@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-25T19:29:49.707332+00:00",
+  "generated_at": "2026-08-25T19:44:09.802219+00:00",
   "default_threshold": 70,
   "zones": [
     {
@@ -680,7 +680,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 29,
@@ -702,7 +702,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 30,
@@ -724,7 +724,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 31,
@@ -746,7 +746,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 32,
@@ -922,7 +922,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 40,
@@ -944,7 +944,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 41,
@@ -966,7 +966,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 42,
@@ -988,7 +988,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 43,
@@ -1202,7 +1202,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 52,
@@ -1224,7 +1224,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 53,
@@ -1246,7 +1246,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 54,
@@ -1268,7 +1268,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 55,
@@ -1596,7 +1596,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 67,
@@ -1618,7 +1618,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 68,
@@ -1640,7 +1640,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 69,
@@ -1662,7 +1662,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 70,
@@ -1794,7 +1794,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 76,
@@ -2056,7 +2056,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 85,
@@ -2078,7 +2078,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 86,
@@ -2274,7 +2274,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 92,
@@ -2296,7 +2296,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 93,
@@ -2318,7 +2318,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 94,
@@ -2340,7 +2340,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 95,
@@ -2756,7 +2756,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 111,
@@ -2794,7 +2794,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 112,
@@ -2816,7 +2816,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 113,
@@ -2838,7 +2838,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 114,
@@ -2860,7 +2860,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 115,
@@ -2882,7 +2882,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 116,
@@ -2904,7 +2904,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 117,
@@ -3282,7 +3282,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 132,
@@ -3304,7 +3304,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 133,
@@ -3342,7 +3342,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 134,
@@ -3364,7 +3364,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 135,
@@ -3386,7 +3386,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 136,
@@ -3408,7 +3408,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 137,
@@ -3858,7 +3858,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 152,
@@ -3896,7 +3896,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 153,
@@ -3918,7 +3918,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 154,
@@ -3956,7 +3956,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 155,
@@ -3994,7 +3994,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 156,
@@ -4016,7 +4016,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 157,
@@ -4038,7 +4038,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 158,
@@ -4438,7 +4438,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 174,
@@ -4476,7 +4476,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 175,
@@ -4498,7 +4498,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 176,
@@ -4536,7 +4536,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 177,
@@ -4594,7 +4594,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 178,
@@ -4632,7 +4632,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 179,
@@ -4786,7 +4786,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 186,
@@ -4808,7 +4808,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 187,
@@ -4830,7 +4830,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 188,
@@ -5155,7 +5155,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 198,
@@ -5193,7 +5193,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 199,
@@ -5231,7 +5231,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 200,
@@ -5423,7 +5423,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 208,
@@ -5445,7 +5445,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 209,
@@ -5467,7 +5467,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 210,
@@ -5525,7 +5525,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 211,
@@ -5547,7 +5547,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 212,
@@ -5703,7 +5703,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 216,
@@ -5741,7 +5741,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 217,
@@ -6202,7 +6202,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 231,
@@ -6224,7 +6224,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 232,
@@ -6282,7 +6282,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 233,
@@ -6325,7 +6325,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 234,
@@ -6363,7 +6363,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 235,
@@ -6445,7 +6445,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 238,
@@ -6503,7 +6503,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 239,
@@ -6541,7 +6541,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 240,
@@ -6563,7 +6563,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 241,
@@ -6935,7 +6935,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 255,
@@ -6993,7 +6993,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 256,
@@ -7031,7 +7031,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 257,
@@ -7084,7 +7084,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 258,
@@ -7144,7 +7144,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 260,
@@ -7166,7 +7166,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 261,
@@ -7188,7 +7188,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 262,
@@ -7210,7 +7210,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 263,
@@ -7263,7 +7263,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 264,
@@ -7724,7 +7724,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 279,
@@ -7746,7 +7746,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 280,
@@ -7843,7 +7843,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 283,
@@ -7896,7 +7896,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 284,
@@ -7949,7 +7949,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 285,
@@ -7992,7 +7992,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 286,
@@ -8045,7 +8045,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 287,
@@ -8648,7 +8648,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 307,
@@ -8670,7 +8670,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 308,
@@ -8708,7 +8708,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 309,
@@ -8751,7 +8751,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 310,
@@ -8773,7 +8773,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 311,
@@ -8957,7 +8957,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 316,
@@ -8979,7 +8979,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 317,
@@ -9001,7 +9001,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 318,
@@ -9023,7 +9023,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 319,
@@ -9412,7 +9412,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 332,
@@ -9434,7 +9434,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 333,
@@ -9456,7 +9456,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 334,
@@ -9478,7 +9478,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 335,
@@ -9646,7 +9646,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 340,
@@ -9684,7 +9684,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 341,
@@ -9706,7 +9706,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 342,
@@ -9728,7 +9728,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 343,
@@ -10036,7 +10036,7 @@
         "prec_1h_mm": null,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 357,
@@ -10058,7 +10058,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 358,
@@ -10080,7 +10080,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 359,
@@ -10102,7 +10102,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 360,
@@ -10212,7 +10212,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 365,
@@ -10270,7 +10270,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 366,
@@ -10292,7 +10292,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T07:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 367,
