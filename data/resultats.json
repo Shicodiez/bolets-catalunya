@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-25T14:22:40.896985+00:00",
+  "generated_at": "2026-08-25T18:19:33.542183+00:00",
   "default_threshold": 70,
   "zones": [
     {
@@ -20,7 +20,7 @@
         "station_name": "SANT JAUME D'ENVEJA",
         "distance_km": 10.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -42,7 +42,7 @@
         "station_name": "TORTOSA",
         "distance_km": 15.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -64,7 +64,7 @@
         "station_name": "SANT JAUME D'ENVEJA",
         "distance_km": 8.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -86,7 +86,7 @@
         "station_name": "SANT JAUME D'ENVEJA",
         "distance_km": 1.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -108,7 +108,7 @@
         "station_name": "SANT JAUME D'ENVEJA",
         "distance_km": 12.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -130,7 +130,7 @@
         "station_name": "TORTOSA",
         "distance_km": 4.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -152,7 +152,7 @@
         "station_name": "TORTOSA",
         "distance_km": 8.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -174,7 +174,7 @@
         "station_name": "SANT JAUME D'ENVEJA",
         "distance_km": 13.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -196,7 +196,7 @@
         "station_name": "SANT JAUME D'ENVEJA",
         "distance_km": 10.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -218,7 +218,7 @@
         "station_name": "SANT JAUME D'ENVEJA",
         "distance_km": 15.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -240,7 +240,7 @@
         "station_name": "SANT JAUME D'ENVEJA",
         "distance_km": 24.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -262,7 +262,7 @@
         "station_name": "HORTA DE SANT JOAN",
         "distance_km": 8.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -284,7 +284,7 @@
         "station_name": "TORTOSA",
         "distance_km": 7.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -306,7 +306,7 @@
         "station_name": "TORTOSA",
         "distance_km": 10.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -328,7 +328,7 @@
         "station_name": "RASQUERA",
         "distance_km": 16.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -350,7 +350,7 @@
         "station_name": "VANDELLÓS",
         "distance_km": 9.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -372,7 +372,7 @@
         "station_name": "VANDELLÓS",
         "distance_km": 11.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -394,7 +394,7 @@
         "station_name": "VANDELLÓS",
         "distance_km": 19.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -416,7 +416,7 @@
         "station_name": "TARRAGONA  FAC. GEOGRAFIA",
         "distance_km": 27.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -438,7 +438,7 @@
         "station_name": "TARRAGONA  FAC. GEOGRAFIA",
         "distance_km": 27.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -460,7 +460,7 @@
         "station_name": "HORTA DE SANT JOAN",
         "distance_km": 7.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -513,7 +513,7 @@
         "station_name": "HORTA DE SANT JOAN",
         "distance_km": 3.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -566,7 +566,7 @@
         "station_name": "RASQUERA",
         "distance_km": 13.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -604,7 +604,7 @@
         "station_name": "RASQUERA",
         "distance_km": 4.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -626,7 +626,7 @@
         "station_name": "RASQUERA",
         "distance_km": 9.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -679,7 +679,7 @@
         "station_name": "VANDELLÓS",
         "distance_km": 3.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -701,7 +701,7 @@
         "station_name": "VANDELLÓS",
         "distance_km": 7.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -723,7 +723,7 @@
         "station_name": "VANDELLÓS",
         "distance_km": 17.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -745,7 +745,7 @@
         "station_name": "TARRAGONA  FAC. GEOGRAFIA",
         "distance_km": 17.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -767,7 +767,7 @@
         "station_name": "TARRAGONA  FAC. GEOGRAFIA",
         "distance_km": 18.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -789,7 +789,7 @@
         "station_name": "TARRAGONA  FAC. GEOGRAFIA",
         "distance_km": 23.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -811,7 +811,7 @@
         "station_name": "HORTA DE SANT JOAN",
         "distance_km": 14.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -833,7 +833,7 @@
         "station_name": "HORTA DE SANT JOAN",
         "distance_km": 12.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -855,7 +855,7 @@
         "station_name": "RASQUERA",
         "distance_km": 13.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -877,7 +877,7 @@
         "station_name": "RASQUERA",
         "distance_km": 6.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -899,7 +899,7 @@
         "station_name": "RASQUERA",
         "distance_km": 10.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -921,7 +921,7 @@
         "station_name": "VANDELLÓS",
         "distance_km": 11.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -943,7 +943,7 @@
         "station_name": "VANDELLÓS",
         "distance_km": 13.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -965,7 +965,7 @@
         "station_name": "REUS  AEROPUERTO",
         "distance_km": 11.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -987,7 +987,7 @@
         "station_name": "TARRAGONA  FAC. GEOGRAFIA",
         "distance_km": 8.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1009,7 +1009,7 @@
         "station_name": "TARRAGONA  FAC. GEOGRAFIA",
         "distance_km": 9.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1031,7 +1031,7 @@
         "station_name": "TARRAGONA  FAC. GEOGRAFIA",
         "distance_km": 17.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1053,7 +1053,7 @@
         "station_name": "TARRAGONA  FAC. GEOGRAFIA",
         "distance_km": 27.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1075,7 +1075,7 @@
         "station_name": "MASSALUCA",
         "distance_km": 11.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1097,7 +1097,7 @@
         "station_name": "MASSALUCA",
         "distance_km": 3.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1119,7 +1119,7 @@
         "station_name": "MASSALUCA",
         "distance_km": 9.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1172,7 +1172,7 @@
         "station_name": "RASQUERA",
         "distance_km": 16.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1194,7 +1194,7 @@
         "station_name": "CABACÉS",
         "distance_km": 11.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1216,7 +1216,7 @@
         "station_name": "ALFORJA",
         "distance_km": 13.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1238,7 +1238,7 @@
         "station_name": "ALFORJA",
         "distance_km": 7.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1260,7 +1260,7 @@
         "station_name": "REUS  AEROPUERTO",
         "distance_km": 7.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1282,7 +1282,7 @@
         "station_name": "REUS  AEROPUERTO",
         "distance_km": 3.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1304,7 +1304,7 @@
         "station_name": "TARRAGONA  FAC. GEOGRAFIA",
         "distance_km": 6.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1326,7 +1326,7 @@
         "station_name": "TARRAGONA  FAC. GEOGRAFIA",
         "distance_km": 16.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1348,7 +1348,7 @@
         "station_name": "VILAFRANCA DEL PENEDÈS",
         "distance_km": 22.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1370,7 +1370,7 @@
         "station_name": "SITGES  VALLCARCA",
         "distance_km": 17.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1392,7 +1392,7 @@
         "station_name": "SITGES  VALLCARCA",
         "distance_km": 11.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1414,7 +1414,7 @@
         "station_name": "SITGES  VALLCARCA",
         "distance_km": 12.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1436,7 +1436,7 @@
         "station_name": "MASSALUCA",
         "distance_km": 13.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1458,7 +1458,7 @@
         "station_name": "MASSALUCA",
         "distance_km": 7.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1480,7 +1480,7 @@
         "station_name": "MASSALUCA",
         "distance_km": 11.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1533,7 +1533,7 @@
         "station_name": "CABACÉS",
         "distance_km": 12.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1555,7 +1555,7 @@
         "station_name": "CABACÉS",
         "distance_km": 2.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1593,7 +1593,7 @@
         "station_name": "CABACÉS",
         "distance_km": 8.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1646,7 +1646,7 @@
         "station_name": "ALFORJA",
         "distance_km": 3.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1684,7 +1684,7 @@
         "station_name": "ALFORJA",
         "distance_km": 9.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1706,7 +1706,7 @@
         "station_name": "VALLS",
         "distance_km": 7.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1728,7 +1728,7 @@
         "station_name": "VALLS",
         "distance_km": 7.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1750,7 +1750,7 @@
         "station_name": "VALLS",
         "distance_km": 16.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1772,7 +1772,7 @@
         "station_name": "VILAFRANCA DEL PENEDÈS",
         "distance_km": 13.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1794,7 +1794,7 @@
         "station_name": "VILAFRANCA DEL PENEDÈS",
         "distance_km": 10.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1816,7 +1816,7 @@
         "station_name": "SITGES  VALLCARCA",
         "distance_km": 3.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1838,7 +1838,7 @@
         "station_name": "SITGES  VALLCARCA",
         "distance_km": 6.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1860,7 +1860,7 @@
         "station_name": "BARCELONA  AEROPUERTO",
         "distance_km": 6.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1882,7 +1882,7 @@
         "station_name": "BARCELONA  AEROPUERTO",
         "distance_km": 10.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1904,7 +1904,7 @@
         "station_name": "MASSALUCA",
         "distance_km": 20.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1926,7 +1926,7 @@
         "station_name": "MASSALUCA",
         "distance_km": 17.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -1979,7 +1979,7 @@
         "station_name": "MASSALUCA",
         "distance_km": 19.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -2001,7 +2001,7 @@
         "station_name": "EL SOLERÀS",
         "distance_km": 11.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -2023,7 +2023,7 @@
         "station_name": "EVC_ELS TORMS",
         "distance_km": 7.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -2076,7 +2076,7 @@
         "station_name": "LA POBLA DE CERVOLES",
         "distance_km": 7.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -2114,7 +2114,7 @@
         "station_name": "LA POBLA DE CERVOLES",
         "distance_km": 5.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -2167,7 +2167,7 @@
         "station_name": "LA POBLA DE CERVOLES",
         "distance_km": 14.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -2189,7 +2189,7 @@
         "station_name": "VALLS",
         "distance_km": 6.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -2211,7 +2211,7 @@
         "station_name": "VALLS",
         "distance_km": 6.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -2264,7 +2264,7 @@
         "station_name": "PONTONS",
         "distance_km": 11.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -2317,7 +2317,7 @@
         "station_name": "VILAFRANCA DEL PENEDÈS",
         "distance_km": 9.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -2339,7 +2339,7 @@
         "station_name": "VILAFRANCA DEL PENEDÈS",
         "distance_km": 0.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -2392,7 +2392,7 @@
         "station_name": "SITGES  VALLCARCA",
         "distance_km": 10.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -2445,7 +2445,7 @@
         "station_name": "CORBERA  PUIG D?AGULLES",
         "distance_km": 9.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -2467,7 +2467,7 @@
         "station_name": "BARCELONA  AEROPUERTO",
         "distance_km": 4.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -2489,7 +2489,7 @@
         "station_name": "BARCELONA  DRASSANES",
         "distance_km": 4.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -2511,7 +2511,7 @@
         "station_name": "BARCELONA  DRASSANES",
         "distance_km": 11.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -2533,7 +2533,7 @@
         "station_name": "VILASSAR DE DALT",
         "distance_km": 19.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -2555,7 +2555,7 @@
         "station_name": "VILASSAR DE DALT",
         "distance_km": 24.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -2577,7 +2577,7 @@
         "station_name": "FRAGA",
         "distance_km": 16.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -2599,7 +2599,7 @@
         "station_name": "FRAGA",
         "distance_km": 11.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -2621,7 +2621,7 @@
         "station_name": "FRAGA",
         "distance_km": 14.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -2643,7 +2643,7 @@
         "station_name": "EL SOLERÀS",
         "distance_km": 7.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -2696,7 +2696,7 @@
         "station_name": "EL SOLERÀS",
         "distance_km": 2.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -2718,7 +2718,7 @@
         "station_name": "EVC_ELS TORMS",
         "distance_km": 8.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -2740,7 +2740,7 @@
         "station_name": "LA POBLA DE CERVOLES",
         "distance_km": 7.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -2762,7 +2762,7 @@
         "station_name": "LA POBLA DE CERVOLES",
         "distance_km": 14.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -2815,7 +2815,7 @@
         "station_name": "VALLS",
         "distance_km": 15.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -2837,7 +2837,7 @@
         "station_name": "VALLS",
         "distance_km": 15.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -2859,7 +2859,7 @@
         "station_name": "PONTONS",
         "distance_km": 6.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -2912,7 +2912,7 @@
         "station_name": "PONTONS",
         "distance_km": 3.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -2934,7 +2934,7 @@
         "station_name": "VILAFRANCA DEL PENEDÈS",
         "distance_km": 10.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -2956,7 +2956,7 @@
         "station_name": "CORBERA  PUIG D?AGULLES",
         "distance_km": 6.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -3009,7 +3009,7 @@
         "station_name": "CORBERA  PUIG D?AGULLES",
         "distance_km": 3.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -3062,7 +3062,7 @@
         "station_name": "BARCELONA  DRASSANES",
         "distance_km": 11.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -3084,7 +3084,7 @@
         "station_name": "BARCELONA  DRASSANES",
         "distance_km": 5.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -3106,7 +3106,7 @@
         "station_name": "VILASSAR DE DALT",
         "distance_km": 10.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -3128,7 +3128,7 @@
         "station_name": "VILASSAR DE DALT",
         "distance_km": 10.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -3150,7 +3150,7 @@
         "station_name": "VILASSAR DE DALT",
         "distance_km": 17.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -3172,7 +3172,7 @@
         "station_name": "ARENYS DE MAR",
         "distance_km": 21.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -3194,7 +3194,7 @@
         "station_name": "FRAGA",
         "distance_km": 1.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -3216,7 +3216,7 @@
         "station_name": "FRAGA",
         "distance_km": 9.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -3238,7 +3238,7 @@
         "station_name": "LLEIDA",
         "distance_km": 12.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -3260,7 +3260,7 @@
         "station_name": "EL SOLERÀS",
         "distance_km": 11.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -3282,7 +3282,7 @@
         "station_name": "MOLLERUSSA",
         "distance_km": 12.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -3304,7 +3304,7 @@
         "station_name": "MOLLERUSSA",
         "distance_km": 13.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -3326,7 +3326,7 @@
         "station_name": "LLORAC",
         "distance_km": 20.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -3379,7 +3379,7 @@
         "station_name": "LLORAC",
         "distance_km": 10.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -3401,7 +3401,7 @@
         "station_name": "LLORAC",
         "distance_km": 5.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -3423,7 +3423,7 @@
         "station_name": "LLORAC",
         "distance_km": 12.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -3476,7 +3476,7 @@
         "station_name": "IGUALADA - MUNTANYETA",
         "distance_km": 9.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -3529,7 +3529,7 @@
         "station_name": "IGUALADA - MUNTANYETA",
         "distance_km": 11.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -3551,7 +3551,7 @@
         "station_name": "MONTSERRAT",
         "distance_km": 9.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -3573,7 +3573,7 @@
         "station_name": "MONTSERRAT",
         "distance_km": 11.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -3595,7 +3595,7 @@
         "station_name": "CALDES DE MONTBUI",
         "distance_km": 14.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -3617,7 +3617,7 @@
         "station_name": "CALDES DE MONTBUI",
         "distance_km": 11.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -3655,7 +3655,7 @@
         "station_name": "VILASSAR DE DALT",
         "distance_km": 5.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -3677,7 +3677,7 @@
         "station_name": "VILASSAR DE DALT",
         "distance_km": 4.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -3699,7 +3699,7 @@
         "station_name": "ARENYS DE MAR",
         "distance_km": 8.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -3721,7 +3721,7 @@
         "station_name": "ARENYS DE MAR",
         "distance_km": 13.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -3743,7 +3743,7 @@
         "station_name": "FRAGA",
         "distance_km": 8.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -3765,7 +3765,7 @@
         "station_name": "LLEIDA",
         "distance_km": 11.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -3787,7 +3787,7 @@
         "station_name": "LLEIDA",
         "distance_km": 2.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -3809,7 +3809,7 @@
         "station_name": "LLEIDA",
         "distance_km": 9.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -3831,7 +3831,7 @@
         "station_name": "MOLLERUSSA",
         "distance_km": 3.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -3853,7 +3853,7 @@
         "station_name": "MOLLERUSSA",
         "distance_km": 7.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -3875,7 +3875,7 @@
         "station_name": "TORDERA - GRANYANELLA",
         "distance_km": 15.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -3897,7 +3897,7 @@
         "station_name": "TORDERA - GRANYANELLA",
         "distance_km": 9.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -3955,7 +3955,7 @@
         "station_name": "LLORAC",
         "distance_km": 4.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -4013,7 +4013,7 @@
         "station_name": "LLORAC",
         "distance_km": 12.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -4066,7 +4066,7 @@
         "station_name": "IGUALADA - MUNTANYETA",
         "distance_km": 3.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -4088,7 +4088,7 @@
         "station_name": "IGUALADA - MUNTANYETA",
         "distance_km": 7.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -4110,7 +4110,7 @@
         "station_name": "MONTSERRAT",
         "distance_km": 2.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -4148,7 +4148,7 @@
         "station_name": "MONTSERRAT",
         "distance_km": 7.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -4201,7 +4201,7 @@
         "station_name": "CALDES DE MONTBUI",
         "distance_km": 9.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -4254,7 +4254,7 @@
         "station_name": "CALDES DE MONTBUI",
         "distance_km": 1.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -4276,7 +4276,7 @@
         "station_name": "CALDES DE MONTBUI",
         "distance_km": 10.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -4314,7 +4314,7 @@
         "station_name": "ARENYS DE MAR",
         "distance_km": 10.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -4352,7 +4352,7 @@
         "station_name": "ARENYS DE MAR",
         "distance_km": 1.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -4374,7 +4374,7 @@
         "station_name": "ARENYS DE MAR",
         "distance_km": 10.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -4396,7 +4396,7 @@
         "station_name": "BLANES  JARDIN BOTANICO",
         "distance_km": 8.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -4418,7 +4418,7 @@
         "station_name": "TAMARITE DE LITERA  LA MELUSA",
         "distance_km": 10.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -4440,7 +4440,7 @@
         "station_name": "TAMARITE DE LITERA  LA MELUSA",
         "distance_km": 12.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -4462,7 +4462,7 @@
         "station_name": "LLEIDA",
         "distance_km": 7.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -4484,7 +4484,7 @@
         "station_name": "LLEIDA",
         "distance_km": 11.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -4506,7 +4506,7 @@
         "station_name": "MOLLERUSSA",
         "distance_km": 8.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -4528,7 +4528,7 @@
         "station_name": "MOLLERUSSA",
         "distance_km": 11.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -4550,7 +4550,7 @@
         "station_name": "TORDERA - GRANYANELLA",
         "distance_km": 12.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -4572,7 +4572,7 @@
         "station_name": "TORDERA - GRANYANELLA",
         "distance_km": 2.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -4594,7 +4594,7 @@
         "station_name": "TORDERA - GRANYANELLA",
         "distance_km": 8.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -4616,7 +4616,7 @@
         "station_name": "TORÀ",
         "distance_km": 13.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -4638,7 +4638,7 @@
         "station_name": "IGUALADA - MUNTANYETA",
         "distance_km": 11.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -4676,7 +4676,7 @@
         "station_name": "MANRESA",
         "distance_km": 13.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -4698,7 +4698,7 @@
         "station_name": "MANRESA",
         "distance_km": 4.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -4736,7 +4736,7 @@
         "station_name": "MANRESA",
         "distance_km": 8.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -4789,7 +4789,7 @@
         "station_name": "CALDES DE MONTBUI",
         "distance_km": 13.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -4811,7 +4811,7 @@
         "station_name": "CALDES DE MONTBUI",
         "distance_km": 8.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -4864,7 +4864,7 @@
         "station_name": "FONTMARTINA",
         "distance_km": 13.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -4886,7 +4886,7 @@
         "station_name": "FONTMARTINA",
         "distance_km": 7.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -4924,7 +4924,7 @@
         "station_name": "ARENYS DE MAR",
         "distance_km": 11.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -4982,7 +4982,7 @@
         "station_name": "BLANES  JARDIN BOTANICO",
         "distance_km": 12.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -5035,7 +5035,7 @@
         "station_name": "BLANES  JARDIN BOTANICO",
         "distance_km": 2.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -5057,7 +5057,7 @@
         "station_name": "BLANES  JARDIN BOTANICO",
         "distance_km": 8.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -5079,7 +5079,7 @@
         "station_name": "TAMARITE DE LITERA  LA MELUSA",
         "distance_km": 2.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -5101,7 +5101,7 @@
         "station_name": "TAMARITE DE LITERA  LA MELUSA",
         "distance_km": 7.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -5123,7 +5123,7 @@
         "station_name": "LLEIDA",
         "distance_km": 17.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -5145,7 +5145,7 @@
         "station_name": "OS DE BALAGUER",
         "distance_km": 11.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -5167,7 +5167,7 @@
         "station_name": "OS DE BALAGUER",
         "distance_km": 12.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -5189,7 +5189,7 @@
         "station_name": "ARTESA DE SEGRE",
         "distance_km": 17.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -5211,7 +5211,7 @@
         "station_name": "ARTESA DE SEGRE",
         "distance_km": 11.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -5233,7 +5233,7 @@
         "station_name": "TORDERA - GRANYANELLA",
         "distance_km": 11.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -5255,7 +5255,7 @@
         "station_name": "TORÀ",
         "distance_km": 6.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -5277,7 +5277,7 @@
         "station_name": "TORÀ",
         "distance_km": 4.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -5330,7 +5330,7 @@
         "station_name": "TORÀ",
         "distance_km": 14.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -5352,7 +5352,7 @@
         "station_name": "MANRESA",
         "distance_km": 14.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -5374,7 +5374,7 @@
         "station_name": "MANRESA",
         "distance_km": 7.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -5427,7 +5427,7 @@
         "station_name": "MANRESA",
         "distance_km": 10.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -5449,7 +5449,7 @@
         "station_name": "MOIÀ",
         "distance_km": 5.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -5507,7 +5507,7 @@
         "station_name": "MOIÀ",
         "distance_km": 7.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -5545,7 +5545,7 @@
         "station_name": "FONTMARTINA",
         "distance_km": 11.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -5603,7 +5603,7 @@
         "station_name": "FONTMARTINA",
         "distance_km": 2.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -5641,7 +5641,7 @@
         "station_name": "FONTMARTINA",
         "distance_km": 9.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -5679,7 +5679,7 @@
         "station_name": "SANT HILARI",
         "distance_km": 16.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -5701,7 +5701,7 @@
         "station_name": "BLANES  JARDIN BOTANICO",
         "distance_km": 11.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -5739,7 +5739,7 @@
         "station_name": "CASTELL D?ARO",
         "distance_km": 10.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -5761,7 +5761,7 @@
         "station_name": "TAMARITE DE LITERA  LA MELUSA",
         "distance_km": 16.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -5783,7 +5783,7 @@
         "station_name": "TAMARITE DE LITERA  LA MELUSA",
         "distance_km": 10.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -5805,7 +5805,7 @@
         "station_name": "TAMARITE DE LITERA  LA MELUSA",
         "distance_km": 12.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -5827,7 +5827,7 @@
         "station_name": "OS DE BALAGUER",
         "distance_km": 13.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -5849,7 +5849,7 @@
         "station_name": "OS DE BALAGUER",
         "distance_km": 3.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -5871,7 +5871,7 @@
         "station_name": "OS DE BALAGUER",
         "distance_km": 6.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -5893,7 +5893,7 @@
         "station_name": "ARTESA DE SEGRE",
         "distance_km": 12.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -5915,7 +5915,7 @@
         "station_name": "ARTESA DE SEGRE",
         "distance_km": 2.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -5973,7 +5973,7 @@
         "station_name": "ARTESA DE SEGRE",
         "distance_km": 7.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -5995,7 +5995,7 @@
         "station_name": "TORÀ",
         "distance_km": 9.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -6048,7 +6048,7 @@
         "station_name": "TORÀ",
         "distance_km": 8.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -6106,7 +6106,7 @@
         "station_name": "RINER - XIXONS",
         "distance_km": 9.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -6159,7 +6159,7 @@
         "station_name": "RINER - XIXONS",
         "distance_km": 11.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -6181,7 +6181,7 @@
         "station_name": "BALSARENY",
         "distance_km": 5.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -6234,7 +6234,7 @@
         "station_name": "BALSARENY",
         "distance_km": 4.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -6256,7 +6256,7 @@
         "station_name": "MOIÀ",
         "distance_km": 7.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -6314,7 +6314,7 @@
         "station_name": "MOIÀ",
         "distance_km": 9.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -6367,7 +6367,7 @@
         "station_name": "FONTMARTINA",
         "distance_km": 16.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -6420,7 +6420,7 @@
         "station_name": "SANT HILARI",
         "distance_km": 8.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -6458,7 +6458,7 @@
         "station_name": "SANT HILARI",
         "distance_km": 2.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -6511,7 +6511,7 @@
         "station_name": "GIRONA  AEROPUERTO",
         "distance_km": 9.6,
         "prec_1h_mm": null,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -6564,7 +6564,7 @@
         "station_name": "GIRONA  AEROPUERTO",
         "distance_km": 4.8,
         "prec_1h_mm": null,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -6602,7 +6602,7 @@
         "station_name": "GIRONA  AEROPUERTO",
         "distance_km": 12.6,
         "prec_1h_mm": null,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -6640,7 +6640,7 @@
         "station_name": "CASTELL D?ARO",
         "distance_km": 7.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -6662,7 +6662,7 @@
         "station_name": "BARBASTRO",
         "distance_km": 18.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -6684,7 +6684,7 @@
         "station_name": "BENABARRE",
         "distance_km": 16.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -6706,7 +6706,7 @@
         "station_name": "OS DE BALAGUER",
         "distance_km": 17.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -6728,7 +6728,7 @@
         "station_name": "OS DE BALAGUER",
         "distance_km": 10.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -6766,7 +6766,7 @@
         "station_name": "OS DE BALAGUER",
         "distance_km": 11.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -6788,7 +6788,7 @@
         "station_name": "LLIMIANA",
         "distance_km": 12.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -6846,7 +6846,7 @@
         "station_name": "ARTESA DE SEGRE",
         "distance_km": 9.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -6904,7 +6904,7 @@
         "station_name": "ARTESA DE SEGRE",
         "distance_km": 11.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -6957,7 +6957,7 @@
         "station_name": "TORÀ",
         "distance_km": 18.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -6979,7 +6979,7 @@
         "station_name": "RINER - XIXONS",
         "distance_km": 13.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -7001,7 +7001,7 @@
         "station_name": "RINER - XIXONS",
         "distance_km": 3.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -7054,7 +7054,7 @@
         "station_name": "RINER - XIXONS",
         "distance_km": 7.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -7112,7 +7112,7 @@
         "station_name": "BALSARENY",
         "distance_km": 11.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -7165,7 +7165,7 @@
         "station_name": "PRATS DE LLUÇANÈS",
         "distance_km": 9.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -7187,7 +7187,7 @@
         "station_name": "PRATS DE LLUÇANÈS",
         "distance_km": 5.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -7209,7 +7209,7 @@
         "station_name": "PRATS DE LLUÇANÈS",
         "distance_km": 13.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -7231,7 +7231,7 @@
         "station_name": "SANT HILARI",
         "distance_km": 20.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -7269,7 +7269,7 @@
         "station_name": "SANT HILARI",
         "distance_km": 12.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -7307,7 +7307,7 @@
         "station_name": "SANT HILARI",
         "distance_km": 9.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -7329,7 +7329,7 @@
         "station_name": "GIRONA  AEROPUERTO",
         "distance_km": 10.1,
         "prec_1h_mm": null,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -7351,7 +7351,7 @@
         "station_name": "GIRONA  PARC DEL MIGDIA",
         "distance_km": 3.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -7404,7 +7404,7 @@
         "station_name": "GIRONA  PARC DEL MIGDIA",
         "distance_km": 7.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -7426,7 +7426,7 @@
         "station_name": "CASTELL D?ARO",
         "distance_km": 17.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -7448,7 +7448,7 @@
         "station_name": "L?ESTARTIT",
         "distance_km": 11.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -7470,7 +7470,7 @@
         "station_name": "BENABARRE",
         "distance_km": 6.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -7492,7 +7492,7 @@
         "station_name": "BENABARRE",
         "distance_km": 11.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -7514,7 +7514,7 @@
         "station_name": "LLIMIANA",
         "distance_km": 16.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -7552,7 +7552,7 @@
         "station_name": "LLIMIANA",
         "distance_km": 6.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -7574,7 +7574,7 @@
         "station_name": "LLIMIANA",
         "distance_km": 4.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -7632,7 +7632,7 @@
         "station_name": "LLIMIANA",
         "distance_km": 14.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -7685,7 +7685,7 @@
         "station_name": "COLL DE NARGÓ",
         "distance_km": 14.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -7738,7 +7738,7 @@
         "station_name": "COLL DE NARGÓ",
         "distance_km": 11.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -7760,7 +7760,7 @@
         "station_name": "COLL DE NARGÓ",
         "distance_km": 15.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -7798,7 +7798,7 @@
         "station_name": "RINER - XIXONS",
         "distance_km": 12.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -7820,7 +7820,7 @@
         "station_name": "RINER - XIXONS",
         "distance_km": 13.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -7842,7 +7842,7 @@
         "station_name": "BERGA  INSTITUTO",
         "distance_km": 6.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -7864,7 +7864,7 @@
         "station_name": "BERGA  INSTITUTO",
         "distance_km": 8.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -7917,7 +7917,7 @@
         "station_name": "PRATS DE LLUÇANÈS",
         "distance_km": 5.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -7939,7 +7939,7 @@
         "station_name": "PRATS DE LLUÇANÈS",
         "distance_km": 13.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -7997,7 +7997,7 @@
         "station_name": "RIPOLL",
         "distance_km": 17.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -8019,7 +8019,7 @@
         "station_name": "LES PLANES D?HOSTOLES",
         "distance_km": 11.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -8077,7 +8077,7 @@
         "station_name": "LES PLANES D?HOSTOLES",
         "distance_km": 1.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -8115,7 +8115,7 @@
         "station_name": "LES PLANES D?HOSTOLES",
         "distance_km": 9.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -8168,7 +8168,7 @@
         "station_name": "PORQUERES",
         "distance_km": 6.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -8226,7 +8226,7 @@
         "station_name": "GIRONA  PARC DEL MIGDIA",
         "distance_km": 11.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -8248,7 +8248,7 @@
         "station_name": "L?ESTARTIT",
         "distance_km": 14.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -8270,7 +8270,7 @@
         "station_name": "L?ESTARTIT",
         "distance_km": 4.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -8292,7 +8292,7 @@
         "station_name": "BENABARRE",
         "distance_km": 3.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -8314,7 +8314,7 @@
         "station_name": "BENABARRE",
         "distance_km": 9.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -8372,7 +8372,7 @@
         "station_name": "TALARN",
         "distance_km": 14.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -8394,7 +8394,7 @@
         "station_name": "TALARN",
         "distance_km": 7.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -8416,7 +8416,7 @@
         "station_name": "LLIMIANA",
         "distance_km": 9.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -8438,7 +8438,7 @@
         "station_name": "LLIMIANA",
         "distance_km": 16.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -8491,7 +8491,7 @@
         "station_name": "COLL DE NARGÓ",
         "distance_km": 9.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -8544,7 +8544,7 @@
         "station_name": "COLL DE NARGÓ",
         "distance_km": 1.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -8566,7 +8566,7 @@
         "station_name": "COLL DE NARGÓ",
         "distance_km": 10.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -8619,7 +8619,7 @@
         "station_name": "TUIXENT",
         "distance_km": 9.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -8672,7 +8672,7 @@
         "station_name": "TUIXENT",
         "distance_km": 13.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -8725,7 +8725,7 @@
         "station_name": "BERGA  INSTITUTO",
         "distance_km": 6.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -8778,7 +8778,7 @@
         "station_name": "BERGA  INSTITUTO",
         "distance_km": 7.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -8831,7 +8831,7 @@
         "station_name": "RIPOLL",
         "distance_km": 13.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -8853,7 +8853,7 @@
         "station_name": "RIPOLL",
         "distance_km": 5.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -8911,7 +8911,7 @@
         "station_name": "RIPOLL",
         "distance_km": 9.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -8932,44 +8932,44 @@
         {
           "id": "oureig",
           "name": "Ou de reig",
-          "score": 70
+          "score": 75
         },
         {
           "id": "rossinyols",
           "name": "Rossinyols",
-          "score": 61
+          "score": 66
         },
         {
           "id": "ceps",
           "name": "Ceps",
-          "score": 57
+          "score": 62
         },
         {
           "id": "llengua",
           "name": "Llengua de bou",
-          "score": 57
+          "score": 62
         },
         {
           "id": "camagrocs",
           "name": "Camagrocs",
-          "score": 50
+          "score": 55
         },
         {
           "id": "trompetes",
           "name": "Trompetes de la mort",
-          "score": 42
+          "score": 47
         },
         {
           "id": "colmenilles",
           "name": "Colmenilles",
-          "score": 38
+          "score": 43
         }
       ],
       "aemet_check": {
         "station_name": "VALL DE BIANYA",
         "distance_km": 8.9,
-        "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "prec_1h_mm": 0.2,
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -8990,24 +8990,24 @@
         {
           "id": "oureig",
           "name": "Ou de reig",
-          "score": 70
+          "score": 75
         },
         {
           "id": "camagrocs",
           "name": "Camagrocs",
-          "score": 50
+          "score": 55
         },
         {
           "id": "fredolic",
           "name": "Fredolic",
-          "score": 46
+          "score": 51
         }
       ],
       "aemet_check": {
         "station_name": "VALL DE BIANYA",
         "distance_km": 9.4,
-        "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "prec_1h_mm": 0.2,
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -9060,7 +9060,7 @@
         "station_name": "PORQUERES",
         "distance_km": 9.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -9082,7 +9082,7 @@
         "station_name": "PORQUERES",
         "distance_km": 4.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -9140,7 +9140,7 @@
         "station_name": "PORQUERES",
         "distance_km": 12.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -9162,7 +9162,7 @@
         "station_name": "CASTELLO D?EMPURIES",
         "distance_km": 10.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -9184,7 +9184,7 @@
         "station_name": "CASTELLO D?EMPURIES",
         "distance_km": 10.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -9206,7 +9206,7 @@
         "station_name": "CAPELLA  LAGUARRES",
         "distance_km": 10.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -9228,7 +9228,7 @@
         "station_name": "CAPELLA  LAGUARRES",
         "distance_km": 3.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -9250,7 +9250,7 @@
         "station_name": "CAPELLA  LAGUARRES",
         "distance_km": 10.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -9272,7 +9272,7 @@
         "station_name": "SOPEIRA",
         "distance_km": 10.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -9294,7 +9294,7 @@
         "station_name": "TALARN",
         "distance_km": 4.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -9352,7 +9352,7 @@
         "station_name": "TALARN",
         "distance_km": 8.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -9390,7 +9390,7 @@
         "station_name": "TALARN",
         "distance_km": 17.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -9412,7 +9412,7 @@
         "station_name": "COLL DE NARGÓ",
         "distance_km": 12.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -9450,7 +9450,7 @@
         "station_name": "COLL DE NARGÓ",
         "distance_km": 8.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -9503,7 +9503,7 @@
         "station_name": "TUIXENT",
         "distance_km": 10.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -9525,7 +9525,7 @@
         "station_name": "TUIXENT",
         "distance_km": 0.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -9578,7 +9578,7 @@
         "station_name": "TUIXENT",
         "distance_km": 9.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -9616,7 +9616,7 @@
         "station_name": "BERGA  INSTITUTO",
         "distance_km": 15.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -9674,7 +9674,7 @@
         "station_name": "LA MOLINA",
         "distance_km": 11.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -9696,7 +9696,7 @@
         "station_name": "PLANOLES",
         "distance_km": 10.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -9749,7 +9749,7 @@
         "station_name": "RIPOLL",
         "distance_km": 4.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -9770,44 +9770,44 @@
         {
           "id": "oureig",
           "name": "Ou de reig",
-          "score": 82
+          "score": 77
         },
         {
           "id": "rossinyols",
           "name": "Rossinyols",
-          "score": 80
+          "score": 75
         },
         {
           "id": "ceps",
           "name": "Ceps",
-          "score": 77
+          "score": 72
         },
         {
           "id": "camagrocs",
           "name": "Camagrocs",
-          "score": 73
+          "score": 68
         },
         {
           "id": "llengua",
           "name": "Llengua de bou",
-          "score": 73
+          "score": 68
         },
         {
           "id": "trompetes",
           "name": "Trompetes de la mort",
-          "score": 69
+          "score": 64
         },
         {
           "id": "colmenilles",
           "name": "Colmenilles",
-          "score": 60
+          "score": 55
         }
       ],
       "aemet_check": {
         "station_name": "SANT PAU DE SEGURIES",
         "distance_km": 6.4,
-        "prec_1h_mm": 0.2,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -9828,8 +9828,8 @@
       "aemet_check": {
         "station_name": "VALL DE BIANYA",
         "distance_km": 5.1,
-        "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "prec_1h_mm": 0.2,
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -9850,39 +9850,39 @@
         {
           "id": "ceps",
           "name": "Ceps",
-          "score": 59
+          "score": 64
         },
         {
           "id": "rossinyols",
           "name": "Rossinyols",
-          "score": 58
+          "score": 63
         },
         {
           "id": "rovellons",
           "name": "Rovellons",
-          "score": 54
+          "score": 59
         },
         {
           "id": "pinetell",
           "name": "Pinetell",
-          "score": 51
+          "score": 56
         },
         {
           "id": "fredolic",
           "name": "Fredolic",
-          "score": 43
+          "score": 48
         },
         {
           "id": "colmenilles",
           "name": "Colmenilles",
-          "score": 38
+          "score": 43
         }
       ],
       "aemet_check": {
         "station_name": "VALL DE BIANYA",
         "distance_km": 6.0,
-        "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "prec_1h_mm": 0.2,
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -9903,39 +9903,39 @@
         {
           "id": "rossinyols",
           "name": "Rossinyols",
-          "score": 48
+          "score": 53
         },
         {
           "id": "rovellons",
           "name": "Rovellons",
-          "score": 45
+          "score": 50
         },
         {
           "id": "fredolic",
           "name": "Fredolic",
-          "score": 43
+          "score": 48
         },
         {
           "id": "pinetell",
           "name": "Pinetell",
-          "score": 42
+          "score": 47
         },
         {
           "id": "ceps",
           "name": "Ceps",
-          "score": 38
+          "score": 43
         },
         {
           "id": "colmenilles",
           "name": "Colmenilles",
-          "score": 38
+          "score": 43
         }
       ],
       "aemet_check": {
         "station_name": "VALL DE BIANYA",
         "distance_km": 15.8,
-        "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "prec_1h_mm": 0.2,
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -9957,7 +9957,7 @@
         "station_name": "PORQUERES",
         "distance_km": 14.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -9979,7 +9979,7 @@
         "station_name": "FIGUERES  ELS ASPRES",
         "distance_km": 5.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -10001,7 +10001,7 @@
         "station_name": "CASTELLO D?EMPURIES",
         "distance_km": 5.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -10023,7 +10023,7 @@
         "station_name": "CASTELLO D?EMPURIES",
         "distance_km": 4.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -10045,7 +10045,7 @@
         "station_name": "CAPELLA  LAGUARRES",
         "distance_km": 16.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -10067,7 +10067,7 @@
         "station_name": "CAPELLA  LAGUARRES",
         "distance_km": 13.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -10089,7 +10089,7 @@
         "station_name": "SOPEIRA",
         "distance_km": 13.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -10111,7 +10111,7 @@
         "station_name": "SOPEIRA",
         "distance_km": 3.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -10133,7 +10133,7 @@
         "station_name": "SOPEIRA",
         "distance_km": 7.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -10191,7 +10191,7 @@
         "station_name": "TALARN",
         "distance_km": 15.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -10213,7 +10213,7 @@
         "station_name": "PORT AINE  L?ORRI",
         "distance_km": 15.0,
         "prec_1h_mm": null,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -10266,7 +10266,7 @@
         "station_name": "PORT AINE  L?ORRI",
         "distance_km": 9.9,
         "prec_1h_mm": null,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -10287,8 +10287,8 @@
       "aemet_check": {
         "station_name": "LA SEU D'URGELL  AEROPORT",
         "distance_km": 7.2,
-        "prec_1h_mm": 0.1,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-25T12:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -10309,39 +10309,39 @@
         {
           "id": "rovellons",
           "name": "Rovellons",
-          "score": 73
+          "score": 68
         },
         {
           "id": "rossinyols",
           "name": "Rossinyols",
-          "score": 73
+          "score": 68
         },
         {
           "id": "ceps",
           "name": "Ceps",
-          "score": 70
+          "score": 65
         },
         {
           "id": "pinetell",
           "name": "Pinetell",
-          "score": 69
+          "score": 64
         },
         {
           "id": "fredolic",
           "name": "Fredolic",
-          "score": 61
+          "score": 56
         },
         {
           "id": "colmenilles",
           "name": "Colmenilles",
-          "score": 53
+          "score": 48
         }
       ],
       "aemet_check": {
         "station_name": "LA SEU D'URGELL  AEROPORT",
         "distance_km": 3.6,
-        "prec_1h_mm": 0.1,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-25T12:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -10363,7 +10363,7 @@
         "station_name": "TUIXENT",
         "distance_km": 10.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -10421,7 +10421,7 @@
         "station_name": "MARTINET",
         "distance_km": 4.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -10474,7 +10474,7 @@
         "station_name": "MARTINET",
         "distance_km": 10.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -10527,7 +10527,7 @@
         "station_name": "LA MOLINA",
         "distance_km": 1.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -10549,7 +10549,7 @@
         "station_name": "PLANOLES",
         "distance_km": 4.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -10571,7 +10571,7 @@
         "station_name": "PLANOLES",
         "distance_km": 5.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -10592,39 +10592,39 @@
         {
           "id": "rovellons",
           "name": "Rovellons",
-          "score": 73
+          "score": 68
         },
         {
           "id": "rossinyols",
           "name": "Rossinyols",
-          "score": 73
+          "score": 68
         },
         {
           "id": "pinetell",
           "name": "Pinetell",
-          "score": 73
+          "score": 68
         },
         {
           "id": "ceps",
           "name": "Ceps",
-          "score": 70
+          "score": 65
         },
         {
           "id": "fredolic",
           "name": "Fredolic",
-          "score": 68
+          "score": 63
         },
         {
           "id": "colmenilles",
           "name": "Colmenilles",
-          "score": 60
+          "score": 55
         }
       ],
       "aemet_check": {
         "station_name": "SANT PAU DE SEGURIES",
         "distance_km": 9.1,
-        "prec_1h_mm": 0.2,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -10645,44 +10645,44 @@
         {
           "id": "oureig",
           "name": "Ou de reig",
-          "score": 75
+          "score": 70
         },
         {
           "id": "rossinyols",
           "name": "Rossinyols",
-          "score": 73
+          "score": 68
         },
         {
           "id": "ceps",
           "name": "Ceps",
-          "score": 70
+          "score": 65
         },
         {
           "id": "camagrocs",
           "name": "Camagrocs",
-          "score": 65
+          "score": 60
         },
         {
           "id": "llengua",
           "name": "Llengua de bou",
-          "score": 65
+          "score": 60
         },
         {
           "id": "trompetes",
           "name": "Trompetes de la mort",
-          "score": 62
+          "score": 57
         },
         {
           "id": "colmenilles",
           "name": "Colmenilles",
-          "score": 53
+          "score": 48
         }
       ],
       "aemet_check": {
         "station_name": "SANT PAU DE SEGURIES",
         "distance_km": 8.3,
-        "prec_1h_mm": 0.2,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -10703,44 +10703,44 @@
         {
           "id": "oureig",
           "name": "Ou de reig",
-          "score": 70
+          "score": 75
         },
         {
           "id": "ceps",
           "name": "Ceps",
-          "score": 65
+          "score": 70
         },
         {
           "id": "rossinyols",
           "name": "Rossinyols",
-          "score": 64
+          "score": 69
         },
         {
           "id": "llengua",
           "name": "Llengua de bou",
-          "score": 60
+          "score": 65
         },
         {
           "id": "camagrocs",
           "name": "Camagrocs",
-          "score": 54
+          "score": 59
         },
         {
           "id": "trompetes",
           "name": "Trompetes de la mort",
-          "score": 50
+          "score": 55
         },
         {
           "id": "colmenilles",
           "name": "Colmenilles",
-          "score": 42
+          "score": 47
         }
       ],
       "aemet_check": {
         "station_name": "VALL DE BIANYA",
         "distance_km": 13.6,
-        "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "prec_1h_mm": 0.2,
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -10793,7 +10793,7 @@
         "station_name": "MAÇANET DE CABRENYS",
         "distance_km": 10.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -10846,7 +10846,7 @@
         "station_name": "MAÇANET DE CABRENYS",
         "distance_km": 7.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -10868,7 +10868,7 @@
         "station_name": "FIGUERES  ELS ASPRES",
         "distance_km": 8.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -10890,7 +10890,7 @@
         "station_name": "ESPOLLA  LES ALBERES",
         "distance_km": 7.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -10912,7 +10912,7 @@
         "station_name": "EL PORT DE LA SELVA",
         "distance_km": 4.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -10934,7 +10934,7 @@
         "station_name": "AÍNSA-SOBRARBE  LA SERRETA-DEPÓSITO",
         "distance_km": 7.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -10956,7 +10956,7 @@
         "station_name": "SEIRA",
         "distance_km": 10.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -10978,7 +10978,7 @@
         "station_name": "SEIRA",
         "distance_km": 7.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11000,7 +11000,7 @@
         "station_name": "SEIRA",
         "distance_km": 14.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11022,7 +11022,7 @@
         "station_name": "SOPEIRA",
         "distance_km": 10.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11044,7 +11044,7 @@
         "station_name": "BARRUERA",
         "distance_km": 10.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11066,7 +11066,7 @@
         "station_name": "CABDELLA-CENTRAL",
         "distance_km": 6.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11088,7 +11088,7 @@
         "station_name": "CABDELLA-CENTRAL",
         "distance_km": 9.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11110,7 +11110,7 @@
         "station_name": "PORT AINE  L?ORRI",
         "distance_km": 1.4,
         "prec_1h_mm": null,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11132,7 +11132,7 @@
         "station_name": "PORT AINE  L?ORRI",
         "distance_km": 8.7,
         "prec_1h_mm": null,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11153,39 +11153,39 @@
         {
           "id": "rovellons",
           "name": "Rovellons",
-          "score": 81
+          "score": 76
         },
         {
           "id": "rossinyols",
           "name": "Rossinyols",
-          "score": 81
+          "score": 76
         },
         {
           "id": "pinetell",
           "name": "Pinetell",
-          "score": 81
+          "score": 76
         },
         {
           "id": "ceps",
           "name": "Ceps",
-          "score": 78
+          "score": 73
         },
         {
           "id": "fredolic",
           "name": "Fredolic",
-          "score": 76
+          "score": 71
         },
         {
           "id": "colmenilles",
           "name": "Colmenilles",
-          "score": 60
+          "score": 55
         }
       ],
       "aemet_check": {
         "station_name": "LA SEU D'URGELL  AEROPORT",
         "distance_km": 8.6,
-        "prec_1h_mm": 0.1,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-25T12:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11238,7 +11238,7 @@
         "station_name": "CAP DE REC",
         "distance_km": 8.8,
         "prec_1h_mm": null,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11260,7 +11260,7 @@
         "station_name": "CAP DE REC",
         "distance_km": 2.5,
         "prec_1h_mm": null,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11282,7 +11282,7 @@
         "station_name": "MARTINET",
         "distance_km": 10.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11304,7 +11304,7 @@
         "station_name": "LA MOLINA",
         "distance_km": 8.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11326,7 +11326,7 @@
         "station_name": "PLANOLES",
         "distance_km": 11.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11348,7 +11348,7 @@
         "station_name": "PLANOLES",
         "distance_km": 12.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11369,39 +11369,39 @@
         {
           "id": "rovellons",
           "name": "Rovellons",
-          "score": 81
+          "score": 76
         },
         {
           "id": "rossinyols",
           "name": "Rossinyols",
-          "score": 81
+          "score": 76
         },
         {
           "id": "pinetell",
           "name": "Pinetell",
-          "score": 81
+          "score": 76
         },
         {
           "id": "ceps",
           "name": "Ceps",
-          "score": 78
+          "score": 73
         },
         {
           "id": "fredolic",
           "name": "Fredolic",
-          "score": 76
+          "score": 71
         },
         {
           "id": "colmenilles",
           "name": "Colmenilles",
-          "score": 63
+          "score": 58
         }
       ],
       "aemet_check": {
         "station_name": "SANT PAU DE SEGURIES",
         "distance_km": 18.0,
-        "prec_1h_mm": 0.2,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11422,8 +11422,8 @@
       "aemet_check": {
         "station_name": "SANT PAU DE SEGURIES",
         "distance_km": 17.6,
-        "prec_1h_mm": 0.2,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11445,7 +11445,7 @@
         "station_name": "MAÇANET DE CABRENYS",
         "distance_km": 18.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11467,7 +11467,7 @@
         "station_name": "MAÇANET DE CABRENYS",
         "distance_km": 8.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11525,7 +11525,7 @@
         "station_name": "MAÇANET DE CABRENYS",
         "distance_km": 3.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11547,7 +11547,7 @@
         "station_name": "ESPOLLA  LES ALBERES",
         "distance_km": 8.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11569,7 +11569,7 @@
         "station_name": "SEIRA",
         "distance_km": 7.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11591,7 +11591,7 @@
         "station_name": "SEIRA",
         "distance_km": 3.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11613,7 +11613,7 @@
         "station_name": "CERLER  COGULLA",
         "distance_km": 6.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11635,7 +11635,7 @@
         "station_name": "BARRUERA",
         "distance_km": 7.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11657,7 +11657,7 @@
         "station_name": "BARRUERA",
         "distance_km": 2.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11679,7 +11679,7 @@
         "station_name": "CABDELLA-CENTRAL",
         "distance_km": 5.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11701,7 +11701,7 @@
         "station_name": "CABDELLA-CENTRAL",
         "distance_km": 8.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11754,7 +11754,7 @@
         "station_name": "PORT AINE  L?ORRI",
         "distance_km": 10.3,
         "prec_1h_mm": null,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11776,7 +11776,7 @@
         "station_name": "PORT AINE  L?ORRI",
         "distance_km": 13.4,
         "prec_1h_mm": null,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11797,8 +11797,8 @@
       "aemet_check": {
         "station_name": "LA SEU D'URGELL  AEROPORT",
         "distance_km": 18.3,
-        "prec_1h_mm": 0.1,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-25T12:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11820,7 +11820,7 @@
         "station_name": "CAP DE REC",
         "distance_km": 11.7,
         "prec_1h_mm": null,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11842,7 +11842,7 @@
         "station_name": "CAP DE REC",
         "distance_km": 8.1,
         "prec_1h_mm": null,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11864,7 +11864,7 @@
         "station_name": "BENASQUE",
         "distance_km": 4.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11886,7 +11886,7 @@
         "station_name": "CERLER  COGULLA",
         "distance_km": 5.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11908,7 +11908,7 @@
         "station_name": "BARRUERA",
         "distance_km": 12.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11930,7 +11930,7 @@
         "station_name": "BARRUERA",
         "distance_km": 10.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11952,7 +11952,7 @@
         "station_name": "CAP DE VAQUEIRA",
         "distance_km": 11.2,
         "prec_1h_mm": null,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -11974,7 +11974,7 @@
         "station_name": "ESTERRI D?ANEU",
         "distance_km": 5.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -12032,7 +12032,7 @@
         "station_name": "ESTERRI D?ANEU",
         "distance_km": 6.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -12090,7 +12090,7 @@
         "station_name": "ESTERRI D?ANEU",
         "distance_km": 16.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -12112,7 +12112,7 @@
         "station_name": "CAP DE REC",
         "distance_km": 25.8,
         "prec_1h_mm": null,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -12134,7 +12134,7 @@
         "station_name": "BENASQUE",
         "distance_km": 10.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -12192,7 +12192,7 @@
         "station_name": "BOSSOST-CENTRAL",
         "distance_km": 10.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     },
@@ -12245,7 +12245,7 @@
         "station_name": "ARTIES",
         "distance_km": 4.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-25T02:00:00+0000"
+        "observed_at": "2026-08-25T06:00:00+0000"
       },
       "own_history_days": 0
     }
