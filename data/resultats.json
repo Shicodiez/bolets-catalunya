@@ -1,86 +1,2964 @@
 {
-  "generated_at": "2026-08-25T09:18:21.741270+00:00",
+  "generated_at": "2026-08-25T09:36:34.446269+00:00",
   "zones": [
     {
-      "name": "Val d'Aran",
-      "lat": 42.7,
-      "lon": 0.85,
-      "alt": 1200,
-      "tree": "pi_negre",
-      "tree_label": "pineda de pi negre",
-      "rain_10d": 48,
-      "avg_temp": 20,
-      "days_since_rain": 1,
-      "species_scores": [
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 79
-        },
-        {
-          "id": "rovellons",
-          "name": "Rovellons",
-          "score": 66
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 66
-        }
-      ],
-      "best_score": 79,
-      "best_species": "Ceps",
+      "id": 1,
+      "name": "Punt 1",
+      "lat": 40.664,
+      "lon": 0.685,
+      "alt": 250,
+      "tree": "conreu",
+      "tree_label": "conreu",
+      "is_forest": false,
+      "rain_10d": 4,
+      "avg_temp": 28,
+      "days_since_rain": 20,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
       "aemet_check": {
-        "station_name": "ARTIES",
-        "distance_km": 2.2,
+        "station_name": "SANT JAUME D'ENVEJA",
+        "distance_km": 11.2,
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-24T21:00:00+0000"
       }
     },
     {
-      "name": "Pallars Sobirà N",
-      "lat": 42.58,
-      "lon": 1.1,
-      "alt": 1400,
-      "tree": "pi_negre",
-      "tree_label": "pineda de pi negre",
-      "rain_10d": 48,
-      "avg_temp": 16,
-      "days_since_rain": 1,
-      "species_scores": [
-        {
-          "id": "rovellons",
-          "name": "Rovellons",
-          "score": 80
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 80
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 79
-        }
-      ],
-      "best_score": 80,
-      "best_species": "Rovellons",
+      "id": 2,
+      "name": "Punt 2",
+      "lat": 40.664,
+      "lon": 0.88,
+      "alt": 250,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 7,
+      "avg_temp": 28,
+      "days_since_rain": 3,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
       "aemet_check": {
-        "station_name": "ESTERRI D?ANEU",
+        "station_name": "SANT JAUME D'ENVEJA",
+        "distance_km": 7.1,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Punt 3",
+      "lat": 40.808,
+      "lon": 0.49,
+      "alt": 250,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 8,
+      "avg_temp": 29,
+      "days_since_rain": 20,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "TORTOSA",
+        "distance_km": 1.4,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 4,
+      "name": "Punt 4",
+      "lat": 40.808,
+      "lon": 0.685,
+      "alt": 250,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 11,
+      "avg_temp": 28,
+      "days_since_rain": 3,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "SANT JAUME D'ENVEJA",
+        "distance_km": 16.0,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 5,
+      "name": "Punt 5",
+      "lat": 40.808,
+      "lon": 0.88,
+      "alt": 250,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 10,
+      "avg_temp": 29,
+      "days_since_rain": 3,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "SANT JAUME D'ENVEJA",
+        "distance_km": 13.5,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 6,
+      "name": "Punt 6",
+      "lat": 40.808,
+      "lon": 1.076,
+      "alt": 250,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 20,
+      "avg_temp": 28,
+      "days_since_rain": 3,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "VANDELLÓS",
+        "distance_km": 24.0,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 7,
+      "name": "Punt 7",
+      "lat": 40.952,
+      "lon": 0.295,
+      "alt": 250,
+      "tree": "conreu",
+      "tree_label": "conreu",
+      "is_forest": false,
+      "rain_10d": 3,
+      "avg_temp": 26,
+      "days_since_rain": 20,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "HORTA DE SANT JOAN",
+        "distance_km": 1.4,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 8,
+      "name": "Punt 8",
+      "lat": 40.952,
+      "lon": 0.49,
+      "alt": 250,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 5,
+      "avg_temp": 28,
+      "days_since_rain": 20,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "RASQUERA",
+        "distance_km": 11.9,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 9,
+      "name": "Punt 9",
+      "lat": 40.952,
+      "lon": 0.685,
+      "alt": 250,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 10,
+      "avg_temp": 27,
+      "days_since_rain": 3,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "RASQUERA",
+        "distance_km": 8.4,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 10,
+      "name": "Punt 10",
+      "lat": 40.952,
+      "lon": 0.88,
+      "alt": 250,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 15,
+      "avg_temp": 29,
+      "days_since_rain": 3,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "VANDELLÓS",
+        "distance_km": 1.0,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 11,
+      "name": "Punt 11",
+      "lat": 40.952,
+      "lon": 1.076,
+      "alt": 250,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 29,
+      "avg_temp": 28,
+      "days_since_rain": 3,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "VANDELLÓS",
+        "distance_km": 17.2,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 12,
+      "name": "Punt 12",
+      "lat": 40.952,
+      "lon": 1.271,
+      "alt": 250,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 24,
+      "avg_temp": 28,
+      "days_since_rain": 3,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "TARRAGONA  FAC. GEOGRAFIA",
+        "distance_km": 19.2,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 13,
+      "name": "Punt 13",
+      "lat": 40.952,
+      "lon": 1.466,
+      "alt": 250,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 16,
+      "avg_temp": 28,
+      "days_since_rain": 3,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "TARRAGONA  FAC. GEOGRAFIA",
+        "distance_km": 26.4,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 14,
+      "name": "Punt 14",
+      "lat": 41.097,
+      "lon": 0.295,
+      "alt": 250,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 3,
+      "avg_temp": 27,
+      "days_since_rain": 20,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "MASSALUCA",
+        "distance_km": 10.2,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 15,
+      "name": "Punt 15",
+      "lat": 41.097,
+      "lon": 0.49,
+      "alt": 250,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 2,
+      "avg_temp": 27,
+      "days_since_rain": 20,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "MASSALUCA",
+        "distance_km": 14.5,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 16,
+      "name": "Punt 16",
+      "lat": 41.097,
+      "lon": 0.685,
+      "alt": 250,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 3,
+      "avg_temp": 29,
+      "days_since_rain": 20,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "RASQUERA",
+        "distance_km": 11.9,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 17,
+      "name": "Punt 17",
+      "lat": 41.097,
+      "lon": 0.88,
+      "alt": 250,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 11,
+      "avg_temp": 25,
+      "days_since_rain": 3,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "ALFORJA",
+        "distance_km": 14.8,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 18,
+      "name": "Punt 18",
+      "lat": 41.097,
+      "lon": 1.076,
+      "alt": 250,
+      "tree": "conreu",
+      "tree_label": "conreu",
+      "is_forest": false,
+      "rain_10d": 18,
+      "avg_temp": 28,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "REUS  AEROPUERTO",
+        "distance_km": 9.1,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 19,
+      "name": "Punt 19",
+      "lat": 41.097,
+      "lon": 1.271,
+      "alt": 250,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 19,
+      "avg_temp": 28,
+      "days_since_rain": 3,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "TARRAGONA  FAC. GEOGRAFIA",
+        "distance_km": 3.5,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 20,
+      "name": "Punt 20",
+      "lat": 41.097,
+      "lon": 1.466,
+      "alt": 250,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 6,
+      "avg_temp": 28,
+      "days_since_rain": 20,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "TARRAGONA  FAC. GEOGRAFIA",
+        "distance_km": 18.4,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 21,
+      "name": "Punt 21",
+      "lat": 41.097,
+      "lon": 1.661,
+      "alt": 250,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 4,
+      "avg_temp": 28,
+      "days_since_rain": 20,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "SITGES  VALLCARCA",
+        "distance_km": 22.9,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 22,
+      "name": "Punt 22",
+      "lat": 41.241,
+      "lon": 0.295,
+      "alt": 250,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 2,
+      "avg_temp": 29,
+      "days_since_rain": 20,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "MASSALUCA",
+        "distance_km": 8.6,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 23,
+      "name": "Punt 23",
+      "lat": 41.241,
+      "lon": 0.49,
+      "alt": 250,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 2,
+      "avg_temp": 29,
+      "days_since_rain": 20,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "MASSALUCA",
+        "distance_km": 13.5,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 24,
+      "name": "Punt 24",
+      "lat": 41.241,
+      "lon": 0.685,
+      "alt": 250,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 2,
+      "avg_temp": 27,
+      "days_since_rain": 20,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "CABACÉS",
+        "distance_km": 4.3,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 25,
+      "name": "Punt 25",
+      "lat": 41.241,
+      "lon": 0.88,
+      "alt": 250,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 6,
+      "avg_temp": 26,
+      "days_since_rain": 20,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "ALFORJA",
+        "distance_km": 7.6,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 26,
+      "name": "Punt 26",
+      "lat": 41.241,
+      "lon": 1.076,
+      "alt": 250,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 16,
+      "avg_temp": 25,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "ALFORJA",
+        "distance_km": 9.9,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 27,
+      "name": "Punt 27",
+      "lat": 41.241,
+      "lon": 1.271,
+      "alt": 250,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 15,
+      "avg_temp": 27,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "VALLS",
+        "distance_km": 5.9,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 28,
+      "name": "Punt 28",
+      "lat": 41.241,
+      "lon": 1.466,
+      "alt": 250,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 9,
+      "avg_temp": 26,
+      "days_since_rain": 3,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "VALLS",
+        "distance_km": 18.1,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 29,
+      "name": "Punt 29",
+      "lat": 41.241,
+      "lon": 1.661,
+      "alt": 250,
+      "tree": "conreu",
+      "tree_label": "conreu",
+      "is_forest": false,
+      "rain_10d": 5,
+      "avg_temp": 28,
+      "days_since_rain": 20,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "VILAFRANCA DEL PENEDÈS",
+        "distance_km": 10.0,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 30,
+      "name": "Punt 30",
+      "lat": 41.241,
+      "lon": 1.856,
+      "alt": 30,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 3,
+      "avg_temp": 28,
+      "days_since_rain": 20,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "SITGES  VALLCARCA",
+        "distance_km": 0.4,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 31,
+      "name": "Punt 31",
+      "lat": 41.241,
+      "lon": 2.051,
+      "alt": 30,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 4,
+      "avg_temp": 28,
+      "days_since_rain": 20,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "BARCELONA  AEROPUERTO",
+        "distance_km": 6.0,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 32,
+      "name": "Punt 32",
+      "lat": 41.241,
+      "lon": 2.246,
+      "alt": 30,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 6,
+      "avg_temp": 28,
+      "days_since_rain": 20,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "BARCELONA  AEROPUERTO",
+        "distance_km": 15.8,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 33,
+      "name": "Punt 33",
+      "lat": 41.385,
+      "lon": 0.295,
+      "alt": 330,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 3,
+      "avg_temp": 29,
+      "days_since_rain": 20,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "FRAGA",
+        "distance_km": 16.3,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 34,
+      "name": "Punt 34",
+      "lat": 41.385,
+      "lon": 0.49,
+      "alt": 330,
+      "tree": "conreu",
+      "tree_label": "conreu",
+      "is_forest": false,
+      "rain_10d": 5,
+      "avg_temp": 28,
+      "days_since_rain": 20,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "EL SOLERÀS",
+        "distance_km": 16.0,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 35,
+      "name": "Punt 35",
+      "lat": 41.385,
+      "lon": 0.685,
+      "alt": 330,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 6,
+      "avg_temp": 27,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "EL SOLERÀS",
+        "distance_km": 3.2,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 36,
+      "name": "Punt 36",
+      "lat": 41.385,
+      "lon": 0.88,
+      "alt": 330,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 2,
+      "avg_temp": 26,
+      "days_since_rain": 20,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "LA POBLA DE CERVOLES",
+        "distance_km": 3.5,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 37,
+      "name": "Punt 37",
+      "lat": 41.385,
+      "lon": 1.076,
+      "alt": 330,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 3,
+      "avg_temp": 26,
+      "days_since_rain": 20,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "LA POBLA DE CERVOLES",
+        "distance_km": 13.7,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 38,
+      "name": "Punt 38",
+      "lat": 41.385,
+      "lon": 1.271,
+      "alt": 330,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 15,
+      "avg_temp": 24,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "VALLS",
+        "distance_km": 10.3,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 39,
+      "name": "Punt 39",
+      "lat": 41.385,
+      "lon": 1.466,
+      "alt": 330,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 13,
+      "avg_temp": 24,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "PONTONS",
+        "distance_km": 5.7,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 40,
+      "name": "Punt 40",
+      "lat": 41.385,
+      "lon": 1.661,
+      "alt": 330,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 5,
+      "avg_temp": 25,
+      "days_since_rain": 20,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "VILAFRANCA DEL PENEDÈS",
+        "distance_km": 6.2,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 41,
+      "name": "Punt 41",
+      "lat": 41.385,
+      "lon": 1.856,
+      "alt": 80,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 4,
+      "avg_temp": 25,
+      "days_since_rain": 20,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "CORBERA  PUIG D?AGULLES",
+        "distance_km": 3.5,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 42,
+      "name": "Punt 42",
+      "lat": 41.385,
+      "lon": 2.051,
+      "alt": 80,
+      "tree": "urba",
+      "tree_label": "urba",
+      "is_forest": false,
+      "rain_10d": 6,
+      "avg_temp": 27,
+      "days_since_rain": 20,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "BARCELONA  DRASSANES",
+        "distance_km": 10.3,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 43,
+      "name": "Punt 43",
+      "lat": 41.385,
+      "lon": 2.246,
+      "alt": 80,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 3,
+      "avg_temp": 28,
+      "days_since_rain": 20,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "BARCELONA  DRASSANES",
+        "distance_km": 6.1,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 44,
+      "name": "Punt 44",
+      "lat": 41.385,
+      "lon": 2.441,
+      "alt": 30,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 9,
+      "avg_temp": 28,
+      "days_since_rain": 4,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "VILASSAR DE DALT",
+        "distance_km": 14.8,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 45,
+      "name": "Punt 45",
+      "lat": 41.385,
+      "lon": 2.637,
+      "alt": 30,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 14,
+      "avg_temp": 28,
+      "days_since_rain": 4,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "ARENYS DE MAR",
+        "distance_km": 23.9,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 46,
+      "name": "Punt 46",
+      "lat": 41.529,
+      "lon": 0.295,
+      "alt": 460,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 6,
+      "avg_temp": 29,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "FRAGA",
+        "distance_km": 5.1,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 47,
+      "name": "Punt 47",
+      "lat": 41.529,
+      "lon": 0.49,
+      "alt": 460,
+      "tree": "conreu",
+      "tree_label": "conreu",
+      "is_forest": false,
+      "rain_10d": 12,
+      "avg_temp": 29,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "FRAGA",
+        "distance_km": 11.2,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 48,
+      "name": "Punt 48",
+      "lat": 41.529,
+      "lon": 0.685,
+      "alt": 460,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 12,
+      "avg_temp": 28,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "EL SOLERÀS",
+        "distance_km": 12.8,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 49,
+      "name": "Punt 49",
+      "lat": 41.529,
+      "lon": 0.88,
+      "alt": 460,
+      "tree": "conreu",
+      "tree_label": "conreu",
+      "is_forest": false,
+      "rain_10d": 8,
+      "avg_temp": 28,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "MOLLERUSSA",
+        "distance_km": 9.8,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 50,
+      "name": "Punt 50",
+      "lat": 41.529,
+      "lon": 1.076,
+      "alt": 460,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 10,
+      "avg_temp": 26,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "LLORAC",
+        "distance_km": 19.7,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 51,
+      "name": "Punt 51",
+      "lat": 41.529,
+      "lon": 1.271,
+      "alt": 460,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 14,
+      "avg_temp": 24,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "LLORAC",
+        "distance_km": 4.5,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 52,
+      "name": "Punt 52",
+      "lat": 41.529,
+      "lon": 1.466,
+      "alt": 460,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 10,
+      "avg_temp": 24,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "IGUALADA - MUNTANYETA",
+        "distance_km": 12.8,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 53,
+      "name": "Punt 53",
+      "lat": 41.529,
+      "lon": 1.661,
+      "alt": 460,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 11,
+      "avg_temp": 26,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "IGUALADA - MUNTANYETA",
+        "distance_km": 8.3,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 54,
+      "name": "Punt 54",
+      "lat": 41.529,
+      "lon": 1.856,
+      "alt": 210,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 14,
+      "avg_temp": 27,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "CORBERA  PUIG D?AGULLES",
+        "distance_km": 13.6,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 55,
+      "name": "Punt 55",
+      "lat": 41.529,
+      "lon": 2.051,
+      "alt": 210,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 7,
+      "avg_temp": 27,
+      "days_since_rain": 20,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "CALDES DE MONTBUI",
+        "distance_km": 13.5,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 56,
+      "name": "Punt 56",
+      "lat": 41.529,
+      "lon": 2.246,
+      "alt": 210,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 6,
+      "avg_temp": 26,
+      "days_since_rain": 20,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "VILASSAR DE DALT",
+        "distance_km": 10.1,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 57,
+      "name": "Punt 57",
+      "lat": 41.529,
+      "lon": 2.441,
+      "alt": 60,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 9,
+      "avg_temp": 27,
+      "days_since_rain": 20,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "VILASSAR DE DALT",
+        "distance_km": 7.1,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 58,
+      "name": "Punt 58",
+      "lat": 41.529,
+      "lon": 2.637,
+      "alt": 60,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 22,
+      "avg_temp": 28,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "ARENYS DE MAR",
+        "distance_km": 10.3,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 59,
+      "name": "Punt 59",
+      "lat": 41.673,
+      "lon": 0.295,
+      "alt": 590,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 7,
+      "avg_temp": 28,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "BALLOBAR  DEPÓSITO",
+        "distance_km": 10.7,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 60,
+      "name": "Punt 60",
+      "lat": 41.673,
+      "lon": 0.49,
+      "alt": 590,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 9,
+      "avg_temp": 28,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "LLEIDA",
+        "distance_km": 10.4,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 61,
+      "name": "Punt 61",
+      "lat": 41.673,
+      "lon": 0.685,
+      "alt": 590,
+      "tree": "conreu",
+      "tree_label": "conreu",
+      "is_forest": false,
+      "rain_10d": 17,
+      "avg_temp": 29,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "LLEIDA",
+        "distance_km": 8.9,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 62,
+      "name": "Punt 62",
+      "lat": 41.673,
+      "lon": 0.88,
+      "alt": 590,
+      "tree": "conreu",
+      "tree_label": "conreu",
+      "is_forest": false,
+      "rain_10d": 14,
+      "avg_temp": 28,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "MOLLERUSSA",
+        "distance_km": 6.3,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 63,
+      "name": "Punt 63",
+      "lat": 41.673,
+      "lon": 1.076,
+      "alt": 590,
+      "tree": "conreu",
+      "tree_label": "conreu",
+      "is_forest": false,
+      "rain_10d": 18,
+      "avg_temp": 28,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "TORDERA - GRANYANELLA",
+        "distance_km": 12.2,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 64,
+      "name": "Punt 64",
+      "lat": 41.673,
+      "lon": 1.271,
+      "alt": 590,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 18,
+      "avg_temp": 26,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "TORDERA - GRANYANELLA",
+        "distance_km": 4.1,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 65,
+      "name": "Punt 65",
+      "lat": 41.673,
+      "lon": 1.466,
+      "alt": 590,
+      "tree": "conreu",
+      "tree_label": "conreu",
+      "is_forest": false,
+      "rain_10d": 19,
+      "avg_temp": 25,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "IGUALADA - MUNTANYETA",
+        "distance_km": 14.6,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 66,
+      "name": "Punt 66",
+      "lat": 41.673,
+      "lon": 1.661,
+      "alt": 590,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 20,
+      "avg_temp": 25,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "IGUALADA - MUNTANYETA",
+        "distance_km": 10.8,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 67,
+      "name": "Punt 67",
+      "lat": 41.673,
+      "lon": 1.856,
+      "alt": 340,
+      "tree": "conreu",
+      "tree_label": "conreu",
+      "is_forest": false,
+      "rain_10d": 13,
+      "avg_temp": 27,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "MANRESA",
+        "distance_km": 5.4,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 68,
+      "name": "Punt 68",
+      "lat": 41.673,
+      "lon": 2.051,
+      "alt": 340,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 12,
+      "avg_temp": 26,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "CALDES DE MONTBUI",
+        "distance_km": 11.8,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 69,
+      "name": "Punt 69",
+      "lat": 41.673,
+      "lon": 2.246,
+      "alt": 340,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 18,
+      "avg_temp": 26,
+      "days_since_rain": 5,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "CALDES DE MONTBUI",
+        "distance_km": 9.3,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 70,
+      "name": "Punt 70",
+      "lat": 41.673,
+      "lon": 2.441,
+      "alt": 190,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 10,
+      "avg_temp": 26,
+      "days_since_rain": 20,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "FONTMARTINA",
+        "distance_km": 9.7,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 71,
+      "name": "Punt 71",
+      "lat": 41.673,
+      "lon": 2.637,
+      "alt": 190,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 9,
+      "avg_temp": 25,
+      "days_since_rain": 20,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "ARENYS DE MAR",
+        "distance_km": 12.5,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 72,
+      "name": "Punt 72",
+      "lat": 41.673,
+      "lon": 2.832,
+      "alt": 190,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 14,
+      "avg_temp": 26,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "BLANES  JARDIN BOTANICO",
+        "distance_km": 2.3,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 73,
+      "name": "Punt 73",
+      "lat": 41.817,
+      "lon": 0.295,
+      "alt": 720,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 12,
+      "avg_temp": 27,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "TAMARITE DE LITERA  LA MELUSA",
+        "distance_km": 7.9,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 74,
+      "name": "Punt 74",
+      "lat": 41.817,
+      "lon": 0.49,
+      "alt": 720,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 12,
+      "avg_temp": 28,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "TAMARITE DE LITERA  LA MELUSA",
+        "distance_km": 10.2,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 75,
+      "name": "Punt 75",
+      "lat": 41.817,
+      "lon": 0.685,
+      "alt": 720,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 16,
+      "avg_temp": 27,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "OS DE BALAGUER",
+        "distance_km": 8.6,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 76,
+      "name": "Punt 76",
+      "lat": 41.817,
+      "lon": 0.88,
+      "alt": 720,
+      "tree": "conreu",
+      "tree_label": "conreu",
+      "is_forest": false,
+      "rain_10d": 13,
+      "avg_temp": 27,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "OS DE BALAGUER",
+        "distance_km": 12.0,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 77,
+      "name": "Punt 77",
+      "lat": 41.817,
+      "lon": 1.076,
+      "alt": 720,
+      "tree": "conreu",
+      "tree_label": "conreu",
+      "is_forest": false,
+      "rain_10d": 16,
+      "avg_temp": 27,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "ARTESA DE SEGRE",
+        "distance_km": 7.7,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 78,
+      "name": "Punt 78",
+      "lat": 41.817,
+      "lon": 1.271,
+      "alt": 720,
+      "tree": "conreu",
+      "tree_label": "conreu",
+      "is_forest": false,
+      "rain_10d": 15,
+      "avg_temp": 26,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "TORÀ",
+        "distance_km": 10.4,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 79,
+      "name": "Punt 79",
+      "lat": 41.817,
+      "lon": 1.466,
+      "alt": 720,
+      "tree": "conreu",
+      "tree_label": "conreu",
+      "is_forest": false,
+      "rain_10d": 13,
+      "avg_temp": 24,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "TORÀ",
+        "distance_km": 6.0,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 80,
+      "name": "Punt 80",
+      "lat": 41.817,
+      "lon": 1.661,
+      "alt": 720,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 16,
+      "avg_temp": 25,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "RINER - XIXONS",
+        "distance_km": 15.4,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 81,
+      "name": "Punt 81",
+      "lat": 41.817,
+      "lon": 1.856,
+      "alt": 470,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 22,
+      "avg_temp": 26,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "BALSARENY",
+        "distance_km": 5.7,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 82,
+      "name": "Punt 82",
+      "lat": 41.817,
+      "lon": 2.051,
+      "alt": 470,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 13,
+      "avg_temp": 26,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "MOIÀ",
+        "distance_km": 3.7,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 83,
+      "name": "Punt 83",
+      "lat": 41.817,
+      "lon": 2.246,
+      "alt": 470,
+      "tree": "conreu",
+      "tree_label": "conreu",
+      "is_forest": false,
+      "rain_10d": 12,
+      "avg_temp": 24,
+      "days_since_rain": 20,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "MOIÀ",
+        "distance_km": 12.5,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 84,
+      "name": "Punt 84",
+      "lat": 41.817,
+      "lon": 2.441,
+      "alt": 320,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 10,
+      "avg_temp": 24,
+      "days_since_rain": 20,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "FONTMARTINA",
+        "distance_km": 6.4,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 85,
+      "name": "Punt 85",
+      "lat": 41.817,
+      "lon": 2.637,
+      "alt": 320,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 14,
+      "avg_temp": 26,
+      "days_since_rain": 4,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "SANT HILARI",
+        "distance_km": 12.5,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 86,
+      "name": "Punt 86",
+      "lat": 41.817,
+      "lon": 2.832,
+      "alt": 320,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 21,
+      "avg_temp": 26,
+      "days_since_rain": 4,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "GIRONA  AEROPUERTO",
+        "distance_km": 12.0,
+        "prec_1h_mm": null,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 87,
+      "name": "Punt 87",
+      "lat": 41.817,
+      "lon": 3.027,
+      "alt": 320,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 28,
+      "avg_temp": 26,
+      "days_since_rain": 4,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "CASTELL D?ARO",
+        "distance_km": 1.1,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 88,
+      "name": "Punt 88",
+      "lat": 41.961,
+      "lon": 0.49,
+      "alt": 840,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 21,
+      "avg_temp": 25,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "BENABARRE",
+        "distance_km": 16.9,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 89,
+      "name": "Punt 89",
+      "lat": 41.961,
+      "lon": 0.685,
+      "alt": 840,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 17,
+      "avg_temp": 25,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "OS DE BALAGUER",
+        "distance_km": 11.4,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 90,
+      "name": "Punt 90",
+      "lat": 41.961,
+      "lon": 0.88,
+      "alt": 840,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 19,
+      "avg_temp": 25,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "LLIMIANA",
+        "distance_km": 12.0,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 91,
+      "name": "Punt 91",
+      "lat": 41.961,
+      "lon": 1.076,
+      "alt": 840,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 11,
+      "avg_temp": 26,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "ARTESA DE SEGRE",
+        "distance_km": 9.3,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 92,
+      "name": "Punt 92",
+      "lat": 41.961,
+      "lon": 1.271,
+      "alt": 840,
+      "tree": "conreu",
+      "tree_label": "conreu",
+      "is_forest": false,
+      "rain_10d": 16,
+      "avg_temp": 24,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "ARTESA DE SEGRE",
+        "distance_km": 16.1,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 93,
+      "name": "Punt 93",
+      "lat": 41.961,
+      "lon": 1.466,
+      "alt": 840,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 19,
+      "avg_temp": 25,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "RINER - XIXONS",
+        "distance_km": 11.3,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 94,
+      "name": "Punt 94",
+      "lat": 41.961,
+      "lon": 1.661,
+      "alt": 840,
+      "tree": "conreu",
+      "tree_label": "conreu",
+      "is_forest": false,
+      "rain_10d": 13,
+      "avg_temp": 25,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "RINER - XIXONS",
+        "distance_km": 5.1,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 95,
+      "name": "Punt 95",
+      "lat": 41.961,
+      "lon": 1.856,
+      "alt": 840,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 18,
+      "avg_temp": 25,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "BALSARENY",
+        "distance_km": 10.6,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 96,
+      "name": "Punt 96",
+      "lat": 41.961,
+      "lon": 2.051,
+      "alt": 840,
+      "tree": "conreu",
+      "tree_label": "conreu",
+      "is_forest": false,
+      "rain_10d": 18,
+      "avg_temp": 25,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "PRATS DE LLUÇANÈS",
         "distance_km": 5.5,
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-24T21:00:00+0000"
       }
     },
     {
-      "name": "Pallars Sobirà S",
-      "lat": 42.45,
-      "lon": 1.05,
-      "alt": 1300,
-      "tree": "avet",
-      "tree_label": "avetosa",
+      "id": 97,
+      "name": "Punt 97",
+      "lat": 41.961,
+      "lon": 2.246,
+      "alt": 840,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 12,
+      "avg_temp": 25,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "PRATS DE LLUÇANÈS",
+        "distance_km": 18.8,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 98,
+      "name": "Punt 98",
+      "lat": 41.961,
+      "lon": 2.441,
+      "alt": 440,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 13,
+      "avg_temp": 25,
+      "days_since_rain": 10,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "SANT HILARI",
+        "distance_km": 10.7,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 99,
+      "name": "Punt 99",
+      "lat": 41.961,
+      "lon": 2.637,
+      "alt": 440,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 32,
+      "avg_temp": 26,
+      "days_since_rain": 4,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "GIRONA  AEROPUERTO",
+        "distance_km": 11.8,
+        "prec_1h_mm": null,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 100,
+      "name": "Punt 100",
+      "lat": 41.961,
+      "lon": 2.832,
+      "alt": 440,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 26,
+      "avg_temp": 26,
+      "days_since_rain": 4,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "GIRONA  PARC DEL MIGDIA",
+        "distance_km": 1.6,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 101,
+      "name": "Punt 101",
+      "lat": 41.961,
+      "lon": 3.027,
+      "alt": 440,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 17,
+      "avg_temp": 27,
+      "days_since_rain": 4,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "CASTELL D?ARO",
+        "distance_km": 17.0,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 102,
+      "name": "Punt 102",
+      "lat": 42.106,
+      "lon": 0.49,
+      "alt": 980,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 22,
+      "avg_temp": 25,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "BENABARRE",
+        "distance_km": 1.1,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 103,
+      "name": "Punt 103",
+      "lat": 42.106,
+      "lon": 0.685,
+      "alt": 980,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 39,
+      "avg_temp": 25,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "BENABARRE",
+        "distance_km": 16.9,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 104,
+      "name": "Punt 104",
+      "lat": 42.106,
+      "lon": 0.88,
+      "alt": 980,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 37,
+      "avg_temp": 27,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "LLIMIANA",
+        "distance_km": 4.9,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 105,
+      "name": "Punt 105",
+      "lat": 42.106,
+      "lon": 1.076,
+      "alt": 980,
+      "tree": "conreu",
+      "tree_label": "conreu",
+      "is_forest": false,
+      "rain_10d": 43,
+      "avg_temp": 25,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "LLIMIANA",
+        "distance_km": 14.6,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 106,
+      "name": "Punt 106",
+      "lat": 42.106,
+      "lon": 1.271,
+      "alt": 980,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 37,
+      "avg_temp": 20,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "COLL DE NARGÓ",
+        "distance_km": 6.4,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 107,
+      "name": "Punt 107",
+      "lat": 42.106,
+      "lon": 1.466,
+      "alt": 980,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 66,
+      "avg_temp": 22,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "COLL DE NARGÓ",
+        "distance_km": 13.8,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 108,
+      "name": "Punt 108",
+      "lat": 42.106,
+      "lon": 1.661,
+      "alt": 980,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 47,
+      "avg_temp": 21,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "TUIXENT",
+        "distance_km": 15.7,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 109,
+      "name": "Punt 109",
+      "lat": 42.106,
+      "lon": 1.856,
+      "alt": 980,
+      "tree": "conreu",
+      "tree_label": "conreu",
+      "is_forest": false,
+      "rain_10d": 37,
+      "avg_temp": 24,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "BERGA  INSTITUTO",
+        "distance_km": 0.5,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 110,
+      "name": "Punt 110",
+      "lat": 42.106,
+      "lon": 2.051,
+      "alt": 980,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 22,
+      "avg_temp": 23,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "PRATS DE LLUÇANÈS",
+        "distance_km": 11.2,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 111,
+      "name": "Punt 111",
+      "lat": 42.106,
+      "lon": 2.246,
+      "alt": 980,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 24,
+      "avg_temp": 25,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "RIPOLL",
+        "distance_km": 10.3,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 112,
+      "name": "Punt 112",
+      "lat": 42.106,
+      "lon": 2.441,
+      "alt": 980,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 23,
+      "avg_temp": 26,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "LES PLANES D?HOSTOLES",
+        "distance_km": 10.8,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 113,
+      "name": "Punt 113",
+      "lat": 42.106,
+      "lon": 2.637,
+      "alt": 980,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 38,
+      "avg_temp": 26,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "LES PLANES D?HOSTOLES",
+        "distance_km": 9.2,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 114,
+      "name": "Punt 114",
+      "lat": 42.106,
+      "lon": 2.832,
+      "alt": 980,
+      "tree": "conreu",
+      "tree_label": "conreu",
+      "is_forest": false,
+      "rain_10d": 51,
+      "avg_temp": 27,
+      "days_since_rain": 9,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "PORQUERES",
+        "distance_km": 5.6,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 115,
+      "name": "Punt 115",
+      "lat": 42.106,
+      "lon": 3.027,
+      "alt": 980,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 22,
+      "avg_temp": 27,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "CASTELLO D?EMPURIES",
+        "distance_km": 14.3,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 116,
+      "name": "Punt 116",
+      "lat": 42.25,
+      "lon": 0.49,
+      "alt": 1110,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 17,
+      "avg_temp": 25,
+      "days_since_rain": 3,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "CAPELLA  LAGUARRES",
+        "distance_km": 5.8,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 117,
+      "name": "Punt 117",
+      "lat": 42.25,
+      "lon": 0.685,
+      "alt": 1110,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 31,
+      "avg_temp": 24,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "SOPEIRA",
+        "distance_km": 9.2,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 118,
+      "name": "Punt 118",
+      "lat": 42.25,
+      "lon": 0.88,
+      "alt": 1110,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 33,
+      "avg_temp": 21,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "TALARN",
+        "distance_km": 5.2,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 119,
+      "name": "Punt 119",
+      "lat": 42.25,
+      "lon": 1.076,
+      "alt": 1110,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
       "rain_10d": 68,
+      "avg_temp": 21,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "TALARN",
+        "distance_km": 18.1,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 120,
+      "name": "Punt 120",
+      "lat": 42.25,
+      "lon": 1.271,
+      "alt": 1110,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 61,
+      "avg_temp": 18,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "COLL DE NARGÓ",
+        "distance_km": 11.1,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 121,
+      "name": "Punt 121",
+      "lat": 42.25,
+      "lon": 1.466,
+      "alt": 1110,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 50,
+      "avg_temp": 21,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "TUIXENT",
+        "distance_km": 8.8,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 122,
+      "name": "Punt 122",
+      "lat": 42.25,
+      "lon": 1.661,
+      "alt": 1110,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 81,
+      "avg_temp": 17,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "TUIXENT",
+        "distance_km": 7.8,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 123,
+      "name": "Punt 123",
+      "lat": 42.25,
+      "lon": 1.856,
+      "alt": 1110,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 24,
+      "avg_temp": 22,
+      "days_since_rain": 10,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "LA MOLINA",
+        "distance_km": 11.5,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 124,
+      "name": "Punt 124",
+      "lat": 42.25,
+      "lon": 2.051,
+      "alt": 1110,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 28,
+      "avg_temp": 21,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "PLANOLES",
+        "distance_km": 8.6,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 125,
+      "name": "Punt 125",
+      "lat": 42.25,
+      "lon": 2.246,
+      "alt": 1110,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 28,
+      "avg_temp": 23,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "RIPOLL",
+        "distance_km": 7.7,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 126,
+      "name": "Punt 126",
+      "lat": 42.25,
+      "lon": 2.441,
+      "alt": 1110,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 35,
+      "avg_temp": 23,
+      "days_since_rain": 4,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "VALL DE BIANYA",
+        "distance_km": 5.1,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 127,
+      "name": "Punt 127",
+      "lat": 42.25,
+      "lon": 2.637,
+      "alt": 1110,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 24,
+      "avg_temp": 26,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "VALL DE BIANYA",
+        "distance_km": 14.3,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 128,
+      "name": "Punt 128",
+      "lat": 42.25,
+      "lon": 2.832,
+      "alt": 1110,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 13,
+      "avg_temp": 27,
+      "days_since_rain": 4,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "FIGUERES  ELS ASPRES",
+        "distance_km": 10.6,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 129,
+      "name": "Punt 129",
+      "lat": 42.25,
+      "lon": 3.027,
+      "alt": 1110,
+      "tree": "conreu",
+      "tree_label": "conreu",
+      "is_forest": false,
+      "rain_10d": 10,
+      "avg_temp": 27,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "FIGUERES  ELS ASPRES",
+        "distance_km": 5.6,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 130,
+      "name": "Punt 130",
+      "lat": 42.25,
+      "lon": 3.222,
+      "alt": 1110,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 5,
+      "avg_temp": 27,
+      "days_since_rain": 20,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "EL PORT DE LA SELVA",
+        "distance_km": 8.9,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 131,
+      "name": "Punt 131",
+      "lat": 42.394,
+      "lon": 0.295,
+      "alt": 1230,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 24,
+      "avg_temp": 25,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "AÍNSA-SOBRARBE  LA SERRETA-DEPÓSITO",
+        "distance_km": 13.2,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 132,
+      "name": "Punt 132",
+      "lat": 42.394,
+      "lon": 0.49,
+      "alt": 1230,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 40,
+      "avg_temp": 20,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "SEIRA",
+        "distance_km": 10.3,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 133,
+      "name": "Punt 133",
+      "lat": 42.394,
+      "lon": 0.685,
+      "alt": 1230,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 54,
+      "avg_temp": 19,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "SOPEIRA",
+        "distance_km": 9.8,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 134,
+      "name": "Punt 134",
+      "lat": 42.394,
+      "lon": 0.88,
+      "alt": 1230,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 37,
+      "avg_temp": 21,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "CABDELLA-CENTRAL",
+        "distance_km": 12.1,
+        "prec_1h_mm": 0.4,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 135,
+      "name": "Punt 135",
+      "lat": 42.394,
+      "lon": 1.076,
+      "alt": 1230,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 71,
       "avg_temp": 17,
       "days_since_rain": 1,
       "species_scores": [],
@@ -88,889 +2966,403 @@
       "best_species": null,
       "aemet_check": {
         "station_name": "CABDELLA-CENTRAL",
-        "distance_km": 5.2,
+        "distance_km": 10.7,
         "prec_1h_mm": 0.4,
         "observed_at": "2026-08-24T21:00:00+0000"
       }
     },
     {
-      "name": "Alta Ribagorça",
-      "lat": 42.48,
-      "lon": 0.75,
-      "alt": 1500,
-      "tree": "pi_negre",
-      "tree_label": "pineda de pi negre",
-      "rain_10d": 52,
+      "id": 136,
+      "name": "Punt 136",
+      "lat": 42.394,
+      "lon": 1.271,
+      "alt": 1230,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 40,
       "avg_temp": 17,
       "days_since_rain": 1,
-      "species_scores": [
-        {
-          "id": "rovellons",
-          "name": "Rovellons",
-          "score": 80
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 80
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 79
-        }
-      ],
-      "best_score": 80,
-      "best_species": "Rovellons",
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
       "aemet_check": {
-        "station_name": "BARRUERA",
-        "distance_km": 4.8,
-        "prec_1h_mm": 0.2,
+        "station_name": "PORT AINE  L?ORRI",
+        "distance_km": 5.0,
+        "prec_1h_mm": null,
         "observed_at": "2026-08-24T21:00:00+0000"
       }
     },
     {
-      "name": "Pallars Jussà",
-      "lat": 42.35,
-      "lon": 0.9,
-      "alt": 1000,
-      "tree": "pi_roig",
-      "tree_label": "pineda de pi roig",
-      "rain_10d": 44,
-      "avg_temp": 23,
+      "id": 137,
+      "name": "Punt 137",
+      "lat": 42.394,
+      "lon": 1.466,
+      "alt": 1230,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 36,
+      "avg_temp": 21,
       "days_since_rain": 1,
-      "species_scores": [
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 66
-        },
-        {
-          "id": "rovellons",
-          "name": "Rovellons",
-          "score": 65
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 64
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 64
-        }
-      ],
-      "best_score": 66,
-      "best_species": "Pinetell",
-      "aemet_check": {
-        "station_name": "SOPEIRA",
-        "distance_km": 13.1,
-        "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-24T21:00:00+0000"
-      }
-    },
-    {
-      "name": "Alt Urgell N",
-      "lat": 42.35,
-      "lon": 1.35,
-      "alt": 900,
-      "tree": "pi_roig",
-      "tree_label": "pineda de pi roig",
-      "rain_10d": 51,
-      "avg_temp": 20,
-      "days_since_rain": 1,
-      "species_scores": [
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 79
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 67
-        },
-        {
-          "id": "rovellons",
-          "name": "Rovellons",
-          "score": 66
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 66
-        }
-      ],
-      "best_score": 79,
-      "best_species": "Ceps",
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
       "aemet_check": {
         "station_name": "LA SEU D'URGELL  AEROPORT",
-        "distance_km": 4.6,
+        "distance_km": 7.9,
         "prec_1h_mm": 0.5,
         "observed_at": "2026-08-24T21:00:00+0000"
       }
     },
     {
-      "name": "Alt Urgell S",
-      "lat": 42.2,
-      "lon": 1.45,
-      "alt": 800,
-      "tree": "pi_roig",
-      "tree_label": "pineda de pi roig",
-      "rain_10d": 64,
-      "avg_temp": 18,
-      "days_since_rain": 1,
-      "species_scores": [
-        {
-          "id": "rovellons",
-          "name": "Rovellons",
-          "score": 80
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 80
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 79
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 68
-        }
-      ],
-      "best_score": 80,
-      "best_species": "Rovellons",
-      "aemet_check": {
-        "station_name": "TUIXENT",
-        "distance_km": 10.4,
-        "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-24T21:00:00+0000"
-      }
-    },
-    {
-      "name": "Cerdanya",
-      "lat": 42.4,
-      "lon": 1.9,
-      "alt": 1150,
-      "tree": "pi_negre",
-      "tree_label": "pineda de pi negre",
-      "rain_10d": 30,
+      "id": 138,
+      "name": "Punt 138",
+      "lat": 42.394,
+      "lon": 1.661,
+      "alt": 1230,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 54,
       "avg_temp": 19,
       "days_since_rain": 1,
-      "species_scores": [
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 79
-        },
-        {
-          "id": "rovellons",
-          "name": "Rovellons",
-          "score": 67
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 67
-        }
-      ],
-      "best_score": 79,
-      "best_species": "Ceps",
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "CAP DE REC",
+        "distance_km": 4.1,
+        "prec_1h_mm": null,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 139,
+      "name": "Punt 139",
+      "lat": 42.394,
+      "lon": 1.856,
+      "alt": 1230,
+      "tree": "aigua",
+      "tree_label": "aigua",
+      "is_forest": false,
+      "rain_10d": 35,
+      "avg_temp": 19,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
       "aemet_check": {
         "station_name": "LA MOLINA",
-        "distance_km": 8.2,
+        "distance_km": 9.7,
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-24T21:00:00+0000"
       }
     },
     {
-      "name": "Solsonès",
-      "lat": 41.99,
-      "lon": 1.52,
-      "alt": 850,
-      "tree": "pi_roig",
-      "tree_label": "pineda de pi roig",
-      "rain_10d": 17,
-      "avg_temp": 25,
+      "id": 140,
+      "name": "Punt 140",
+      "lat": 42.394,
+      "lon": 2.051,
+      "alt": 1230,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 20,
+      "avg_temp": 15,
       "days_since_rain": 1,
-      "species_scores": [
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 62
-        },
-        {
-          "id": "rovellons",
-          "name": "Rovellons",
-          "score": 61
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 61
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 56
-        }
-      ],
-      "best_score": 62,
-      "best_species": "Pinetell",
-      "aemet_check": {
-        "station_name": "RINER - XIXONS",
-        "distance_km": 8.2,
-        "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-24T21:00:00+0000"
-      }
-    },
-    {
-      "name": "Berguedà N",
-      "lat": 42.15,
-      "lon": 1.85,
-      "alt": 750,
-      "tree": "pi_roig",
-      "tree_label": "pineda de pi roig",
-      "rain_10d": 28,
-      "avg_temp": 23,
-      "days_since_rain": 1,
-      "species_scores": [
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 66
-        },
-        {
-          "id": "rovellons",
-          "name": "Rovellons",
-          "score": 65
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 64
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 64
-        }
-      ],
-      "best_score": 66,
-      "best_species": "Pinetell",
-      "aemet_check": {
-        "station_name": "BERGA  INSTITUTO",
-        "distance_km": 5.4,
-        "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-24T21:00:00+0000"
-      }
-    },
-    {
-      "name": "Berguedà S",
-      "lat": 42.05,
-      "lon": 1.7,
-      "alt": 650,
-      "tree": "roure",
-      "tree_label": "roureda",
-      "rain_10d": 17,
-      "avg_temp": 22,
-      "days_since_rain": 1,
-      "species_scores": [
-        {
-          "id": "oureig",
-          "name": "Ou de reig",
-          "score": 80
-        },
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 63
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 61
-        },
-        {
-          "id": "llengua",
-          "name": "Llengua de bou",
-          "score": 59
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 57
-        },
-        {
-          "id": "camagrocs",
-          "name": "Camagrocs",
-          "score": 57
-        },
-        {
-          "id": "trompetes",
-          "name": "Trompetes de la mort",
-          "score": 53
-        }
-      ],
-      "best_score": 80,
-      "best_species": "Ou de reig",
-      "aemet_check": {
-        "station_name": "RINER - XIXONS",
-        "distance_km": 14.0,
-        "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-24T21:00:00+0000"
-      }
-    },
-    {
-      "name": "Ripollès",
-      "lat": 42.28,
-      "lon": 2.2,
-      "alt": 900,
-      "tree": "faig",
-      "tree_label": "fageda",
-      "rain_10d": 19,
-      "avg_temp": 17,
-      "days_since_rain": 1,
-      "species_scores": [
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 78
-        },
-        {
-          "id": "camagrocs",
-          "name": "Camagrocs",
-          "score": 75
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 73
-        },
-        {
-          "id": "trompetes",
-          "name": "Trompetes de la mort",
-          "score": 70
-        }
-      ],
-      "best_score": 78,
-      "best_species": "Rossinyols",
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
       "aemet_check": {
         "station_name": "PLANOLES",
-        "distance_km": 9.0,
-        "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-24T21:00:00+0000"
-      }
-    },
-    {
-      "name": "Garrotxa",
-      "lat": 42.18,
-      "lon": 2.49,
-      "alt": 450,
-      "tree": "faig",
-      "tree_label": "fageda",
-      "rain_10d": 15,
-      "avg_temp": 27,
-      "days_since_rain": 1,
-      "species_scores": [
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 58
-        },
-        {
-          "id": "camagrocs",
-          "name": "Camagrocs",
-          "score": 55
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 54
-        },
-        {
-          "id": "trompetes",
-          "name": "Trompetes de la mort",
-          "score": 51
-        }
-      ],
-      "best_score": 58,
-      "best_species": "Rossinyols",
-      "aemet_check": {
-        "station_name": "VALL DE BIANYA",
-        "distance_km": 3.7,
-        "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-24T21:00:00+0000"
-      }
-    },
-    {
-      "name": "Alt Empordà",
-      "lat": 42.27,
-      "lon": 2.9,
-      "alt": 180,
-      "tree": "alzina",
-      "tree_label": "alzinar",
-      "rain_10d": 9,
-      "avg_temp": 28,
-      "days_since_rain": 4,
-      "species_scores": [
-        {
-          "id": "oureig",
-          "name": "Ou de reig",
-          "score": 56
-        },
-        {
-          "id": "fredolic",
-          "name": "Fredolic",
-          "score": 53
-        },
-        {
-          "id": "camagrocs",
-          "name": "Camagrocs",
-          "score": 50
-        }
-      ],
-      "best_score": 56,
-      "best_species": "Ou de reig",
-      "aemet_check": {
-        "station_name": "FIGUERES  ELS ASPRES",
-        "distance_km": 5.1,
-        "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-24T21:00:00+0000"
-      }
-    },
-    {
-      "name": "Osona N",
-      "lat": 41.98,
-      "lon": 2.3,
-      "alt": 600,
-      "tree": "roure",
-      "tree_label": "roureda",
-      "rain_10d": 19,
-      "avg_temp": 25,
-      "days_since_rain": 1,
-      "species_scores": [
-        {
-          "id": "oureig",
-          "name": "Ou de reig",
-          "score": 68
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 63
-        },
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 63
-        },
-        {
-          "id": "camagrocs",
-          "name": "Camagrocs",
-          "score": 60
-        },
-        {
-          "id": "llengua",
-          "name": "Llengua de bou",
-          "score": 60
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 58
-        },
-        {
-          "id": "trompetes",
-          "name": "Trompetes de la mort",
-          "score": 55
-        }
-      ],
-      "best_score": 68,
-      "best_species": "Ou de reig",
-      "aemet_check": {
-        "station_name": "SANT HILARI",
-        "distance_km": 20.8,
-        "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-24T21:00:00+0000"
-      }
-    },
-    {
-      "name": "Osona S",
-      "lat": 41.85,
-      "lon": 2.2,
-      "alt": 500,
-      "tree": "roure",
-      "tree_label": "roureda",
-      "rain_10d": 13,
-      "avg_temp": 24,
-      "days_since_rain": 1,
-      "species_scores": [
-        {
-          "id": "oureig",
-          "name": "Ou de reig",
-          "score": 74
-        },
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 60
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 56
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 52
-        },
-        {
-          "id": "camagrocs",
-          "name": "Camagrocs",
-          "score": 52
-        },
-        {
-          "id": "llengua",
-          "name": "Llengua de bou",
-          "score": 52
-        },
-        {
-          "id": "trompetes",
-          "name": "Trompetes de la mort",
-          "score": 49
-        }
-      ],
-      "best_score": 74,
-      "best_species": "Ou de reig",
-      "aemet_check": {
-        "station_name": "MOIÀ",
         "distance_km": 9.6,
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-24T21:00:00+0000"
       }
     },
     {
-      "name": "Bages",
-      "lat": 41.79,
-      "lon": 1.83,
-      "alt": 450,
-      "tree": "pi_blanc",
-      "tree_label": "pineda de pi blanc",
-      "rain_10d": 24,
-      "avg_temp": 26,
+      "id": 141,
+      "name": "Punt 141",
+      "lat": 42.394,
+      "lon": 2.246,
+      "alt": 1230,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 63,
+      "avg_temp": 10,
       "days_since_rain": 1,
-      "species_scores": [
-        {
-          "id": "rovellons",
-          "name": "Rovellons",
-          "score": 65
-        },
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 63
-        },
-        {
-          "id": "fredolic",
-          "name": "Fredolic",
-          "score": 62
-        }
-      ],
-      "best_score": 65,
-      "best_species": "Rovellons",
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
       "aemet_check": {
-        "station_name": "MANRESA",
-        "distance_km": 7.8,
-        "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-24T21:00:00+0000"
-      }
-    },
-    {
-      "name": "Vallès Oriental",
-      "lat": 41.68,
-      "lon": 2.3,
-      "alt": 350,
-      "tree": "alzina",
-      "tree_label": "alzinar",
-      "rain_10d": 18,
-      "avg_temp": 26,
-      "days_since_rain": 4,
-      "species_scores": [
-        {
-          "id": "oureig",
-          "name": "Ou de reig",
-          "score": 70
-        },
-        {
-          "id": "fredolic",
-          "name": "Fredolic",
-          "score": 66
-        },
-        {
-          "id": "camagrocs",
-          "name": "Camagrocs",
-          "score": 62
-        }
-      ],
-      "best_score": 70,
-      "best_species": "Ou de reig",
-      "aemet_check": {
-        "station_name": "CALDES DE MONTBUI",
-        "distance_km": 13.3,
-        "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-24T21:00:00+0000"
-      }
-    },
-    {
-      "name": "Montseny",
-      "lat": 41.77,
-      "lon": 2.43,
-      "alt": 850,
-      "tree": "faig",
-      "tree_label": "fageda",
-      "rain_10d": 10,
-      "avg_temp": 21,
-      "days_since_rain": 20,
-      "species_scores": [
-        {
-          "id": "camagrocs",
-          "name": "Camagrocs",
-          "score": 74
-        },
-        {
-          "id": "trompetes",
-          "name": "Trompetes de la mort",
-          "score": 70
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 56
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 54
-        }
-      ],
-      "best_score": 74,
-      "best_species": "Camagrocs",
-      "aemet_check": {
-        "station_name": "FONTMARTINA",
-        "distance_km": 1.1,
-        "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-24T21:00:00+0000"
-      }
-    },
-    {
-      "name": "Selva",
-      "lat": 41.85,
-      "lon": 2.55,
-      "alt": 300,
-      "tree": "alzina",
-      "tree_label": "alzinar",
-      "rain_10d": 11,
-      "avg_temp": 25,
-      "days_since_rain": 20,
-      "species_scores": [
-        {
-          "id": "camagrocs",
-          "name": "Camagrocs",
-          "score": 74
-        },
-        {
-          "id": "fredolic",
-          "name": "Fredolic",
-          "score": 59
-        },
-        {
-          "id": "oureig",
-          "name": "Ou de reig",
-          "score": 57
-        }
-      ],
-      "best_score": 74,
-      "best_species": "Camagrocs",
-      "aemet_check": {
-        "station_name": "SANT HILARI",
-        "distance_km": 4.6,
-        "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-24T21:00:00+0000"
-      }
-    },
-    {
-      "name": "Anoia",
-      "lat": 41.6,
-      "lon": 1.55,
-      "alt": 400,
-      "tree": "pi_blanc",
-      "tree_label": "pineda de pi blanc",
-      "rain_10d": 21,
-      "avg_temp": 26,
-      "days_since_rain": 1,
-      "species_scores": [
-        {
-          "id": "rovellons",
-          "name": "Rovellons",
-          "score": 65
-        },
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 63
-        },
-        {
-          "id": "fredolic",
-          "name": "Fredolic",
-          "score": 62
-        }
-      ],
-      "best_score": 65,
-      "best_species": "Rovellons",
-      "aemet_check": {
-        "station_name": "IGUALADA - MUNTANYETA",
-        "distance_km": 4.3,
-        "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-24T21:00:00+0000"
-      }
-    },
-    {
-      "name": "Priorat",
-      "lat": 41.23,
-      "lon": 0.82,
-      "alt": 500,
-      "tree": "alzina",
-      "tree_label": "alzinar",
-      "rain_10d": 7,
-      "avg_temp": 27,
-      "days_since_rain": 1,
-      "species_scores": [
-        {
-          "id": "oureig",
-          "name": "Ou de reig",
-          "score": 51
-        },
-        {
-          "id": "fredolic",
-          "name": "Fredolic",
-          "score": 47
-        },
-        {
-          "id": "camagrocs",
-          "name": "Camagrocs",
-          "score": 45
-        }
-      ],
-      "best_score": 51,
-      "best_species": "Ou de reig",
-      "aemet_check": {
-        "station_name": "CABACÉS",
-        "distance_km": 7.4,
-        "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-24T21:00:00+0000"
-      }
-    },
-    {
-      "name": "Conca de Barberà",
-      "lat": 41.42,
-      "lon": 1.15,
-      "alt": 600,
-      "tree": "pi_blanc",
-      "tree_label": "pineda de pi blanc",
-      "rain_10d": 7,
-      "avg_temp": 26,
-      "days_since_rain": 1,
-      "species_scores": [
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 50
-        },
-        {
-          "id": "rovellons",
-          "name": "Rovellons",
-          "score": 49
-        },
-        {
-          "id": "fredolic",
-          "name": "Fredolic",
-          "score": 47
-        }
-      ],
-      "best_score": 50,
-      "best_species": "Colmenilles",
-      "aemet_check": {
-        "station_name": "VALLS",
-        "distance_km": 16.9,
-        "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-24T21:00:00+0000"
-      }
-    },
-    {
-      "name": "Baix Camp",
-      "lat": 41.15,
-      "lon": 0.95,
-      "alt": 450,
-      "tree": "alzina",
-      "tree_label": "alzinar",
-      "rain_10d": 19,
-      "avg_temp": 26,
-      "days_since_rain": 1,
-      "species_scores": [
-        {
-          "id": "oureig",
-          "name": "Ou de reig",
-          "score": 67
-        },
-        {
-          "id": "fredolic",
-          "name": "Fredolic",
-          "score": 62
-        },
-        {
-          "id": "camagrocs",
-          "name": "Camagrocs",
-          "score": 60
-        }
-      ],
-      "best_score": 67,
-      "best_species": "Ou de reig",
-      "aemet_check": {
-        "station_name": "ALFORJA",
-        "distance_km": 7.2,
-        "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-24T21:00:00+0000"
-      }
-    },
-    {
-      "name": "Terra Alta",
-      "lat": 41.05,
-      "lon": 0.45,
-      "alt": 400,
-      "tree": "pi_pinyer",
-      "tree_label": "pineda de pi pinyer",
-      "rain_10d": 1,
-      "avg_temp": 27,
-      "days_since_rain": 20,
-      "species_scores": [
-        {
-          "id": "rovellons",
-          "name": "Rovellons",
-          "score": 42
-        }
-      ],
-      "best_score": 42,
-      "best_species": "Rovellons",
-      "aemet_check": {
-        "station_name": "RASQUERA",
+        "station_name": "PLANOLES",
         "distance_km": 14.6,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 142,
+      "name": "Punt 142",
+      "lat": 42.394,
+      "lon": 2.441,
+      "alt": 1230,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 42,
+      "avg_temp": 18,
+      "days_since_rain": 4,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "SANT PAU DE SEGURIES",
+        "distance_km": 16.3,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 143,
+      "name": "Punt 143",
+      "lat": 42.394,
+      "lon": 2.637,
+      "alt": 1230,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 28,
+      "avg_temp": 22,
+      "days_since_rain": 4,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "MAÇANET DE CABRENYS",
+        "distance_km": 9.8,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 144,
+      "name": "Punt 144",
+      "lat": 42.394,
+      "lon": 2.832,
+      "alt": 1230,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 21,
+      "avg_temp": 27,
+      "days_since_rain": 4,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "MAÇANET DE CABRENYS",
+        "distance_km": 6.3,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 145,
+      "name": "Punt 145",
+      "lat": 42.394,
+      "lon": 3.027,
+      "alt": 1230,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 7,
+      "avg_temp": 28,
+      "days_since_rain": 4,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "ESPOLLA  LES ALBERES",
+        "distance_km": 1.8,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 146,
+      "name": "Punt 146",
+      "lat": 42.538,
+      "lon": 0.49,
+      "alt": 1360,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 25,
+      "avg_temp": 20,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "CERLER  COGULLA",
+        "distance_km": 4.7,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 147,
+      "name": "Punt 147",
+      "lat": 42.538,
+      "lon": 0.685,
+      "alt": 1360,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 78,
+      "avg_temp": 12,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "BARRUERA",
+        "distance_km": 10.1,
+        "prec_1h_mm": 0.2,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 148,
+      "name": "Punt 148",
+      "lat": 42.538,
+      "lon": 0.88,
+      "alt": 1360,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 79,
+      "avg_temp": 14,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "BARRUERA",
+        "distance_km": 7.7,
+        "prec_1h_mm": 0.2,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 149,
+      "name": "Punt 149",
+      "lat": 42.538,
+      "lon": 1.076,
+      "alt": 1360,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 61,
+      "avg_temp": 13,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "ESTERRI D?ANEU",
+        "distance_km": 10.5,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 150,
+      "name": "Punt 150",
+      "lat": 42.538,
+      "lon": 1.271,
+      "alt": 1360,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 36,
+      "avg_temp": 21,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "PORT AINE  L?ORRI",
+        "distance_km": 15.0,
+        "prec_1h_mm": null,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 151,
+      "name": "Punt 151",
+      "lat": 42.538,
+      "lon": 1.466,
+      "alt": 1360,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 59,
+      "avg_temp": 15,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "CAP DE REC",
+        "distance_km": 20.4,
+        "prec_1h_mm": null,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 152,
+      "name": "Punt 152",
+      "lat": 42.682,
+      "lon": 0.685,
+      "alt": 1490,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 106,
+      "avg_temp": 14,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "BOSSOST-CENTRAL",
+        "distance_km": 10.5,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
+    },
+    {
+      "id": 153,
+      "name": "Punt 153",
+      "lat": 42.682,
+      "lon": 0.88,
+      "alt": 1490,
+      "tree": "desconegut",
+      "tree_label": "tipus de bosc desconegut",
+      "is_forest": false,
+      "rain_10d": 50,
+      "avg_temp": 18,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "ARTIES",
+        "distance_km": 2.0,
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-24T21:00:00+0000"
       }
