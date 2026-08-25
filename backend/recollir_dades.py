@@ -440,12 +440,12 @@ SPECIES = [
 ]
 
 TREE_LABELS = {
-    "pi_roig": "pineda de pi roig", "pi_negre": "pineda de pi negre", "avet": "avetosa",
-    "pi_blanc": "pineda de pi blanc", "pi_pinyer": "pineda de pi pinyer",
-    "pi_altres": "bosc de coníferes (espècie no diferenciada)",
-    "alzina": "alzinar/bosc de perennifolis", "roure": "roureda/bosc de caducifolis",
-    "faig": "fageda", "suro": "surededa", "mixt": "bosc mixt",
-    "matollar": "matollar", "prat": "prat/pastura", "desconegut": "tipus de bosc desconegut",
+    "pi_roig": "pinar de pino rojo", "pi_negre": "pinar de pino negro", "avet": "abetal",
+    "pi_blanc": "pinar de pino blanco", "pi_pinyer": "pinar de pino piñonero",
+    "pi_altres": "bosque de coníferas (especie no diferenciada)",
+    "alzina": "encinar/bosque de perennifolios", "roure": "robledal/bosque de caducifolios",
+    "faig": "hayedo", "suro": "alcornocal", "mixt": "bosque mixto",
+    "matollar": "matorral", "prat": "prado/pastizal", "desconegut": "tipo de bosque desconocido",
 }
 
 # Mapa de tipus de bosc no forestal / desconegut que no assignem a cap espècie
