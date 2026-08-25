@@ -1236,6 +1236,85 @@ HISTORY_PATH = "../data/historial_lluvia.json"
 HISTORY_MAX_DAYS = 30
 
 
+GEOCODE_CACHE_PATH = "../data/geocode_cache.json"
+NOMINATIM_URL = "https://nominatim.openstreetmap.org/search"
+GEOCODE_BATCH_PER_RUN = 20  # respecta el límit de Nominatim (4/min) sense allargar massa l'execució
+GEOCODE_DELAY_SECONDS = 15  # ~4 peticions/minut
+
+
+def load_geocode_cache():
+    """Cache permanent (no caduca): nom de lloc -> {lat, lon} o None si no s'ha trobat."""
+    try:
+        with open(GEOCODE_CACHE_PATH, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {}
+
+
+def save_geocode_cache(cache):
+    with open(GEOCODE_CACHE_PATH, "w", encoding="utf-8") as f:
+        json.dump(cache, f, ensure_ascii=False)
+
+
+def geocode_place(location_name, timeout=10):
+    """Geocodifica un nom de lloc de Catalunya via Nominatim (OSM), gratuït
+    i sense clau. S'acota la cerca a Catalunya afegint ', Catalunya' i
+    limitant per bounding box aproximat, per evitar coincidències d'altres
+    llocs del món amb el mateix nom."""
+    query = f"{location_name}, Catalunya, Spain"
+    params = (
+        f"?q={urllib.parse.quote(query)}&format=json&limit=1"
+        f"&viewbox=0.10,42.90,3.35,40.50&bounded=1"
+    )
+    url = NOMINATIM_URL + params
+    req = urllib.request.Request(url, headers={"User-Agent": "bolets-catalunya-app/1.0 (github.com/Shicodiez/bolets-catalunya)"})
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+        if data:
+            return {"lat": float(data[0]["lat"]), "lon": float(data[0]["lon"])}
+    except Exception:
+        pass
+    return None
+
+
+def geocode_meteoclimatic_batch(stations):
+    """
+    Geocodifica un lot limitat d'estacions de Meteoclimatic per execució,
+    respectant el límit de Nominatim (4 peticions/minut per a scripts
+    automàtics). El cache és permanent — un cop geocodificat un lloc, no cal
+    tornar-ho a fer mai més (les estacions no es mouen). Amb el temps,
+    totes les estacions del feed queden geocodificades.
+    """
+    cache = load_geocode_cache()
+    to_geocode = [s for s in stations if s["location"] and s["location"].strip() not in cache]
+
+    if not to_geocode:
+        print("  Geocodificació: totes les ubicacions ja són al cache")
+    else:
+        batch = to_geocode[:GEOCODE_BATCH_PER_RUN]
+        print(f"  Geocodificació: {len(to_geocode)} ubicacions pendents, geocodificant {len(batch)} aquesta execució...")
+        for i, st in enumerate(batch):
+            place = st["location"].strip()
+            result = geocode_place(place)
+            cache[place] = result  # es desa també si és None, per no reintentar llocs que no es troben
+            if i < len(batch) - 1:
+                time.sleep(GEOCODE_DELAY_SECONDS)
+        save_geocode_cache(cache)
+        found = sum(1 for st in batch if cache.get(st["location"].strip()))
+        print(f"  Geocodificació: {found}/{len(batch)} trobades aquesta execució")
+
+    # Aplica el cache a les estacions
+    for st in stations:
+        place = st["location"].strip() if st["location"] else ""
+        coords = cache.get(place)
+        if coords:
+            st["lat"] = coords["lat"]
+            st["lon"] = coords["lon"]
+
+    return stations
+
+
 def fetch_meteoclimatic_stations(timeout=20):
     """
     Consulta el XML públic de Meteoclimatic per a totes les estacions de
@@ -1251,25 +1330,13 @@ def fetch_meteoclimatic_stations(timeout=20):
     import xml.etree.ElementTree as ET
     root = ET.fromstring(xml_text)
     all_stations = root.findall(".//station")
-    if all_stations:
-        first_raw = ET.tostring(all_stations[0], encoding="unicode")
-        print(f"    [DEBUG meteoclimatic] XML primera estació (primers 600 car.): {first_raw[:600]}")
 
     stations = []
     for st in all_stations:
         st_id = st.findtext("id", default="")
         location = st.findtext("location", default="")
-        lat = None
+        lat = None  # es completa després via geocodificació (el feed no dona coordenades)
         lon = None
-        coords = st.find("coordinates")
-        if coords is not None:
-            lat_txt = coords.findtext("latitude")
-            lon_txt = coords.findtext("longitude")
-            try:
-                lat = float(lat_txt) if lat_txt else None
-                lon = float(lon_txt) if lon_txt else None
-            except ValueError:
-                pass
 
         rain_now = None
         rain_el = st.find(".//stationdata/rain")
@@ -1371,6 +1438,7 @@ def build_results():
     try:
         mc_stations = fetch_meteoclimatic_stations()
         print(f"  Meteoclimatic: {len(mc_stations)} estacions rebudes")
+        mc_stations = geocode_meteoclimatic_batch(mc_stations)
         history = update_history_with_meteoclimatic(history, ZONES, mc_stations)
         history = save_history(history)
     except Exception as e:
