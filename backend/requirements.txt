@@ -1,0 +1,2 @@
+# Aquest projecte només fa servir llibreries estàndard de Python
+# (json, urllib, datetime) — no calen dependències externes per ara.
