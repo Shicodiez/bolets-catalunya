@@ -29,12 +29,24 @@
     flex: 1; min-width: 160px; padding: 8px 12px; border-radius: var(--radius);
     border: 0.5px solid var(--border); background: var(--surface-2); font-size: 14px;
   }
+  .threshold-box {
+    background: var(--surface-2); border: 0.5px solid var(--border); border-radius: 12px;
+    padding: 14px 16px; margin-bottom: 16px;
+  }
+  .threshold-label { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px; }
+  .threshold-label strong { font-size: 15px; }
+  input[type="range"] { width: 100%; }
   #map { width: 100%; height: 480px; border-radius: 12px; border: 0.5px solid var(--border); margin-bottom: 16px; background: var(--surface-1); }
   .leaflet-popup-content-wrapper { border-radius: 10px; }
   .popup-title { font-weight: 500; font-size: 14px; margin: 0 0 4px; }
   .popup-meta { font-size: 12px; color: #5f5e5a; margin: 0 0 6px; }
-  .popup-score { display: inline-block; font-size: 13px; font-weight: 500; padding: 3px 8px; border-radius: 6px; margin-bottom: 6px; }
-  .popup-detail { font-size: 11px; color: #898781; margin: 0; }
+  .popup-species-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 12px; padding: 3px 0; }
+  .popup-score-pill { font-size: 11px; font-weight: 500; padding: 2px 7px; border-radius: 6px; }
+  .popup-detail { font-size: 11px; color: #898781; margin: 4px 0 0; }
+  .popup-btn {
+    margin-top: 8px; width: 100%; padding: 6px 10px; font-size: 12px; border-radius: 6px;
+    border: 0.5px solid var(--border); background: var(--surface-1); cursor: pointer;
+  }
   .zone-card {
     background: var(--surface-2); border: 0.5px solid var(--border);
     border-radius: 12px; padding: 14px 16px; margin-bottom: 8px; cursor: pointer;
@@ -43,8 +55,6 @@
   .zone-name { font-weight: 500; font-size: 14px; margin: 0; }
   .zone-meta { font-size: 12px; color: var(--text-secondary); margin: 2px 0 0; }
   .score-pill { font-size: 13px; font-weight: 500; padding: 4px 10px; border-radius: var(--radius); }
-  .bar-track { margin-top: 8px; height: 4px; background: var(--surface-1); border-radius: 2px; overflow: hidden; }
-  .bar-fill { height: 100%; }
   .zone-detail { font-size: 11px; color: var(--text-muted); margin: 6px 0 0; }
   .legend { margin-top: 20px; padding: 16px 20px; background: var(--surface-1); border-radius: 12px; }
   .legend p { font-size: 13px; color: var(--text-secondary); margin: 0 0 8px; }
@@ -52,20 +62,52 @@
   .legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 4px; vertical-align: -1px; }
   .footer-note { font-size: 12px; color: var(--text-muted); margin-top: 12px; }
   .section-label { font-size: 13px; font-weight: 500; margin: 20px 0 8px; }
+
+  .sighting-box {
+    background: var(--surface-2); border: 0.5px solid var(--border); border-radius: 12px;
+    padding: 16px; margin-top: 20px;
+  }
+  .sighting-box h3 { font-size: 15px; margin: 0 0 4px; }
+  .sighting-box p.hint { font-size: 12px; color: var(--text-secondary); margin: 0 0 12px; }
+  .sighting-form { display: flex; flex-direction: column; gap: 8px; }
+  .sighting-form label { font-size: 12px; color: var(--text-secondary); }
+  .sighting-form select, .sighting-form input, .sighting-form textarea {
+    width: 100%; padding: 8px 10px; border-radius: var(--radius);
+    border: 0.5px solid var(--border); background: var(--surface-1); font-size: 14px;
+    font-family: inherit;
+  }
+  .sighting-form button {
+    margin-top: 4px; padding: 10px; border-radius: var(--radius); border: none;
+    background: var(--green-bar); color: white; font-size: 14px; font-weight: 500; cursor: pointer;
+  }
+  .sighting-list { margin-top: 16px; }
+  .sighting-item {
+    font-size: 12px; padding: 8px 10px; background: var(--surface-1); border-radius: 8px;
+    margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; gap: 8px;
+  }
+  .sighting-item button { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 12px; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <h1>Predictor de setas — Catalunya</h1>
-  <p class="subtitle">Puntuación según lluvia, temperatura y tipo de bosque</p>
+  <p class="subtitle">Puntuación por evidencia acumulada: lluvia, temperatura, temporada y contraste entre fuentes</p>
   <div id="status">Cargando datos...</div>
+
+  <div class="threshold-box">
+    <div class="threshold-label">
+      <span>Umbral de sensibilidad</span>
+      <strong id="threshold-value">70</strong>
+    </div>
+    <input type="range" id="threshold-slider" min="0" max="100" value="70" step="5">
+  </div>
 
   <div class="controls">
     <select id="species-filter">
       <option value="all">Todas las especies</option>
     </select>
     <select id="sort-mode">
-      <option value="score">Ordenar por nº de especies</option>
+      <option value="score">Ordenar por puntuación</option>
       <option value="name">Ordenar por nombre de zona</option>
     </select>
   </div>
@@ -73,11 +115,40 @@
   <div id="map"></div>
 
   <div class="legend">
-    <p>Los puntos verdes cumplen todas las condiciones: lluvia suficiente, días desde la lluvia en el rango correcto, temperatura mínima nocturna adecuada y bosque compatible. Se usa la mínima de la noche (no la media del día) porque es la que refleja el frescor que activa la salida de las setas, aunque las tardes sigan siendo calurosas.</p>
+    <p>La puntuación (0-100) suma evidencia de varios factores: lluvia acumulada, días desde la lluvia, temperatura mínima nocturna, temporada típica de la especie según altitud/mes, y contraste con AEMET y estaciones amateur (Meteoclimatic). Ningún factor por sí solo descarta una especie salvo el tipo de bosque — mueve el umbral para ver más o menos zonas.</p>
+    <div class="legend-items">
+      <span><span class="legend-dot" style="background:#1D9E75"></span>Alta (≥80)</span>
+      <span><span class="legend-dot" style="background:#EF9F27"></span>Media (umbral-79)</span>
+    </div>
   </div>
 
-  <p class="section-label" id="section-label">Mejores zonas</p>
+  <p class="section-label" id="section-label">Zonas por encima del umbral</p>
   <div id="zones-list"></div>
+
+  <div class="sighting-box">
+    <h3>🍄 Registrar un hallazgo</h3>
+    <p class="hint">Apunta lo que encuentres, dónde y cuándo — con el tiempo esto ayuda a afinar el modelo. Se guarda en este navegador.</p>
+    <div class="sighting-form">
+      <div>
+        <label>Especie</label>
+        <select id="sighting-species"></select>
+      </div>
+      <div>
+        <label>Zona (elige la más cercana a donde lo encontraste)</label>
+        <select id="sighting-zone"></select>
+      </div>
+      <div>
+        <label>Fecha</label>
+        <input type="date" id="sighting-date">
+      </div>
+      <div>
+        <label>Notas (opcional)</label>
+        <textarea id="sighting-notes" rows="2" placeholder="Cantidad, lugar exacto, condiciones..."></textarea>
+      </div>
+      <button id="sighting-save">Guardar hallazgo</button>
+    </div>
+    <div class="sighting-list" id="sighting-list"></div>
+  </div>
 
   <p class="footer-note" id="generated-note"></p>
 </div>
@@ -87,23 +158,27 @@
 let DATA = null;
 let map = null;
 let markers = [];
+let threshold = 70;
+
+function colorForScore(s) {
+  if (s >= 80) return {bg: '#E1F5EE', text: '#04342C', dot: '#1D9E75'};
+  return {bg: '#FAEEDA', text: '#412402', dot: '#EF9F27'};
+}
 
 function aemetLine(z) {
   if (!z.aemet_check) return '';
   const a = z.aemet_check;
   const precText = (a.prec_1h_mm !== null && a.prec_1h_mm !== undefined) ? `${a.prec_1h_mm}mm/h` : 'sin dato';
-  return `<p class="popup-detail" style="margin-top:4px">✓ Contrastado con estación AEMET "${a.station_name}" (${a.distance_km}km) — ${precText} ahora mismo</p>`;
+  return `<p class="popup-detail">✓ AEMET "${a.station_name}" (${a.distance_km}km) — ${precText} ahora mismo</p>`;
 }
-
-const MATCH_COLOR = {bg: '#E1F5EE', text: '#04342C', dot: '#1D9E75'};
 
 function getRows(filterVal) {
   return DATA.zones.map(z => {
-    let matches = z.matching_species || [];
-    if (filterVal !== 'all') {
-      matches = matches.filter(s => s.id === filterVal);
-    }
-    return {...z, matches, hasMatch: matches.length > 0};
+    let scores = z.species_scores || [];
+    if (filterVal !== 'all') scores = scores.filter(s => s.id === filterVal);
+    const above = scores.filter(s => s.score >= threshold);
+    const best = scores.length ? scores[0] : null;
+    return {...z, scores, above, hasMatch: above.length > 0, bestScore: best ? best.score : 0};
   });
 }
 
@@ -113,23 +188,25 @@ function renderMap(filterVal) {
 
   getRows(filterVal).forEach(z => {
     if (!z.is_forest || !z.hasMatch) return;
+    const c = colorForScore(z.bestScore);
     const marker = L.circleMarker([z.lat, z.lon], {
-      radius: 8,
-      fillColor: MATCH_COLOR.dot,
-      color: '#ffffff',
-      weight: 1,
-      opacity: 1,
-      fillOpacity: 0.85
+      radius: 7 + (z.bestScore - threshold) / 10,
+      fillColor: c.dot, color: '#ffffff', weight: 1, opacity: 1, fillOpacity: 0.85
     }).addTo(map);
 
-    const speciesList = z.matches.map(s => s.name).join(', ');
+    const speciesRows = z.above.map(s => {
+      const sc = colorForScore(s.score);
+      return `<div class="popup-species-row"><span>${s.name}</span><span class="popup-score-pill" style="background:${sc.bg};color:${sc.text}">${s.score}</span></div>`;
+    }).join('');
+
     marker.bindPopup(`
       <p class="popup-title">${z.name}</p>
       <p class="popup-meta">${z.alt}m · ${z.tree_label}</p>
-      <span class="popup-score" style="background:${MATCH_COLOR.bg};color:${MATCH_COLOR.text}">${speciesList}</span>
-      <p class="popup-detail">Lluvia 10d: ${z.rain_10d}mm · Mín. noche: ${z.min_temp}°C (media: ${z.avg_temp}°C) · ${z.days_since_rain}d desde lluvia fuerte</p>
-      ${z.own_history_days ? `<p class="popup-detail" style="margin-top:2px">📊 Historial propio (Meteoclimatic): ${z.own_history_days}d acumulados</p>` : ''}
+      ${speciesRows}
+      <p class="popup-detail">Lluvia acumulada: ${z.rain_10d}mm · Mín. noche: ${z.min_temp}°C · ${z.days_since_rain}d desde inicio de lluvia</p>
+      ${z.own_history_days ? `<p class="popup-detail">📊 Historial propio: ${z.own_history_days}d acumulados</p>` : ''}
       ${aemetLine(z)}
+      <button class="popup-btn" onclick="prefillSighting(${z.id})">Registrar hallazgo aquí</button>
     `);
     markers.push(marker);
   });
@@ -138,29 +215,25 @@ function renderMap(filterVal) {
 function renderList(filterVal, sortVal) {
   const list = document.getElementById('zones-list');
   list.innerHTML = '';
-  let rows = getRows(filterVal).filter(z => z.is_forest);
+  let rows = getRows(filterVal).filter(z => z.is_forest && z.hasMatch);
 
-  rows = rows.filter(z => z.hasMatch);
-
-  if (sortVal === 'score') rows.sort((a, b) => b.matches.length - a.matches.length);
+  if (sortVal === 'score') rows.sort((a, b) => b.bestScore - a.bestScore);
   else rows.sort((a, b) => a.name.localeCompare(b.name));
 
-  const shown = rows.slice(0, 60);
-
-  shown.forEach(z => {
+  rows.slice(0, 60).forEach(z => {
+    const c = colorForScore(z.bestScore);
     const card = document.createElement('div');
     card.className = 'zone-card';
-    const speciesList = z.matches.map(s => s.name).join(', ');
+    const speciesList = z.above.map(s => `${s.name} (${s.score})`).join(', ');
     card.innerHTML = `
       <div class="zone-top">
         <div style="flex:1;min-width:0">
           <p class="zone-name">${z.name}</p>
           <p class="zone-meta">${speciesList} · ${z.alt}m · ${z.tree_label}</p>
         </div>
-        <span class="score-pill" style="background:${MATCH_COLOR.bg};color:${MATCH_COLOR.text}">${z.matches.length}</span>
+        <span class="score-pill" style="background:${c.bg};color:${c.text}">${z.bestScore}</span>
       </div>
-      <p class="zone-detail">Lluvia 10d: ${z.rain_10d}mm · Mín. noche: ${z.min_temp}°C (media: ${z.avg_temp}°C) · ${z.days_since_rain}d desde lluvia fuerte</p>
-      ${z.aemet_check ? `<p class="zone-detail">✓ AEMET "${z.aemet_check.station_name}" (${z.aemet_check.distance_km}km)</p>` : ''}
+      <p class="zone-detail">Lluvia: ${z.rain_10d}mm · Mín. noche: ${z.min_temp}°C · ${z.days_since_rain}d desde inicio de lluvia</p>
     `;
     card.addEventListener('click', () => {
       map.setView([z.lat, z.lon], 9);
@@ -178,8 +251,93 @@ function render() {
   renderMap(filterVal);
   renderList(filterVal, sortVal);
   const matchCount = getRows(filterVal).filter(z => z.hasMatch).length;
-  document.getElementById('section-label').textContent =
-    `Zonas donde se cumplen todas las condiciones (${matchCount})`;
+  document.getElementById('section-label').textContent = `Zonas por encima del umbral (${matchCount})`;
+}
+
+document.getElementById('threshold-slider').addEventListener('input', (e) => {
+  threshold = parseInt(e.target.value, 10);
+  document.getElementById('threshold-value').textContent = threshold;
+  render();
+});
+
+const SIGHTINGS_KEY = 'bolets_sightings_v1';
+
+function loadSightings() {
+  try {
+    return JSON.parse(localStorage.getItem(SIGHTINGS_KEY) || '[]');
+  } catch (e) {
+    return [];
+  }
+}
+
+function saveSightings(list) {
+  localStorage.setItem(SIGHTINGS_KEY, JSON.stringify(list));
+}
+
+function renderSightings() {
+  const list = loadSightings();
+  const container = document.getElementById('sighting-list');
+  container.innerHTML = '';
+  list.slice().reverse().forEach((s, revIdx) => {
+    const idx = list.length - 1 - revIdx;
+    const item = document.createElement('div');
+    item.className = 'sighting-item';
+    item.innerHTML = `
+      <span>${s.date} · ${s.speciesName} · ${s.zoneName}${s.notes ? ' — ' + s.notes : ''}</span>
+      <button onclick="deleteSighting(${idx})">Borrar</button>
+    `;
+    container.appendChild(item);
+  });
+}
+
+function deleteSighting(idx) {
+  const list = loadSightings();
+  list.splice(idx, 1);
+  saveSightings(list);
+  renderSightings();
+}
+
+function prefillSighting(zoneId) {
+  document.getElementById('sighting-zone').value = String(zoneId);
+  document.querySelector('.sighting-box').scrollIntoView({behavior: 'smooth', block: 'center'});
+}
+
+function setupSightingForm() {
+  const speciesSel = document.getElementById('sighting-species');
+  DATA.species_catalog.forEach(sp => {
+    const opt = document.createElement('option');
+    opt.value = sp.id;
+    opt.textContent = sp.name;
+    speciesSel.appendChild(opt);
+  });
+
+  const zoneSel = document.getElementById('sighting-zone');
+  DATA.zones.filter(z => z.is_forest).forEach(z => {
+    const opt = document.createElement('option');
+    opt.value = String(z.id);
+    opt.textContent = `${z.name} (${z.alt}m, ${z.tree_label})`;
+    zoneSel.appendChild(opt);
+  });
+
+  document.getElementById('sighting-date').value = new Date().toISOString().slice(0, 10);
+
+  document.getElementById('sighting-save').addEventListener('click', () => {
+    const speciesId = speciesSel.value;
+    const speciesName = speciesSel.options[speciesSel.selectedIndex].textContent;
+    const zoneId = zoneSel.value;
+    const zoneName = zoneSel.options[zoneSel.selectedIndex].textContent;
+    const date = document.getElementById('sighting-date').value;
+    const notes = document.getElementById('sighting-notes').value.trim();
+    if (!date) return;
+
+    const list = loadSightings();
+    list.push({speciesId, speciesName, zoneId, zoneName, date, notes});
+    saveSightings(list);
+    document.getElementById('sighting-notes').value = '';
+    renderSightings();
+  });
+
+  renderSightings();
 }
 
 async function loadData() {
@@ -188,6 +346,12 @@ async function loadData() {
     const res = await fetch('../data/resultats.json?t=' + Date.now());
     if (!res.ok) throw new Error('No se ha encontrado resultats.json');
     DATA = await res.json();
+
+    if (DATA.default_threshold) {
+      threshold = DATA.default_threshold;
+      document.getElementById('threshold-slider').value = threshold;
+      document.getElementById('threshold-value').textContent = threshold;
+    }
 
     map = L.map('map', {scrollWheelZoom: false}).setView([41.85, 1.55], 8);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -209,6 +373,8 @@ async function loadData() {
     document.getElementById('generated-note').textContent =
       'Datos actualizados: ' + genDate.toLocaleString('es-ES');
     status.textContent = `${DATA.zones.length} zonas cargadas`;
+
+    setupSightingForm();
     render();
   } catch (e) {
     status.textContent = 'Error cargando datos: ' + e.message;
