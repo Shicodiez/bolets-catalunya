@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-25T19:14:34.681561+00:00",
+  "generated_at": "2026-08-25T19:22:15.487702+00:00",
   "default_threshold": 70,
   "zones": [
     {
@@ -470,19 +470,14 @@
       "lat": 40.97,
       "lon": 0.344,
       "alt": 250,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 2,
       "avg_temp": 27,
       "min_temp": 22,
       "days_since_rain": 20,
       "species_scores": [
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 22
-        },
         {
           "id": "colmenilles",
           "name": "Colmenilles",
@@ -494,19 +489,9 @@
           "score": 20
         },
         {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 19
-        },
-        {
           "id": "rovellons",
           "name": "Rovellons",
           "score": 13
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 11
         }
       ],
       "aemet_check": {
@@ -523,8 +508,8 @@
       "lat": 40.97,
       "lon": 0.466,
       "alt": 250,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 2,
       "avg_temp": 28,
@@ -542,24 +527,9 @@
           "score": 20
         },
         {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 19
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 15
-        },
-        {
           "id": "rovellons",
           "name": "Rovellons",
           "score": 13
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 11
         }
       ],
       "aemet_check": {
@@ -636,8 +606,8 @@
       "lat": 40.97,
       "lon": 0.832,
       "alt": 250,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 15,
       "avg_temp": 27,
@@ -658,21 +628,6 @@
           "id": "rovellons",
           "name": "Rovellons",
           "score": 30
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 30
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 30
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 21
         }
       ],
       "aemet_check": {
@@ -1129,8 +1084,8 @@
       "lat": 41.151,
       "lon": 0.588,
       "alt": 250,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 5,
       "avg_temp": 29,
@@ -1148,24 +1103,9 @@
           "score": 20
         },
         {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 19
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 15
-        },
-        {
           "id": "rovellons",
           "name": "Rovellons",
           "score": 13
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 11
         }
       ],
       "aemet_check": {
@@ -1490,8 +1430,8 @@
       "lat": 41.241,
       "lon": 0.588,
       "alt": 250,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 2,
       "avg_temp": 29,
@@ -1509,24 +1449,9 @@
           "score": 20
         },
         {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 19
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 15
-        },
-        {
           "id": "rovellons",
           "name": "Rovellons",
           "score": 13
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 11
         }
       ],
       "aemet_check": {
@@ -1603,8 +1528,8 @@
       "lat": 41.241,
       "lon": 0.954,
       "alt": 250,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 8,
       "avg_temp": 23,
@@ -1612,24 +1537,9 @@
       "days_since_rain": 1,
       "species_scores": [
         {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 25
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 24
-        },
-        {
           "id": "rovellons",
           "name": "Rovellons",
           "score": 21
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 17
         },
         {
           "id": "colmenilles",
@@ -1936,8 +1846,8 @@
       "lat": 41.331,
       "lon": 0.466,
       "alt": 280,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 2,
       "avg_temp": 29,
@@ -1955,24 +1865,9 @@
           "score": 20
         },
         {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 19
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 15
-        },
-        {
           "id": "rovellons",
           "name": "Rovellons",
           "score": 13
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 11
         }
       ],
       "aemet_check": {
@@ -2033,24 +1928,14 @@
       "lat": 41.331,
       "lon": 0.832,
       "alt": 280,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 3,
       "avg_temp": 26,
       "min_temp": 21,
       "days_since_rain": 20,
       "species_scores": [
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 25
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 22
-        },
         {
           "id": "colmenilles",
           "name": "Colmenilles",
@@ -2065,11 +1950,6 @@
           "id": "rovellons",
           "name": "Rovellons",
           "score": 16
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 11
         }
       ],
       "aemet_check": {
@@ -2124,8 +2004,8 @@
       "lat": 41.331,
       "lon": 1.076,
       "alt": 280,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 11,
       "avg_temp": 23,
@@ -2133,24 +2013,9 @@
       "days_since_rain": 3,
       "species_scores": [
         {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 38
-        },
-        {
           "id": "rovellons",
           "name": "Rovellons",
           "score": 35
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 35
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 31
         },
         {
           "id": "colmenilles",
@@ -2221,8 +2086,8 @@
       "lat": 41.331,
       "lon": 1.441,
       "alt": 280,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 14,
       "avg_temp": 25,
@@ -2235,24 +2100,9 @@
           "score": 39
         },
         {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 34
-        },
-        {
           "id": "rovellons",
           "name": "Rovellons",
           "score": 31
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 29
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 27
         },
         {
           "id": "fredolic",
@@ -2274,24 +2124,14 @@
       "lat": 41.331,
       "lon": 1.563,
       "alt": 280,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 7,
       "avg_temp": 25,
       "min_temp": 21,
       "days_since_rain": 1,
       "species_scores": [
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 18
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 17
-        },
         {
           "id": "rovellons",
           "name": "Rovellons",
@@ -2300,11 +2140,6 @@
         {
           "id": "colmenilles",
           "name": "Colmenilles",
-          "score": 11
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
           "score": 11
         },
         {
@@ -2349,8 +2184,8 @@
       "lat": 41.331,
       "lon": 1.807,
       "alt": 30,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 5,
       "avg_temp": 27,
@@ -2368,24 +2203,9 @@
           "score": 20
         },
         {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 19
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 15
-        },
-        {
           "id": "rovellons",
           "name": "Rovellons",
           "score": 13
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 11
         }
       ],
       "aemet_check": {
@@ -2402,8 +2222,8 @@
       "lat": 41.331,
       "lon": 1.929,
       "alt": 30,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 4,
       "avg_temp": 27,
@@ -2421,24 +2241,9 @@
           "score": 20
         },
         {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 19
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 15
-        },
-        {
           "id": "rovellons",
           "name": "Rovellons",
           "score": 13
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 11
         }
       ],
       "aemet_check": {
@@ -2653,8 +2458,8 @@
       "lat": 41.421,
       "lon": 0.71,
       "alt": 360,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 4,
       "avg_temp": 27,
@@ -2662,23 +2467,8 @@
       "days_since_rain": 1,
       "species_scores": [
         {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 15
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 14
-        },
-        {
           "id": "rovellons",
           "name": "Rovellons",
-          "score": 11
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
           "score": 11
         },
         {
@@ -2772,24 +2562,14 @@
       "lat": 41.421,
       "lon": 1.198,
       "alt": 360,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 9,
       "avg_temp": 26,
       "min_temp": 21,
       "days_since_rain": 1,
       "species_scores": [
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 19
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 18
-        },
         {
           "id": "rovellons",
           "name": "Rovellons",
@@ -2799,11 +2579,6 @@
           "id": "colmenilles",
           "name": "Colmenilles",
           "score": 16
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 13
         },
         {
           "id": "fredolic",
@@ -2869,24 +2644,14 @@
       "lat": 41.421,
       "lon": 1.563,
       "alt": 360,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 10,
       "avg_temp": 25,
       "min_temp": 20,
       "days_since_rain": 1,
       "species_scores": [
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 25
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 22
-        },
         {
           "id": "rovellons",
           "name": "Rovellons",
@@ -2896,11 +2661,6 @@
           "id": "colmenilles",
           "name": "Colmenilles",
           "score": 19
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 18
         },
         {
           "id": "fredolic",
@@ -2966,8 +2726,8 @@
       "lat": 41.421,
       "lon": 1.929,
       "alt": 110,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 5,
       "avg_temp": 27,
@@ -2975,23 +2735,8 @@
       "days_since_rain": 1,
       "species_scores": [
         {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 15
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 14
-        },
-        {
           "id": "rovellons",
           "name": "Rovellons",
-          "score": 11
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
           "score": 11
         },
         {
@@ -3019,24 +2764,14 @@
       "lat": 41.421,
       "lon": 2.051,
       "alt": 110,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 8,
       "avg_temp": 26,
       "min_temp": 22,
       "days_since_rain": 1,
       "species_scores": [
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 15
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 14
-        },
         {
           "id": "colmenilles",
           "name": "Colmenilles",
@@ -3045,11 +2780,6 @@
         {
           "id": "rovellons",
           "name": "Rovellons",
-          "score": 11
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
           "score": 11
         },
         {
@@ -3336,19 +3066,14 @@
       "lat": 41.511,
       "lon": 1.198,
       "alt": 440,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 13,
       "avg_temp": 24,
       "min_temp": 20,
       "days_since_rain": 1,
       "species_scores": [
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 31
-        },
         {
           "id": "colmenilles",
           "name": "Colmenilles",
@@ -3358,16 +3083,6 @@
           "id": "rovellons",
           "name": "Rovellons",
           "score": 27
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 26
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 24
         },
         {
           "id": "fredolic",
@@ -3433,8 +3148,8 @@
       "lat": 41.511,
       "lon": 1.563,
       "alt": 440,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 8,
       "avg_temp": 25,
@@ -3442,24 +3157,9 @@
       "days_since_rain": 1,
       "species_scores": [
         {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 25
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 24
-        },
-        {
           "id": "rovellons",
           "name": "Rovellons",
           "score": 21
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 17
         },
         {
           "id": "colmenilles",
@@ -3486,8 +3186,8 @@
       "lat": 41.511,
       "lon": 1.685,
       "alt": 440,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 11,
       "avg_temp": 25,
@@ -3495,24 +3195,9 @@
       "days_since_rain": 1,
       "species_scores": [
         {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 30
-        },
-        {
           "id": "rovellons",
           "name": "Rovellons",
           "score": 27
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 26
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 23
         },
         {
           "id": "colmenilles",
@@ -4023,8 +3708,8 @@
       "lat": 41.601,
       "lon": 1.563,
       "alt": 520,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 21,
       "avg_temp": 26,
@@ -4032,24 +3717,9 @@
       "days_since_rain": 1,
       "species_scores": [
         {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 51
-        },
-        {
           "id": "rovellons",
           "name": "Rovellons",
           "score": 47
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 44
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 42
         },
         {
           "id": "colmenilles",
@@ -4158,8 +3828,8 @@
       "lat": 41.601,
       "lon": 2.051,
       "alt": 270,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 15,
       "avg_temp": 26,
@@ -4172,24 +3842,9 @@
           "score": 38
         },
         {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 36
-        },
-        {
           "id": "rovellons",
           "name": "Rovellons",
           "score": 32
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 30
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 29
         },
         {
           "id": "fredolic",
@@ -4211,19 +3866,14 @@
       "lat": 41.601,
       "lon": 2.173,
       "alt": 270,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 18,
       "avg_temp": 27,
       "min_temp": 22,
       "days_since_rain": 1,
       "species_scores": [
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 38
-        },
         {
           "id": "colmenilles",
           "name": "Colmenilles",
@@ -4238,16 +3888,6 @@
           "id": "rovellons",
           "name": "Rovellons",
           "score": 35
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 35
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 28
         }
       ],
       "aemet_check": {
@@ -4746,19 +4386,14 @@
       "lat": 41.691,
       "lon": 2.051,
       "alt": 350,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 12,
       "avg_temp": 26,
       "min_temp": 20,
       "days_since_rain": 1,
       "species_scores": [
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 29
-        },
         {
           "id": "colmenilles",
           "name": "Colmenilles",
@@ -4768,16 +4403,6 @@
           "id": "rovellons",
           "name": "Rovellons",
           "score": 25
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 25
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 22
         },
         {
           "id": "fredolic",
@@ -4821,19 +4446,14 @@
       "lat": 41.691,
       "lon": 2.295,
       "alt": 350,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 18,
       "avg_temp": 25,
       "min_temp": 20,
       "days_since_rain": 1,
       "species_scores": [
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 45
-        },
         {
           "id": "rovellons",
           "name": "Rovellons",
@@ -4845,19 +4465,9 @@
           "score": 38
         },
         {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 38
-        },
-        {
           "id": "fredolic",
           "name": "Fredolic",
           "score": 36
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 35
         }
       ],
       "aemet_check": {
@@ -4992,8 +4602,8 @@
       "lat": 41.691,
       "lon": 2.783,
       "alt": 200,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 14,
       "avg_temp": 26,
@@ -5006,29 +4616,14 @@
           "score": 34
         },
         {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 26
-        },
-        {
           "id": "rovellons",
           "name": "Rovellons",
-          "score": 23
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
           "score": 23
         },
         {
           "id": "fredolic",
           "name": "Fredolic",
           "score": 22
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 21
         }
       ],
       "aemet_check": {
@@ -5287,19 +4882,14 @@
       "lat": 41.781,
       "lon": 1.563,
       "alt": 680,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 14,
       "avg_temp": 25,
       "min_temp": 19,
       "days_since_rain": 1,
       "species_scores": [
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 36
-        },
         {
           "id": "colmenilles",
           "name": "Colmenilles",
@@ -5309,16 +4899,6 @@
           "id": "rovellons",
           "name": "Rovellons",
           "score": 33
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 31
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 29
         },
         {
           "id": "fredolic",
@@ -5384,8 +4964,8 @@
       "lat": 41.781,
       "lon": 1.929,
       "alt": 430,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 13,
       "avg_temp": 26,
@@ -5393,29 +4973,14 @@
       "days_since_rain": 1,
       "species_scores": [
         {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 34
-        },
-        {
           "id": "rovellons",
           "name": "Rovellons",
           "score": 31
         },
         {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 30
-        },
-        {
           "id": "colmenilles",
           "name": "Colmenilles",
           "score": 30
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 27
         },
         {
           "id": "fredolic",
@@ -5555,8 +5120,8 @@
       "lat": 41.781,
       "lon": 2.417,
       "alt": 280,
-      "tree": "roure",
-      "tree_label": "robledal/bosque de caducifolios",
+      "tree": "faig",
+      "tree_label": "hayedo",
       "is_forest": true,
       "rain_10d": 12,
       "avg_temp": 23,
@@ -5564,24 +5129,9 @@
       "days_since_rain": 20,
       "species_scores": [
         {
-          "id": "llengua",
-          "name": "Llengua de bou",
-          "score": 53
-        },
-        {
           "id": "camagrocs",
           "name": "Camagrocs",
           "score": 46
-        },
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 42
-        },
-        {
-          "id": "oureig",
-          "name": "Ou de reig",
-          "score": 41
         },
         {
           "id": "rossinyols",
@@ -6005,19 +5555,14 @@
       "lat": 41.871,
       "lon": 1.441,
       "alt": 760,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 16,
       "avg_temp": 25,
       "min_temp": 19,
       "days_since_rain": 1,
       "species_scores": [
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 42
-        },
         {
           "id": "rovellons",
           "name": "Rovellons",
@@ -6027,16 +5572,6 @@
           "id": "colmenilles",
           "name": "Colmenilles",
           "score": 38
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 35
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 34
         },
         {
           "id": "fredolic",
@@ -6116,19 +5651,14 @@
       "lat": 41.871,
       "lon": 1.685,
       "alt": 760,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 15,
       "avg_temp": 25,
       "min_temp": 18,
       "days_since_rain": 1,
       "species_scores": [
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 42
-        },
         {
           "id": "colmenilles",
           "name": "Colmenilles",
@@ -6138,16 +5668,6 @@
           "id": "rovellons",
           "name": "Rovellons",
           "score": 39
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 36
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 36
         },
         {
           "id": "fredolic",
@@ -6191,8 +5711,8 @@
       "lat": 41.871,
       "lon": 1.929,
       "alt": 510,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 19,
       "avg_temp": 25,
@@ -6200,24 +5720,9 @@
       "days_since_rain": 1,
       "species_scores": [
         {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 54
-        },
-        {
           "id": "rovellons",
           "name": "Rovellons",
           "score": 51
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 48
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 44
         },
         {
           "id": "colmenilles",
@@ -6324,8 +5829,8 @@
       "lat": 41.871,
       "lon": 2.295,
       "alt": 510,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 9,
       "avg_temp": 24,
@@ -6333,24 +5838,9 @@
       "days_since_rain": 1,
       "species_scores": [
         {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 33
-        },
-        {
           "id": "rovellons",
           "name": "Rovellons",
           "score": 29
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 28
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 26
         },
         {
           "id": "colmenilles",
@@ -6377,45 +5867,14 @@
       "lat": 41.871,
       "lon": 2.417,
       "alt": 360,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "avet",
+      "tree_label": "abetal",
       "is_forest": true,
       "rain_10d": 13,
       "avg_temp": 25,
       "min_temp": 19,
       "days_since_rain": 1,
-      "species_scores": [
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 34
-        },
-        {
-          "id": "rovellons",
-          "name": "Rovellons",
-          "score": 31
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 30
-        },
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 30
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 27
-        },
-        {
-          "id": "fredolic",
-          "name": "Fredolic",
-          "score": 22
-        }
-      ],
+      "species_scores": [],
       "aemet_check": {
         "station_name": "SANT HILARI",
         "distance_km": 8.1,
@@ -6521,8 +5980,8 @@
       "lat": 41.871,
       "lon": 2.783,
       "alt": 360,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_pinyer",
+      "tree_label": "pinar de pino piñonero",
       "is_forest": true,
       "rain_10d": 22,
       "avg_temp": 26,
@@ -6530,34 +5989,9 @@
       "days_since_rain": 1,
       "species_scores": [
         {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 47
-        },
-        {
           "id": "rovellons",
           "name": "Rovellons",
           "score": 44
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 41
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 41
-        },
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 38
-        },
-        {
-          "id": "fredolic",
-          "name": "Fredolic",
-          "score": 36
         }
       ],
       "aemet_check": {
@@ -6856,8 +6290,8 @@
       "lat": 41.961,
       "lon": 1.198,
       "alt": 840,
-      "tree": "roure",
-      "tree_label": "robledal/bosque de caducifolios",
+      "tree": "faig",
+      "tree_label": "hayedo",
       "is_forest": true,
       "rain_10d": 15,
       "avg_temp": 26,
@@ -6865,24 +6299,9 @@
       "days_since_rain": 1,
       "species_scores": [
         {
-          "id": "oureig",
-          "name": "Ou de reig",
-          "score": 53
-        },
-        {
           "id": "rossinyols",
           "name": "Rossinyols",
           "score": 39
-        },
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 38
-        },
-        {
-          "id": "llengua",
-          "name": "Llengua de bou",
-          "score": 35
         },
         {
           "id": "ceps",
@@ -6914,8 +6333,8 @@
       "lat": 41.961,
       "lon": 1.32,
       "alt": 840,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 20,
       "avg_temp": 26,
@@ -6923,24 +6342,9 @@
       "days_since_rain": 1,
       "species_scores": [
         {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 51
-        },
-        {
           "id": "rovellons",
           "name": "Rovellons",
           "score": 47
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 44
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 40
         },
         {
           "id": "colmenilles",
@@ -7011,19 +6415,14 @@
       "lat": 41.961,
       "lon": 1.685,
       "alt": 840,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 13,
       "avg_temp": 25,
       "min_temp": 18,
       "days_since_rain": 1,
       "species_scores": [
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 37
-        },
         {
           "id": "rovellons",
           "name": "Rovellons",
@@ -7033,16 +6432,6 @@
           "id": "colmenilles",
           "name": "Colmenilles",
           "score": 34
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 33
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 31
         },
         {
           "id": "fredolic",
@@ -7122,8 +6511,8 @@
       "lat": 41.961,
       "lon": 1.929,
       "alt": 840,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 24,
       "avg_temp": 25,
@@ -7131,24 +6520,9 @@
       "days_since_rain": 1,
       "species_scores": [
         {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 57
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 56
-        },
-        {
           "id": "rovellons",
           "name": "Rovellons",
           "score": 54
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 51
         },
         {
           "id": "colmenilles",
@@ -7361,8 +6735,8 @@
       "lat": 41.961,
       "lon": 2.905,
       "alt": 440,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 27,
       "avg_temp": 25,
@@ -7370,24 +6744,9 @@
       "days_since_rain": 4,
       "species_scores": [
         {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 59
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 58
-        },
-        {
           "id": "rovellons",
           "name": "Rovellons",
           "score": 54
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 51
         },
         {
           "id": "colmenilles",
@@ -7642,19 +7001,14 @@
       "lat": 42.052,
       "lon": 1.198,
       "alt": 930,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 13,
       "avg_temp": 24,
       "min_temp": 18,
       "days_since_rain": 1,
       "species_scores": [
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 37
-        },
         {
           "id": "rovellons",
           "name": "Rovellons",
@@ -7664,16 +7018,6 @@
           "id": "colmenilles",
           "name": "Colmenilles",
           "score": 34
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 33
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 31
         },
         {
           "id": "fredolic",
@@ -7949,8 +7293,8 @@
       "lat": 42.052,
       "lon": 2.295,
       "alt": 930,
-      "tree": "roure",
-      "tree_label": "robledal/bosque de caducifolios",
+      "tree": "faig",
+      "tree_label": "hayedo",
       "is_forest": true,
       "rain_10d": 21,
       "avg_temp": 25,
@@ -7958,19 +7302,9 @@
       "days_since_rain": 1,
       "species_scores": [
         {
-          "id": "oureig",
-          "name": "Ou de reig",
-          "score": 63
-        },
-        {
           "id": "rossinyols",
           "name": "Rossinyols",
           "score": 57
-        },
-        {
-          "id": "llengua",
-          "name": "Llengua de bou",
-          "score": 53
         },
         {
           "id": "ceps",
@@ -7981,11 +7315,6 @@
           "id": "camagrocs",
           "name": "Camagrocs",
           "score": 47
-        },
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 42
         },
         {
           "id": "trompetes",
@@ -8029,8 +7358,8 @@
       "lat": 42.052,
       "lon": 2.539,
       "alt": 530,
-      "tree": "roure",
-      "tree_label": "robledal/bosque de caducifolios",
+      "tree": "faig",
+      "tree_label": "hayedo",
       "is_forest": true,
       "rain_10d": 19,
       "avg_temp": 25,
@@ -8038,24 +7367,9 @@
       "days_since_rain": 4,
       "species_scores": [
         {
-          "id": "oureig",
-          "name": "Ou de reig",
-          "score": 70
-        },
-        {
           "id": "rossinyols",
           "name": "Rossinyols",
           "score": 55
-        },
-        {
-          "id": "llengua",
-          "name": "Llengua de bou",
-          "score": 51
-        },
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 45
         },
         {
           "id": "ceps",
@@ -8125,8 +7439,8 @@
       "lat": 42.052,
       "lon": 2.783,
       "alt": 530,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 22,
       "avg_temp": 25,
@@ -8134,24 +7448,9 @@
       "days_since_rain": 1,
       "species_scores": [
         {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 51
-        },
-        {
           "id": "rovellons",
           "name": "Rovellons",
           "score": 47
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 44
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 44
         },
         {
           "id": "colmenilles",
@@ -8324,19 +7623,14 @@
       "lat": 42.142,
       "lon": 0.71,
       "alt": 1010,
-      "tree": "roure",
-      "tree_label": "robledal/bosque de caducifolios",
+      "tree": "faig",
+      "tree_label": "hayedo",
       "is_forest": true,
       "rain_10d": 48,
       "avg_temp": 25,
       "min_temp": 19,
       "days_since_rain": 5,
       "species_scores": [
-        {
-          "id": "oureig",
-          "name": "Ou de reig",
-          "score": 73
-        },
         {
           "id": "ceps",
           "name": "Ceps",
@@ -8348,11 +7642,6 @@
           "score": 64
         },
         {
-          "id": "llengua",
-          "name": "Llengua de bou",
-          "score": 60
-        },
-        {
           "id": "camagrocs",
           "name": "Camagrocs",
           "score": 53
@@ -8361,11 +7650,6 @@
           "id": "trompetes",
           "name": "Trompetes de la mort",
           "score": 50
-        },
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 48
         }
       ],
       "aemet_check": {
@@ -8448,45 +7732,14 @@
       "lat": 42.142,
       "lon": 1.198,
       "alt": 1010,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "avet",
+      "tree_label": "abetal",
       "is_forest": true,
       "rain_10d": 31,
       "avg_temp": 20,
       "min_temp": 15,
       "days_since_rain": 1,
-      "species_scores": [
-        {
-          "id": "rovellons",
-          "name": "Rovellons",
-          "score": 61
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 61
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 61
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 58
-        },
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 52
-        },
-        {
-          "id": "fredolic",
-          "name": "Fredolic",
-          "score": 52
-        }
-      ],
+      "species_scores": [],
       "aemet_check": {
         "station_name": "COLL DE NARGÓ",
         "distance_km": 9.5,
@@ -8501,45 +7754,14 @@
       "lat": 42.142,
       "lon": 1.32,
       "alt": 1010,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "avet",
+      "tree_label": "abetal",
       "is_forest": true,
       "rain_10d": 28,
       "avg_temp": 23,
       "min_temp": 17,
       "days_since_rain": 4,
-      "species_scores": [
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 68
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 65
-        },
-        {
-          "id": "rovellons",
-          "name": "Rovellons",
-          "score": 64
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 61
-        },
-        {
-          "id": "fredolic",
-          "name": "Fredolic",
-          "score": 53
-        },
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 52
-        }
-      ],
+      "species_scores": [],
       "aemet_check": {
         "station_name": "COLL DE NARGÓ",
         "distance_km": 1.5,
@@ -8735,8 +7957,8 @@
       "lat": 42.142,
       "lon": 1.929,
       "alt": 1010,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_roig",
+      "tree_label": "pinar de pino rojo",
       "is_forest": true,
       "rain_10d": 38,
       "avg_temp": 23,
@@ -8762,16 +7984,6 @@
           "id": "pinetell",
           "name": "Pinetell",
           "score": 54
-        },
-        {
-          "id": "fredolic",
-          "name": "Fredolic",
-          "score": 46
-        },
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 45
         }
       ],
       "aemet_check": {
@@ -8863,19 +8075,14 @@
       "lat": 42.142,
       "lon": 2.295,
       "alt": 1010,
-      "tree": "roure",
-      "tree_label": "robledal/bosque de caducifolios",
+      "tree": "faig",
+      "tree_label": "hayedo",
       "is_forest": true,
       "rain_10d": 27,
       "avg_temp": 21,
       "min_temp": 16,
       "days_since_rain": 1,
       "species_scores": [
-        {
-          "id": "oureig",
-          "name": "Ou de reig",
-          "score": 63
-        },
         {
           "id": "rossinyols",
           "name": "Rossinyols",
@@ -8892,19 +8099,9 @@
           "score": 53
         },
         {
-          "id": "llengua",
-          "name": "Llengua de bou",
-          "score": 53
-        },
-        {
           "id": "trompetes",
           "name": "Trompetes de la mort",
           "score": 50
-        },
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 48
         }
       ],
       "aemet_check": {
@@ -8921,19 +8118,14 @@
       "lat": 42.142,
       "lon": 2.417,
       "alt": 1010,
-      "tree": "roure",
-      "tree_label": "robledal/bosque de caducifolios",
+      "tree": "faig",
+      "tree_label": "hayedo",
       "is_forest": true,
       "rain_10d": 23,
       "avg_temp": 24,
       "min_temp": 19,
       "days_since_rain": 1,
       "species_scores": [
-        {
-          "id": "oureig",
-          "name": "Ou de reig",
-          "score": 63
-        },
         {
           "id": "rossinyols",
           "name": "Rossinyols",
@@ -8945,19 +8137,9 @@
           "score": 50
         },
         {
-          "id": "llengua",
-          "name": "Llengua de bou",
-          "score": 50
-        },
-        {
           "id": "camagrocs",
           "name": "Camagrocs",
           "score": 43
-        },
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 38
         },
         {
           "id": "trompetes",
@@ -9017,19 +8199,14 @@
       "lat": 42.142,
       "lon": 2.661,
       "alt": 1010,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 16,
       "avg_temp": 25,
       "min_temp": 19,
       "days_since_rain": 1,
       "species_scores": [
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 42
-        },
         {
           "id": "rovellons",
           "name": "Rovellons",
@@ -9039,16 +8216,6 @@
           "id": "colmenilles",
           "name": "Colmenilles",
           "score": 38
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 35
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 34
         },
         {
           "id": "fredolic",
@@ -9304,19 +8471,14 @@
       "lat": 42.232,
       "lon": 0.954,
       "alt": 1090,
-      "tree": "roure",
-      "tree_label": "robledal/bosque de caducifolios",
+      "tree": "faig",
+      "tree_label": "hayedo",
       "is_forest": true,
       "rain_10d": 28,
       "avg_temp": 26,
       "min_temp": 19,
       "days_since_rain": 3,
       "species_scores": [
-        {
-          "id": "oureig",
-          "name": "Ou de reig",
-          "score": 68
-        },
         {
           "id": "ceps",
           "name": "Ceps",
@@ -9328,11 +8490,6 @@
           "score": 59
         },
         {
-          "id": "llengua",
-          "name": "Llengua de bou",
-          "score": 55
-        },
-        {
           "id": "camagrocs",
           "name": "Camagrocs",
           "score": 48
@@ -9341,11 +8498,6 @@
           "id": "trompetes",
           "name": "Trompetes de la mort",
           "score": 45
-        },
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 43
         }
       ],
       "aemet_check": {
@@ -9460,45 +8612,14 @@
       "lat": 42.232,
       "lon": 1.441,
       "alt": 1090,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "avet",
+      "tree_label": "abetal",
       "is_forest": true,
       "rain_10d": 50,
       "avg_temp": 20,
       "min_temp": 15,
       "days_since_rain": 1,
-      "species_scores": [
-        {
-          "id": "rovellons",
-          "name": "Rovellons",
-          "score": 61
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 61
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 61
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 58
-        },
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 52
-        },
-        {
-          "id": "fredolic",
-          "name": "Fredolic",
-          "score": 52
-        }
-      ],
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TUIXENT",
         "distance_km": 10.6,
@@ -9535,45 +8656,14 @@
       "lat": 42.232,
       "lon": 1.685,
       "alt": 1090,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "avet",
+      "tree_label": "abetal",
       "is_forest": true,
       "rain_10d": 75,
       "avg_temp": 17,
       "min_temp": 13,
       "days_since_rain": 1,
-      "species_scores": [
-        {
-          "id": "rovellons",
-          "name": "Rovellons",
-          "score": 61
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 61
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 61
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 58
-        },
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 58
-        },
-        {
-          "id": "fredolic",
-          "name": "Fredolic",
-          "score": 56
-        }
-      ],
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TUIXENT",
         "distance_km": 9.5,
@@ -9626,19 +8716,14 @@
       "lat": 42.232,
       "lon": 1.929,
       "alt": 1090,
-      "tree": "roure",
-      "tree_label": "robledal/bosque de caducifolios",
+      "tree": "faig",
+      "tree_label": "hayedo",
       "is_forest": true,
       "rain_10d": 28,
       "avg_temp": 22,
       "min_temp": 16,
       "days_since_rain": 2,
       "species_scores": [
-        {
-          "id": "oureig",
-          "name": "Ou de reig",
-          "score": 65
-        },
         {
           "id": "rossinyols",
           "name": "Rossinyols",
@@ -9655,19 +8740,9 @@
           "score": 56
         },
         {
-          "id": "llengua",
-          "name": "Llengua de bou",
-          "score": 56
-        },
-        {
           "id": "trompetes",
           "name": "Trompetes de la mort",
           "score": 52
-        },
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 51
         }
       ],
       "aemet_check": {
@@ -9706,8 +8781,8 @@
       "lat": 42.232,
       "lon": 2.173,
       "alt": 1090,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_roig",
+      "tree_label": "pinar de pino rojo",
       "is_forest": true,
       "rain_10d": 8,
       "avg_temp": 23,
@@ -9733,16 +8808,6 @@
           "id": "pinetell",
           "name": "Pinetell",
           "score": 27
-        },
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 24
-        },
-        {
-          "id": "fredolic",
-          "name": "Fredolic",
-          "score": 21
         }
       ],
       "aemet_check": {
@@ -9759,19 +8824,14 @@
       "lat": 42.232,
       "lon": 2.295,
       "alt": 1090,
-      "tree": "roure",
-      "tree_label": "robledal/bosque de caducifolios",
+      "tree": "faig",
+      "tree_label": "hayedo",
       "is_forest": true,
       "rain_10d": 33,
       "avg_temp": 22,
       "min_temp": 16,
       "days_since_rain": 4,
       "species_scores": [
-        {
-          "id": "oureig",
-          "name": "Ou de reig",
-          "score": 70
-        },
         {
           "id": "rossinyols",
           "name": "Rossinyols",
@@ -9788,19 +8848,9 @@
           "score": 61
         },
         {
-          "id": "llengua",
-          "name": "Llengua de bou",
-          "score": 61
-        },
-        {
           "id": "trompetes",
           "name": "Trompetes de la mort",
           "score": 57
-        },
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 55
         }
       ],
       "aemet_check": {
@@ -9839,8 +8889,8 @@
       "lat": 42.232,
       "lon": 2.539,
       "alt": 1090,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 26,
       "avg_temp": 27,
@@ -9848,24 +8898,9 @@
       "days_since_rain": 1,
       "species_scores": [
         {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 52
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 51
-        },
-        {
           "id": "rovellons",
           "name": "Rovellons",
           "score": 47
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 44
         },
         {
           "id": "colmenilles",
@@ -9892,19 +8927,14 @@
       "lat": 42.232,
       "lon": 2.661,
       "alt": 1090,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 18,
       "avg_temp": 27,
       "min_temp": 21,
       "days_since_rain": 1,
       "species_scores": [
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 41
-        },
         {
           "id": "rovellons",
           "name": "Rovellons",
@@ -9919,16 +8949,6 @@
           "id": "fredolic",
           "name": "Fredolic",
           "score": 36
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 35
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 31
         }
       ],
       "aemet_check": {
@@ -10223,45 +9243,14 @@
       "lat": 42.322,
       "lon": 1.198,
       "alt": 1170,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "avet",
+      "tree_label": "abetal",
       "is_forest": true,
       "rain_10d": 53,
       "avg_temp": 17,
       "min_temp": 12,
       "days_since_rain": 1,
-      "species_scores": [
-        {
-          "id": "rovellons",
-          "name": "Rovellons",
-          "score": 61
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 61
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 61
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 58
-        },
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 58
-        },
-        {
-          "id": "fredolic",
-          "name": "Fredolic",
-          "score": 56
-        }
-      ],
+      "species_scores": [],
       "aemet_check": {
         "station_name": "PORT AINE  L?ORRI",
         "distance_km": 9.9,
@@ -10431,45 +9420,14 @@
       "lat": 42.322,
       "lon": 1.807,
       "alt": 1170,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "avet",
+      "tree_label": "abetal",
       "is_forest": true,
       "rain_10d": 51,
       "avg_temp": 18,
       "min_temp": 13,
       "days_since_rain": 1,
-      "species_scores": [
-        {
-          "id": "rovellons",
-          "name": "Rovellons",
-          "score": 61
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 61
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 61
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 58
-        },
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 58
-        },
-        {
-          "id": "fredolic",
-          "name": "Fredolic",
-          "score": 56
-        }
-      ],
+      "species_scores": [],
       "aemet_check": {
         "station_name": "MARTINET",
         "distance_km": 10.4,
@@ -10484,45 +9442,14 @@
       "lat": 42.322,
       "lon": 1.929,
       "alt": 1170,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "avet",
+      "tree_label": "abetal",
       "is_forest": true,
       "rain_10d": 35,
       "avg_temp": 15,
       "min_temp": 11,
       "days_since_rain": 1,
-      "species_scores": [
-        {
-          "id": "rovellons",
-          "name": "Rovellons",
-          "score": 61
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 61
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 61
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 58
-        },
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 58
-        },
-        {
-          "id": "fredolic",
-          "name": "Fredolic",
-          "score": 56
-        }
-      ],
+      "species_scores": [],
       "aemet_check": {
         "station_name": "LA MOLINA",
         "distance_km": 1.4,
@@ -10581,45 +9508,14 @@
       "lat": 42.322,
       "lon": 2.295,
       "alt": 1170,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "avet",
+      "tree_label": "abetal",
       "is_forest": true,
       "rain_10d": 27,
       "avg_temp": 19,
       "min_temp": 14,
       "days_since_rain": 1,
-      "species_scores": [
-        {
-          "id": "rovellons",
-          "name": "Rovellons",
-          "score": 61
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 61
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 61
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 58
-        },
-        {
-          "id": "fredolic",
-          "name": "Fredolic",
-          "score": 56
-        },
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 55
-        }
-      ],
+      "species_scores": [],
       "aemet_check": {
         "station_name": "SANT PAU DE SEGURIES",
         "distance_km": 9.1,
@@ -10634,19 +9530,14 @@
       "lat": 42.322,
       "lon": 2.417,
       "alt": 1170,
-      "tree": "roure",
-      "tree_label": "robledal/bosque de caducifolios",
+      "tree": "faig",
+      "tree_label": "hayedo",
       "is_forest": true,
       "rain_10d": 33,
       "avg_temp": 21,
       "min_temp": 16,
       "days_since_rain": 1,
       "species_scores": [
-        {
-          "id": "oureig",
-          "name": "Ou de reig",
-          "score": 63
-        },
         {
           "id": "rossinyols",
           "name": "Rossinyols",
@@ -10663,19 +9554,9 @@
           "score": 53
         },
         {
-          "id": "llengua",
-          "name": "Llengua de bou",
-          "score": 53
-        },
-        {
           "id": "trompetes",
           "name": "Trompetes de la mort",
           "score": 50
-        },
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 48
         }
       ],
       "aemet_check": {
@@ -10692,19 +9573,14 @@
       "lat": 42.322,
       "lon": 2.539,
       "alt": 1170,
-      "tree": "roure",
-      "tree_label": "robledal/bosque de caducifolios",
+      "tree": "faig",
+      "tree_label": "hayedo",
       "is_forest": true,
       "rain_10d": 35,
       "avg_temp": 23,
       "min_temp": 18,
       "days_since_rain": 1,
       "species_scores": [
-        {
-          "id": "oureig",
-          "name": "Ou de reig",
-          "score": 63
-        },
         {
           "id": "ceps",
           "name": "Ceps",
@@ -10716,11 +9592,6 @@
           "score": 57
         },
         {
-          "id": "llengua",
-          "name": "Llengua de bou",
-          "score": 53
-        },
-        {
           "id": "camagrocs",
           "name": "Camagrocs",
           "score": 47
@@ -10729,11 +9600,6 @@
           "id": "trompetes",
           "name": "Trompetes de la mort",
           "score": 43
-        },
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 42
         }
       ],
       "aemet_check": {
@@ -10750,8 +9616,8 @@
       "lat": 42.322,
       "lon": 2.661,
       "alt": 1170,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 31,
       "avg_temp": 22,
@@ -10759,24 +9625,9 @@
       "days_since_rain": 1,
       "species_scores": [
         {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 61
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 58
-        },
-        {
           "id": "rovellons",
           "name": "Rovellons",
           "score": 57
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 54
         },
         {
           "id": "fredolic",
@@ -10803,8 +9654,8 @@
       "lat": 42.322,
       "lon": 2.783,
       "alt": 1170,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 16,
       "avg_temp": 27,
@@ -10817,29 +9668,14 @@
           "score": 38
         },
         {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 35
-        },
-        {
           "id": "rovellons",
           "name": "Rovellons",
           "score": 32
         },
         {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 29
-        },
-        {
           "id": "fredolic",
           "name": "Fredolic",
           "score": 29
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 28
         }
       ],
       "aemet_check": {
@@ -11142,45 +9978,14 @@
       "lat": 42.412,
       "lon": 1.441,
       "alt": 1250,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "avet",
+      "tree_label": "abetal",
       "is_forest": true,
       "rain_10d": 48,
       "avg_temp": 19,
       "min_temp": 14,
       "days_since_rain": 1,
-      "species_scores": [
-        {
-          "id": "rovellons",
-          "name": "Rovellons",
-          "score": 61
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 61
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 61
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 58
-        },
-        {
-          "id": "fredolic",
-          "name": "Fredolic",
-          "score": 56
-        },
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 55
-        }
-      ],
+      "species_scores": [],
       "aemet_check": {
         "station_name": "LA SEU D'URGELL  AEROPORT",
         "distance_km": 8.6,
@@ -11195,45 +10000,14 @@
       "lat": 42.412,
       "lon": 1.563,
       "alt": 1250,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "avet",
+      "tree_label": "abetal",
       "is_forest": true,
       "rain_10d": 52,
       "avg_temp": 16,
       "min_temp": 12,
       "days_since_rain": 1,
-      "species_scores": [
-        {
-          "id": "rovellons",
-          "name": "Rovellons",
-          "score": 61
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 61
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 61
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 58
-        },
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 58
-        },
-        {
-          "id": "fredolic",
-          "name": "Fredolic",
-          "score": 56
-        }
-      ],
+      "species_scores": [],
       "aemet_check": {
         "station_name": "CAP DE REC",
         "distance_km": 8.8,
@@ -11358,45 +10132,14 @@
       "lat": 42.412,
       "lon": 2.295,
       "alt": 1250,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "avet",
+      "tree_label": "abetal",
       "is_forest": true,
       "rain_10d": 62,
       "avg_temp": 16,
       "min_temp": 12,
       "days_since_rain": 1,
-      "species_scores": [
-        {
-          "id": "rovellons",
-          "name": "Rovellons",
-          "score": 61
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 61
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 61
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 58
-        },
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 58
-        },
-        {
-          "id": "fredolic",
-          "name": "Fredolic",
-          "score": 56
-        }
-      ],
+      "species_scores": [],
       "aemet_check": {
         "station_name": "SANT PAU DE SEGURIES",
         "distance_km": 18.0,
@@ -11711,45 +10454,14 @@
       "lat": 42.502,
       "lon": 1.198,
       "alt": 1330,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "avet",
+      "tree_label": "abetal",
       "is_forest": true,
       "rain_10d": 37,
       "avg_temp": 20,
       "min_temp": 15,
       "days_since_rain": 1,
-      "species_scores": [
-        {
-          "id": "rovellons",
-          "name": "Rovellons",
-          "score": 61
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 61
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 61
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 58
-        },
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 52
-        },
-        {
-          "id": "fredolic",
-          "name": "Fredolic",
-          "score": 52
-        }
-      ],
+      "species_scores": [],
       "aemet_check": {
         "station_name": "PORT AINE  L?ORRI",
         "distance_km": 10.3,
@@ -12042,19 +10754,14 @@
       "lat": 42.592,
       "lon": 1.32,
       "alt": 1410,
-      "tree": "roure",
-      "tree_label": "robledal/bosque de caducifolios",
+      "tree": "faig",
+      "tree_label": "hayedo",
       "is_forest": true,
       "rain_10d": 43,
       "avg_temp": 19,
       "min_temp": 14,
       "days_since_rain": 1,
       "species_scores": [
-        {
-          "id": "oureig",
-          "name": "Ou de reig",
-          "score": 63
-        },
         {
           "id": "rossinyols",
           "name": "Rossinyols",
@@ -12066,11 +10773,6 @@
           "score": 58
         },
         {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 55
-        },
-        {
           "id": "camagrocs",
           "name": "Camagrocs",
           "score": 53
@@ -12078,11 +10780,6 @@
         {
           "id": "trompetes",
           "name": "Trompetes de la mort",
-          "score": 53
-        },
-        {
-          "id": "llengua",
-          "name": "Llengua de bou",
           "score": 53
         }
       ],
@@ -12144,19 +10841,14 @@
       "lat": 42.682,
       "lon": 0.71,
       "alt": 1490,
-      "tree": "roure",
-      "tree_label": "robledal/bosque de caducifolios",
+      "tree": "faig",
+      "tree_label": "hayedo",
       "is_forest": true,
       "rain_10d": 94,
       "avg_temp": 18,
       "min_temp": 14,
       "days_since_rain": 1,
       "species_scores": [
-        {
-          "id": "oureig",
-          "name": "Ou de reig",
-          "score": 63
-        },
         {
           "id": "rossinyols",
           "name": "Rossinyols",
@@ -12168,11 +10860,6 @@
           "score": 58
         },
         {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 55
-        },
-        {
           "id": "camagrocs",
           "name": "Camagrocs",
           "score": 53
@@ -12180,11 +10867,6 @@
         {
           "id": "trompetes",
           "name": "Trompetes de la mort",
-          "score": 53
-        },
-        {
-          "id": "llengua",
-          "name": "Llengua de bou",
           "score": 53
         }
       ],
@@ -12202,45 +10884,14 @@
       "lat": 42.682,
       "lon": 0.832,
       "alt": 1490,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "avet",
+      "tree_label": "abetal",
       "is_forest": true,
       "rain_10d": 56,
       "avg_temp": 15,
       "min_temp": 11,
       "days_since_rain": 1,
-      "species_scores": [
-        {
-          "id": "rovellons",
-          "name": "Rovellons",
-          "score": 61
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 61
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 61
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 58
-        },
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 58
-        },
-        {
-          "id": "fredolic",
-          "name": "Fredolic",
-          "score": 56
-        }
-      ],
+      "species_scores": [],
       "aemet_check": {
         "station_name": "ARTIES",
         "distance_km": 4.2,
