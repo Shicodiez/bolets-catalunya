@@ -451,6 +451,11 @@ TREE_LABELS = {
 # Mapa de tipus de bosc no forestal / desconegut que no assignem a cap espècie
 NON_FOREST = {"conreu", "urba", "desconegut", "aigua", "roca", "matollar", "prat"}
 
+# Llindar de puntuació per defecte per considerar una espècie "probable" en una
+# zona. La web permet ajustar-lo amb un control lliscant sense recalcular:
+# es desen totes les puntuacions >0 i el filtratge final es fa al navegador.
+DEFAULT_SCORE_THRESHOLD = 70
+
 OPEN_METEO_URL = "https://api.open-meteo.com/v1/forecast"
 AEMET_STATIONS_URL = "https://opendata.aemet.es/opendata/api/observacion/convencional/todas"
 ICGC_WMS_URL = "https://geoserveis.icgc.cat/servei/catalunya/cobertes-sol/wms"
@@ -790,28 +795,106 @@ def fetch_all_tree_types(zones, layer_name, delay=0.05, max_total_seconds=280):
 # 6. SCORING
 # ---------------------------------------------------------------------------
 
-def species_matches(sp, rain_10d, min_temp, tree, days_since_rain):
+def species_score(sp, rain_10d, min_temp, tree, days_since_rain, alt, month, aemet_rain_1h=None, mc_rain_today=None):
     """
-    Comprovació binària: l'espècie només es dona per probable si es compleixen
-    TOTS els requisits alhora (hàbitat, pluja, dies des de la pluja, temperatura).
-    No hi ha puntuació intermèdia ni compensació entre factors — o hi ha
-    condicions o no n'hi ha.
+    Sistema de puntuació 0-100 per evidència acumulada, no tot-o-res. Cada
+    factor suma punts segons com d'a prop està del rang òptim (amb tolerància
+    als marges, no un tall sec), i s'hi afegeixen factors climàtics/geogràfics
+    que no depenen només de la lectura meteorològica exacta d'un dia concret.
 
-    S'usa min_temp (mitjana de mínimes nocturnes) en comptes de la mitjana dia/nit,
-    perquè és el que millor reflecteix quan el fred d'una nit d'inici de tardor ja
-    ha arribat, encara que les tardes segueixin sent calaroses.
+    Retorna 0 si l'hàbitat és incompatible (això sí és un requisit dur —
+    un rovelló no surt sota una alzina, per molt bones que siguin la resta
+    de condicions). La resta de factors són graduals.
     """
     if tree not in sp["trees"]:
-        return False
-    if rain_10d < sp["min_rain"]:
-        return False
+        return 0, {}
+
+    breakdown = {}
+    score = 0.0
+
+    # --- Pluja acumulada (0-30 punts, amb tolerància) ---
+    min_rain = sp["min_rain"]
+    ratio = rain_10d / min_rain if min_rain else 1
+    if ratio >= 1:
+        rain_score = 30
+    elif ratio >= 0.7:
+        rain_score = 30 * ((ratio - 0.7) / 0.3) * 0.6 + 12  # 70-100% del mínim -> 12-30 punts
+    elif ratio >= 0.4:
+        rain_score = 12 * ((ratio - 0.4) / 0.3)  # 40-70% del mínim -> 0-12 punts
+    else:
+        rain_score = 0
+    breakdown["pluja"] = round(rain_score, 1)
+    score += rain_score
+
+    # --- Dies des de la pluja (0-25 punts, amb marges tous) ---
     lo, hi = sp["rain_days"]
-    if not (lo <= days_since_rain <= hi):
-        return False
+    if lo <= days_since_rain <= hi:
+        days_score = 25
+    else:
+        mid = (lo + hi) / 2
+        span = (hi - lo) / 2 + 5  # marge de tolerància més enllà del rang
+        dist = abs(days_since_rain - mid) - (hi - lo) / 2
+        days_score = max(0, 25 - (dist / 5) * 12)
+    breakdown["dies_pluja"] = round(days_score, 1)
+    score += days_score
+
+    # --- Temperatura mínima (0-20 punts, amb marges tous) ---
     tlo, thi = sp["temp_range"]
-    if not (tlo <= min_temp <= thi):
-        return False
-    return True
+    if tlo <= min_temp <= thi:
+        temp_score = 20
+    else:
+        tmid = (tlo + thi) / 2
+        dist = abs(min_temp - tmid) - (thi - tlo) / 2
+        temp_score = max(0, 20 - (dist / 3) * 10)
+    breakdown["temperatura"] = round(temp_score, 1)
+    score += temp_score
+
+    # --- Climatologia de temporada per altitud (0-15 punts) ---
+    # Coneixement micològic establert: cada espècie té una temporada més
+    # probable segons l'altitud, independentment del detall exacte del dia.
+    season_score = seasonal_climate_score(sp, alt, month)
+    breakdown["temporada"] = round(season_score, 1)
+    score += season_score
+
+    # --- Corroboració entre fonts (0-10 punts bonus) ---
+    # Si AEMET o Meteoclimatic confirmen pluja recent que Open-Meteo no
+    # reflecteix bé, això és evidència addicional a favor, no es descarta.
+    corrob_score = 0
+    if aemet_rain_1h is not None and aemet_rain_1h > 0:
+        corrob_score += 5
+    if mc_rain_today is not None and mc_rain_today >= 5:
+        corrob_score += 5
+    breakdown["corroboracio"] = corrob_score
+    score += corrob_score
+
+    return max(0, min(100, round(score))), breakdown
+
+
+def seasonal_climate_score(sp, alt, month):
+    """
+    Puntuació de temporada segons altitud i mes, basada en coneixement
+    micològic general (no en la lectura meteorològica del dia). Els bolets
+    de tardor típics (rovellons, ceps...) tenen temporada més primerenca
+    com més amunt, i més tardana com més avall.
+    """
+    # Mesos òptims aproximats per franja d'altitud (1=gener...12=desembre)
+    if alt >= 1200:
+        peak_months = [8, 9, 10]
+    elif alt >= 700:
+        peak_months = [9, 10, 11]
+    else:
+        peak_months = [10, 11]
+
+    if sp["id"] == "colmenilles":  # espècie de primavera, no de tardor
+        peak_months = [4, 5]
+
+    if month in peak_months:
+        return 15
+    # un mes abans o després del pic encara dona mig punt
+    adjacent = {m - 1 for m in peak_months} | {m + 1 for m in peak_months}
+    if month in adjacent:
+        return 7
+    return 0
 
 
 # ---------------------------------------------------------------------------
@@ -1040,6 +1123,10 @@ def build_results():
     else:
         print("AVÍS: no hi ha AEMET_API_KEY configurada — es continua sense contrast")
 
+    current_month = datetime.now(timezone.utc).month
+    today_str = datetime.now(timezone.utc).date().isoformat()
+    today_history = history.get(today_str, {})
+
     zones_out = []
     for zone, daily_wrapper in zip(ZONES, weather_results):
         daily = daily_wrapper.get("daily", {})
@@ -1047,6 +1134,7 @@ def build_results():
         tree = tree_types.get(zone["id"], "desconegut")
 
         aemet_info = None
+        aemet_rain_1h = None
         if aemet_stations:
             nearest = nearest_aemet_station(zone["lat"], zone["lon"], aemet_stations)
             if nearest:
@@ -1056,12 +1144,21 @@ def build_results():
                     "prec_1h_mm": nearest["prec_1h"],
                     "observed_at": nearest["fint"],
                 }
+                aemet_rain_1h = nearest["prec_1h"]
 
-        matching_species = []
+        mc_rain_today = today_history.get(str(zone["id"]), {}).get("meteoclimatic")
+
+        species_scores = []
         if tree not in NON_FOREST:
             for sp in SPECIES:
-                if species_matches(sp, rain_10d, min_temp, tree, days_since_rain):
-                    matching_species.append({"id": sp["id"], "name": sp["name"]})
+                s, breakdown = species_score(
+                    sp, rain_10d, min_temp, tree, days_since_rain, zone["alt"], current_month,
+                    aemet_rain_1h=aemet_rain_1h, mc_rain_today=mc_rain_today,
+                )
+                if s > 0:
+                    species_scores.append({"id": sp["id"], "name": sp["name"], "score": s})
+        species_scores.sort(key=lambda x: x["score"], reverse=True)
+        matching_species = [s for s in species_scores if s["score"] >= DEFAULT_SCORE_THRESHOLD]
 
         zones_out.append({
             "id": zone["id"],
@@ -1076,14 +1173,14 @@ def build_results():
             "avg_temp": avg_temp,
             "min_temp": min_temp,
             "days_since_rain": days_since_rain,
-            "matching_species": matching_species,
-            "has_match": len(matching_species) > 0,
+            "species_scores": species_scores,
             "aemet_check": aemet_info,
             "own_history_days": own_history_days_count(history, zone["id"]),
         })
 
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(),
+        "default_threshold": DEFAULT_SCORE_THRESHOLD,
         "zones": zones_out,
         "species_catalog": [{"id": sp["id"], "name": sp["name"]} for sp in SPECIES],
     }
