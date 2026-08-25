@@ -15,18 +15,11 @@ Pensat per executar-se automàticament cada poques hores (veure README.md).
 """
 
 import json
+import os
 import time
 import urllib.request
 import urllib.error
 from datetime import datetime, timezone
-
-# ---------------------------------------------------------------------------
-# 1. GRAELLA DE PUNTS DE CATALUNYA
-# ---------------------------------------------------------------------------
-# Cada punt: nom, latitud, longitud, altitud (m), tipus de bosc dominant.
-# El tipus de bosc és una assignació geogràfica coneguda (Institut Cartogràfic,
-# CREAF, bibliografia micològica). Es pot substituir en el futur per una
-# consulta real al WMS de l'ICGC (Mapa de cobertes del sòl).
 
 ZONES = [
     {"name": "Val d'Aran",        "lat": 42.70, "lon": 0.85, "alt": 1200, "tree": "pi_negre"},
@@ -56,9 +49,6 @@ ZONES = [
     {"name": "Terra Alta",        "lat": 41.05, "lon": 0.45, "alt": 400,  "tree": "pi_pinyer"},
 ]
 
-# ---------------------------------------------------------------------------
-# 2. ESPÈCIES DE BOLETS I LA SEVA LÒGICA
-# ---------------------------------------------------------------------------
 SPECIES = [
     {"id": "rovellons",   "name": "Rovellons",           "trees": ["pi_roig", "pi_negre", "pi_pinyer", "pi_blanc"], "rain_days": [7, 15],  "temp_range": [8, 18],  "min_rain": 20},
     {"id": "ceps",        "name": "Ceps",                 "trees": ["roure", "faig", "pi_roig", "pi_negre"],        "rain_days": [8, 16],  "temp_range": [10, 20], "min_rain": 25},
@@ -79,127 +69,25 @@ TREE_LABELS = {
 }
 
 OPEN_METEO_URL = "https://api.open-meteo.com/v1/forecast"
+AEMET_API_KEY = None  # Es defineix a través de la variable d'entorn AEMET_API_KEY
+AEMET_STATIONS_URL = "https://opendata.aemet.es/opendata/api/observacion/convencional/todas"
 
 
-def fetch_weather(zones, timeout=20):
-    """Consulta Open-Meteo per a totes les zones en una sola petició."""
-    lats = ",".join(str(z["lat"]) for z in zones)
-    lons = ",".join(str(z["lon"]) for z in zones)
-    params = (
-        f"?latitude={lats}&longitude={lons}"
-        f"&daily=precipitation_sum,temperature_2m_max,temperature_2m_min"
-        f"&past_days=16&forecast_days=1&timezone=Europe%2FMadrid"
-    )
-    url = OPEN_METEO_URL + params
-    req = urllib.request.Request(url, headers={"User-Agent": "bolets-catalunya-app/1.0"})
-    with urllib.request.urlopen(req, timeout=timeout) as resp:
-        data = json.loads(resp.read().decode("utf-8"))
-    return data if isinstance(data, list) else [data]
+def haversine_km(lat1, lon1, lat2, lon2):
+    """Distància aproximada en km entre dos punts (per trobar l'estació AEMET més propera)."""
+    import math
+    r = 6371
+    p1, p2 = math.radians(lat1), math.radians(lat2)
+    dphi = math.radians(lat2 - lat1)
+    dlambda = math.radians(lon2 - lon1)
+    a = math.sin(dphi / 2) ** 2 + math.cos(p1) * math.cos(p2) * math.sin(dlambda / 2) ** 2
+    return 2 * r * math.asin(min(1, a ** 0.5))
 
 
-def compute_rain_stats(daily):
-    """A partir del bloc 'daily' d'Open-Meteo, calcula pluja 10d, temp mitjana i dies des de pluja forta."""
-    precip = daily.get("precipitation_sum") or []
-    tmax = daily.get("temperature_2m_max") or []
-    tmin = daily.get("temperature_2m_min") or []
-
-    last10_precip = precip[-11:-1] if len(precip) >= 11 else precip[:-1]
-    rain_10d = round(sum(p or 0 for p in last10_precip))
-
-    last10_tmax = tmax[-11:-1] if len(tmax) >= 11 else tmax[:-1]
-    last10_tmin = tmin[-11:-1] if len(tmin) >= 11 else tmin[:-1]
-    n = max(len(last10_tmax), 1)
-    avg_temp = round(
-        (sum(t or 0 for t in last10_tmax) / n + sum(t or 0 for t in last10_tmin) / n) / 2
-    )
-
-    days_since_rain = 20
-    for i in range(len(precip) - 2, -1, -1):
-        if (precip[i] or 0) >= 5:
-            days_since_rain = len(precip) - 1 - i
-            break
-
-    return rain_10d, avg_temp, days_since_rain
-
-
-def score_species(sp, rain_10d, avg_temp, tree, days_since_rain):
-    if tree not in sp["trees"]:
-        return 0
-    score = 35
-    if rain_10d >= sp["min_rain"]:
-        score += 25
-    else:
-        score += max(0, 25 * (rain_10d / sp["min_rain"]))
-
-    lo, hi = sp["rain_days"]
-    if lo <= days_since_rain <= hi:
-        score += 25
-    else:
-        mid = (lo + hi) / 2
-        score += max(0, 15 - abs(days_since_rain - mid))
-
-    tlo, thi = sp["temp_range"]
-    if tlo <= avg_temp <= thi:
-        score += 15
-    else:
-        tmid = (tlo + thi) / 2
-        score += max(0, 8 - abs(avg_temp - tmid))
-
-    return max(0, min(100, round(score)))
-
-
-def build_results():
-    print(f"[{datetime.now(timezone.utc).isoformat()}] Consultant Open-Meteo per {len(ZONES)} punts...")
-    weather_results = fetch_weather(ZONES)
-
-    zones_out = []
-    for zone, daily_wrapper in zip(ZONES, weather_results):
-        daily = daily_wrapper.get("daily", {})
-        rain_10d, avg_temp, days_since_rain = compute_rain_stats(daily)
-
-        species_scores = []
-        for sp in SPECIES:
-            s = score_species(sp, rain_10d, avg_temp, zone["tree"], days_since_rain)
-            if s > 0:
-                species_scores.append({"id": sp["id"], "name": sp["name"], "score": s})
-        species_scores.sort(key=lambda x: x["score"], reverse=True)
-
-        zones_out.append({
-            "name": zone["name"],
-            "lat": zone["lat"],
-            "lon": zone["lon"],
-            "alt": zone["alt"],
-            "tree": zone["tree"],
-            "tree_label": TREE_LABELS.get(zone["tree"], zone["tree"]),
-            "rain_10d": rain_10d,
-            "avg_temp": avg_temp,
-            "days_since_rain": days_since_rain,
-            "species_scores": species_scores,
-            "best_score": species_scores[0]["score"] if species_scores else 0,
-            "best_species": species_scores[0]["name"] if species_scores else None,
-        })
-
-    return {
-        "generated_at": datetime.now(timezone.utc).isoformat(),
-        "zones": zones_out,
-        "species_catalog": [{"id": sp["id"], "name": sp["name"]} for sp in SPECIES],
-    }
-
-
-def main():
-    try:
-        results = build_results()
-    except (urllib.error.URLError, TimeoutError) as e:
-        print(f"ERROR consultant Open-Meteo: {e}")
-        return
-
-    out_path = "../data/resultats.json"
-    with open(out_path, "w", encoding="utf-8") as f:
-        json.dump(results, f, ensure_ascii=False, indent=2)
-
-    print(f"Fet. {len(results['zones'])} zones desades a {out_path}")
-    print(f"Generat: {results['generated_at']}")
-
-
-if __name__ == "__main__":
-    main()
+def fetch_aemet_observations(api_key, timeout=20):
+    """
+    Consulta AEMET OpenData (observació convencional, totes les estacions).
+    Retorna una llista de diccionaris amb lat, lon, precipitació (mm/60min) i data.
+    AEMET requereix dues peticions: la primera dona una URL temporal amb les dades reals.
+    """
+    if not api
