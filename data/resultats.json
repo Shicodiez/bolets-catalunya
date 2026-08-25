@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-25T08:52:34.301468+00:00",
+  "generated_at": "2026-08-25T09:18:21.741270+00:00",
   "zones": [
     {
       "name": "Val d'Aran",
@@ -29,7 +29,13 @@
         }
       ],
       "best_score": 79,
-      "best_species": "Ceps"
+      "best_species": "Ceps",
+      "aemet_check": {
+        "station_name": "ARTIES",
+        "distance_km": 2.2,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
     },
     {
       "name": "Pallars Sobirà N",
@@ -59,7 +65,13 @@
         }
       ],
       "best_score": 80,
-      "best_species": "Rovellons"
+      "best_species": "Rovellons",
+      "aemet_check": {
+        "station_name": "ESTERRI D?ANEU",
+        "distance_km": 5.5,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
     },
     {
       "name": "Pallars Sobirà S",
@@ -73,7 +85,13 @@
       "days_since_rain": 1,
       "species_scores": [],
       "best_score": 0,
-      "best_species": null
+      "best_species": null,
+      "aemet_check": {
+        "station_name": "CABDELLA-CENTRAL",
+        "distance_km": 5.2,
+        "prec_1h_mm": 0.4,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
     },
     {
       "name": "Alta Ribagorça",
@@ -103,7 +121,13 @@
         }
       ],
       "best_score": 80,
-      "best_species": "Rovellons"
+      "best_species": "Rovellons",
+      "aemet_check": {
+        "station_name": "BARRUERA",
+        "distance_km": 4.8,
+        "prec_1h_mm": 0.2,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
     },
     {
       "name": "Pallars Jussà",
@@ -138,7 +162,13 @@
         }
       ],
       "best_score": 66,
-      "best_species": "Pinetell"
+      "best_species": "Pinetell",
+      "aemet_check": {
+        "station_name": "SOPEIRA",
+        "distance_km": 13.1,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
     },
     {
       "name": "Alt Urgell N",
@@ -173,7 +203,13 @@
         }
       ],
       "best_score": 79,
-      "best_species": "Ceps"
+      "best_species": "Ceps",
+      "aemet_check": {
+        "station_name": "LA SEU D'URGELL  AEROPORT",
+        "distance_km": 4.6,
+        "prec_1h_mm": 0.5,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
     },
     {
       "name": "Alt Urgell S",
@@ -208,7 +244,13 @@
         }
       ],
       "best_score": 80,
-      "best_species": "Rovellons"
+      "best_species": "Rovellons",
+      "aemet_check": {
+        "station_name": "TUIXENT",
+        "distance_km": 10.4,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
     },
     {
       "name": "Cerdanya",
@@ -238,7 +280,13 @@
         }
       ],
       "best_score": 79,
-      "best_species": "Ceps"
+      "best_species": "Ceps",
+      "aemet_check": {
+        "station_name": "LA MOLINA",
+        "distance_km": 8.2,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
     },
     {
       "name": "Solsonès",
@@ -273,7 +321,13 @@
         }
       ],
       "best_score": 62,
-      "best_species": "Pinetell"
+      "best_species": "Pinetell",
+      "aemet_check": {
+        "station_name": "RINER - XIXONS",
+        "distance_km": 8.2,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
     },
     {
       "name": "Berguedà N",
@@ -308,7 +362,13 @@
         }
       ],
       "best_score": 66,
-      "best_species": "Pinetell"
+      "best_species": "Pinetell",
+      "aemet_check": {
+        "station_name": "BERGA  INSTITUTO",
+        "distance_km": 5.4,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
     },
     {
       "name": "Berguedà S",
@@ -358,7 +418,13 @@
         }
       ],
       "best_score": 80,
-      "best_species": "Ou de reig"
+      "best_species": "Ou de reig",
+      "aemet_check": {
+        "station_name": "RINER - XIXONS",
+        "distance_km": 14.0,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
     },
     {
       "name": "Ripollès",
@@ -393,7 +459,13 @@
         }
       ],
       "best_score": 78,
-      "best_species": "Rossinyols"
+      "best_species": "Rossinyols",
+      "aemet_check": {
+        "station_name": "PLANOLES",
+        "distance_km": 9.0,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
     },
     {
       "name": "Garrotxa",
@@ -428,7 +500,13 @@
         }
       ],
       "best_score": 58,
-      "best_species": "Rossinyols"
+      "best_species": "Rossinyols",
+      "aemet_check": {
+        "station_name": "VALL DE BIANYA",
+        "distance_km": 3.7,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
     },
     {
       "name": "Alt Empordà",
@@ -458,7 +536,13 @@
         }
       ],
       "best_score": 56,
-      "best_species": "Ou de reig"
+      "best_species": "Ou de reig",
+      "aemet_check": {
+        "station_name": "FIGUERES  ELS ASPRES",
+        "distance_km": 5.1,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
     },
     {
       "name": "Osona N",
@@ -508,7 +592,13 @@
         }
       ],
       "best_score": 68,
-      "best_species": "Ou de reig"
+      "best_species": "Ou de reig",
+      "aemet_check": {
+        "station_name": "SANT HILARI",
+        "distance_km": 20.8,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
     },
     {
       "name": "Osona S",
@@ -558,7 +648,13 @@
         }
       ],
       "best_score": 74,
-      "best_species": "Ou de reig"
+      "best_species": "Ou de reig",
+      "aemet_check": {
+        "station_name": "MOIÀ",
+        "distance_km": 9.6,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
     },
     {
       "name": "Bages",
@@ -588,7 +684,13 @@
         }
       ],
       "best_score": 65,
-      "best_species": "Rovellons"
+      "best_species": "Rovellons",
+      "aemet_check": {
+        "station_name": "MANRESA",
+        "distance_km": 7.8,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
     },
     {
       "name": "Vallès Oriental",
@@ -618,7 +720,13 @@
         }
       ],
       "best_score": 70,
-      "best_species": "Ou de reig"
+      "best_species": "Ou de reig",
+      "aemet_check": {
+        "station_name": "CALDES DE MONTBUI",
+        "distance_km": 13.3,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
     },
     {
       "name": "Montseny",
@@ -653,7 +761,13 @@
         }
       ],
       "best_score": 74,
-      "best_species": "Camagrocs"
+      "best_species": "Camagrocs",
+      "aemet_check": {
+        "station_name": "FONTMARTINA",
+        "distance_km": 1.1,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
     },
     {
       "name": "Selva",
@@ -683,7 +797,13 @@
         }
       ],
       "best_score": 74,
-      "best_species": "Camagrocs"
+      "best_species": "Camagrocs",
+      "aemet_check": {
+        "station_name": "SANT HILARI",
+        "distance_km": 4.6,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
     },
     {
       "name": "Anoia",
@@ -713,7 +833,13 @@
         }
       ],
       "best_score": 65,
-      "best_species": "Rovellons"
+      "best_species": "Rovellons",
+      "aemet_check": {
+        "station_name": "IGUALADA - MUNTANYETA",
+        "distance_km": 4.3,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
     },
     {
       "name": "Priorat",
@@ -743,7 +869,13 @@
         }
       ],
       "best_score": 51,
-      "best_species": "Ou de reig"
+      "best_species": "Ou de reig",
+      "aemet_check": {
+        "station_name": "CABACÉS",
+        "distance_km": 7.4,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
     },
     {
       "name": "Conca de Barberà",
@@ -773,7 +905,13 @@
         }
       ],
       "best_score": 50,
-      "best_species": "Colmenilles"
+      "best_species": "Colmenilles",
+      "aemet_check": {
+        "station_name": "VALLS",
+        "distance_km": 16.9,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
     },
     {
       "name": "Baix Camp",
@@ -803,7 +941,13 @@
         }
       ],
       "best_score": 67,
-      "best_species": "Ou de reig"
+      "best_species": "Ou de reig",
+      "aemet_check": {
+        "station_name": "ALFORJA",
+        "distance_km": 7.2,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
     },
     {
       "name": "Terra Alta",
@@ -823,7 +967,13 @@
         }
       ],
       "best_score": 42,
-      "best_species": "Rovellons"
+      "best_species": "Rovellons",
+      "aemet_check": {
+        "station_name": "RASQUERA",
+        "distance_km": 14.6,
+        "prec_1h_mm": 0.0,
+        "observed_at": "2026-08-24T21:00:00+0000"
+      }
     }
   ],
   "species_catalog": [
