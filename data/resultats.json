@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-25T09:42:40.772645+00:00",
+  "generated_at": "2026-08-25T09:48:25.971766+00:00",
   "zones": [
     {
       "id": 1,
@@ -51,8 +51,8 @@
       "lat": 40.808,
       "lon": 0.49,
       "alt": 250,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
+      "tree": "matollar",
+      "tree_label": "matollar",
       "is_forest": false,
       "rain_10d": 8,
       "avg_temp": 29,
@@ -183,8 +183,8 @@
       "lat": 40.952,
       "lon": 0.685,
       "alt": 250,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
+      "tree": "matollar",
+      "tree_label": "matollar",
       "is_forest": false,
       "rain_10d": 10,
       "avg_temp": 27,
@@ -491,8 +491,8 @@
       "lat": 41.241,
       "lon": 0.49,
       "alt": 250,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
+      "tree": "matollar",
+      "tree_label": "matollar",
       "is_forest": false,
       "rain_10d": 2,
       "avg_temp": 29,
@@ -513,8 +513,8 @@
       "lat": 41.241,
       "lon": 0.685,
       "alt": 250,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
+      "tree": "matollar",
+      "tree_label": "matollar",
       "is_forest": false,
       "rain_10d": 2,
       "avg_temp": 27,
@@ -601,8 +601,8 @@
       "lat": 41.241,
       "lon": 1.466,
       "alt": 250,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
+      "tree": "matollar",
+      "tree_label": "matollar",
       "is_forest": false,
       "rain_10d": 9,
       "avg_temp": 26,
@@ -645,8 +645,8 @@
       "lat": 41.241,
       "lon": 1.856,
       "alt": 30,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
+      "tree": "matollar",
+      "tree_label": "matollar",
       "is_forest": false,
       "rain_10d": 3,
       "avg_temp": 28,
@@ -777,8 +777,8 @@
       "lat": 41.385,
       "lon": 0.88,
       "alt": 330,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
+      "tree": "matollar",
+      "tree_label": "matollar",
       "is_forest": false,
       "rain_10d": 2,
       "avg_temp": 26,
@@ -821,15 +821,51 @@
       "lat": 41.385,
       "lon": 1.271,
       "alt": 330,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "roure",
+      "tree_label": "roureda",
+      "is_forest": true,
       "rain_10d": 15,
       "avg_temp": 24,
       "days_since_rain": 1,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 77
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 63
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 58
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 55
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 55
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 54
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 51
+        }
+      ],
+      "best_score": 77,
+      "best_species": "Ou de reig",
       "aemet_check": {
         "station_name": "VALLS",
         "distance_km": 10.3,
@@ -1041,8 +1077,8 @@
       "lat": 41.529,
       "lon": 0.685,
       "alt": 460,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
+      "tree": "matollar",
+      "tree_label": "matollar",
       "is_forest": false,
       "rain_10d": 12,
       "avg_temp": 28,
@@ -1151,8 +1187,8 @@
       "lat": 41.529,
       "lon": 1.661,
       "alt": 460,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
+      "tree": "matollar",
+      "tree_label": "matollar",
       "is_forest": false,
       "rain_10d": 11,
       "avg_temp": 26,
@@ -1195,8 +1231,8 @@
       "lat": 41.529,
       "lon": 2.051,
       "alt": 210,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
+      "tree": "matollar",
+      "tree_label": "matollar",
       "is_forest": false,
       "rain_10d": 7,
       "avg_temp": 27,
@@ -1635,8 +1671,8 @@
       "lat": 41.817,
       "lon": 0.685,
       "alt": 720,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
+      "tree": "matollar",
+      "tree_label": "matollar",
       "is_forest": false,
       "rain_10d": 16,
       "avg_temp": 27,
@@ -1745,15 +1781,51 @@
       "lat": 41.817,
       "lon": 1.661,
       "alt": 720,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "roure",
+      "tree_label": "roureda",
+      "is_forest": true,
       "rain_10d": 16,
       "avg_temp": 25,
       "days_since_rain": 1,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 65
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 63
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 60
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 56
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 56
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 55
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 52
+        }
+      ],
+      "best_score": 65,
+      "best_species": "Ou de reig",
       "aemet_check": {
         "station_name": "RINER - XIXONS",
         "distance_km": 15.4,
@@ -1855,15 +1927,51 @@
       "lat": 41.817,
       "lon": 2.637,
       "alt": 320,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "roure",
+      "tree_label": "roureda",
+      "is_forest": true,
       "rain_10d": 14,
       "avg_temp": 26,
       "days_since_rain": 4,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 64
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 64
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 60
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 56
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 56
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 56
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 53
+        }
+      ],
+      "best_score": 64,
+      "best_species": "Ou de reig",
       "aemet_check": {
         "station_name": "SANT HILARI",
         "distance_km": 12.5,
@@ -1965,15 +2073,51 @@
       "lat": 41.961,
       "lon": 0.88,
       "alt": 840,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "roure",
+      "tree_label": "roureda",
+      "is_forest": true,
       "rain_10d": 19,
       "avg_temp": 25,
       "days_since_rain": 1,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 68
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 63
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 63
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 60
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 60
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 58
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 55
+        }
+      ],
+      "best_score": 68,
+      "best_species": "Ou de reig",
       "aemet_check": {
         "station_name": "LLIMIANA",
         "distance_km": 12.0,
@@ -1987,15 +2131,51 @@
       "lat": 41.961,
       "lon": 1.076,
       "alt": 840,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "roure",
+      "tree_label": "roureda",
+      "is_forest": true,
       "rain_10d": 11,
       "avg_temp": 26,
       "days_since_rain": 1,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 57
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 56
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 53
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 50
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 50
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 50
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 47
+        }
+      ],
+      "best_score": 57,
+      "best_species": "Ou de reig",
       "aemet_check": {
         "station_name": "ARTESA DE SEGRE",
         "distance_km": 9.3,
@@ -2119,15 +2299,51 @@
       "lat": 41.961,
       "lon": 2.246,
       "alt": 840,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "roure",
+      "tree_label": "roureda",
+      "is_forest": true,
       "rain_10d": 12,
       "avg_temp": 25,
       "days_since_rain": 1,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 60
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 58
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 54
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 51
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 51
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 51
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 48
+        }
+      ],
+      "best_score": 60,
+      "best_species": "Ou de reig",
       "aemet_check": {
         "station_name": "PRATS DE LLUÇANÈS",
         "distance_km": 18.8,
@@ -2163,15 +2379,51 @@
       "lat": 41.961,
       "lon": 2.637,
       "alt": 440,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "roure",
+      "tree_label": "roureda",
+      "is_forest": true,
       "rain_10d": 32,
       "avg_temp": 26,
       "days_since_rain": 4,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 70
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 68
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 67
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 66
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 64
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 64
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 64
+        }
+      ],
+      "best_score": 70,
+      "best_species": "Ou de reig",
       "aemet_check": {
         "station_name": "GIRONA  AEROPUERTO",
         "distance_km": 11.8,
@@ -2185,8 +2437,8 @@
       "lat": 41.961,
       "lon": 2.832,
       "alt": 440,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
+      "tree": "prat",
+      "tree_label": "prat/pastura",
       "is_forest": false,
       "rain_10d": 26,
       "avg_temp": 26,
@@ -2273,8 +2525,8 @@
       "lat": 42.106,
       "lon": 0.88,
       "alt": 980,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
+      "tree": "matollar",
+      "tree_label": "matollar",
       "is_forest": false,
       "rain_10d": 37,
       "avg_temp": 27,
@@ -2405,8 +2657,8 @@
       "lat": 42.106,
       "lon": 2.051,
       "alt": 980,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
+      "tree": "prat",
+      "tree_label": "prat/pastura",
       "is_forest": false,
       "rain_10d": 22,
       "avg_temp": 23,
@@ -2449,15 +2701,51 @@
       "lat": 42.106,
       "lon": 2.441,
       "alt": 980,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "roure",
+      "tree_label": "roureda",
+      "is_forest": true,
       "rain_10d": 23,
       "avg_temp": 26,
       "days_since_rain": 1,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 67
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 64
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 63
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 62
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 61
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 61
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 59
+        }
+      ],
+      "best_score": 67,
+      "best_species": "Ou de reig",
       "aemet_check": {
         "station_name": "LES PLANES D?HOSTOLES",
         "distance_km": 10.8,
@@ -2471,15 +2759,51 @@
       "lat": 42.106,
       "lon": 2.637,
       "alt": 980,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "roure",
+      "tree_label": "roureda",
+      "is_forest": true,
       "rain_10d": 38,
       "avg_temp": 26,
       "days_since_rain": 1,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 67
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 64
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 64
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 63
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 61
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 61
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 61
+        }
+      ],
+      "best_score": 67,
+      "best_species": "Ou de reig",
       "aemet_check": {
         "station_name": "LES PLANES D?HOSTOLES",
         "distance_km": 9.2,
@@ -2581,8 +2905,8 @@
       "lat": 42.25,
       "lon": 0.88,
       "alt": 1110,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
+      "tree": "matollar",
+      "tree_label": "matollar",
       "is_forest": false,
       "rain_10d": 33,
       "avg_temp": 21,
@@ -2647,8 +2971,8 @@
       "lat": 42.25,
       "lon": 1.466,
       "alt": 1110,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
+      "tree": "prat",
+      "tree_label": "prat/pastura",
       "is_forest": false,
       "rain_10d": 50,
       "avg_temp": 21,
@@ -2735,15 +3059,51 @@
       "lat": 42.25,
       "lon": 2.246,
       "alt": 1110,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "roure",
+      "tree_label": "roureda",
+      "is_forest": true,
       "rain_10d": 28,
       "avg_temp": 23,
       "days_since_rain": 1,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 81
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 64
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 64
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 63
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 62
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 61
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 61
+        }
+      ],
+      "best_score": 81,
+      "best_species": "Ou de reig",
       "aemet_check": {
         "station_name": "RIPOLL",
         "distance_km": 7.7,
@@ -2845,8 +3205,8 @@
       "lat": 42.25,
       "lon": 3.222,
       "alt": 1110,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
+      "tree": "matollar",
+      "tree_label": "matollar",
       "is_forest": false,
       "rain_10d": 5,
       "avg_temp": 27,
@@ -2933,15 +3293,51 @@
       "lat": 42.394,
       "lon": 0.88,
       "alt": 1230,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "roure",
+      "tree_label": "roureda",
+      "is_forest": true,
       "rain_10d": 37,
       "avg_temp": 21,
       "days_since_rain": 1,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 81
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 66
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 66
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 64
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 63
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 62
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 61
+        }
+      ],
+      "best_score": 81,
+      "best_species": "Ou de reig",
       "aemet_check": {
         "station_name": "CABDELLA-CENTRAL",
         "distance_km": 12.1,
@@ -2955,8 +3351,8 @@
       "lat": 42.394,
       "lon": 1.076,
       "alt": 1230,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
+      "tree": "prat",
+      "tree_label": "prat/pastura",
       "is_forest": false,
       "rain_10d": 71,
       "avg_temp": 17,
@@ -2999,8 +3395,8 @@
       "lat": 42.394,
       "lon": 1.466,
       "alt": 1230,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
+      "tree": "matollar",
+      "tree_label": "matollar",
       "is_forest": false,
       "rain_10d": 36,
       "avg_temp": 21,
@@ -3263,8 +3659,8 @@
       "lat": 42.538,
       "lon": 1.076,
       "alt": 1360,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
+      "tree": "prat",
+      "tree_label": "prat/pastura",
       "is_forest": false,
       "rain_10d": 61,
       "avg_temp": 13,
@@ -3329,8 +3725,8 @@
       "lat": 42.682,
       "lon": 0.685,
       "alt": 1490,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
+      "tree": "matollar",
+      "tree_label": "matollar",
       "is_forest": false,
       "rain_10d": 106,
       "avg_temp": 14,
