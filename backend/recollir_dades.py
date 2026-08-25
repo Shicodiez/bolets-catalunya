@@ -1052,6 +1052,138 @@ def seasonal_climate_score(sp, alt, month, gbif_distributions=None):
 # 7. PROCÉS PRINCIPAL
 # ---------------------------------------------------------------------------
 
+# ---------------------------------------------------------------------------
+# 10. VEGETACIO (sig.gencat.cat) — CAPES PER ESPÈCIE D'ARBRE
+# ---------------------------------------------------------------------------
+# Servei WMS de la Generalitat amb una capa WMS separada per a cada espècie
+# d'arbre (VEGETACIO_ABIESALBA, VEGETACIO_FAGUSSYLVATICA, VEGETACIO_PINUS...).
+# Dona detall real d'espècie que la capa del ICGC no dona. Es descobreixen les
+# capes de manera automàtica (filtrant les d'incendis/risc/perímetres, que no
+# són d'espècie) i es consulten només les rellevants segons el grup genèric
+# (conífera/caducifoli/perennifoli) ja conegut via ICGC, per no disparar el
+# nombre de peticions.
+
+VEGETACIO_WMS_URL = "https://sig.gencat.cat/ows/VEGETACIO/wms"
+VEGETACIO_LAYERS_CACHE_PATH = "../data/vegetacio_layers_cache.json"
+VEGETACIO_LAYERS_CACHE_MAX_DAYS = 90
+
+# Paraules que indiquen que la capa NO és d'una espècie d'arbre (incendis,
+# riscos, perímetres administratius, etc.) — es descarten en el descobriment.
+VEGETACIO_NON_SPECIES_KEYWORDS = [
+    "INCENDI", "RISC", "PERIMETRE", "PERILL", "MUNALTRISC", "AGRUDEFENFOREST",
+    "INSTRORDENFOREST", "INVFORESTNAC", "HERBASSARS", "FONTSLLAVORERES",
+    "INFLAMABILITAT",
+]
+
+# Mapa de nom científic (part del nom de capa) -> grup genèric ICGC, per saber
+# quines capes val la pena consultar per a un punt segons el seu tipus de
+# bosc ja conegut. S'amplia automàticament amb qualsevol espècie descoberta
+# que continguí aquestes arrels.
+VEGETACIO_SPECIES_TO_GROUP = {
+    "ABIESALBA": "pi_altres", "PINUSHALEPENSIS": "pi_altres", "PINUSSYLVESTRIS": "pi_altres",
+    "PINUSNIGRA": "pi_altres", "PINUSUNCINATA": "pi_altres", "PINUSPINEA": "pi_altres",
+    "PINUSPINASTER": "pi_altres",
+    "FAGUSSYLVATICA": "roure", "QUERCUS": "roure",
+    "QUERCUSILEX": "alzina", "QUERCUSSUBER": "alzina",
+}
+
+
+def discover_vegetacio_species_layers(timeout=15):
+    """Consulta GetCapabilities del servei VEGETACIO i retorna la llista de
+    noms de capa que semblen ser d'espècie d'arbre (prefixades VEGETACIO_ i
+    sense cap paraula de la llista d'exclusió)."""
+    url = f"{VEGETACIO_WMS_URL}?request=GetCapabilities&service=wms&version=1.3.0"
+    req = urllib.request.Request(url, headers={"User-Agent": "bolets-catalunya-app/1.0"})
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            xml_text = resp.read().decode("utf-8", errors="ignore")
+    except Exception as e:
+        print(f"  AVÍS: no s'ha pogut consultar GetCapabilities de VEGETACIO ({e})")
+        return []
+
+    import re
+    names = re.findall(r"<Name>([^<]+)</Name>", xml_text)
+    species_layers = []
+    for name in names:
+        if not name.startswith("VEGETACIO_"):
+            continue
+        if any(kw in name for kw in VEGETACIO_NON_SPECIES_KEYWORDS):
+            continue
+        species_layers.append(name)
+    return sorted(set(species_layers))
+
+
+def load_vegetacio_layers_cache():
+    try:
+        with open(VEGETACIO_LAYERS_CACHE_PATH, "r", encoding="utf-8") as f:
+            cache = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return None
+    cached_at = cache.get("cached_at")
+    if not cached_at:
+        return None
+    try:
+        age_days = (datetime.now(timezone.utc) - datetime.fromisoformat(cached_at)).days
+    except ValueError:
+        return None
+    if age_days > VEGETACIO_LAYERS_CACHE_MAX_DAYS:
+        return None
+    return cache.get("layers")
+
+
+def save_vegetacio_layers_cache(layers):
+    cache = {"cached_at": datetime.now(timezone.utc).isoformat(), "layers": layers}
+    with open(VEGETACIO_LAYERS_CACHE_PATH, "w", encoding="utf-8") as f:
+        json.dump(cache, f, ensure_ascii=False)
+
+
+def layer_relevant_for_group(layer_name, tree_group):
+    """Decideix si val la pena consultar aquesta capa d'espècie per a un punt
+    del grup genèric donat (pi_altres/roure/alzina), per no fer peticions
+    innecessàries. Si l'espècie no està mapejada, es consulta igualment
+    (millor un punt de més que perdre'n un de vàlid)."""
+    for species_key, group in VEGETACIO_SPECIES_TO_GROUP.items():
+        if species_key in layer_name:
+            return group == tree_group
+    return True
+
+
+def fetch_vegetacio_species_for_point(lat, lon, layer_name, timeout=6):
+    """Consulta si una capa d'espècie concreta té presència en un punt."""
+    d = 0.01
+    params = (
+        f"?REQUEST=GetFeatureInfo&SERVICE=WMS&VERSION=1.1.1&LAYERS={layer_name}"
+        f"&STYLES=&FORMAT=image/png&SRS=EPSG:4326"
+        f"&BBOX={lon-d},{lat-d},{lon+d},{lat+d}&WIDTH=101&HEIGHT=101"
+        f"&QUERY_LAYERS={layer_name}&X=50&Y=50&INFO_FORMAT=text/plain"
+    )
+    url = VEGETACIO_WMS_URL + params
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "bolets-catalunya-app/1.0"})
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            txt = resp.read().decode("utf-8", errors="ignore")
+        return "Feature" in txt or "<gml" in txt.lower()
+    except Exception:
+        return False
+
+
+def species_layer_to_tree_key(layer_name):
+    """Tradueix un nom de capa VEGETACIO_XXX al mateix vocabulari de tree que
+    ja fem servir per al scoring (pi_roig, roure, faig, alzina, suro...)."""
+    mapping = {
+        "PINUSSYLVESTRIS": "pi_roig", "PINUSUNCINATA": "pi_negre", "ABIESALBA": "avet",
+        "PINUSHALEPENSIS": "pi_blanc", "PINUSPINEA": "pi_pinyer", "PINUSNIGRA": "pi_altres",
+        "PINUSPINASTER": "pi_altres", "FAGUSSYLVATICA": "faig", "QUERCUSILEX": "alzina",
+        "QUERCUSSUBER": "suro",
+    }
+    for key, tree in mapping.items():
+        if key in layer_name:
+            return tree
+    if "QUERCUS" in layer_name:
+        return "roure"
+    return None
+
+
 TREE_CACHE_PATH = "../data/bosc_cache.json"
 TREE_CACHE_MAX_DAYS = 30
 
@@ -1137,9 +1269,9 @@ def fetch_meteoclimatic_stations(timeout=20):
         rain_now = None
         rain_el = st.find(".//stationdata/rain")
         if rain_el is not None:
-            now_txt = rain_el.findtext("now")
+            total_txt = rain_el.findtext("total")
             try:
-                rain_now = float(now_txt) if now_txt is not None else None
+                rain_now = float(total_txt) if total_txt is not None else None
             except ValueError:
                 rain_now = None
 
@@ -1195,6 +1327,10 @@ def save_history(history):
 def update_history_with_meteoclimatic(history, zones, mc_stations):
     """Afegeix la pluja d'avui de Meteoclimatic a l'historial per a cada zona
     que tingui una estació prou a prop."""
+    valid_coords = sum(1 for s in mc_stations if s["lat"] is not None and s["lon"] is not None)
+    valid_rain = sum(1 for s in mc_stations if s["rain_today_mm"] is not None)
+    print(f"  Meteoclimatic diagnòstic: {valid_coords}/{len(mc_stations)} amb coordenades, {valid_rain}/{len(mc_stations)} amb dada de pluja")
+
     today_str = datetime.now(timezone.utc).date().isoformat()
     day_entry = history.get(today_str, {})
     matched = 0
@@ -1261,6 +1397,36 @@ def build_results():
 
     known_trees = sum(1 for t in tree_types.values() if t not in NON_FOREST)
     print(f"Bosc: {known_trees}/{len(ZONES)} punts amb tipus de bosc identificat")
+
+    print("Refinant espècie exacta amb VEGETACIO (sig.gencat.cat)...")
+    vegetacio_layers = load_vegetacio_layers_cache()
+    if vegetacio_layers is None:
+        vegetacio_layers = discover_vegetacio_species_layers()
+        if vegetacio_layers:
+            save_vegetacio_layers_cache(vegetacio_layers)
+    print(f"  VEGETACIO: {len(vegetacio_layers)} capes d'espècie disponibles")
+
+    refined_count = 0
+    if vegetacio_layers:
+        veg_start = time.time()
+        veg_max_seconds = 200
+        for zone in ZONES:
+            if time.time() - veg_start > veg_max_seconds:
+                print(f"  VEGETACIO: límit de temps ({veg_max_seconds}s) assolit — es continua sense refinar la resta")
+                break
+            current_tree = tree_types.get(zone["id"], "desconegut")
+            if current_tree in NON_FOREST:
+                continue
+            for layer in vegetacio_layers:
+                if not layer_relevant_for_group(layer, current_tree):
+                    continue
+                if fetch_vegetacio_species_for_point(zone["lat"], zone["lon"], layer):
+                    refined_tree = species_layer_to_tree_key(layer)
+                    if refined_tree:
+                        tree_types[zone["id"]] = refined_tree
+                        refined_count += 1
+                    break  # ja trobada una espècie coincident per aquest punt
+    print(f"  VEGETACIO: {refined_count} punts refinats amb espècie exacta")
 
     aemet_key = os.environ.get("AEMET_API_KEY")
     aemet_stations = []
@@ -1341,50 +1507,6 @@ def build_results():
     }
 
 
-def test_vegetacio_species_layers():
-    """
-    PROVA CONTROLADA (no afecta el resultat principal): comprova si el servei
-    WMS VEGETACIO de la Generalitat (sig.gencat.cat), amb capes específiques
-    per espècie (VEGETACIO_ABIESALBA, VEGETACIO_FAGUSSYLVATICA,
-    VEGETACIO_PINUSHALEPENSIS), respon de manera útil per a punts coneguts
-    del Pirineu. Només 5 punts de prova, no els 390 — és per decidir si val
-    la pena integrar-ho de debò en una fase futura.
-    """
-    test_points = [
-        {"name": "Val d'Aran (Arties)", "lat": 42.68, "lon": 0.83},
-        {"name": "Pallars Sobirà alt", "lat": 42.58, "lon": 1.10},
-        {"name": "Ripollès (Camprodon)", "lat": 42.31, "lon": 2.37},
-        {"name": "Montseny", "lat": 41.77, "lon": 2.43},
-        {"name": "Priorat", "lat": 41.23, "lon": 0.82},
-    ]
-    layers_to_test = ["VEGETACIO_ABIESALBA", "VEGETACIO_FAGUSSYLVATICA", "VEGETACIO_PINUSHALEPENSIS"]
-    base_url = "https://sig.gencat.cat/ows/VEGETACIO/wms"
-
-    print("\n--- PROVA CONTROLADA: capes per espècie de VEGETACIO (sig.gencat.cat) ---")
-    for point in test_points:
-        d = 0.01
-        results_for_point = []
-        for layer in layers_to_test:
-            params = (
-                f"?REQUEST=GetFeatureInfo&SERVICE=WMS&VERSION=1.1.1&LAYERS={layer}"
-                f"&STYLES=&FORMAT=image/png&SRS=EPSG:4326"
-                f"&BBOX={point['lon']-d},{point['lat']-d},{point['lon']+d},{point['lat']+d}"
-                f"&WIDTH=101&HEIGHT=101&QUERY_LAYERS={layer}&X=50&Y=50&INFO_FORMAT=text/plain"
-            )
-            url = base_url + params
-            try:
-                req = urllib.request.Request(url, headers={"User-Agent": "bolets-catalunya-app/1.0"})
-                with urllib.request.urlopen(req, timeout=8) as resp:
-                    txt = resp.read().decode("utf-8", errors="ignore")
-                has_feature = "Feature" in txt or "<gml" in txt.lower()
-                snippet = txt[:150].replace("\n", " ")
-                results_for_point.append(f"{layer}={'SÍ' if has_feature else 'no'} ({snippet})")
-            except Exception as e:
-                results_for_point.append(f"{layer}=ERROR({type(e).__name__})")
-        print(f"  {point['name']}: " + " | ".join(results_for_point))
-    print("--- FI PROVA CONTROLADA ---\n")
-
-
 def main():
     try:
         results = build_results()
@@ -1399,11 +1521,6 @@ def main():
     forest_count = sum(1 for z in results["zones"] if z["is_forest"])
     print(f"Fet. {len(results['zones'])} zones desades a {out_path} ({forest_count} boscoses)")
     print(f"Generat: {results['generated_at']}")
-
-    try:
-        test_vegetacio_species_layers()
-    except Exception as e:
-        print(f"AVÍS: la prova controlada de VEGETACIO ha fallat sencera ({e}) — no afecta el resultat principal")
 
 
 if __name__ == "__main__":
