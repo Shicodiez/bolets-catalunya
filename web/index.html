@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Predictor de bolets — Catalunya</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
   :root {
     --surface-0: #f7f6f2; --surface-1: #efeee8; --surface-2: #ffffff;
@@ -19,7 +20,7 @@
     color: var(--text-primary); font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
     font-size: 16px; line-height: 1.6;
   }
-  .wrap { max-width: 680px; margin: 0 auto; }
+  .wrap { max-width: 760px; margin: 0 auto; }
   h1 { font-size: 22px; font-weight: 500; margin: 0 0 4px; }
   .subtitle { font-size: 14px; color: var(--text-secondary); margin: 0 0 20px; }
   #status { font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; }
@@ -28,9 +29,15 @@
     flex: 1; min-width: 160px; padding: 8px 12px; border-radius: var(--radius);
     border: 0.5px solid var(--border); background: var(--surface-2); font-size: 14px;
   }
+  #map { width: 100%; height: 480px; border-radius: 12px; border: 0.5px solid var(--border); margin-bottom: 16px; background: var(--surface-1); }
+  .leaflet-popup-content-wrapper { border-radius: 10px; }
+  .popup-title { font-weight: 500; font-size: 14px; margin: 0 0 4px; }
+  .popup-meta { font-size: 12px; color: #5f5e5a; margin: 0 0 6px; }
+  .popup-score { display: inline-block; font-size: 13px; font-weight: 500; padding: 3px 8px; border-radius: 6px; margin-bottom: 6px; }
+  .popup-detail { font-size: 11px; color: #898781; margin: 0; }
   .zone-card {
     background: var(--surface-2); border: 0.5px solid var(--border);
-    border-radius: 12px; padding: 14px 16px; margin-bottom: 8px;
+    border-radius: 12px; padding: 14px 16px; margin-bottom: 8px; cursor: pointer;
   }
   .zone-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
   .zone-name { font-weight: 500; font-size: 14px; margin: 0; }
@@ -42,8 +49,9 @@
   .legend { margin-top: 20px; padding: 16px 20px; background: var(--surface-1); border-radius: 12px; }
   .legend p { font-size: 13px; color: var(--text-secondary); margin: 0 0 8px; }
   .legend-items { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px; }
-  .legend-dot { width: 10px; height: 10px; border-radius: 2px; display: inline-block; margin-right: 4px; vertical-align: -1px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 4px; vertical-align: -1px; }
   .footer-note { font-size: 12px; color: var(--text-muted); margin-top: 12px; }
+  .section-label { font-size: 13px; font-weight: 500; margin: 20px 0 8px; }
 </style>
 </head>
 <body>
@@ -62,7 +70,7 @@
     </select>
   </div>
 
-  <div id="zones-list"></div>
+  <div id="map"></div>
 
   <div class="legend">
     <p>Llegenda de puntuació</p>
@@ -72,25 +80,27 @@
       <span><span class="legend-dot" style="background:#B4B2A9"></span>Baixa (0-39)</span>
     </div>
   </div>
+
+  <p class="section-label">Totes les zones</p>
+  <div id="zones-list"></div>
+
   <p class="footer-note" id="generated-note"></p>
 </div>
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 let DATA = null;
+let map = null;
+let markers = [];
 
 function colorForScore(s) {
-  if (s >= 70) return {bg: 'var(--green-bg)', text: 'var(--green-text)', bar: 'var(--green-bar)'};
-  if (s >= 40) return {bg: 'var(--amber-bg)', text: 'var(--amber-text)', bar: 'var(--amber-bar)'};
-  return {bg: 'var(--gray-bg)', text: 'var(--gray-text)', bar: 'var(--gray-bar)'};
+  if (s >= 70) return {bg: '#E1F5EE', text: '#04342C', bar: '#1D9E75', dot: '#1D9E75'};
+  if (s >= 40) return {bg: '#FAEEDA', text: '#412402', bar: '#EF9F27', dot: '#EF9F27'};
+  return {bg: '#F1EFE8', text: '#2C2C2A', bar: '#B4B2A9', dot: '#B4B2A9'};
 }
 
-function render() {
-  const filterVal = document.getElementById('species-filter').value;
-  const sortVal = document.getElementById('sort-mode').value;
-  const list = document.getElementById('zones-list');
-  list.innerHTML = '';
-
-  let rows = DATA.zones.map(z => {
+function getRows(filterVal) {
+  return DATA.zones.map(z => {
     let bestScore = z.best_score;
     let bestSpecies = z.best_species;
     if (filterVal !== 'all') {
@@ -100,6 +110,38 @@ function render() {
     }
     return {...z, bestScore, bestSpecies};
   });
+}
+
+function renderMap(filterVal) {
+  markers.forEach(m => map.removeLayer(m));
+  markers = [];
+
+  getRows(filterVal).forEach(z => {
+    const c = colorForScore(z.bestScore);
+    const radius = 8 + (z.bestScore / 100) * 10;
+    const marker = L.circleMarker([z.lat, z.lon], {
+      radius: radius,
+      fillColor: c.dot,
+      color: '#ffffff',
+      weight: 2,
+      opacity: 1,
+      fillOpacity: 0.85
+    }).addTo(map);
+
+    marker.bindPopup(`
+      <p class="popup-title">${z.name}</p>
+      <p class="popup-meta">${z.alt}m · ${z.tree_label}</p>
+      <span class="popup-score" style="background:${c.bg};color:${c.text}">${z.bestScore} · ${z.bestScore > 0 ? z.bestSpecies : 'Sense espècie compatible'}</span>
+      <p class="popup-detail">Pluja 10d: ${z.rain_10d}mm · Temp: ${z.avg_temp}°C · ${z.days_since_rain}d des de pluja forta</p>
+    `);
+    markers.push(marker);
+  });
+}
+
+function renderList(filterVal, sortVal) {
+  const list = document.getElementById('zones-list');
+  list.innerHTML = '';
+  let rows = getRows(filterVal);
 
   if (sortVal === 'score') rows.sort((a, b) => b.bestScore - a.bestScore);
   else rows.sort((a, b) => a.name.localeCompare(b.name));
@@ -119,8 +161,21 @@ function render() {
       <div class="bar-track"><div class="bar-fill" style="width:${z.bestScore}%;background:${c.bar}"></div></div>
       <p class="zone-detail">Pluja 10d: ${z.rain_10d}mm · Temp mitjana: ${z.avg_temp}°C · ${z.days_since_rain}d des de pluja forta</p>
     `;
+    card.addEventListener('click', () => {
+      map.setView([z.lat, z.lon], 9);
+      const m = markers.find(mk => mk.getLatLng().lat === z.lat && mk.getLatLng().lng === z.lon);
+      if (m) m.openPopup();
+      document.getElementById('map').scrollIntoView({behavior: 'smooth', block: 'center'});
+    });
     list.appendChild(card);
   });
+}
+
+function render() {
+  const filterVal = document.getElementById('species-filter').value;
+  const sortVal = document.getElementById('sort-mode').value;
+  renderMap(filterVal);
+  renderList(filterVal, sortVal);
 }
 
 async function loadData() {
@@ -129,6 +184,12 @@ async function loadData() {
     const res = await fetch('../data/resultats.json?t=' + Date.now());
     if (!res.ok) throw new Error('No s\'ha trobat resultats.json');
     DATA = await res.json();
+
+    map = L.map('map', {scrollWheelZoom: false}).setView([41.85, 1.55], 8);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors',
+      maxZoom: 13
+    }).addTo(map);
 
     const filterSel = document.getElementById('species-filter');
     DATA.species_catalog.forEach(sp => {
