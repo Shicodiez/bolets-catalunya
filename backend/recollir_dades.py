@@ -428,7 +428,7 @@ def fetch_all_tree_types(zones, delay=0.05, max_total_seconds=240):
             for remaining in zones[i:]:
                 results[remaining["id"]] = ("desconegut", None)
             break
-        results[z["id"]] = fetch_tree_type(z["lat"], z["lon"], debug=(i < 3))
+        results[z["id"]] = fetch_tree_type(z["lat"], z["lon"], debug=True)
         if delay:
             time.sleep(delay)
         if (i + 1) % 25 == 0:
