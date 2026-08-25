@@ -128,6 +128,7 @@ function renderMap(filterVal) {
       <p class="popup-meta">${z.alt}m · ${z.tree_label}</p>
       <span class="popup-score" style="background:${MATCH_COLOR.bg};color:${MATCH_COLOR.text}">${speciesList}</span>
       <p class="popup-detail">Lluvia 10d: ${z.rain_10d}mm · Mín. noche: ${z.min_temp}°C (media: ${z.avg_temp}°C) · ${z.days_since_rain}d desde lluvia fuerte</p>
+      ${z.own_history_days ? `<p class="popup-detail" style="margin-top:2px">📊 Historial propio (Meteoclimatic): ${z.own_history_days}d acumulados</p>` : ''}
       ${aemetLine(z)}
     `);
     markers.push(marker);
