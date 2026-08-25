@@ -540,29 +540,39 @@ def fetch_weather(zones, batch_size=100):
 
 
 def compute_rain_stats(daily):
-    """A partir del bloc 'daily' d'Open-Meteo, calcula pluja 10d, temperatures i dies des de pluja forta.
+    """A partir del bloc 'daily' d'Open-Meteo, calcula pluja acumulada, temperatures i
+    dies des de l'inici de la tanda de pluges.
 
     IMPORTANT: per al scoring de bolets s'usa min_temp (mitjana de les mínimes nocturnes),
     no la mitjana dia/nit. Un bolet reacciona al fred de la matinada després de la pluja,
     no a la temperatura de la tarda — una mitjana dia/nit pot amagar nits ja prou fresques
     encara que les tardes segueixin sent caloroses (típic de finals d'estiu al Pirineu).
+
+    IMPORTANT: la pluja acumulada es compta des de l'INICI de la tanda de pluges actual
+    (no una finestra fixa de 10 dies), perquè amb tandes llargues (pluges repetides durant
+    12-14 dies, com és habitual al Pirineu a finals d'estiu) una finestra fixa perdria
+    pluja real caiguda a l'inici de la tanda. Es limita a un màxim de 16 dies (l'històric
+    disponible) per no arrossegar pluja d'una tanda anterior ja seca fa temps.
     """
     precip = daily.get("precipitation_sum") or []
     tmax = daily.get("temperature_2m_max") or []
     tmin = daily.get("temperature_2m_min") or []
 
-    last10_precip = precip[-11:-1] if len(precip) >= 11 else precip[:-1]
-    rain_10d = round(sum(p or 0 for p in last10_precip))
-
-    last10_tmax = tmax[-11:-1] if len(tmax) >= 11 else tmax[:-1]
-    last10_tmin = tmin[-11:-1] if len(tmin) >= 11 else tmin[:-1]
-    n = max(len(last10_tmax), 1)
-    avg_temp = round(
-        (sum(t or 0 for t in last10_tmax) / n + sum(t or 0 for t in last10_tmin) / n) / 2
-    )
-    min_temp = round(sum(t or 0 for t in last10_tmin) / n)
-
     days_since_rain = compute_days_since_rain_episode_start(precip)
+
+    # Pluja acumulada des de l'inici de la tanda (mínim 10 dies, màxim tot l'històric)
+    window = max(10, min(days_since_rain, len(precip) - 1 if precip else 10))
+    rain_window = precip[-(window + 1):-1] if len(precip) >= window + 1 else precip[:-1]
+    rain_10d = round(sum(p or 0 for p in rain_window))
+
+    # Temperatures: es calculen sobre els mateixos dies que la pluja acumulada
+    temp_window_max = tmax[-(window + 1):-1] if len(tmax) >= window + 1 else tmax[:-1]
+    temp_window_min = tmin[-(window + 1):-1] if len(tmin) >= window + 1 else tmin[:-1]
+    n = max(len(temp_window_max), 1)
+    avg_temp = round(
+        (sum(t or 0 for t in temp_window_max) / n + sum(t or 0 for t in temp_window_min) / n) / 2
+    )
+    min_temp = round(sum(t or 0 for t in temp_window_min) / n)
 
     return rain_10d, avg_temp, min_temp, days_since_rain
 
