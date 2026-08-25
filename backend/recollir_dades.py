@@ -818,30 +818,77 @@ def species_matches(sp, rain_10d, min_temp, tree, days_since_rain):
 # 7. PROCÉS PRINCIPAL
 # ---------------------------------------------------------------------------
 
+TREE_CACHE_PATH = "../data/bosc_cache.json"
+TREE_CACHE_MAX_DAYS = 30
+
+
+def load_tree_cache():
+    """Carrega el cache de tipus de bosc si existeix i no ha caducat."""
+    try:
+        with open(TREE_CACHE_PATH, "r", encoding="utf-8") as f:
+            cache = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {}
+
+    cached_at = cache.get("cached_at")
+    if not cached_at:
+        return {}
+    try:
+        cached_date = datetime.fromisoformat(cached_at)
+    except ValueError:
+        return {}
+    age_days = (datetime.now(timezone.utc) - cached_date).days
+    if age_days > TREE_CACHE_MAX_DAYS:
+        print(f"  Cache de bosc caducat ({age_days} dies) — es torna a consultar l'ICGC")
+        return {}
+
+    trees = cache.get("trees", {})
+    print(f"  Cache de bosc trobat ({age_days} dies) amb {len(trees)} punts")
+    return {int(k): v for k, v in trees.items()}
+
+
+def save_tree_cache(tree_types):
+    """Desa el cache de tipus de bosc per no haver de reconsultar l'ICGC cada cop."""
+    cache = {
+        "cached_at": datetime.now(timezone.utc).isoformat(),
+        "trees": {str(k): v for k, v in tree_types.items()},
+    }
+    with open(TREE_CACHE_PATH, "w", encoding="utf-8") as f:
+        json.dump(cache, f, ensure_ascii=False)
+
+
 def build_results():
     print(f"[{datetime.now(timezone.utc).isoformat()}] Graella de {len(ZONES)} punts")
 
     print("Consultant Open-Meteo (meteorologia)...")
     weather_results = fetch_weather(ZONES)
 
-    print("Consultant ICGC (tipus de bosc real per a cada punt)...")
-    layer_name, available_layers = discover_icgc_layer()
-    tree_results = {}
-    icgc_start = time.time()
-    icgc_max_seconds = 280
-    for i, z in enumerate(ZONES):
-        if time.time() - icgc_start > icgc_max_seconds:
-            print(f"  ICGC: límit de temps ({icgc_max_seconds}s) assolit a {i}/{len(ZONES)} — es continua sense la resta")
-            for remaining in ZONES[i:]:
-                tree_results[remaining["id"]] = ("desconegut", None)
-            break
-        tree_results[z["id"]] = fetch_tree_type(z["lat"], z["lon"], layer_name, debug=(i < 5))
-        time.sleep(0.05)
-        if (i + 1) % 50 == 0:
-            print(f"  ICGC: {i + 1}/{len(ZONES)} punts consultats...")
-    tree_types = {zid: t for zid, (t, _label) in tree_results.items()}
+    print("Consultant tipus de bosc (amb cache)...")
+    tree_types = load_tree_cache()
+    missing_zones = [z for z in ZONES if z["id"] not in tree_types]
+
+    if missing_zones:
+        print(f"  {len(missing_zones)} punts sense cache — consultant ICGC...")
+        layer_name, available_layers = discover_icgc_layer()
+        icgc_start = time.time()
+        icgc_max_seconds = 280
+        for i, z in enumerate(missing_zones):
+            if time.time() - icgc_start > icgc_max_seconds:
+                print(f"  ICGC: límit de temps ({icgc_max_seconds}s) assolit a {i}/{len(missing_zones)} — es continua sense la resta")
+                for remaining in missing_zones[i:]:
+                    tree_types[remaining["id"]] = "desconegut"
+                break
+            tree, _label = fetch_tree_type(z["lat"], z["lon"], layer_name, debug=False)
+            tree_types[z["id"]] = tree
+            time.sleep(0.05)
+            if (i + 1) % 50 == 0:
+                print(f"  ICGC: {i + 1}/{len(missing_zones)} punts consultats...")
+        save_tree_cache(tree_types)
+    else:
+        print("  Tots els punts trobats al cache — no cal consultar l'ICGC")
+
     known_trees = sum(1 for t in tree_types.values() if t not in NON_FOREST)
-    print(f"ICGC: {known_trees}/{len(ZONES)} punts amb tipus de bosc identificat")
+    print(f"Bosc: {known_trees}/{len(ZONES)} punts amb tipus de bosc identificat")
 
     aemet_key = os.environ.get("AEMET_API_KEY")
     aemet_stations = []
@@ -858,12 +905,7 @@ def build_results():
     zones_out = []
     for zone, daily_wrapper in zip(ZONES, weather_results):
         daily = daily_wrapper.get("daily", {})
-        if zone["id"] == 390:
-            print(f"  [DEBUG punt 390] precipitation_sum cru: {daily.get('precipitation_sum')}")
-            print(f"  [DEBUG punt 390] temperature_2m_min cru: {daily.get('temperature_2m_min')}")
         rain_10d, avg_temp, min_temp, days_since_rain = compute_rain_stats(daily)
-        if zone["id"] == 390:
-            print(f"  [DEBUG punt 390] resultat: rain_10d={rain_10d} min_temp={min_temp} days_since_rain={days_since_rain}")
         tree = tree_types.get(zone["id"], "desconegut")
 
         aemet_info = None
