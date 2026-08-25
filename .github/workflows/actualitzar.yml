@@ -22,6 +22,8 @@ jobs:
 
       - name: Executar el script de recollida de dades
         working-directory: backend
+        env:
+          AEMET_API_KEY: ${{ secrets.AEMET_API_KEY }}
         run: python recollir_dades.py
 
       - name: Desar els canvis al repositori
