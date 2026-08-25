@@ -73,7 +73,7 @@
   <div id="map"></div>
 
   <div class="legend">
-    <p>Los puntos verdes cumplen todas las condiciones: lluvia suficiente, días desde la lluvia en el rango correcto, temperatura adecuada y bosque compatible.</p>
+    <p>Los puntos verdes cumplen todas las condiciones: lluvia suficiente, días desde la lluvia en el rango correcto, temperatura mínima nocturna adecuada y bosque compatible. Se usa la mínima de la noche (no la media del día) porque es la que refleja el frescor que activa la salida de las setas, aunque las tardes sigan siendo calurosas.</p>
   </div>
 
   <p class="section-label" id="section-label">Mejores zonas</p>
@@ -127,7 +127,7 @@ function renderMap(filterVal) {
       <p class="popup-title">${z.name}</p>
       <p class="popup-meta">${z.alt}m · ${z.tree_label}</p>
       <span class="popup-score" style="background:${MATCH_COLOR.bg};color:${MATCH_COLOR.text}">${speciesList}</span>
-      <p class="popup-detail">Lluvia 10d: ${z.rain_10d}mm · Temp: ${z.avg_temp}°C · ${z.days_since_rain}d desde lluvia fuerte</p>
+      <p class="popup-detail">Lluvia 10d: ${z.rain_10d}mm · Mín. noche: ${z.min_temp}°C (media: ${z.avg_temp}°C) · ${z.days_since_rain}d desde lluvia fuerte</p>
       ${aemetLine(z)}
     `);
     markers.push(marker);
@@ -158,7 +158,7 @@ function renderList(filterVal, sortVal) {
         </div>
         <span class="score-pill" style="background:${MATCH_COLOR.bg};color:${MATCH_COLOR.text}">${z.matches.length}</span>
       </div>
-      <p class="zone-detail">Lluvia 10d: ${z.rain_10d}mm · Temp media: ${z.avg_temp}°C · ${z.days_since_rain}d desde lluvia fuerte</p>
+      <p class="zone-detail">Lluvia 10d: ${z.rain_10d}mm · Mín. noche: ${z.min_temp}°C (media: ${z.avg_temp}°C) · ${z.days_since_rain}d desde lluvia fuerte</p>
       ${z.aemet_check ? `<p class="zone-detail">✓ AEMET "${z.aemet_check.station_name}" (${z.aemet_check.distance_km}km)</p>` : ''}
     `;
     card.addEventListener('click', () => {
