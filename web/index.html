@@ -65,7 +65,7 @@
       <option value="all">Todas las especies</option>
     </select>
     <select id="sort-mode">
-      <option value="score">Ordenar por puntuación</option>
+      <option value="score">Ordenar por nº de especies</option>
       <option value="name">Ordenar por nombre de zona</option>
     </select>
   </div>
@@ -73,12 +73,7 @@
   <div id="map"></div>
 
   <div class="legend">
-    <p>Leyenda de puntuación</p>
-    <div class="legend-items">
-      <span><span class="legend-dot" style="background:#1D9E75"></span>Alta (70-100)</span>
-      <span><span class="legend-dot" style="background:#EF9F27"></span>Media (40-69)</span>
-      <span><span class="legend-dot" style="background:#B4B2A9"></span>Baja (0-39)</span>
-    </div>
+    <p>Los puntos verdes cumplen todas las condiciones: lluvia suficiente, días desde la lluvia en el rango correcto, temperatura adecuada y bosque compatible.</p>
   </div>
 
   <p class="section-label" id="section-label">Mejores zonas</p>
@@ -100,22 +95,15 @@ function aemetLine(z) {
   return `<p class="popup-detail" style="margin-top:4px">✓ Contrastado con estación AEMET "${a.station_name}" (${a.distance_km}km) — ${precText} ahora mismo</p>`;
 }
 
-function colorForScore(s) {
-  if (s >= 70) return {bg: '#E1F5EE', text: '#04342C', bar: '#1D9E75', dot: '#1D9E75'};
-  if (s >= 40) return {bg: '#FAEEDA', text: '#412402', bar: '#EF9F27', dot: '#EF9F27'};
-  return {bg: '#F1EFE8', text: '#2C2C2A', bar: '#B4B2A9', dot: '#B4B2A9'};
-}
+const MATCH_COLOR = {bg: '#E1F5EE', text: '#04342C', dot: '#1D9E75'};
 
 function getRows(filterVal) {
   return DATA.zones.map(z => {
-    let bestScore = z.best_score;
-    let bestSpecies = z.best_species;
+    let matches = z.matching_species || [];
     if (filterVal !== 'all') {
-      const match = z.species_scores.find(s => s.id === filterVal);
-      bestScore = match ? match.score : 0;
-      bestSpecies = match ? match.name : null;
+      matches = matches.filter(s => s.id === filterVal);
     }
-    return {...z, bestScore, bestSpecies};
+    return {...z, matches, hasMatch: matches.length > 0};
   });
 }
 
@@ -124,22 +112,21 @@ function renderMap(filterVal) {
   markers = [];
 
   getRows(filterVal).forEach(z => {
-    if (!z.is_forest) return;
-    const c = colorForScore(z.bestScore);
-    const radius = 5 + (z.bestScore / 100) * 7;
+    if (!z.is_forest || !z.hasMatch) return;
     const marker = L.circleMarker([z.lat, z.lon], {
-      radius: radius,
-      fillColor: c.dot,
+      radius: 8,
+      fillColor: MATCH_COLOR.dot,
       color: '#ffffff',
       weight: 1,
       opacity: 1,
       fillOpacity: 0.85
     }).addTo(map);
 
+    const speciesList = z.matches.map(s => s.name).join(', ');
     marker.bindPopup(`
       <p class="popup-title">${z.name}</p>
       <p class="popup-meta">${z.alt}m · ${z.tree_label}</p>
-      <span class="popup-score" style="background:${c.bg};color:${c.text}">${z.bestScore} · ${z.bestScore > 0 ? z.bestSpecies : 'Sin especie compatible'}</span>
+      <span class="popup-score" style="background:${MATCH_COLOR.bg};color:${MATCH_COLOR.text}">${speciesList}</span>
       <p class="popup-detail">Lluvia 10d: ${z.rain_10d}mm · Temp: ${z.avg_temp}°C · ${z.days_since_rain}d desde lluvia fuerte</p>
       ${aemetLine(z)}
     `);
@@ -152,24 +139,25 @@ function renderList(filterVal, sortVal) {
   list.innerHTML = '';
   let rows = getRows(filterVal).filter(z => z.is_forest);
 
-  if (sortVal === 'score') rows.sort((a, b) => b.bestScore - a.bestScore);
+  rows = rows.filter(z => z.hasMatch);
+
+  if (sortVal === 'score') rows.sort((a, b) => b.matches.length - a.matches.length);
   else rows.sort((a, b) => a.name.localeCompare(b.name));
 
-  const shown = sortVal === 'score' ? rows.slice(0, 30) : rows;
+  const shown = rows.slice(0, 60);
 
   shown.forEach(z => {
-    const c = colorForScore(z.bestScore);
     const card = document.createElement('div');
     card.className = 'zone-card';
+    const speciesList = z.matches.map(s => s.name).join(', ');
     card.innerHTML = `
       <div class="zone-top">
         <div style="flex:1;min-width:0">
           <p class="zone-name">${z.name}</p>
-          <p class="zone-meta">${z.bestScore > 0 ? z.bestSpecies : 'Sin especie compatible'} · ${z.alt}m · ${z.tree_label}</p>
+          <p class="zone-meta">${speciesList} · ${z.alt}m · ${z.tree_label}</p>
         </div>
-        <span class="score-pill" style="background:${c.bg};color:${c.text}">${z.bestScore}</span>
+        <span class="score-pill" style="background:${MATCH_COLOR.bg};color:${MATCH_COLOR.text}">${z.matches.length}</span>
       </div>
-      <div class="bar-track"><div class="bar-fill" style="width:${z.bestScore}%;background:${c.bar}"></div></div>
       <p class="zone-detail">Lluvia 10d: ${z.rain_10d}mm · Temp media: ${z.avg_temp}°C · ${z.days_since_rain}d desde lluvia fuerte</p>
       ${z.aemet_check ? `<p class="zone-detail">✓ AEMET "${z.aemet_check.station_name}" (${z.aemet_check.distance_km}km)</p>` : ''}
     `;
@@ -188,9 +176,9 @@ function render() {
   const sortVal = document.getElementById('sort-mode').value;
   renderMap(filterVal);
   renderList(filterVal, sortVal);
-  const forestCount = DATA.zones.filter(z => z.is_forest).length;
+  const matchCount = getRows(filterVal).filter(z => z.hasMatch).length;
   document.getElementById('section-label').textContent =
-    sortVal === 'score' ? `Mejores zonas (top 30 de ${forestCount} boscosas)` : `Todas las zonas boscosas (${forestCount})`;
+    `Zonas donde se cumplen todas las condiciones (${matchCount})`;
 }
 
 async function loadData() {
