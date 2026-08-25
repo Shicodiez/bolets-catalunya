@@ -21,6 +21,7 @@ import os
 import time
 import urllib.request
 import urllib.error
+import urllib.parse
 from datetime import datetime, timezone
 
 # ---------------------------------------------------------------------------
@@ -427,16 +428,16 @@ ZONES = [
 # 2. ESPÈCIES DE BOLETS I LA SEVA LÒGICA
 # ---------------------------------------------------------------------------
 SPECIES = [
-    {"id": "rovellons",   "name": "Rovellons",           "trees": ["pi_roig", "pi_negre", "pi_pinyer", "pi_blanc", "pi_altres"], "rain_days": [7, 15],  "temp_range": [4, 16],  "min_rain": 20},
-    {"id": "ceps",        "name": "Ceps",                 "trees": ["roure", "faig", "pi_roig", "pi_negre", "pi_altres"],        "rain_days": [8, 16],  "temp_range": [6, 18],  "min_rain": 25},
-    {"id": "camagrocs",   "name": "Camagrocs",            "trees": ["faig", "roure", "alzina"],                                  "rain_days": [10, 20], "temp_range": [6, 16],  "min_rain": 20},
-    {"id": "trompetes",   "name": "Trompetes de la mort", "trees": ["faig", "roure"],                                            "rain_days": [10, 20], "temp_range": [5, 15],  "min_rain": 25},
-    {"id": "oureig",      "name": "Ou de reig",           "trees": ["alzina", "roure", "suro"],                                  "rain_days": [6, 14],  "temp_range": [10, 22], "min_rain": 18},
-    {"id": "rossinyols",  "name": "Rossinyols",           "trees": ["faig", "roure", "pi_roig", "pi_altres"],                    "rain_days": [7, 16],  "temp_range": [6, 17],  "min_rain": 20},
-    {"id": "colmenilles", "name": "Colmenilles",          "trees": ["roure", "pi_blanc", "pi_altres"],                           "rain_days": [8, 18],  "temp_range": [2, 13],  "min_rain": 15},
-    {"id": "llengua",     "name": "Llengua de bou",       "trees": ["roure", "suro"],                                            "rain_days": [10, 20], "temp_range": [8, 18],  "min_rain": 20},
-    {"id": "pinetell",    "name": "Pinetell",             "trees": ["pi_roig", "pi_negre", "pi_altres"],                         "rain_days": [7, 14],  "temp_range": [4, 15],  "min_rain": 20},
-    {"id": "fredolic",    "name": "Fredolic",             "trees": ["pi_blanc", "alzina", "pi_altres"],                          "rain_days": [9, 18],  "temp_range": [3, 14],  "min_rain": 18},
+    {"id": "rovellons",   "name": "Rovellons",           "scientific": ["Lactarius deliciosus", "Lactarius sanguifluus"],      "trees": ["pi_roig", "pi_negre", "pi_pinyer", "pi_blanc", "pi_altres"], "rain_days": [7, 15],  "temp_range": [4, 16],  "min_rain": 20},
+    {"id": "ceps",        "name": "Ceps",                 "scientific": ["Boletus edulis", "Boletus aereus", "Boletus pinophilus"], "trees": ["roure", "faig", "pi_roig", "pi_negre", "pi_altres"],        "rain_days": [8, 16],  "temp_range": [6, 18],  "min_rain": 25},
+    {"id": "camagrocs",   "name": "Camagrocs",            "scientific": ["Craterellus lutescens"],                              "trees": ["faig", "roure", "alzina"],                                  "rain_days": [10, 20], "temp_range": [6, 16],  "min_rain": 20},
+    {"id": "trompetes",   "name": "Trompetes de la mort", "scientific": ["Craterellus cornucopioides"],                         "trees": ["faig", "roure"],                                            "rain_days": [10, 20], "temp_range": [5, 15],  "min_rain": 25},
+    {"id": "oureig",      "name": "Ou de reig",           "scientific": ["Amanita caesarea"],                                   "trees": ["alzina", "roure", "suro"],                                  "rain_days": [6, 14],  "temp_range": [10, 22], "min_rain": 18},
+    {"id": "rossinyols",  "name": "Rossinyols",           "scientific": ["Cantharellus cibarius"],                              "trees": ["faig", "roure", "pi_roig", "pi_altres"],                    "rain_days": [7, 16],  "temp_range": [6, 17],  "min_rain": 20},
+    {"id": "colmenilles", "name": "Colmenilles",          "scientific": ["Morchella esculenta", "Morchella elata"],             "trees": ["roure", "pi_blanc", "pi_altres"],                           "rain_days": [8, 18],  "temp_range": [2, 13],  "min_rain": 15},
+    {"id": "llengua",     "name": "Llengua de bou",       "scientific": ["Hydnum repandum"],                                    "trees": ["roure", "suro"],                                            "rain_days": [10, 20], "temp_range": [8, 18],  "min_rain": 20},
+    {"id": "pinetell",    "name": "Pinetell",             "scientific": ["Lactarius deliciosus"],                               "trees": ["pi_roig", "pi_negre", "pi_altres"],                         "rain_days": [7, 14],  "temp_range": [4, 15],  "min_rain": 20},
+    {"id": "fredolic",    "name": "Fredolic",             "scientific": ["Tricholoma terreum"],                                 "trees": ["pi_blanc", "alzina", "pi_altres"],                          "rain_days": [9, 18],  "temp_range": [3, 14],  "min_rain": 18},
 ]
 
 TREE_LABELS = {
@@ -795,7 +796,7 @@ def fetch_all_tree_types(zones, layer_name, delay=0.05, max_total_seconds=280):
 # 6. SCORING
 # ---------------------------------------------------------------------------
 
-def species_score(sp, rain_10d, min_temp, tree, days_since_rain, alt, month, aemet_rain_1h=None, mc_rain_today=None):
+def species_score(sp, rain_10d, min_temp, tree, days_since_rain, alt, month, aemet_rain_1h=None, mc_rain_today=None, gbif_distributions=None):
     """
     Sistema de puntuació 0-100 per evidència acumulada, no tot-o-res. Cada
     factor suma punts segons com d'a prop està del rang òptim (amb tolerància
@@ -852,7 +853,7 @@ def species_score(sp, rain_10d, min_temp, tree, days_since_rain, alt, month, aem
     # --- Climatologia de temporada per altitud (0-15 punts) ---
     # Coneixement micològic establert: cada espècie té una temporada més
     # probable segons l'altitud, independentment del detall exacte del dia.
-    season_score = seasonal_climate_score(sp, alt, month)
+    season_score = seasonal_climate_score(sp, alt, month, gbif_distributions)
     breakdown["temporada"] = round(season_score, 1)
     score += season_score
 
@@ -870,14 +871,164 @@ def species_score(sp, rain_10d, min_temp, tree, days_since_rain, alt, month, aem
     return max(0, min(100, round(score))), breakdown
 
 
-def seasonal_climate_score(sp, alt, month):
+# ---------------------------------------------------------------------------
+# 9. GBIF — HISTÒRIC REAL D'AVISTAMENTS (FungaCAT i altres datasets)
+# ---------------------------------------------------------------------------
+# GBIF és una base de dades pública i gratuïta (sense clau) amb milions de
+# registres d'observacions de fongs, incloent el dataset FungaCAT (Catalunya,
+# des de 1752). Es fa servir per calcular la distribució mensual REAL
+# d'aparicions de cada espècie a Catalunya, en comptes d'una estimació manual.
+
+GBIF_API_URL = "https://api.gbif.org/v1/occurrence/search"
+GBIF_CACHE_PATH = "../data/gbif_cache.json"
+GBIF_CACHE_MAX_DAYS = 60  # l'estacionalitat històrica no canvia sovint
+
+
+def fetch_gbif_monthly_distribution(scientific_name, timeout=20):
     """
-    Puntuació de temporada segons altitud i mes, basada en coneixement
-    micològic general (no en la lectura meteorològica del dia). Els bolets
-    de tardor típics (rovellons, ceps...) tenen temporada més primerenca
-    com més amunt, i més tardana com més avall.
+    Consulta GBIF per a una espècie (nom científic) amb coordenades a
+    Catalunya, i retorna un diccionari {mes: nombre_de_registres} basat en
+    l'històric complet disponible. S'usa geometry (bounding box aproximat
+    de Catalunya) en comptes de country=ES per no incloure la resta d'Espanya.
     """
-    # Mesos òptims aproximats per franja d'altitud (1=gener...12=desembre)
+    catalunya_bbox = "POLYGON((0.10 40.50, 3.35 40.50, 3.35 42.90, 0.10 42.90, 0.10 40.50))"
+    month_counts = {m: 0 for m in range(1, 13)}
+    offset = 0
+    limit = 300
+    max_records = 3000  # límit de seguretat per no fer massa peticions per espècie
+
+    while offset < max_records:
+        params = (
+            f"?scientificName={urllib.parse.quote(scientific_name)}"
+            f"&geometry={urllib.parse.quote(catalunya_bbox)}"
+            f"&hasCoordinate=true&limit={limit}&offset={offset}"
+        )
+        url = GBIF_API_URL + params
+        req = urllib.request.Request(url, headers={"User-Agent": "bolets-catalunya-app/1.0"})
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+        except Exception:
+            break
+
+        results = data.get("results", [])
+        if not results:
+            break
+        for rec in results:
+            month = rec.get("month")
+            if month and 1 <= month <= 12:
+                month_counts[month] += 1
+
+        if data.get("endOfRecords", True):
+            break
+        offset += limit
+
+    return month_counts
+
+
+def load_gbif_cache():
+    """Carrega el cache de distribució mensual GBIF si existeix i no ha caducat."""
+    try:
+        with open(GBIF_CACHE_PATH, "r", encoding="utf-8") as f:
+            cache = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {}
+
+    cached_at = cache.get("cached_at")
+    if not cached_at:
+        return {}
+    try:
+        cached_date = datetime.fromisoformat(cached_at)
+    except ValueError:
+        return {}
+    age_days = (datetime.now(timezone.utc) - cached_date).days
+    if age_days > GBIF_CACHE_MAX_DAYS:
+        print(f"  Cache de GBIF caducat ({age_days} dies) — es torna a consultar")
+        return {}
+
+    print(f"  Cache de GBIF trobat ({age_days} dies)")
+    return cache.get("species", {})
+
+
+def save_gbif_cache(species_distributions):
+    cache = {
+        "cached_at": datetime.now(timezone.utc).isoformat(),
+        "species": species_distributions,
+    }
+    with open(GBIF_CACHE_PATH, "w", encoding="utf-8") as f:
+        json.dump(cache, f, ensure_ascii=False)
+
+
+def build_gbif_distributions():
+    """
+    Per a cada espècie del catàleg, consulta (o recupera del cache) la
+    distribució mensual real de GBIF, combinant tots els noms científics
+    (sinònims/espècies properes) d'aquella espècie.
+    """
+    cache = load_gbif_cache()
+    missing = [sp for sp in SPECIES if sp["id"] not in cache]
+
+    if missing:
+        print(f"  GBIF: consultant {len(missing)} espècies sense cache...")
+        for sp in missing:
+            combined = {m: 0 for m in range(1, 13)}
+            for name in sp.get("scientific", []):
+                try:
+                    counts = fetch_gbif_monthly_distribution(name)
+                    for m, c in counts.items():
+                        combined[m] += c
+                except Exception as e:
+                    print(f"    AVÍS: GBIF ha fallat per '{name}' ({e})")
+            cache[sp["id"]] = combined
+            total = sum(combined.values())
+            print(f"    {sp['name']}: {total} registres GBIF trobats")
+        save_gbif_cache(cache)
+    else:
+        print("  GBIF: totes les espècies trobades al cache")
+
+    return cache
+
+
+def gbif_seasonal_score(monthly_counts, month):
+    """
+    Puntuació 0-15 basada en la proporció real de registres GBIF que cauen
+    en aquest mes (i els adjacents amb pes reduït), respecte al total anual
+    de l'espècie. Si no hi ha prou registres (< 15), no es pot confiar en
+    la distribució i es retorna None perquè el crida faci servir el fallback.
+    """
+    if not monthly_counts:
+        return None
+    total = sum(monthly_counts.values())
+    if total < 15:
+        return None
+
+    prev_m = 12 if month == 1 else month - 1
+    next_m = 1 if month == 12 else month + 1
+    weighted = (
+        monthly_counts.get(month, 0) * 1.0
+        + monthly_counts.get(prev_m, 0) * 0.4
+        + monthly_counts.get(next_m, 0) * 0.4
+    )
+    ratio = weighted / total
+    # Escala calibrada: un mes que concentri ~35% o més del pes anual (habitual
+    # en el mes de màxima temporada) arriba al màxim de 15; per sota, escala lineal.
+    return round(min(15, (ratio / 0.35) * 15), 1)
+
+
+def seasonal_climate_score(sp, alt, month, gbif_distributions=None):
+    """
+    Puntuació de temporada segons altitud i mes. Si hi ha prou dades reals
+    de GBIF per a l'espècie, es fa servir la distribució real d'aparicions;
+    si no, es fa servir l'estimació manual basada en coneixement general
+    (altitud/mes) com a reserva.
+    """
+    if gbif_distributions:
+        counts = gbif_distributions.get(sp["id"])
+        gbif_score = gbif_seasonal_score(counts, month)
+        if gbif_score is not None:
+            return gbif_score
+
+    # --- Fallback: estimació manual ---
     if alt >= 1200:
         peak_months = [8, 9, 10]
     elif alt >= 700:
@@ -890,11 +1041,11 @@ def seasonal_climate_score(sp, alt, month):
 
     if month in peak_months:
         return 15
-    # un mes abans o després del pic encara dona mig punt
     adjacent = {m - 1 for m in peak_months} | {m + 1 for m in peak_months}
     if month in adjacent:
         return 7
     return 0
+
 
 
 # ---------------------------------------------------------------------------
@@ -1123,6 +1274,9 @@ def build_results():
     else:
         print("AVÍS: no hi ha AEMET_API_KEY configurada — es continua sense contrast")
 
+    print("Consultant GBIF (històric real d'avistaments, FungaCAT)...")
+    gbif_distributions = build_gbif_distributions()
+
     current_month = datetime.now(timezone.utc).month
     today_str = datetime.now(timezone.utc).date().isoformat()
     today_history = history.get(today_str, {})
@@ -1154,6 +1308,7 @@ def build_results():
                 s, breakdown = species_score(
                     sp, rain_10d, min_temp, tree, days_since_rain, zone["alt"], current_month,
                     aemet_rain_1h=aemet_rain_1h, mc_rain_today=mc_rain_today,
+                    gbif_distributions=gbif_distributions,
                 )
                 if s > 0:
                     species_scores.append({"id": sp["id"], "name": sp["name"], "score": s})
