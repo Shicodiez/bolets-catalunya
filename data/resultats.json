@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-25T09:51:20.934875+00:00",
+  "generated_at": "2026-08-25T09:55:47.455926+00:00",
   "zones": [
     {
       "id": 1,
@@ -73,8 +73,8 @@
       "lat": 40.808,
       "lon": 0.685,
       "alt": 250,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
+      "tree": "urba",
+      "tree_label": "urba",
       "is_forest": false,
       "rain_10d": 11,
       "avg_temp": 28,
@@ -161,15 +161,46 @@
       "lat": 40.952,
       "lon": 0.49,
       "alt": 250,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "pi_altres",
+      "tree_label": "bosc de coníferes",
+      "is_forest": true,
       "rain_10d": 5,
       "avg_temp": 28,
       "days_since_rain": 20,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 51
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 50
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 48
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 47
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 47
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 47
+        }
+      ],
+      "best_score": 51,
+      "best_species": "Colmenilles",
       "aemet_check": {
         "station_name": "RASQUERA",
         "distance_km": 11.9,
@@ -293,8 +324,8 @@
       "lat": 41.097,
       "lon": 0.295,
       "alt": 250,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
+      "tree": "conreu",
+      "tree_label": "conreu",
       "is_forest": false,
       "rain_10d": 3,
       "avg_temp": 27,
@@ -315,8 +346,8 @@
       "lat": 41.097,
       "lon": 0.49,
       "alt": 250,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
+      "tree": "conreu",
+      "tree_label": "conreu",
       "is_forest": false,
       "rain_10d": 2,
       "avg_temp": 27,
@@ -337,8 +368,8 @@
       "lat": 41.097,
       "lon": 0.685,
       "alt": 250,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
+      "tree": "conreu",
+      "tree_label": "conreu",
       "is_forest": false,
       "rain_10d": 3,
       "avg_temp": 29,
@@ -359,15 +390,46 @@
       "lat": 41.097,
       "lon": 0.88,
       "alt": 250,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "pi_altres",
+      "tree_label": "bosc de coníferes",
+      "is_forest": true,
       "rain_10d": 11,
       "avg_temp": 25,
       "days_since_rain": 3,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 58
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 56
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 56
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 55
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 55
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 52
+        }
+      ],
+      "best_score": 58,
+      "best_species": "Colmenilles",
       "aemet_check": {
         "station_name": "ALFORJA",
         "distance_km": 14.8,
@@ -535,15 +597,31 @@
       "lat": 41.241,
       "lon": 0.88,
       "alt": 250,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "alzina",
+      "tree_label": "bosc de perennifolis (alzina...)",
+      "is_forest": true,
       "rain_10d": 6,
       "avg_temp": 26,
       "days_since_rain": 20,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 68
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 52
+        },
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 49
+        }
+      ],
+      "best_score": 68,
+      "best_species": "Camagrocs",
       "aemet_check": {
         "station_name": "ALFORJA",
         "distance_km": 7.6,
@@ -557,15 +635,31 @@
       "lat": 41.241,
       "lon": 1.076,
       "alt": 250,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "alzina",
+      "tree_label": "bosc de perennifolis (alzina...)",
+      "is_forest": true,
       "rain_10d": 16,
       "avg_temp": 25,
       "days_since_rain": 1,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 65
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 60
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 56
+        }
+      ],
+      "best_score": 65,
+      "best_species": "Ou de reig",
       "aemet_check": {
         "station_name": "ALFORJA",
         "distance_km": 9.9,
@@ -579,8 +673,8 @@
       "lat": 41.241,
       "lon": 1.271,
       "alt": 250,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
+      "tree": "conreu",
+      "tree_label": "conreu",
       "is_forest": false,
       "rain_10d": 15,
       "avg_temp": 27,
@@ -755,8 +849,8 @@
       "lat": 41.385,
       "lon": 0.685,
       "alt": 330,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
+      "tree": "conreu",
+      "tree_label": "conreu",
       "is_forest": false,
       "rain_10d": 6,
       "avg_temp": 27,
@@ -799,15 +893,46 @@
       "lat": 41.385,
       "lon": 1.076,
       "alt": 330,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "pi_altres",
+      "tree_label": "bosc de coníferes",
+      "is_forest": true,
       "rain_10d": 3,
       "avg_temp": 26,
       "days_since_rain": 20,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 48
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 48
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 45
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 45
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 45
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 44
+        }
+      ],
+      "best_score": 48,
+      "best_species": "Colmenilles",
       "aemet_check": {
         "station_name": "LA POBLA DE CERVOLES",
         "distance_km": 13.7,
@@ -822,7 +947,7 @@
       "lon": 1.271,
       "alt": 330,
       "tree": "roure",
-      "tree_label": "roureda",
+      "tree_label": "bosc de caducifolis (roure, faig...)",
       "is_forest": true,
       "rain_10d": 15,
       "avg_temp": 24,
@@ -879,15 +1004,46 @@
       "lat": 41.385,
       "lon": 1.466,
       "alt": 330,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "pi_altres",
+      "tree_label": "bosc de coníferes",
+      "is_forest": true,
       "rain_10d": 13,
       "avg_temp": 24,
       "days_since_rain": 1,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 60
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 57
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 56
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 56
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 56
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 52
+        }
+      ],
+      "best_score": 60,
+      "best_species": "Colmenilles",
       "aemet_check": {
         "station_name": "PONTONS",
         "distance_km": 5.7,
@@ -901,15 +1057,46 @@
       "lat": 41.385,
       "lon": 1.661,
       "alt": 330,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "pi_altres",
+      "tree_label": "bosc de coníferes",
+      "is_forest": true,
       "rain_10d": 5,
       "avg_temp": 25,
       "days_since_rain": 20,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 51
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 50
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 48
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 47
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 47
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 47
+        }
+      ],
+      "best_score": 51,
+      "best_species": "Colmenilles",
       "aemet_check": {
         "station_name": "VILAFRANCA DEL PENEDÈS",
         "distance_km": 6.2,
@@ -923,15 +1110,31 @@
       "lat": 41.385,
       "lon": 1.856,
       "alt": 80,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "alzina",
+      "tree_label": "bosc de perennifolis (alzina...)",
+      "is_forest": true,
       "rain_10d": 4,
       "avg_temp": 25,
       "days_since_rain": 20,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 65
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 49
+        },
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 48
+        }
+      ],
+      "best_score": 65,
+      "best_species": "Camagrocs",
       "aemet_check": {
         "station_name": "CORBERA  PUIG D?AGULLES",
         "distance_km": 3.5,
@@ -1121,8 +1324,8 @@
       "lat": 41.529,
       "lon": 1.076,
       "alt": 460,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
+      "tree": "conreu",
+      "tree_label": "conreu",
       "is_forest": false,
       "rain_10d": 10,
       "avg_temp": 26,
@@ -1143,15 +1346,46 @@
       "lat": 41.529,
       "lon": 1.271,
       "alt": 460,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "pi_altres",
+      "tree_label": "bosc de coníferes",
+      "is_forest": true,
       "rain_10d": 14,
       "avg_temp": 24,
       "days_since_rain": 1,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 61
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 58
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 58
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 57
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 57
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 53
+        }
+      ],
+      "best_score": 61,
+      "best_species": "Colmenilles",
       "aemet_check": {
         "station_name": "LLORAC",
         "distance_km": 4.5,
@@ -1165,15 +1399,46 @@
       "lat": 41.529,
       "lon": 1.466,
       "alt": 460,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "pi_altres",
+      "tree_label": "bosc de coníferes",
+      "is_forest": true,
       "rain_10d": 10,
       "avg_temp": 24,
       "days_since_rain": 1,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 55
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 53
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 52
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 52
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 51
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 49
+        }
+      ],
+      "best_score": 55,
+      "best_species": "Colmenilles",
       "aemet_check": {
         "station_name": "IGUALADA - MUNTANYETA",
         "distance_km": 12.8,
@@ -1209,8 +1474,8 @@
       "lat": 41.529,
       "lon": 1.856,
       "alt": 210,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
+      "tree": "urba",
+      "tree_label": "urba",
       "is_forest": false,
       "rain_10d": 14,
       "avg_temp": 27,
@@ -1253,8 +1518,8 @@
       "lat": 41.529,
       "lon": 2.246,
       "alt": 210,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
+      "tree": "aigua",
+      "tree_label": "aigua",
       "is_forest": false,
       "rain_10d": 6,
       "avg_temp": 26,
@@ -1275,8 +1540,8 @@
       "lat": 41.529,
       "lon": 2.441,
       "alt": 60,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
+      "tree": "roca",
+      "tree_label": "roca",
       "is_forest": false,
       "rain_10d": 9,
       "avg_temp": 27,
@@ -1341,8 +1606,8 @@
       "lat": 41.673,
       "lon": 0.49,
       "alt": 590,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
+      "tree": "conreu",
+      "tree_label": "conreu",
       "is_forest": false,
       "rain_10d": 9,
       "avg_temp": 28,
@@ -1429,8 +1694,8 @@
       "lat": 41.673,
       "lon": 1.271,
       "alt": 590,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
+      "tree": "urba",
+      "tree_label": "urba",
       "is_forest": false,
       "rain_10d": 18,
       "avg_temp": 26,
@@ -1473,15 +1738,46 @@
       "lat": 41.673,
       "lon": 1.661,
       "alt": 590,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "pi_altres",
+      "tree_label": "bosc de coníferes",
+      "is_forest": true,
       "rain_10d": 20,
       "avg_temp": 25,
       "days_since_rain": 1,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 66
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 65
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 64
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 63
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 62
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 59
+        }
+      ],
+      "best_score": 66,
+      "best_species": "Pinetell",
       "aemet_check": {
         "station_name": "IGUALADA - MUNTANYETA",
         "distance_km": 10.8,
@@ -1517,15 +1813,46 @@
       "lat": 41.673,
       "lon": 2.051,
       "alt": 340,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "pi_altres",
+      "tree_label": "bosc de coníferes",
+      "is_forest": true,
       "rain_10d": 12,
       "avg_temp": 26,
       "days_since_rain": 1,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 58
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 56
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 55
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 54
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 54
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 51
+        }
+      ],
+      "best_score": 58,
+      "best_species": "Colmenilles",
       "aemet_check": {
         "station_name": "CALDES DE MONTBUI",
         "distance_km": 11.8,
@@ -1539,15 +1866,31 @@
       "lat": 41.673,
       "lon": 2.246,
       "alt": 340,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "alzina",
+      "tree_label": "bosc de perennifolis (alzina...)",
+      "is_forest": true,
       "rain_10d": 18,
       "avg_temp": 26,
       "days_since_rain": 5,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 71
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 66
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 62
+        }
+      ],
+      "best_score": 71,
+      "best_species": "Ou de reig",
       "aemet_check": {
         "station_name": "CALDES DE MONTBUI",
         "distance_km": 9.3,
@@ -1561,15 +1904,31 @@
       "lat": 41.673,
       "lon": 2.441,
       "alt": 190,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "alzina",
+      "tree_label": "bosc de perennifolis (alzina...)",
+      "is_forest": true,
       "rain_10d": 10,
       "avg_temp": 26,
       "days_since_rain": 20,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 72
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 57
+        },
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 55
+        }
+      ],
+      "best_score": 72,
+      "best_species": "Camagrocs",
       "aemet_check": {
         "station_name": "FONTMARTINA",
         "distance_km": 9.7,
@@ -1583,15 +1942,31 @@
       "lat": 41.673,
       "lon": 2.637,
       "alt": 190,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "alzina",
+      "tree_label": "bosc de perennifolis (alzina...)",
+      "is_forest": true,
       "rain_10d": 9,
       "avg_temp": 25,
       "days_since_rain": 20,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 71
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 56
+        },
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 54
+        }
+      ],
+      "best_score": 71,
+      "best_species": "Camagrocs",
       "aemet_check": {
         "station_name": "ARENYS DE MAR",
         "distance_km": 12.5,
@@ -1782,7 +2157,7 @@
       "lon": 1.661,
       "alt": 720,
       "tree": "roure",
-      "tree_label": "roureda",
+      "tree_label": "bosc de caducifolis (roure, faig...)",
       "is_forest": true,
       "rain_10d": 16,
       "avg_temp": 25,
@@ -1839,15 +2214,46 @@
       "lat": 41.817,
       "lon": 1.856,
       "alt": 470,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "pi_altres",
+      "tree_label": "bosc de coníferes",
+      "is_forest": true,
       "rain_10d": 22,
       "avg_temp": 26,
       "days_since_rain": 1,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 66
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 65
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 64
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 63
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 62
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 61
+        }
+      ],
+      "best_score": 66,
+      "best_species": "Pinetell",
       "aemet_check": {
         "station_name": "BALSARENY",
         "distance_km": 5.7,
@@ -1861,15 +2267,46 @@
       "lat": 41.817,
       "lon": 2.051,
       "alt": 470,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "pi_altres",
+      "tree_label": "bosc de coníferes",
+      "is_forest": true,
       "rain_10d": 13,
       "avg_temp": 26,
       "days_since_rain": 1,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 60
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 57
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 56
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 56
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 56
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 52
+        }
+      ],
+      "best_score": 60,
+      "best_species": "Colmenilles",
       "aemet_check": {
         "station_name": "MOIÀ",
         "distance_km": 3.7,
@@ -1905,15 +2342,31 @@
       "lat": 41.817,
       "lon": 2.441,
       "alt": 320,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "alzina",
+      "tree_label": "bosc de perennifolis (alzina...)",
+      "is_forest": true,
       "rain_10d": 10,
       "avg_temp": 24,
       "days_since_rain": 20,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 72
+        },
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 69
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 57
+        }
+      ],
+      "best_score": 72,
+      "best_species": "Camagrocs",
       "aemet_check": {
         "station_name": "FONTMARTINA",
         "distance_km": 6.4,
@@ -1928,7 +2381,7 @@
       "lon": 2.637,
       "alt": 320,
       "tree": "roure",
-      "tree_label": "roureda",
+      "tree_label": "bosc de caducifolis (roure, faig...)",
       "is_forest": true,
       "rain_10d": 14,
       "avg_temp": 26,
@@ -1985,15 +2438,46 @@
       "lat": 41.817,
       "lon": 2.832,
       "alt": 320,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "pi_altres",
+      "tree_label": "bosc de coníferes",
+      "is_forest": true,
       "rain_10d": 21,
       "avg_temp": 26,
       "days_since_rain": 4,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 68
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 68
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 68
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 66
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 66
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 63
+        }
+      ],
+      "best_score": 68,
+      "best_species": "Rovellons",
       "aemet_check": {
         "station_name": "GIRONA  AEROPUERTO",
         "distance_km": 12.0,
@@ -2007,15 +2491,31 @@
       "lat": 41.817,
       "lon": 3.027,
       "alt": 320,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "alzina",
+      "tree_label": "bosc de perennifolis (alzina...)",
+      "is_forest": true,
       "rain_10d": 28,
       "avg_temp": 26,
       "days_since_rain": 4,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 70
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 66
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 64
+        }
+      ],
+      "best_score": 70,
+      "best_species": "Ou de reig",
       "aemet_check": {
         "station_name": "CASTELL D?ARO",
         "distance_km": 1.1,
@@ -2051,15 +2551,31 @@
       "lat": 41.961,
       "lon": 0.685,
       "alt": 840,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "alzina",
+      "tree_label": "bosc de perennifolis (alzina...)",
+      "is_forest": true,
       "rain_10d": 17,
       "avg_temp": 25,
       "days_since_rain": 1,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 67
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 61
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 57
+        }
+      ],
+      "best_score": 67,
+      "best_species": "Ou de reig",
       "aemet_check": {
         "station_name": "OS DE BALAGUER",
         "distance_km": 11.4,
@@ -2074,7 +2590,7 @@
       "lon": 0.88,
       "alt": 840,
       "tree": "roure",
-      "tree_label": "roureda",
+      "tree_label": "bosc de caducifolis (roure, faig...)",
       "is_forest": true,
       "rain_10d": 19,
       "avg_temp": 25,
@@ -2132,7 +2648,7 @@
       "lon": 1.076,
       "alt": 840,
       "tree": "roure",
-      "tree_label": "roureda",
+      "tree_label": "bosc de caducifolis (roure, faig...)",
       "is_forest": true,
       "rain_10d": 11,
       "avg_temp": 26,
@@ -2211,15 +2727,46 @@
       "lat": 41.961,
       "lon": 1.466,
       "alt": 840,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "pi_altres",
+      "tree_label": "bosc de coníferes",
+      "is_forest": true,
       "rain_10d": 19,
       "avg_temp": 25,
       "days_since_rain": 1,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 64
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 64
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 63
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 63
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 62
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 58
+        }
+      ],
+      "best_score": 64,
+      "best_species": "Rovellons",
       "aemet_check": {
         "station_name": "RINER - XIXONS",
         "distance_km": 11.3,
@@ -2255,8 +2802,8 @@
       "lat": 41.961,
       "lon": 1.856,
       "alt": 840,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
+      "tree": "roca",
+      "tree_label": "roca",
       "is_forest": false,
       "rain_10d": 18,
       "avg_temp": 25,
@@ -2300,7 +2847,7 @@
       "lon": 2.246,
       "alt": 840,
       "tree": "roure",
-      "tree_label": "roureda",
+      "tree_label": "bosc de caducifolis (roure, faig...)",
       "is_forest": true,
       "rain_10d": 12,
       "avg_temp": 25,
@@ -2357,15 +2904,31 @@
       "lat": 41.961,
       "lon": 2.441,
       "alt": 440,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "alzina",
+      "tree_label": "bosc de perennifolis (alzina...)",
+      "is_forest": true,
       "rain_10d": 13,
       "avg_temp": 25,
       "days_since_rain": 10,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 80
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 78
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 76
+        }
+      ],
+      "best_score": 80,
+      "best_species": "Ou de reig",
       "aemet_check": {
         "station_name": "SANT HILARI",
         "distance_km": 10.7,
@@ -2380,7 +2943,7 @@
       "lon": 2.637,
       "alt": 440,
       "tree": "roure",
-      "tree_label": "roureda",
+      "tree_label": "bosc de caducifolis (roure, faig...)",
       "is_forest": true,
       "rain_10d": 32,
       "avg_temp": 26,
@@ -2459,8 +3022,8 @@
       "lat": 41.961,
       "lon": 3.027,
       "alt": 440,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
+      "tree": "urba",
+      "tree_label": "urba",
       "is_forest": false,
       "rain_10d": 17,
       "avg_temp": 27,
@@ -2569,15 +3132,31 @@
       "lat": 42.106,
       "lon": 1.271,
       "alt": 980,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "alzina",
+      "tree_label": "bosc de perennifolis (alzina...)",
+      "is_forest": true,
       "rain_10d": 37,
       "avg_temp": 20,
       "days_since_rain": 1,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 81
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 63
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 62
+        }
+      ],
+      "best_score": 81,
+      "best_species": "Ou de reig",
       "aemet_check": {
         "station_name": "COLL DE NARGÓ",
         "distance_km": 6.4,
@@ -2591,15 +3170,46 @@
       "lat": 42.106,
       "lon": 1.466,
       "alt": 980,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "pi_altres",
+      "tree_label": "bosc de coníferes",
+      "is_forest": true,
       "rain_10d": 66,
       "avg_temp": 22,
       "days_since_rain": 1,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 66
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 65
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 65
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 65
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 63
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 62
+        }
+      ],
+      "best_score": 66,
+      "best_species": "Pinetell",
       "aemet_check": {
         "station_name": "COLL DE NARGÓ",
         "distance_km": 13.8,
@@ -2613,15 +3223,46 @@
       "lat": 42.106,
       "lon": 1.661,
       "alt": 980,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "pi_altres",
+      "tree_label": "bosc de coníferes",
+      "is_forest": true,
       "rain_10d": 47,
       "avg_temp": 21,
       "days_since_rain": 1,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 66
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 66
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 66
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 65
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 63
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 62
+        }
+      ],
+      "best_score": 66,
+      "best_species": "Ceps",
       "aemet_check": {
         "station_name": "TUIXENT",
         "distance_km": 15.7,
@@ -2679,15 +3320,46 @@
       "lat": 42.106,
       "lon": 2.246,
       "alt": 980,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "pi_altres",
+      "tree_label": "bosc de coníferes",
+      "is_forest": true,
       "rain_10d": 24,
       "avg_temp": 25,
       "days_since_rain": 1,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 66
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 65
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 64
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 63
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 63
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 62
+        }
+      ],
+      "best_score": 66,
+      "best_species": "Pinetell",
       "aemet_check": {
         "station_name": "RIPOLL",
         "distance_km": 10.3,
@@ -2702,7 +3374,7 @@
       "lon": 2.441,
       "alt": 980,
       "tree": "roure",
-      "tree_label": "roureda",
+      "tree_label": "bosc de caducifolis (roure, faig...)",
       "is_forest": true,
       "rain_10d": 23,
       "avg_temp": 26,
@@ -2760,7 +3432,7 @@
       "lon": 2.637,
       "alt": 980,
       "tree": "roure",
-      "tree_label": "roureda",
+      "tree_label": "bosc de caducifolis (roure, faig...)",
       "is_forest": true,
       "rain_10d": 38,
       "avg_temp": 26,
@@ -2839,15 +3511,46 @@
       "lat": 42.106,
       "lon": 3.027,
       "alt": 980,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "pi_altres",
+      "tree_label": "bosc de coníferes",
+      "is_forest": true,
       "rain_10d": 22,
       "avg_temp": 27,
       "days_since_rain": 1,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 66
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 65
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 64
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 63
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 62
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 61
+        }
+      ],
+      "best_score": 66,
+      "best_species": "Pinetell",
       "aemet_check": {
         "station_name": "CASTELLO D?EMPURIES",
         "distance_km": 14.3,
@@ -2927,15 +3630,46 @@
       "lat": 42.25,
       "lon": 1.076,
       "alt": 1110,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "pi_altres",
+      "tree_label": "bosc de coníferes",
+      "is_forest": true,
       "rain_10d": 68,
       "avg_temp": 21,
       "days_since_rain": 1,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 66
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 66
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 66
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 65
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 63
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 62
+        }
+      ],
+      "best_score": 66,
+      "best_species": "Ceps",
       "aemet_check": {
         "station_name": "TALARN",
         "distance_km": 18.1,
@@ -2949,15 +3683,31 @@
       "lat": 42.25,
       "lon": 1.271,
       "alt": 1110,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "alzina",
+      "tree_label": "bosc de perennifolis (alzina...)",
+      "is_forest": true,
       "rain_10d": 61,
       "avg_temp": 18,
       "days_since_rain": 1,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 81
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 76
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 64
+        }
+      ],
+      "best_score": 81,
+      "best_species": "Ou de reig",
       "aemet_check": {
         "station_name": "COLL DE NARGÓ",
         "distance_km": 11.1,
@@ -2993,15 +3743,46 @@
       "lat": 42.25,
       "lon": 1.661,
       "alt": 1110,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "pi_altres",
+      "tree_label": "bosc de coníferes",
+      "is_forest": true,
       "rain_10d": 81,
       "avg_temp": 17,
       "days_since_rain": 1,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 80
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 80
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 80
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 79
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 65
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 64
+        }
+      ],
+      "best_score": 80,
+      "best_species": "Rovellons",
       "aemet_check": {
         "station_name": "TUIXENT",
         "distance_km": 7.8,
@@ -3015,15 +3796,46 @@
       "lat": 42.25,
       "lon": 1.856,
       "alt": 1110,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "pi_altres",
+      "tree_label": "bosc de coníferes",
+      "is_forest": true,
       "rain_10d": 24,
       "avg_temp": 22,
       "days_since_rain": 10,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 86
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 85
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 85
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 85
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 85
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 85
+        }
+      ],
+      "best_score": 86,
+      "best_species": "Rossinyols",
       "aemet_check": {
         "station_name": "LA MOLINA",
         "distance_km": 11.5,
@@ -3037,15 +3849,46 @@
       "lat": 42.25,
       "lon": 2.051,
       "alt": 1110,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "pi_altres",
+      "tree_label": "bosc de coníferes",
+      "is_forest": true,
       "rain_10d": 28,
       "avg_temp": 21,
       "days_since_rain": 1,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 66
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 66
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 66
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 65
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 63
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 62
+        }
+      ],
+      "best_score": 66,
+      "best_species": "Ceps",
       "aemet_check": {
         "station_name": "PLANOLES",
         "distance_km": 8.6,
@@ -3060,7 +3903,7 @@
       "lon": 2.246,
       "alt": 1110,
       "tree": "roure",
-      "tree_label": "roureda",
+      "tree_label": "bosc de caducifolis (roure, faig...)",
       "is_forest": true,
       "rain_10d": 28,
       "avg_temp": 23,
@@ -3117,15 +3960,31 @@
       "lat": 42.25,
       "lon": 2.441,
       "alt": 1110,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "alzina",
+      "tree_label": "bosc de perennifolis (alzina...)",
+      "is_forest": true,
       "rain_10d": 35,
       "avg_temp": 23,
       "days_since_rain": 4,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 84
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 66
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 64
+        }
+      ],
+      "best_score": 84,
+      "best_species": "Ou de reig",
       "aemet_check": {
         "station_name": "VALL DE BIANYA",
         "distance_km": 5.1,
@@ -3139,15 +3998,46 @@
       "lat": 42.25,
       "lon": 2.637,
       "alt": 1110,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "pi_altres",
+      "tree_label": "bosc de coníferes",
+      "is_forest": true,
       "rain_10d": 24,
       "avg_temp": 26,
       "days_since_rain": 1,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 66
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 65
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 64
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 63
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 63
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 62
+        }
+      ],
+      "best_score": 66,
+      "best_species": "Pinetell",
       "aemet_check": {
         "station_name": "VALL DE BIANYA",
         "distance_km": 14.3,
@@ -3161,15 +4051,46 @@
       "lat": 42.25,
       "lon": 2.832,
       "alt": 1110,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "pi_altres",
+      "tree_label": "bosc de coníferes",
+      "is_forest": true,
       "rain_10d": 13,
       "avg_temp": 27,
       "days_since_rain": 4,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 63
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 60
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 59
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 59
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 59
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 55
+        }
+      ],
+      "best_score": 63,
+      "best_species": "Colmenilles",
       "aemet_check": {
         "station_name": "FIGUERES  ELS ASPRES",
         "distance_km": 10.6,
@@ -3294,7 +4215,7 @@
       "lon": 0.88,
       "alt": 1230,
       "tree": "roure",
-      "tree_label": "roureda",
+      "tree_label": "bosc de caducifolis (roure, faig...)",
       "is_forest": true,
       "rain_10d": 37,
       "avg_temp": 21,
@@ -3373,15 +4294,46 @@
       "lat": 42.394,
       "lon": 1.271,
       "alt": 1230,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "pi_altres",
+      "tree_label": "bosc de coníferes",
+      "is_forest": true,
       "rain_10d": 40,
       "avg_temp": 17,
       "days_since_rain": 1,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 80
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 80
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 80
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 79
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 65
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 64
+        }
+      ],
+      "best_score": 80,
+      "best_species": "Rovellons",
       "aemet_check": {
         "station_name": "PORT AINE  L?ORRI",
         "distance_km": 5.0,
@@ -3417,15 +4369,46 @@
       "lat": 42.394,
       "lon": 1.661,
       "alt": 1230,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "pi_altres",
+      "tree_label": "bosc de coníferes",
+      "is_forest": true,
       "rain_10d": 54,
       "avg_temp": 19,
       "days_since_rain": 1,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 80
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 79
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 67
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 67
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 63
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 63
+        }
+      ],
+      "best_score": 80,
+      "best_species": "Rossinyols",
       "aemet_check": {
         "station_name": "CAP DE REC",
         "distance_km": 4.1,
@@ -3483,8 +4466,8 @@
       "lat": 42.394,
       "lon": 2.246,
       "alt": 1230,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
+      "tree": "roca",
+      "tree_label": "roca",
       "is_forest": false,
       "rain_10d": 63,
       "avg_temp": 10,
@@ -3549,15 +4532,31 @@
       "lat": 42.394,
       "lon": 2.832,
       "alt": 1230,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "alzina",
+      "tree_label": "bosc de perennifolis (alzina...)",
+      "is_forest": true,
       "rain_10d": 21,
       "avg_temp": 27,
       "days_since_rain": 4,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 69
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 66
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 64
+        }
+      ],
+      "best_score": 69,
+      "best_species": "Ou de reig",
       "aemet_check": {
         "station_name": "MAÇANET DE CABRENYS",
         "distance_km": 6.3,
@@ -3571,15 +4570,46 @@
       "lat": 42.394,
       "lon": 3.027,
       "alt": 1230,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "pi_altres",
+      "tree_label": "bosc de coníferes",
+      "is_forest": true,
       "rain_10d": 7,
       "avg_temp": 28,
       "days_since_rain": 4,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 53
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 52
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 52
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 51
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 50
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 49
+        }
+      ],
+      "best_score": 53,
+      "best_species": "Colmenilles",
       "aemet_check": {
         "station_name": "ESPOLLA  LES ALBERES",
         "distance_km": 1.8,
@@ -3637,15 +4667,46 @@
       "lat": 42.538,
       "lon": 0.88,
       "alt": 1360,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "pi_altres",
+      "tree_label": "bosc de coníferes",
+      "is_forest": true,
       "rain_10d": 79,
       "avg_temp": 14,
       "days_since_rain": 1,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 80
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 80
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 80
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 79
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 78
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 78
+        }
+      ],
+      "best_score": 80,
+      "best_species": "Rovellons",
       "aemet_check": {
         "station_name": "BARRUERA",
         "distance_km": 7.7,
@@ -3681,15 +4742,31 @@
       "lat": 42.538,
       "lon": 1.271,
       "alt": 1360,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "alzina",
+      "tree_label": "bosc de perennifolis (alzina...)",
+      "is_forest": true,
       "rain_10d": 36,
       "avg_temp": 21,
       "days_since_rain": 1,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 81
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 62
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 62
+        }
+      ],
+      "best_score": 81,
+      "best_species": "Ou de reig",
       "aemet_check": {
         "station_name": "PORT AINE  L?ORRI",
         "distance_km": 15.0,
@@ -3747,15 +4824,46 @@
       "lat": 42.682,
       "lon": 0.88,
       "alt": 1490,
-      "tree": "desconegut",
-      "tree_label": "tipus de bosc desconegut",
-      "is_forest": false,
+      "tree": "pi_altres",
+      "tree_label": "bosc de coníferes",
+      "is_forest": true,
       "rain_10d": 50,
       "avg_temp": 18,
       "days_since_rain": 1,
-      "species_scores": [],
-      "best_score": 0,
-      "best_species": null,
+      "species_scores": [
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 80
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 80
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 79
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 68
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 64
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 64
+        }
+      ],
+      "best_score": 80,
+      "best_species": "Rovellons",
       "aemet_check": {
         "station_name": "ARTIES",
         "distance_km": 2.0,
