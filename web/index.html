@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ca">
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Predictor de bolets — Catalunya</title>
+<title>Predictor de setas — Catalunya</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
   :root {
@@ -56,32 +56,32 @@
 </head>
 <body>
 <div class="wrap">
-  <h1>Predictor de bolets — Catalunya</h1>
-  <p class="subtitle">Puntuació segons pluja, temperatura i tipus de bosc</p>
-  <div id="status">Carregant dades...</div>
+  <h1>Predictor de setas — Catalunya</h1>
+  <p class="subtitle">Puntuación según lluvia, temperatura y tipo de bosque</p>
+  <div id="status">Cargando datos...</div>
 
   <div class="controls">
     <select id="species-filter">
-      <option value="all">Totes les espècies</option>
+      <option value="all">Todas las especies</option>
     </select>
     <select id="sort-mode">
-      <option value="score">Ordenar per puntuació</option>
-      <option value="name">Ordenar per nom de zona</option>
+      <option value="score">Ordenar por puntuación</option>
+      <option value="name">Ordenar por nombre de zona</option>
     </select>
   </div>
 
   <div id="map"></div>
 
   <div class="legend">
-    <p>Llegenda de puntuació</p>
+    <p>Leyenda de puntuación</p>
     <div class="legend-items">
       <span><span class="legend-dot" style="background:#1D9E75"></span>Alta (70-100)</span>
-      <span><span class="legend-dot" style="background:#EF9F27"></span>Mitjana (40-69)</span>
-      <span><span class="legend-dot" style="background:#B4B2A9"></span>Baixa (0-39)</span>
+      <span><span class="legend-dot" style="background:#EF9F27"></span>Media (40-69)</span>
+      <span><span class="legend-dot" style="background:#B4B2A9"></span>Baja (0-39)</span>
     </div>
   </div>
 
-  <p class="section-label" id="section-label">Millors zones</p>
+  <p class="section-label" id="section-label">Mejores zonas</p>
   <div id="zones-list"></div>
 
   <p class="footer-note" id="generated-note"></p>
@@ -96,8 +96,8 @@ let markers = [];
 function aemetLine(z) {
   if (!z.aemet_check) return '';
   const a = z.aemet_check;
-  const precText = (a.prec_1h_mm !== null && a.prec_1h_mm !== undefined) ? `${a.prec_1h_mm}mm/h` : 'sense dada';
-  return `<p class="popup-detail" style="margin-top:4px">✓ Contrastat amb estació AEMET "${a.station_name}" (${a.distance_km}km) — ${precText} ara mateix</p>`;
+  const precText = (a.prec_1h_mm !== null && a.prec_1h_mm !== undefined) ? `${a.prec_1h_mm}mm/h` : 'sin dato';
+  return `<p class="popup-detail" style="margin-top:4px">✓ Contrastado con estación AEMET "${a.station_name}" (${a.distance_km}km) — ${precText} ahora mismo</p>`;
 }
 
 function colorForScore(s) {
@@ -139,8 +139,8 @@ function renderMap(filterVal) {
     marker.bindPopup(`
       <p class="popup-title">${z.name}</p>
       <p class="popup-meta">${z.alt}m · ${z.tree_label}</p>
-      <span class="popup-score" style="background:${c.bg};color:${c.text}">${z.bestScore} · ${z.bestScore > 0 ? z.bestSpecies : 'Sense espècie compatible'}</span>
-      <p class="popup-detail">Pluja 10d: ${z.rain_10d}mm · Temp: ${z.avg_temp}°C · ${z.days_since_rain}d des de pluja forta</p>
+      <span class="popup-score" style="background:${c.bg};color:${c.text}">${z.bestScore} · ${z.bestScore > 0 ? z.bestSpecies : 'Sin especie compatible'}</span>
+      <p class="popup-detail">Lluvia 10d: ${z.rain_10d}mm · Temp: ${z.avg_temp}°C · ${z.days_since_rain}d desde lluvia fuerte</p>
       ${aemetLine(z)}
     `);
     markers.push(marker);
@@ -165,12 +165,12 @@ function renderList(filterVal, sortVal) {
       <div class="zone-top">
         <div style="flex:1;min-width:0">
           <p class="zone-name">${z.name}</p>
-          <p class="zone-meta">${z.bestScore > 0 ? z.bestSpecies : 'Sense espècie compatible'} · ${z.alt}m · ${z.tree_label}</p>
+          <p class="zone-meta">${z.bestScore > 0 ? z.bestSpecies : 'Sin especie compatible'} · ${z.alt}m · ${z.tree_label}</p>
         </div>
         <span class="score-pill" style="background:${c.bg};color:${c.text}">${z.bestScore}</span>
       </div>
       <div class="bar-track"><div class="bar-fill" style="width:${z.bestScore}%;background:${c.bar}"></div></div>
-      <p class="zone-detail">Pluja 10d: ${z.rain_10d}mm · Temp mitjana: ${z.avg_temp}°C · ${z.days_since_rain}d des de pluja forta</p>
+      <p class="zone-detail">Lluvia 10d: ${z.rain_10d}mm · Temp media: ${z.avg_temp}°C · ${z.days_since_rain}d desde lluvia fuerte</p>
       ${z.aemet_check ? `<p class="zone-detail">✓ AEMET "${z.aemet_check.station_name}" (${z.aemet_check.distance_km}km)</p>` : ''}
     `;
     card.addEventListener('click', () => {
@@ -190,14 +190,14 @@ function render() {
   renderList(filterVal, sortVal);
   const forestCount = DATA.zones.filter(z => z.is_forest).length;
   document.getElementById('section-label').textContent =
-    sortVal === 'score' ? `Millors zones (top 30 de ${forestCount} boscoses)` : `Totes les zones boscoses (${forestCount})`;
+    sortVal === 'score' ? `Mejores zonas (top 30 de ${forestCount} boscosas)` : `Todas las zonas boscosas (${forestCount})`;
 }
 
 async function loadData() {
   const status = document.getElementById('status');
   try {
     const res = await fetch('../data/resultats.json?t=' + Date.now());
-    if (!res.ok) throw new Error('No s\'ha trobat resultats.json');
+    if (!res.ok) throw new Error('No se ha encontrado resultats.json');
     DATA = await res.json();
 
     map = L.map('map', {scrollWheelZoom: false}).setView([41.85, 1.55], 8);
@@ -218,11 +218,11 @@ async function loadData() {
 
     const genDate = new Date(DATA.generated_at);
     document.getElementById('generated-note').textContent =
-      'Dades actualitzades: ' + genDate.toLocaleString('ca-ES');
-    status.textContent = `${DATA.zones.length} zones carregades`;
+      'Datos actualizados: ' + genDate.toLocaleString('es-ES');
+    status.textContent = `${DATA.zones.length} zonas cargadas`;
     render();
   } catch (e) {
-    status.textContent = 'Error carregant dades: ' + e.message;
+    status.textContent = 'Error cargando datos: ' + e.message;
   }
 }
 
