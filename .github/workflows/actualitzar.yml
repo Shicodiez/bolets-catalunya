@@ -1,0 +1,33 @@
+name: Actualitzar dades de bolets
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  actualitzar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar el repositori
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Executar el script de recollida de dades
+        working-directory: backend
+        run: python recollir_dades.py
+
+      - name: Desar els canvis al repositori
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/resultats.json
+          git diff --staged --quiet || git commit -m "Actualització automàtica de dades"
+          git push
