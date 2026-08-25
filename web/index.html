@@ -93,6 +93,13 @@ let DATA = null;
 let map = null;
 let markers = [];
 
+function aemetLine(z) {
+  if (!z.aemet_check) return '';
+  const a = z.aemet_check;
+  const precText = (a.prec_1h_mm !== null && a.prec_1h_mm !== undefined) ? `${a.prec_1h_mm}mm/h` : 'sense dada';
+  return `<p class="popup-detail" style="margin-top:4px">✓ Contrastat amb estació AEMET "${a.station_name}" (${a.distance_km}km) — ${precText} ara mateix</p>`;
+}
+
 function colorForScore(s) {
   if (s >= 70) return {bg: '#E1F5EE', text: '#04342C', bar: '#1D9E75', dot: '#1D9E75'};
   if (s >= 40) return {bg: '#FAEEDA', text: '#412402', bar: '#EF9F27', dot: '#EF9F27'};
@@ -133,6 +140,7 @@ function renderMap(filterVal) {
       <p class="popup-meta">${z.alt}m · ${z.tree_label}</p>
       <span class="popup-score" style="background:${c.bg};color:${c.text}">${z.bestScore} · ${z.bestScore > 0 ? z.bestSpecies : 'Sense espècie compatible'}</span>
       <p class="popup-detail">Pluja 10d: ${z.rain_10d}mm · Temp: ${z.avg_temp}°C · ${z.days_since_rain}d des de pluja forta</p>
+      ${aemetLine(z)}
     `);
     markers.push(marker);
   });
@@ -160,6 +168,7 @@ function renderList(filterVal, sortVal) {
       </div>
       <div class="bar-track"><div class="bar-fill" style="width:${z.bestScore}%;background:${c.bar}"></div></div>
       <p class="zone-detail">Pluja 10d: ${z.rain_10d}mm · Temp mitjana: ${z.avg_temp}°C · ${z.days_since_rain}d des de pluja forta</p>
+      ${z.aemet_check ? `<p class="zone-detail">✓ AEMET "${z.aemet_check.station_name}" (${z.aemet_check.distance_km}km)</p>` : ''}
     `;
     card.addEventListener('click', () => {
       map.setView([z.lat, z.lon], 9);
