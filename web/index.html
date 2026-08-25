@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Predictor de bolets — Catalunya</title>
+<style>
+  :root {
+    --surface-0: #f7f6f2; --surface-1: #efeee8; --surface-2: #ffffff;
+    --text-primary: #1a1a18; --text-secondary: #5f5e5a; --text-muted: #898781;
+    --border: rgba(11,11,11,0.10); --radius: 8px;
+    --green-bg: #E1F5EE; --green-text: #04342C; --green-bar: #1D9E75;
+    --amber-bg: #FAEEDA; --amber-text: #412402; --amber-bar: #EF9F27;
+    --gray-bg: #F1EFE8; --gray-text: #2C2C2A; --gray-bar: #B4B2A9;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 24px 16px 60px; background: var(--surface-0);
+    color: var(--text-primary); font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 16px; line-height: 1.6;
+  }
+  .wrap { max-width: 680px; margin: 0 auto; }
+  h1 { font-size: 22px; font-weight: 500; margin: 0 0 4px; }
+  .subtitle { font-size: 14px; color: var(--text-secondary); margin: 0 0 20px; }
+  #status { font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; }
+  .controls { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+  select {
+    flex: 1; min-width: 160px; padding: 8px 12px; border-radius: var(--radius);
+    border: 0.5px solid var(--border); background: var(--surface-2); font-size: 14px;
+  }
+  .zone-card {
+    background: var(--surface-2); border: 0.5px solid var(--border);
+    border-radius: 12px; padding: 14px 16px; margin-bottom: 8px;
+  }
+  .zone-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .zone-name { font-weight: 500; font-size: 14px; margin: 0; }
+  .zone-meta { font-size: 12px; color: var(--text-secondary); margin: 2px 0 0; }
+  .score-pill { font-size: 13px; font-weight: 500; padding: 4px 10px; border-radius: var(--radius); }
+  .bar-track { margin-top: 8px; height: 4px; background: var(--surface-1); border-radius: 2px; overflow: hidden; }
+  .bar-fill { height: 100%; }
+  .zone-detail { font-size: 11px; color: var(--text-muted); margin: 6px 0 0; }
+  .legend { margin-top: 20px; padding: 16px 20px; background: var(--surface-1); border-radius: 12px; }
+  .legend p { font-size: 13px; color: var(--text-secondary); margin: 0 0 8px; }
+  .legend-items { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 2px; display: inline-block; margin-right: 4px; vertical-align: -1px; }
+  .footer-note { font-size: 12px; color: var(--text-muted); margin-top: 12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Predictor de bolets — Catalunya</h1>
+  <p class="subtitle">Puntuació segons pluja, temperatura i tipus de bosc</p>
+  <div id="status">Carregant dades...</div>
+
+  <div class="controls">
+    <select id="species-filter">
+      <option value="all">Totes les espècies</option>
+    </select>
+    <select id="sort-mode">
+      <option value="score">Ordenar per puntuació</option>
+      <option value="name">Ordenar per nom de zona</option>
+    </select>
+  </div>
+
+  <div id="zones-list"></div>
+
+  <div class="legend">
+    <p>Llegenda de puntuació</p>
+    <div class="legend-items">
+      <span><span class="legend-dot" style="background:#1D9E75"></span>Alta (70-100)</span>
+      <span><span class="legend-dot" style="background:#EF9F27"></span>Mitjana (40-69)</span>
+      <span><span class="legend-dot" style="background:#B4B2A9"></span>Baixa (0-39)</span>
+    </div>
+  </div>
+  <p class="footer-note" id="generated-note"></p>
+</div>
+
+<script>
+let DATA = null;
+
+function colorForScore(s) {
+  if (s >= 70) return {bg: 'var(--green-bg)', text: 'var(--green-text)', bar: 'var(--green-bar)'};
+  if (s >= 40) return {bg: 'var(--amber-bg)', text: 'var(--amber-text)', bar: 'var(--amber-bar)'};
+  return {bg: 'var(--gray-bg)', text: 'var(--gray-text)', bar: 'var(--gray-bar)'};
+}
+
+function render() {
+  const filterVal = document.getElementById('species-filter').value;
+  const sortVal = document.getElementById('sort-mode').value;
+  const list = document.getElementById('zones-list');
+  list.innerHTML = '';
+
+  let rows = DATA.zones.map(z => {
+    let bestScore = z.best_score;
+    let bestSpecies = z.best_species;
+    if (filterVal !== 'all') {
+      const match = z.species_scores.find(s => s.id === filterVal);
+      bestScore = match ? match.score : 0;
+      bestSpecies = match ? match.name : null;
+    }
+    return {...z, bestScore, bestSpecies};
+  });
+
+  if (sortVal === 'score') rows.sort((a, b) => b.bestScore - a.bestScore);
+  else rows.sort((a, b) => a.name.localeCompare(b.name));
+
+  rows.forEach(z => {
+    const c = colorForScore(z.bestScore);
+    const card = document.createElement('div');
+    card.className = 'zone-card';
+    card.innerHTML = `
+      <div class="zone-top">
+        <div style="flex:1;min-width:0">
+          <p class="zone-name">${z.name}</p>
+          <p class="zone-meta">${z.bestScore > 0 ? z.bestSpecies : 'Sense espècie compatible'} · ${z.alt}m · ${z.tree_label}</p>
+        </div>
+        <span class="score-pill" style="background:${c.bg};color:${c.text}">${z.bestScore}</span>
+      </div>
+      <div class="bar-track"><div class="bar-fill" style="width:${z.bestScore}%;background:${c.bar}"></div></div>
+      <p class="zone-detail">Pluja 10d: ${z.rain_10d}mm · Temp mitjana: ${z.avg_temp}°C · ${z.days_since_rain}d des de pluja forta</p>
+    `;
+    list.appendChild(card);
+  });
+}
+
+async function loadData() {
+  const status = document.getElementById('status');
+  try {
+    const res = await fetch('../data/resultats.json?t=' + Date.now());
+    if (!res.ok) throw new Error('No s\'ha trobat resultats.json');
+    DATA = await res.json();
+
+    const filterSel = document.getElementById('species-filter');
+    DATA.species_catalog.forEach(sp => {
+      const opt = document.createElement('option');
+      opt.value = sp.id;
+      opt.textContent = sp.name;
+      filterSel.appendChild(opt);
+    });
+    filterSel.addEventListener('change', render);
+    document.getElementById('sort-mode').addEventListener('change', render);
+
+    const genDate = new Date(DATA.generated_at);
+    document.getElementById('generated-note').textContent =
+      'Dades actualitzades: ' + genDate.toLocaleString('ca-ES');
+    status.textContent = `${DATA.zones.length} zones carregades`;
+    render();
+  } catch (e) {
+    status.textContent = 'Error carregant dades: ' + e.message;
+  }
+}
+
+loadData();
+</script>
+</body>
+</html>
