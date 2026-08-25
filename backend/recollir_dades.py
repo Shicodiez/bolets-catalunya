@@ -190,23 +190,22 @@ ZONES = [
 # 2. ESPÈCIES DE BOLETS I LA SEVA LÒGICA
 # ---------------------------------------------------------------------------
 SPECIES = [
-    {"id": "rovellons",   "name": "Rovellons",           "trees": ["pi_roig", "pi_negre", "pi_pinyer", "pi_blanc", "pi_altres"], "rain_days": [7, 15],  "temp_range": [8, 18],  "min_rain": 20},
-    {"id": "ceps",        "name": "Ceps",                 "trees": ["roure", "faig", "pi_roig", "pi_negre"],        "rain_days": [8, 16],  "temp_range": [10, 20], "min_rain": 25},
-    {"id": "camagrocs",   "name": "Camagrocs",            "trees": ["faig", "roure", "alzina"],                     "rain_days": [10, 20], "temp_range": [10, 18], "min_rain": 20},
-    {"id": "trompetes",   "name": "Trompetes de la mort", "trees": ["faig", "roure"],                               "rain_days": [10, 20], "temp_range": [9, 17],  "min_rain": 25},
-    {"id": "oureig",      "name": "Ou de reig",           "trees": ["alzina", "roure", "suro"],                     "rain_days": [6, 14],  "temp_range": [14, 24], "min_rain": 18},
-    {"id": "rossinyols",  "name": "Rossinyols",           "trees": ["faig", "roure", "pi_roig"],                    "rain_days": [7, 16],  "temp_range": [10, 19], "min_rain": 20},
-    {"id": "colmenilles", "name": "Colmenilles",          "trees": ["roure", "pi_blanc"],                           "rain_days": [8, 18],  "temp_range": [6, 15],  "min_rain": 15},
-    {"id": "llengua",     "name": "Llengua de bou",       "trees": ["roure", "suro"],                               "rain_days": [10, 20], "temp_range": [12, 20], "min_rain": 20},
-    {"id": "pinetell",    "name": "Pinetell",             "trees": ["pi_roig", "pi_negre", "pi_altres"],            "rain_days": [7, 14],  "temp_range": [8, 17],  "min_rain": 20},
-    {"id": "fredolic",    "name": "Fredolic",             "trees": ["pi_blanc", "alzina"],                          "rain_days": [9, 18],  "temp_range": [7, 16],  "min_rain": 18},
+    {"id": "rovellons",   "name": "Rovellons",           "trees": ["pi_altres"],           "rain_days": [7, 15],  "temp_range": [8, 18],  "min_rain": 20},
+    {"id": "ceps",        "name": "Ceps",                 "trees": ["roure", "pi_altres"],  "rain_days": [8, 16],  "temp_range": [10, 20], "min_rain": 25},
+    {"id": "camagrocs",   "name": "Camagrocs",            "trees": ["roure", "alzina"],     "rain_days": [10, 20], "temp_range": [10, 18], "min_rain": 20},
+    {"id": "trompetes",   "name": "Trompetes de la mort", "trees": ["roure"],               "rain_days": [10, 20], "temp_range": [9, 17],  "min_rain": 25},
+    {"id": "oureig",      "name": "Ou de reig",           "trees": ["alzina", "roure"],     "rain_days": [6, 14],  "temp_range": [14, 24], "min_rain": 18},
+    {"id": "rossinyols",  "name": "Rossinyols",           "trees": ["roure", "pi_altres"],  "rain_days": [7, 16],  "temp_range": [10, 19], "min_rain": 20},
+    {"id": "colmenilles", "name": "Colmenilles",          "trees": ["roure", "pi_altres"],  "rain_days": [8, 18],  "temp_range": [6, 15],  "min_rain": 15},
+    {"id": "llengua",     "name": "Llengua de bou",       "trees": ["roure"],               "rain_days": [10, 20], "temp_range": [12, 20], "min_rain": 20},
+    {"id": "pinetell",    "name": "Pinetell",             "trees": ["pi_altres"],           "rain_days": [7, 14],  "temp_range": [8, 17],  "min_rain": 20},
+    {"id": "fredolic",    "name": "Fredolic",             "trees": ["pi_altres", "alzina"], "rain_days": [9, 18],  "temp_range": [7, 16],  "min_rain": 18},
 ]
 
 TREE_LABELS = {
-    "pi_roig": "pineda de pi roig", "pi_negre": "pineda de pi negre", "avet": "avetosa",
-    "pi_blanc": "pineda de pi blanc", "pi_pinyer": "pineda de pi pinyer", "alzina": "alzinar",
-    "roure": "roureda", "faig": "fageda", "suro": "surededa", "pi_altres": "altres coníferes",
-    "mixt": "bosc mixt", "matollar": "matollar", "prat": "prat/pastura", "desconegut": "tipus de bosc desconegut",
+    "pi_altres": "bosc de coníferes", "roure": "bosc de caducifolis (roure, faig...)",
+    "alzina": "bosc de perennifolis (alzina...)", "mixt": "bosc mixt",
+    "matollar": "matollar", "prat": "prat/pastura", "desconegut": "tipus de bosc desconegut",
 }
 
 # Mapa de tipus de bosc no forestal / desconegut que no assignem a cap espècie
@@ -362,22 +361,24 @@ def parse_tree_from_text(txt):
     low = (class_label or txt).lower()
 
     checks = [
+        (["aciculifoli"], "pi_altres"),
+        (["caducifoli", "planifoli"], "roure"),
+        (["esclerofil", "laurifoli"], "alzina"),
         (["pi roig", "sylvestris"], "pi_roig"),
         (["pi negre", "uncinata"], "pi_negre"),
         (["avet", "abies"], "avet"),
         (["pi blanc", "halepensis"], "pi_blanc"),
         (["pi pinyer", "pinea"], "pi_pinyer"),
-        (["alzina", "ilex"], "alzina"),
+        (["alzina", " ilex"], "alzina"),
         (["roure", "quercus"], "roure"),
         (["fag", "fagus"], "faig"),
         (["sur", "suber"], "suro"),
         (["conífer", "conifer", "pinassa", "pineda"], "pi_altres"),
-        (["planifoli", "caducifoli", "frondós", "frondos"], "roure"),
         (["mixt"], "mixt"),
-        (["conreu", "agrícola", "agricola", "herbaci", "herbaci", "farratge", "fruiter"], "conreu"),
-        (["urbà", "urba", "edificat", "industrial", "vial", "nucli"], "urba"),
-        (["aigua", "embassament", "riu", "llacuna", "estany"], "aigua"),
-        (["roca", "rocam", "tartera", "glacera", "platja", "sorral"], "roca"),
+        (["conreu", "vinyes", "oliverars", "fruiter", "herbaci", "llenyós", "llenyos"], "conreu"),
+        (["urbà", "urba", "edificat", "industrial", "vial", "nucli", "eixample", "residencial", "extracció", "extraccio", "abocador"], "urba"),
+        (["aigua", "embassament", "curs", "llacuna", "estany", "humi"], "aigua"),
+        (["roquissar", "congesta", "tartera", "glacera", "platg", "sorral"], "roca"),
         (["matollar", "bosquina", "brolla", "landa", "garriga"], "matollar"),
         (["prat", "pastura", "herbassar"], "prat"),
     ]
@@ -428,7 +429,7 @@ def fetch_all_tree_types(zones, delay=0.05, max_total_seconds=240):
             for remaining in zones[i:]:
                 results[remaining["id"]] = ("desconegut", None)
             break
-        results[z["id"]] = fetch_tree_type(z["lat"], z["lon"], debug=True)
+        results[z["id"]] = fetch_tree_type(z["lat"], z["lon"], debug=False)
         if delay:
             time.sleep(delay)
         if (i + 1) % 25 == 0:
