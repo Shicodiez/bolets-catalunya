@@ -586,11 +586,11 @@ def compute_days_since_rain_episode_start(precip):
     humit perquè el bolet hagi pogut sortir — comptar només des de l'últim xàfec
     donaria sempre "fa 0-1 dies", cosa que no reflecteix la realitat.
 
-    Mètode: recorre els dies cap enrere; mentre hi hagi pluja significativa (>=3mm)
-    en un dia o l'anterior (permetent un dia sec pel mig, típic entre xàfecs d'una
-    mateixa tanda), es considera que encara estem dins la mateixa tanda. Quan es
-    troben 2 dies secs seguits, es dona per acabada la tanda anterior i es marca
-    l'inici de l'actual.
+    Mètode: partint del dia més recent amb pluja, es retrocedeix comptant dies,
+    permetent com a màxim 1 dia sec seguit enmig de la tanda (típic entre xàfecs
+    d'un mateix episodi). Es compten TOTS els dies recorreguts (plujosos o no)
+    fins que es troben 2 dies secs seguits — aquest total és l'antiguitat de la
+    tanda, no només la posició del primer dia amb pluja.
     """
     if not precip or len(precip) < 2:
         return 20
@@ -601,30 +601,30 @@ def compute_days_since_rain_episode_start(precip):
     if n == 0:
         return 20
 
-    # Recorrem de més recent a més antic
     i = n - 1
-    # Si avui/ahir no ha plogut gens, no estem en una tanda activa
+    # Si el dia més recent no ha plogut gens, no estem en una tanda activa ara mateix
     if (days[i] or 0) < 3:
-        # Busquem quan va ploure per última vegada, com abans (comportament de fallback)
         for j in range(i, -1, -1):
             if (days[j] or 0) >= 5:
                 return n - j
         return 20
 
-    # Estem en una tanda: retrocedim mentre no trobem 2 dies secs seguits
+    # Estem en una tanda activa: comptem dies enrere (incloent els secs intermedis)
+    # fins trobar 2 dies secs seguits, que marquen el final de la tanda anterior.
     dry_streak = 0
-    episode_start = i
+    days_counted = 0
     while i >= 0:
         if (days[i] or 0) < 3:
             dry_streak += 1
             if dry_streak >= 2:
+                days_counted -= 1  # el dia sec que confirma el final no forma part de la tanda
                 break
         else:
             dry_streak = 0
-            episode_start = i
+        days_counted += 1
         i -= 1
 
-    return n - episode_start
+    return max(1, days_counted)
 
 
 # ---------------------------------------------------------------------------
