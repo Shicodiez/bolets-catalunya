@@ -562,13 +562,59 @@ def compute_rain_stats(daily):
     )
     min_temp = round(sum(t or 0 for t in last10_tmin) / n)
 
-    days_since_rain = 20
-    for i in range(len(precip) - 2, -1, -1):
-        if (precip[i] or 0) >= 5:
-            days_since_rain = len(precip) - 1 - i
-            break
+    days_since_rain = compute_days_since_rain_episode_start(precip)
 
     return rain_10d, avg_temp, min_temp, days_since_rain
+
+
+def compute_days_since_rain_episode_start(precip):
+    """
+    Calcula els dies transcorreguts des de l'INICI de la darrera tanda de pluges,
+    no des de l'últim xàfec puntual. Amb pluges repetides en pocs dies (típic de
+    tempestes d'estiu/tardor al Pirineu), l'última pluja forta pot haver caigut
+    ahir mateix, però si la tanda va començar fa 8-10 dies el sòl porta prou temps
+    humit perquè el bolet hagi pogut sortir — comptar només des de l'últim xàfec
+    donaria sempre "fa 0-1 dies", cosa que no reflecteix la realitat.
+
+    Mètode: recorre els dies cap enrere; mentre hi hagi pluja significativa (>=3mm)
+    en un dia o l'anterior (permetent un dia sec pel mig, típic entre xàfecs d'una
+    mateixa tanda), es considera que encara estem dins la mateixa tanda. Quan es
+    troben 2 dies secs seguits, es dona per acabada la tanda anterior i es marca
+    l'inici de l'actual.
+    """
+    if not precip or len(precip) < 2:
+        return 20
+
+    # precip[-1] és avui/parcial, l'ignorem; treballem amb els dies complets anteriors
+    days = precip[:-1]
+    n = len(days)
+    if n == 0:
+        return 20
+
+    # Recorrem de més recent a més antic
+    i = n - 1
+    # Si avui/ahir no ha plogut gens, no estem en una tanda activa
+    if (days[i] or 0) < 3:
+        # Busquem quan va ploure per última vegada, com abans (comportament de fallback)
+        for j in range(i, -1, -1):
+            if (days[j] or 0) >= 5:
+                return n - j
+        return 20
+
+    # Estem en una tanda: retrocedim mentre no trobem 2 dies secs seguits
+    dry_streak = 0
+    episode_start = i
+    while i >= 0:
+        if (days[i] or 0) < 3:
+            dry_streak += 1
+            if dry_streak >= 2:
+                break
+        else:
+            dry_streak = 0
+            episode_start = i
+        i -= 1
+
+    return n - episode_start
 
 
 # ---------------------------------------------------------------------------
