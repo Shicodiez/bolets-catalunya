@@ -727,30 +727,24 @@ def fetch_all_tree_types(zones, layer_name, delay=0.05, max_total_seconds=280):
 # 6. SCORING
 # ---------------------------------------------------------------------------
 
-def score_species(sp, rain_10d, avg_temp, tree, days_since_rain):
+def species_matches(sp, rain_10d, avg_temp, tree, days_since_rain):
+    """
+    Comprovació binària: l'espècie només es dona per probable si es compleixen
+    TOTS els requisits alhora (hàbitat, pluja, dies des de la pluja, temperatura).
+    No hi ha puntuació intermèdia ni compensació entre factors — o hi ha
+    condicions o no n'hi ha.
+    """
     if tree not in sp["trees"]:
-        return 0
-    score = 35
-    if rain_10d >= sp["min_rain"]:
-        score += 25
-    else:
-        score += max(0, 25 * (rain_10d / sp["min_rain"]))
-
+        return False
+    if rain_10d < sp["min_rain"]:
+        return False
     lo, hi = sp["rain_days"]
-    if lo <= days_since_rain <= hi:
-        score += 25
-    else:
-        mid = (lo + hi) / 2
-        score += max(0, 15 - abs(days_since_rain - mid))
-
+    if not (lo <= days_since_rain <= hi):
+        return False
     tlo, thi = sp["temp_range"]
-    if tlo <= avg_temp <= thi:
-        score += 15
-    else:
-        tmid = (tlo + thi) / 2
-        score += max(0, 8 - abs(avg_temp - tmid))
-
-    return max(0, min(100, round(score)))
+    if not (tlo <= avg_temp <= thi):
+        return False
+    return True
 
 
 # ---------------------------------------------------------------------------
@@ -811,13 +805,11 @@ def build_results():
                     "observed_at": nearest["fint"],
                 }
 
-        species_scores = []
+        matching_species = []
         if tree not in NON_FOREST:
             for sp in SPECIES:
-                s = score_species(sp, rain_10d, avg_temp, tree, days_since_rain)
-                if s > 0:
-                    species_scores.append({"id": sp["id"], "name": sp["name"], "score": s})
-            species_scores.sort(key=lambda x: x["score"], reverse=True)
+                if species_matches(sp, rain_10d, avg_temp, tree, days_since_rain):
+                    matching_species.append({"id": sp["id"], "name": sp["name"]})
 
         zones_out.append({
             "id": zone["id"],
@@ -831,9 +823,8 @@ def build_results():
             "rain_10d": rain_10d,
             "avg_temp": avg_temp,
             "days_since_rain": days_since_rain,
-            "species_scores": species_scores,
-            "best_score": species_scores[0]["score"] if species_scores else 0,
-            "best_species": species_scores[0]["name"] if species_scores else None,
+            "matching_species": matching_species,
+            "has_match": len(matching_species) > 0,
             "aemet_check": aemet_info,
         })
 
