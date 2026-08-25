@@ -127,23 +127,46 @@
 
   <div class="sighting-box">
     <h3>🍄 Registrar un hallazgo</h3>
-    <p class="hint">Apunta lo que encuentres, dónde y cuándo — con el tiempo esto ayuda a afinar el modelo. Se guarda en este navegador.</p>
+    <p class="hint">Toca "Marcar en el mapa" y luego haz clic en el lugar exacto donde estabas. Con el tiempo esto ayuda a afinar el modelo.</p>
     <div class="sighting-form">
+      <button type="button" id="sighting-pick-btn" class="popup-btn" style="margin-bottom:4px">📍 Marcar en el mapa</button>
+      <p id="sighting-coords-hint" class="hint" style="margin:0"></p>
+      <div>
+        <label>Nombre del lugar</label>
+        <input type="text" id="sighting-place" placeholder="Malniu, Berga, Montseny, Montnegre, Guilleries...">
+      </div>
       <div>
         <label>Especie</label>
         <select id="sighting-species"></select>
       </div>
       <div>
-        <label>Zona (elige la más cercana a donde lo encontraste)</label>
-        <select id="sighting-zone"></select>
+        <label>Altitud aproximada</label>
+        <select id="sighting-alt"></select>
+      </div>
+      <div>
+        <label>Tipo de árbol</label>
+        <select id="sighting-tree">
+          <option value="pi">Pino</option>
+          <option value="roure">Roble</option>
+          <option value="alzina">Encina</option>
+          <option value="madrono">Madroño</option>
+          <option value="suro">Alcornoque</option>
+          <option value="faig">Haya</option>
+          <option value="avet">Abeto</option>
+          <option value="mixt">Mixto / no lo sé</option>
+        </select>
       </div>
       <div>
         <label>Fecha</label>
         <input type="date" id="sighting-date">
       </div>
       <div>
-        <label>Notas (opcional)</label>
-        <textarea id="sighting-notes" rows="2" placeholder="Cantidad, lugar exacto, condiciones..."></textarea>
+        <label>Cantidad encontrada</label>
+        <select id="sighting-amount">
+          <option value="mucho">Mucho</option>
+          <option value="poco">Poco</option>
+          <option value="nada">Nada</option>
+        </select>
       </div>
       <button id="sighting-save">Guardar hallazgo</button>
     </div>
@@ -274,6 +297,8 @@ function saveSightings(list) {
   localStorage.setItem(SIGHTINGS_KEY, JSON.stringify(list));
 }
 
+const AMOUNT_ICON = {mucho: '🍄🍄🍄', poco: '🍄', nada: '❌'};
+
 function renderSightings() {
   const list = loadSightings();
   const container = document.getElementById('sighting-list');
@@ -282,8 +307,9 @@ function renderSightings() {
     const idx = list.length - 1 - revIdx;
     const item = document.createElement('div');
     item.className = 'sighting-item';
+    const icon = AMOUNT_ICON[s.amount] || '';
     item.innerHTML = `
-      <span>${s.date} · ${s.speciesName} · ${s.zoneName}${s.notes ? ' — ' + s.notes : ''}</span>
+      <span>${icon} ${s.date} · ${s.speciesName} · ${s.place} (${s.alt}m, ${s.treeName})</span>
       <button onclick="deleteSighting(${idx})">Borrar</button>
     `;
     container.appendChild(item);
@@ -297,8 +323,48 @@ function deleteSighting(idx) {
   renderSightings();
 }
 
+let pickingLocation = false;
+let pickedLatLng = null;
+let pickMarker = null;
+
 function prefillSighting(zoneId) {
-  document.getElementById('sighting-zone').value = String(zoneId);
+  const z = DATA.zones.find(zz => zz.id === zoneId);
+  if (z) {
+    pickedLatLng = {lat: z.lat, lng: z.lon};
+    updatePickedCoordsHint();
+    // Preselecciona la altitud/árbol más cercanos como punto de partida
+    const altSel = document.getElementById('sighting-alt');
+    const roundedAlt = Math.round(z.alt / 50) * 50;
+    if ([...altSel.options].some(o => o.value === String(roundedAlt))) {
+      altSel.value = String(roundedAlt);
+    }
+  }
+  document.querySelector('.sighting-box').scrollIntoView({behavior: 'smooth', block: 'center'});
+}
+
+function updatePickedCoordsHint() {
+  const hint = document.getElementById('sighting-coords-hint');
+  if (pickedLatLng) {
+    hint.textContent = `📍 Ubicación marcada (${pickedLatLng.lat.toFixed(4)}, ${pickedLatLng.lng.toFixed(4)})`;
+  } else {
+    hint.textContent = 'Todavía no has marcado ningún punto en el mapa.';
+  }
+}
+
+function togglePickingMode() {
+  pickingLocation = !pickingLocation;
+  const btn = document.getElementById('sighting-pick-btn');
+  btn.textContent = pickingLocation ? '📍 Haz clic en el mapa...' : '📍 Marcar en el mapa';
+  document.getElementById('map').style.cursor = pickingLocation ? 'crosshair' : '';
+}
+
+function handleMapClickForSighting(e) {
+  if (!pickingLocation) return;
+  pickedLatLng = {lat: e.latlng.lat, lng: e.latlng.lng};
+  if (pickMarker) map.removeLayer(pickMarker);
+  pickMarker = L.marker([pickedLatLng.lat, pickedLatLng.lng]).addTo(map);
+  updatePickedCoordsHint();
+  togglePickingMode();
   document.querySelector('.sighting-box').scrollIntoView({behavior: 'smooth', block: 'center'});
 }
 
@@ -311,29 +377,50 @@ function setupSightingForm() {
     speciesSel.appendChild(opt);
   });
 
-  const zoneSel = document.getElementById('sighting-zone');
-  DATA.zones.filter(z => z.is_forest).forEach(z => {
+  const altSel = document.getElementById('sighting-alt');
+  for (let a = 0; a <= 2500; a += 50) {
     const opt = document.createElement('option');
-    opt.value = String(z.id);
-    opt.textContent = `${z.name} (${z.alt}m, ${z.tree_label})`;
-    zoneSel.appendChild(opt);
-  });
+    opt.value = String(a);
+    opt.textContent = `${a} m`;
+    altSel.appendChild(opt);
+  }
 
   document.getElementById('sighting-date').value = new Date().toISOString().slice(0, 10);
+  updatePickedCoordsHint();
+
+  document.getElementById('sighting-pick-btn').addEventListener('click', togglePickingMode);
+  map.on('click', handleMapClickForSighting);
 
   document.getElementById('sighting-save').addEventListener('click', () => {
+    if (!pickedLatLng) {
+      alert('Marca primero el punto en el mapa.');
+      return;
+    }
+    const place = document.getElementById('sighting-place').value.trim();
+    if (!place) {
+      alert('Escribe el nombre del lugar.');
+      return;
+    }
     const speciesId = speciesSel.value;
     const speciesName = speciesSel.options[speciesSel.selectedIndex].textContent;
-    const zoneId = zoneSel.value;
-    const zoneName = zoneSel.options[zoneSel.selectedIndex].textContent;
+    const alt = altSel.value;
+    const treeSel = document.getElementById('sighting-tree');
+    const tree = treeSel.value;
+    const treeName = treeSel.options[treeSel.selectedIndex].textContent;
     const date = document.getElementById('sighting-date').value;
-    const notes = document.getElementById('sighting-notes').value.trim();
+    const amount = document.getElementById('sighting-amount').value;
     if (!date) return;
 
     const list = loadSightings();
-    list.push({speciesId, speciesName, zoneId, zoneName, date, notes});
+    list.push({
+      speciesId, speciesName, place, alt, tree, treeName, date, amount,
+      lat: pickedLatLng.lat, lng: pickedLatLng.lng,
+    });
     saveSightings(list);
-    document.getElementById('sighting-notes').value = '';
+    document.getElementById('sighting-place').value = '';
+    pickedLatLng = null;
+    if (pickMarker) { map.removeLayer(pickMarker); pickMarker = null; }
+    updatePickedCoordsHint();
     renderSightings();
   });
 
