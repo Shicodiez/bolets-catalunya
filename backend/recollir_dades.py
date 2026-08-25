@@ -1341,6 +1341,50 @@ def build_results():
     }
 
 
+def test_vegetacio_species_layers():
+    """
+    PROVA CONTROLADA (no afecta el resultat principal): comprova si el servei
+    WMS VEGETACIO de la Generalitat (sig.gencat.cat), amb capes específiques
+    per espècie (VEGETACIO_ABIESALBA, VEGETACIO_FAGUSSYLVATICA,
+    VEGETACIO_PINUSHALEPENSIS), respon de manera útil per a punts coneguts
+    del Pirineu. Només 5 punts de prova, no els 390 — és per decidir si val
+    la pena integrar-ho de debò en una fase futura.
+    """
+    test_points = [
+        {"name": "Val d'Aran (Arties)", "lat": 42.68, "lon": 0.83},
+        {"name": "Pallars Sobirà alt", "lat": 42.58, "lon": 1.10},
+        {"name": "Ripollès (Camprodon)", "lat": 42.31, "lon": 2.37},
+        {"name": "Montseny", "lat": 41.77, "lon": 2.43},
+        {"name": "Priorat", "lat": 41.23, "lon": 0.82},
+    ]
+    layers_to_test = ["VEGETACIO_ABIESALBA", "VEGETACIO_FAGUSSYLVATICA", "VEGETACIO_PINUSHALEPENSIS"]
+    base_url = "https://sig.gencat.cat/ows/VEGETACIO/wms"
+
+    print("\n--- PROVA CONTROLADA: capes per espècie de VEGETACIO (sig.gencat.cat) ---")
+    for point in test_points:
+        d = 0.01
+        results_for_point = []
+        for layer in layers_to_test:
+            params = (
+                f"?REQUEST=GetFeatureInfo&SERVICE=WMS&VERSION=1.1.1&LAYERS={layer}"
+                f"&STYLES=&FORMAT=image/png&SRS=EPSG:4326"
+                f"&BBOX={point['lon']-d},{point['lat']-d},{point['lon']+d},{point['lat']+d}"
+                f"&WIDTH=101&HEIGHT=101&QUERY_LAYERS={layer}&X=50&Y=50&INFO_FORMAT=text/plain"
+            )
+            url = base_url + params
+            try:
+                req = urllib.request.Request(url, headers={"User-Agent": "bolets-catalunya-app/1.0"})
+                with urllib.request.urlopen(req, timeout=8) as resp:
+                    txt = resp.read().decode("utf-8", errors="ignore")
+                has_feature = "Feature" in txt or "<gml" in txt.lower()
+                snippet = txt[:150].replace("\n", " ")
+                results_for_point.append(f"{layer}={'SÍ' if has_feature else 'no'} ({snippet})")
+            except Exception as e:
+                results_for_point.append(f"{layer}=ERROR({type(e).__name__})")
+        print(f"  {point['name']}: " + " | ".join(results_for_point))
+    print("--- FI PROVA CONTROLADA ---\n")
+
+
 def main():
     try:
         results = build_results()
@@ -1355,6 +1399,11 @@ def main():
     forest_count = sum(1 for z in results["zones"] if z["is_forest"])
     print(f"Fet. {len(results['zones'])} zones desades a {out_path} ({forest_count} boscoses)")
     print(f"Generat: {results['generated_at']}")
+
+    try:
+        test_vegetacio_species_layers()
+    except Exception as e:
+        print(f"AVÍS: la prova controlada de VEGETACIO ha fallat sencera ({e}) — no afecta el resultat principal")
 
 
 if __name__ == "__main__":
