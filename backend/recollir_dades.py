@@ -427,16 +427,16 @@ ZONES = [
 # 2. ESPÈCIES DE BOLETS I LA SEVA LÒGICA
 # ---------------------------------------------------------------------------
 SPECIES = [
-    {"id": "rovellons",   "name": "Rovellons",           "trees": ["pi_roig", "pi_negre", "pi_pinyer", "pi_blanc", "pi_altres"], "rain_days": [7, 15],  "temp_range": [8, 18],  "min_rain": 20},
-    {"id": "ceps",        "name": "Ceps",                 "trees": ["roure", "faig", "pi_roig", "pi_negre", "pi_altres"],        "rain_days": [8, 16],  "temp_range": [10, 20], "min_rain": 25},
-    {"id": "camagrocs",   "name": "Camagrocs",            "trees": ["faig", "roure", "alzina"],                                  "rain_days": [10, 20], "temp_range": [10, 18], "min_rain": 20},
-    {"id": "trompetes",   "name": "Trompetes de la mort", "trees": ["faig", "roure"],                                            "rain_days": [10, 20], "temp_range": [9, 17],  "min_rain": 25},
-    {"id": "oureig",      "name": "Ou de reig",           "trees": ["alzina", "roure", "suro"],                                  "rain_days": [6, 14],  "temp_range": [14, 24], "min_rain": 18},
-    {"id": "rossinyols",  "name": "Rossinyols",           "trees": ["faig", "roure", "pi_roig", "pi_altres"],                    "rain_days": [7, 16],  "temp_range": [10, 19], "min_rain": 20},
-    {"id": "colmenilles", "name": "Colmenilles",          "trees": ["roure", "pi_blanc", "pi_altres"],                           "rain_days": [8, 18],  "temp_range": [6, 15],  "min_rain": 15},
-    {"id": "llengua",     "name": "Llengua de bou",       "trees": ["roure", "suro"],                                            "rain_days": [10, 20], "temp_range": [12, 20], "min_rain": 20},
-    {"id": "pinetell",    "name": "Pinetell",             "trees": ["pi_roig", "pi_negre", "pi_altres"],                         "rain_days": [7, 14],  "temp_range": [8, 17],  "min_rain": 20},
-    {"id": "fredolic",    "name": "Fredolic",             "trees": ["pi_blanc", "alzina", "pi_altres"],                          "rain_days": [9, 18],  "temp_range": [7, 16],  "min_rain": 18},
+    {"id": "rovellons",   "name": "Rovellons",           "trees": ["pi_roig", "pi_negre", "pi_pinyer", "pi_blanc", "pi_altres"], "rain_days": [7, 15],  "temp_range": [4, 16],  "min_rain": 20},
+    {"id": "ceps",        "name": "Ceps",                 "trees": ["roure", "faig", "pi_roig", "pi_negre", "pi_altres"],        "rain_days": [8, 16],  "temp_range": [6, 18],  "min_rain": 25},
+    {"id": "camagrocs",   "name": "Camagrocs",            "trees": ["faig", "roure", "alzina"],                                  "rain_days": [10, 20], "temp_range": [6, 16],  "min_rain": 20},
+    {"id": "trompetes",   "name": "Trompetes de la mort", "trees": ["faig", "roure"],                                            "rain_days": [10, 20], "temp_range": [5, 15],  "min_rain": 25},
+    {"id": "oureig",      "name": "Ou de reig",           "trees": ["alzina", "roure", "suro"],                                  "rain_days": [6, 14],  "temp_range": [10, 22], "min_rain": 18},
+    {"id": "rossinyols",  "name": "Rossinyols",           "trees": ["faig", "roure", "pi_roig", "pi_altres"],                    "rain_days": [7, 16],  "temp_range": [6, 17],  "min_rain": 20},
+    {"id": "colmenilles", "name": "Colmenilles",          "trees": ["roure", "pi_blanc", "pi_altres"],                           "rain_days": [8, 18],  "temp_range": [2, 13],  "min_rain": 15},
+    {"id": "llengua",     "name": "Llengua de bou",       "trees": ["roure", "suro"],                                            "rain_days": [10, 20], "temp_range": [8, 18],  "min_rain": 20},
+    {"id": "pinetell",    "name": "Pinetell",             "trees": ["pi_roig", "pi_negre", "pi_altres"],                         "rain_days": [7, 14],  "temp_range": [4, 15],  "min_rain": 20},
+    {"id": "fredolic",    "name": "Fredolic",             "trees": ["pi_blanc", "alzina", "pi_altres"],                          "rain_days": [9, 18],  "temp_range": [3, 14],  "min_rain": 18},
 ]
 
 TREE_LABELS = {
@@ -540,7 +540,13 @@ def fetch_weather(zones, batch_size=100):
 
 
 def compute_rain_stats(daily):
-    """A partir del bloc 'daily' d'Open-Meteo, calcula pluja 10d, temp mitjana i dies des de pluja forta."""
+    """A partir del bloc 'daily' d'Open-Meteo, calcula pluja 10d, temperatures i dies des de pluja forta.
+
+    IMPORTANT: per al scoring de bolets s'usa min_temp (mitjana de les mínimes nocturnes),
+    no la mitjana dia/nit. Un bolet reacciona al fred de la matinada després de la pluja,
+    no a la temperatura de la tarda — una mitjana dia/nit pot amagar nits ja prou fresques
+    encara que les tardes segueixin sent caloroses (típic de finals d'estiu al Pirineu).
+    """
     precip = daily.get("precipitation_sum") or []
     tmax = daily.get("temperature_2m_max") or []
     tmin = daily.get("temperature_2m_min") or []
@@ -554,6 +560,7 @@ def compute_rain_stats(daily):
     avg_temp = round(
         (sum(t or 0 for t in last10_tmax) / n + sum(t or 0 for t in last10_tmin) / n) / 2
     )
+    min_temp = round(sum(t or 0 for t in last10_tmin) / n)
 
     days_since_rain = 20
     for i in range(len(precip) - 2, -1, -1):
@@ -561,7 +568,7 @@ def compute_rain_stats(daily):
             days_since_rain = len(precip) - 1 - i
             break
 
-    return rain_10d, avg_temp, days_since_rain
+    return rain_10d, avg_temp, min_temp, days_since_rain
 
 
 # ---------------------------------------------------------------------------
@@ -727,12 +734,16 @@ def fetch_all_tree_types(zones, layer_name, delay=0.05, max_total_seconds=280):
 # 6. SCORING
 # ---------------------------------------------------------------------------
 
-def species_matches(sp, rain_10d, avg_temp, tree, days_since_rain):
+def species_matches(sp, rain_10d, min_temp, tree, days_since_rain):
     """
     Comprovació binària: l'espècie només es dona per probable si es compleixen
     TOTS els requisits alhora (hàbitat, pluja, dies des de la pluja, temperatura).
     No hi ha puntuació intermèdia ni compensació entre factors — o hi ha
     condicions o no n'hi ha.
+
+    S'usa min_temp (mitjana de mínimes nocturnes) en comptes de la mitjana dia/nit,
+    perquè és el que millor reflecteix quan el fred d'una nit d'inici de tardor ja
+    ha arribat, encara que les tardes segueixin sent calaroses.
     """
     if tree not in sp["trees"]:
         return False
@@ -742,7 +753,7 @@ def species_matches(sp, rain_10d, avg_temp, tree, days_since_rain):
     if not (lo <= days_since_rain <= hi):
         return False
     tlo, thi = sp["temp_range"]
-    if not (tlo <= avg_temp <= thi):
+    if not (tlo <= min_temp <= thi):
         return False
     return True
 
@@ -791,7 +802,7 @@ def build_results():
     zones_out = []
     for zone, daily_wrapper in zip(ZONES, weather_results):
         daily = daily_wrapper.get("daily", {})
-        rain_10d, avg_temp, days_since_rain = compute_rain_stats(daily)
+        rain_10d, avg_temp, min_temp, days_since_rain = compute_rain_stats(daily)
         tree = tree_types.get(zone["id"], "desconegut")
 
         aemet_info = None
@@ -808,7 +819,7 @@ def build_results():
         matching_species = []
         if tree not in NON_FOREST:
             for sp in SPECIES:
-                if species_matches(sp, rain_10d, avg_temp, tree, days_since_rain):
+                if species_matches(sp, rain_10d, min_temp, tree, days_since_rain):
                     matching_species.append({"id": sp["id"], "name": sp["name"]})
 
         zones_out.append({
@@ -822,6 +833,7 @@ def build_results():
             "is_forest": tree not in NON_FOREST,
             "rain_10d": rain_10d,
             "avg_temp": avg_temp,
+            "min_temp": min_temp,
             "days_since_rain": days_since_rain,
             "matching_species": matching_species,
             "has_match": len(matching_species) > 0,
