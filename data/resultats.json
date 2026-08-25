@@ -1,1 +1,871 @@
-{"generated_at": null, "zones": [], "species_catalog": []}
+{
+  "generated_at": "2026-08-25T08:52:34.301468+00:00",
+  "zones": [
+    {
+      "name": "Val d'Aran",
+      "lat": 42.7,
+      "lon": 0.85,
+      "alt": 1200,
+      "tree": "pi_negre",
+      "tree_label": "pineda de pi negre",
+      "rain_10d": 48,
+      "avg_temp": 20,
+      "days_since_rain": 1,
+      "species_scores": [
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 79
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 66
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 66
+        }
+      ],
+      "best_score": 79,
+      "best_species": "Ceps"
+    },
+    {
+      "name": "Pallars Sobirà N",
+      "lat": 42.58,
+      "lon": 1.1,
+      "alt": 1400,
+      "tree": "pi_negre",
+      "tree_label": "pineda de pi negre",
+      "rain_10d": 48,
+      "avg_temp": 16,
+      "days_since_rain": 1,
+      "species_scores": [
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 80
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 80
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 79
+        }
+      ],
+      "best_score": 80,
+      "best_species": "Rovellons"
+    },
+    {
+      "name": "Pallars Sobirà S",
+      "lat": 42.45,
+      "lon": 1.05,
+      "alt": 1300,
+      "tree": "avet",
+      "tree_label": "avetosa",
+      "rain_10d": 68,
+      "avg_temp": 17,
+      "days_since_rain": 1,
+      "species_scores": [],
+      "best_score": 0,
+      "best_species": null
+    },
+    {
+      "name": "Alta Ribagorça",
+      "lat": 42.48,
+      "lon": 0.75,
+      "alt": 1500,
+      "tree": "pi_negre",
+      "tree_label": "pineda de pi negre",
+      "rain_10d": 52,
+      "avg_temp": 17,
+      "days_since_rain": 1,
+      "species_scores": [
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 80
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 80
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 79
+        }
+      ],
+      "best_score": 80,
+      "best_species": "Rovellons"
+    },
+    {
+      "name": "Pallars Jussà",
+      "lat": 42.35,
+      "lon": 0.9,
+      "alt": 1000,
+      "tree": "pi_roig",
+      "tree_label": "pineda de pi roig",
+      "rain_10d": 44,
+      "avg_temp": 23,
+      "days_since_rain": 1,
+      "species_scores": [
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 66
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 65
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 64
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 64
+        }
+      ],
+      "best_score": 66,
+      "best_species": "Pinetell"
+    },
+    {
+      "name": "Alt Urgell N",
+      "lat": 42.35,
+      "lon": 1.35,
+      "alt": 900,
+      "tree": "pi_roig",
+      "tree_label": "pineda de pi roig",
+      "rain_10d": 51,
+      "avg_temp": 20,
+      "days_since_rain": 1,
+      "species_scores": [
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 79
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 67
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 66
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 66
+        }
+      ],
+      "best_score": 79,
+      "best_species": "Ceps"
+    },
+    {
+      "name": "Alt Urgell S",
+      "lat": 42.2,
+      "lon": 1.45,
+      "alt": 800,
+      "tree": "pi_roig",
+      "tree_label": "pineda de pi roig",
+      "rain_10d": 64,
+      "avg_temp": 18,
+      "days_since_rain": 1,
+      "species_scores": [
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 80
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 80
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 79
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 68
+        }
+      ],
+      "best_score": 80,
+      "best_species": "Rovellons"
+    },
+    {
+      "name": "Cerdanya",
+      "lat": 42.4,
+      "lon": 1.9,
+      "alt": 1150,
+      "tree": "pi_negre",
+      "tree_label": "pineda de pi negre",
+      "rain_10d": 30,
+      "avg_temp": 19,
+      "days_since_rain": 1,
+      "species_scores": [
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 79
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 67
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 67
+        }
+      ],
+      "best_score": 79,
+      "best_species": "Ceps"
+    },
+    {
+      "name": "Solsonès",
+      "lat": 41.99,
+      "lon": 1.52,
+      "alt": 850,
+      "tree": "pi_roig",
+      "tree_label": "pineda de pi roig",
+      "rain_10d": 17,
+      "avg_temp": 25,
+      "days_since_rain": 1,
+      "species_scores": [
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 62
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 61
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 61
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 56
+        }
+      ],
+      "best_score": 62,
+      "best_species": "Pinetell"
+    },
+    {
+      "name": "Berguedà N",
+      "lat": 42.15,
+      "lon": 1.85,
+      "alt": 750,
+      "tree": "pi_roig",
+      "tree_label": "pineda de pi roig",
+      "rain_10d": 28,
+      "avg_temp": 23,
+      "days_since_rain": 1,
+      "species_scores": [
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 66
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 65
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 64
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 64
+        }
+      ],
+      "best_score": 66,
+      "best_species": "Pinetell"
+    },
+    {
+      "name": "Berguedà S",
+      "lat": 42.05,
+      "lon": 1.7,
+      "alt": 650,
+      "tree": "roure",
+      "tree_label": "roureda",
+      "rain_10d": 17,
+      "avg_temp": 22,
+      "days_since_rain": 1,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 80
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 63
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 61
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 59
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 57
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 57
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 53
+        }
+      ],
+      "best_score": 80,
+      "best_species": "Ou de reig"
+    },
+    {
+      "name": "Ripollès",
+      "lat": 42.28,
+      "lon": 2.2,
+      "alt": 900,
+      "tree": "faig",
+      "tree_label": "fageda",
+      "rain_10d": 19,
+      "avg_temp": 17,
+      "days_since_rain": 1,
+      "species_scores": [
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 78
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 75
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 73
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 70
+        }
+      ],
+      "best_score": 78,
+      "best_species": "Rossinyols"
+    },
+    {
+      "name": "Garrotxa",
+      "lat": 42.18,
+      "lon": 2.49,
+      "alt": 450,
+      "tree": "faig",
+      "tree_label": "fageda",
+      "rain_10d": 15,
+      "avg_temp": 27,
+      "days_since_rain": 1,
+      "species_scores": [
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 58
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 55
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 54
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 51
+        }
+      ],
+      "best_score": 58,
+      "best_species": "Rossinyols"
+    },
+    {
+      "name": "Alt Empordà",
+      "lat": 42.27,
+      "lon": 2.9,
+      "alt": 180,
+      "tree": "alzina",
+      "tree_label": "alzinar",
+      "rain_10d": 9,
+      "avg_temp": 28,
+      "days_since_rain": 4,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 56
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 53
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 50
+        }
+      ],
+      "best_score": 56,
+      "best_species": "Ou de reig"
+    },
+    {
+      "name": "Osona N",
+      "lat": 41.98,
+      "lon": 2.3,
+      "alt": 600,
+      "tree": "roure",
+      "tree_label": "roureda",
+      "rain_10d": 19,
+      "avg_temp": 25,
+      "days_since_rain": 1,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 68
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 63
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 63
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 60
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 60
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 58
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 55
+        }
+      ],
+      "best_score": 68,
+      "best_species": "Ou de reig"
+    },
+    {
+      "name": "Osona S",
+      "lat": 41.85,
+      "lon": 2.2,
+      "alt": 500,
+      "tree": "roure",
+      "tree_label": "roureda",
+      "rain_10d": 13,
+      "avg_temp": 24,
+      "days_since_rain": 1,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 74
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 60
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 56
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 52
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 52
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 52
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 49
+        }
+      ],
+      "best_score": 74,
+      "best_species": "Ou de reig"
+    },
+    {
+      "name": "Bages",
+      "lat": 41.79,
+      "lon": 1.83,
+      "alt": 450,
+      "tree": "pi_blanc",
+      "tree_label": "pineda de pi blanc",
+      "rain_10d": 24,
+      "avg_temp": 26,
+      "days_since_rain": 1,
+      "species_scores": [
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 65
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 63
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 62
+        }
+      ],
+      "best_score": 65,
+      "best_species": "Rovellons"
+    },
+    {
+      "name": "Vallès Oriental",
+      "lat": 41.68,
+      "lon": 2.3,
+      "alt": 350,
+      "tree": "alzina",
+      "tree_label": "alzinar",
+      "rain_10d": 18,
+      "avg_temp": 26,
+      "days_since_rain": 4,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 70
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 66
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 62
+        }
+      ],
+      "best_score": 70,
+      "best_species": "Ou de reig"
+    },
+    {
+      "name": "Montseny",
+      "lat": 41.77,
+      "lon": 2.43,
+      "alt": 850,
+      "tree": "faig",
+      "tree_label": "fageda",
+      "rain_10d": 10,
+      "avg_temp": 21,
+      "days_since_rain": 20,
+      "species_scores": [
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 74
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 70
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 56
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 54
+        }
+      ],
+      "best_score": 74,
+      "best_species": "Camagrocs"
+    },
+    {
+      "name": "Selva",
+      "lat": 41.85,
+      "lon": 2.55,
+      "alt": 300,
+      "tree": "alzina",
+      "tree_label": "alzinar",
+      "rain_10d": 11,
+      "avg_temp": 25,
+      "days_since_rain": 20,
+      "species_scores": [
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 74
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 59
+        },
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 57
+        }
+      ],
+      "best_score": 74,
+      "best_species": "Camagrocs"
+    },
+    {
+      "name": "Anoia",
+      "lat": 41.6,
+      "lon": 1.55,
+      "alt": 400,
+      "tree": "pi_blanc",
+      "tree_label": "pineda de pi blanc",
+      "rain_10d": 21,
+      "avg_temp": 26,
+      "days_since_rain": 1,
+      "species_scores": [
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 65
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 63
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 62
+        }
+      ],
+      "best_score": 65,
+      "best_species": "Rovellons"
+    },
+    {
+      "name": "Priorat",
+      "lat": 41.23,
+      "lon": 0.82,
+      "alt": 500,
+      "tree": "alzina",
+      "tree_label": "alzinar",
+      "rain_10d": 7,
+      "avg_temp": 27,
+      "days_since_rain": 1,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 51
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 47
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 45
+        }
+      ],
+      "best_score": 51,
+      "best_species": "Ou de reig"
+    },
+    {
+      "name": "Conca de Barberà",
+      "lat": 41.42,
+      "lon": 1.15,
+      "alt": 600,
+      "tree": "pi_blanc",
+      "tree_label": "pineda de pi blanc",
+      "rain_10d": 7,
+      "avg_temp": 26,
+      "days_since_rain": 1,
+      "species_scores": [
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 50
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 49
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 47
+        }
+      ],
+      "best_score": 50,
+      "best_species": "Colmenilles"
+    },
+    {
+      "name": "Baix Camp",
+      "lat": 41.15,
+      "lon": 0.95,
+      "alt": 450,
+      "tree": "alzina",
+      "tree_label": "alzinar",
+      "rain_10d": 19,
+      "avg_temp": 26,
+      "days_since_rain": 1,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 67
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 62
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 60
+        }
+      ],
+      "best_score": 67,
+      "best_species": "Ou de reig"
+    },
+    {
+      "name": "Terra Alta",
+      "lat": 41.05,
+      "lon": 0.45,
+      "alt": 400,
+      "tree": "pi_pinyer",
+      "tree_label": "pineda de pi pinyer",
+      "rain_10d": 1,
+      "avg_temp": 27,
+      "days_since_rain": 20,
+      "species_scores": [
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 42
+        }
+      ],
+      "best_score": 42,
+      "best_species": "Rovellons"
+    }
+  ],
+  "species_catalog": [
+    {
+      "id": "rovellons",
+      "name": "Rovellons"
+    },
+    {
+      "id": "ceps",
+      "name": "Ceps"
+    },
+    {
+      "id": "camagrocs",
+      "name": "Camagrocs"
+    },
+    {
+      "id": "trompetes",
+      "name": "Trompetes de la mort"
+    },
+    {
+      "id": "oureig",
+      "name": "Ou de reig"
+    },
+    {
+      "id": "rossinyols",
+      "name": "Rossinyols"
+    },
+    {
+      "id": "colmenilles",
+      "name": "Colmenilles"
+    },
+    {
+      "id": "llengua",
+      "name": "Llengua de bou"
+    },
+    {
+      "id": "pinetell",
+      "name": "Pinetell"
+    },
+    {
+      "id": "fredolic",
+      "name": "Fredolic"
+    }
+  ]
+}
