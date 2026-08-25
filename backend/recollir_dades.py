@@ -190,7 +190,7 @@ ZONES = [
 # 2. ESPÈCIES DE BOLETS I LA SEVA LÒGICA
 # ---------------------------------------------------------------------------
 SPECIES = [
-    {"id": "rovellons",   "name": "Rovellons",           "trees": ["pi_roig", "pi_negre", "pi_pinyer", "pi_blanc"], "rain_days": [7, 15],  "temp_range": [8, 18],  "min_rain": 20},
+    {"id": "rovellons",   "name": "Rovellons",           "trees": ["pi_roig", "pi_negre", "pi_pinyer", "pi_blanc", "pi_altres"], "rain_days": [7, 15],  "temp_range": [8, 18],  "min_rain": 20},
     {"id": "ceps",        "name": "Ceps",                 "trees": ["roure", "faig", "pi_roig", "pi_negre"],        "rain_days": [8, 16],  "temp_range": [10, 20], "min_rain": 25},
     {"id": "camagrocs",   "name": "Camagrocs",            "trees": ["faig", "roure", "alzina"],                     "rain_days": [10, 20], "temp_range": [10, 18], "min_rain": 20},
     {"id": "trompetes",   "name": "Trompetes de la mort", "trees": ["faig", "roure"],                               "rain_days": [10, 20], "temp_range": [9, 17],  "min_rain": 25},
@@ -198,7 +198,7 @@ SPECIES = [
     {"id": "rossinyols",  "name": "Rossinyols",           "trees": ["faig", "roure", "pi_roig"],                    "rain_days": [7, 16],  "temp_range": [10, 19], "min_rain": 20},
     {"id": "colmenilles", "name": "Colmenilles",          "trees": ["roure", "pi_blanc"],                           "rain_days": [8, 18],  "temp_range": [6, 15],  "min_rain": 15},
     {"id": "llengua",     "name": "Llengua de bou",       "trees": ["roure", "suro"],                               "rain_days": [10, 20], "temp_range": [12, 20], "min_rain": 20},
-    {"id": "pinetell",    "name": "Pinetell",             "trees": ["pi_roig", "pi_negre"],                         "rain_days": [7, 14],  "temp_range": [8, 17],  "min_rain": 20},
+    {"id": "pinetell",    "name": "Pinetell",             "trees": ["pi_roig", "pi_negre", "pi_altres"],            "rain_days": [7, 14],  "temp_range": [8, 17],  "min_rain": 20},
     {"id": "fredolic",    "name": "Fredolic",             "trees": ["pi_blanc", "alzina"],                          "rain_days": [9, 18],  "temp_range": [7, 16],  "min_rain": 18},
 ]
 
@@ -206,11 +206,11 @@ TREE_LABELS = {
     "pi_roig": "pineda de pi roig", "pi_negre": "pineda de pi negre", "avet": "avetosa",
     "pi_blanc": "pineda de pi blanc", "pi_pinyer": "pineda de pi pinyer", "alzina": "alzinar",
     "roure": "roureda", "faig": "fageda", "suro": "surededa", "pi_altres": "altres coníferes",
-    "mixt": "bosc mixt", "desconegut": "tipus de bosc desconegut",
+    "mixt": "bosc mixt", "matollar": "matollar", "prat": "prat/pastura", "desconegut": "tipus de bosc desconegut",
 }
 
 # Mapa de tipus de bosc no forestal / desconegut que no assignem a cap espècie
-NON_FOREST = {"conreu", "urba", "desconegut", "aigua", "roca"}
+NON_FOREST = {"conreu", "urba", "desconegut", "aigua", "roca", "matollar", "prat"}
 
 OPEN_METEO_URL = "https://api.open-meteo.com/v1/forecast"
 AEMET_STATIONS_URL = "https://opendata.aemet.es/opendata/api/observacion/convencional/todas"
@@ -342,9 +342,25 @@ def nearest_aemet_station(lat, lon, stations, max_km=40):
 # ---------------------------------------------------------------------------
 
 def parse_tree_from_text(txt):
+    """
+    Interpreta la resposta de GetFeatureInfo del WMS de l'ICGC (capa 'cobertes_2009',
+    simplificada a 41 classes). La resposta inclou una línia 'class = "CODI. (N) Nom"'.
+    Com que aquesta capa és més general que la llegenda de 241 categories, es reconeixen
+    també termes genèrics de tipus de bosc a més dels específics per espècie.
+    """
     if not txt:
-        return "desconegut"
-    low = txt.lower()
+        return "desconegut", None
+
+    # Extreu el contingut de la línia 'class = ...'
+    class_label = None
+    for line in txt.splitlines():
+        line = line.strip()
+        if line.lower().startswith("class"):
+            class_label = line.split("=", 1)[-1].strip().strip("'\"")
+            break
+
+    low = (class_label or txt).lower()
+
     checks = [
         (["pi roig", "sylvestris"], "pi_roig"),
         (["pi negre", "uncinata"], "pi_negre"),
@@ -355,17 +371,20 @@ def parse_tree_from_text(txt):
         (["roure", "quercus"], "roure"),
         (["fag", "fagus"], "faig"),
         (["sur", "suber"], "suro"),
-        (["conífer", "conifer"], "pi_altres"),
+        (["conífer", "conifer", "pinassa", "pineda"], "pi_altres"),
+        (["planifoli", "caducifoli", "frondós", "frondos"], "roure"),
         (["mixt"], "mixt"),
-        (["conreu", "agrícola", "agricola"], "conreu"),
-        (["urbà", "urba", "edificat"], "urba"),
-        (["aigua", "embassament", "riu"], "aigua"),
-        (["roca", "rocam"], "roca"),
+        (["conreu", "agrícola", "agricola", "herbaci", "herbaci", "farratge", "fruiter"], "conreu"),
+        (["urbà", "urba", "edificat", "industrial", "vial", "nucli"], "urba"),
+        (["aigua", "embassament", "riu", "llacuna", "estany"], "aigua"),
+        (["roca", "rocam", "tartera", "glacera", "platja", "sorral"], "roca"),
+        (["matollar", "bosquina", "brolla", "landa", "garriga"], "matollar"),
+        (["prat", "pastura", "herbassar"], "prat"),
     ]
     for keywords, tree in checks:
         if any(k in low for k in keywords):
-            return tree
-    return "desconegut"
+            return tree, class_label
+    return "desconegut", class_label
 
 
 def fetch_tree_type(lat, lon, timeout=5, debug=False):
@@ -383,18 +402,18 @@ def fetch_tree_type(lat, lon, timeout=5, debug=False):
         with urllib.request.urlopen(req, timeout=timeout) as resp:
             status = resp.status
             txt = resp.read().decode("utf-8", errors="ignore")
+        tree, class_label = parse_tree_from_text(txt)
         if debug:
-            print(f"    [DEBUG] status={status} url={url}")
-            print(f"    [DEBUG] resposta (primers 300 car.): {txt[:300]!r}")
-        return parse_tree_from_text(txt)
+            print(f"    [DEBUG] status={status} class_label={class_label!r} -> tree={tree}")
+        return tree, class_label
     except urllib.error.HTTPError as e:
         if debug:
-            print(f"    [DEBUG] HTTPError {e.code}: {e.reason} — url={url}")
-        return "desconegut"
+            print(f"    [DEBUG] HTTPError {e.code}: {e.reason}")
+        return "desconegut", None
     except Exception as e:
         if debug:
-            print(f"    [DEBUG] {type(e).__name__}: {e} — url={url}")
-        return "desconegut"
+            print(f"    [DEBUG] {type(e).__name__}: {e}")
+        return "desconegut", None
 
 
 def fetch_all_tree_types(zones, delay=0.05, max_total_seconds=240):
@@ -407,7 +426,7 @@ def fetch_all_tree_types(zones, delay=0.05, max_total_seconds=240):
         if time.time() - start > max_total_seconds:
             print(f"  ICGC: límit de temps ({max_total_seconds}s) assolit a {i}/{len(zones)} — es continua sense la resta")
             for remaining in zones[i:]:
-                results[remaining["id"]] = "desconegut"
+                results[remaining["id"]] = ("desconegut", None)
             break
         results[z["id"]] = fetch_tree_type(z["lat"], z["lon"], debug=(i < 3))
         if delay:
@@ -458,7 +477,8 @@ def build_results():
     weather_results = fetch_weather(ZONES)
 
     print("Consultant ICGC (tipus de bosc real per a cada punt)...")
-    tree_types = fetch_all_tree_types(ZONES)
+    tree_results = fetch_all_tree_types(ZONES)
+    tree_types = {zid: t for zid, (t, _label) in tree_results.items()}
     known_trees = sum(1 for t in tree_types.values() if t not in NON_FOREST)
     print(f"ICGC: {known_trees}/{len(ZONES)} punts amb tipus de bosc identificat")
 
