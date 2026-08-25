@@ -857,11 +857,149 @@ def save_tree_cache(tree_types):
         json.dump(cache, f, ensure_ascii=False)
 
 
+# ---------------------------------------------------------------------------
+# 8. METEOCLIMATIC — XARXA D'ESTACIONS AMATEUR (contrast del dia actual)
+# ---------------------------------------------------------------------------
+# Meteoclimatic només dona el valor acumulat d'AVUI (no històric). Per tenir
+# un històric propi, cada execució es desa el valor d'avui a HISTORY_PATH i es
+# descarten les entrades de més de HISTORY_MAX_DAYS. Pensat perquè Meteocat
+# (quan arribi l'accés) s'integri al mateix fitxer com una font més.
+
+METEOCLIMATIC_XML_URL = "http://www.meteoclimatic.net/feed/xml/ESCAT"
+HISTORY_PATH = "../data/historial_lluvia.json"
+HISTORY_MAX_DAYS = 30
+
+
+def fetch_meteoclimatic_stations(timeout=20):
+    """
+    Consulta el XML públic de Meteoclimatic per a totes les estacions de
+    Catalunya (codi d'àrea ESCAT). Retorna una llista de diccionaris amb
+    id, location, lat/lon (si estan disponibles al XML) i pluja d'avui (mm).
+    Meteoclimatic no dona sempre lat/lon explícits al XML bàsic — si no hi
+    són, la funció que fa servir aquestes dades ha de treballar per location.
+    """
+    req = urllib.request.Request(METEOCLIMATIC_XML_URL, headers={"User-Agent": "bolets-catalunya-app/1.0"})
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        xml_text = resp.read().decode("utf-8", errors="ignore")
+
+    import xml.etree.ElementTree as ET
+    root = ET.fromstring(xml_text)
+    stations = []
+    for st in root.findall(".//station"):
+        st_id = st.findtext("id", default="")
+        location = st.findtext("location", default="")
+        lat = None
+        lon = None
+        coords = st.find("coordinates")
+        if coords is not None:
+            lat_txt = coords.findtext("latitude")
+            lon_txt = coords.findtext("longitude")
+            try:
+                lat = float(lat_txt) if lat_txt else None
+                lon = float(lon_txt) if lon_txt else None
+            except ValueError:
+                pass
+
+        rain_now = None
+        rain_el = st.find(".//stationdata/rain")
+        if rain_el is not None:
+            now_txt = rain_el.findtext("now")
+            try:
+                rain_now = float(now_txt) if now_txt is not None else None
+            except ValueError:
+                rain_now = None
+
+        stations.append({
+            "id": st_id, "location": location,
+            "lat": lat, "lon": lon, "rain_today_mm": rain_now,
+        })
+    return stations
+
+
+def nearest_meteoclimatic_station(lat, lon, stations, max_km=25):
+    """Retorna l'estació Meteoclimatic més propera amb coordenades i dada de pluja vàlida."""
+    best, best_dist = None, max_km
+    for st in stations:
+        if st["lat"] is None or st["lon"] is None or st["rain_today_mm"] is None:
+            continue
+        d = haversine_km(lat, lon, st["lat"], st["lon"])
+        if d < best_dist:
+            best, best_dist = st, d
+    if best:
+        return {**best, "distance_km": round(best_dist, 1)}
+    return None
+
+
+def load_history():
+    """Carrega l'historial propi de pluja per zona/dia. Estructura:
+    { "2026-08-25": {"390": {"meteoclimatic": 12.1}, ...}, "2026-08-24": {...} }
+    Cada dia pot tenir aportacions de diverses fonts per zona — pensat per
+    afegir Meteocat com una font més quan hi hagi accés."""
+    try:
+        with open(HISTORY_PATH, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {}
+
+
+def save_history(history):
+    """Desa l'historial, descartant les entrades de més de HISTORY_MAX_DAYS."""
+    today = datetime.now(timezone.utc).date()
+    pruned = {}
+    for date_str, day_data in history.items():
+        try:
+            d = datetime.fromisoformat(date_str).date()
+        except ValueError:
+            continue
+        if (today - d).days <= HISTORY_MAX_DAYS:
+            pruned[date_str] = day_data
+    with open(HISTORY_PATH, "w", encoding="utf-8") as f:
+        json.dump(pruned, f, ensure_ascii=False)
+    return pruned
+
+
+def update_history_with_meteoclimatic(history, zones, mc_stations):
+    """Afegeix la pluja d'avui de Meteoclimatic a l'historial per a cada zona
+    que tingui una estació prou a prop."""
+    today_str = datetime.now(timezone.utc).date().isoformat()
+    day_entry = history.get(today_str, {})
+    matched = 0
+    for z in zones:
+        nearest = nearest_meteoclimatic_station(z["lat"], z["lon"], mc_stations)
+        if nearest:
+            zone_entry = day_entry.get(str(z["id"]), {})
+            zone_entry["meteoclimatic"] = nearest["rain_today_mm"]
+            zone_entry["meteoclimatic_station"] = nearest["location"]
+            zone_entry["meteoclimatic_distance_km"] = nearest["distance_km"]
+            day_entry[str(z["id"])] = zone_entry
+            matched += 1
+    history[today_str] = day_entry
+    print(f"  Meteoclimatic: {matched}/{len(zones)} punts amb estació propera trobada")
+    return history
+
+
+def own_history_days_count(history, zone_id):
+    """Compta quants dies d'historial propi tenim per a una zona (útil per
+    saber quan l'historial ja és prou llarg per fer-lo servir en el scoring)."""
+    zid = str(zone_id)
+    return sum(1 for day_data in history.values() if zid in day_data)
+
+
 def build_results():
     print(f"[{datetime.now(timezone.utc).isoformat()}] Graella de {len(ZONES)} punts")
 
     print("Consultant Open-Meteo (meteorologia)...")
     weather_results = fetch_weather(ZONES)
+
+    print("Consultant Meteoclimatic (contrast estacions amateur, historial propi)...")
+    history = load_history()
+    try:
+        mc_stations = fetch_meteoclimatic_stations()
+        print(f"  Meteoclimatic: {len(mc_stations)} estacions rebudes")
+        history = update_history_with_meteoclimatic(history, ZONES, mc_stations)
+        history = save_history(history)
+    except Exception as e:
+        print(f"  AVÍS: no s'ha pogut consultar Meteoclimatic ({e}) — es continua sense actualitzar l'historial")
 
     print("Consultant tipus de bosc (amb cache)...")
     tree_types = load_tree_cache()
@@ -941,6 +1079,7 @@ def build_results():
             "matching_species": matching_species,
             "has_match": len(matching_species) > 0,
             "aemet_check": aemet_info,
+            "own_history_days": own_history_days_count(history, zone["id"]),
         })
 
     return {
