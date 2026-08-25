@@ -1250,8 +1250,13 @@ def fetch_meteoclimatic_stations(timeout=20):
 
     import xml.etree.ElementTree as ET
     root = ET.fromstring(xml_text)
+    all_stations = root.findall(".//station")
+    if all_stations:
+        first_raw = ET.tostring(all_stations[0], encoding="unicode")
+        print(f"    [DEBUG meteoclimatic] XML primera estació (primers 600 car.): {first_raw[:600]}")
+
     stations = []
-    for st in root.findall(".//station"):
+    for st in all_stations:
         st_id = st.findtext("id", default="")
         location = st.findtext("location", default="")
         lat = None
