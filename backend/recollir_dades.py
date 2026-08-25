@@ -368,7 +368,7 @@ def parse_tree_from_text(txt):
     return "desconegut"
 
 
-def fetch_tree_type(lat, lon, timeout=5):
+def fetch_tree_type(lat, lon, timeout=5, debug=False):
     """Consulta el WMS de l'ICGC (GetFeatureInfo) per saber el tipus de bosc en un punt."""
     d = 0.01
     params = (
@@ -381,9 +381,19 @@ def fetch_tree_type(lat, lon, timeout=5):
     req = urllib.request.Request(url, headers={"User-Agent": "bolets-catalunya-app/1.0"})
     try:
         with urllib.request.urlopen(req, timeout=timeout) as resp:
+            status = resp.status
             txt = resp.read().decode("utf-8", errors="ignore")
+        if debug:
+            print(f"    [DEBUG] status={status} url={url}")
+            print(f"    [DEBUG] resposta (primers 300 car.): {txt[:300]!r}")
         return parse_tree_from_text(txt)
-    except Exception:
+    except urllib.error.HTTPError as e:
+        if debug:
+            print(f"    [DEBUG] HTTPError {e.code}: {e.reason} — url={url}")
+        return "desconegut"
+    except Exception as e:
+        if debug:
+            print(f"    [DEBUG] {type(e).__name__}: {e} — url={url}")
         return "desconegut"
 
 
@@ -399,7 +409,7 @@ def fetch_all_tree_types(zones, delay=0.05, max_total_seconds=240):
             for remaining in zones[i:]:
                 results[remaining["id"]] = "desconegut"
             break
-        results[z["id"]] = fetch_tree_type(z["lat"], z["lon"])
+        results[z["id"]] = fetch_tree_type(z["lat"], z["lon"], debug=(i < 3))
         if delay:
             time.sleep(delay)
         if (i + 1) % 25 == 0:
