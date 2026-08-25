@@ -1,5 +1,6 @@
 {
-  "generated_at": "2026-08-25T14:09:03.341579+00:00",
+  "generated_at": "2026-08-25T14:22:40.896985+00:00",
+  "default_threshold": 70,
   "zones": [
     {
       "id": 1,
@@ -14,8 +15,7 @@
       "avg_temp": 28,
       "min_temp": 26,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "SANT JAUME D'ENVEJA",
         "distance_km": 10.1,
@@ -37,8 +37,7 @@
       "avg_temp": 29,
       "min_temp": 23,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TORTOSA",
         "distance_km": 15.6,
@@ -60,8 +59,7 @@
       "avg_temp": 28,
       "min_temp": 24,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "SANT JAUME D'ENVEJA",
         "distance_km": 8.4,
@@ -83,8 +81,7 @@
       "avg_temp": 28,
       "min_temp": 26,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "SANT JAUME D'ENVEJA",
         "distance_km": 1.9,
@@ -106,8 +103,7 @@
       "avg_temp": 28,
       "min_temp": 27,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "SANT JAUME D'ENVEJA",
         "distance_km": 12.2,
@@ -129,8 +125,7 @@
       "avg_temp": 29,
       "min_temp": 24,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TORTOSA",
         "distance_km": 4.1,
@@ -152,8 +147,7 @@
       "avg_temp": 28,
       "min_temp": 23,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TORTOSA",
         "distance_km": 8.6,
@@ -175,8 +169,7 @@
       "avg_temp": 28,
       "min_temp": 24,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "SANT JAUME D'ENVEJA",
         "distance_km": 13.1,
@@ -198,8 +191,7 @@
       "avg_temp": 29,
       "min_temp": 26,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "SANT JAUME D'ENVEJA",
         "distance_km": 10.3,
@@ -221,8 +213,7 @@
       "avg_temp": 28,
       "min_temp": 27,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "SANT JAUME D'ENVEJA",
         "distance_km": 15.8,
@@ -244,8 +235,7 @@
       "avg_temp": 28,
       "min_temp": 27,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "SANT JAUME D'ENVEJA",
         "distance_km": 24.6,
@@ -267,8 +257,7 @@
       "avg_temp": 24,
       "min_temp": 20,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "HORTA DE SANT JOAN",
         "distance_km": 8.6,
@@ -290,8 +279,7 @@
       "avg_temp": 29,
       "min_temp": 24,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TORTOSA",
         "distance_km": 7.0,
@@ -313,8 +301,7 @@
       "avg_temp": 27,
       "min_temp": 22,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TORTOSA",
         "distance_km": 10.4,
@@ -336,8 +323,7 @@
       "avg_temp": 28,
       "min_temp": 23,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "RASQUERA",
         "distance_km": 16.1,
@@ -359,8 +345,7 @@
       "avg_temp": 29,
       "min_temp": 25,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "VANDELLÓS",
         "distance_km": 9.3,
@@ -382,8 +367,7 @@
       "avg_temp": 28,
       "min_temp": 27,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "VANDELLÓS",
         "distance_km": 11.1,
@@ -405,8 +389,7 @@
       "avg_temp": 28,
       "min_temp": 27,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "VANDELLÓS",
         "distance_km": 19.3,
@@ -428,8 +411,7 @@
       "avg_temp": 28,
       "min_temp": 27,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TARRAGONA  FAC. GEOGRAFIA",
         "distance_km": 27.5,
@@ -451,8 +433,7 @@
       "avg_temp": 28,
       "min_temp": 27,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TARRAGONA  FAC. GEOGRAFIA",
         "distance_km": 27.8,
@@ -474,8 +455,7 @@
       "avg_temp": 26,
       "min_temp": 20,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "HORTA DE SANT JOAN",
         "distance_km": 7.8,
@@ -497,8 +477,38 @@
       "avg_temp": 27,
       "min_temp": 22,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 22
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 20
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 20
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 19
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 13
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 11
+        }
+      ],
       "aemet_check": {
         "station_name": "HORTA DE SANT JOAN",
         "distance_km": 3.3,
@@ -520,8 +530,38 @@
       "avg_temp": 28,
       "min_temp": 23,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 20
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 20
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 19
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 15
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 13
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 11
+        }
+      ],
       "aemet_check": {
         "station_name": "RASQUERA",
         "distance_km": 13.0,
@@ -543,8 +583,23 @@
       "avg_temp": 27,
       "min_temp": 22,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 31
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 25
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 20
+        }
+      ],
       "aemet_check": {
         "station_name": "RASQUERA",
         "distance_km": 4.4,
@@ -566,8 +621,7 @@
       "avg_temp": 27,
       "min_temp": 22,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "RASQUERA",
         "distance_km": 9.0,
@@ -589,8 +643,38 @@
       "avg_temp": 27,
       "min_temp": 24,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 43
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 31
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 30
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 30
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 30
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 21
+        }
+      ],
       "aemet_check": {
         "station_name": "VANDELLÓS",
         "distance_km": 3.6,
@@ -612,8 +696,7 @@
       "avg_temp": 28,
       "min_temp": 25,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "VANDELLÓS",
         "distance_km": 7.1,
@@ -635,8 +718,7 @@
       "avg_temp": 28,
       "min_temp": 25,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "VANDELLÓS",
         "distance_km": 17.2,
@@ -658,8 +740,7 @@
       "avg_temp": 28,
       "min_temp": 27,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TARRAGONA  FAC. GEOGRAFIA",
         "distance_km": 17.6,
@@ -681,8 +762,7 @@
       "avg_temp": 28,
       "min_temp": 27,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TARRAGONA  FAC. GEOGRAFIA",
         "distance_km": 18.1,
@@ -704,8 +784,7 @@
       "avg_temp": 28,
       "min_temp": 27,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TARRAGONA  FAC. GEOGRAFIA",
         "distance_km": 23.5,
@@ -727,8 +806,7 @@
       "avg_temp": 28,
       "min_temp": 22,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "HORTA DE SANT JOAN",
         "distance_km": 14.2,
@@ -750,8 +828,7 @@
       "avg_temp": 27,
       "min_temp": 22,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "HORTA DE SANT JOAN",
         "distance_km": 12.3,
@@ -773,8 +850,7 @@
       "avg_temp": 28,
       "min_temp": 23,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "RASQUERA",
         "distance_km": 13.9,
@@ -796,8 +872,7 @@
       "avg_temp": 29,
       "min_temp": 24,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "RASQUERA",
         "distance_km": 6.6,
@@ -819,8 +894,7 @@
       "avg_temp": 28,
       "min_temp": 22,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "RASQUERA",
         "distance_km": 10.2,
@@ -842,8 +916,7 @@
       "avg_temp": 25,
       "min_temp": 21,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "VANDELLÓS",
         "distance_km": 11.9,
@@ -865,8 +938,7 @@
       "avg_temp": 27,
       "min_temp": 23,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "VANDELLÓS",
         "distance_km": 13.4,
@@ -888,8 +960,7 @@
       "avg_temp": 28,
       "min_temp": 25,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "REUS  AEROPUERTO",
         "distance_km": 11.9,
@@ -911,8 +982,7 @@
       "avg_temp": 28,
       "min_temp": 24,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TARRAGONA  FAC. GEOGRAFIA",
         "distance_km": 8.2,
@@ -934,8 +1004,7 @@
       "avg_temp": 28,
       "min_temp": 25,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TARRAGONA  FAC. GEOGRAFIA",
         "distance_km": 9.2,
@@ -957,8 +1026,7 @@
       "avg_temp": 28,
       "min_temp": 27,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TARRAGONA  FAC. GEOGRAFIA",
         "distance_km": 17.5,
@@ -980,8 +1048,7 @@
       "avg_temp": 28,
       "min_temp": 27,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TARRAGONA  FAC. GEOGRAFIA",
         "distance_km": 27.2,
@@ -1003,8 +1070,7 @@
       "avg_temp": 29,
       "min_temp": 23,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "MASSALUCA",
         "distance_km": 11.4,
@@ -1026,8 +1092,7 @@
       "avg_temp": 28,
       "min_temp": 22,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "MASSALUCA",
         "distance_km": 3.0,
@@ -1049,8 +1114,7 @@
       "avg_temp": 27,
       "min_temp": 22,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "MASSALUCA",
         "distance_km": 9.9,
@@ -1072,8 +1136,38 @@
       "avg_temp": 29,
       "min_temp": 23,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 20
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 20
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 19
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 15
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 13
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 11
+        }
+      ],
       "aemet_check": {
         "station_name": "RASQUERA",
         "distance_km": 16.4,
@@ -1095,8 +1189,7 @@
       "avg_temp": 29,
       "min_temp": 22,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "CABACÉS",
         "distance_km": 11.1,
@@ -1118,8 +1211,7 @@
       "avg_temp": 26,
       "min_temp": 22,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "ALFORJA",
         "distance_km": 13.0,
@@ -1141,8 +1233,7 @@
       "avg_temp": 26,
       "min_temp": 22,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "ALFORJA",
         "distance_km": 7.0,
@@ -1164,8 +1255,7 @@
       "avg_temp": 27,
       "min_temp": 23,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "REUS  AEROPUERTO",
         "distance_km": 7.4,
@@ -1187,8 +1277,7 @@
       "avg_temp": 27,
       "min_temp": 24,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "REUS  AEROPUERTO",
         "distance_km": 3.0,
@@ -1210,8 +1299,7 @@
       "avg_temp": 27,
       "min_temp": 25,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TARRAGONA  FAC. GEOGRAFIA",
         "distance_km": 6.7,
@@ -1233,8 +1321,7 @@
       "avg_temp": 28,
       "min_temp": 24,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TARRAGONA  FAC. GEOGRAFIA",
         "distance_km": 16.3,
@@ -1256,8 +1343,7 @@
       "avg_temp": 28,
       "min_temp": 26,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "VILAFRANCA DEL PENEDÈS",
         "distance_km": 22.1,
@@ -1279,8 +1365,7 @@
       "avg_temp": 28,
       "min_temp": 26,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "SITGES  VALLCARCA",
         "distance_km": 17.4,
@@ -1302,8 +1387,7 @@
       "avg_temp": 28,
       "min_temp": 28,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "SITGES  VALLCARCA",
         "distance_km": 11.0,
@@ -1325,8 +1409,7 @@
       "avg_temp": 28,
       "min_temp": 28,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "SITGES  VALLCARCA",
         "distance_km": 12.1,
@@ -1348,8 +1431,7 @@
       "avg_temp": 29,
       "min_temp": 23,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "MASSALUCA",
         "distance_km": 13.1,
@@ -1371,8 +1453,7 @@
       "avg_temp": 29,
       "min_temp": 24,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "MASSALUCA",
         "distance_km": 7.1,
@@ -1394,8 +1475,7 @@
       "avg_temp": 30,
       "min_temp": 25,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "MASSALUCA",
         "distance_km": 11.8,
@@ -1417,8 +1497,38 @@
       "avg_temp": 29,
       "min_temp": 23,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 20
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 20
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 19
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 15
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 13
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 11
+        }
+      ],
       "aemet_check": {
         "station_name": "CABACÉS",
         "distance_km": 12.3,
@@ -1440,8 +1550,7 @@
       "avg_temp": 28,
       "min_temp": 23,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "CABACÉS",
         "distance_km": 2.3,
@@ -1463,8 +1572,23 @@
       "avg_temp": 26,
       "min_temp": 21,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 33
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 7
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 6
+        }
+      ],
       "aemet_check": {
         "station_name": "CABACÉS",
         "distance_km": 8.1,
@@ -1486,8 +1610,38 @@
       "avg_temp": 23,
       "min_temp": 19,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 25
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 24
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 21
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 17
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 14
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 11
+        }
+      ],
       "aemet_check": {
         "station_name": "ALFORJA",
         "distance_km": 3.1,
@@ -1509,8 +1663,23 @@
       "avg_temp": 25,
       "min_temp": 21,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 61
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 34
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 30
+        }
+      ],
       "aemet_check": {
         "station_name": "ALFORJA",
         "distance_km": 9.9,
@@ -1532,8 +1701,7 @@
       "avg_temp": 27,
       "min_temp": 22,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "VALLS",
         "distance_km": 7.8,
@@ -1555,8 +1723,7 @@
       "avg_temp": 27,
       "min_temp": 22,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "VALLS",
         "distance_km": 7.6,
@@ -1578,8 +1745,7 @@
       "avg_temp": 26,
       "min_temp": 23,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "VALLS",
         "distance_km": 16.1,
@@ -1601,8 +1767,7 @@
       "avg_temp": 27,
       "min_temp": 23,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "VILAFRANCA DEL PENEDÈS",
         "distance_km": 13.8,
@@ -1624,8 +1789,7 @@
       "avg_temp": 28,
       "min_temp": 24,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "VILAFRANCA DEL PENEDÈS",
         "distance_km": 10.0,
@@ -1647,8 +1811,7 @@
       "avg_temp": 28,
       "min_temp": 25,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "SITGES  VALLCARCA",
         "distance_km": 3.8,
@@ -1670,8 +1833,7 @@
       "avg_temp": 29,
       "min_temp": 26,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "SITGES  VALLCARCA",
         "distance_km": 6.4,
@@ -1693,8 +1855,7 @@
       "avg_temp": 28,
       "min_temp": 24,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "BARCELONA  AEROPUERTO",
         "distance_km": 6.0,
@@ -1716,8 +1877,7 @@
       "avg_temp": 28,
       "min_temp": 26,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "BARCELONA  AEROPUERTO",
         "distance_km": 10.4,
@@ -1739,8 +1899,7 @@
       "avg_temp": 29,
       "min_temp": 23,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "MASSALUCA",
         "distance_km": 20.3,
@@ -1762,8 +1921,7 @@
       "avg_temp": 30,
       "min_temp": 24,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "MASSALUCA",
         "distance_km": 17.1,
@@ -1785,8 +1943,38 @@
       "avg_temp": 29,
       "min_temp": 23,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 20
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 20
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 19
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 15
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 13
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 11
+        }
+      ],
       "aemet_check": {
         "station_name": "MASSALUCA",
         "distance_km": 19.5,
@@ -1808,8 +1996,7 @@
       "avg_temp": 29,
       "min_temp": 23,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "EL SOLERÀS",
         "distance_km": 11.9,
@@ -1831,8 +2018,7 @@
       "avg_temp": 26,
       "min_temp": 21,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "EVC_ELS TORMS",
         "distance_km": 7.3,
@@ -1854,8 +2040,38 @@
       "avg_temp": 26,
       "min_temp": 21,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 25
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 22
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 20
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 20
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 16
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 11
+        }
+      ],
       "aemet_check": {
         "station_name": "LA POBLA DE CERVOLES",
         "distance_km": 7.9,
@@ -1877,8 +2093,23 @@
       "avg_temp": 25,
       "min_temp": 20,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 32
+        },
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 31
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 20
+        }
+      ],
       "aemet_check": {
         "station_name": "LA POBLA DE CERVOLES",
         "distance_km": 5.2,
@@ -1900,8 +2131,38 @@
       "avg_temp": 23,
       "min_temp": 18,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 38
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 35
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 35
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 31
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 30
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 26
+        }
+      ],
       "aemet_check": {
         "station_name": "LA POBLA DE CERVOLES",
         "distance_km": 14.1,
@@ -1923,8 +2184,7 @@
       "avg_temp": 24,
       "min_temp": 20,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "VALLS",
         "distance_km": 6.7,
@@ -1946,8 +2206,7 @@
       "avg_temp": 26,
       "min_temp": 21,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "VALLS",
         "distance_km": 6.5,
@@ -1969,8 +2228,38 @@
       "avg_temp": 25,
       "min_temp": 21,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 39
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 34
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 31
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 29
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 27
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 27
+        }
+      ],
       "aemet_check": {
         "station_name": "PONTONS",
         "distance_km": 11.6,
@@ -1992,8 +2281,38 @@
       "avg_temp": 25,
       "min_temp": 21,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 18
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 17
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 14
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 11
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 11
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 6
+        }
+      ],
       "aemet_check": {
         "station_name": "VILAFRANCA DEL PENEDÈS",
         "distance_km": 9.5,
@@ -2015,8 +2334,7 @@
       "avg_temp": 27,
       "min_temp": 21,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "VILAFRANCA DEL PENEDÈS",
         "distance_km": 0.7,
@@ -2038,8 +2356,38 @@
       "avg_temp": 27,
       "min_temp": 23,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 20
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 20
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 19
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 15
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 13
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 11
+        }
+      ],
       "aemet_check": {
         "station_name": "SITGES  VALLCARCA",
         "distance_km": 10.4,
@@ -2061,8 +2409,38 @@
       "avg_temp": 27,
       "min_temp": 23,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 20
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 20
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 19
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 15
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 13
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 11
+        }
+      ],
       "aemet_check": {
         "station_name": "CORBERA  PUIG D?AGULLES",
         "distance_km": 9.3,
@@ -2084,8 +2462,7 @@
       "avg_temp": 28,
       "min_temp": 24,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "BARCELONA  AEROPUERTO",
         "distance_km": 4.5,
@@ -2107,8 +2484,7 @@
       "avg_temp": 28,
       "min_temp": 26,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "BARCELONA  DRASSANES",
         "distance_km": 4.9,
@@ -2130,8 +2506,7 @@
       "avg_temp": 28,
       "min_temp": 27,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "BARCELONA  DRASSANES",
         "distance_km": 11.2,
@@ -2153,8 +2528,7 @@
       "avg_temp": 28,
       "min_temp": 27,
       "days_since_rain": 4,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "VILASSAR DE DALT",
         "distance_km": 19.9,
@@ -2176,8 +2550,7 @@
       "avg_temp": 28,
       "min_temp": 27,
       "days_since_rain": 4,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "VILASSAR DE DALT",
         "distance_km": 24.3,
@@ -2199,8 +2572,7 @@
       "avg_temp": 28,
       "min_temp": 22,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "FRAGA",
         "distance_km": 16.0,
@@ -2222,8 +2594,7 @@
       "avg_temp": 30,
       "min_temp": 23,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "FRAGA",
         "distance_km": 11.6,
@@ -2245,8 +2616,7 @@
       "avg_temp": 29,
       "min_temp": 23,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "FRAGA",
         "distance_km": 14.8,
@@ -2268,8 +2638,7 @@
       "avg_temp": 28,
       "min_temp": 23,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "EL SOLERÀS",
         "distance_km": 7.6,
@@ -2291,8 +2660,38 @@
       "avg_temp": 27,
       "min_temp": 22,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 15
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 14
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 11
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 11
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 8
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 6
+        }
+      ],
       "aemet_check": {
         "station_name": "EL SOLERÀS",
         "distance_km": 2.8,
@@ -2314,8 +2713,7 @@
       "avg_temp": 27,
       "min_temp": 21,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "EVC_ELS TORMS",
         "distance_km": 8.7,
@@ -2337,8 +2735,7 @@
       "avg_temp": 27,
       "min_temp": 21,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "LA POBLA DE CERVOLES",
         "distance_km": 7.0,
@@ -2360,8 +2757,7 @@
       "avg_temp": 26,
       "min_temp": 20,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "LA POBLA DE CERVOLES",
         "distance_km": 14.9,
@@ -2383,8 +2779,38 @@
       "avg_temp": 26,
       "min_temp": 21,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 19
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 18
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 16
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 16
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 13
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 10
+        }
+      ],
       "aemet_check": {
         "station_name": "VALLS",
         "distance_km": 15.2,
@@ -2406,8 +2832,7 @@
       "avg_temp": 24,
       "min_temp": 20,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "VALLS",
         "distance_km": 15.1,
@@ -2429,8 +2854,7 @@
       "avg_temp": 22,
       "min_temp": 18,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "PONTONS",
         "distance_km": 6.5,
@@ -2452,8 +2876,38 @@
       "avg_temp": 25,
       "min_temp": 20,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 25
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 22
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 21
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 19
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 18
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 12
+        }
+      ],
       "aemet_check": {
         "station_name": "PONTONS",
         "distance_km": 3.7,
@@ -2475,8 +2929,7 @@
       "avg_temp": 26,
       "min_temp": 21,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "VILAFRANCA DEL PENEDÈS",
         "distance_km": 10.1,
@@ -2498,8 +2951,7 @@
       "avg_temp": 27,
       "min_temp": 21,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "CORBERA  PUIG D?AGULLES",
         "distance_km": 6.7,
@@ -2521,8 +2973,38 @@
       "avg_temp": 27,
       "min_temp": 22,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 15
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 14
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 11
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 11
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 8
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 6
+        }
+      ],
       "aemet_check": {
         "station_name": "CORBERA  PUIG D?AGULLES",
         "distance_km": 3.9,
@@ -2544,8 +3026,38 @@
       "avg_temp": 26,
       "min_temp": 22,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 15
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 14
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 14
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 11
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 11
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 8
+        }
+      ],
       "aemet_check": {
         "station_name": "BARCELONA  DRASSANES",
         "distance_km": 11.5,
@@ -2567,8 +3079,7 @@
       "avg_temp": 27,
       "min_temp": 24,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "BARCELONA  DRASSANES",
         "distance_km": 5.1,
@@ -2590,8 +3101,7 @@
       "avg_temp": 28,
       "min_temp": 24,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "VILASSAR DE DALT",
         "distance_km": 10.9,
@@ -2613,8 +3123,7 @@
       "avg_temp": 28,
       "min_temp": 26,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "VILASSAR DE DALT",
         "distance_km": 10.4,
@@ -2636,8 +3145,7 @@
       "avg_temp": 28,
       "min_temp": 27,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "VILASSAR DE DALT",
         "distance_km": 17.4,
@@ -2659,8 +3167,7 @@
       "avg_temp": 28,
       "min_temp": 27,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "ARENYS DE MAR",
         "distance_km": 21.1,
@@ -2682,8 +3189,7 @@
       "avg_temp": 29,
       "min_temp": 23,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "FRAGA",
         "distance_km": 1.8,
@@ -2705,8 +3211,7 @@
       "avg_temp": 29,
       "min_temp": 23,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "FRAGA",
         "distance_km": 9.3,
@@ -2728,8 +3233,7 @@
       "avg_temp": 29,
       "min_temp": 23,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "LLEIDA",
         "distance_km": 12.8,
@@ -2751,8 +3255,7 @@
       "avg_temp": 28,
       "min_temp": 22,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "EL SOLERÀS",
         "distance_km": 11.1,
@@ -2774,8 +3277,7 @@
       "avg_temp": 28,
       "min_temp": 22,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "MOLLERUSSA",
         "distance_km": 12.1,
@@ -2797,8 +3299,7 @@
       "avg_temp": 27,
       "min_temp": 22,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "MOLLERUSSA",
         "distance_km": 13.8,
@@ -2820,8 +3321,7 @@
       "avg_temp": 26,
       "min_temp": 20,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "LLORAC",
         "distance_km": 20.1,
@@ -2843,8 +3343,38 @@
       "avg_temp": 24,
       "min_temp": 20,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 31
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 30
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 27
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 26
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 24
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 19
+        }
+      ],
       "aemet_check": {
         "station_name": "LLORAC",
         "distance_km": 10.6,
@@ -2866,8 +3396,7 @@
       "avg_temp": 24,
       "min_temp": 19,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "LLORAC",
         "distance_km": 5.2,
@@ -2889,8 +3418,7 @@
       "avg_temp": 24,
       "min_temp": 19,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "LLORAC",
         "distance_km": 12.1,
@@ -2912,8 +3440,38 @@
       "avg_temp": 25,
       "min_temp": 19,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 25
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 24
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 21
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 17
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 14
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 11
+        }
+      ],
       "aemet_check": {
         "station_name": "IGUALADA - MUNTANYETA",
         "distance_km": 9.0,
@@ -2935,8 +3493,38 @@
       "avg_temp": 25,
       "min_temp": 19,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 30
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 27
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 26
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 23
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 22
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 18
+        }
+      ],
       "aemet_check": {
         "station_name": "IGUALADA - MUNTANYETA",
         "distance_km": 11.1,
@@ -2958,8 +3546,7 @@
       "avg_temp": 27,
       "min_temp": 21,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "MONTSERRAT",
         "distance_km": 9.7,
@@ -2981,8 +3568,7 @@
       "avg_temp": 28,
       "min_temp": 23,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "MONTSERRAT",
         "distance_km": 11.9,
@@ -3004,8 +3590,7 @@
       "avg_temp": 27,
       "min_temp": 22,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "CALDES DE MONTBUI",
         "distance_km": 14.9,
@@ -3027,8 +3612,7 @@
       "avg_temp": 27,
       "min_temp": 22,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "CALDES DE MONTBUI",
         "distance_km": 11.3,
@@ -3050,8 +3634,23 @@
       "avg_temp": 26,
       "min_temp": 22,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 31
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 25
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 20
+        }
+      ],
       "aemet_check": {
         "station_name": "VILASSAR DE DALT",
         "distance_km": 5.7,
@@ -3073,8 +3672,7 @@
       "avg_temp": 28,
       "min_temp": 26,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "VILASSAR DE DALT",
         "distance_km": 4.6,
@@ -3096,8 +3694,7 @@
       "avg_temp": 27,
       "min_temp": 24,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "ARENYS DE MAR",
         "distance_km": 8.5,
@@ -3119,8 +3716,7 @@
       "avg_temp": 28,
       "min_temp": 26,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "ARENYS DE MAR",
         "distance_km": 13.2,
@@ -3142,8 +3738,7 @@
       "avg_temp": 29,
       "min_temp": 22,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "FRAGA",
         "distance_km": 8.5,
@@ -3165,8 +3760,7 @@
       "avg_temp": 29,
       "min_temp": 22,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "LLEIDA",
         "distance_km": 11.3,
@@ -3188,8 +3782,7 @@
       "avg_temp": 29,
       "min_temp": 23,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "LLEIDA",
         "distance_km": 2.9,
@@ -3211,8 +3804,7 @@
       "avg_temp": 29,
       "min_temp": 22,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "LLEIDA",
         "distance_km": 9.7,
@@ -3234,8 +3826,7 @@
       "avg_temp": 29,
       "min_temp": 22,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "MOLLERUSSA",
         "distance_km": 3.4,
@@ -3257,8 +3848,7 @@
       "avg_temp": 28,
       "min_temp": 22,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "MOLLERUSSA",
         "distance_km": 7.5,
@@ -3280,8 +3870,7 @@
       "avg_temp": 28,
       "min_temp": 22,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TORDERA - GRANYANELLA",
         "distance_km": 15.1,
@@ -3303,8 +3892,7 @@
       "avg_temp": 26,
       "min_temp": 21,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TORDERA - GRANYANELLA",
         "distance_km": 9.1,
@@ -3326,8 +3914,43 @@
       "avg_temp": 24,
       "min_temp": 19,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 60
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 45
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 41
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 38
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 36
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 34
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 21
+        }
+      ],
       "aemet_check": {
         "station_name": "LLORAC",
         "distance_km": 4.9,
@@ -3349,8 +3972,43 @@
       "avg_temp": 25,
       "min_temp": 19,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 63
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 48
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 44
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 38
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 38
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 37
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 23
+        }
+      ],
       "aemet_check": {
         "station_name": "LLORAC",
         "distance_km": 12.0,
@@ -3372,8 +4030,38 @@
       "avg_temp": 26,
       "min_temp": 20,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 51
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 47
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 44
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 42
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 38
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 36
+        }
+      ],
       "aemet_check": {
         "station_name": "IGUALADA - MUNTANYETA",
         "distance_km": 3.4,
@@ -3395,8 +4083,7 @@
       "avg_temp": 26,
       "min_temp": 20,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "IGUALADA - MUNTANYETA",
         "distance_km": 7.3,
@@ -3418,8 +4105,7 @@
       "avg_temp": 22,
       "min_temp": 16,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "MONTSERRAT",
         "distance_km": 2.8,
@@ -3441,8 +4127,23 @@
       "avg_temp": 26,
       "min_temp": 20,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 63
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 40
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 36
+        }
+      ],
       "aemet_check": {
         "station_name": "MONTSERRAT",
         "distance_km": 7.5,
@@ -3464,8 +4165,38 @@
       "avg_temp": 26,
       "min_temp": 20,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 38
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 36
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 32
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 30
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 29
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 26
+        }
+      ],
       "aemet_check": {
         "station_name": "CALDES DE MONTBUI",
         "distance_km": 9.8,
@@ -3487,8 +4218,38 @@
       "avg_temp": 27,
       "min_temp": 22,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 38
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 38
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 36
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 35
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 35
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 28
+        }
+      ],
       "aemet_check": {
         "station_name": "CALDES DE MONTBUI",
         "distance_km": 1.4,
@@ -3510,8 +4271,7 @@
       "avg_temp": 27,
       "min_temp": 21,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "CALDES DE MONTBUI",
         "distance_km": 10.6,
@@ -3533,8 +4293,23 @@
       "avg_temp": 26,
       "min_temp": 21,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 39
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 12
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 11
+        }
+      ],
       "aemet_check": {
         "station_name": "ARENYS DE MAR",
         "distance_km": 10.3,
@@ -3556,8 +4331,23 @@
       "avg_temp": 27,
       "min_temp": 23,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 56
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 32
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 24
+        }
+      ],
       "aemet_check": {
         "station_name": "ARENYS DE MAR",
         "distance_km": 1.5,
@@ -3579,8 +4369,7 @@
       "avg_temp": 27,
       "min_temp": 24,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "ARENYS DE MAR",
         "distance_km": 10.2,
@@ -3602,8 +4391,7 @@
       "avg_temp": 26,
       "min_temp": 22,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "BLANES  JARDIN BOTANICO",
         "distance_km": 8.7,
@@ -3625,8 +4413,7 @@
       "avg_temp": 29,
       "min_temp": 22,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TAMARITE DE LITERA  LA MELUSA",
         "distance_km": 10.4,
@@ -3648,8 +4435,7 @@
       "avg_temp": 28,
       "min_temp": 22,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TAMARITE DE LITERA  LA MELUSA",
         "distance_km": 12.4,
@@ -3671,8 +4457,7 @@
       "avg_temp": 28,
       "min_temp": 22,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "LLEIDA",
         "distance_km": 7.3,
@@ -3694,8 +4479,7 @@
       "avg_temp": 29,
       "min_temp": 22,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "LLEIDA",
         "distance_km": 11.8,
@@ -3717,8 +4501,7 @@
       "avg_temp": 29,
       "min_temp": 22,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "MOLLERUSSA",
         "distance_km": 8.7,
@@ -3740,8 +4523,7 @@
       "avg_temp": 28,
       "min_temp": 22,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "MOLLERUSSA",
         "distance_km": 11.0,
@@ -3763,8 +4545,7 @@
       "avg_temp": 28,
       "min_temp": 21,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TORDERA - GRANYANELLA",
         "distance_km": 12.3,
@@ -3786,8 +4567,7 @@
       "avg_temp": 27,
       "min_temp": 21,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TORDERA - GRANYANELLA",
         "distance_km": 2.4,
@@ -3809,8 +4589,7 @@
       "avg_temp": 26,
       "min_temp": 20,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TORDERA - GRANYANELLA",
         "distance_km": 8.1,
@@ -3832,8 +4611,7 @@
       "avg_temp": 25,
       "min_temp": 19,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TORÀ",
         "distance_km": 13.3,
@@ -3855,8 +4633,7 @@
       "avg_temp": 25,
       "min_temp": 19,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "IGUALADA - MUNTANYETA",
         "distance_km": 11.9,
@@ -3878,8 +4655,23 @@
       "avg_temp": 24,
       "min_temp": 18,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 63
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 47
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 42
+        }
+      ],
       "aemet_check": {
         "station_name": "MANRESA",
         "distance_km": 13.3,
@@ -3901,8 +4693,7 @@
       "avg_temp": 27,
       "min_temp": 20,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "MANRESA",
         "distance_km": 4.2,
@@ -3924,8 +4715,23 @@
       "avg_temp": 26,
       "min_temp": 19,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 56
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 32
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 31
+        }
+      ],
       "aemet_check": {
         "station_name": "MANRESA",
         "distance_km": 8.0,
@@ -3947,8 +4753,38 @@
       "avg_temp": 26,
       "min_temp": 20,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 29
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 26
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 25
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 25
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 22
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 16
+        }
+      ],
       "aemet_check": {
         "station_name": "CALDES DE MONTBUI",
         "distance_km": 13.1,
@@ -3970,8 +4806,7 @@
       "avg_temp": 25,
       "min_temp": 20,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "CALDES DE MONTBUI",
         "distance_km": 8.7,
@@ -3993,8 +4828,38 @@
       "avg_temp": 25,
       "min_temp": 20,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 45
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 41
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 38
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 38
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 36
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 35
+        }
+      ],
       "aemet_check": {
         "station_name": "FONTMARTINA",
         "distance_km": 13.7,
@@ -4016,8 +4881,7 @@
       "avg_temp": 26,
       "min_temp": 20,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "FONTMARTINA",
         "distance_km": 7.8,
@@ -4039,8 +4903,23 @@
       "avg_temp": 27,
       "min_temp": 22,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 53
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 26
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 18
+        }
+      ],
       "aemet_check": {
         "station_name": "ARENYS DE MAR",
         "distance_km": 11.5,
@@ -4062,8 +4941,43 @@
       "avg_temp": 26,
       "min_temp": 21,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 39
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 21
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 19
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 18
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 17
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 11
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 3
+        }
+      ],
       "aemet_check": {
         "station_name": "BLANES  JARDIN BOTANICO",
         "distance_km": 12.1,
@@ -4085,8 +4999,38 @@
       "avg_temp": 26,
       "min_temp": 22,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 34
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 26
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 23
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 23
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 22
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 21
+        }
+      ],
       "aemet_check": {
         "station_name": "BLANES  JARDIN BOTANICO",
         "distance_km": 2.4,
@@ -4108,8 +5052,7 @@
       "avg_temp": 27,
       "min_temp": 25,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "BLANES  JARDIN BOTANICO",
         "distance_km": 8.4,
@@ -4131,8 +5074,7 @@
       "avg_temp": 28,
       "min_temp": 21,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TAMARITE DE LITERA  LA MELUSA",
         "distance_km": 2.7,
@@ -4154,8 +5096,7 @@
       "avg_temp": 28,
       "min_temp": 21,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TAMARITE DE LITERA  LA MELUSA",
         "distance_km": 7.4,
@@ -4177,8 +5118,7 @@
       "avg_temp": 28,
       "min_temp": 22,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "LLEIDA",
         "distance_km": 17.2,
@@ -4200,8 +5140,7 @@
       "avg_temp": 28,
       "min_temp": 22,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "OS DE BALAGUER",
         "distance_km": 11.0,
@@ -4223,8 +5162,7 @@
       "avg_temp": 28,
       "min_temp": 22,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "OS DE BALAGUER",
         "distance_km": 12.0,
@@ -4246,8 +5184,7 @@
       "avg_temp": 28,
       "min_temp": 21,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "ARTESA DE SEGRE",
         "distance_km": 17.0,
@@ -4269,8 +5206,7 @@
       "avg_temp": 28,
       "min_temp": 21,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "ARTESA DE SEGRE",
         "distance_km": 11.5,
@@ -4292,8 +5228,7 @@
       "avg_temp": 27,
       "min_temp": 21,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TORDERA - GRANYANELLA",
         "distance_km": 11.3,
@@ -4315,8 +5250,7 @@
       "avg_temp": 26,
       "min_temp": 19,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TORÀ",
         "distance_km": 6.8,
@@ -4338,8 +5272,7 @@
       "avg_temp": 25,
       "min_temp": 19,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TORÀ",
         "distance_km": 4.7,
@@ -4361,8 +5294,38 @@
       "avg_temp": 25,
       "min_temp": 19,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 36
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 34
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 33
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 31
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 29
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 26
+        }
+      ],
       "aemet_check": {
         "station_name": "TORÀ",
         "distance_km": 14.2,
@@ -4384,8 +5347,7 @@
       "avg_temp": 25,
       "min_temp": 19,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "MANRESA",
         "distance_km": 14.6,
@@ -4407,8 +5369,7 @@
       "avg_temp": 26,
       "min_temp": 19,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "MANRESA",
         "distance_km": 7.3,
@@ -4430,8 +5391,38 @@
       "avg_temp": 26,
       "min_temp": 19,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 34
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 31
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 30
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 30
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 27
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 22
+        }
+      ],
       "aemet_check": {
         "station_name": "MANRESA",
         "distance_km": 10.0,
@@ -4453,8 +5444,7 @@
       "avg_temp": 26,
       "min_temp": 19,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "MOIÀ",
         "distance_km": 5.1,
@@ -4476,8 +5466,43 @@
       "avg_temp": 23,
       "min_temp": 18,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 46
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 37
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 34
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 33
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 33
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 27
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 18
+        }
+      ],
       "aemet_check": {
         "station_name": "MOIÀ",
         "distance_km": 7.4,
@@ -4499,8 +5524,23 @@
       "avg_temp": 23,
       "min_temp": 18,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 60
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 39
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 38
+        }
+      ],
       "aemet_check": {
         "station_name": "FONTMARTINA",
         "distance_km": 11.5,
@@ -4522,8 +5562,43 @@
       "avg_temp": 23,
       "min_temp": 18,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 53
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 46
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 42
+        },
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 41
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 40
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 39
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 38
+        }
+      ],
       "aemet_check": {
         "station_name": "FONTMARTINA",
         "distance_km": 2.6,
@@ -4545,8 +5620,23 @@
       "avg_temp": 26,
       "min_temp": 20,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 39
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 38
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 29
+        }
+      ],
       "aemet_check": {
         "station_name": "FONTMARTINA",
         "distance_km": 9.3,
@@ -4568,8 +5658,23 @@
       "avg_temp": 26,
       "min_temp": 20,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 50
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 22
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 22
+        }
+      ],
       "aemet_check": {
         "station_name": "SANT HILARI",
         "distance_km": 16.5,
@@ -4591,8 +5696,7 @@
       "avg_temp": 26,
       "min_temp": 22,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "BLANES  JARDIN BOTANICO",
         "distance_km": 11.7,
@@ -4614,8 +5718,23 @@
       "avg_temp": 25,
       "min_temp": 21,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 63
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 37
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 36
+        }
+      ],
       "aemet_check": {
         "station_name": "CASTELL D?ARO",
         "distance_km": 10.9,
@@ -4637,8 +5756,7 @@
       "avg_temp": 27,
       "min_temp": 21,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TAMARITE DE LITERA  LA MELUSA",
         "distance_km": 16.3,
@@ -4660,8 +5778,7 @@
       "avg_temp": 27,
       "min_temp": 22,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TAMARITE DE LITERA  LA MELUSA",
         "distance_km": 10.4,
@@ -4683,8 +5800,7 @@
       "avg_temp": 27,
       "min_temp": 21,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TAMARITE DE LITERA  LA MELUSA",
         "distance_km": 12.4,
@@ -4706,8 +5822,7 @@
       "avg_temp": 27,
       "min_temp": 21,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "OS DE BALAGUER",
         "distance_km": 13.9,
@@ -4729,8 +5844,7 @@
       "avg_temp": 26,
       "min_temp": 21,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "OS DE BALAGUER",
         "distance_km": 3.8,
@@ -4752,8 +5866,7 @@
       "avg_temp": 26,
       "min_temp": 21,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "OS DE BALAGUER",
         "distance_km": 6.3,
@@ -4775,8 +5888,7 @@
       "avg_temp": 26,
       "min_temp": 20,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "ARTESA DE SEGRE",
         "distance_km": 12.9,
@@ -4798,8 +5910,7 @@
       "avg_temp": 27,
       "min_temp": 20,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "ARTESA DE SEGRE",
         "distance_km": 2.9,
@@ -4821,8 +5932,43 @@
       "avg_temp": 26,
       "min_temp": 20,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 60
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 43
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 39
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 38
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 37
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 32
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 22
+        }
+      ],
       "aemet_check": {
         "station_name": "ARTESA DE SEGRE",
         "distance_km": 7.5,
@@ -4844,8 +5990,7 @@
       "avg_temp": 26,
       "min_temp": 20,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TORÀ",
         "distance_km": 9.6,
@@ -4867,8 +6012,38 @@
       "avg_temp": 25,
       "min_temp": 19,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 49
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 46
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 42
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 41
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 39
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 38
+        }
+      ],
       "aemet_check": {
         "station_name": "TORÀ",
         "distance_km": 8.2,
@@ -4890,8 +6065,43 @@
       "avg_temp": 25,
       "min_temp": 19,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 53
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 41
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 37
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 37
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 30
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 30
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 22
+        }
+      ],
       "aemet_check": {
         "station_name": "RINER - XIXONS",
         "distance_km": 9.1,
@@ -4913,8 +6123,38 @@
       "avg_temp": 25,
       "min_temp": 18,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 49
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 46
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 43
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 43
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 42
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 39
+        }
+      ],
       "aemet_check": {
         "station_name": "RINER - XIXONS",
         "distance_km": 11.0,
@@ -4936,8 +6176,7 @@
       "avg_temp": 25,
       "min_temp": 19,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "BALSARENY",
         "distance_km": 5.4,
@@ -4959,8 +6198,38 @@
       "avg_temp": 25,
       "min_temp": 18,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 54
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 51
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 48
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 44
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 42
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 42
+        }
+      ],
       "aemet_check": {
         "station_name": "BALSARENY",
         "distance_km": 4.7,
@@ -4982,8 +6251,7 @@
       "avg_temp": 25,
       "min_temp": 18,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "MOIÀ",
         "distance_km": 7.4,
@@ -5005,8 +6273,43 @@
       "avg_temp": 24,
       "min_temp": 17,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 46
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 41
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 37
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 33
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 33
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 30
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 22
+        }
+      ],
       "aemet_check": {
         "station_name": "MOIÀ",
         "distance_km": 9.1,
@@ -5028,8 +6331,38 @@
       "avg_temp": 24,
       "min_temp": 17,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 33
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 29
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 28
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 26
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 23
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 20
+        }
+      ],
       "aemet_check": {
         "station_name": "FONTMARTINA",
         "distance_km": 16.7,
@@ -5051,8 +6384,38 @@
       "avg_temp": 25,
       "min_temp": 19,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 34
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 31
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 30
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 30
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 27
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 22
+        }
+      ],
       "aemet_check": {
         "station_name": "SANT HILARI",
         "distance_km": 8.1,
@@ -5074,8 +6437,23 @@
       "avg_temp": 24,
       "min_temp": 19,
       "days_since_rain": 4,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 70
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 46
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 45
+        }
+      ],
       "aemet_check": {
         "station_name": "SANT HILARI",
         "distance_km": 2.4,
@@ -5097,8 +6475,38 @@
       "avg_temp": 26,
       "min_temp": 21,
       "days_since_rain": 4,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 54
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 51
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 48
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 48
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 45
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 43
+        }
+      ],
       "aemet_check": {
         "station_name": "GIRONA  AEROPUERTO",
         "distance_km": 9.6,
@@ -5120,8 +6528,38 @@
       "avg_temp": 26,
       "min_temp": 21,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 47
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 44
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 41
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 41
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 38
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 36
+        }
+      ],
       "aemet_check": {
         "station_name": "GIRONA  AEROPUERTO",
         "distance_km": 4.8,
@@ -5143,8 +6581,23 @@
       "avg_temp": 26,
       "min_temp": 21,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 63
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 37
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 36
+        }
+      ],
       "aemet_check": {
         "station_name": "GIRONA  AEROPUERTO",
         "distance_km": 12.6,
@@ -5166,8 +6619,23 @@
       "avg_temp": 26,
       "min_temp": 22,
       "days_since_rain": 4,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 70
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 43
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 41
+        }
+      ],
       "aemet_check": {
         "station_name": "CASTELL D?ARO",
         "distance_km": 7.0,
@@ -5189,8 +6657,7 @@
       "avg_temp": 27,
       "min_temp": 21,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "BARBASTRO",
         "distance_km": 18.1,
@@ -5212,8 +6679,7 @@
       "avg_temp": 26,
       "min_temp": 20,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "BENABARRE",
         "distance_km": 16.9,
@@ -5235,8 +6701,7 @@
       "avg_temp": 25,
       "min_temp": 19,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "OS DE BALAGUER",
         "distance_km": 17.0,
@@ -5258,8 +6723,7 @@
       "avg_temp": 25,
       "min_temp": 19,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "OS DE BALAGUER",
         "distance_km": 10.5,
@@ -5281,8 +6745,23 @@
       "avg_temp": 26,
       "min_temp": 20,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 70
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 43
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 41
+        }
+      ],
       "aemet_check": {
         "station_name": "OS DE BALAGUER",
         "distance_km": 11.6,
@@ -5304,8 +6783,7 @@
       "avg_temp": 23,
       "min_temp": 18,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "LLIMIANA",
         "distance_km": 12.4,
@@ -5327,8 +6805,43 @@
       "avg_temp": 26,
       "min_temp": 20,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 48
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 34
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 30
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 30
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 23
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 22
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 15
+        }
+      ],
       "aemet_check": {
         "station_name": "ARTESA DE SEGRE",
         "distance_km": 9.3,
@@ -5350,8 +6863,43 @@
       "avg_temp": 26,
       "min_temp": 19,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 60
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 46
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 42
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 40
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 38
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 35
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 25
+        }
+      ],
       "aemet_check": {
         "station_name": "ARTESA DE SEGRE",
         "distance_km": 11.5,
@@ -5373,8 +6921,38 @@
       "avg_temp": 26,
       "min_temp": 20,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 58
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 54
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 51
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 47
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 43
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 38
+        }
+      ],
       "aemet_check": {
         "station_name": "TORÀ",
         "distance_km": 18.4,
@@ -5396,8 +6974,7 @@
       "avg_temp": 24,
       "min_temp": 18,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "RINER - XIXONS",
         "distance_km": 13.4,
@@ -5419,8 +6996,7 @@
       "avg_temp": 25,
       "min_temp": 18,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "RINER - XIXONS",
         "distance_km": 3.5,
@@ -5442,8 +7018,38 @@
       "avg_temp": 25,
       "min_temp": 18,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 44
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 41
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 40
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 38
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 34
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 33
+        }
+      ],
       "aemet_check": {
         "station_name": "RINER - XIXONS",
         "distance_km": 7.0,
@@ -5465,8 +7071,43 @@
       "avg_temp": 25,
       "min_temp": 18,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 67
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 55
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 51
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 46
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 45
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 42
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 32
+        }
+      ],
       "aemet_check": {
         "station_name": "BALSARENY",
         "distance_km": 11.8,
@@ -5488,8 +7129,38 @@
       "avg_temp": 25,
       "min_temp": 18,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 64
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 63
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 61
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 58
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 49
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 42
+        }
+      ],
       "aemet_check": {
         "station_name": "PRATS DE LLUÇANÈS",
         "distance_km": 9.6,
@@ -5511,8 +7182,7 @@
       "avg_temp": 25,
       "min_temp": 19,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "PRATS DE LLUÇANÈS",
         "distance_km": 5.5,
@@ -5534,8 +7204,7 @@
       "avg_temp": 25,
       "min_temp": 18,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "PRATS DE LLUÇANÈS",
         "distance_km": 13.1,
@@ -5557,8 +7226,7 @@
       "avg_temp": 25,
       "min_temp": 18,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "SANT HILARI",
         "distance_km": 20.1,
@@ -5580,8 +7248,23 @@
       "avg_temp": 25,
       "min_temp": 18,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 46
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 27
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 26
+        }
+      ],
       "aemet_check": {
         "station_name": "SANT HILARI",
         "distance_km": 12.0,
@@ -5603,8 +7286,23 @@
       "avg_temp": 24,
       "min_temp": 19,
       "days_since_rain": 4,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 70
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 51
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 46
+        }
+      ],
       "aemet_check": {
         "station_name": "SANT HILARI",
         "distance_km": 9.2,
@@ -5626,8 +7324,7 @@
       "avg_temp": 26,
       "min_temp": 20,
       "days_since_rain": 4,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "GIRONA  AEROPUERTO",
         "distance_km": 10.1,
@@ -5649,8 +7346,7 @@
       "avg_temp": 27,
       "min_temp": 21,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "GIRONA  PARC DEL MIGDIA",
         "distance_km": 3.3,
@@ -5672,8 +7368,38 @@
       "avg_temp": 25,
       "min_temp": 20,
       "days_since_rain": 4,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 59
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 58
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 54
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 51
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 45
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 43
+        }
+      ],
       "aemet_check": {
         "station_name": "GIRONA  PARC DEL MIGDIA",
         "distance_km": 7.2,
@@ -5695,8 +7421,7 @@
       "avg_temp": 27,
       "min_temp": 22,
       "days_since_rain": 4,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "CASTELL D?ARO",
         "distance_km": 17.0,
@@ -5718,8 +7443,7 @@
       "avg_temp": 26,
       "min_temp": 22,
       "days_since_rain": 4,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "L?ESTARTIT",
         "distance_km": 11.2,
@@ -5741,8 +7465,7 @@
       "avg_temp": 24,
       "min_temp": 18,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "BENABARRE",
         "distance_km": 6.8,
@@ -5764,8 +7487,7 @@
       "avg_temp": 24,
       "min_temp": 17,
       "days_since_rain": 2,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "BENABARRE",
         "distance_km": 11.2,
@@ -5787,8 +7509,7 @@
       "avg_temp": 20,
       "min_temp": 14,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "LLIMIANA",
         "distance_km": 16.4,
@@ -5810,8 +7531,23 @@
       "avg_temp": 24,
       "min_temp": 18,
       "days_since_rain": 2,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 49
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 30
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 28
+        }
+      ],
       "aemet_check": {
         "station_name": "LLIMIANA",
         "distance_km": 6.4,
@@ -5833,8 +7569,7 @@
       "avg_temp": 26,
       "min_temp": 20,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "LLIMIANA",
         "distance_km": 4.2,
@@ -5856,8 +7591,43 @@
       "avg_temp": 22,
       "min_temp": 17,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 40
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 38
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 35
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 30
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 27
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 24
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 18
+        }
+      ],
       "aemet_check": {
         "station_name": "LLIMIANA",
         "distance_km": 14.0,
@@ -5879,8 +7649,38 @@
       "avg_temp": 24,
       "min_temp": 18,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 44
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 41
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 40
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 38
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 34
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 33
+        }
+      ],
       "aemet_check": {
         "station_name": "COLL DE NARGÓ",
         "distance_km": 14.8,
@@ -5902,8 +7702,38 @@
       "avg_temp": 24,
       "min_temp": 18,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 52
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 49
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 46
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 45
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 43
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 42
+        }
+      ],
       "aemet_check": {
         "station_name": "COLL DE NARGÓ",
         "distance_km": 11.4,
@@ -5925,8 +7755,7 @@
       "avg_temp": 24,
       "min_temp": 18,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "COLL DE NARGÓ",
         "distance_km": 15.6,
@@ -5948,8 +7777,23 @@
       "avg_temp": 24,
       "min_temp": 18,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 70
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 54
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 49
+        }
+      ],
       "aemet_check": {
         "station_name": "RINER - XIXONS",
         "distance_km": 12.0,
@@ -5971,8 +7815,7 @@
       "avg_temp": 23,
       "min_temp": 18,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "RINER - XIXONS",
         "distance_km": 13.5,
@@ -5994,8 +7837,7 @@
       "avg_temp": 25,
       "min_temp": 19,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "BERGA  INSTITUTO",
         "distance_km": 6.9,
@@ -6017,8 +7859,7 @@
       "avg_temp": 24,
       "min_temp": 18,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "BERGA  INSTITUTO",
         "distance_km": 8.1,
@@ -6040,8 +7881,38 @@
       "avg_temp": 24,
       "min_temp": 17,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 62
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 58
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 55
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 53
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 48
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 45
+        }
+      ],
       "aemet_check": {
         "station_name": "PRATS DE LLUÇANÈS",
         "distance_km": 5.4,
@@ -6063,8 +7934,7 @@
       "avg_temp": 23,
       "min_temp": 16,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "PRATS DE LLUÇANÈS",
         "distance_km": 13.1,
@@ -6086,8 +7956,43 @@
       "avg_temp": 25,
       "min_temp": 18,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 70
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 64
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 60
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 56
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 54
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 42
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 41
+        }
+      ],
       "aemet_check": {
         "station_name": "RIPOLL",
         "distance_km": 17.5,
@@ -6109,8 +8014,7 @@
       "avg_temp": 24,
       "min_temp": 18,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "LES PLANES D?HOSTOLES",
         "distance_km": 11.1,
@@ -6132,8 +8036,43 @@
       "avg_temp": 25,
       "min_temp": 20,
       "days_since_rain": 4,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 70
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 55
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 51
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 45
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 44
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 44
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 30
+        }
+      ],
       "aemet_check": {
         "station_name": "LES PLANES D?HOSTOLES",
         "distance_km": 1.0,
@@ -6155,8 +8094,23 @@
       "avg_temp": 25,
       "min_temp": 20,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 63
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 40
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 36
+        }
+      ],
       "aemet_check": {
         "station_name": "LES PLANES D?HOSTOLES",
         "distance_km": 9.1,
@@ -6178,8 +8132,38 @@
       "avg_temp": 25,
       "min_temp": 20,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 51
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 47
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 44
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 44
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 38
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 36
+        }
+      ],
       "aemet_check": {
         "station_name": "PORQUERES",
         "distance_km": 6.0,
@@ -6201,8 +8185,43 @@
       "avg_temp": 27,
       "min_temp": 21,
       "days_since_rain": 4,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 57
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 41
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 36
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 33
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 32
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 26
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 17
+        }
+      ],
       "aemet_check": {
         "station_name": "GIRONA  PARC DEL MIGDIA",
         "distance_km": 11.3,
@@ -6224,8 +8243,7 @@
       "avg_temp": 27,
       "min_temp": 22,
       "days_since_rain": 4,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "L?ESTARTIT",
         "distance_km": 14.4,
@@ -6247,8 +8265,7 @@
       "avg_temp": 26,
       "min_temp": 22,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "L?ESTARTIT",
         "distance_km": 4.3,
@@ -6270,8 +8287,7 @@
       "avg_temp": 24,
       "min_temp": 18,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "BENABARRE",
         "distance_km": 3.5,
@@ -6293,8 +8309,7 @@
       "avg_temp": 24,
       "min_temp": 18,
       "days_since_rain": 4,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "BENABARRE",
         "distance_km": 9.5,
@@ -6316,8 +8331,43 @@
       "avg_temp": 25,
       "min_temp": 19,
       "days_since_rain": 5,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 80
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 71
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 71
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 67
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 60
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 57
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 48
+        }
+      ],
       "aemet_check": {
         "station_name": "TALARN",
         "distance_km": 14.5,
@@ -6339,8 +8389,7 @@
       "avg_temp": 25,
       "min_temp": 19,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TALARN",
         "distance_km": 7.5,
@@ -6362,8 +8411,7 @@
       "avg_temp": 26,
       "min_temp": 20,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "LLIMIANA",
         "distance_km": 9.2,
@@ -6385,8 +8433,7 @@
       "avg_temp": 24,
       "min_temp": 18,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "LLIMIANA",
         "distance_km": 16.2,
@@ -6408,8 +8455,38 @@
       "avg_temp": 20,
       "min_temp": 15,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 68
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 68
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 68
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 65
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 59
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 52
+        }
+      ],
       "aemet_check": {
         "station_name": "COLL DE NARGÓ",
         "distance_km": 9.5,
@@ -6431,8 +8508,38 @@
       "avg_temp": 23,
       "min_temp": 17,
       "days_since_rain": 4,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 75
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 72
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 71
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 68
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 60
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 52
+        }
+      ],
       "aemet_check": {
         "station_name": "COLL DE NARGÓ",
         "distance_km": 1.5,
@@ -6454,8 +8561,7 @@
       "avg_temp": 18,
       "min_temp": 14,
       "days_since_rain": 4,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "COLL DE NARGÓ",
         "distance_km": 10.7,
@@ -6477,8 +8583,38 @@
       "avg_temp": 20,
       "min_temp": 15,
       "days_since_rain": 4,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 75
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 75
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 75
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 72
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 67
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 59
+        }
+      ],
       "aemet_check": {
         "station_name": "TUIXENT",
         "distance_km": 9.8,
@@ -6500,8 +8636,38 @@
       "avg_temp": 21,
       "min_temp": 16,
       "days_since_rain": 4,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 75
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 75
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 72
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 71
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 63
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 55
+        }
+      ],
       "aemet_check": {
         "station_name": "TUIXENT",
         "distance_km": 13.7,
@@ -6523,8 +8689,38 @@
       "avg_temp": 17,
       "min_temp": 13,
       "days_since_rain": 4,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 75
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 75
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 75
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 72
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 70
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 65
+        }
+      ],
       "aemet_check": {
         "station_name": "BERGA  INSTITUTO",
         "distance_km": 6.1,
@@ -6546,8 +8742,38 @@
       "avg_temp": 23,
       "min_temp": 17,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 68
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 65
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 64
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 61
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 53
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 45
+        }
+      ],
       "aemet_check": {
         "station_name": "BERGA  INSTITUTO",
         "distance_km": 7.4,
@@ -6569,8 +8795,38 @@
       "avg_temp": 23,
       "min_temp": 18,
       "days_since_rain": 2,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 68
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 67
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 63
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 60
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 52
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 44
+        }
+      ],
       "aemet_check": {
         "station_name": "RIPOLL",
         "distance_km": 13.2,
@@ -6592,8 +8848,7 @@
       "avg_temp": 23,
       "min_temp": 18,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "RIPOLL",
         "distance_km": 5.8,
@@ -6615,8 +8870,43 @@
       "avg_temp": 21,
       "min_temp": 16,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 70
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 68
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 65
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 60
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 60
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 57
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 48
+        }
+      ],
       "aemet_check": {
         "station_name": "RIPOLL",
         "distance_km": 9.8,
@@ -6638,8 +8928,43 @@
       "avg_temp": 24,
       "min_temp": 19,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 70
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 61
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 57
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 57
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 50
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 42
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 38
+        }
+      ],
       "aemet_check": {
         "station_name": "VALL DE BIANYA",
         "distance_km": 8.9,
@@ -6661,8 +8986,23 @@
       "avg_temp": 24,
       "min_temp": 19,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 70
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 50
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 46
+        }
+      ],
       "aemet_check": {
         "station_name": "VALL DE BIANYA",
         "distance_km": 9.4,
@@ -6684,8 +9024,38 @@
       "avg_temp": 25,
       "min_temp": 19,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 49
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 46
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 42
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 41
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 39
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 38
+        }
+      ],
       "aemet_check": {
         "station_name": "PORQUERES",
         "distance_km": 9.4,
@@ -6707,8 +9077,7 @@
       "avg_temp": 27,
       "min_temp": 21,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "PORQUERES",
         "distance_km": 4.5,
@@ -6730,8 +9099,43 @@
       "avg_temp": 27,
       "min_temp": 22,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 70
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 52
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 51
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 47
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 40
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 40
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 38
+        }
+      ],
       "aemet_check": {
         "station_name": "PORQUERES",
         "distance_km": 12.4,
@@ -6753,8 +9157,7 @@
       "avg_temp": 27,
       "min_temp": 22,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "CASTELLO D?EMPURIES",
         "distance_km": 10.7,
@@ -6776,8 +9179,7 @@
       "avg_temp": 26,
       "min_temp": 24,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "CASTELLO D?EMPURIES",
         "distance_km": 10.3,
@@ -6799,8 +9201,7 @@
       "avg_temp": 26,
       "min_temp": 19,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "CAPELLA  LAGUARRES",
         "distance_km": 10.6,
@@ -6822,8 +9223,7 @@
       "avg_temp": 27,
       "min_temp": 20,
       "days_since_rain": 15,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "CAPELLA  LAGUARRES",
         "distance_km": 3.4,
@@ -6845,8 +9245,7 @@
       "avg_temp": 22,
       "min_temp": 16,
       "days_since_rain": 5,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "CAPELLA  LAGUARRES",
         "distance_km": 10.6,
@@ -6868,8 +9267,7 @@
       "avg_temp": 25,
       "min_temp": 18,
       "days_since_rain": 5,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "SOPEIRA",
         "distance_km": 10.1,
@@ -6891,8 +9289,7 @@
       "avg_temp": 21,
       "min_temp": 16,
       "days_since_rain": 4,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TALARN",
         "distance_km": 4.1,
@@ -6914,8 +9311,43 @@
       "avg_temp": 26,
       "min_temp": 19,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 75
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 67
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 66
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 62
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 55
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 52
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 43
+        }
+      ],
       "aemet_check": {
         "station_name": "TALARN",
         "distance_km": 8.0,
@@ -6937,8 +9369,23 @@
       "avg_temp": 20,
       "min_temp": 16,
       "days_since_rain": 5,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 80
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 70
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 66
+        }
+      ],
       "aemet_check": {
         "station_name": "TALARN",
         "distance_km": 17.7,
@@ -6960,8 +9407,7 @@
       "avg_temp": 21,
       "min_temp": 16,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "COLL DE NARGÓ",
         "distance_km": 12.7,
@@ -6983,8 +9429,23 @@
       "avg_temp": 22,
       "min_temp": 16,
       "days_since_rain": 4,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 77
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 68
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 63
+        }
+      ],
       "aemet_check": {
         "station_name": "COLL DE NARGÓ",
         "distance_km": 8.6,
@@ -7006,8 +9467,38 @@
       "avg_temp": 20,
       "min_temp": 15,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 68
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 68
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 68
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 65
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 59
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 52
+        }
+      ],
       "aemet_check": {
         "station_name": "TUIXENT",
         "distance_km": 10.6,
@@ -7029,8 +9520,7 @@
       "avg_temp": 21,
       "min_temp": 15,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TUIXENT",
         "distance_km": 0.6,
@@ -7052,8 +9542,38 @@
       "avg_temp": 17,
       "min_temp": 13,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 68
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 68
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 68
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 65
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 63
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 58
+        }
+      ],
       "aemet_check": {
         "station_name": "TUIXENT",
         "distance_km": 9.5,
@@ -7075,8 +9595,23 @@
       "avg_temp": 22,
       "min_temp": 16,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 70
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 60
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 56
+        }
+      ],
       "aemet_check": {
         "station_name": "BERGA  INSTITUTO",
         "distance_km": 15.1,
@@ -7098,8 +9633,43 @@
       "avg_temp": 22,
       "min_temp": 16,
       "days_since_rain": 2,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 72
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 70
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 68
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 63
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 63
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 59
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 51
+        }
+      ],
       "aemet_check": {
         "station_name": "LA MOLINA",
         "distance_km": 11.2,
@@ -7121,8 +9691,7 @@
       "avg_temp": 21,
       "min_temp": 16,
       "days_since_rain": 2,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "PLANOLES",
         "distance_km": 10.4,
@@ -7144,8 +9713,38 @@
       "avg_temp": 23,
       "min_temp": 16,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 38
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 38
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 35
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 34
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 28
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 24
+        }
+      ],
       "aemet_check": {
         "station_name": "RIPOLL",
         "distance_km": 4.9,
@@ -7167,8 +9766,43 @@
       "avg_temp": 22,
       "min_temp": 16,
       "days_since_rain": 4,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 82
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 80
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 77
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 73
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 73
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 69
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 60
+        }
+      ],
       "aemet_check": {
         "station_name": "SANT PAU DE SEGURIES",
         "distance_km": 6.4,
@@ -7190,8 +9824,7 @@
       "avg_temp": 26,
       "min_temp": 20,
       "days_since_rain": 4,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "VALL DE BIANYA",
         "distance_km": 5.1,
@@ -7213,8 +9846,38 @@
       "avg_temp": 27,
       "min_temp": 20,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 59
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 58
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 54
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 51
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 43
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 38
+        }
+      ],
       "aemet_check": {
         "station_name": "VALL DE BIANYA",
         "distance_km": 6.0,
@@ -7236,8 +9899,38 @@
       "avg_temp": 27,
       "min_temp": 21,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 48
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 45
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 43
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 42
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 38
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 38
+        }
+      ],
       "aemet_check": {
         "station_name": "VALL DE BIANYA",
         "distance_km": 15.8,
@@ -7259,8 +9952,7 @@
       "avg_temp": 27,
       "min_temp": 21,
       "days_since_rain": 4,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "PORQUERES",
         "distance_km": 14.3,
@@ -7282,8 +9974,7 @@
       "avg_temp": 29,
       "min_temp": 23,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "FIGUERES  ELS ASPRES",
         "distance_km": 5.5,
@@ -7305,8 +9996,7 @@
       "avg_temp": 27,
       "min_temp": 22,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "CASTELLO D?EMPURIES",
         "distance_km": 5.5,
@@ -7328,8 +10018,7 @@
       "avg_temp": 27,
       "min_temp": 24,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "CASTELLO D?EMPURIES",
         "distance_km": 4.7,
@@ -7351,8 +10040,7 @@
       "avg_temp": 23,
       "min_temp": 17,
       "days_since_rain": 3,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "CAPELLA  LAGUARRES",
         "distance_km": 16.8,
@@ -7374,8 +10062,7 @@
       "avg_temp": 21,
       "min_temp": 16,
       "days_since_rain": 6,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "CAPELLA  LAGUARRES",
         "distance_km": 13.4,
@@ -7397,8 +10084,7 @@
       "avg_temp": 23,
       "min_temp": 18,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "SOPEIRA",
         "distance_km": 13.1,
@@ -7420,8 +10106,7 @@
       "avg_temp": 20,
       "min_temp": 15,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "SOPEIRA",
         "distance_km": 3.1,
@@ -7443,8 +10128,7 @@
       "avg_temp": 19,
       "min_temp": 15,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "SOPEIRA",
         "distance_km": 7.0,
@@ -7466,8 +10150,43 @@
       "avg_temp": 22,
       "min_temp": 16,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 70
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 68
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 65
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 60
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 60
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 57
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 48
+        }
+      ],
       "aemet_check": {
         "station_name": "TALARN",
         "distance_km": 15.0,
@@ -7489,8 +10208,7 @@
       "avg_temp": 24,
       "min_temp": 18,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "PORT AINE  L?ORRI",
         "distance_km": 15.0,
@@ -7512,8 +10230,38 @@
       "avg_temp": 17,
       "min_temp": 12,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 68
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 68
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 68
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 65
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 63
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 58
+        }
+      ],
       "aemet_check": {
         "station_name": "PORT AINE  L?ORRI",
         "distance_km": 9.9,
@@ -7535,8 +10283,7 @@
       "avg_temp": 22,
       "min_temp": 16,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "LA SEU D'URGELL  AEROPORT",
         "distance_km": 7.2,
@@ -7558,8 +10305,38 @@
       "avg_temp": 22,
       "min_temp": 16,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 73
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 73
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 70
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 69
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 61
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 53
+        }
+      ],
       "aemet_check": {
         "station_name": "LA SEU D'URGELL  AEROPORT",
         "distance_km": 3.6,
@@ -7581,8 +10358,7 @@
       "avg_temp": 21,
       "min_temp": 15,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "TUIXENT",
         "distance_km": 10.2,
@@ -7604,8 +10380,43 @@
       "avg_temp": 20,
       "min_temp": 14,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 70
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 68
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 65
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 60
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 60
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 60
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 55
+        }
+      ],
       "aemet_check": {
         "station_name": "MARTINET",
         "distance_km": 4.5,
@@ -7627,8 +10438,38 @@
       "avg_temp": 18,
       "min_temp": 13,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 68
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 68
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 68
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 65
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 63
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 58
+        }
+      ],
       "aemet_check": {
         "station_name": "MARTINET",
         "distance_km": 10.4,
@@ -7650,8 +10491,38 @@
       "avg_temp": 15,
       "min_temp": 11,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 68
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 68
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 68
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 65
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 63
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 58
+        }
+      ],
       "aemet_check": {
         "station_name": "LA MOLINA",
         "distance_km": 1.4,
@@ -7673,8 +10544,7 @@
       "avg_temp": 20,
       "min_temp": 15,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "PLANOLES",
         "distance_km": 4.3,
@@ -7696,8 +10566,7 @@
       "avg_temp": 21,
       "min_temp": 15,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "PLANOLES",
         "distance_km": 5.8,
@@ -7719,8 +10588,38 @@
       "avg_temp": 19,
       "min_temp": 14,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 73
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 73
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 73
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 70
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 68
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 60
+        }
+      ],
       "aemet_check": {
         "station_name": "SANT PAU DE SEGURIES",
         "distance_km": 9.1,
@@ -7742,8 +10641,43 @@
       "avg_temp": 21,
       "min_temp": 16,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 75
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 73
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 70
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 65
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 65
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 62
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 53
+        }
+      ],
       "aemet_check": {
         "station_name": "SANT PAU DE SEGURIES",
         "distance_km": 8.3,
@@ -7765,8 +10699,43 @@
       "avg_temp": 23,
       "min_temp": 18,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 70
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 65
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 64
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 60
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 54
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 50
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 42
+        }
+      ],
       "aemet_check": {
         "station_name": "VALL DE BIANYA",
         "distance_km": 13.6,
@@ -7788,8 +10757,38 @@
       "avg_temp": 22,
       "min_temp": 17,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 68
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 65
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 64
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 61
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 53
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 45
+        }
+      ],
       "aemet_check": {
         "station_name": "MAÇANET DE CABRENYS",
         "distance_km": 10.6,
@@ -7811,8 +10810,38 @@
       "avg_temp": 27,
       "min_temp": 21,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 42
+        },
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 39
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 38
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 36
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 36
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 35
+        }
+      ],
       "aemet_check": {
         "station_name": "MAÇANET DE CABRENYS",
         "distance_km": 7.6,
@@ -7834,8 +10863,7 @@
       "avg_temp": 28,
       "min_temp": 22,
       "days_since_rain": 4,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "FIGUERES  ELS ASPRES",
         "distance_km": 8.3,
@@ -7857,8 +10885,7 @@
       "avg_temp": 27,
       "min_temp": 22,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "ESPOLLA  LES ALBERES",
         "distance_km": 7.7,
@@ -7880,8 +10907,7 @@
       "avg_temp": 27,
       "min_temp": 23,
       "days_since_rain": 20,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "EL PORT DE LA SELVA",
         "distance_km": 4.8,
@@ -7903,8 +10929,7 @@
       "avg_temp": 25,
       "min_temp": 19,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "AÍNSA-SOBRARBE  LA SERRETA-DEPÓSITO",
         "distance_km": 7.0,
@@ -7926,8 +10951,7 @@
       "avg_temp": 22,
       "min_temp": 17,
       "days_since_rain": 5,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "SEIRA",
         "distance_km": 10.3,
@@ -7949,8 +10973,7 @@
       "avg_temp": 22,
       "min_temp": 16,
       "days_since_rain": 5,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "SEIRA",
         "distance_km": 7.7,
@@ -7972,8 +10995,7 @@
       "avg_temp": 18,
       "min_temp": 13,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "SEIRA",
         "distance_km": 14.5,
@@ -7995,8 +11017,7 @@
       "avg_temp": 21,
       "min_temp": 15,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "SOPEIRA",
         "distance_km": 10.8,
@@ -8018,8 +11039,7 @@
       "avg_temp": 20,
       "min_temp": 14,
       "days_since_rain": 4,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "BARRUERA",
         "distance_km": 10.5,
@@ -8041,8 +11061,7 @@
       "avg_temp": 19,
       "min_temp": 14,
       "days_since_rain": 5,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "CABDELLA-CENTRAL",
         "distance_km": 6.8,
@@ -8064,8 +11083,7 @@
       "avg_temp": 17,
       "min_temp": 12,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "CABDELLA-CENTRAL",
         "distance_km": 9.2,
@@ -8087,8 +11105,7 @@
       "avg_temp": 14,
       "min_temp": 10,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "PORT AINE  L?ORRI",
         "distance_km": 1.4,
@@ -8110,8 +11127,7 @@
       "avg_temp": 20,
       "min_temp": 15,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "PORT AINE  L?ORRI",
         "distance_km": 8.7,
@@ -8133,8 +11149,38 @@
       "avg_temp": 19,
       "min_temp": 14,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 81
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 81
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 81
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 78
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 76
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 60
+        }
+      ],
       "aemet_check": {
         "station_name": "LA SEU D'URGELL  AEROPORT",
         "distance_km": 8.6,
@@ -8156,8 +11202,38 @@
       "avg_temp": 16,
       "min_temp": 12,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 76
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 76
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 76
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 73
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 71
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 58
+        }
+      ],
       "aemet_check": {
         "station_name": "CAP DE REC",
         "distance_km": 8.8,
@@ -8179,8 +11255,7 @@
       "avg_temp": 17,
       "min_temp": 12,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "CAP DE REC",
         "distance_km": 2.5,
@@ -8202,8 +11277,7 @@
       "avg_temp": 19,
       "min_temp": 13,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "MARTINET",
         "distance_km": 10.9,
@@ -8225,8 +11299,7 @@
       "avg_temp": 19,
       "min_temp": 12,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "LA MOLINA",
         "distance_km": 8.9,
@@ -8248,8 +11321,7 @@
       "avg_temp": 16,
       "min_temp": 12,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "PLANOLES",
         "distance_km": 11.4,
@@ -8271,8 +11343,7 @@
       "avg_temp": 11,
       "min_temp": 7,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "PLANOLES",
         "distance_km": 12.0,
@@ -8294,8 +11365,38 @@
       "avg_temp": 16,
       "min_temp": 12,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 81
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 81
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 81
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 78
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 76
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 63
+        }
+      ],
       "aemet_check": {
         "station_name": "SANT PAU DE SEGURIES",
         "distance_km": 18.0,
@@ -8317,8 +11418,7 @@
       "avg_temp": 20,
       "min_temp": 16,
       "days_since_rain": 4,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "SANT PAU DE SEGURIES",
         "distance_km": 17.6,
@@ -8340,8 +11440,7 @@
       "avg_temp": 23,
       "min_temp": 18,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "MAÇANET DE CABRENYS",
         "distance_km": 18.0,
@@ -8363,8 +11462,7 @@
       "avg_temp": 21,
       "min_temp": 16,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "MAÇANET DE CABRENYS",
         "distance_km": 8.3,
@@ -8386,8 +11484,43 @@
       "avg_temp": 24,
       "min_temp": 19,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 75
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 60
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 56
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 51
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 49
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 38
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 36
+        }
+      ],
       "aemet_check": {
         "station_name": "MAÇANET DE CABRENYS",
         "distance_km": 3.6,
@@ -8409,8 +11542,7 @@
       "avg_temp": 27,
       "min_temp": 22,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "ESPOLLA  LES ALBERES",
         "distance_km": 8.7,
@@ -8432,8 +11564,7 @@
       "avg_temp": 12,
       "min_temp": 9,
       "days_since_rain": 6,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "SEIRA",
         "distance_km": 7.9,
@@ -8455,8 +11586,7 @@
       "avg_temp": 20,
       "min_temp": 14,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "SEIRA",
         "distance_km": 3.8,
@@ -8478,8 +11608,7 @@
       "avg_temp": 17,
       "min_temp": 12,
       "days_since_rain": 5,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "CERLER  COGULLA",
         "distance_km": 6.9,
@@ -8501,8 +11630,7 @@
       "avg_temp": 21,
       "min_temp": 15,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "BARRUERA",
         "distance_km": 7.3,
@@ -8524,8 +11652,7 @@
       "avg_temp": 15,
       "min_temp": 10,
       "days_since_rain": 5,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "BARRUERA",
         "distance_km": 2.7,
@@ -8547,8 +11674,7 @@
       "avg_temp": 13,
       "min_temp": 9,
       "days_since_rain": 5,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "CABDELLA-CENTRAL",
         "distance_km": 5.0,
@@ -8570,8 +11696,7 @@
       "avg_temp": 12,
       "min_temp": 8,
       "days_since_rain": 5,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "CABDELLA-CENTRAL",
         "distance_km": 8.0,
@@ -8593,8 +11718,38 @@
       "avg_temp": 20,
       "min_temp": 15,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 76
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 76
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 76
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 73
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 67
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 52
+        }
+      ],
       "aemet_check": {
         "station_name": "PORT AINE  L?ORRI",
         "distance_km": 10.3,
@@ -8616,8 +11771,7 @@
       "avg_temp": 14,
       "min_temp": 10,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "PORT AINE  L?ORRI",
         "distance_km": 13.4,
@@ -8639,8 +11793,7 @@
       "avg_temp": 18,
       "min_temp": 13,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "LA SEU D'URGELL  AEROPORT",
         "distance_km": 18.3,
@@ -8662,8 +11815,7 @@
       "avg_temp": 17,
       "min_temp": 12,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "CAP DE REC",
         "distance_km": 11.7,
@@ -8685,8 +11837,7 @@
       "avg_temp": 11,
       "min_temp": 7,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "CAP DE REC",
         "distance_km": 8.1,
@@ -8708,8 +11859,7 @@
       "avg_temp": 15,
       "min_temp": 10,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "BENASQUE",
         "distance_km": 4.5,
@@ -8731,8 +11881,7 @@
       "avg_temp": 12,
       "min_temp": 8,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "CERLER  COGULLA",
         "distance_km": 5.5,
@@ -8754,8 +11903,7 @@
       "avg_temp": 13,
       "min_temp": 9,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "BARRUERA",
         "distance_km": 12.3,
@@ -8777,8 +11925,7 @@
       "avg_temp": 9,
       "min_temp": 6,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "BARRUERA",
         "distance_km": 10.2,
@@ -8800,8 +11947,7 @@
       "avg_temp": 10,
       "min_temp": 6,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "CAP DE VAQUEIRA",
         "distance_km": 11.2,
@@ -8823,8 +11969,7 @@
       "avg_temp": 15,
       "min_temp": 10,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "ESTERRI D?ANEU",
         "distance_km": 5.5,
@@ -8846,8 +11991,43 @@
       "avg_temp": 17,
       "min_temp": 12,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 78
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 76
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 73
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 68
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 68
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 68
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 58
+        }
+      ],
       "aemet_check": {
         "station_name": "ESTERRI D?ANEU",
         "distance_km": 6.9,
@@ -8869,8 +12049,43 @@
       "avg_temp": 19,
       "min_temp": 14,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 78
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 76
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 73
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 68
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 68
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 68
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 55
+        }
+      ],
       "aemet_check": {
         "station_name": "ESTERRI D?ANEU",
         "distance_km": 16.3,
@@ -8892,8 +12107,7 @@
       "avg_temp": 9,
       "min_temp": 6,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "CAP DE REC",
         "distance_km": 25.8,
@@ -8915,8 +12129,7 @@
       "avg_temp": 14,
       "min_temp": 11,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [],
       "aemet_check": {
         "station_name": "BENASQUE",
         "distance_km": 10.7,
@@ -8938,8 +12151,43 @@
       "avg_temp": 18,
       "min_temp": 14,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "oureig",
+          "name": "Ou de reig",
+          "score": 78
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 76
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 73
+        },
+        {
+          "id": "camagrocs",
+          "name": "Camagrocs",
+          "score": 68
+        },
+        {
+          "id": "trompetes",
+          "name": "Trompetes de la mort",
+          "score": 68
+        },
+        {
+          "id": "llengua",
+          "name": "Llengua de bou",
+          "score": 68
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 55
+        }
+      ],
       "aemet_check": {
         "station_name": "BOSSOST-CENTRAL",
         "distance_km": 10.6,
@@ -8961,8 +12209,38 @@
       "avg_temp": 15,
       "min_temp": 11,
       "days_since_rain": 1,
-      "matching_species": [],
-      "has_match": false,
+      "species_scores": [
+        {
+          "id": "rovellons",
+          "name": "Rovellons",
+          "score": 76
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 76
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 76
+        },
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 73
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 71
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 58
+        }
+      ],
       "aemet_check": {
         "station_name": "ARTIES",
         "distance_km": 4.2,
