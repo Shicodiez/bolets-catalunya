@@ -858,7 +858,12 @@ def build_results():
     zones_out = []
     for zone, daily_wrapper in zip(ZONES, weather_results):
         daily = daily_wrapper.get("daily", {})
+        if zone["id"] == 390:
+            print(f"  [DEBUG punt 390] precipitation_sum cru: {daily.get('precipitation_sum')}")
+            print(f"  [DEBUG punt 390] temperature_2m_min cru: {daily.get('temperature_2m_min')}")
         rain_10d, avg_temp, min_temp, days_since_rain = compute_rain_stats(daily)
+        if zone["id"] == 390:
+            print(f"  [DEBUG punt 390] resultat: rain_10d={rain_10d} min_temp={min_temp} days_since_rain={days_since_rain}")
         tree = tree_types.get(zone["id"], "desconegut")
 
         aemet_info = None
