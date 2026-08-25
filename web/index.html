@@ -81,7 +81,7 @@
     </div>
   </div>
 
-  <p class="section-label">Totes les zones</p>
+  <p class="section-label" id="section-label">Millors zones</p>
   <div id="zones-list"></div>
 
   <p class="footer-note" id="generated-note"></p>
@@ -124,13 +124,14 @@ function renderMap(filterVal) {
   markers = [];
 
   getRows(filterVal).forEach(z => {
+    if (!z.is_forest) return;
     const c = colorForScore(z.bestScore);
-    const radius = 8 + (z.bestScore / 100) * 10;
+    const radius = 5 + (z.bestScore / 100) * 7;
     const marker = L.circleMarker([z.lat, z.lon], {
       radius: radius,
       fillColor: c.dot,
       color: '#ffffff',
-      weight: 2,
+      weight: 1,
       opacity: 1,
       fillOpacity: 0.85
     }).addTo(map);
@@ -149,12 +150,14 @@ function renderMap(filterVal) {
 function renderList(filterVal, sortVal) {
   const list = document.getElementById('zones-list');
   list.innerHTML = '';
-  let rows = getRows(filterVal);
+  let rows = getRows(filterVal).filter(z => z.is_forest);
 
   if (sortVal === 'score') rows.sort((a, b) => b.bestScore - a.bestScore);
   else rows.sort((a, b) => a.name.localeCompare(b.name));
 
-  rows.forEach(z => {
+  const shown = sortVal === 'score' ? rows.slice(0, 30) : rows;
+
+  shown.forEach(z => {
     const c = colorForScore(z.bestScore);
     const card = document.createElement('div');
     card.className = 'zone-card';
@@ -185,6 +188,9 @@ function render() {
   const sortVal = document.getElementById('sort-mode').value;
   renderMap(filterVal);
   renderList(filterVal, sortVal);
+  const forestCount = DATA.zones.filter(z => z.is_forest).length;
+  document.getElementById('section-label').textContent =
+    sortVal === 'score' ? `Millors zones (top 30 de ${forestCount} boscoses)` : `Totes les zones boscoses (${forestCount})`;
 }
 
 async function loadData() {
