@@ -21,6 +21,14 @@ import urllib.request
 import urllib.error
 from datetime import datetime, timezone
 
+# ---------------------------------------------------------------------------
+# 1. GRAELLA DE PUNTS DE CATALUNYA
+# ---------------------------------------------------------------------------
+# Cada punt: nom, latitud, longitud, altitud (m), tipus de bosc dominant.
+# El tipus de bosc és una assignació geogràfica coneguda (Institut Cartogràfic,
+# CREAF, bibliografia micològica). Es pot substituir en el futur per una
+# consulta real al WMS de l'ICGC (Mapa de cobertes del sòl).
+
 ZONES = [
     {"name": "Val d'Aran",        "lat": 42.70, "lon": 0.85, "alt": 1200, "tree": "pi_negre"},
     {"name": "Pallars Sobirà N",  "lat": 42.58, "lon": 1.10, "alt": 1400, "tree": "pi_negre"},
@@ -48,6 +56,14 @@ ZONES = [
     {"name": "Baix Camp",         "lat": 41.15, "lon": 0.95, "alt": 450,  "tree": "alzina"},
     {"name": "Terra Alta",        "lat": 41.05, "lon": 0.45, "alt": 400,  "tree": "pi_pinyer"},
 ]
+
+# ---------------------------------------------------------------------------
+# 2. ESPÈCIES DE BOLETS I LA SEVA LÒGICA
+# ---------------------------------------------------------------------------
+# trees: tipus de bosc compatibles
+# rain_days: [min, max] dies des de l'última pluja forta on és més probable trobar-lo
+# temp_range: [min, max] temperatura mitjana òptima (°C)
+# min_rain: mm de pluja acumulada als últims 10 dies per considerar-ho suficient
 
 SPECIES = [
     {"id": "rovellons",   "name": "Rovellons",           "trees": ["pi_roig", "pi_negre", "pi_pinyer", "pi_blanc"], "rain_days": [7, 15],  "temp_range": [8, 18],  "min_rain": 20},
