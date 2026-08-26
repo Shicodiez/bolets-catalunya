@@ -829,7 +829,7 @@ def species_score(sp, rain_10d, min_temp, tree, days_since_rain, alt, month, aem
     de condicions). La resta de factors són graduals.
     """
     if tree not in sp["trees"]:
-        return 0, {}
+        return 0, {}, "baja"
 
     breakdown = {}
     score = 0.0
