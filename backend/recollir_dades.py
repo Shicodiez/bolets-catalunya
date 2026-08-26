@@ -22,7 +22,7 @@ import time
 import urllib.request
 import urllib.error
 import urllib.parse
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 # ---------------------------------------------------------------------------
 # 1. GRAELLA DE PUNTS DE CATALUNYA (~150 punts, generada automàticament)
@@ -889,7 +889,44 @@ def species_score(sp, rain_10d, min_temp, tree, days_since_rain, alt, month, aem
     breakdown["corroboracio"] = corrob_score
     score += corrob_score
 
-    return max(0, min(100, round(score))), breakdown
+    final_score = max(0, min(100, round(score)))
+    confidence = compute_confidence(sp, gbif_distributions, aemet_rain_1h, mc_rain_today)
+
+    return final_score, breakdown, confidence
+
+
+def compute_confidence(sp, gbif_distributions, aemet_rain_1h, mc_rain_today):
+    """
+    Nivell de confiança ("alta"/"mitjana"/"baixa") de la puntuació, INDEPENDENT
+    del seu valor. Una puntuació de 84 basada en pocs registres històrics i
+    cap corroboració és menys fiable que un 84 recolzat per molta evidència,
+    encara que el número sigui idèntic — això evita transmetre una falsa
+    sensació de precisió (una puntuació alta no és el mateix que una
+    puntuació fiable).
+
+    Factors que sumen confiança:
+    - Prou registres GBIF per a aquesta espècie (>= 30 és "molts")
+    - Alguna font addicional (AEMET o Meteoclimatic) ha corroborat la pluja
+    """
+    points = 0
+    species_gbif_data = gbif_distributions.get(sp["id"]) if gbif_distributions else None
+    total_gbif = sum(species_gbif_data.get("month_counts", {}).values()) if species_gbif_data else 0
+    if total_gbif >= 30:
+        points += 2
+    elif total_gbif >= 15:
+        points += 1
+
+    if aemet_rain_1h is not None:
+        points += 1
+    if mc_rain_today is not None:
+        points += 1
+
+    if points >= 3:
+        return "alta"
+    elif points >= 1:
+        return "mitjana"
+    else:
+        return "baja"
 
 
 # ---------------------------------------------------------------------------
@@ -908,12 +945,20 @@ GBIF_CACHE_MAX_DAYS = 60  # l'estacionalitat històrica no canvia sovint
 def fetch_gbif_monthly_distribution(scientific_name, timeout=20):
     """
     Consulta GBIF per a una espècie (nom científic) amb coordenades a
-    Catalunya, i retorna un diccionari {mes: nombre_de_registres} basat en
-    l'històric complet disponible. S'usa geometry (bounding box aproximat
-    de Catalunya) en comptes de country=ES per no incloure la resta d'Espanya.
+    Catalunya, i retorna:
+    - month_counts: {mes: nombre_de_registres}
+    - alt_bucket_counts: {tram_altitud: nombre_de_registres} — trams de 250m,
+      a partir del camp 'elevation' de GBIF quan hi és disponible
+    - total_with_elevation: quants registres tenien dada d'altitud (per saber
+      si val la pena confiar en alt_bucket_counts)
+
+    S'usa geometry (bounding box aproximat de Catalunya) en comptes de
+    country=ES per no incloure la resta d'Espanya.
     """
     catalunya_bbox = "POLYGON((0.10 40.50, 3.35 40.50, 3.35 42.90, 0.10 42.90, 0.10 40.50))"
     month_counts = {m: 0 for m in range(1, 13)}
+    alt_bucket_counts = {}
+    total_with_elevation = 0
     offset = 0
     limit = 300
     max_records = 3000  # límit de seguretat per no fer massa peticions per espècie
@@ -940,11 +985,24 @@ def fetch_gbif_monthly_distribution(scientific_name, timeout=20):
             if month and 1 <= month <= 12:
                 month_counts[month] += 1
 
+            elevation = rec.get("elevation")
+            if elevation is not None:
+                try:
+                    bucket = int(float(elevation) // 250) * 250
+                    alt_bucket_counts[bucket] = alt_bucket_counts.get(bucket, 0) + 1
+                    total_with_elevation += 1
+                except (TypeError, ValueError):
+                    pass
+
         if data.get("endOfRecords", True):
             break
         offset += limit
 
-    return month_counts
+    return {
+        "month_counts": month_counts,
+        "alt_bucket_counts": alt_bucket_counts,
+        "total_with_elevation": total_with_elevation,
+    }
 
 
 def load_gbif_cache():
@@ -983,8 +1041,8 @@ def save_gbif_cache(species_distributions):
 def build_gbif_distributions():
     """
     Per a cada espècie del catàleg, consulta (o recupera del cache) la
-    distribució mensual real de GBIF, combinant tots els noms científics
-    (sinònims/espècies properes) d'aquella espècie.
+    distribució mensual i d'altitud real de GBIF, combinant tots els noms
+    científics (sinònims/espècies properes) d'aquella espècie.
     """
     cache = load_gbif_cache()
     missing = [sp for sp in SPECIES if sp["id"] not in cache]
@@ -992,17 +1050,26 @@ def build_gbif_distributions():
     if missing:
         print(f"  GBIF: consultant {len(missing)} espècies sense cache...")
         for sp in missing:
-            combined = {m: 0 for m in range(1, 13)}
+            combined_months = {m: 0 for m in range(1, 13)}
+            combined_alt_buckets = {}
+            total_elevation = 0
             for name in sp.get("scientific", []):
                 try:
-                    counts = fetch_gbif_monthly_distribution(name)
-                    for m, c in counts.items():
-                        combined[m] += c
+                    result = fetch_gbif_monthly_distribution(name)
+                    for m, c in result["month_counts"].items():
+                        combined_months[m] += c
+                    for bucket, c in result["alt_bucket_counts"].items():
+                        combined_alt_buckets[bucket] = combined_alt_buckets.get(bucket, 0) + c
+                    total_elevation += result["total_with_elevation"]
                 except Exception as e:
                     print(f"    AVÍS: GBIF ha fallat per '{name}' ({e})")
-            cache[sp["id"]] = combined
-            total = sum(combined.values())
-            print(f"    {sp['name']}: {total} registres GBIF trobats")
+            cache[sp["id"]] = {
+                "month_counts": combined_months,
+                "alt_bucket_counts": {str(k): v for k, v in combined_alt_buckets.items()},
+                "total_with_elevation": total_elevation,
+            }
+            total = sum(combined_months.values())
+            print(f"    {sp['name']}: {total} registres GBIF trobats ({total_elevation} amb altitud)")
         save_gbif_cache(cache)
     else:
         print("  GBIF: totes les espècies trobades al cache")
@@ -1010,13 +1077,16 @@ def build_gbif_distributions():
     return cache
 
 
-def gbif_seasonal_score(monthly_counts, month):
+def gbif_seasonal_score(species_gbif_data, month):
     """
     Puntuació 0-15 basada en la proporció real de registres GBIF que cauen
     en aquest mes (i els adjacents amb pes reduït), respecte al total anual
     de l'espècie. Si no hi ha prou registres (< 15), no es pot confiar en
     la distribució i es retorna None perquè el crida faci servir el fallback.
     """
+    if not species_gbif_data:
+        return None
+    monthly_counts = species_gbif_data.get("month_counts", {})
     if not monthly_counts:
         return None
     total = sum(monthly_counts.values())
@@ -1027,27 +1097,58 @@ def gbif_seasonal_score(monthly_counts, month):
     next_m = 1 if month == 12 else month + 1
     weighted = (
         monthly_counts.get(month, 0) * 1.0
+        + monthly_counts.get(str(month), 0) * 1.0
         + monthly_counts.get(prev_m, 0) * 0.4
+        + monthly_counts.get(str(prev_m), 0) * 0.4
         + monthly_counts.get(next_m, 0) * 0.4
+        + monthly_counts.get(str(next_m), 0) * 0.4
     )
-    ratio = weighted / total
+    ratio = weighted / total if total else 0
     # Escala calibrada: un mes que concentri ~35% o més del pes anual (habitual
     # en el mes de màxima temporada) arriba al màxim de 15; per sota, escala lineal.
     return round(min(15, (ratio / 0.35) * 15), 1)
 
 
+def gbif_altitude_bonus(species_gbif_data, alt):
+    """
+    Bonus de 0-5 punts si l'altitud del punt coincideix amb el tram
+    d'altitud on GBIF té més registres reals d'aquesta espècie. Requereix
+    almenys 15 registres amb dada d'altitud per confiar-hi (si no, retorna 0
+    sense penalitzar).
+    """
+    if not species_gbif_data:
+        return 0
+    alt_buckets = species_gbif_data.get("alt_bucket_counts", {})
+    total_elev = species_gbif_data.get("total_with_elevation", 0)
+    if not alt_buckets or total_elev < 15:
+        return 0
+
+    point_bucket = int(alt // 250) * 250
+    counts_by_bucket = {int(k): v for k, v in alt_buckets.items()}
+    best_bucket = max(counts_by_bucket, key=counts_by_bucket.get)
+
+    dist_buckets = abs(point_bucket - best_bucket) // 250
+    if dist_buckets == 0:
+        return 5
+    elif dist_buckets == 1:
+        return 2
+    return 0
+
+
 def seasonal_climate_score(sp, alt, month, gbif_distributions=None):
     """
     Puntuació de temporada segons altitud i mes. Si hi ha prou dades reals
-    de GBIF per a l'espècie, es fa servir la distribució real d'aparicions;
-    si no, es fa servir l'estimació manual basada en coneixement general
-    (altitud/mes) com a reserva.
+    de GBIF per a l'espècie, es fa servir la distribució real d'aparicions
+    (mes + bonus d'altitud real); si no, es fa servir l'estimació manual
+    basada en coneixement general (altitud/mes) com a reserva.
     """
-    if gbif_distributions:
-        counts = gbif_distributions.get(sp["id"])
-        gbif_score = gbif_seasonal_score(counts, month)
+    species_gbif_data = gbif_distributions.get(sp["id"]) if gbif_distributions else None
+
+    if species_gbif_data:
+        gbif_score = gbif_seasonal_score(species_gbif_data, month)
         if gbif_score is not None:
-            return gbif_score
+            alt_bonus = gbif_altitude_bonus(species_gbif_data, alt)
+            return min(15, gbif_score + alt_bonus)
 
     # --- Fallback: estimació manual ---
     if alt >= 1200:
@@ -1602,13 +1703,13 @@ def build_results():
         species_scores = []
         if tree not in NON_FOREST:
             for sp in SPECIES:
-                s, breakdown = species_score(
+                s, breakdown, confidence = species_score(
                     sp, rain_10d, min_temp, tree, days_since_rain, zone["alt"], current_month,
                     aemet_rain_1h=aemet_rain_1h, mc_rain_today=mc_rain_today,
                     gbif_distributions=gbif_distributions,
                 )
                 if s > 0:
-                    species_scores.append({"id": sp["id"], "name": sp["name"], "score": s})
+                    species_scores.append({"id": sp["id"], "name": sp["name"], "score": s, "confidence": confidence})
         species_scores.sort(key=lambda x: x["score"], reverse=True)
         matching_species = [s for s in species_scores if s["score"] >= DEFAULT_SCORE_THRESHOLD]
 
@@ -1646,12 +1747,187 @@ def build_results():
     }
 
 
+EVOLUTION_PATH = "../data/evolucion.json"
+EVOLUTION_MAX_DAYS = 30
+
+
+def load_evolution():
+    try:
+        with open(EVOLUTION_PATH, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {}
+
+
+def save_evolution(results):
+    """
+    Desa un resum diari (millor puntuació per zona) per poder calcular
+    l'evolució (avui vs. fa X dies) a la web. Es guarda només un cop al dia
+    (si ja hi ha una entrada d'avui, es sobreescriu amb la darrera execució
+    del dia en comptes d'acumular una entrada per cada execució de 6h).
+    """
+    evolution = load_evolution()
+    today_str = datetime.now(timezone.utc).date().isoformat()
+
+    day_snapshot = {}
+    for z in results["zones"]:
+        if not z["is_forest"] or not z["species_scores"]:
+            continue
+        day_snapshot[str(z["id"])] = z["species_scores"][0]["score"]
+    evolution[today_str] = day_snapshot
+
+    today = datetime.now(timezone.utc).date()
+    pruned = {}
+    for date_str, snapshot in evolution.items():
+        try:
+            d = datetime.fromisoformat(date_str).date()
+        except ValueError:
+            continue
+        if (today - d).days <= EVOLUTION_MAX_DAYS:
+            pruned[date_str] = snapshot
+
+    with open(EVOLUTION_PATH, "w", encoding="utf-8") as f:
+        json.dump(pruned, f, ensure_ascii=False)
+    return pruned
+
+
+def compute_score_changes(evolution, results, days_back=7):
+    """
+    Per a cada zona, calcula el canvi de puntuació respecte a 'days_back' dies
+    enrere (si hi ha aquella data a l'historial). Retorna un diccionari
+    {zone_id: {"previous": X, "current": Y, "change": Y-X}} només per a les
+    zones on hi ha dada prèvia real (no s'inventa cap valor).
+    """
+    today = datetime.now(timezone.utc).date()
+    target_date = (today - timedelta(days=days_back)).isoformat()
+    previous_snapshot = evolution.get(target_date)
+    if not previous_snapshot:
+        return {}
+
+    changes = {}
+    for z in results["zones"]:
+        if not z["is_forest"] or not z["species_scores"]:
+            continue
+        zid = str(z["id"])
+        prev = previous_snapshot.get(zid)
+        if prev is None:
+            continue
+        curr = z["species_scores"][0]["score"]
+        changes[zid] = {"previous": prev, "current": curr, "change": curr - prev}
+    return changes
+
+
+# ---------------------------------------------------------------------------
+# 12. PRECISIÓ HISTÒRICA DEL MODEL — contrastar prediccions amb hallazgos reals
+# ---------------------------------------------------------------------------
+# Es llegeixen els hallazgos guardats pel Worker (fitxer públic al repositori)
+# i es comparen amb la puntuació que tenia aquella zona/dia a l'historial
+# d'evolució, per calcular quina precisió té realment el model amb dades
+# de camp reals — no una suposició.
+
+HALLAZGOS_RAW_URL = "https://raw.githubusercontent.com/Shicodiez/bolets-catalunya/main/data/hallazgos.json"
+
+
+def fetch_hallazgos(timeout=15):
+    """Llegeix els hallazgos guardats (fitxer públic al repositori, servit
+    per raw.githubusercontent.com — no cal autenticació per llegir-lo)."""
+    req = urllib.request.Request(HALLAZGOS_RAW_URL, headers={"User-Agent": "bolets-catalunya-app/1.0"})
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+        return data if isinstance(data, list) else []
+    except Exception as e:
+        print(f"  AVÍS: no s'han pogut llegir els hallazgos ({e})")
+        return []
+
+
+def nearest_zone_id(lat, lon, zones, max_km=8):
+    """Troba l'id de la zona de la graella més propera a unes coordenades
+    d'un hallazgo, per poder-lo comparar amb la puntuació d'aquella zona."""
+    best_id, best_dist = None, max_km
+    for z in zones:
+        d = haversine_km(lat, lon, z["lat"], z["lon"])
+        if d < best_dist:
+            best_id, best_dist = z["id"], d
+    return best_id
+
+
+def compute_model_accuracy(hallazgos, evolution):
+    """
+    Per a cada hallazgo amb prou informació (data + coordenades), busca la
+    puntuació que el model donava a la zona més propera aquell dia (segons
+    l'historial d'evolució) i comprova si l'encert coincideix:
+    - amount 'mucho'/'poco' + puntuació >= llindar -> encert
+    - amount 'nada' + puntuació < llindar -> encert
+    - la resta -> desencert
+
+    Retorna un resum global i desglossat per franja de puntuació, només amb
+    els hallazgos que realment es poden contrastar (no s'inventa res).
+    """
+    results = {"total_comparable": 0, "aciertos": 0, "por_franja": {}}
+    if not hallazgos or not evolution:
+        return results
+
+    for h in hallazgos:
+        date = h.get("date")
+        lat, lng = h.get("lat"), h.get("lng")
+        amount = h.get("amount")
+        if not date or lat is None or lng is None or amount not in ("mucho", "poco", "nada"):
+            continue
+
+        day_snapshot = evolution.get(date)
+        if not day_snapshot:
+            continue
+
+        zone_id = nearest_zone_id(lat, lng, ZONES)
+        if zone_id is None:
+            continue
+        score = day_snapshot.get(str(zone_id))
+        if score is None:
+            continue
+
+        expected_found = amount in ("mucho", "poco")
+        predicted_found = score >= DEFAULT_SCORE_THRESHOLD
+        hit = expected_found == predicted_found
+
+        results["total_comparable"] += 1
+        if hit:
+            results["aciertos"] += 1
+
+        franja = f"{(score // 10) * 10}-{(score // 10) * 10 + 9}"
+        franja_stats = results["por_franja"].setdefault(franja, {"total": 0, "aciertos": 0})
+        franja_stats["total"] += 1
+        if hit:
+            franja_stats["aciertos"] += 1
+
+    if results["total_comparable"] > 0:
+        results["precision_global"] = round(results["aciertos"] / results["total_comparable"] * 100, 1)
+    return results
+
+
 def main():
     try:
         results = build_results()
     except (urllib.error.URLError, TimeoutError) as e:
         print(f"ERROR consultant dades meteorològiques: {e}")
         return
+
+    evolution = save_evolution(results)
+    score_changes = compute_score_changes(evolution, results, days_back=7)
+    results["score_changes_7d"] = score_changes
+    if score_changes:
+        risers = sorted(score_changes.items(), key=lambda kv: kv[1]["change"], reverse=True)[:5]
+        print(f"Evolució 7 dies: {len(score_changes)} zones amb comparativa, top pujades: " +
+              ", ".join(f"{zid}(+{c['change']})" for zid, c in risers if c["change"] > 0))
+
+    print("Contrastant precisió del model amb hallazgos reals...")
+    hallazgos = fetch_hallazgos()
+    accuracy = compute_model_accuracy(hallazgos, evolution)
+    results["model_accuracy"] = accuracy
+    if accuracy["total_comparable"] > 0:
+        print(f"  Precisió: {accuracy['precision_global']}% ({accuracy['aciertos']}/{accuracy['total_comparable']} hallazgos contrastables)")
+    else:
+        print("  Encara no hi ha prou hallazgos contrastables (calen data + coordenades que coincideixin amb dies de l'historial)")
 
     out_path = "../data/resultats.json"
     with open(out_path, "w", encoding="utf-8") as f:
