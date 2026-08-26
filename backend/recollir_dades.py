@@ -1448,6 +1448,43 @@ def own_history_days_count(history, zone_id):
     return sum(1 for day_data in history.values() if zid in day_data)
 
 
+# ---------------------------------------------------------------------------
+# 11. AVISOS DE CADUCITAT DE CREDENCIALS
+# ---------------------------------------------------------------------------
+# Dates de caducitat conegudes (s'han d'actualitzar a mà quan es renovi cada
+# credencial). Es genera un avís quan falten poques dies, perquè es mostri
+# a la web i no calgui recordar-ho de memòria.
+
+CREDENTIAL_EXPIRATIONS = [
+    {"name": "API key d'AEMET", "expires_on": "2026-11-25", "renew_url": "https://opendata.aemet.es"},
+    {"name": "Token de GitHub (Worker d'hallazgos)", "expires_on": "2026-11-24", "renew_url": "https://github.com/settings/tokens?type=beta"},
+]
+
+CREDENTIAL_WARNING_DAYS = 15
+
+
+def check_credential_expirations():
+    """Retorna una llista d'avisos per a les credencials que caduquen en
+    menys de CREDENTIAL_WARNING_DAYS dies (o que ja han caducat)."""
+    warnings = []
+    today = datetime.now(timezone.utc).date()
+    for cred in CREDENTIAL_EXPIRATIONS:
+        try:
+            expires = datetime.fromisoformat(cred["expires_on"]).date()
+        except ValueError:
+            continue
+        days_left = (expires - today).days
+        if days_left <= CREDENTIAL_WARNING_DAYS:
+            warnings.append({
+                "name": cred["name"],
+                "expires_on": cred["expires_on"],
+                "days_left": days_left,
+                "renew_url": cred["renew_url"],
+                "expired": days_left < 0,
+            })
+    return warnings
+
+
 def build_results():
     print(f"[{datetime.now(timezone.utc).isoformat()}] Graella de {len(ZONES)} punts")
 
@@ -1593,9 +1630,17 @@ def build_results():
             "own_history_days": own_history_days_count(history, zone["id"]),
         })
 
+    credential_warnings = check_credential_expirations()
+    if credential_warnings:
+        print(f"AVÍS: {len(credential_warnings)} credencial(s) a punt de caducar o caducades:")
+        for w in credential_warnings:
+            estat = "JA HA CADUCAT" if w["expired"] else f"caduca en {w['days_left']} dies"
+            print(f"  - {w['name']}: {estat} ({w['expires_on']})")
+
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "default_threshold": DEFAULT_SCORE_THRESHOLD,
+        "credential_warnings": credential_warnings,
         "zones": zones_out,
         "species_catalog": [{"id": sp["id"], "name": sp["name"]} for sp in SPECIES],
     }
