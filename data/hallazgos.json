@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "speciesId": "ceps",
+    "speciesName": "Ceps",
+    "place": "Ger",
+    "alt": "2000",
+    "tree": "pi",
+    "treeName": "Pino",
+    "date": "2026-08-25",
+    "amount": "poco",
+    "lat": 42.46714672120768,
+    "lng": 1.8044185638427737,
+    "id": "a00ba0cc-f494-4cd4-b8ec-5c1f2af3ca56",
+    "createdAt": "2026-08-26T06:20:13.600Z"
+  }
+]
