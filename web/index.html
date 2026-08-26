@@ -61,6 +61,12 @@
   .legend-items { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px; }
   .legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 4px; vertical-align: -1px; }
   .footer-note { font-size: 12px; color: var(--text-muted); margin-top: 12px; }
+  .cred-warning {
+    background: #FCE8E6; border: 1px solid #E24B4A; border-radius: 10px;
+    padding: 10px 14px; margin-bottom: 12px; font-size: 13px; color: #6B1512;
+  }
+  .cred-warning a { color: #6B1512; font-weight: 500; }
+  .cred-warning strong { display: block; margin-bottom: 2px; }
   .section-label { font-size: 13px; font-weight: 500; margin: 20px 0 8px; }
 
   .sighting-box {
@@ -92,6 +98,7 @@
 <div class="wrap">
   <h1>Predictor de setas — Catalunya</h1>
   <p class="subtitle">Puntuación por evidencia acumulada: lluvia, temperatura, temporada y contraste entre fuentes</p>
+  <div id="credential-warnings"></div>
   <div id="status">Cargando datos...</div>
 
   <div class="threshold-box">
@@ -492,6 +499,23 @@ function setupSightingForm() {
   renderSightings();
 }
 
+function renderCredentialWarnings(warnings) {
+  const container = document.getElementById('credential-warnings');
+  container.innerHTML = '';
+  warnings.forEach(w => {
+    const box = document.createElement('div');
+    box.className = 'cred-warning';
+    const msg = w.expired
+      ? `Ya ha caducado (${w.expires_on})`
+      : `Caduca en ${w.days_left} día${w.days_left === 1 ? '' : 's'} (${w.expires_on})`;
+    box.innerHTML = `
+      <strong>⚠️ ${w.name}: ${msg}</strong>
+      <a href="${w.renew_url}" target="_blank" rel="noopener">Renovar aquí</a>
+    `;
+    container.appendChild(box);
+  });
+}
+
 async function loadData() {
   const status = document.getElementById('status');
   try {
@@ -504,6 +528,8 @@ async function loadData() {
       document.getElementById('threshold-slider').value = threshold;
       document.getElementById('threshold-value').textContent = threshold;
     }
+
+    renderCredentialWarnings(DATA.credential_warnings || []);
 
     map = L.map('map', {scrollWheelZoom: false}).setView([41.85, 1.55], 8);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
