@@ -206,7 +206,7 @@
   <div id="map"></div>
 
   <div class="legend">
-    <p>La puntuación (0-100) suma evidencia de varios factores: lluvia acumulada, días desde la lluvia, temperatura mínima nocturna, temporada típica de la especie según altitud/mes, y contraste con AEMET y estaciones amateur (Meteoclimatic). Ningún factor por sí solo descarta una especie salvo el tipo de bosque — mueve el umbral para ver más o menos zonas.</p>
+    <p>La puntuación (0-100) suma evidencia de varios factores: lluvia acumulada, días desde la lluvia, temperatura mínima nocturna, humedad real del suelo (no solo lo que ha llovido, sino si esa agua sigue en la tierra), temporada típica de la especie según altitud/mes, y contraste con AEMET y estaciones amateur (Meteoclimatic). Ningún factor por sí solo descarta una especie salvo el tipo de bosque — mueve el umbral para ver más o menos zonas.</p>
     <div class="legend-items">
       <span><span class="legend-dot" style="background:#1D9E75"></span>Alta (≥80)</span>
       <span><span class="legend-dot" style="background:#EF9F27"></span>Media (umbral-79)</span>
@@ -239,6 +239,16 @@ function aemetLine(z) {
   const a = z.aemet_check;
   const precText = (a.prec_1h_mm !== null && a.prec_1h_mm !== undefined) ? `${a.prec_1h_mm}mm/h` : 'sin dato';
   return `<p class="popup-detail">✓ AEMET "${a.station_name}" (${a.distance_km}km) — ${precText} ahora mismo</p>`;
+}
+
+function soilMoistureLine(z) {
+  const s = z.soil_stats;
+  if (!s || s.soil_moisture_avg_7d === null || s.soil_moisture_avg_7d === undefined) return '';
+  const pct = Math.round(s.soil_moisture_avg_7d * 100);
+  let trendIcon = '➡️';
+  if (s.soil_moisture_trend > 0.01) trendIcon = '📈';
+  else if (s.soil_moisture_trend < -0.02) trendIcon = '📉';
+  return `<p class="popup-detail">💧 Humedad del suelo (7d): ${pct}% ${trendIcon}</p>`;
 }
 
 function triangulationLine(z) {
@@ -295,6 +305,7 @@ function renderMap(filterVal) {
       <p class="popup-meta">${z.alt}m · ${z.tree_label}</p>
       ${speciesRows}
       <p class="popup-detail">Lluvia acumulada: ${z.rain_10d}mm · Mín. noche: ${z.min_temp}°C · ${z.days_since_rain}d desde inicio de lluvia</p>
+      ${soilMoistureLine(z)}
       ${triangulationLine(z)}
       ${z.own_history_days ? `<p class="popup-detail">📊 Historial propio: ${z.own_history_days}d acumulados</p>` : ''}
       ${aemetLine(z)}
