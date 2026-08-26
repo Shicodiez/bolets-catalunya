@@ -80,7 +80,7 @@
     margin-top: 4px; padding: 10px; border-radius: var(--radius); border: none;
     background: var(--green-bar); color: white; font-size: 14px; font-weight: 500; cursor: pointer;
   }
-  .sighting-list { margin-top: 16px; }
+  .sighting-marker-icon { background: transparent; border: none; }
   .sighting-item {
     font-size: 12px; padding: 8px 10px; background: var(--surface-1); border-radius: 8px;
     margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; gap: 8px;
@@ -119,7 +119,7 @@
       <button type="button" id="sighting-pick-btn" class="popup-btn" style="margin-bottom:4px">📍 Marcar en el mapa</button>
       <p id="sighting-coords-hint" class="hint" style="margin:0"></p>
       <div>
-        <label>Nombre del lugar</label>
+        <label>Nombre del lugar (se rellena solo, puedes editarlo)</label>
         <input type="text" id="sighting-place" placeholder="Malniu, Berga, Montseny, Montnegre, Guilleries...">
       </div>
       <div>
@@ -157,7 +157,6 @@
       </div>
       <button id="sighting-save">Guardar hallazgo</button>
     </div>
-    <div class="sighting-list" id="sighting-list"></div>
   </div>
 
   <div id="map"></div>
@@ -298,21 +297,32 @@ function saveSightings(list) {
 }
 
 const AMOUNT_ICON = {mucho: '🍄🍄🍄', poco: '🍄', nada: '❌'};
+let sightingMarkers = [];
+
+const sightingDivIcon = L.divIcon({
+  className: 'sighting-marker-icon',
+  html: '<div style="font-size:20px;line-height:1;filter:drop-shadow(0 1px 1px rgba(0,0,0,.4))">📍</div>',
+  iconSize: [22, 22],
+  iconAnchor: [11, 20],
+  popupAnchor: [0, -18],
+});
 
 function renderSightings() {
+  sightingMarkers.forEach(m => map.removeLayer(m));
+  sightingMarkers = [];
+
   const list = loadSightings();
-  const container = document.getElementById('sighting-list');
-  container.innerHTML = '';
-  list.slice().reverse().forEach((s, revIdx) => {
-    const idx = list.length - 1 - revIdx;
-    const item = document.createElement('div');
-    item.className = 'sighting-item';
+  list.forEach((s, idx) => {
+    if (typeof s.lat !== 'number' || typeof s.lng !== 'number') return;
     const icon = AMOUNT_ICON[s.amount] || '';
-    item.innerHTML = `
-      <span>${icon} ${s.date} · ${s.speciesName} · ${s.place} (${s.alt}m, ${s.treeName})</span>
-      <button onclick="deleteSighting(${idx})">Borrar</button>
-    `;
-    container.appendChild(item);
+    const marker = L.marker([s.lat, s.lng], {icon: sightingDivIcon}).addTo(map);
+    marker.bindPopup(`
+      <p class="popup-title">${icon} ${s.speciesName}</p>
+      <p class="popup-meta">${s.place} · ${s.alt}m · ${s.treeName}</p>
+      <p class="popup-detail">${s.date}</p>
+      <button class="popup-btn" onclick="deleteSighting(${idx})">Borrar este hallazgo</button>
+    `);
+    sightingMarkers.push(marker);
   });
 }
 
@@ -366,6 +376,28 @@ function handleMapClickForSighting(e) {
   updatePickedCoordsHint();
   togglePickingMode();
   document.querySelector('.sighting-box').scrollIntoView({behavior: 'smooth', block: 'center'});
+  reverseGeocodePlace(pickedLatLng.lat, pickedLatLng.lng);
+}
+
+async function reverseGeocodePlace(lat, lng) {
+  const placeInput = document.getElementById('sighting-place');
+  const previousValue = placeInput.value;
+  placeInput.placeholder = 'Buscando nombre del lugar...';
+  placeInput.value = '';
+  try {
+    const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&zoom=14&accept-language=es`;
+    const res = await fetch(url, {headers: {'Accept': 'application/json'}});
+    if (!res.ok) throw new Error('reverse geocoding failed');
+    const data = await res.json();
+    const addr = data.address || {};
+    const name = addr.village || addr.town || addr.hamlet || addr.municipality
+      || addr.city || addr.county || (data.display_name ? data.display_name.split(',')[0] : '');
+    placeInput.value = name || previousValue;
+  } catch (e) {
+    placeInput.value = previousValue;
+  } finally {
+    placeInput.placeholder = 'Malniu, Berga, Montseny, Montnegre, Guilleries...';
+  }
 }
 
 function setupSightingForm() {
