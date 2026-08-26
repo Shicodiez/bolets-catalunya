@@ -1709,7 +1709,7 @@ def build_results():
                     gbif_distributions=gbif_distributions,
                 )
                 if s > 0:
-                    species_scores.append({"id": sp["id"], "name": sp["name"], "score": s, "confidence": confidence})
+                    species_scores.append({"id": sp["id"], "name": sp["name"], "score": s, "confidence": confidence, "breakdown": breakdown})
         species_scores.sort(key=lambda x: x["score"], reverse=True)
         matching_species = [s for s in species_scores if s["score"] >= DEFAULT_SCORE_THRESHOLD]
 
