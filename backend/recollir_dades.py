@@ -541,12 +541,18 @@ def haversine_km(lat1, lon1, lat2, lon2):
 # ---------------------------------------------------------------------------
 
 def fetch_weather_batch(zones, timeout=30):
-    """Consulta Open-Meteo per a un grup de zones en una sola petició."""
+    """Consulta Open-Meteo per a un grup de zones en una sola petició.
+    Inclou humitat del sòl (soil_moisture_9_27cm, capa on viu el miceli de
+    la majoria d'espècies) i evapotranspiració, per saber si l'aigua caiguda
+    realment ha quedat al sòl o s'ha perdut — la pluja per si sola no ho
+    distingeix (50mm sobre sòl ja humit no és el mateix que 50mm sobre sòl
+    ressec, encara que la suma de pluja sigui idèntica)."""
     lats = ",".join(str(z["lat"]) for z in zones)
     lons = ",".join(str(z["lon"]) for z in zones)
     params = (
         f"?latitude={lats}&longitude={lons}"
         f"&daily=precipitation_sum,temperature_2m_max,temperature_2m_min"
+        f"&hourly=soil_moisture_9_27cm,et0_fao_evapotranspiration"
         f"&past_days=16&forecast_days=1&timezone=Europe%2FMadrid"
     )
     url = OPEN_METEO_URL + params
@@ -564,6 +570,53 @@ def fetch_weather(zones, batch_size=100):
         batch = zones[i:i + batch_size]
         all_results.extend(fetch_weather_batch(batch))
     return all_results
+
+
+def compute_soil_moisture_stats(hourly):
+    """
+    A partir del bloc 'hourly' d'Open-Meteo (soil_moisture_9_27cm i
+    et0_fao_evapotranspiration), calcula:
+    - soil_moisture_now: valor més recent d'humitat del sòl (m³/m³, 0-1)
+    - soil_moisture_avg_7d: mitjana dels últims 7 dies
+    - soil_moisture_trend: diferència entre la mitjana dels últims 3 dies i
+      la dels 3 dies anteriors — positiu si el sòl s'està humitejant, negatiu
+      si s'està assecant, encara que hagi plogut recentment
+    - evapotranspiration_7d: evapotranspiració acumulada 7 dies (quanta
+      aigua "es perd" cap a l'atmosfera/plantes — a més evapotranspiració,
+      menys queda realment disponible al sòl per molt que hagi plogut)
+
+    Aquestes dades permeten distingir "50mm sobre sòl ja humit" de "50mm
+    sobre sòl ressec que se'ls beu" — la pluja per si sola no ho fa.
+    """
+    moisture = hourly.get("soil_moisture_9_27cm") or []
+    evapo = hourly.get("et0_fao_evapotranspiration") or []
+
+    valid_moisture = [v for v in moisture if v is not None]
+    if not valid_moisture:
+        return None
+
+    soil_moisture_now = round(valid_moisture[-1], 3)
+
+    last_7d_hours = 7 * 24
+    last_3d_hours = 3 * 24
+    recent_window = [v for v in moisture[-last_7d_hours:] if v is not None]
+    soil_moisture_avg_7d = round(sum(recent_window) / len(recent_window), 3) if recent_window else None
+
+    last_3d = [v for v in moisture[-last_3d_hours:] if v is not None]
+    prev_3d = [v for v in moisture[-2 * last_3d_hours:-last_3d_hours] if v is not None]
+    trend = None
+    if last_3d and prev_3d:
+        trend = round((sum(last_3d) / len(last_3d)) - (sum(prev_3d) / len(prev_3d)), 4)
+
+    evapo_7d_values = [v for v in evapo[-last_7d_hours:] if v is not None]
+    evapotranspiration_7d = round(sum(evapo_7d_values), 1) if evapo_7d_values else None
+
+    return {
+        "soil_moisture_now": soil_moisture_now,
+        "soil_moisture_avg_7d": soil_moisture_avg_7d,
+        "soil_moisture_trend": trend,
+        "evapotranspiration_7d": evapotranspiration_7d,
+    }
 
 
 def compute_rain_stats(daily):
@@ -817,7 +870,7 @@ def fetch_all_tree_types(zones, layer_name, delay=0.05, max_total_seconds=280):
 # 6. SCORING
 # ---------------------------------------------------------------------------
 
-def species_score(sp, rain_10d, min_temp, tree, days_since_rain, alt, month, aemet_rain_1h=None, mc_rain_today=None, gbif_distributions=None, triangulation=None):
+def species_score(sp, rain_10d, min_temp, tree, days_since_rain, alt, month, aemet_rain_1h=None, mc_rain_today=None, gbif_distributions=None, triangulation=None, soil_stats=None):
     """
     Sistema de puntuació 0-100 per evidència acumulada, no tot-o-res. Cada
     factor suma punts segons com d'a prop està del rang òptim (amb tolerància
@@ -834,15 +887,18 @@ def species_score(sp, rain_10d, min_temp, tree, days_since_rain, alt, month, aem
     breakdown = {}
     score = 0.0
 
-    # --- Pluja acumulada (0-30 punts, amb tolerància) ---
+    # --- Pluja acumulada (0-22 punts, amb tolerància) ---
+    # Es redueix respecte al disseny anterior (0-30) perquè ara la humitat
+    # real del sòl (component nou, més avall) recull part d'aquesta
+    # evidència de forma més directa quan hi ha dada disponible.
     min_rain = sp["min_rain"]
     ratio = rain_10d / min_rain if min_rain else 1
     if ratio >= 1:
-        rain_score = 30
+        rain_score = 22
     elif ratio >= 0.7:
-        rain_score = 30 * ((ratio - 0.7) / 0.3) * 0.6 + 12  # 70-100% del mínim -> 12-30 punts
+        rain_score = 22 * ((ratio - 0.7) / 0.3) * 0.6 + 9
     elif ratio >= 0.4:
-        rain_score = 12 * ((ratio - 0.4) / 0.3)  # 40-70% del mínim -> 0-12 punts
+        rain_score = 9 * ((ratio - 0.4) / 0.3)
     else:
         rain_score = 0
     breakdown["pluja"] = round(rain_score, 1)
@@ -870,6 +926,33 @@ def species_score(sp, rain_10d, min_temp, tree, days_since_rain, alt, month, aem
         temp_score = max(0, 20 - (dist / 3) * 10)
     breakdown["temperatura"] = round(temp_score, 1)
     score += temp_score
+
+    # --- Humitat real del sòl (0-8 punts) — distingeix "pluja que ha quedat
+    # al sòl" de "pluja que se l'ha begut la terra ressecada o l'ha perdut
+    # l'evapotranspiració". Nomes s'aplica si hi ha dada (Open-Meteo pot no
+    # donar-la per a tots els punts); si no n'hi ha, aquests punts es
+    # reparteixen proporcionalment entre els altres components perquè el
+    # total segueixi sent 100 com a màxim teòric.
+    soil_score = 0
+    if soil_stats and soil_stats.get("soil_moisture_avg_7d") is not None:
+        moisture = soil_stats["soil_moisture_avg_7d"]
+        trend = soil_stats.get("soil_moisture_trend") or 0
+        # Llindars orientatius: per sobre de 0.30 m³/m³ el sòl sol estar prou
+        # humit per a la majoria de sòls forestals catalans; per sota de 0.15
+        # sol estar sec. S'hi suma un petit bonus si la tendència és a l'alça
+        # (el sòl s'està humitejant, no només "ja ho estava").
+        if moisture >= 0.30:
+            soil_score = 8
+        elif moisture >= 0.15:
+            soil_score = 8 * ((moisture - 0.15) / 0.15)
+        else:
+            soil_score = 0
+        if trend > 0.01:
+            soil_score = min(8, soil_score + 1.5)
+        elif trend < -0.02:
+            soil_score = max(0, soil_score - 1.5)
+    breakdown["humitat_sol"] = round(soil_score, 1)
+    score += soil_score
 
     # --- Climatologia de temporada per altitud (0-15 punts) ---
     # Coneixement micològic establert: cada espècie té una temporada més
@@ -1749,7 +1832,9 @@ def build_results():
     zones_out = []
     for zone, daily_wrapper in zip(ZONES, weather_results):
         daily = daily_wrapper.get("daily", {})
+        hourly = daily_wrapper.get("hourly", {})
         rain_10d, avg_temp, min_temp, days_since_rain = compute_rain_stats(daily)
+        soil_stats = compute_soil_moisture_stats(hourly)
         tree = tree_types.get(zone["id"], "desconegut")
 
         aemet_info = None
@@ -1776,6 +1861,7 @@ def build_results():
                     sp, rain_10d, min_temp, tree, days_since_rain, zone["alt"], current_month,
                     aemet_rain_1h=aemet_rain_1h, mc_rain_today=mc_rain_today,
                     gbif_distributions=gbif_distributions, triangulation=triangulation,
+                    soil_stats=soil_stats,
                 )
                 if s > 0:
                     species_scores.append({"id": sp["id"], "name": sp["name"], "score": s, "confidence": confidence, "breakdown": breakdown})
@@ -1799,6 +1885,7 @@ def build_results():
             "aemet_check": aemet_info,
             "own_history_days": own_history_days_count(history, zone["id"]),
             "triangulation": triangulation,
+            "soil_stats": soil_stats,
         })
 
     credential_warnings = check_credential_expirations()
