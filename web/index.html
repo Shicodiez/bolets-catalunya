@@ -282,18 +282,39 @@ document.getElementById('threshold-slider').addEventListener('input', (e) => {
   render();
 });
 
-const SIGHTINGS_KEY = 'bolets_sightings_v1';
+const HALLAZGOS_WORKER_URL = 'https://bolets-hallazgos.shicoars.workers.dev/';
+let sightingsCache = [];
 
-function loadSightings() {
+async function loadSightings() {
   try {
-    return JSON.parse(localStorage.getItem(SIGHTINGS_KEY) || '[]');
+    const res = await fetch(HALLAZGOS_WORKER_URL);
+    if (!res.ok) throw new Error('fetch hallazgos failed');
+    sightingsCache = await res.json();
+    return sightingsCache;
   } catch (e) {
-    return [];
+    console.error('No se han podido cargar los hallazgos:', e);
+    return sightingsCache; // se mantiene lo último conocido en vez de vaciar la vista
   }
 }
 
-function saveSightings(list) {
-  localStorage.setItem(SIGHTINGS_KEY, JSON.stringify(list));
+async function saveSighting(hallazgo) {
+  const res = await fetch(HALLAZGOS_WORKER_URL, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(hallazgo),
+  });
+  if (!res.ok) throw new Error('No se ha podido guardar el hallazgo');
+  return res.json();
+}
+
+async function deleteSightingRemote(id) {
+  const res = await fetch(HALLAZGOS_WORKER_URL, {
+    method: 'DELETE',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({id}),
+  });
+  if (!res.ok) throw new Error('No se ha podido borrar el hallazgo');
+  return res.json();
 }
 
 const AMOUNT_ICON = {mucho: '🍄🍄🍄', poco: '🍄', nada: '❌'};
@@ -307,12 +328,12 @@ const sightingDivIcon = L.divIcon({
   popupAnchor: [0, -18],
 });
 
-function renderSightings() {
+async function renderSightings() {
   sightingMarkers.forEach(m => map.removeLayer(m));
   sightingMarkers = [];
 
-  const list = loadSightings();
-  list.forEach((s, idx) => {
+  const list = await loadSightings();
+  list.forEach((s) => {
     if (typeof s.lat !== 'number' || typeof s.lng !== 'number') return;
     const icon = AMOUNT_ICON[s.amount] || '';
     const marker = L.marker([s.lat, s.lng], {icon: sightingDivIcon}).addTo(map);
@@ -320,17 +341,19 @@ function renderSightings() {
       <p class="popup-title">${icon} ${s.speciesName}</p>
       <p class="popup-meta">${s.place} · ${s.alt}m · ${s.treeName}</p>
       <p class="popup-detail">${s.date}</p>
-      <button class="popup-btn" onclick="deleteSighting(${idx})">Borrar este hallazgo</button>
+      <button class="popup-btn" onclick="deleteSighting('${s.id}')">Borrar este hallazgo</button>
     `);
     sightingMarkers.push(marker);
   });
 }
 
-function deleteSighting(idx) {
-  const list = loadSightings();
-  list.splice(idx, 1);
-  saveSightings(list);
-  renderSightings();
+async function deleteSighting(id) {
+  try {
+    await deleteSightingRemote(id);
+    await renderSightings();
+  } catch (e) {
+    alert('No se ha podido borrar el hallazgo. Inténtalo de nuevo.');
+  }
 }
 
 let pickingLocation = false;
@@ -423,7 +446,7 @@ function setupSightingForm() {
   document.getElementById('sighting-pick-btn').addEventListener('click', togglePickingMode);
   map.on('click', handleMapClickForSighting);
 
-  document.getElementById('sighting-save').addEventListener('click', () => {
+  document.getElementById('sighting-save').addEventListener('click', async () => {
     if (!pickedLatLng) {
       alert('Marca primero el punto en el mapa.');
       return;
@@ -443,17 +466,27 @@ function setupSightingForm() {
     const amount = document.getElementById('sighting-amount').value;
     if (!date) return;
 
-    const list = loadSightings();
-    list.push({
-      speciesId, speciesName, place, alt, tree, treeName, date, amount,
-      lat: pickedLatLng.lat, lng: pickedLatLng.lng,
-    });
-    saveSightings(list);
-    document.getElementById('sighting-place').value = '';
-    pickedLatLng = null;
-    if (pickMarker) { map.removeLayer(pickMarker); pickMarker = null; }
-    updatePickedCoordsHint();
-    renderSightings();
+    const saveBtn = document.getElementById('sighting-save');
+    const originalText = saveBtn.textContent;
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'Guardando...';
+
+    try {
+      await saveSighting({
+        speciesId, speciesName, place, alt, tree, treeName, date, amount,
+        lat: pickedLatLng.lat, lng: pickedLatLng.lng,
+      });
+      document.getElementById('sighting-place').value = '';
+      pickedLatLng = null;
+      if (pickMarker) { map.removeLayer(pickMarker); pickMarker = null; }
+      updatePickedCoordsHint();
+      await renderSightings();
+    } catch (e) {
+      alert('No se ha podido guardar el hallazgo. Comprueba tu conexión e inténtalo de nuevo.');
+    } finally {
+      saveBtn.disabled = false;
+      saveBtn.textContent = originalText;
+    }
   });
 
   renderSightings();
