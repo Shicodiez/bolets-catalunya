@@ -92,9 +92,37 @@
     margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; gap: 8px;
   }
   .sighting-item button { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 12px; }
+
+  #login-screen {
+    max-width: 360px; margin: 15vh auto 0; padding: 32px 24px;
+    background: var(--surface-2); border-radius: 16px; border: 0.5px solid var(--border);
+    text-align: center;
+  }
+  #login-screen h1 { font-size: 20px; margin: 0 0 6px; }
+  #login-screen p { font-size: 14px; color: var(--text-secondary); margin: 0 0 20px; }
+  #login-screen input {
+    width: 100%; padding: 12px 14px; border-radius: var(--radius);
+    border: 0.5px solid var(--border); background: var(--surface-1); font-size: 16px;
+    margin-bottom: 10px; box-sizing: border-box; text-align: center;
+  }
+  #login-screen button {
+    width: 100%; padding: 12px; border-radius: var(--radius); border: none;
+    background: var(--green-bar); color: white; font-size: 15px; font-weight: 500; cursor: pointer;
+  }
+  #login-error { color: #E24B4A; font-size: 13px; margin-top: 10px; min-height: 18px; }
+  #app-content { display: none; }
 </style>
 </head>
 <body>
+<div id="login-screen">
+  <h1>🍄 Predictor de setas</h1>
+  <p>Introduce la contraseña de acceso</p>
+  <input type="password" id="login-password" placeholder="Contraseña" autocomplete="current-password">
+  <button id="login-submit">Entrar</button>
+  <p id="login-error"></p>
+</div>
+
+<div id="app-content">
 <div class="wrap">
   <h1>Predictor de setas — Catalunya</h1>
   <p class="subtitle">Puntuación por evidencia acumulada: lluvia, temperatura, temporada y contraste entre fuentes</p>
@@ -290,11 +318,93 @@ document.getElementById('threshold-slider').addEventListener('input', (e) => {
 });
 
 const HALLAZGOS_WORKER_URL = 'https://bolets-hallazgos.shicoars.workers.dev/';
+const SESSION_TOKEN_KEY = 'bolets_session_token';
+
+function getSessionToken() {
+  return sessionStorage.getItem(SESSION_TOKEN_KEY) || localStorage.getItem(SESSION_TOKEN_KEY);
+}
+
+function setSessionToken(token) {
+  localStorage.setItem(SESSION_TOKEN_KEY, token);
+}
+
+async function verifySession(token) {
+  if (!token) return false;
+  try {
+    const res = await fetch(HALLAZGOS_WORKER_URL + 'verify', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({token}),
+    });
+    if (!res.ok) return false;
+    const data = await res.json();
+    return !!data.valid;
+  } catch (e) {
+    return false;
+  }
+}
+
+function showApp() {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('app-content').style.display = 'block';
+  loadData();
+}
+
+async function attemptLogin(password) {
+  const errEl = document.getElementById('login-error');
+  const btn = document.getElementById('login-submit');
+  errEl.textContent = '';
+  btn.disabled = true;
+  btn.textContent = 'Comprobando...';
+  try {
+    const res = await fetch(HALLAZGOS_WORKER_URL + 'auth', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({password}),
+    });
+    if (!res.ok) {
+      errEl.textContent = 'Contraseña incorrecta.';
+      return;
+    }
+    const data = await res.json();
+    setSessionToken(data.token);
+    showApp();
+  } catch (e) {
+    errEl.textContent = 'No se ha podido comprobar la contraseña. Revisa tu conexión.';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Entrar';
+  }
+}
+
+async function initAuth() {
+  const existingToken = getSessionToken();
+  if (existingToken && await verifySession(existingToken)) {
+    showApp();
+    return;
+  }
+  document.getElementById('login-submit').addEventListener('click', () => {
+    const pw = document.getElementById('login-password').value;
+    if (pw) attemptLogin(pw);
+  });
+  document.getElementById('login-password').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const pw = document.getElementById('login-password').value;
+      if (pw) attemptLogin(pw);
+    }
+  });
+}
+
+initAuth();
+
+
 let sightingsCache = [];
 
 async function loadSightings() {
   try {
-    const res = await fetch(HALLAZGOS_WORKER_URL);
+    const res = await fetch(HALLAZGOS_WORKER_URL, {
+      headers: {'X-Session-Token': getSessionToken() || ''},
+    });
     if (!res.ok) throw new Error('fetch hallazgos failed');
     sightingsCache = await res.json();
     return sightingsCache;
@@ -307,7 +417,7 @@ async function loadSightings() {
 async function saveSighting(hallazgo) {
   const res = await fetch(HALLAZGOS_WORKER_URL, {
     method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    headers: {'Content-Type': 'application/json', 'X-Session-Token': getSessionToken() || ''},
     body: JSON.stringify(hallazgo),
   });
   if (!res.ok) throw new Error('No se ha podido guardar el hallazgo');
@@ -317,7 +427,7 @@ async function saveSighting(hallazgo) {
 async function deleteSightingRemote(id) {
   const res = await fetch(HALLAZGOS_WORKER_URL, {
     method: 'DELETE',
-    headers: {'Content-Type': 'application/json'},
+    headers: {'Content-Type': 'application/json', 'X-Session-Token': getSessionToken() || ''},
     body: JSON.stringify({id}),
   });
   if (!res.ok) throw new Error('No se ha podido borrar el hallazgo');
@@ -558,8 +668,7 @@ async function loadData() {
     status.textContent = 'Error cargando datos: ' + e.message;
   }
 }
-
-loadData();
 </script>
+</div>
 </body>
 </html>
