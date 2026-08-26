@@ -817,7 +817,7 @@ def fetch_all_tree_types(zones, layer_name, delay=0.05, max_total_seconds=280):
 # 6. SCORING
 # ---------------------------------------------------------------------------
 
-def species_score(sp, rain_10d, min_temp, tree, days_since_rain, alt, month, aemet_rain_1h=None, mc_rain_today=None, gbif_distributions=None):
+def species_score(sp, rain_10d, min_temp, tree, days_since_rain, alt, month, aemet_rain_1h=None, mc_rain_today=None, gbif_distributions=None, triangulation=None):
     """
     Sistema de puntuació 0-100 per evidència acumulada, no tot-o-res. Cada
     factor suma punts segons com d'a prop està del rang òptim (amb tolerància
@@ -879,23 +879,32 @@ def species_score(sp, rain_10d, min_temp, tree, days_since_rain, alt, month, aem
     score += season_score
 
     # --- Corroboració entre fonts (0-10 punts bonus) ---
-    # Si AEMET o Meteoclimatic confirmen pluja recent que Open-Meteo no
-    # reflecteix bé, això és evidència addicional a favor, no es descarta.
+    # Si el valor triangulat (combinació ponderada de diverses estacions
+    # reals AEMET+Meteoclimatic) confirma pluja recent, és evidència més
+    # fiable que una sola font aïllada — es prioritza sobre el bonus simple.
     corrob_score = 0
-    if aemet_rain_1h is not None and aemet_rain_1h > 0:
-        corrob_score += 5
-    if mc_rain_today is not None and mc_rain_today >= 5:
-        corrob_score += 5
+    if triangulation and triangulation.get("estimated_rain_mm") is not None:
+        tri_rain = triangulation["estimated_rain_mm"]
+        n_stations = len(triangulation.get("stations_used", []))
+        if tri_rain >= 5:
+            corrob_score = 10 if n_stations >= 2 else 7
+        elif tri_rain > 0:
+            corrob_score = 5 if n_stations >= 2 else 3
+    else:
+        if aemet_rain_1h is not None and aemet_rain_1h > 0:
+            corrob_score += 5
+        if mc_rain_today is not None and mc_rain_today >= 5:
+            corrob_score += 5
     breakdown["corroboracio"] = corrob_score
     score += corrob_score
 
     final_score = max(0, min(100, round(score)))
-    confidence = compute_confidence(sp, gbif_distributions, aemet_rain_1h, mc_rain_today)
+    confidence = compute_confidence(sp, gbif_distributions, aemet_rain_1h, mc_rain_today, triangulation)
 
     return final_score, breakdown, confidence
 
 
-def compute_confidence(sp, gbif_distributions, aemet_rain_1h, mc_rain_today):
+def compute_confidence(sp, gbif_distributions, aemet_rain_1h, mc_rain_today, triangulation=None):
     """
     Nivell de confiança ("alta"/"mitjana"/"baixa") de la puntuació, INDEPENDENT
     del seu valor. Una puntuació de 84 basada en pocs registres històrics i
@@ -906,7 +915,8 @@ def compute_confidence(sp, gbif_distributions, aemet_rain_1h, mc_rain_today):
 
     Factors que sumen confiança:
     - Prou registres GBIF per a aquesta espècie (>= 30 és "molts")
-    - Alguna font addicional (AEMET o Meteoclimatic) ha corroborat la pluja
+    - Triangulació amb 2+ estacions reals properes (més fiable que una sola font)
+    - Si no hi ha triangulació, alguna font aïllada (AEMET o Meteoclimatic) corrobora
     """
     points = 0
     species_gbif_data = gbif_distributions.get(sp["id"]) if gbif_distributions else None
@@ -916,10 +926,16 @@ def compute_confidence(sp, gbif_distributions, aemet_rain_1h, mc_rain_today):
     elif total_gbif >= 15:
         points += 1
 
-    if aemet_rain_1h is not None:
+    n_triangulation_stations = len(triangulation.get("stations_used", [])) if triangulation else 0
+    if n_triangulation_stations >= 2:
+        points += 2
+    elif n_triangulation_stations == 1:
         points += 1
-    if mc_rain_today is not None:
-        points += 1
+    else:
+        if aemet_rain_1h is not None:
+            points += 1
+        if mc_rain_today is not None:
+            points += 1
 
     if points >= 3:
         return "alta"
@@ -1490,6 +1506,57 @@ def nearest_meteoclimatic_station(lat, lon, stations, max_km=25):
     return None
 
 
+def triangulate_rain(lat, lon, aemet_stations, mc_stations, max_km=30, max_stations=4, min_distance_km=0.5):
+    """
+    Estima la pluja d'avui a un punt combinant les estacions reals més
+    properes (AEMET + Meteoclimatic juntes) mitjançant IDW (Inverse Distance
+    Weighting): cada estació pesa segons 1/distància², de manera que les més
+    properes dominen l'estimació però les llunyanes encara hi aporten.
+
+    És una millora del "agafar només l'estació més propera": suavitza dades
+    puntuals estranyes d'una sola estació i dona una estimació més fiable
+    quan n'hi ha diverses a prop, sense inventar-se res si no n'hi ha cap.
+
+    Retorna None si no hi ha cap estació prou a prop (max_km), perquè el
+    crida ha de saber distingir "no hi ha dada" de "0mm reals".
+    """
+    candidates = []
+
+    for st in aemet_stations or []:
+        rain = st.get("prec_1h")
+        if rain is None:
+            continue
+        d = haversine_km(lat, lon, st["lat"], st["lon"])
+        if d <= max_km:
+            candidates.append({"rain": rain, "distance_km": d, "source": "aemet", "name": st.get("name")})
+
+    for st in mc_stations or []:
+        if st.get("lat") is None or st.get("lon") is None or st.get("rain_today_mm") is None:
+            continue
+        d = haversine_km(lat, lon, st["lat"], st["lon"])
+        if d <= max_km:
+            candidates.append({"rain": st["rain_today_mm"], "distance_km": d, "source": "meteoclimatic", "name": st.get("location")})
+
+    if not candidates:
+        return None
+
+    candidates.sort(key=lambda c: c["distance_km"])
+    candidates = candidates[:max_stations]
+
+    weighted_sum = 0.0
+    weight_total = 0.0
+    used_stations = []
+    for c in candidates:
+        d = max(c["distance_km"], min_distance_km)  # evita dividir per (gairebé) zero
+        weight = 1 / (d ** 2)
+        weighted_sum += c["rain"] * weight
+        weight_total += weight
+        used_stations.append({"source": c["source"], "name": c["name"], "distance_km": round(c["distance_km"], 1), "rain": c["rain"]})
+
+    estimated_rain = round(weighted_sum / weight_total, 1) if weight_total else None
+    return {"estimated_rain_mm": estimated_rain, "stations_used": used_stations}
+
+
 def load_history():
     """Carrega l'historial propi de pluja per zona/dia. Estructura:
     { "2026-08-25": {"390": {"meteoclimatic": 12.1}, ...}, "2026-08-24": {...} }
@@ -1700,13 +1767,15 @@ def build_results():
 
         mc_rain_today = today_history.get(str(zone["id"]), {}).get("meteoclimatic")
 
+        triangulation = triangulate_rain(zone["lat"], zone["lon"], aemet_stations, mc_stations)
+
         species_scores = []
         if tree not in NON_FOREST:
             for sp in SPECIES:
                 s, breakdown, confidence = species_score(
                     sp, rain_10d, min_temp, tree, days_since_rain, zone["alt"], current_month,
                     aemet_rain_1h=aemet_rain_1h, mc_rain_today=mc_rain_today,
-                    gbif_distributions=gbif_distributions,
+                    gbif_distributions=gbif_distributions, triangulation=triangulation,
                 )
                 if s > 0:
                     species_scores.append({"id": sp["id"], "name": sp["name"], "score": s, "confidence": confidence, "breakdown": breakdown})
@@ -1729,6 +1798,7 @@ def build_results():
             "species_scores": species_scores,
             "aemet_check": aemet_info,
             "own_history_days": own_history_days_count(history, zone["id"]),
+            "triangulation": triangulation,
         })
 
     credential_warnings = check_credential_expirations()
