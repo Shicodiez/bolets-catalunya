@@ -270,7 +270,14 @@ function renderMap(filterVal) {
       const sc = colorForScore(s.score);
       const confIcon = CONFIDENCE_ICON[s.confidence] || '';
       const confTitle = CONFIDENCE_LABEL[s.confidence] || '';
-      return `<div class="popup-species-row"><span>${s.name}</span><span><span title="${confTitle}">${confIcon}</span> <span class="popup-score-pill" style="background:${sc.bg};color:${sc.text}">${s.score}</span></span></div>`;
+      const rowId = `explain-${z.id}-${s.id}`;
+      return `
+        <div class="popup-species-row"><span>${s.name}</span><span><span title="${confTitle}">${confIcon}</span> <span class="popup-score-pill" style="background:${sc.bg};color:${sc.text}">${s.score}</span></span></div>
+        <div style="margin:2px 0 6px">
+          <a href="#" style="font-size:11px" onclick="explainZoneSpecies(event, ${z.id}, '${s.id}', '${rowId}')">¿Por qué esta puntuación?</a>
+          <p id="${rowId}" class="popup-detail" style="display:none;margin-top:4px"></p>
+        </div>
+      `;
     }).join('');
 
     marker.bindPopup(`
@@ -499,6 +506,42 @@ async function deleteSighting(id) {
 let pickingLocation = false;
 let pickedLatLng = null;
 let pickMarker = null;
+
+async function explainZoneSpecies(event, zoneId, speciesId, elementId) {
+  event.preventDefault();
+  const z = DATA.zones.find(zz => zz.id === zoneId);
+  if (!z) return;
+  const sp = (z.species_scores || []).find(s => s.id === speciesId);
+  if (!sp) return;
+
+  const p = document.getElementById(elementId);
+  p.style.display = 'block';
+  p.textContent = 'Pensando...';
+
+  try {
+    const res = await fetch(HALLAZGOS_WORKER_URL + 'explain', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'X-Session-Token': getSessionToken() || ''},
+      body: JSON.stringify({
+        zoneName: z.name,
+        speciesName: sp.name,
+        score: sp.score,
+        confidence: sp.confidence,
+        breakdown: sp.breakdown,
+        rain10d: z.rain_10d,
+        minTemp: z.min_temp,
+        daysSinceRain: z.days_since_rain,
+        treeLabel: z.tree_label,
+        scoreChange: (DATA.score_changes_7d || {})[String(z.id)] || null,
+      }),
+    });
+    if (!res.ok) throw new Error('explain failed');
+    const data = await res.json();
+    p.textContent = data.explanation;
+  } catch (e) {
+    p.textContent = 'No se ha podido generar la explicación ahora mismo.';
+  }
+}
 
 function prefillSighting(zoneId) {
   const z = DATA.zones.find(zz => zz.id === zoneId);
