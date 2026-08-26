@@ -505,6 +505,27 @@ def discover_icgc_layer(timeout=15):
 # UTILITATS GEOGRÀFIQUES
 # ---------------------------------------------------------------------------
 
+def retry_with_backoff(func, max_attempts=3, base_delay=2, description="operació"):
+    """
+    Executa 'func' (sense arguments — fer servir lambda o functools.partial
+    si en necessita) i reintenta fins a max_attempts vegades si falla, amb
+    espera creixent entre intents (2s, 4s, 8s...). Si tots els intents
+    fallen, es propaga l'última excepció perquè el crida decideixi què fer
+    (normalment continuar sense aquella font, com ja es feia abans).
+    """
+    last_exception = None
+    for attempt in range(1, max_attempts + 1):
+        try:
+            return func()
+        except Exception as e:
+            last_exception = e
+            if attempt < max_attempts:
+                delay = base_delay * (2 ** (attempt - 1))
+                print(f"    AVÍS: {description} ha fallat (intent {attempt}/{max_attempts}: {type(e).__name__}) — reintentant en {delay}s...")
+                time.sleep(delay)
+    raise last_exception
+
+
 def haversine_km(lat1, lon1, lat2, lon2):
     """Distància aproximada en km entre dos punts."""
     r = 6371
@@ -1431,12 +1452,12 @@ def build_results():
     print(f"[{datetime.now(timezone.utc).isoformat()}] Graella de {len(ZONES)} punts")
 
     print("Consultant Open-Meteo (meteorologia)...")
-    weather_results = fetch_weather(ZONES)
+    weather_results = retry_with_backoff(lambda: fetch_weather(ZONES), description="Open-Meteo")
 
     print("Consultant Meteoclimatic (contrast estacions amateur, historial propi)...")
     history = load_history()
     try:
-        mc_stations = fetch_meteoclimatic_stations()
+        mc_stations = retry_with_backoff(fetch_meteoclimatic_stations, description="Meteoclimatic")
         print(f"  Meteoclimatic: {len(mc_stations)} estacions rebudes")
         mc_stations = geocode_meteoclimatic_batch(mc_stations)
         history = update_history_with_meteoclimatic(history, ZONES, mc_stations)
@@ -1506,7 +1527,7 @@ def build_results():
     if aemet_key:
         try:
             print("Consultant AEMET (estacions reals) per contrastar...")
-            aemet_stations = fetch_aemet_observations(aemet_key)
+            aemet_stations = retry_with_backoff(lambda: fetch_aemet_observations(aemet_key), description="AEMET")
             print(f"AEMET: {len(aemet_stations)} estacions amb dades rebudes")
         except Exception as e:
             print(f"AVÍS: no s'ha pogut consultar AEMET ({e}) — es continua sense contrast")
