@@ -5,6 +5,13 @@ on:
     - cron: '0 */6 * * *'
   workflow_dispatch:
 
+# Evita que dues execucions es solapin (per exemple una manual mentre corre
+# la programada): si n'hi ha una en marxa, la següent espera en cua en
+# comptes d'executar-se en paral·lel i trepitjar-se els fitxers de cache.
+concurrency:
+  group: actualitzar-dades-bolets
+  cancel-in-progress: false
+
 permissions:
   contents: write
 
@@ -32,4 +39,6 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/resultats.json data/bosc_cache.json data/historial_lluvia.json data/gbif_cache.json data/vegetacio_layers_cache.json data/geocode_cache.json
           git diff --staged --quiet || git commit -m "Actualització automàtica de dades"
-          git push
+          # Si el push falla perquè el remot ha canviat mentrestant, es fa
+          # un pull --rebase i es reintenta una vegada abans de rendir-se.
+          git push || (git pull --rebase && git push)
