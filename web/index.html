@@ -38,6 +38,14 @@
   input[type="range"] { width: 100%; }
   #map { width: 100%; height: 480px; border-radius: 12px; border: 0.5px solid var(--border); margin-bottom: 16px; background: var(--surface-1); }
   .leaflet-popup-content-wrapper { border-radius: 10px; }
+  .leaflet-popup-content {
+    max-height: 60vh;
+    overflow-y: auto;
+    margin: 12px 16px;
+  }
+  .leaflet-popup {
+    max-width: 320px;
+  }
   .popup-title { font-weight: 500; font-size: 14px; margin: 0 0 4px; }
   .popup-meta { font-size: 12px; color: #5f5e5a; margin: 0 0 6px; }
   .popup-species-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 12px; padding: 3px 0; }
@@ -557,11 +565,11 @@ async function explainZoneSpecies(event, zoneId, speciesId, elementId) {
         scoreChange: (DATA.score_changes_7d || {})[String(z.id)] || null,
       }),
     });
-    if (!res.ok) throw new Error('explain failed');
     const data = await res.json();
+    if (!res.ok) throw new Error(data.error || `error ${res.status}`);
     p.textContent = data.explanation;
   } catch (e) {
-    p.textContent = 'No se ha podido generar la explicación ahora mismo.';
+    p.textContent = 'No se ha podido generar la explicación: ' + e.message;
   }
 }
 
