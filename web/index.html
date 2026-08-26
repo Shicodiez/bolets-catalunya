@@ -67,6 +67,15 @@
   }
   .cred-warning a { color: #6B1512; font-weight: 500; }
   .cred-warning strong { display: block; margin-bottom: 2px; }
+  .accuracy-box {
+    background: var(--surface-1); border-radius: 12px; padding: 14px 16px;
+    margin-bottom: 16px; font-size: 13px;
+  }
+  .accuracy-box .headline { font-weight: 500; font-size: 15px; margin: 0 0 6px; }
+  .accuracy-box .franjas { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; font-size: 12px; color: var(--text-secondary); }
+  .score-change { font-size: 11px; margin-left: 4px; }
+  .score-change.up { color: #1D9E75; }
+  .score-change.down { color: #E24B4A; }
   .section-label { font-size: 13px; font-weight: 500; margin: 20px 0 8px; }
 
   .sighting-box {
@@ -202,7 +211,10 @@
       <span><span class="legend-dot" style="background:#1D9E75"></span>Alta (≥80)</span>
       <span><span class="legend-dot" style="background:#EF9F27"></span>Media (umbral-79)</span>
     </div>
+    <p style="margin-top:10px">🟢🟠🔴 = confianza en la puntuación (cuánta evidencia real la respalda: registros históricos de GBIF y corroboración entre fuentes meteorológicas). Una puntuación alta con confianza baja significa que se basa sobre todo en el cálculo del día, no en histórico contrastado.</p>
   </div>
+
+  <div id="accuracy-panel"></div>
 
   <p class="section-label" id="section-label">Zonas por encima del umbral</p>
   <div id="zones-list"></div>
@@ -235,7 +247,8 @@ function getRows(filterVal) {
     if (filterVal !== 'all') scores = scores.filter(s => s.id === filterVal);
     const above = scores.filter(s => s.score >= threshold);
     const best = scores.length ? scores[0] : null;
-    return {...z, scores, above, hasMatch: above.length > 0, bestScore: best ? best.score : 0};
+    const scoreChange = (DATA.score_changes_7d || {})[String(z.id)];
+    return {...z, scores, above, hasMatch: above.length > 0, bestScore: best ? best.score : 0, scoreChange};
   });
 }
 
@@ -251,9 +264,13 @@ function renderMap(filterVal) {
       fillColor: c.dot, color: '#ffffff', weight: 1, opacity: 1, fillOpacity: 0.85
     }).addTo(map);
 
+    const CONFIDENCE_ICON = {alta: '🟢', mitjana: '🟠', baja: '🔴'};
+    const CONFIDENCE_LABEL = {alta: 'Confianza alta', mitjana: 'Confianza media', baja: 'Confianza baja'};
     const speciesRows = z.above.map(s => {
       const sc = colorForScore(s.score);
-      return `<div class="popup-species-row"><span>${s.name}</span><span class="popup-score-pill" style="background:${sc.bg};color:${sc.text}">${s.score}</span></div>`;
+      const confIcon = CONFIDENCE_ICON[s.confidence] || '';
+      const confTitle = CONFIDENCE_LABEL[s.confidence] || '';
+      return `<div class="popup-species-row"><span>${s.name}</span><span><span title="${confTitle}">${confIcon}</span> <span class="popup-score-pill" style="background:${sc.bg};color:${sc.text}">${s.score}</span></span></div>`;
     }).join('');
 
     marker.bindPopup(`
@@ -281,14 +298,20 @@ function renderList(filterVal, sortVal) {
     const c = colorForScore(z.bestScore);
     const card = document.createElement('div');
     card.className = 'zone-card';
-    const speciesList = z.above.map(s => `${s.name} (${s.score})`).join(', ');
+    const CONFIDENCE_ICON2 = {alta: '🟢', mitjana: '🟠', baja: '🔴'};
+    const speciesList = z.above.map(s => `${CONFIDENCE_ICON2[s.confidence] || ''} ${s.name} (${s.score})`).join(', ');
+    let changeHtml = '';
+    if (z.scoreChange && z.scoreChange.change !== 0) {
+      const up = z.scoreChange.change > 0;
+      changeHtml = `<span class="score-change ${up ? 'up' : 'down'}">${up ? '▲' : '▼'}${Math.abs(z.scoreChange.change)} (7d)</span>`;
+    }
     card.innerHTML = `
       <div class="zone-top">
         <div style="flex:1;min-width:0">
           <p class="zone-name">${z.name}</p>
           <p class="zone-meta">${speciesList} · ${z.alt}m · ${z.tree_label}</p>
         </div>
-        <span class="score-pill" style="background:${c.bg};color:${c.text}">${z.bestScore}</span>
+        <span class="score-pill" style="background:${c.bg};color:${c.text}">${z.bestScore}</span>${changeHtml}
       </div>
       <p class="zone-detail">Lluvia: ${z.rain_10d}mm · Mín. noche: ${z.min_temp}°C · ${z.days_since_rain}d desde inicio de lluvia</p>
     `;
@@ -626,6 +649,26 @@ function renderCredentialWarnings(warnings) {
   });
 }
 
+function renderAccuracyPanel(accuracy) {
+  const container = document.getElementById('accuracy-panel');
+  container.innerHTML = '';
+  if (!accuracy || !accuracy.total_comparable) {
+    return; // no se inventa nada si aún no hay suficientes hallazgos contrastables
+  }
+  const box = document.createElement('div');
+  box.className = 'accuracy-box';
+  const franjasHtml = Object.entries(accuracy.por_franja || {})
+    .sort((a, b) => parseInt(b[0]) - parseInt(a[0]))
+    .map(([franja, s]) => `<span>${franja}: ${Math.round(s.aciertos / s.total * 100)}% (${s.aciertos}/${s.total})</span>`)
+    .join('');
+  box.innerHTML = `
+    <p class="headline">📊 Precisión del modelo con vuestros hallazgos: ${accuracy.precision_global}%</p>
+    <p>${accuracy.aciertos} de ${accuracy.total_comparable} hallazgos contrastables coinciden con lo que predijo el modelo ese día.</p>
+    <div class="franjas">${franjasHtml}</div>
+  `;
+  container.appendChild(box);
+}
+
 async function loadData() {
   const status = document.getElementById('status');
   try {
@@ -640,6 +683,7 @@ async function loadData() {
     }
 
     renderCredentialWarnings(DATA.credential_warnings || []);
+    renderAccuracyPanel(DATA.model_accuracy);
 
     map = L.map('map', {scrollWheelZoom: false}).setView([41.85, 1.55], 8);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
