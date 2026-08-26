@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-26T06:16:27.064109+00:00",
+  "generated_at": "2026-08-26T06:30:53.779998+00:00",
   "default_threshold": 70,
   "credential_warnings": [],
   "zones": [
@@ -1357,7 +1357,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T18:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 59,
@@ -3217,7 +3217,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T18:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 129,
@@ -3239,7 +3239,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T18:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 130,
@@ -3761,7 +3761,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T18:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 149,
@@ -3783,7 +3783,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T18:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 150,
@@ -4319,7 +4319,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T18:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 170,
@@ -4341,7 +4341,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T18:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 171,
@@ -4935,7 +4935,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T18:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 192,
@@ -4957,7 +4957,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T18:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 193,
@@ -4995,7 +4995,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T18:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 194,
@@ -5682,7 +5682,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T18:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 215,
@@ -6408,7 +6408,7 @@
         "prec_1h_mm": 0.0,
         "observed_at": "2026-08-25T18:00:00+0000"
       },
-      "own_history_days": 0
+      "own_history_days": 1
     },
     {
       "id": 237,
