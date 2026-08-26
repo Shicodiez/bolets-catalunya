@@ -241,6 +241,16 @@ function aemetLine(z) {
   return `<p class="popup-detail">✓ AEMET "${a.station_name}" (${a.distance_km}km) — ${precText} ahora mismo</p>`;
 }
 
+function triangulationLine(z) {
+  const t = z.triangulation;
+  if (!t || t.estimated_rain_mm === null || t.estimated_rain_mm === undefined) return '';
+  const n = (t.stations_used || []).length;
+  const stationsText = (t.stations_used || [])
+    .map(s => `${s.name} (${s.distance_km}km)`)
+    .join(', ');
+  return `<p class="popup-detail">📡 Triangulado con ${n} estación${n === 1 ? '' : 'es'}: ${t.estimated_rain_mm}mm hoy — ${stationsText}</p>`;
+}
+
 function getRows(filterVal) {
   return DATA.zones.map(z => {
     let scores = z.species_scores || [];
@@ -285,6 +295,7 @@ function renderMap(filterVal) {
       <p class="popup-meta">${z.alt}m · ${z.tree_label}</p>
       ${speciesRows}
       <p class="popup-detail">Lluvia acumulada: ${z.rain_10d}mm · Mín. noche: ${z.min_temp}°C · ${z.days_since_rain}d desde inicio de lluvia</p>
+      ${triangulationLine(z)}
       ${z.own_history_days ? `<p class="popup-detail">📊 Historial propio: ${z.own_history_days}d acumulados</p>` : ''}
       ${aemetLine(z)}
       <button class="popup-btn" onclick="prefillSighting(${z.id})">Registrar hallazgo aquí</button>
