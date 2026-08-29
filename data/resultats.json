@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-29T15:53:36.524807+00:00",
+  "generated_at": "2026-08-29T20:09:12.982761+00:00",
   "default_threshold": 70,
   "credential_warnings": [],
   "zones": [
@@ -21,7 +21,7 @@
         "station_name": "SANT JAUME D'ENVEJA",
         "distance_km": 10.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -78,7 +78,7 @@
         "station_name": "TORTOSA",
         "distance_km": 15.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -135,7 +135,7 @@
         "station_name": "SANT JAUME D'ENVEJA",
         "distance_km": 8.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -192,7 +192,7 @@
         "station_name": "SANT JAUME D'ENVEJA",
         "distance_km": 1.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -249,7 +249,7 @@
         "station_name": "SANT JAUME D'ENVEJA",
         "distance_km": 12.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -306,7 +306,7 @@
         "station_name": "TORTOSA",
         "distance_km": 4.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -363,7 +363,7 @@
         "station_name": "TORTOSA",
         "distance_km": 8.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -420,7 +420,7 @@
         "station_name": "SANT JAUME D'ENVEJA",
         "distance_km": 13.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -477,7 +477,7 @@
         "station_name": "SANT JAUME D'ENVEJA",
         "distance_km": 10.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -513,7 +513,7 @@
         "soil_moisture_now": 0.282,
         "soil_moisture_avg_7d": 0.284,
         "soil_moisture_trend": -0.0018,
-        "evapotranspiration_7d": 34.1
+        "evapotranspiration_7d": 34.0
       }
     },
     {
@@ -534,7 +534,7 @@
         "station_name": "SANT JAUME D'ENVEJA",
         "distance_km": 15.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -570,7 +570,7 @@
         "soil_moisture_now": 0.0,
         "soil_moisture_avg_7d": 0.0,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 34.7
+        "evapotranspiration_7d": 34.6
       }
     },
     {
@@ -591,7 +591,7 @@
         "station_name": "SANT JAUME D'ENVEJA",
         "distance_km": 24.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -627,7 +627,7 @@
         "soil_moisture_now": 0.0,
         "soil_moisture_avg_7d": 0.0,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 35.4
+        "evapotranspiration_7d": 35.3
       }
     },
     {
@@ -648,7 +648,7 @@
         "station_name": "HORTA DE SANT JOAN",
         "distance_km": 8.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -705,7 +705,7 @@
         "station_name": "TORTOSA",
         "distance_km": 7.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -762,7 +762,7 @@
         "station_name": "TORTOSA",
         "distance_km": 10.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -819,7 +819,7 @@
         "station_name": "RASQUERA",
         "distance_km": 16.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -876,7 +876,7 @@
         "station_name": "VANDELLÓS",
         "distance_km": 9.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -912,7 +912,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.115,
         "soil_moisture_trend": -0.0028,
-        "evapotranspiration_7d": 34.9
+        "evapotranspiration_7d": 35.0
       }
     },
     {
@@ -933,7 +933,7 @@
         "station_name": "VANDELLÓS",
         "distance_km": 11.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -969,7 +969,7 @@
         "soil_moisture_now": 0.0,
         "soil_moisture_avg_7d": 0.0,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 34.7
+        "evapotranspiration_7d": 34.6
       }
     },
     {
@@ -990,7 +990,7 @@
         "station_name": "VANDELLÓS",
         "distance_km": 19.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -1026,7 +1026,7 @@
         "soil_moisture_now": 0.0,
         "soil_moisture_avg_7d": 0.0,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 35.2
+        "evapotranspiration_7d": 35.1
       }
     },
     {
@@ -1047,7 +1047,7 @@
         "station_name": "TARRAGONA  FAC. GEOGRAFIA",
         "distance_km": 27.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -1104,7 +1104,7 @@
         "station_name": "TARRAGONA  FAC. GEOGRAFIA",
         "distance_km": 27.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -1140,7 +1140,7 @@
         "soil_moisture_now": 0.0,
         "soil_moisture_avg_7d": 0.0,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 36.1
+        "evapotranspiration_7d": 36.0
       }
     },
     {
@@ -1161,7 +1161,7 @@
         "station_name": "HORTA DE SANT JOAN",
         "distance_km": 7.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -1197,7 +1197,7 @@
         "soil_moisture_now": 0.198,
         "soil_moisture_avg_7d": 0.197,
         "soil_moisture_trend": 0.0025,
-        "evapotranspiration_7d": 37.2
+        "evapotranspiration_7d": 37.3
       }
     },
     {
@@ -1261,7 +1261,7 @@
         "station_name": "HORTA DE SANT JOAN",
         "distance_km": 3.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -1297,7 +1297,7 @@
         "soil_moisture_now": 0.199,
         "soil_moisture_avg_7d": 0.203,
         "soil_moisture_trend": -0.0033,
-        "evapotranspiration_7d": 35.9
+        "evapotranspiration_7d": 36.0
       }
     },
     {
@@ -1361,7 +1361,7 @@
         "station_name": "RASQUERA",
         "distance_km": 13.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -1461,7 +1461,7 @@
         "station_name": "RASQUERA",
         "distance_km": 4.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -1518,7 +1518,7 @@
         "station_name": "RASQUERA",
         "distance_km": 9.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -1618,7 +1618,7 @@
         "station_name": "VANDELLÓS",
         "distance_km": 3.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -1654,7 +1654,7 @@
         "soil_moisture_now": 0.202,
         "soil_moisture_avg_7d": 0.213,
         "soil_moisture_trend": -0.0074,
-        "evapotranspiration_7d": 33.2
+        "evapotranspiration_7d": 33.1
       }
     },
     {
@@ -1675,7 +1675,7 @@
         "station_name": "VANDELLÓS",
         "distance_km": 7.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -1732,7 +1732,7 @@
         "station_name": "VANDELLÓS",
         "distance_km": 17.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -1789,7 +1789,7 @@
         "station_name": "TARRAGONA  FAC. GEOGRAFIA",
         "distance_km": 17.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -1846,7 +1846,7 @@
         "station_name": "TARRAGONA  FAC. GEOGRAFIA",
         "distance_km": 18.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -1903,7 +1903,7 @@
         "station_name": "TARRAGONA  FAC. GEOGRAFIA",
         "distance_km": 23.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -1960,7 +1960,7 @@
         "station_name": "HORTA DE SANT JOAN",
         "distance_km": 14.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -2017,7 +2017,7 @@
         "station_name": "HORTA DE SANT JOAN",
         "distance_km": 12.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -2074,7 +2074,7 @@
         "station_name": "RASQUERA",
         "distance_km": 13.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -2131,7 +2131,7 @@
         "station_name": "RASQUERA",
         "distance_km": 6.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -2188,7 +2188,7 @@
         "station_name": "RASQUERA",
         "distance_km": 10.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -2245,7 +2245,7 @@
         "station_name": "VANDELLÓS",
         "distance_km": 11.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -2302,7 +2302,7 @@
         "station_name": "VANDELLÓS",
         "distance_km": 13.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -2359,7 +2359,7 @@
         "station_name": "REUS  AEROPUERTO",
         "distance_km": 11.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -2416,7 +2416,7 @@
         "station_name": "TARRAGONA  FAC. GEOGRAFIA",
         "distance_km": 8.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -2473,7 +2473,7 @@
         "station_name": "TARRAGONA  FAC. GEOGRAFIA",
         "distance_km": 9.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -2509,7 +2509,7 @@
         "soil_moisture_now": 0.187,
         "soil_moisture_avg_7d": 0.19,
         "soil_moisture_trend": -0.0018,
-        "evapotranspiration_7d": 32.3
+        "evapotranspiration_7d": 32.2
       }
     },
     {
@@ -2530,7 +2530,7 @@
         "station_name": "TARRAGONA  FAC. GEOGRAFIA",
         "distance_km": 17.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -2587,7 +2587,7 @@
         "station_name": "TARRAGONA  FAC. GEOGRAFIA",
         "distance_km": 27.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -2644,7 +2644,7 @@
         "station_name": "MASSALUCA",
         "distance_km": 11.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -2701,7 +2701,7 @@
         "station_name": "MASSALUCA",
         "distance_km": 3.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -2758,7 +2758,7 @@
         "station_name": "MASSALUCA",
         "distance_km": 9.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -2858,7 +2858,7 @@
         "station_name": "RASQUERA",
         "distance_km": 16.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -2894,7 +2894,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": -0.0007,
-        "evapotranspiration_7d": 37.1
+        "evapotranspiration_7d": 37.2
       }
     },
     {
@@ -2915,7 +2915,7 @@
         "station_name": "CABACÉS",
         "distance_km": 11.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -2951,7 +2951,7 @@
         "soil_moisture_now": 0.107,
         "soil_moisture_avg_7d": 0.108,
         "soil_moisture_trend": -0.0009,
-        "evapotranspiration_7d": 37.0
+        "evapotranspiration_7d": 37.1
       }
     },
     {
@@ -2972,7 +2972,7 @@
         "station_name": "ALFORJA",
         "distance_km": 13.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -3029,7 +3029,7 @@
         "station_name": "ALFORJA",
         "distance_km": 7.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -3086,7 +3086,7 @@
         "station_name": "REUS  AEROPUERTO",
         "distance_km": 7.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -3122,7 +3122,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.115,
         "soil_moisture_trend": -0.0054,
-        "evapotranspiration_7d": 34.1
+        "evapotranspiration_7d": 34.0
       }
     },
     {
@@ -3143,7 +3143,7 @@
         "station_name": "REUS  AEROPUERTO",
         "distance_km": 3.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -3200,7 +3200,7 @@
         "station_name": "TARRAGONA  FAC. GEOGRAFIA",
         "distance_km": 6.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -3236,7 +3236,7 @@
         "soil_moisture_now": 0.187,
         "soil_moisture_avg_7d": 0.19,
         "soil_moisture_trend": -0.0018,
-        "evapotranspiration_7d": 32.2
+        "evapotranspiration_7d": 32.1
       }
     },
     {
@@ -3257,7 +3257,7 @@
         "station_name": "TARRAGONA  FAC. GEOGRAFIA",
         "distance_km": 16.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -3314,7 +3314,7 @@
         "station_name": "VILAFRANCA DEL PENEDÈS",
         "distance_km": 22.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -3371,7 +3371,7 @@
         "station_name": "SITGES  VALLCARCA",
         "distance_km": 17.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -3397,8 +3397,8 @@
           },
           {
             "source": "meteoclimatic",
-            "name": "Sant Pere de Ribes",
-            "distance_km": 14.3,
+            "name": "Sitges",
+            "distance_km": 14.1,
             "rain": 0.0
           }
         ]
@@ -3428,22 +3428,22 @@
         "station_name": "SITGES  VALLCARCA",
         "distance_km": 11.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
         "estimated_rain_mm": 0.0,
         "stations_used": [
           {
-            "source": "aemet",
-            "name": "SITGES  VALLCARCA",
-            "distance_km": 11.0,
+            "source": "meteoclimatic",
+            "name": "Sitges",
+            "distance_km": 9.4,
             "rain": 0.0
           },
           {
-            "source": "aemet",
-            "name": "SITGES  VALLCARCA",
-            "distance_km": 11.0,
+            "source": "meteoclimatic",
+            "name": "Sitges",
+            "distance_km": 9.4,
             "rain": 0.0
           },
           {
@@ -3464,7 +3464,7 @@
         "soil_moisture_now": 0.0,
         "soil_moisture_avg_7d": 0.0,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 35.4
+        "evapotranspiration_7d": 35.3
       }
     },
     {
@@ -3485,7 +3485,7 @@
         "station_name": "SITGES  VALLCARCA",
         "distance_km": 12.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -3521,7 +3521,7 @@
         "soil_moisture_now": 0.0,
         "soil_moisture_avg_7d": 0.0,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 35.8
+        "evapotranspiration_7d": 35.7
       }
     },
     {
@@ -3542,7 +3542,7 @@
         "station_name": "MASSALUCA",
         "distance_km": 13.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -3599,7 +3599,7 @@
         "station_name": "MASSALUCA",
         "distance_km": 7.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -3656,7 +3656,7 @@
         "station_name": "MASSALUCA",
         "distance_km": 11.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -3692,7 +3692,7 @@
         "soil_moisture_now": 0.216,
         "soil_moisture_avg_7d": 0.205,
         "soil_moisture_trend": 0.0156,
-        "evapotranspiration_7d": 40.0
+        "evapotranspiration_7d": 40.1
       }
     },
     {
@@ -3756,7 +3756,7 @@
         "station_name": "CABACÉS",
         "distance_km": 12.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -3813,7 +3813,7 @@
         "station_name": "CABACÉS",
         "distance_km": 2.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -3913,7 +3913,7 @@
         "station_name": "CABACÉS",
         "distance_km": 8.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -4013,7 +4013,7 @@
         "station_name": "ALFORJA",
         "distance_km": 3.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -4113,7 +4113,7 @@
         "station_name": "ALFORJA",
         "distance_km": 9.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -4170,7 +4170,7 @@
         "station_name": "VALLS",
         "distance_km": 7.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -4227,7 +4227,7 @@
         "station_name": "VALLS",
         "distance_km": 7.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -4284,7 +4284,7 @@
         "station_name": "VALLS",
         "distance_km": 16.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -4341,7 +4341,7 @@
         "station_name": "VILAFRANCA DEL PENEDÈS",
         "distance_km": 13.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -4398,7 +4398,7 @@
         "station_name": "VILAFRANCA DEL PENEDÈS",
         "distance_km": 10.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -4455,7 +4455,7 @@
         "station_name": "SITGES  VALLCARCA",
         "distance_km": 3.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -4463,20 +4463,20 @@
         "stations_used": [
           {
             "source": "meteoclimatic",
+            "name": "Sitges",
+            "distance_km": 0.7,
+            "rain": 0.0
+          },
+          {
+            "source": "meteoclimatic",
+            "name": "Sitges",
+            "distance_km": 0.7,
+            "rain": 0.0
+          },
+          {
+            "source": "meteoclimatic",
             "name": "Sant Pere de Ribes",
             "distance_km": 3.7,
-            "rain": 0.0
-          },
-          {
-            "source": "aemet",
-            "name": "SITGES  VALLCARCA",
-            "distance_km": 3.8,
-            "rain": 0.0
-          },
-          {
-            "source": "aemet",
-            "name": "SITGES  VALLCARCA",
-            "distance_km": 3.8,
             "rain": 0.0
           },
           {
@@ -4512,7 +4512,7 @@
         "station_name": "SITGES  VALLCARCA",
         "distance_km": 6.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -4569,7 +4569,7 @@
         "station_name": "BARCELONA  AEROPUERTO",
         "distance_km": 6.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -4626,7 +4626,7 @@
         "station_name": "BARCELONA  AEROPUERTO",
         "distance_km": 10.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -4683,7 +4683,7 @@
         "station_name": "MASSALUCA",
         "distance_km": 20.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -4740,7 +4740,7 @@
         "station_name": "MASSALUCA",
         "distance_km": 17.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -4776,7 +4776,7 @@
         "soil_moisture_now": 0.304,
         "soil_moisture_avg_7d": 0.292,
         "soil_moisture_trend": 0.0138,
-        "evapotranspiration_7d": 39.2
+        "evapotranspiration_7d": 39.1
       }
     },
     {
@@ -4840,7 +4840,7 @@
         "station_name": "MASSALUCA",
         "distance_km": 19.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -4897,7 +4897,7 @@
         "station_name": "EL SOLERÀS",
         "distance_km": 11.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -4954,7 +4954,7 @@
         "station_name": "EVC_ELS TORMS",
         "distance_km": 7.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -5054,7 +5054,7 @@
         "station_name": "LA POBLA DE CERVOLES",
         "distance_km": 7.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -5154,7 +5154,7 @@
         "station_name": "LA POBLA DE CERVOLES",
         "distance_km": 5.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -5254,7 +5254,7 @@
         "station_name": "LA POBLA DE CERVOLES",
         "distance_km": 14.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -5311,7 +5311,7 @@
         "station_name": "VALLS",
         "distance_km": 6.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -5368,7 +5368,7 @@
         "station_name": "VALLS",
         "distance_km": 6.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -5468,7 +5468,7 @@
         "station_name": "PONTONS",
         "distance_km": 11.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -5568,7 +5568,7 @@
         "station_name": "VILAFRANCA DEL PENEDÈS",
         "distance_km": 9.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -5625,7 +5625,7 @@
         "station_name": "VILAFRANCA DEL PENEDÈS",
         "distance_km": 0.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -5725,7 +5725,7 @@
         "station_name": "SITGES  VALLCARCA",
         "distance_km": 10.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -5825,7 +5825,7 @@
         "station_name": "CORBERA  PUIG D?AGULLES",
         "distance_km": 9.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -5882,7 +5882,7 @@
         "station_name": "BARCELONA  AEROPUERTO",
         "distance_km": 4.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -5939,7 +5939,7 @@
         "station_name": "BARCELONA  DRASSANES",
         "distance_km": 4.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -5996,7 +5996,7 @@
         "station_name": "BARCELONA  DRASSANES",
         "distance_km": 11.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -6032,7 +6032,7 @@
         "soil_moisture_now": 0.0,
         "soil_moisture_avg_7d": 0.0,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 35.3
+        "evapotranspiration_7d": 35.2
       }
     },
     {
@@ -6053,7 +6053,7 @@
         "station_name": "VILASSAR DE DALT",
         "distance_km": 19.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -6110,7 +6110,7 @@
         "station_name": "VILASSAR DE DALT",
         "distance_km": 24.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -6167,7 +6167,7 @@
         "station_name": "FRAGA",
         "distance_km": 16.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -6203,7 +6203,7 @@
         "soil_moisture_now": 0.193,
         "soil_moisture_avg_7d": 0.192,
         "soil_moisture_trend": 0.0012,
-        "evapotranspiration_7d": 38.8
+        "evapotranspiration_7d": 38.9
       }
     },
     {
@@ -6224,7 +6224,7 @@
         "station_name": "FRAGA",
         "distance_km": 11.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -6260,7 +6260,7 @@
         "soil_moisture_now": 0.185,
         "soil_moisture_avg_7d": 0.185,
         "soil_moisture_trend": -0.0002,
-        "evapotranspiration_7d": 39.9
+        "evapotranspiration_7d": 39.8
       }
     },
     {
@@ -6281,7 +6281,7 @@
         "station_name": "FRAGA",
         "distance_km": 14.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -6338,7 +6338,7 @@
         "station_name": "EL SOLERÀS",
         "distance_km": 7.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -6438,7 +6438,7 @@
         "station_name": "EL SOLERÀS",
         "distance_km": 2.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -6495,7 +6495,7 @@
         "station_name": "EVC_ELS TORMS",
         "distance_km": 8.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -6552,7 +6552,7 @@
         "station_name": "LA POBLA DE CERVOLES",
         "distance_km": 7.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -6588,7 +6588,7 @@
         "soil_moisture_now": 0.146,
         "soil_moisture_avg_7d": 0.16,
         "soil_moisture_trend": -0.0113,
-        "evapotranspiration_7d": 37.1
+        "evapotranspiration_7d": 37.2
       }
     },
     {
@@ -6609,7 +6609,7 @@
         "station_name": "LA POBLA DE CERVOLES",
         "distance_km": 14.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -6709,7 +6709,7 @@
         "station_name": "VALLS",
         "distance_km": 15.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -6766,7 +6766,7 @@
         "station_name": "VALLS",
         "distance_km": 15.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -6823,7 +6823,7 @@
         "station_name": "PONTONS",
         "distance_km": 6.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -6923,7 +6923,7 @@
         "station_name": "PONTONS",
         "distance_km": 3.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -6980,12 +6980,24 @@
         "station_name": "VILAFRANCA DEL PENEDÈS",
         "distance_km": 10.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
         "estimated_rain_mm": 0.0,
         "stations_used": [
+          {
+            "source": "meteoclimatic",
+            "name": "Sant Pere de Riudebitlles",
+            "distance_km": 3.9,
+            "rain": 0.0
+          },
+          {
+            "source": "meteoclimatic",
+            "name": "Sant Pere de Riudebitlles",
+            "distance_km": 3.9,
+            "rain": 0.0
+          },
           {
             "source": "meteoclimatic",
             "name": "La Granada",
@@ -6996,18 +7008,6 @@
             "source": "meteoclimatic",
             "name": "Lavern",
             "distance_km": 7.9,
-            "rain": 0.0
-          },
-          {
-            "source": "meteoclimatic",
-            "name": "La Font del Bosc Mediona",
-            "distance_km": 8.8,
-            "rain": 0.0
-          },
-          {
-            "source": "meteoclimatic",
-            "name": "El Bedorc - Piera",
-            "distance_km": 9.0,
             "rain": 0.0
           }
         ]
@@ -7037,12 +7037,18 @@
         "station_name": "CORBERA  PUIG D?AGULLES",
         "distance_km": 6.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
         "estimated_rain_mm": 0.0,
         "stations_used": [
+          {
+            "source": "meteoclimatic",
+            "name": "Sant Sadurní d'Anoia",
+            "distance_km": 1.8,
+            "rain": 0.0
+          },
           {
             "source": "meteoclimatic",
             "name": "Sant Pau D'Ordal",
@@ -7059,12 +7065,6 @@
             "source": "meteoclimatic",
             "name": "Gelida - Institut",
             "distance_km": 5.2,
-            "rain": 0.0
-          },
-          {
-            "source": "aemet",
-            "name": "CORBERA  PUIG D?AGULLES",
-            "distance_km": 6.7,
             "rain": 0.0
           }
         ]
@@ -7137,7 +7137,7 @@
         "station_name": "CORBERA  PUIG D?AGULLES",
         "distance_km": 3.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -7237,7 +7237,7 @@
         "station_name": "BARCELONA  DRASSANES",
         "distance_km": 11.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -7294,7 +7294,7 @@
         "station_name": "BARCELONA  DRASSANES",
         "distance_km": 5.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -7351,7 +7351,7 @@
         "station_name": "VILASSAR DE DALT",
         "distance_km": 10.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -7408,7 +7408,7 @@
         "station_name": "VILASSAR DE DALT",
         "distance_km": 10.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -7465,7 +7465,7 @@
         "station_name": "VILASSAR DE DALT",
         "distance_km": 17.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -7522,7 +7522,7 @@
         "station_name": "ARENYS DE MAR",
         "distance_km": 21.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -7579,7 +7579,7 @@
         "station_name": "FRAGA",
         "distance_km": 1.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -7636,7 +7636,7 @@
         "station_name": "FRAGA",
         "distance_km": 9.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -7693,7 +7693,7 @@
         "station_name": "LLEIDA",
         "distance_km": 12.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -7750,7 +7750,7 @@
         "station_name": "EL SOLERÀS",
         "distance_km": 11.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -7807,7 +7807,7 @@
         "station_name": "MOLLERUSSA",
         "distance_km": 12.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -7864,7 +7864,7 @@
         "station_name": "MOLLERUSSA",
         "distance_km": 13.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -7921,7 +7921,7 @@
         "station_name": "LLORAC",
         "distance_km": 20.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -8021,7 +8021,7 @@
         "station_name": "LLORAC",
         "distance_km": 10.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -8078,7 +8078,7 @@
         "station_name": "LLORAC",
         "distance_km": 5.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -8135,7 +8135,7 @@
         "station_name": "LLORAC",
         "distance_km": 12.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -8171,7 +8171,7 @@
         "soil_moisture_now": 0.137,
         "soil_moisture_avg_7d": 0.151,
         "soil_moisture_trend": -0.0091,
-        "evapotranspiration_7d": 31.9
+        "evapotranspiration_7d": 32.0
       }
     },
     {
@@ -8235,7 +8235,7 @@
         "station_name": "IGUALADA - MUNTANYETA",
         "distance_km": 9.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -8335,7 +8335,7 @@
         "station_name": "IGUALADA - MUNTANYETA",
         "distance_km": 11.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -8355,13 +8355,13 @@
           },
           {
             "source": "meteoclimatic",
-            "name": "Piera",
+            "name": "Piera ",
             "distance_km": 5.8,
             "rain": 0.0
           },
           {
             "source": "meteoclimatic",
-            "name": "Piera ",
+            "name": "Piera",
             "distance_km": 5.8,
             "rain": 0.0
           }
@@ -8392,7 +8392,7 @@
         "station_name": "MONTSERRAT",
         "distance_km": 9.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -8400,8 +8400,8 @@
         "stations_used": [
           {
             "source": "meteoclimatic",
-            "name": "La Beguda Alta",
-            "distance_km": 2.9,
+            "name": "Piera ",
+            "distance_km": 4.7,
             "rain": 0.0
           },
           {
@@ -8412,13 +8412,13 @@
           },
           {
             "source": "meteoclimatic",
-            "name": "Piera ",
-            "distance_km": 4.7,
+            "name": "Sant Esteve Sesrovires",
+            "distance_km": 6.0,
             "rain": 0.0
           },
           {
             "source": "meteoclimatic",
-            "name": "Sant Esteve Sesrovires",
+            "name": "Sant Esteve Sesrovires N",
             "distance_km": 6.0,
             "rain": 0.0
           }
@@ -8449,7 +8449,7 @@
         "station_name": "MONTSERRAT",
         "distance_km": 11.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -8475,8 +8475,8 @@
           },
           {
             "source": "meteoclimatic",
-            "name": "La Beguda Alta",
-            "distance_km": 7.7,
+            "name": "Rubí - La Serreta",
+            "distance_km": 8.9,
             "rain": 0.0
           }
         ]
@@ -8506,7 +8506,7 @@
         "station_name": "CALDES DE MONTBUI",
         "distance_km": 14.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -8539,7 +8539,7 @@
         ]
       },
       "soil_stats": {
-        "soil_moisture_now": 0.154,
+        "soil_moisture_now": 0.155,
         "soil_moisture_avg_7d": 0.16,
         "soil_moisture_trend": -0.0021,
         "evapotranspiration_7d": 33.8
@@ -8563,7 +8563,7 @@
         "station_name": "CALDES DE MONTBUI",
         "distance_km": 11.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -8583,14 +8583,14 @@
           },
           {
             "source": "meteoclimatic",
-            "name": "Mollet  -  Estació França",
-            "distance_km": 4.5,
+            "name": "Santa Perpètua de Mogoda",
+            "distance_km": 2.7,
             "rain": 0.0
           },
           {
             "source": "meteoclimatic",
-            "name": "Cerdanyola - Montflorit",
-            "distance_km": 5.4,
+            "name": "Mollet  -  Estació França",
+            "distance_km": 4.5,
             "rain": 0.0
           }
         ]
@@ -8663,7 +8663,7 @@
         "station_name": "VILASSAR DE DALT",
         "distance_km": 5.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -8720,7 +8720,7 @@
         "station_name": "VILASSAR DE DALT",
         "distance_km": 4.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -8777,7 +8777,7 @@
         "station_name": "ARENYS DE MAR",
         "distance_km": 8.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -8803,8 +8803,8 @@
           },
           {
             "source": "meteoclimatic",
-            "name": "Sant Andreu de Llavaneres",
-            "distance_km": 8.4,
+            "name": "Sant Vicenç de Montalt",
+            "distance_km": 7.9,
             "rain": 0.0
           }
         ]
@@ -8834,7 +8834,7 @@
         "station_name": "ARENYS DE MAR",
         "distance_km": 13.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -8870,7 +8870,7 @@
         "soil_moisture_now": 0.0,
         "soil_moisture_avg_7d": 0.0,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 35.0
+        "evapotranspiration_7d": 34.9
       }
     },
     {
@@ -8891,7 +8891,7 @@
         "station_name": "FRAGA",
         "distance_km": 8.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 3,
       "triangulation": {
@@ -8948,7 +8948,7 @@
         "station_name": "LLEIDA",
         "distance_km": 11.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 3,
       "triangulation": {
@@ -9005,7 +9005,7 @@
         "station_name": "LLEIDA",
         "distance_km": 2.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 3,
       "triangulation": {
@@ -9062,7 +9062,7 @@
         "station_name": "LLEIDA",
         "distance_km": 9.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -9119,7 +9119,7 @@
         "station_name": "MOLLERUSSA",
         "distance_km": 3.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -9155,7 +9155,7 @@
         "soil_moisture_now": 0.183,
         "soil_moisture_avg_7d": 0.182,
         "soil_moisture_trend": 0.0009,
-        "evapotranspiration_7d": 37.3
+        "evapotranspiration_7d": 37.2
       }
     },
     {
@@ -9176,7 +9176,7 @@
         "station_name": "MOLLERUSSA",
         "distance_km": 7.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -9233,7 +9233,7 @@
         "station_name": "TORDERA - GRANYANELLA",
         "distance_km": 15.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -9290,7 +9290,7 @@
         "station_name": "TORDERA - GRANYANELLA",
         "distance_km": 9.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -9446,7 +9446,7 @@
         "station_name": "LLORAC",
         "distance_km": 4.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -9482,7 +9482,7 @@
         "soil_moisture_now": 0.15,
         "soil_moisture_avg_7d": 0.157,
         "soil_moisture_trend": 0.0006,
-        "evapotranspiration_7d": 34.2
+        "evapotranspiration_7d": 34.3
       }
     },
     {
@@ -9602,7 +9602,7 @@
         "station_name": "LLORAC",
         "distance_km": 12.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -9702,7 +9702,7 @@
         "station_name": "IGUALADA - MUNTANYETA",
         "distance_km": 3.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -9738,7 +9738,7 @@
         "soil_moisture_now": 0.165,
         "soil_moisture_avg_7d": 0.168,
         "soil_moisture_trend": 0.0017,
-        "evapotranspiration_7d": 33.3
+        "evapotranspiration_7d": 33.4
       }
     },
     {
@@ -9759,7 +9759,7 @@
         "station_name": "IGUALADA - MUNTANYETA",
         "distance_km": 7.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -9816,7 +9816,7 @@
         "station_name": "MONTSERRAT",
         "distance_km": 2.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -9916,7 +9916,7 @@
         "station_name": "MONTSERRAT",
         "distance_km": 7.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -10016,7 +10016,7 @@
         "station_name": "CALDES DE MONTBUI",
         "distance_km": 9.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -10036,14 +10036,14 @@
           },
           {
             "source": "meteoclimatic",
-            "name": "Sabadell - Creu Alta",
-            "distance_km": 6.1,
+            "name": "Sabadell - Centre",
+            "distance_km": 8.1,
             "rain": 0.0
           },
           {
             "source": "meteoclimatic",
-            "name": "Sabadell - Centre",
-            "distance_km": 8.1,
+            "name": "Barcelona - Gràcia Centre",
+            "distance_km": 8.2,
             "rain": 0.0
           }
         ]
@@ -10116,7 +10116,7 @@
         "station_name": "CALDES DE MONTBUI",
         "distance_km": 1.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -10152,7 +10152,7 @@
         "soil_moisture_now": 0.133,
         "soil_moisture_avg_7d": 0.138,
         "soil_moisture_trend": -0.0017,
-        "evapotranspiration_7d": 35.2
+        "evapotranspiration_7d": 35.3
       }
     },
     {
@@ -10173,7 +10173,7 @@
         "station_name": "CALDES DE MONTBUI",
         "distance_km": 10.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -10273,7 +10273,7 @@
         "station_name": "ARENYS DE MAR",
         "distance_km": 10.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -10373,7 +10373,7 @@
         "station_name": "ARENYS DE MAR",
         "distance_km": 1.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -10409,7 +10409,7 @@
         "soil_moisture_now": 0.1,
         "soil_moisture_avg_7d": 0.101,
         "soil_moisture_trend": -0.0009,
-        "evapotranspiration_7d": 33.6
+        "evapotranspiration_7d": 33.5
       }
     },
     {
@@ -10430,7 +10430,7 @@
         "station_name": "ARENYS DE MAR",
         "distance_km": 10.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -10450,14 +10450,14 @@
           },
           {
             "source": "meteoclimatic",
-            "name": "Canet de Mar",
-            "distance_km": 7.0,
+            "name": "Santa Susanna",
+            "distance_km": 5.4,
             "rain": 0.0
           },
           {
             "source": "meteoclimatic",
-            "name": "Malgrat de mar",
-            "distance_km": 8.3,
+            "name": "Canet de Mar",
+            "distance_km": 7.0,
             "rain": 0.0
           }
         ]
@@ -10487,7 +10487,7 @@
         "station_name": "BLANES  JARDIN BOTANICO",
         "distance_km": 8.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -10500,9 +10500,9 @@
             "rain": 0.0
           },
           {
-            "source": "aemet",
-            "name": "BLANES  JARDIN BOTANICO",
-            "distance_km": 8.7,
+            "source": "meteoclimatic",
+            "name": "Santa Susanna",
+            "distance_km": 7.4,
             "rain": 0.0
           },
           {
@@ -10523,7 +10523,7 @@
         "soil_moisture_now": 0.1,
         "soil_moisture_avg_7d": 0.101,
         "soil_moisture_trend": 0.0006,
-        "evapotranspiration_7d": 33.4
+        "evapotranspiration_7d": 33.3
       }
     },
     {
@@ -10544,7 +10544,7 @@
         "station_name": "TAMARITE DE LITERA  LA MELUSA",
         "distance_km": 10.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 3,
       "triangulation": {
@@ -10601,7 +10601,7 @@
         "station_name": "TAMARITE DE LITERA  LA MELUSA",
         "distance_km": 12.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 3,
       "triangulation": {
@@ -10658,7 +10658,7 @@
         "station_name": "LLEIDA",
         "distance_km": 7.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -10715,7 +10715,7 @@
         "station_name": "LLEIDA",
         "distance_km": 11.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -10750,7 +10750,7 @@
       "soil_stats": {
         "soil_moisture_now": 0.181,
         "soil_moisture_avg_7d": 0.179,
-        "soil_moisture_trend": 0.0022,
+        "soil_moisture_trend": 0.0023,
         "evapotranspiration_7d": 37.9
       }
     },
@@ -10772,7 +10772,7 @@
         "station_name": "MOLLERUSSA",
         "distance_km": 8.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -10829,7 +10829,7 @@
         "station_name": "MOLLERUSSA",
         "distance_km": 11.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -10886,7 +10886,7 @@
         "station_name": "TORDERA - GRANYANELLA",
         "distance_km": 12.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -10943,7 +10943,7 @@
         "station_name": "TORDERA - GRANYANELLA",
         "distance_km": 2.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -11000,7 +11000,7 @@
         "station_name": "TORDERA - GRANYANELLA",
         "distance_km": 8.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -11057,7 +11057,7 @@
         "station_name": "TORÀ",
         "distance_km": 13.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -11114,7 +11114,7 @@
         "station_name": "IGUALADA - MUNTANYETA",
         "distance_km": 11.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -11214,7 +11214,7 @@
         "station_name": "MANRESA",
         "distance_km": 13.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -11250,7 +11250,7 @@
         "soil_moisture_now": 0.15,
         "soil_moisture_avg_7d": 0.155,
         "soil_moisture_trend": 0.001,
-        "evapotranspiration_7d": 32.1
+        "evapotranspiration_7d": 32.2
       }
     },
     {
@@ -11271,7 +11271,7 @@
         "station_name": "MANRESA",
         "distance_km": 4.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -11371,7 +11371,7 @@
         "station_name": "MANRESA",
         "distance_km": 8.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -11471,7 +11471,7 @@
         "station_name": "CALDES DE MONTBUI",
         "distance_km": 13.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -11528,7 +11528,7 @@
         "station_name": "CALDES DE MONTBUI",
         "distance_km": 8.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -11628,7 +11628,7 @@
         "station_name": "FONTMARTINA",
         "distance_km": 13.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -11664,7 +11664,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.117,
         "soil_moisture_trend": -0.0057,
-        "evapotranspiration_7d": 34.0
+        "evapotranspiration_7d": 34.1
       }
     },
     {
@@ -11685,7 +11685,7 @@
         "station_name": "FONTMARTINA",
         "distance_km": 7.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -11721,7 +11721,7 @@
         "soil_moisture_now": 0.108,
         "soil_moisture_avg_7d": 0.112,
         "soil_moisture_trend": -0.0019,
-        "evapotranspiration_7d": 34.3
+        "evapotranspiration_7d": 34.2
       }
     },
     {
@@ -11785,7 +11785,7 @@
         "station_name": "ARENYS DE MAR",
         "distance_km": 11.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -11941,7 +11941,7 @@
         "station_name": "BLANES  JARDIN BOTANICO",
         "distance_km": 12.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -11955,6 +11955,12 @@
           },
           {
             "source": "meteoclimatic",
+            "name": "Santa Susanna",
+            "distance_km": 7.2,
+            "rain": 0.0
+          },
+          {
+            "source": "meteoclimatic",
             "name": "Malgrat de mar",
             "distance_km": 8.4,
             "rain": 0.0
@@ -11964,12 +11970,6 @@
             "name": "Calella",
             "distance_km": 8.6,
             "rain": 0.0
-          },
-          {
-            "source": "meteoclimatic",
-            "name": "Grions",
-            "distance_km": 8.9,
-            "rain": 0.0
           }
         ]
       },
@@ -11977,7 +11977,7 @@
         "soil_moisture_now": 0.1,
         "soil_moisture_avg_7d": 0.101,
         "soil_moisture_trend": 0.0006,
-        "evapotranspiration_7d": 33.5
+        "evapotranspiration_7d": 33.4
       }
     },
     {
@@ -12041,7 +12041,7 @@
         "station_name": "BLANES  JARDIN BOTANICO",
         "distance_km": 2.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -12098,7 +12098,7 @@
         "station_name": "BLANES  JARDIN BOTANICO",
         "distance_km": 8.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -12155,7 +12155,7 @@
         "station_name": "TAMARITE DE LITERA  LA MELUSA",
         "distance_km": 2.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -12212,7 +12212,7 @@
         "station_name": "TAMARITE DE LITERA  LA MELUSA",
         "distance_km": 7.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 3,
       "triangulation": {
@@ -12269,7 +12269,7 @@
         "station_name": "LLEIDA",
         "distance_km": 17.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -12326,7 +12326,7 @@
         "station_name": "OS DE BALAGUER",
         "distance_km": 11.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -12383,7 +12383,7 @@
         "station_name": "OS DE BALAGUER",
         "distance_km": 12.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -12419,7 +12419,7 @@
         "soil_moisture_now": 0.185,
         "soil_moisture_avg_7d": 0.185,
         "soil_moisture_trend": -0.0006,
-        "evapotranspiration_7d": 37.1
+        "evapotranspiration_7d": 37.2
       }
     },
     {
@@ -12440,7 +12440,7 @@
         "station_name": "ARTESA DE SEGRE",
         "distance_km": 17.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -12497,7 +12497,7 @@
         "station_name": "ARTESA DE SEGRE",
         "distance_km": 11.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -12554,7 +12554,7 @@
         "station_name": "TORDERA - GRANYANELLA",
         "distance_km": 11.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -12611,7 +12611,7 @@
         "station_name": "TORÀ",
         "distance_km": 6.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 2,
       "triangulation": {
@@ -12647,7 +12647,7 @@
         "soil_moisture_now": 0.147,
         "soil_moisture_avg_7d": 0.15,
         "soil_moisture_trend": 0.0029,
-        "evapotranspiration_7d": 35.0
+        "evapotranspiration_7d": 34.9
       }
     },
     {
@@ -12668,7 +12668,7 @@
         "station_name": "TORÀ",
         "distance_km": 4.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -12768,7 +12768,7 @@
         "station_name": "TORÀ",
         "distance_km": 14.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -12825,7 +12825,7 @@
         "station_name": "MANRESA",
         "distance_km": 14.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -12882,7 +12882,7 @@
         "station_name": "MANRESA",
         "distance_km": 7.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -12982,7 +12982,7 @@
         "station_name": "MANRESA",
         "distance_km": 10.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -13039,7 +13039,7 @@
         "station_name": "MOIÀ",
         "distance_km": 5.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -13195,7 +13195,7 @@
         "station_name": "MOIÀ",
         "distance_km": 7.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -13295,7 +13295,7 @@
         "station_name": "FONTMARTINA",
         "distance_km": 11.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -13303,14 +13303,14 @@
         "stations_used": [
           {
             "source": "meteoclimatic",
-            "name": "La Garriga (Ajuntament)",
-            "distance_km": 10.7,
+            "name": "Seva",
+            "distance_km": 6.2,
             "rain": 0.0
           },
           {
-            "source": "aemet",
-            "name": "FONTMARTINA",
-            "distance_km": 11.5,
+            "source": "meteoclimatic",
+            "name": "La Garriga (Ajuntament)",
+            "distance_km": 10.7,
             "rain": 0.0
           },
           {
@@ -13409,7 +13409,7 @@
         "station_name": "FONTMARTINA",
         "distance_km": 2.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -13509,7 +13509,7 @@
         "station_name": "FONTMARTINA",
         "distance_km": 9.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -13609,7 +13609,7 @@
         "station_name": "SANT HILARI",
         "distance_km": 16.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -13666,7 +13666,7 @@
         "station_name": "BLANES  JARDIN BOTANICO",
         "distance_km": 11.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -13766,7 +13766,7 @@
         "station_name": "CASTELL D?ARO",
         "distance_km": 10.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -13802,7 +13802,7 @@
         "soil_moisture_now": 0.1,
         "soil_moisture_avg_7d": 0.099,
         "soil_moisture_trend": 0.0005,
-        "evapotranspiration_7d": 30.4
+        "evapotranspiration_7d": 30.3
       }
     },
     {
@@ -13823,7 +13823,7 @@
         "station_name": "TAMARITE DE LITERA  LA MELUSA",
         "distance_km": 16.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -13880,7 +13880,7 @@
         "station_name": "TAMARITE DE LITERA  LA MELUSA",
         "distance_km": 10.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -13937,7 +13937,7 @@
         "station_name": "TAMARITE DE LITERA  LA MELUSA",
         "distance_km": 12.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -13994,7 +13994,7 @@
         "station_name": "OS DE BALAGUER",
         "distance_km": 13.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -14051,7 +14051,7 @@
         "station_name": "OS DE BALAGUER",
         "distance_km": 3.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -14108,7 +14108,7 @@
         "station_name": "OS DE BALAGUER",
         "distance_km": 6.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -14165,7 +14165,7 @@
         "station_name": "ARTESA DE SEGRE",
         "distance_km": 12.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -14222,7 +14222,7 @@
         "station_name": "ARTESA DE SEGRE",
         "distance_km": 2.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -14378,7 +14378,7 @@
         "station_name": "ARTESA DE SEGRE",
         "distance_km": 7.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -14435,7 +14435,7 @@
         "station_name": "TORÀ",
         "distance_km": 9.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -14535,9 +14535,9 @@
         "station_name": "TORÀ",
         "distance_km": 8.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
-      "own_history_days": 0,
+      "own_history_days": 1,
       "triangulation": {
         "estimated_rain_mm": 0.0,
         "stations_used": [
@@ -14571,7 +14571,7 @@
         "soil_moisture_now": 0.117,
         "soil_moisture_avg_7d": 0.121,
         "soil_moisture_trend": 0.0027,
-        "evapotranspiration_7d": 34.4
+        "evapotranspiration_7d": 34.5
       }
     },
     {
@@ -14691,7 +14691,7 @@
         "station_name": "RINER - XIXONS",
         "distance_km": 9.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -14791,7 +14791,7 @@
         "station_name": "RINER - XIXONS",
         "distance_km": 11.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -14848,7 +14848,7 @@
         "station_name": "BALSARENY",
         "distance_km": 5.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -14948,7 +14948,7 @@
         "station_name": "BALSARENY",
         "distance_km": 4.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -15005,16 +15005,16 @@
         "station_name": "MOIÀ",
         "distance_km": 7.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
         "estimated_rain_mm": 0.0,
         "stations_used": [
           {
-            "source": "aemet",
-            "name": "MOIÀ",
-            "distance_km": 7.4,
+            "source": "meteoclimatic",
+            "name": "Santa Maria d'Oló",
+            "distance_km": 1.3,
             "rain": 0.0
           },
           {
@@ -15161,22 +15161,22 @@
         "station_name": "MOIÀ",
         "distance_km": 9.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
         "estimated_rain_mm": 0.0,
         "stations_used": [
           {
-            "source": "aemet",
-            "name": "MOIÀ",
-            "distance_km": 9.1,
+            "source": "meteoclimatic",
+            "name": "Santa Eulàlia Riuprimer",
+            "distance_km": 4.6,
             "rain": 0.0
           },
           {
-            "source": "aemet",
-            "name": "MOIÀ",
-            "distance_km": 9.1,
+            "source": "meteoclimatic",
+            "name": "Sentfores (La Guixa)",
+            "distance_km": 6.8,
             "rain": 0.0
           },
           {
@@ -15261,12 +15261,24 @@
         "station_name": "FONTMARTINA",
         "distance_km": 16.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
         "estimated_rain_mm": 0.0,
         "stations_used": [
+          {
+            "source": "meteoclimatic",
+            "name": "Santa Eugènia de Berga",
+            "distance_km": 3.4,
+            "rain": 0.0
+          },
+          {
+            "source": "meteoclimatic",
+            "name": "Seva",
+            "distance_km": 4.0,
+            "rain": 0.0
+          },
           {
             "source": "meteoclimatic",
             "name": "Sant Julià de Vilatorta",
@@ -15278,18 +15290,6 @@
             "name": "Calldetenes",
             "distance_km": 6.2,
             "rain": 0.0
-          },
-          {
-            "source": "meteoclimatic",
-            "name": "Espinelves",
-            "distance_km": 10.1,
-            "rain": 0.0
-          },
-          {
-            "source": "meteoclimatic",
-            "name": "Manlleu",
-            "distance_km": 14.4,
-            "rain": 0.0
           }
         ]
       },
@@ -15297,7 +15297,7 @@
         "soil_moisture_now": 0.118,
         "soil_moisture_avg_7d": 0.113,
         "soil_moisture_trend": 0.0074,
-        "evapotranspiration_7d": 33.4
+        "evapotranspiration_7d": 33.5
       }
     },
     {
@@ -15318,7 +15318,7 @@
         "station_name": "SANT HILARI",
         "distance_km": 8.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -15331,9 +15331,9 @@
             "rain": 0.0
           },
           {
-            "source": "aemet",
-            "name": "SANT HILARI",
-            "distance_km": 8.1,
+            "source": "meteoclimatic",
+            "name": "Sant Sadurní d'Osormort",
+            "distance_km": 4.5,
             "rain": 0.0
           },
           {
@@ -15418,7 +15418,7 @@
         "station_name": "SANT HILARI",
         "distance_km": 2.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -15560,7 +15560,7 @@
         "station_name": "GIRONA  AEROPUERTO",
         "distance_km": 9.6,
         "prec_1h_mm": null,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -15593,7 +15593,7 @@
         ]
       },
       "soil_stats": {
-        "soil_moisture_now": 0.1,
+        "soil_moisture_now": 0.101,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": -0.0026,
         "evapotranspiration_7d": 33.4
@@ -15632,7 +15632,7 @@
         "station_name": "GIRONA  AEROPUERTO",
         "distance_km": 4.8,
         "prec_1h_mm": null,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -15732,7 +15732,7 @@
         "station_name": "GIRONA  AEROPUERTO",
         "distance_km": 12.6,
         "prec_1h_mm": null,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -15832,7 +15832,7 @@
         "station_name": "CASTELL D?ARO",
         "distance_km": 7.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -15889,7 +15889,7 @@
         "station_name": "BARBASTRO",
         "distance_km": 18.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -15925,7 +15925,7 @@
         "soil_moisture_now": 0.197,
         "soil_moisture_avg_7d": 0.2,
         "soil_moisture_trend": -0.0003,
-        "evapotranspiration_7d": 37.6
+        "evapotranspiration_7d": 37.5
       }
     },
     {
@@ -15946,7 +15946,7 @@
         "station_name": "BENABARRE",
         "distance_km": 16.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -16003,7 +16003,7 @@
         "station_name": "OS DE BALAGUER",
         "distance_km": 17.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -16060,7 +16060,7 @@
         "station_name": "OS DE BALAGUER",
         "distance_km": 10.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -16160,7 +16160,7 @@
         "station_name": "OS DE BALAGUER",
         "distance_km": 11.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -16217,7 +16217,7 @@
         "station_name": "LLIMIANA",
         "distance_km": 12.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -16373,7 +16373,7 @@
         "station_name": "ARTESA DE SEGRE",
         "distance_km": 9.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -16487,7 +16487,7 @@
         "station_name": "ARTESA DE SEGRE",
         "distance_km": 11.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -16587,16 +16587,16 @@
         "station_name": "TORÀ",
         "distance_km": 18.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
         "estimated_rain_mm": 0.0,
         "stations_used": [
           {
-            "source": "aemet",
-            "name": "TORÀ",
-            "distance_km": 18.4,
+            "source": "meteoclimatic",
+            "name": "Solsona",
+            "distance_km": 16.8,
             "rain": 0.0
           },
           {
@@ -16644,16 +16644,16 @@
         "station_name": "RINER - XIXONS",
         "distance_km": 13.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
-      "own_history_days": 0,
+      "own_history_days": 1,
       "triangulation": {
         "estimated_rain_mm": 0.0,
         "stations_used": [
           {
-            "source": "aemet",
-            "name": "RINER - XIXONS",
-            "distance_km": 13.4,
+            "source": "meteoclimatic",
+            "name": "Solsona",
+            "distance_km": 7.4,
             "rain": 0.0
           },
           {
@@ -16701,7 +16701,7 @@
         "station_name": "RINER - XIXONS",
         "distance_km": 3.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -16737,7 +16737,7 @@
         "soil_moisture_now": 0.114,
         "soil_moisture_avg_7d": 0.123,
         "soil_moisture_trend": -0.0013,
-        "evapotranspiration_7d": 32.9
+        "evapotranspiration_7d": 33.0
       }
     },
     {
@@ -16801,7 +16801,7 @@
         "station_name": "RINER - XIXONS",
         "distance_km": 7.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -16957,7 +16957,7 @@
         "station_name": "BALSARENY",
         "distance_km": 11.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -17057,7 +17057,7 @@
         "station_name": "PRATS DE LLUÇANÈS",
         "distance_km": 9.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -17093,7 +17093,7 @@
         "soil_moisture_now": 0.131,
         "soil_moisture_avg_7d": 0.136,
         "soil_moisture_trend": 0.0012,
-        "evapotranspiration_7d": 32.5
+        "evapotranspiration_7d": 32.6
       }
     },
     {
@@ -17114,7 +17114,7 @@
         "station_name": "PRATS DE LLUÇANÈS",
         "distance_km": 5.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -17150,7 +17150,7 @@
         "soil_moisture_now": 0.109,
         "soil_moisture_avg_7d": 0.108,
         "soil_moisture_trend": -0.0012,
-        "evapotranspiration_7d": 34.2
+        "evapotranspiration_7d": 34.3
       }
     },
     {
@@ -17171,7 +17171,7 @@
         "station_name": "PRATS DE LLUÇANÈS",
         "distance_km": 13.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -17179,26 +17179,26 @@
         "stations_used": [
           {
             "source": "meteoclimatic",
-            "name": "Calldetenes",
-            "distance_km": 9.9,
+            "name": "Santa Cecília de Voltregà",
+            "distance_km": 5.4,
             "rain": 0.0
           },
           {
             "source": "meteoclimatic",
-            "name": "Manlleu",
-            "distance_km": 10.2,
+            "name": "Santa Eulàlia Riuprimer",
+            "distance_km": 5.7,
             "rain": 0.0
           },
           {
-            "source": "aemet",
-            "name": "PRATS DE LLUÇANÈS",
-            "distance_km": 13.1,
+            "source": "meteoclimatic",
+            "name": "Sentfores (La Guixa)",
+            "distance_km": 7.2,
             "rain": 0.0
           },
           {
-            "source": "aemet",
-            "name": "PRATS DE LLUÇANÈS",
-            "distance_km": 13.1,
+            "source": "meteoclimatic",
+            "name": "Calldetenes",
+            "distance_km": 9.9,
             "rain": 0.0
           }
         ]
@@ -17228,7 +17228,7 @@
         "station_name": "SANT HILARI",
         "distance_km": 20.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -17328,12 +17328,18 @@
         "station_name": "SANT HILARI",
         "distance_km": 12.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
         "estimated_rain_mm": 0.0,
         "stations_used": [
+          {
+            "source": "meteoclimatic",
+            "name": "Sant Sadurní d'Osormort",
+            "distance_km": 7.2,
+            "rain": 0.0
+          },
           {
             "source": "meteoclimatic",
             "name": "Sant Pere de Casserres",
@@ -17351,12 +17357,6 @@
             "name": "Sant Marti Sescorts",
             "distance_km": 9.5,
             "rain": 0.0
-          },
-          {
-            "source": "meteoclimatic",
-            "name": "Espinelves",
-            "distance_km": 10.2,
-            "rain": 0.0
           }
         ]
       },
@@ -17364,7 +17364,7 @@
         "soil_moisture_now": 0.115,
         "soil_moisture_avg_7d": 0.109,
         "soil_moisture_trend": 0.0084,
-        "evapotranspiration_7d": 33.4
+        "evapotranspiration_7d": 33.3
       }
     },
     {
@@ -17428,7 +17428,7 @@
         "station_name": "SANT HILARI",
         "distance_km": 9.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -17485,7 +17485,7 @@
         "station_name": "GIRONA  AEROPUERTO",
         "distance_km": 10.1,
         "prec_1h_mm": null,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -17542,7 +17542,7 @@
         "station_name": "GIRONA  PARC DEL MIGDIA",
         "distance_km": 3.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -17642,7 +17642,7 @@
         "station_name": "GIRONA  PARC DEL MIGDIA",
         "distance_km": 7.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -17699,7 +17699,7 @@
         "station_name": "CASTELL D?ARO",
         "distance_km": 17.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -17756,7 +17756,7 @@
         "station_name": "L?ESTARTIT",
         "distance_km": 11.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -17792,7 +17792,7 @@
         "soil_moisture_now": 0.182,
         "soil_moisture_avg_7d": 0.19,
         "soil_moisture_trend": -0.0006,
-        "evapotranspiration_7d": 30.3
+        "evapotranspiration_7d": 30.4
       }
     },
     {
@@ -17813,7 +17813,7 @@
         "station_name": "BENABARRE",
         "distance_km": 6.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -17870,7 +17870,7 @@
         "station_name": "BENABARRE",
         "distance_km": 11.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -17927,7 +17927,7 @@
         "station_name": "LLIMIANA",
         "distance_km": 16.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -18027,7 +18027,7 @@
         "station_name": "LLIMIANA",
         "distance_km": 6.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -18084,7 +18084,7 @@
         "station_name": "LLIMIANA",
         "distance_km": 4.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -18240,7 +18240,7 @@
         "station_name": "LLIMIANA",
         "distance_km": 14.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -18340,7 +18340,7 @@
         "station_name": "COLL DE NARGÓ",
         "distance_km": 14.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -18376,7 +18376,7 @@
         "soil_moisture_now": 0.146,
         "soil_moisture_avg_7d": 0.16,
         "soil_moisture_trend": -0.0076,
-        "evapotranspiration_7d": 32.3
+        "evapotranspiration_7d": 32.4
       }
     },
     {
@@ -18482,7 +18482,7 @@
         "station_name": "COLL DE NARGÓ",
         "distance_km": 11.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -18518,7 +18518,7 @@
         "soil_moisture_now": 0.122,
         "soil_moisture_avg_7d": 0.137,
         "soil_moisture_trend": -0.0052,
-        "evapotranspiration_7d": 32.6
+        "evapotranspiration_7d": 32.7
       }
     },
     {
@@ -18539,16 +18539,16 @@
         "station_name": "COLL DE NARGÓ",
         "distance_km": 15.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
         "estimated_rain_mm": 0.0,
         "stations_used": [
           {
-            "source": "aemet",
-            "name": "COLL DE NARGÓ",
-            "distance_km": 15.6,
+            "source": "meteoclimatic",
+            "name": "Solsona",
+            "distance_km": 9.0,
             "rain": 0.0
           },
           {
@@ -18639,16 +18639,16 @@
         "station_name": "RINER - XIXONS",
         "distance_km": 12.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
         "estimated_rain_mm": 0.0,
         "stations_used": [
           {
-            "source": "aemet",
-            "name": "RINER - XIXONS",
-            "distance_km": 12.0,
+            "source": "meteoclimatic",
+            "name": "Solsona",
+            "distance_km": 7.4,
             "rain": 0.0
           },
           {
@@ -18696,7 +18696,7 @@
         "station_name": "RINER - XIXONS",
         "distance_km": 13.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -18732,7 +18732,7 @@
         "soil_moisture_now": 0.178,
         "soil_moisture_avg_7d": 0.193,
         "soil_moisture_trend": -0.0096,
-        "evapotranspiration_7d": 31.0
+        "evapotranspiration_7d": 31.1
       }
     },
     {
@@ -18753,7 +18753,7 @@
         "station_name": "BERGA  INSTITUTO",
         "distance_km": 6.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -18810,7 +18810,7 @@
         "station_name": "BERGA  INSTITUTO",
         "distance_km": 8.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -18952,7 +18952,7 @@
         "station_name": "PRATS DE LLUÇANÈS",
         "distance_km": 5.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -19009,7 +19009,7 @@
         "station_name": "PRATS DE LLUÇANÈS",
         "distance_km": 13.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -19023,6 +19023,12 @@
           },
           {
             "source": "meteoclimatic",
+            "name": "Santa Cecília de Voltregà",
+            "distance_km": 7.7,
+            "rain": 0.0
+          },
+          {
+            "source": "meteoclimatic",
             "name": "Manlleu",
             "distance_km": 10.8,
             "rain": 0.0
@@ -19031,12 +19037,6 @@
             "source": "meteoclimatic",
             "name": "Bellmunt",
             "distance_km": 11.4,
-            "rain": 0.0
-          },
-          {
-            "source": "meteoclimatic",
-            "name": "Bellmunt - Santuari",
-            "distance_km": 11.5,
             "rain": 0.0
           }
         ]
@@ -19123,7 +19123,7 @@
         "station_name": "RIPOLL",
         "distance_km": 17.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -19180,7 +19180,7 @@
         "station_name": "LES PLANES D?HOSTOLES",
         "distance_km": 11.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -19216,7 +19216,7 @@
         "soil_moisture_now": 0.108,
         "soil_moisture_avg_7d": 0.106,
         "soil_moisture_trend": 0.0018,
-        "evapotranspiration_7d": 33.3
+        "evapotranspiration_7d": 33.2
       }
     },
     {
@@ -19294,7 +19294,7 @@
         "station_name": "LES PLANES D?HOSTOLES",
         "distance_km": 1.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -19394,7 +19394,7 @@
         "station_name": "LES PLANES D?HOSTOLES",
         "distance_km": 9.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -19430,7 +19430,7 @@
         "soil_moisture_now": 0.115,
         "soil_moisture_avg_7d": 0.112,
         "soil_moisture_trend": 0.0029,
-        "evapotranspiration_7d": 31.3
+        "evapotranspiration_7d": 31.4
       }
     },
     {
@@ -19494,7 +19494,7 @@
         "station_name": "PORQUERES",
         "distance_km": 6.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -19650,7 +19650,7 @@
         "station_name": "GIRONA  PARC DEL MIGDIA",
         "distance_km": 11.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -19670,13 +19670,13 @@
           },
           {
             "source": "meteoclimatic",
-            "name": "Girona-Fontajau",
-            "distance_km": 10.4,
+            "name": "Figueres - Nord",
+            "distance_km": 11.2,
             "rain": 0.0
           },
           {
             "source": "meteoclimatic",
-            "name": "Figueres - Nord",
+            "name": "Les Olives",
             "distance_km": 11.2,
             "rain": 0.0
           }
@@ -19707,7 +19707,7 @@
         "station_name": "L?ESTARTIT",
         "distance_km": 14.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -19721,6 +19721,12 @@
           },
           {
             "source": "meteoclimatic",
+            "name": "Sobrestany",
+            "distance_km": 8.2,
+            "rain": 0.0
+          },
+          {
+            "source": "meteoclimatic",
             "name": "La Bisbal d'Empordà",
             "distance_km": 10.3,
             "rain": 0.0
@@ -19728,12 +19734,6 @@
           {
             "source": "meteoclimatic",
             "name": "La Bisbal d'Empordà - T",
-            "distance_km": 10.3,
-            "rain": 0.0
-          },
-          {
-            "source": "meteoclimatic",
-            "name": "La Bisbal d'Empordà LV",
             "distance_km": 10.3,
             "rain": 0.0
           }
@@ -19764,7 +19764,7 @@
         "station_name": "L?ESTARTIT",
         "distance_km": 4.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -19772,14 +19772,14 @@
         "stations_used": [
           {
             "source": "meteoclimatic",
-            "name": "L'Estartit - Roca Maura",
-            "distance_km": 4.1,
+            "name": "Sobrestany",
+            "distance_km": 3.9,
             "rain": 0.0
           },
           {
-            "source": "aemet",
-            "name": "L?ESTARTIT",
-            "distance_km": 4.3,
+            "source": "meteoclimatic",
+            "name": "L'Estartit - Roca Maura",
+            "distance_km": 4.1,
             "rain": 0.0
           },
           {
@@ -19800,7 +19800,7 @@
         "soil_moisture_now": 0.247,
         "soil_moisture_avg_7d": 0.249,
         "soil_moisture_trend": 0.0008,
-        "evapotranspiration_7d": 30.4
+        "evapotranspiration_7d": 30.5
       }
     },
     {
@@ -19821,7 +19821,7 @@
         "station_name": "BENABARRE",
         "distance_km": 3.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -19878,7 +19878,7 @@
         "station_name": "BENABARRE",
         "distance_km": 9.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -19992,7 +19992,7 @@
         "station_name": "TALARN",
         "distance_km": 14.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -20049,7 +20049,7 @@
         "station_name": "TALARN",
         "distance_km": 7.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -20085,7 +20085,7 @@
         "soil_moisture_now": 0.109,
         "soil_moisture_avg_7d": 0.119,
         "soil_moisture_trend": -0.0109,
-        "evapotranspiration_7d": 33.8
+        "evapotranspiration_7d": 33.9
       }
     },
     {
@@ -20106,7 +20106,7 @@
         "station_name": "LLIMIANA",
         "distance_km": 9.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -20142,7 +20142,7 @@
         "soil_moisture_now": 0.109,
         "soil_moisture_avg_7d": 0.119,
         "soil_moisture_trend": -0.0109,
-        "evapotranspiration_7d": 37.8
+        "evapotranspiration_7d": 37.9
       }
     },
     {
@@ -20163,7 +20163,7 @@
         "station_name": "LLIMIANA",
         "distance_km": 16.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -20220,7 +20220,7 @@
         "station_name": "COLL DE NARGÓ",
         "distance_km": 9.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -20277,7 +20277,7 @@
         "station_name": "COLL DE NARGÓ",
         "distance_km": 1.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -20334,7 +20334,7 @@
         "station_name": "COLL DE NARGÓ",
         "distance_km": 10.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -20476,7 +20476,7 @@
         "station_name": "TUIXENT",
         "distance_km": 9.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -20618,7 +20618,7 @@
         "station_name": "TUIXENT",
         "distance_km": 13.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -20760,7 +20760,7 @@
         "station_name": "BERGA  INSTITUTO",
         "distance_km": 6.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -20874,7 +20874,7 @@
         "station_name": "BERGA  INSTITUTO",
         "distance_km": 7.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -21016,7 +21016,7 @@
         "station_name": "RIPOLL",
         "distance_km": 13.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -21073,7 +21073,7 @@
         "station_name": "RIPOLL",
         "distance_km": 5.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -21109,7 +21109,7 @@
         "soil_moisture_now": 0.113,
         "soil_moisture_avg_7d": 0.127,
         "soil_moisture_trend": -0.0031,
-        "evapotranspiration_7d": 30.3
+        "evapotranspiration_7d": 30.4
       }
     },
     {
@@ -21187,7 +21187,7 @@
         "station_name": "RIPOLL",
         "distance_km": 9.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -21301,7 +21301,7 @@
         "station_name": "VALL DE BIANYA",
         "distance_km": 8.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -21337,7 +21337,7 @@
         "soil_moisture_now": 0.112,
         "soil_moisture_avg_7d": 0.109,
         "soil_moisture_trend": -0.0002,
-        "evapotranspiration_7d": 31.1
+        "evapotranspiration_7d": 31.2
       }
     },
     {
@@ -21401,7 +21401,7 @@
         "station_name": "VALL DE BIANYA",
         "distance_km": 9.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -21437,7 +21437,7 @@
         "soil_moisture_now": 0.114,
         "soil_moisture_avg_7d": 0.109,
         "soil_moisture_trend": 0.0042,
-        "evapotranspiration_7d": 32.1
+        "evapotranspiration_7d": 32.2
       }
     },
     {
@@ -21501,7 +21501,7 @@
         "station_name": "PORQUERES",
         "distance_km": 9.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -21537,7 +21537,7 @@
         "soil_moisture_now": 0.114,
         "soil_moisture_avg_7d": 0.109,
         "soil_moisture_trend": 0.0042,
-        "evapotranspiration_7d": 33.6
+        "evapotranspiration_7d": 33.5
       }
     },
     {
@@ -21558,7 +21558,7 @@
         "station_name": "PORQUERES",
         "distance_km": 4.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -21594,7 +21594,7 @@
         "soil_moisture_now": 0.199,
         "soil_moisture_avg_7d": 0.21,
         "soil_moisture_trend": -0.0062,
-        "evapotranspiration_7d": 38.8
+        "evapotranspiration_7d": 38.9
       }
     },
     {
@@ -21714,7 +21714,7 @@
         "station_name": "PORQUERES",
         "distance_km": 12.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -21750,7 +21750,7 @@
         "soil_moisture_now": 0.199,
         "soil_moisture_avg_7d": 0.21,
         "soil_moisture_trend": -0.0062,
-        "evapotranspiration_7d": 38.8
+        "evapotranspiration_7d": 38.9
       }
     },
     {
@@ -21771,7 +21771,7 @@
         "station_name": "CASTELLO D?EMPURIES",
         "distance_km": 10.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -21796,9 +21796,9 @@
             "rain": 0.0
           },
           {
-            "source": "aemet",
-            "name": "CASTELLO D?EMPURIES",
-            "distance_km": 10.7,
+            "source": "meteoclimatic",
+            "name": "Sobrestany",
+            "distance_km": 10.3,
             "rain": 0.0
           }
         ]
@@ -21807,7 +21807,7 @@
         "soil_moisture_now": 0.226,
         "soil_moisture_avg_7d": 0.224,
         "soil_moisture_trend": 0.0018,
-        "evapotranspiration_7d": 38.1
+        "evapotranspiration_7d": 38.2
       }
     },
     {
@@ -21828,16 +21828,16 @@
         "station_name": "CASTELLO D?EMPURIES",
         "distance_km": 10.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
         "estimated_rain_mm": 0.0,
         "stations_used": [
           {
-            "source": "aemet",
-            "name": "CASTELLO D?EMPURIES",
-            "distance_km": 10.3,
+            "source": "meteoclimatic",
+            "name": "Sobrestany",
+            "distance_km": 7.4,
             "rain": 0.0
           },
           {
@@ -21885,7 +21885,7 @@
         "station_name": "CAPELLA  LAGUARRES",
         "distance_km": 10.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -21921,7 +21921,7 @@
         "soil_moisture_now": 0.195,
         "soil_moisture_avg_7d": 0.21,
         "soil_moisture_trend": -0.0161,
-        "evapotranspiration_7d": 35.5
+        "evapotranspiration_7d": 35.4
       }
     },
     {
@@ -21942,7 +21942,7 @@
         "station_name": "CAPELLA  LAGUARRES",
         "distance_km": 3.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -21999,7 +21999,7 @@
         "station_name": "CAPELLA  LAGUARRES",
         "distance_km": 10.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -22056,7 +22056,7 @@
         "station_name": "SOPEIRA",
         "distance_km": 10.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -22113,7 +22113,7 @@
         "station_name": "TALARN",
         "distance_km": 4.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -22227,7 +22227,7 @@
         "station_name": "TALARN",
         "distance_km": 8.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -22327,7 +22327,7 @@
         "station_name": "TALARN",
         "distance_km": 17.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -22363,7 +22363,7 @@
         "soil_moisture_now": 0.147,
         "soil_moisture_avg_7d": 0.168,
         "soil_moisture_trend": -0.0087,
-        "evapotranspiration_7d": 30.5
+        "evapotranspiration_7d": 30.6
       }
     },
     {
@@ -22384,7 +22384,7 @@
         "station_name": "COLL DE NARGÓ",
         "distance_km": 12.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -22484,7 +22484,7 @@
         "station_name": "COLL DE NARGÓ",
         "distance_km": 8.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -22541,7 +22541,7 @@
         "station_name": "TUIXENT",
         "distance_km": 10.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -22598,7 +22598,7 @@
         "station_name": "TUIXENT",
         "distance_km": 0.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -22655,7 +22655,7 @@
         "station_name": "TUIXENT",
         "distance_km": 9.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -22755,7 +22755,7 @@
         "station_name": "BERGA  INSTITUTO",
         "distance_km": 15.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -22791,7 +22791,7 @@
         "soil_moisture_now": 0.137,
         "soil_moisture_avg_7d": 0.164,
         "soil_moisture_trend": -0.0134,
-        "evapotranspiration_7d": 29.5
+        "evapotranspiration_7d": 29.6
       }
     },
     {
@@ -22869,7 +22869,7 @@
         "station_name": "LA MOLINA",
         "distance_km": 11.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -22926,7 +22926,7 @@
         "station_name": "PLANOLES",
         "distance_km": 10.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -23040,7 +23040,7 @@
         "station_name": "RIPOLL",
         "distance_km": 4.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -23076,7 +23076,7 @@
         "soil_moisture_now": 0.139,
         "soil_moisture_avg_7d": 0.163,
         "soil_moisture_trend": -0.0102,
-        "evapotranspiration_7d": 30.9
+        "evapotranspiration_7d": 31.0
       }
     },
     {
@@ -23154,7 +23154,7 @@
         "station_name": "SANT PAU DE SEGURIES",
         "distance_km": 6.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -23211,7 +23211,7 @@
         "station_name": "VALL DE BIANYA",
         "distance_km": 5.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -23311,7 +23311,7 @@
         "station_name": "VALL DE BIANYA",
         "distance_km": 6.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -23347,7 +23347,7 @@
         "soil_moisture_now": 0.109,
         "soil_moisture_avg_7d": 0.108,
         "soil_moisture_trend": 0.0013,
-        "evapotranspiration_7d": 32.5
+        "evapotranspiration_7d": 32.6
       }
     },
     {
@@ -23411,7 +23411,7 @@
         "station_name": "VALL DE BIANYA",
         "distance_km": 15.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -23447,7 +23447,7 @@
         "soil_moisture_now": 0.114,
         "soil_moisture_avg_7d": 0.109,
         "soil_moisture_trend": 0.0042,
-        "evapotranspiration_7d": 35.2
+        "evapotranspiration_7d": 35.3
       }
     },
     {
@@ -23468,7 +23468,7 @@
         "station_name": "PORQUERES",
         "distance_km": 14.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -23504,7 +23504,7 @@
         "soil_moisture_now": 0.097,
         "soil_moisture_avg_7d": 0.109,
         "soil_moisture_trend": -0.0003,
-        "evapotranspiration_7d": 34.2
+        "evapotranspiration_7d": 34.3
       }
     },
     {
@@ -23525,7 +23525,7 @@
         "station_name": "FIGUERES  ELS ASPRES",
         "distance_km": 5.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -23561,7 +23561,7 @@
         "soil_moisture_now": 0.228,
         "soil_moisture_avg_7d": 0.227,
         "soil_moisture_trend": 0.0022,
-        "evapotranspiration_7d": 40.2
+        "evapotranspiration_7d": 40.5
       }
     },
     {
@@ -23582,7 +23582,7 @@
         "station_name": "CASTELLO D?EMPURIES",
         "distance_km": 5.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -23618,7 +23618,7 @@
         "soil_moisture_now": 0.228,
         "soil_moisture_avg_7d": 0.227,
         "soil_moisture_trend": 0.0022,
-        "evapotranspiration_7d": 38.4
+        "evapotranspiration_7d": 38.6
       }
     },
     {
@@ -23639,7 +23639,7 @@
         "station_name": "CASTELLO D?EMPURIES",
         "distance_km": 4.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -23696,7 +23696,7 @@
         "station_name": "CAPELLA  LAGUARRES",
         "distance_km": 16.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -23753,7 +23753,7 @@
         "station_name": "CAPELLA  LAGUARRES",
         "distance_km": 13.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -23810,7 +23810,7 @@
         "station_name": "SOPEIRA",
         "distance_km": 13.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -23867,7 +23867,7 @@
         "station_name": "SOPEIRA",
         "distance_km": 3.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -23903,7 +23903,7 @@
         "soil_moisture_now": 0.174,
         "soil_moisture_avg_7d": 0.183,
         "soil_moisture_trend": 0.0002,
-        "evapotranspiration_7d": 29.7
+        "evapotranspiration_7d": 29.8
       }
     },
     {
@@ -23924,7 +23924,7 @@
         "station_name": "SOPEIRA",
         "distance_km": 7.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -24080,7 +24080,7 @@
         "station_name": "TALARN",
         "distance_km": 15.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -24137,7 +24137,7 @@
         "station_name": "PORT AINE  L?ORRI",
         "distance_km": 15.0,
         "prec_1h_mm": null,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -24173,7 +24173,7 @@
         "soil_moisture_now": 0.149,
         "soil_moisture_avg_7d": 0.164,
         "soil_moisture_trend": -0.0058,
-        "evapotranspiration_7d": 30.9
+        "evapotranspiration_7d": 31.0
       }
     },
     {
@@ -24194,7 +24194,7 @@
         "station_name": "PORT AINE  L?ORRI",
         "distance_km": 9.9,
         "prec_1h_mm": null,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -24251,7 +24251,7 @@
         "station_name": "LA SEU D'URGELL  AEROPORT",
         "distance_km": 7.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -24287,7 +24287,7 @@
         "soil_moisture_now": 0.132,
         "soil_moisture_avg_7d": 0.155,
         "soil_moisture_trend": -0.0107,
-        "evapotranspiration_7d": 30.0
+        "evapotranspiration_7d": 29.9
       }
     },
     {
@@ -24393,7 +24393,7 @@
         "station_name": "LA SEU D'URGELL  AEROPORT",
         "distance_km": 3.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -24450,7 +24450,7 @@
         "station_name": "TUIXENT",
         "distance_km": 10.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -24606,7 +24606,7 @@
         "station_name": "MARTINET",
         "distance_km": 4.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -24663,7 +24663,7 @@
         "station_name": "MARTINET",
         "distance_km": 10.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -24720,7 +24720,7 @@
         "station_name": "LA MOLINA",
         "distance_km": 1.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -24777,7 +24777,7 @@
         "station_name": "PLANOLES",
         "distance_km": 4.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -24813,7 +24813,7 @@
         "soil_moisture_now": 0.136,
         "soil_moisture_avg_7d": 0.165,
         "soil_moisture_trend": -0.0141,
-        "evapotranspiration_7d": 30.2
+        "evapotranspiration_7d": 30.3
       }
     },
     {
@@ -24834,7 +24834,7 @@
         "station_name": "PLANOLES",
         "distance_km": 5.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -24891,7 +24891,7 @@
         "station_name": "SANT PAU DE SEGURIES",
         "distance_km": 9.1,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -25005,7 +25005,7 @@
         "station_name": "SANT PAU DE SEGURIES",
         "distance_km": 8.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -25119,7 +25119,7 @@
         "station_name": "VALL DE BIANYA",
         "distance_km": 13.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -25219,7 +25219,7 @@
         "station_name": "MAÇANET DE CABRENYS",
         "distance_km": 10.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -25255,7 +25255,7 @@
         "soil_moisture_now": 0.13,
         "soil_moisture_avg_7d": 0.123,
         "soil_moisture_trend": 0.0099,
-        "evapotranspiration_7d": 30.9
+        "evapotranspiration_7d": 31.0
       }
     },
     {
@@ -25319,7 +25319,7 @@
         "station_name": "MAÇANET DE CABRENYS",
         "distance_km": 7.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -25355,7 +25355,7 @@
         "soil_moisture_now": 0.124,
         "soil_moisture_avg_7d": 0.116,
         "soil_moisture_trend": 0.0163,
-        "evapotranspiration_7d": 33.3
+        "evapotranspiration_7d": 33.2
       }
     },
     {
@@ -25376,7 +25376,7 @@
         "station_name": "FIGUERES  ELS ASPRES",
         "distance_km": 8.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -25433,7 +25433,7 @@
         "station_name": "ESPOLLA  LES ALBERES",
         "distance_km": 7.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -25469,7 +25469,7 @@
         "soil_moisture_now": 0.201,
         "soil_moisture_avg_7d": 0.203,
         "soil_moisture_trend": -0.0002,
-        "evapotranspiration_7d": 36.5
+        "evapotranspiration_7d": 36.6
       }
     },
     {
@@ -25490,7 +25490,7 @@
         "station_name": "EL PORT DE LA SELVA",
         "distance_km": 4.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -25526,7 +25526,7 @@
         "soil_moisture_now": 0.137,
         "soil_moisture_avg_7d": 0.149,
         "soil_moisture_trend": -0.0043,
-        "evapotranspiration_7d": 32.0
+        "evapotranspiration_7d": 32.1
       }
     },
     {
@@ -25547,7 +25547,7 @@
         "station_name": "AÍNSA-SOBRARBE  LA SERRETA-DEPÓSITO",
         "distance_km": 7.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -25583,7 +25583,7 @@
         "soil_moisture_now": 0.193,
         "soil_moisture_avg_7d": 0.204,
         "soil_moisture_trend": -0.0047,
-        "evapotranspiration_7d": 30.7
+        "evapotranspiration_7d": 30.6
       }
     },
     {
@@ -25604,7 +25604,7 @@
         "station_name": "SEIRA",
         "distance_km": 10.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -25661,7 +25661,7 @@
         "station_name": "SEIRA",
         "distance_km": 7.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -25697,7 +25697,7 @@
         "soil_moisture_now": 0.183,
         "soil_moisture_avg_7d": 0.204,
         "soil_moisture_trend": -0.0123,
-        "evapotranspiration_7d": 30.3
+        "evapotranspiration_7d": 30.2
       }
     },
     {
@@ -25718,7 +25718,7 @@
         "station_name": "SEIRA",
         "distance_km": 14.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -25775,7 +25775,7 @@
         "station_name": "SOPEIRA",
         "distance_km": 10.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -25811,7 +25811,7 @@
         "soil_moisture_now": 0.174,
         "soil_moisture_avg_7d": 0.183,
         "soil_moisture_trend": 0.0002,
-        "evapotranspiration_7d": 28.7
+        "evapotranspiration_7d": 28.8
       }
     },
     {
@@ -25832,7 +25832,7 @@
         "station_name": "BARRUERA",
         "distance_km": 10.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -25889,7 +25889,7 @@
         "station_name": "CABDELLA-CENTRAL",
         "distance_km": 6.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -25946,7 +25946,7 @@
         "station_name": "CABDELLA-CENTRAL",
         "distance_km": 9.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -25982,7 +25982,7 @@
         "soil_moisture_now": 0.149,
         "soil_moisture_avg_7d": 0.164,
         "soil_moisture_trend": -0.0058,
-        "evapotranspiration_7d": 27.9
+        "evapotranspiration_7d": 27.8
       }
     },
     {
@@ -26003,7 +26003,7 @@
         "station_name": "PORT AINE  L?ORRI",
         "distance_km": 1.4,
         "prec_1h_mm": null,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -26060,7 +26060,7 @@
         "station_name": "PORT AINE  L?ORRI",
         "distance_km": 8.7,
         "prec_1h_mm": null,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -26117,7 +26117,7 @@
         "station_name": "LA SEU D'URGELL  AEROPORT",
         "distance_km": 8.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -26174,7 +26174,7 @@
         "station_name": "CAP DE REC",
         "distance_km": 8.8,
         "prec_1h_mm": null,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -26231,7 +26231,7 @@
         "station_name": "CAP DE REC",
         "distance_km": 2.5,
         "prec_1h_mm": null,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -26288,7 +26288,7 @@
         "station_name": "MARTINET",
         "distance_km": 10.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -26324,7 +26324,7 @@
         "soil_moisture_now": 0.12,
         "soil_moisture_avg_7d": 0.126,
         "soil_moisture_trend": -0.0042,
-        "evapotranspiration_7d": 31.4
+        "evapotranspiration_7d": 31.3
       }
     },
     {
@@ -26345,7 +26345,7 @@
         "station_name": "LA MOLINA",
         "distance_km": 8.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -26402,7 +26402,7 @@
         "station_name": "PLANOLES",
         "distance_km": 11.4,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -26438,7 +26438,7 @@
         "soil_moisture_now": 0.225,
         "soil_moisture_avg_7d": 0.248,
         "soil_moisture_trend": -0.0175,
-        "evapotranspiration_7d": 30.0
+        "evapotranspiration_7d": 29.9
       }
     },
     {
@@ -26459,7 +26459,7 @@
         "station_name": "PLANOLES",
         "distance_km": 12.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -26516,7 +26516,7 @@
         "station_name": "SANT PAU DE SEGURIES",
         "distance_km": 18.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 2,
       "triangulation": {
@@ -26573,7 +26573,7 @@
         "station_name": "SANT PAU DE SEGURIES",
         "distance_km": 17.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -26630,7 +26630,7 @@
         "station_name": "MAÇANET DE CABRENYS",
         "distance_km": 18.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -26687,7 +26687,7 @@
         "station_name": "MAÇANET DE CABRENYS",
         "distance_km": 8.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -26843,7 +26843,7 @@
         "station_name": "MAÇANET DE CABRENYS",
         "distance_km": 3.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -26900,7 +26900,7 @@
         "station_name": "ESPOLLA  LES ALBERES",
         "distance_km": 8.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 5,
       "triangulation": {
@@ -26957,7 +26957,7 @@
         "station_name": "SEIRA",
         "distance_km": 7.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -27014,7 +27014,7 @@
         "station_name": "SEIRA",
         "distance_km": 3.8,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -27071,7 +27071,7 @@
         "station_name": "CERLER  COGULLA",
         "distance_km": 6.9,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -27107,7 +27107,7 @@
         "soil_moisture_now": 0.23,
         "soil_moisture_avg_7d": 0.223,
         "soil_moisture_trend": 0.0079,
-        "evapotranspiration_7d": 26.1
+        "evapotranspiration_7d": 26.2
       }
     },
     {
@@ -27128,7 +27128,7 @@
         "station_name": "BARRUERA",
         "distance_km": 7.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -27164,7 +27164,7 @@
         "soil_moisture_now": 0.174,
         "soil_moisture_avg_7d": 0.183,
         "soil_moisture_trend": 0.0002,
-        "evapotranspiration_7d": 28.9
+        "evapotranspiration_7d": 29.0
       }
     },
     {
@@ -27185,7 +27185,7 @@
         "station_name": "BARRUERA",
         "distance_km": 2.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -27242,7 +27242,7 @@
         "station_name": "CABDELLA-CENTRAL",
         "distance_km": 5.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -27299,7 +27299,7 @@
         "station_name": "CABDELLA-CENTRAL",
         "distance_km": 8.0,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -27356,7 +27356,7 @@
         "station_name": "PORT AINE  L?ORRI",
         "distance_km": 10.3,
         "prec_1h_mm": null,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -27413,7 +27413,7 @@
         "station_name": "PORT AINE  L?ORRI",
         "distance_km": 13.4,
         "prec_1h_mm": null,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -27470,7 +27470,7 @@
         "station_name": "LA SEU D'URGELL  AEROPORT",
         "distance_km": 18.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -27506,7 +27506,7 @@
         "soil_moisture_now": 0.212,
         "soil_moisture_avg_7d": 0.224,
         "soil_moisture_trend": -0.0057,
-        "evapotranspiration_7d": 29.1
+        "evapotranspiration_7d": 29.0
       }
     },
     {
@@ -27527,7 +27527,7 @@
         "station_name": "CAP DE REC",
         "distance_km": 11.7,
         "prec_1h_mm": null,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -27584,7 +27584,7 @@
         "station_name": "CAP DE REC",
         "distance_km": 8.1,
         "prec_1h_mm": null,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -27641,7 +27641,7 @@
         "station_name": "BENASQUE",
         "distance_km": 4.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -27698,7 +27698,7 @@
         "station_name": "CERLER  COGULLA",
         "distance_km": 5.5,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -27755,7 +27755,7 @@
         "station_name": "BARRUERA",
         "distance_km": 12.3,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -27812,7 +27812,7 @@
         "station_name": "BARRUERA",
         "distance_km": 10.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -27848,7 +27848,7 @@
         "soil_moisture_now": 0.228,
         "soil_moisture_avg_7d": 0.222,
         "soil_moisture_trend": 0.007,
-        "evapotranspiration_7d": 19.8
+        "evapotranspiration_7d": 19.7
       }
     },
     {
@@ -27869,7 +27869,7 @@
         "station_name": "CAP DE VAQUEIRA",
         "distance_km": 11.2,
         "prec_1h_mm": null,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -27926,7 +27926,7 @@
         "station_name": "ESTERRI D?ANEU",
         "distance_km": 5.5,
         "prec_1h_mm": null,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 4,
       "triangulation": {
@@ -27962,7 +27962,7 @@
         "soil_moisture_now": 0.152,
         "soil_moisture_avg_7d": 0.156,
         "soil_moisture_trend": -0.0015,
-        "evapotranspiration_7d": 28.9
+        "evapotranspiration_7d": 29.0
       }
     },
     {
@@ -28082,7 +28082,7 @@
         "station_name": "ESTERRI D?ANEU",
         "distance_km": 6.9,
         "prec_1h_mm": null,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -28196,7 +28196,7 @@
         "station_name": "ESTERRI D?ANEU",
         "distance_km": 16.3,
         "prec_1h_mm": null,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -28232,7 +28232,7 @@
         "soil_moisture_now": 0.161,
         "soil_moisture_avg_7d": 0.166,
         "soil_moisture_trend": -0.0006,
-        "evapotranspiration_7d": 31.1
+        "evapotranspiration_7d": 31.0
       }
     },
     {
@@ -28253,7 +28253,7 @@
         "station_name": "CAP DE REC",
         "distance_km": 25.8,
         "prec_1h_mm": null,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -28289,7 +28289,7 @@
         "soil_moisture_now": 0.123,
         "soil_moisture_avg_7d": 0.131,
         "soil_moisture_trend": -0.0047,
-        "evapotranspiration_7d": 23.9
+        "evapotranspiration_7d": 24.0
       }
     },
     {
@@ -28310,7 +28310,7 @@
         "station_name": "BENASQUE",
         "distance_km": 10.7,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -28424,7 +28424,7 @@
         "station_name": "BOSSOST-CENTRAL",
         "distance_km": 10.6,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -28481,7 +28481,7 @@
         "station_name": "ARTIES",
         "distance_km": 4.2,
         "prec_1h_mm": 0.0,
-        "observed_at": "2026-08-29T03:00:00+0000"
+        "observed_at": "2026-08-29T08:00:00+0000"
       },
       "own_history_days": 0,
       "triangulation": {
@@ -28517,7 +28517,7 @@
         "soil_moisture_now": 0.228,
         "soil_moisture_avg_7d": 0.222,
         "soil_moisture_trend": 0.007,
-        "evapotranspiration_7d": 30.1
+        "evapotranspiration_7d": 30.2
       }
     }
   ],
