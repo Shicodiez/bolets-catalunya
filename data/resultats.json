@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-07T14:17:14.503370+00:00",
+  "generated_at": "2026-09-07T14:23:10.108038+00:00",
   "default_threshold": 70,
   "credential_warnings": [],
   "zones": [
@@ -21421,14 +21421,14 @@
           },
           {
             "source": "meteoclimatic",
-            "name": "Olot - Pla de Dalt",
-            "distance_km": 8.2,
+            "name": "Mieres",
+            "distance_km": 8.6,
             "rain": 0.0
           },
           {
             "source": "meteoclimatic",
-            "name": "Mieres",
-            "distance_km": 8.6,
+            "name": "Castellfollit de la Roca",
+            "distance_km": 8.7,
             "rain": 0.0
           }
         ]
@@ -23324,9 +23324,9 @@
             "rain": 0.0
           },
           {
-            "source": "meteoclimatic",
-            "name": "Olot - Pla de Dalt",
-            "distance_km": 4.6,
+            "source": "aemet",
+            "name": "VALL DE BIANYA",
+            "distance_km": 6.0,
             "rain": 0.0
           },
           {
@@ -23436,9 +23436,9 @@
             "rain": 0.0
           },
           {
-            "source": "meteoclimatic",
-            "name": "Olot - Pla de Dalt",
-            "distance_km": 14.0,
+            "source": "aemet",
+            "name": "VALL DE BIANYA",
+            "distance_km": 15.8,
             "rain": 0.0
           }
         ]
@@ -25132,9 +25132,9 @@
             "rain": 0.0
           },
           {
-            "source": "meteoclimatic",
-            "name": "Olot - Pla de Dalt",
-            "distance_km": 13.2,
+            "source": "aemet",
+            "name": "VALL DE BIANYA",
+            "distance_km": 13.6,
             "rain": 0.0
           },
           {
