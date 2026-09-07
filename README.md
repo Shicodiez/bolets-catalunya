@@ -204,13 +204,19 @@ de la salida:
 El nombre del lugar se rellena solo (geocodificación inversa) pero es
 editable.
 
-En el mapa, las salidas **no se muestran individualmente** — se agrupan
-por proximidad (~2km) en un único círculo por zona, cuyo color y tamaño
-reflejan cuántas hay y qué proporción son positivas. Al hacer clic se ve
-el detalle completo del grupo (especie por especie, fecha por fecha), con
-opción de borrar cada registro individual. Así el mapa sigue siendo
-legible aunque haya miles de registros, sin perder ningún dato de cara al
-análisis futuro (tasa de confirmación, zonas con salidas repetidas, etc.).
+Las salidas guardadas **no se muestran en el mapa** — a propósito, para
+que no compitan visualmente con los puntos de predicción del modelo (con
+miles de registros, el mapa quedaría inservible). Los datos siguen
+alimentando la tasa de confirmación y la detección de zonas con salidas
+repetidas por detrás, simplemente no hay representación visual de cada
+salida individual.
+
+Una vez guardada, **una salida no se puede borrar por ningún medio** — ni
+desde la web ni llamando directamente al Worker (no existe endpoint para
+ello). Es una decisión deliberada: protege el historial real que alimenta
+la evolución y la tasa de confirmación del modelo, evitando que datos
+incómodos (una mala predicción, por ejemplo) se puedan eliminar
+selectivamente.
 
 ### Mantenimiento
 
