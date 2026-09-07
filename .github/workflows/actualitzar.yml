@@ -27,6 +27,10 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Instal·lar dependències
+        working-directory: backend
+        run: pip install -r requirements.txt
+
       - name: Executar el script de recollida de dades
         working-directory: backend
         env:
