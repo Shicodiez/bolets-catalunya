@@ -12,5 +12,19 @@
     "lng": 1.8044185638427737,
     "id": "a00ba0cc-f494-4cd4-b8ec-5c1f2af3ca56",
     "createdAt": "2026-08-26T06:20:13.600Z"
+  },
+  {
+    "speciesId": "ceps",
+    "speciesName": "Ceps",
+    "place": "Les Angles",
+    "alt": "1950",
+    "tree": "pi",
+    "treeName": "Pino",
+    "date": "2026-08-26",
+    "amount": "poco",
+    "lat": 42.58859205279217,
+    "lng": 2.0521259307861333,
+    "id": "ed16f970-f23f-469e-820b-a80c1263f593",
+    "createdAt": "2026-09-07T14:09:19.258Z"
   }
 ]
