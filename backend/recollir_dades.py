@@ -777,7 +777,8 @@ METEOCAT_STATIONS_CACHE_MAX_DAYS = 90
 def fetch_meteocat_station_metadata(api_key, timeout=20):
     """Consulta les metadades de totes les estacions XEMA operatives (codi,
     nom, coordenades, altitud) — inclou lat/lon directament, no cal geocodificar."""
-    url = f"{METEOCAT_BASE_URL}/estacions/metadades?estat=ope"
+    today_str = datetime.now(timezone.utc).strftime("%Y-%m-%d") + "Z"
+    url = f"{METEOCAT_BASE_URL}/estacions/metadades?estat=ope&data={today_str}"
     req = urllib.request.Request(url, headers={
         "X-Api-Key": api_key, "User-Agent": "bolets-catalunya-app/1.0",
     })
