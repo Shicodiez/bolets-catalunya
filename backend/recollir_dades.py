@@ -838,15 +838,21 @@ def fetch_meteocat_latest_precipitation(api_key, timeout=25):
     with urllib.request.urlopen(req, timeout=timeout) as resp:
         data = json.loads(resp.read().decode("utf-8"))
 
+    entries = data if isinstance(data, list) else [data]
+    print(f"    [DEBUG Meteocat] /ultimes: {len(entries)} entrades rebudes")
+    if entries:
+        print(f"    [DEBUG Meteocat] primera entrada (mostra): {json.dumps(entries[0], ensure_ascii=False)[:400]}")
+
     # L'API pot retornar una llista amb una entrada per estació, cadascuna
     # amb el seu codi i les lectures més recents.
     readings = {}
-    for entry in data if isinstance(data, list) else [data]:
+    for entry in entries:
         codi = entry.get("codi")
         lectures = entry.get("lectures", [])
         if codi is not None and lectures:
             last = lectures[-1]
             readings[codi] = {"valor": last.get("valor"), "data": last.get("data"), "estat": last.get("estat")}
+    print(f"    [DEBUG Meteocat] lectures parsejades amb codi+valor: {len(readings)}")
     return readings
 
 
