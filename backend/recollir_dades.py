@@ -1704,7 +1704,7 @@ def geocode_zones_batch(zones):
     return cache
 
 
-
+def geocode_meteoclimatic_batch(stations):
     """
     Geocodifica un lot limitat d'estacions de Meteoclimatic per execució,
     respectant el límit de Nominatim (4 peticions/minut per a scripts
