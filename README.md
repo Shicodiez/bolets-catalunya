@@ -161,7 +161,10 @@ Cloudflare que hace de intermediario para:
 Secrets configurados en el Worker (Cloudflare → Workers & Pages →
 `bolets-hallazgos` → Settings → Variables and Secrets):
 - `GITHUB_TOKEN` — Contents read/write solo sobre `bolets-catalunya`. Caduca el 24/11/2026.
-- `APP_PASSWORD` — la contraseña de acceso a la web.
+- `SESSION_SECRET` — texto aleatorio largo, firma las sesiones y los códigos de acceso. No lo escribe ni conoce nadie, solo lo usa el Worker internamente.
+- `AUTHORIZED_EMAILS` — lista de emails con acceso, separados por comas.
+- `BREVO_API_KEY` — key de la API de Brevo, usada para enviar los códigos de acceso por email.
+- `SENDER_EMAIL` — el email verificado en Brevo desde el que se envían los códigos.
 - `DEEPSEEK_API_KEY` — key de la API de DeepSeek (modelo `deepseek-v4-flash`).
 
 Secrets configurados en GitHub Actions (repositorio → Settings → Secrets
@@ -174,19 +177,41 @@ navegador y lo valida todo por su cuenta: rango geográfico real de
 Catalunya para las coordenadas, lista blanca de especies y tipos de
 árbol válidos, límites de longitud en textos, formato de fecha (sin
 fechas futuras ni de hace más de 10 años), límite de tamaño de payload
-(10KB), y un pequeño retraso tras una contraseña incorrecta para
-encarecer intentos automatizados. Un rate limiting completo por IP
-requeriría añadir Cloudflare KV, que de momento no se ha considerado
-necesario para el volumen de uso actual.
+(10KB), y un pequeño retraso tras un intento fallido para encarecer
+intentos automatizados. Un rate limiting completo por IP requeriría
+añadir Cloudflare KV, que de momento no se ha considerado necesario para
+el volumen de uso actual.
+
+**IMPORTANTE — `worker/index.js` no se despliega solo:** el archivo en el
+repositorio de GitHub es solo la copia de referencia. Para que un cambio
+en el Worker tenga efecto de verdad, hay que pegarlo directamente en
+Cloudflare (Workers & Pages → `bolets-hallazgos` → Edit code → pegar →
+Deploy). Subirlo a GitHub por sí solo no actualiza el Worker real.
 
 ### Control de acceso
 
-La web pide una contraseña antes de mostrar nada:
-- Guardada como Secret `APP_PASSWORD` en el Worker — nunca en el código.
-- Al introducirla, el navegador recibe un token de sesión firmado (30 días).
-- **Para revocar el acceso a todo el mundo de golpe**: cambia
-  `APP_PASSWORD` en el Worker. Todas las sesiones antiguas dejan de valer
-  al instante.
+La web pide un email antes de mostrar nada — no hay contraseña compartida:
+1. La persona escribe su email.
+2. El Worker comprueba si ese email está en `AUTHORIZED_EMAILS`. Si no,
+   se rechaza directamente, sin enviar nada.
+3. Si está autorizado, se genera un código de 6 dígitos (válido 10
+   minutos) y se envía por email vía Brevo.
+4. Al introducir el código correcto, el navegador recibe un token de
+   sesión firmado (30 días).
+
+El código no se guarda en ningún sitio (ni base de datos ni caché): se
+deriva con HMAC del email y una ventana de tiempo de 10 minutos usando
+`SESSION_SECRET`, y se vuelve a calcular para comprobarlo — así no hace
+falta Cloudflare KV ni ningún almacenamiento adicional.
+
+- **Para dar acceso a alguien nuevo**: añade su email a `AUTHORIZED_EMAILS`
+  en el Worker (separados por comas, con o sin espacios, da igual).
+- **Para quitarle el acceso a alguien**: quita su email de esa lista. No
+  podrá pedir un código nuevo, pero una sesión ya activa suya seguirá
+  siendo válida hasta que expire (máximo 30 días).
+- **Para revocar el acceso a todo el mundo de golpe**, incluidas sesiones
+  ya activas: cambia `SESSION_SECRET` en el Worker. Todos los tokens
+  firmados con el valor anterior dejan de ser válidos al instante.
 
 ### Registro de salidas propias
 
