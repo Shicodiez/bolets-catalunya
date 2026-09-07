@@ -781,8 +781,14 @@ def fetch_meteocat_station_metadata(api_key, timeout=20):
     req = urllib.request.Request(url, headers={
         "X-Api-Key": api_key, "User-Agent": "bolets-catalunya-app/1.0",
     })
-    with urllib.request.urlopen(req, timeout=timeout) as resp:
-        data = json.loads(resp.read().decode("utf-8"))
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+    except urllib.error.HTTPError as e:
+        error_body = e.read().decode("utf-8", errors="ignore")
+        print(f"    [DEBUG Meteocat] HTTP {e.code} a {url}")
+        print(f"    [DEBUG Meteocat] Cos de l'error: {error_body[:500]}")
+        raise
 
     parsed = []
     for st in data:
