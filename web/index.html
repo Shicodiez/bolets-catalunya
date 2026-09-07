@@ -103,7 +103,7 @@
     margin-top: 4px; padding: 10px; border-radius: var(--radius); border: none;
     background: var(--green-bar); color: white; font-size: 14px; font-weight: 500; cursor: pointer;
   }
-  .sighting-marker-icon { background: transparent; border: none; }
+  /* sighting-marker-icon: eliminada, ya no se usan marcadores individuales por hallazgo */
   .sighting-item {
     font-size: 12px; padding: 8px 10px; background: var(--surface-1); border-radius: 8px;
     margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; gap: 8px;
@@ -496,30 +496,69 @@ async function deleteSightingRemote(id) {
 
 const AMOUNT_ICON = {mucho: '🍄🍄🍄', poco: '🍄', nada: '❌'};
 let sightingMarkers = [];
+const SIGHTING_CLUSTER_KM = 2; // hallazgos a menys d'aquesta distància es consideren la mateixa zona
 
-const sightingDivIcon = L.divIcon({
-  className: 'sighting-marker-icon',
-  html: '<div style="font-size:20px;line-height:1;filter:drop-shadow(0 1px 1px rgba(0,0,0,.4))">📍</div>',
-  iconSize: [22, 22],
-  iconAnchor: [11, 20],
-  popupAnchor: [0, -18],
-});
+function clusterSightings(list) {
+  const withCoords = list.filter(s => typeof s.lat === 'number' && typeof s.lng === 'number');
+  const clusters = [];
+  withCoords.forEach(s => {
+    let cluster = clusters.find(c => haversineKm(c.lat, c.lng, s.lat, s.lng) <= SIGHTING_CLUSTER_KM);
+    if (!cluster) {
+      cluster = {lat: s.lat, lng: s.lng, place: s.place, items: []};
+      clusters.push(cluster);
+    }
+    cluster.items.push(s);
+  });
+  return clusters;
+}
+
+function haversineKm(lat1, lon1, lat2, lon2) {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
 
 async function renderSightings() {
   sightingMarkers.forEach(m => map.removeLayer(m));
   sightingMarkers = [];
 
   const list = await loadSightings();
-  list.forEach((s) => {
-    if (typeof s.lat !== 'number' || typeof s.lng !== 'number') return;
-    const icon = AMOUNT_ICON[s.amount] || '';
-    const marker = L.marker([s.lat, s.lng], {icon: sightingDivIcon}).addTo(map);
+  const clusters = clusterSightings(list);
+
+  clusters.forEach(cluster => {
+    const total = cluster.items.length;
+    const positivos = cluster.items.filter(s => s.amount === 'mucho' || s.amount === 'poco').length;
+    const ratio = positivos / total;
+
+    // Color e intensidad según la proporción de hallazgos positivos en la zona
+    const color = ratio >= 0.6 ? '#1D9E75' : ratio >= 0.3 ? '#EF9F27' : '#B4B2A9';
+    const radius = Math.min(20, 6 + total * 2); // crece con el número de hallazgos, con techo
+
+    const marker = L.circleMarker([cluster.lat, cluster.lng], {
+      radius, fillColor: color, color: '#ffffff', weight: 2, opacity: 1, fillOpacity: 0.65,
+    }).addTo(map);
+
+    const bySpecies = {};
+    cluster.items.forEach(s => {
+      bySpecies[s.speciesName] = bySpecies[s.speciesName] || {mucho: 0, poco: 0, nada: 0};
+      bySpecies[s.speciesName][s.amount] = (bySpecies[s.speciesName][s.amount] || 0) + 1;
+    });
+    const speciesSummary = Object.entries(bySpecies)
+      .map(([name, counts]) => `<div class="popup-species-row"><span>${name}</span><span>${AMOUNT_ICON.mucho}×${counts.mucho||0} ${AMOUNT_ICON.poco}×${counts.poco||0} ${AMOUNT_ICON.nada}×${counts.nada||0}</span></div>`)
+      .join('');
+    const itemsList = cluster.items
+      .slice().sort((a, b) => b.date.localeCompare(a.date))
+      .map(s => `<p class="popup-detail">${AMOUNT_ICON[s.amount]||''} ${s.date} · ${s.speciesName} <a href="#" onclick="deleteSighting('${s.id}');return false;" style="margin-left:6px">borrar</a></p>`)
+      .join('');
+
     marker.bindPopup(`
-      <p class="popup-title">${icon} ${s.speciesName}</p>
-      <p class="popup-meta">${s.place} · ${s.alt}m · ${s.treeName}</p>
-      <p class="popup-detail">${s.date}</p>
-      <button class="popup-btn" onclick="deleteSighting('${s.id}')">Borrar este hallazgo</button>
-    `, {autoPanPadding: [20, 20]});
+      <p class="popup-title">📍 ${cluster.place} — ${total} hallazgo${total === 1 ? '' : 's'}</p>
+      ${speciesSummary}
+      <p class="popup-detail" style="margin-top:6px">Detalle:</p>
+      ${itemsList}
+    `, {autoPanPadding: [20, 20], maxHeight: 280});
     sightingMarkers.push(marker);
   });
 }
