@@ -759,6 +759,107 @@ def nearest_aemet_station(lat, lon, stations, max_km=40):
 
 
 # ---------------------------------------------------------------------------
+# 4c. AEMET — RADAR REGIONAL (precipitació acumulada, cobertura de superfície)
+# ---------------------------------------------------------------------------
+# A diferència de les estacions puntuals (per moltes que en tinguem, sempre
+# hi ha "punts cecs" entre elles), el radar dona cobertura contínua de
+# superfície — important per detectar tempestes molt localitzades que caiguin
+# entre estacions. Format GeoTIFF (EPSG:4326), es processa amb rasterio.
+# Codi de radar "ba" (Barcelona) confirmat contra la documentació oficial.
+
+AEMET_RADAR_CODE = "ba"  # Barcelona — confirmat contra la documentació oficial d'AEMET OpenData
+AEMET_RADAR_MAX_AGE_MINUTES = 30  # el radar s'actualitza cada ~10 min; si la imatge és més vella, es descarta
+
+
+def fetch_aemet_radar_geotiff(api_key, radar_code=AEMET_RADAR_CODE, timeout=25):
+    """
+    Descarrega la imatge de precipitació acumulada del radar regional
+    d'AEMET, seguint el mateix patró de dues peticions que la resta de
+    l'API d'AEMET (primera petició retorna una URL temporal amb les dades
+    reals, vàlida ~5 minuts).
+
+    Retorna els bytes de la imatge GeoTIFF, o None si no s'ha pogut obtenir.
+    """
+    url = f"https://opendata.aemet.es/opendata/api/red/radar/regional/{radar_code}"
+    req = urllib.request.Request(url, headers={"api_key": api_key, "User-Agent": "bolets-catalunya-app/1.0"})
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        meta = json.loads(resp.read().decode("utf-8"))
+
+    if meta.get("estado") != 200:
+        raise Exception(f"AEMET radar ha retornat estat {meta.get('estado')}: {meta.get('descripcion')}")
+
+    data_url = meta["datos"]
+    data_req = urllib.request.Request(data_url, headers={"User-Agent": "bolets-catalunya-app/1.0"})
+    with urllib.request.urlopen(data_req, timeout=timeout) as resp:
+        content_type = resp.headers.get("Content-Type", "")
+        image_bytes = resp.read()
+
+    if "image" not in content_type and not image_bytes[:4] in (b"II*\x00", b"MM\x00*"):
+        # Capçalera TIFF esperada; si no hi és, probablement s'ha rebut un
+        # error JSON en comptes de la imatge (per exemple, radar fora de servei).
+        raise Exception(f"La resposta no sembla un GeoTIFF vàlid (content-type: {content_type})")
+
+    return image_bytes
+
+
+def extract_radar_value_at_point(geotiff_bytes, lat, lon):
+    """
+    Llegeix un GeoTIFF (en memòria, sense escriure a disc) i retorna el
+    valor de precipitació acumulada en unes coordenades concretes, o None
+    si el punt cau fora de la imatge o la banda no té dada vàlida allà.
+    """
+    from rasterio.io import MemoryFile
+
+    with MemoryFile(geotiff_bytes) as memfile:
+        with memfile.open() as src:
+            try:
+                row, col = src.index(lon, lat)
+            except Exception:
+                return None
+            if row < 0 or row >= src.height or col < 0 or col >= src.width:
+                return None
+            window = src.read(1, window=((row, row + 1), (col, col + 1)))
+            if window.size == 0:
+                return None
+            value = float(window[0, 0])
+            nodata = src.nodata
+            if nodata is not None and value == nodata:
+                return None
+            return value
+
+
+def build_radar_lookup(api_key, zones):
+    """
+    Descarrega la imatge de radar un cop, i extreu el valor de precipitació
+    acumulada per a totes les zones de cop (molt més eficient que descarregar
+    la imatge sencera per cada punt). Retorna un diccionari {zone_id: mm} —
+    només amb els punts on s'ha pogut extreure un valor vàlid.
+
+    Si la descàrrega o el processament falla per qualsevol motiu (imatge no
+    disponible, format inesperat, llibreria no disponible), es retorna un
+    diccionari buit i es continua sense radar — mai trenca la resta del càlcul.
+    """
+    try:
+        geotiff_bytes = fetch_aemet_radar_geotiff(api_key)
+    except Exception as e:
+        print(f"  AVÍS: no s'ha pogut descarregar el radar AEMET ({e}) — es continua sense radar")
+        return {}
+
+    lookup = {}
+    errors = 0
+    for z in zones:
+        try:
+            value = extract_radar_value_at_point(geotiff_bytes, z["lat"], z["lon"])
+            if value is not None and value >= 0:
+                lookup[z["id"]] = round(value, 1)
+        except Exception:
+            errors += 1
+    if errors:
+        print(f"  AVÍS: {errors} punts han fallat en extreure el valor del radar")
+    return lookup
+
+
+# ---------------------------------------------------------------------------
 # 4b. METEOCAT / XEMA — TERCERA XARXA D'ESTACIONS REALS
 # ---------------------------------------------------------------------------
 # Xarxa oficial de la Generalitat (~190 estacions), la més densa de les tres
@@ -1005,7 +1106,7 @@ def fetch_all_tree_types(zones, layer_name, delay=0.05, max_total_seconds=280):
 # 6. SCORING
 # ---------------------------------------------------------------------------
 
-def species_score(sp, rain_10d, min_temp, tree, days_since_rain, alt, month, aemet_rain_1h=None, mc_rain_today=None, gbif_distributions=None, triangulation=None, soil_stats=None):
+def species_score(sp, rain_10d, min_temp, tree, days_since_rain, alt, month, aemet_rain_1h=None, mc_rain_today=None, gbif_distributions=None, triangulation=None, soil_stats=None, radar_value=None):
     """
     Sistema de puntuació 0-100 per evidència acumulada, no tot-o-res. Cada
     factor suma punts segons com d'a prop està del rang òptim (amb tolerància
@@ -1097,11 +1198,15 @@ def species_score(sp, rain_10d, min_temp, tree, days_since_rain, alt, month, aem
     score += season_score
 
     # --- Corroboració entre fonts (0-10 punts bonus) ---
-    # Si el valor triangulat (combinació ponderada de diverses estacions
-    # reals AEMET+Meteoclimatic) confirma pluja recent, és evidència més
-    # fiable que una sola font aïllada — es prioritza sobre el bonus simple.
+    # El radar dona cobertura de superfície directa del propi punt (no d'una
+    # estació propera), així que és la senyal més fiable quan hi és
+    # disponible — detecta tempestes molt localitzades que cap estació
+    # puntual pot haver captat. Si no hi ha radar, es fa servir la
+    # triangulació d'estacions com abans.
     corrob_score = 0
-    if triangulation and triangulation.get("estimated_rain_mm") is not None:
+    if radar_value is not None and radar_value >= 3:
+        corrob_score = 10
+    elif triangulation and triangulation.get("estimated_rain_mm") is not None:
         tri_rain = triangulation["estimated_rain_mm"]
         n_stations = len(triangulation.get("stations_used", []))
         if tri_rain >= 5:
@@ -1117,12 +1222,12 @@ def species_score(sp, rain_10d, min_temp, tree, days_since_rain, alt, month, aem
     score += corrob_score
 
     final_score = max(0, min(100, round(score)))
-    confidence = compute_confidence(sp, gbif_distributions, aemet_rain_1h, mc_rain_today, triangulation)
+    confidence = compute_confidence(sp, gbif_distributions, aemet_rain_1h, mc_rain_today, triangulation, radar_value)
 
     return final_score, breakdown, confidence
 
 
-def compute_confidence(sp, gbif_distributions, aemet_rain_1h, mc_rain_today, triangulation=None):
+def compute_confidence(sp, gbif_distributions, aemet_rain_1h, mc_rain_today, triangulation=None, radar_value=None):
     """
     Nivell de confiança ("alta"/"mitjana"/"baixa") de la puntuació, INDEPENDENT
     del seu valor. Una puntuació de 84 basada en pocs registres històrics i
@@ -1133,6 +1238,7 @@ def compute_confidence(sp, gbif_distributions, aemet_rain_1h, mc_rain_today, tri
 
     Factors que sumen confiança:
     - Prou registres GBIF per a aquesta espècie (>= 30 és "molts")
+    - Radar disponible per a aquest punt (cobertura de superfície directa)
     - Triangulació amb 2+ estacions reals properes (més fiable que una sola font)
     - Si no hi ha triangulació, alguna font aïllada (AEMET o Meteoclimatic) corrobora
     """
@@ -1143,6 +1249,9 @@ def compute_confidence(sp, gbif_distributions, aemet_rain_1h, mc_rain_today, tri
         points += 2
     elif total_gbif >= 15:
         points += 1
+
+    if radar_value is not None:
+        points += 2
 
     n_triangulation_stations = len(triangulation.get("stations_used", [])) if triangulation else 0
     if n_triangulation_stations >= 2:
@@ -2062,6 +2171,17 @@ def build_results():
         print("AVÍS: no hi ha AEMET_API_KEY configurada — es continua sense contrast")
         data_coverage["aemet"] = {"ok": False, "detail": "sense API key configurada"}
 
+    radar_lookup = {}
+    if aemet_key:
+        try:
+            print("Consultant radar AEMET (cobertura de superfície, no només punts)...")
+            radar_lookup = build_radar_lookup(aemet_key, ZONES)
+            print(f"  Radar: {len(radar_lookup)}/{len(ZONES)} punts amb valor extret")
+            data_coverage["radar_aemet"] = {"ok": len(radar_lookup) > 0, "detail": f"{len(radar_lookup)} punts"}
+        except Exception as e:
+            print(f"  AVÍS: no s'ha pogut processar el radar AEMET ({e}) — es continua sense radar")
+            data_coverage["radar_aemet"] = {"ok": False, "detail": str(e)}
+
     meteocat_key = os.environ.get("METEOCAT_API_KEY")
     meteocat_stations = []
     if meteocat_key:
@@ -2106,6 +2226,7 @@ def build_results():
                 aemet_rain_1h = nearest["prec_1h"]
 
         mc_rain_today = today_history.get(str(zone["id"]), {}).get("meteoclimatic")
+        radar_value = radar_lookup.get(zone["id"])
 
         triangulation = triangulate_rain(zone["lat"], zone["lon"], aemet_stations, mc_stations, meteocat_stations=meteocat_stations)
 
@@ -2116,7 +2237,7 @@ def build_results():
                     sp, rain_10d, min_temp, tree, days_since_rain, zone["alt"], current_month,
                     aemet_rain_1h=aemet_rain_1h, mc_rain_today=mc_rain_today,
                     gbif_distributions=gbif_distributions, triangulation=triangulation,
-                    soil_stats=soil_stats,
+                    soil_stats=soil_stats, radar_value=radar_value,
                 )
                 if s > 0:
                     species_scores.append({"id": sp["id"], "name": sp["name"], "score": s, "confidence": confidence, "breakdown": breakdown})
@@ -2141,6 +2262,7 @@ def build_results():
             "aemet_check": aemet_info,
             "own_history_days": own_history_days_count(history, zone["id"]),
             "triangulation": triangulation,
+            "radar_mm": radar_value,
             "soil_stats": soil_stats,
         })
 
