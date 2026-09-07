@@ -2,12 +2,14 @@
 
 ## Para quien la va a usar
 
-Esta web te dice, según el tiempo real de los últimos días (lluvia,
-temperatura, y hasta la humedad real de la tierra), en qué zonas de
-Catalunya es más probable encontrar cada tipo de bolet ahora mismo.
+Esta web (y también una app Android instalable) te dice, según el tiempo
+real de los últimos días (lluvia, temperatura, y hasta la humedad real de
+la tierra), en qué zonas de Catalunya es más probable encontrar cada tipo
+de bolet ahora mismo.
 
 **Cómo usarla:**
-1. Entra con la contraseña que te han pasado.
+1. Escribe tu email (tiene que ser uno de los autorizados) y te llegará un
+   código de acceso por correo — introdúcelo para entrar.
 2. En el mapa verás puntos de colores — cada uno es una zona donde alguna
    especie cumple bien las condiciones. Toca un punto para ver qué especie,
    con qué puntuación (0-100, cuanto más alto mejor) y por qué.
@@ -18,11 +20,11 @@ Catalunya es más probable encontrar cada tipo de bolet ahora mismo.
    basada solo en el cálculo del día. En verde, fíate más.
 5. Si tocas "¿Por qué esta puntuación?" te da una explicación en lenguaje
    normal de qué la ha hecho subir o bajar.
-6. Cuando salgáis al monte, marcad en el mapa lo que encontréis (o no
-   encontréis) con "Marcar en el mapa" — cuantos más hallazgos registremos,
-   mejor se irá afinando el modelo con datos reales vuestros. Los hallazgos
-   se agrupan por zona (no verás una chincheta por cada uno) para que el
-   mapa siga siendo legible aunque haya miles registrados.
+6. Cuando salgáis al monte, marcad en el mapa el resultado de la salida
+   (encontrasteis mucho, poco, o buscasteis sin encontrar nada) — cuantos
+   más registremos, mejor se irá afinando el modelo con datos reales
+   vuestros. Estas salidas no se ven en el mapa (para no saturarlo), pero
+   sí cuentan por detrás.
 
 Los datos se actualizan solos cada 6 horas. No hace falta hacer nada para
 que esté al día.
@@ -258,6 +260,42 @@ selectivamente.
   credenciales le quedan 15 días o menos.
 - El backend se ejecuta cada 6 horas vía GitHub Actions; también se puede
   lanzar a mano desde "Actions" → "Actualitzar dades de bolets" → "Run workflow".
+
+### App Android (APK)
+
+Existe un APK Android real de la app, generado con
+[Capacitor](https://capacitorjs.com/). No es una reescritura — es un
+envoltorio nativo que abre la misma web en vivo
+(`https://shicodiez.github.io/bolets-catalunya/web/`), configurado en
+`server.url` dentro de `capacitor.config.json`. Esto significa que
+**cualquier cambio en `web/index.html` (o en cómo se genera
+`resultats.json`) se ve reflejado automáticamente la próxima vez que se
+abre la app**, sin tener que generar ni reinstalar un APK nuevo.
+
+Solo hace falta generar un APK nuevo si se cambia algo "nativo" de verdad:
+el icono, el nombre de la app, la URL a la que apunta, o si en el futuro
+se añaden capacidades que una web normal no tiene (notificaciones push,
+cámara, etc.).
+
+**Proyecto fuente del APK**: carpeta separada (`bolets-apk` en el
+ordenador del usuario, no forma parte de este repositorio) con
+`capacitor.config.json`, `package.json`, y la carpeta `android/` generada
+por Capacitor. El icono se generó con
+[icon.kitchen](https://icon.kitchen) a partir de un diseño simple (fondo
+verde, seta naranja con tallo blanco).
+
+Para generar un APK nuevo (solo si hace falta): `npx cap sync android` →
+abrir con `npx cap open android` → en Android Studio, **Build → Generate
+App Bundles or APKs → Generate APK(s)**. El archivo queda en
+`android/app/build/outputs/apk/debug/app-debug.apk`, listo para compartir
+e instalar directamente (Android pedirá permitir "fuentes desconocidas"
+la primera vez, por no venir de Google Play).
+
+**Nota real del proceso**: la primera vez que se generó, `capacitor.config.ts`
+(formato TypeScript) dio un error de compatibilidad con la versión de
+Node/TypeScript del sistema — se resolvió usando `capacitor.config.json`
+(JSON puro) en su lugar, que Capacitor acepta igual de bien y no necesita
+compilarse.
 
 ### Fallos reales detectados y corregidos durante el desarrollo
 
