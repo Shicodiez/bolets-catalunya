@@ -1,2 +1,5 @@
-# Aquest projecte només fa servir llibreries estàndard de Python
-# (json, urllib, datetime) — no calen dependències externes per ara.
+# Aquest projecte fa servir sobretot llibreries estàndard de Python
+# (json, urllib, datetime). L'única dependència externa és rasterio,
+# necessària per llegir les imatges GeoTIFF del radar meteorològic
+# (precipitació de superfície, complementa les estacions puntuals).
+rasterio>=1.3
