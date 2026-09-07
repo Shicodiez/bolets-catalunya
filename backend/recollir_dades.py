@@ -836,14 +836,27 @@ def build_radar_lookup(api_key, zones):
     només amb els punts on s'ha pogut extreure un valor vàlid.
 
     Si la descàrrega o el processament falla per qualsevol motiu (imatge no
-    disponible, format inesperat, llibreria no disponible), es retorna un
-    diccionari buit i es continua sense radar — mai trenca la resta del càlcul.
+    disponible, format inesperat, llibreria no disponible, o la imatge no
+    porta georeferenciació real), es retorna un diccionari buit i es
+    continua sense radar — mai trenca la resta del càlcul, i mai s'usen
+    valors que podrien no correspondre a les coordenades correctes.
     """
     try:
         geotiff_bytes = fetch_aemet_radar_geotiff(api_key)
     except Exception as e:
         print(f"  AVÍS: no s'ha pogut descarregar el radar AEMET ({e}) — es continua sense radar")
         return {}
+
+    from rasterio.io import MemoryFile
+    with MemoryFile(geotiff_bytes) as memfile:
+        with memfile.open() as src:
+            has_crs = src.crs is not None
+            is_identity = src.transform.is_identity if src.transform else True
+            print(f"  Radar diagnòstic: CRS={src.crs}, transform_identity={is_identity}, bounds={src.bounds}")
+            if not has_crs or is_identity:
+                print("  AVÍS: la imatge del radar no porta georeferenciació real (CRS absent o transform identitat) "
+                      "— es descarta per complet per no fer servir coordenades incorrectes")
+                return {}
 
     lookup = {}
     errors = 0
