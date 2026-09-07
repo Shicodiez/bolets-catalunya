@@ -2259,13 +2259,18 @@ def compute_model_accuracy(hallazgos, evolution):
     puntuació que el model donava a la zona més propera aquell dia (segons
     l'historial d'evolució) i comprova si l'encert coincideix:
     - amount 'mucho'/'poco' + puntuació >= llindar -> encert
-    - amount 'nada' + puntuació < llindar -> encert
+    - amount 'nada' + puntuació < llindar -> encert (l'opció 'nada' ja no es
+      pot triar des del formulari, però es respecta si queda algun hallazgo
+      antic amb aquest valor)
     - la resta -> desencert
 
     Retorna un resum global i desglossat per franja de puntuació, només amb
-    els hallazgos que realment es poden contrastar (no s'inventa res).
+    els hallazgos que realment es poden contrastar (no s'inventa res). Com
+    que la majoria d'hallazgos ara només confirmen troballes positives
+    ('mucho'/'poco'), es guarda també quants dels comparables eren positius
+    vs negatius perquè la web pugui explicar què mesura realment la xifra.
     """
-    results = {"total_comparable": 0, "aciertos": 0, "por_franja": {}}
+    results = {"total_comparable": 0, "aciertos": 0, "por_franja": {}, "positivos": 0, "negativos": 0}
     if not hallazgos or not evolution:
         return results
 
@@ -2292,6 +2297,10 @@ def compute_model_accuracy(hallazgos, evolution):
         hit = expected_found == predicted_found
 
         results["total_comparable"] += 1
+        if expected_found:
+            results["positivos"] += 1
+        else:
+            results["negativos"] += 1
         if hit:
             results["aciertos"] += 1
 
