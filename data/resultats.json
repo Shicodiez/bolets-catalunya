@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-07T15:35:45.580846+00:00",
+  "generated_at": "2026-09-07T15:50:09.806190+00:00",
   "default_threshold": 70,
   "credential_warnings": [],
   "zones": [
@@ -1348,14 +1348,42 @@
       "lat": 40.97,
       "lon": 0.466,
       "alt": 250,
-      "tree": "pi_blanc",
-      "tree_label": "pinar de pino blanco",
+      "tree": "pi_altres",
+      "tree_label": "bosque de coníferas (especie no diferenciada)",
       "is_forest": true,
       "rain_10d": 2,
       "avg_temp": 27,
       "min_temp": 21,
       "days_since_rain": 20,
       "species_scores": [
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 36,
+          "confidence": "mitjana",
+          "breakdown": {
+            "pluja": 0,
+            "dies_pluja": 15.4,
+            "temperatura": 10.0,
+            "humitat_sol": 3.3,
+            "temporada": 7,
+            "corroboracio": 0
+          }
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 32,
+          "confidence": "mitjana",
+          "breakdown": {
+            "pluja": 0,
+            "dies_pluja": 15.4,
+            "temperatura": 6.7,
+            "humitat_sol": 3.3,
+            "temporada": 7,
+            "corroboracio": 0
+          }
+        },
         {
           "id": "fredolic",
           "name": "Fredolic",
@@ -1395,6 +1423,20 @@
             "temperatura": 0,
             "humitat_sol": 3.3,
             "temporada": 0,
+            "corroboracio": 0
+          }
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 21,
+          "confidence": "mitjana",
+          "breakdown": {
+            "pluja": 0,
+            "dies_pluja": 10.6,
+            "temperatura": 0,
+            "humitat_sol": 3.3,
+            "temporada": 7,
             "corroboracio": 0
           }
         }
@@ -2670,7 +2712,7 @@
     },
     {
       "id": 44,
-      "name": "Punt 44",
+      "name": "Favara",
       "lat": 41.151,
       "lon": 0.222,
       "alt": 250,
@@ -2727,7 +2769,7 @@
     },
     {
       "id": 45,
-      "name": "Punt 45",
+      "name": "Vilalba dels Arcs",
       "lat": 41.151,
       "lon": 0.344,
       "alt": 250,
@@ -2784,7 +2826,7 @@
     },
     {
       "id": 46,
-      "name": "Punt 46",
+      "name": "la Fatarella",
       "lat": 41.151,
       "lon": 0.466,
       "alt": 250,
@@ -2841,7 +2883,7 @@
     },
     {
       "id": 47,
-      "name": "Punt 47",
+      "name": "Ascó",
       "lat": 41.151,
       "lon": 0.588,
       "alt": 250,
@@ -2941,7 +2983,7 @@
     },
     {
       "id": 48,
-      "name": "Punt 48",
+      "name": "el Molar",
       "lat": 41.151,
       "lon": 0.71,
       "alt": 250,
@@ -2998,7 +3040,7 @@
     },
     {
       "id": 49,
-      "name": "Punt 49",
+      "name": "Falset",
       "lat": 41.151,
       "lon": 0.832,
       "alt": 250,
@@ -3055,7 +3097,7 @@
     },
     {
       "id": 50,
-      "name": "Punt 50",
+      "name": "Riudecanyes",
       "lat": 41.151,
       "lon": 0.954,
       "alt": 250,
@@ -3112,7 +3154,7 @@
     },
     {
       "id": 51,
-      "name": "Punt 51",
+      "name": "Reus",
       "lat": 41.151,
       "lon": 1.076,
       "alt": 250,
@@ -3169,7 +3211,7 @@
     },
     {
       "id": 52,
-      "name": "Punt 52",
+      "name": "Constantí",
       "lat": 41.151,
       "lon": 1.198,
       "alt": 250,
@@ -3226,7 +3268,7 @@
     },
     {
       "id": 53,
-      "name": "Punt 53",
+      "name": "Tarragona",
       "lat": 41.151,
       "lon": 1.32,
       "alt": 250,
@@ -3568,7 +3610,7 @@
     },
     {
       "id": 59,
-      "name": "Punt 59",
+      "name": "Nonasp",
       "lat": 41.241,
       "lon": 0.222,
       "alt": 250,
@@ -3625,7 +3667,7 @@
     },
     {
       "id": 60,
-      "name": "Punt 60",
+      "name": "Faió",
       "lat": 41.241,
       "lon": 0.344,
       "alt": 250,
@@ -8454,13 +8496,13 @@
           },
           {
             "source": "meteoclimatic",
-            "name": "Piera ",
+            "name": "Piera",
             "distance_km": 4.7,
             "rain": 0.0
           },
           {
             "source": "meteoclimatic",
-            "name": "Piera",
+            "name": "Piera ",
             "distance_km": 4.7,
             "rain": 0.0
           }
@@ -13262,10 +13304,10 @@
             "rain": 0
           },
           {
-            "source": "meteoclimatic",
-            "name": "Seva",
-            "distance_km": 11.0,
-            "rain": 0.0
+            "source": "meteocat",
+            "name": "Tagamanent - PN del Montseny",
+            "distance_km": 11.4,
+            "rain": 0
           }
         ]
       },
@@ -13351,12 +13393,6 @@
           },
           {
             "source": "meteoclimatic",
-            "name": "Seva",
-            "distance_km": 6.2,
-            "rain": 0.0
-          },
-          {
-            "source": "meteoclimatic",
             "name": "La Garriga (Ajuntament)",
             "distance_km": 10.7,
             "rain": 0.0
@@ -13365,6 +13401,12 @@
             "source": "aemet",
             "name": "FONTMARTINA",
             "distance_km": 11.5,
+            "rain": 0.0
+          },
+          {
+            "source": "meteoclimatic",
+            "name": "Castellcir",
+            "distance_km": 12.2,
             "rain": 0.0
           }
         ]
@@ -14778,8 +14820,8 @@
       "lat": 41.871,
       "lon": 1.685,
       "alt": 760,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 12,
       "avg_temp": 24,
@@ -14793,48 +14835,6 @@
           "confidence": "mitjana",
           "breakdown": {
             "pluja": 6.0,
-            "dies_pluja": 25,
-            "temperatura": 20,
-            "humitat_sol": 0,
-            "temporada": 15,
-            "corroboracio": 0
-          }
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 66,
-          "confidence": "mitjana",
-          "breakdown": {
-            "pluja": 6.0,
-            "dies_pluja": 25,
-            "temperatura": 20,
-            "humitat_sol": 0,
-            "temporada": 15,
-            "corroboracio": 0
-          }
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 63,
-          "confidence": "mitjana",
-          "breakdown": {
-            "pluja": 6.0,
-            "dies_pluja": 25,
-            "temperatura": 16.7,
-            "humitat_sol": 0,
-            "temporada": 15,
-            "corroboracio": 0
-          }
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 62,
-          "confidence": "mitjana",
-          "breakdown": {
-            "pluja": 2.4,
             "dies_pluja": 25,
             "temperatura": 20,
             "humitat_sol": 0,
@@ -15290,14 +15290,28 @@
       "lat": 41.871,
       "lon": 2.295,
       "alt": 510,
-      "tree": "pi_pinyer",
-      "tree_label": "pinar de pino piñonero",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 4,
       "avg_temp": 23,
       "min_temp": 16,
       "days_since_rain": 20,
       "species_scores": [
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 41,
+          "confidence": "mitjana",
+          "breakdown": {
+            "pluja": 0,
+            "dies_pluja": 20.2,
+            "temperatura": 13.3,
+            "humitat_sol": 0,
+            "temporada": 7,
+            "corroboracio": 0
+          }
+        },
         {
           "id": "rovellons",
           "name": "Rovellons",
@@ -15309,6 +15323,20 @@
             "temperatura": 20,
             "humitat_sol": 0,
             "temporada": 7,
+            "corroboracio": 0
+          }
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 30,
+          "confidence": "mitjana",
+          "breakdown": {
+            "pluja": 0,
+            "dies_pluja": 20.2,
+            "temperatura": 10.0,
+            "humitat_sol": 0,
+            "temporada": 0,
             "corroboracio": 0
           }
         }
@@ -15331,12 +15359,6 @@
           },
           {
             "source": "meteoclimatic",
-            "name": "Seva",
-            "distance_km": 4.0,
-            "rain": 0.0
-          },
-          {
-            "source": "meteoclimatic",
             "name": "Sant Julià de Vilatorta",
             "distance_km": 6.2,
             "rain": 0.0
@@ -15345,6 +15367,12 @@
             "source": "meteoclimatic",
             "name": "Calldetenes",
             "distance_km": 6.2,
+            "rain": 0.0
+          },
+          {
+            "source": "meteoclimatic",
+            "name": "Sentfores (La Guixa)",
+            "distance_km": 7.1,
             "rain": 0.0
           }
         ]
@@ -15519,14 +15547,56 @@
       "lat": 41.871,
       "lon": 2.661,
       "alt": 360,
-      "tree": "pi_pinyer",
-      "tree_label": "pinar de pino piñonero",
+      "tree": "pi_altres",
+      "tree_label": "bosque de coníferas (especie no diferenciada)",
       "is_forest": true,
       "rain_10d": 2,
       "avg_temp": 25,
       "min_temp": 19,
       "days_since_rain": 20,
       "species_scores": [
+        {
+          "id": "ceps",
+          "name": "Ceps",
+          "score": 39,
+          "confidence": "mitjana",
+          "breakdown": {
+            "pluja": 0,
+            "dies_pluja": 15.4,
+            "temperatura": 16.7,
+            "humitat_sol": 0,
+            "temporada": 7,
+            "corroboracio": 0
+          }
+        },
+        {
+          "id": "rossinyols",
+          "name": "Rossinyols",
+          "score": 36,
+          "confidence": "mitjana",
+          "breakdown": {
+            "pluja": 0,
+            "dies_pluja": 15.4,
+            "temperatura": 13.3,
+            "humitat_sol": 0,
+            "temporada": 7,
+            "corroboracio": 0
+          }
+        },
+        {
+          "id": "fredolic",
+          "name": "Fredolic",
+          "score": 31,
+          "confidence": "mitjana",
+          "breakdown": {
+            "pluja": 0,
+            "dies_pluja": 20.2,
+            "temperatura": 3.3,
+            "humitat_sol": 0,
+            "temporada": 7,
+            "corroboracio": 0
+          }
+        },
         {
           "id": "rovellons",
           "name": "Rovellons",
@@ -15538,6 +15608,34 @@
             "temperatura": 10.0,
             "humitat_sol": 0,
             "temporada": 7,
+            "corroboracio": 0
+          }
+        },
+        {
+          "id": "pinetell",
+          "name": "Pinetell",
+          "score": 24,
+          "confidence": "mitjana",
+          "breakdown": {
+            "pluja": 0,
+            "dies_pluja": 10.6,
+            "temperatura": 6.7,
+            "humitat_sol": 0,
+            "temporada": 7,
+            "corroboracio": 0
+          }
+        },
+        {
+          "id": "colmenilles",
+          "name": "Colmenilles",
+          "score": 20,
+          "confidence": "mitjana",
+          "breakdown": {
+            "pluja": 0,
+            "dies_pluja": 20.2,
+            "temperatura": 0,
+            "humitat_sol": 0,
+            "temporada": 0,
             "corroboracio": 0
           }
         }
@@ -15591,42 +15689,14 @@
       "lat": 41.871,
       "lon": 2.783,
       "alt": 360,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_pinyer",
+      "tree_label": "pinar de pino piñonero",
       "is_forest": true,
       "rain_10d": 4,
       "avg_temp": 26,
       "min_temp": 20,
       "days_since_rain": 20,
       "species_scores": [
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 38,
-          "confidence": "mitjana",
-          "breakdown": {
-            "pluja": 0,
-            "dies_pluja": 15.4,
-            "temperatura": 13.3,
-            "humitat_sol": 1.9,
-            "temporada": 7,
-            "corroboracio": 0
-          }
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 34,
-          "confidence": "mitjana",
-          "breakdown": {
-            "pluja": 0,
-            "dies_pluja": 15.4,
-            "temperatura": 10.0,
-            "humitat_sol": 1.9,
-            "temporada": 7,
-            "corroboracio": 0
-          }
-        },
         {
           "id": "rovellons",
           "name": "Rovellons",
@@ -15638,48 +15708,6 @@
             "temperatura": 6.7,
             "humitat_sol": 1.9,
             "temporada": 7,
-            "corroboracio": 0
-          }
-        },
-        {
-          "id": "fredolic",
-          "name": "Fredolic",
-          "score": 29,
-          "confidence": "mitjana",
-          "breakdown": {
-            "pluja": 0,
-            "dies_pluja": 20.2,
-            "temperatura": 0,
-            "humitat_sol": 1.9,
-            "temporada": 7,
-            "corroboracio": 0
-          }
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 23,
-          "confidence": "mitjana",
-          "breakdown": {
-            "pluja": 0,
-            "dies_pluja": 10.6,
-            "temperatura": 3.3,
-            "humitat_sol": 1.9,
-            "temporada": 7,
-            "corroboracio": 0
-          }
-        },
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 22,
-          "confidence": "mitjana",
-          "breakdown": {
-            "pluja": 0,
-            "dies_pluja": 20.2,
-            "temperatura": 0,
-            "humitat_sol": 1.9,
-            "temporada": 0,
             "corroboracio": 0
           }
         }
@@ -16474,42 +16502,14 @@
       "lat": 41.961,
       "lon": 1.198,
       "alt": 840,
-      "tree": "roure",
-      "tree_label": "robledal/bosque de caducifolios",
+      "tree": "faig",
+      "tree_label": "hayedo",
       "is_forest": true,
       "rain_10d": 10,
       "avg_temp": 25,
       "min_temp": 18,
       "days_since_rain": 14,
       "species_scores": [
-        {
-          "id": "oureig",
-          "name": "Ou de reig",
-          "score": 67,
-          "confidence": "mitjana",
-          "breakdown": {
-            "pluja": 4.7,
-            "dies_pluja": 25,
-            "temperatura": 20,
-            "humitat_sol": 2.0,
-            "temporada": 15,
-            "corroboracio": 0
-          }
-        },
-        {
-          "id": "llengua",
-          "name": "Llengua de bou",
-          "score": 65,
-          "confidence": "mitjana",
-          "breakdown": {
-            "pluja": 3.0,
-            "dies_pluja": 25,
-            "temperatura": 20,
-            "humitat_sol": 2.0,
-            "temporada": 15,
-            "corroboracio": 0
-          }
-        },
         {
           "id": "ceps",
           "name": "Ceps",
@@ -16565,20 +16565,6 @@
             "temporada": 15,
             "corroboracio": 0
           }
-        },
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 38,
-          "confidence": "mitjana",
-          "breakdown": {
-            "pluja": 8.0,
-            "dies_pluja": 25,
-            "temperatura": 3.3,
-            "humitat_sol": 2.0,
-            "temporada": 0,
-            "corroboracio": 0
-          }
         }
       ],
       "aemet_check": {
@@ -16630,42 +16616,14 @@
       "lat": 41.961,
       "lon": 1.32,
       "alt": 840,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 14,
       "avg_temp": 25,
       "min_temp": 18,
       "days_since_rain": 14,
       "species_scores": [
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 66,
-          "confidence": "mitjana",
-          "breakdown": {
-            "pluja": 9.0,
-            "dies_pluja": 25,
-            "temperatura": 16.7,
-            "humitat_sol": 0,
-            "temporada": 15,
-            "corroboracio": 0
-          }
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 65,
-          "confidence": "mitjana",
-          "breakdown": {
-            "pluja": 4.8,
-            "dies_pluja": 25,
-            "temperatura": 20,
-            "humitat_sol": 0,
-            "temporada": 15,
-            "corroboracio": 0
-          }
-        },
         {
           "id": "rovellons",
           "name": "Rovellons",
@@ -16675,20 +16633,6 @@
             "pluja": 9.0,
             "dies_pluja": 25,
             "temperatura": 13.3,
-            "humitat_sol": 0,
-            "temporada": 15,
-            "corroboracio": 0
-          }
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 59,
-          "confidence": "mitjana",
-          "breakdown": {
-            "pluja": 9.0,
-            "dies_pluja": 25,
-            "temperatura": 10.0,
             "humitat_sol": 0,
             "temporada": 15,
             "corroboracio": 0
@@ -16886,8 +16830,8 @@
       "lat": 41.961,
       "lon": 1.685,
       "alt": 840,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 10,
       "avg_temp": 24,
@@ -16903,48 +16847,6 @@
             "pluja": 3.0,
             "dies_pluja": 25,
             "temperatura": 20,
-            "humitat_sol": 0,
-            "temporada": 15,
-            "corroboracio": 0
-          }
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 63,
-          "confidence": "mitjana",
-          "breakdown": {
-            "pluja": 3.0,
-            "dies_pluja": 25,
-            "temperatura": 20,
-            "humitat_sol": 0,
-            "temporada": 15,
-            "corroboracio": 0
-          }
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 60,
-          "confidence": "mitjana",
-          "breakdown": {
-            "pluja": 0.0,
-            "dies_pluja": 25,
-            "temperatura": 20,
-            "humitat_sol": 0,
-            "temporada": 15,
-            "corroboracio": 0
-          }
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 60,
-          "confidence": "mitjana",
-          "breakdown": {
-            "pluja": 3.0,
-            "dies_pluja": 25,
-            "temperatura": 16.7,
             "humitat_sol": 0,
             "temporada": 15,
             "corroboracio": 0
@@ -17184,28 +17086,14 @@
       "lat": 41.961,
       "lon": 1.929,
       "alt": 840,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 18,
       "avg_temp": 24,
       "min_temp": 17,
       "days_since_rain": 14,
       "species_scores": [
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 78,
-          "confidence": "mitjana",
-          "breakdown": {
-            "pluja": 17.8,
-            "dies_pluja": 25,
-            "temperatura": 20,
-            "humitat_sol": 0,
-            "temporada": 15,
-            "corroboracio": 0
-          }
-        },
         {
           "id": "rovellons",
           "name": "Rovellons",
@@ -17229,34 +17117,6 @@
             "pluja": 22,
             "dies_pluja": 25,
             "temperatura": 10.0,
-            "humitat_sol": 0,
-            "temporada": 15,
-            "corroboracio": 0
-          }
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 71,
-          "confidence": "mitjana",
-          "breakdown": {
-            "pluja": 17.8,
-            "dies_pluja": 25,
-            "temperatura": 13.3,
-            "humitat_sol": 0,
-            "temporada": 15,
-            "corroboracio": 0
-          }
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 70,
-          "confidence": "mitjana",
-          "breakdown": {
-            "pluja": 9.9,
-            "dies_pluja": 25,
-            "temperatura": 20,
             "humitat_sol": 0,
             "temporada": 15,
             "corroboracio": 0
@@ -17811,42 +17671,14 @@
       "lat": 41.961,
       "lon": 2.905,
       "alt": 440,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 3,
       "avg_temp": 25,
       "min_temp": 19,
       "days_since_rain": 20,
       "species_scores": [
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 39,
-          "confidence": "mitjana",
-          "breakdown": {
-            "pluja": 0,
-            "dies_pluja": 15.4,
-            "temperatura": 16.7,
-            "humitat_sol": 0.4,
-            "temporada": 7,
-            "corroboracio": 0
-          }
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 36,
-          "confidence": "mitjana",
-          "breakdown": {
-            "pluja": 0,
-            "dies_pluja": 15.4,
-            "temperatura": 13.3,
-            "humitat_sol": 0.4,
-            "temporada": 7,
-            "corroboracio": 0
-          }
-        },
         {
           "id": "fredolic",
           "name": "Fredolic",
@@ -17870,20 +17702,6 @@
             "pluja": 0,
             "dies_pluja": 13.0,
             "temperatura": 10.0,
-            "humitat_sol": 0.4,
-            "temporada": 7,
-            "corroboracio": 0
-          }
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 25,
-          "confidence": "mitjana",
-          "breakdown": {
-            "pluja": 0,
-            "dies_pluja": 10.6,
-            "temperatura": 6.7,
             "humitat_sol": 0.4,
             "temporada": 7,
             "corroboracio": 0
@@ -30784,8 +30602,8 @@
     },
     "23": {
       "previous": 23,
-      "current": 30,
-      "change": 7
+      "current": 36,
+      "change": 13
     },
     "24": {
       "previous": 32,
@@ -31054,8 +30872,8 @@
     },
     "219": {
       "previous": 37,
-      "current": 40,
-      "change": 3
+      "current": 41,
+      "change": 4
     },
     "221": {
       "previous": 50,
@@ -31064,13 +30882,13 @@
     },
     "222": {
       "previous": 56,
-      "current": 30,
-      "change": -26
+      "current": 39,
+      "change": -17
     },
     "223": {
       "previous": 54,
-      "current": 38,
-      "change": -16
+      "current": 29,
+      "change": -25
     },
     "224": {
       "previous": 69,
@@ -31094,13 +30912,13 @@
     },
     "233": {
       "previous": 66,
-      "current": 67,
-      "change": 1
+      "current": 62,
+      "change": -4
     },
     "234": {
       "previous": 69,
-      "current": 66,
-      "change": -3
+      "current": 62,
+      "change": -7
     },
     "237": {
       "previous": 58,
@@ -31114,8 +30932,8 @@
     },
     "239": {
       "previous": 74,
-      "current": 78,
-      "change": 4
+      "current": 74,
+      "change": 0
     },
     "243": {
       "previous": 50,
@@ -31129,8 +30947,8 @@
     },
     "247": {
       "previous": 60,
-      "current": 39,
-      "change": -21
+      "current": 31,
+      "change": -29
     },
     "253": {
       "previous": 52,
@@ -31346,6 +31164,8 @@
   "model_accuracy": {
     "total_comparable": 0,
     "aciertos": 0,
-    "por_franja": {}
+    "por_franja": {},
+    "positivos": 0,
+    "negativos": 0
   }
 }
