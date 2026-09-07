@@ -16,15 +16,9 @@
  */
 
 /**
- * Sistema d'autenticació per contrasenya compartida (Master la controla).
- * En comptes de guardar sessions en una base de dades, es genera un token
- * signat (HMAC amb la mateixa contrasenya com a clau) amb una data de
- * caducitat. El navegador el desa i el reenvia a cada petició; el Worker
- * només ha de verificar la signatura, sense estat.
+ * Utilitat de firma HMAC, base tant del sistema de sessió com del sistema
+ * de codis d'un sol ús per email.
  */
-
-const SESSION_DAYS = 30;
-
 async function hmacSign(secret, message) {
   const enc = new TextEncoder();
   const key = await crypto.subtle.importKey(
@@ -34,17 +28,99 @@ async function hmacSign(secret, message) {
   return btoa(String.fromCharCode(...new Uint8Array(sig)));
 }
 
+/**
+ * Sistema d'autenticació per email amb codi d'un sol ús (substitueix la
+ * contrasenya compartida — el Master controla qui pot entrar mitjançant
+ * una llista d'emails autoritzats, no una contrasenya que es pugui
+ * compartir sense control).
+ *
+ * El codi de 6 xifres es genera de forma "sense estat" (no es desa enlloc):
+ * es deriva amb HMAC de l'email + una finestra de temps de 10 minuts +
+ * un secret intern del Worker. Per verificar-lo, el Worker torna a calcular
+ * quin codi esperaria per a aquell email en aquesta finestra (i l'anterior,
+ * per tolerància si el codi va arribar just al canvi de finestra) i
+ * comprova si coincideix — no cal Cloudflare KV ni cap base de dades.
+ */
+
+const CODE_WINDOW_MINUTES = 10;
+
+function normalizeEmail(email) {
+  return typeof email === "string" ? email.trim().toLowerCase() : "";
+}
+
+function isEmailAuthorized(env, email) {
+  const list = (env.AUTHORIZED_EMAILS || "")
+    .split(",")
+    .map((e) => e.trim().toLowerCase())
+    .filter(Boolean);
+  return list.includes(normalizeEmail(email));
+}
+
+async function computeCodeForWindow(env, email, windowIndex) {
+  const sig = await hmacSign(env.SESSION_SECRET, `${normalizeEmail(email)}:${windowIndex}`);
+  // Es fan servir els primers dígits del hash com a codi de 6 xifres.
+  const digits = sig.replace(/[^0-9]/g, "");
+  const padded = (digits + "000000").slice(0, 6);
+  return padded;
+}
+
+async function generateLoginCode(env, email) {
+  const windowIndex = Math.floor(Date.now() / (CODE_WINDOW_MINUTES * 60 * 1000));
+  return computeCodeForWindow(env, email, windowIndex);
+}
+
+async function verifyLoginCode(env, email, code) {
+  const currentWindow = Math.floor(Date.now() / (CODE_WINDOW_MINUTES * 60 * 1000));
+  // S'accepta també la finestra anterior, per si el codi va arribar just
+  // quan estava a punt de canviar (marge de fins a ~10 minuts addicionals).
+  for (const w of [currentWindow, currentWindow - 1]) {
+    const expected = await computeCodeForWindow(env, email, w);
+    if (expected === code) return true;
+  }
+  return false;
+}
+
+async function sendLoginCodeEmail(env, email, code) {
+  const res = await fetch("https://api.brevo.com/v3/smtp/email", {
+    method: "POST",
+    headers: {
+      "api-key": env.BREVO_API_KEY,
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+    },
+    body: JSON.stringify({
+      sender: { email: env.SENDER_EMAIL, name: "Predictor de Setas" },
+      to: [{ email }],
+      subject: "Tu código de acceso — Predictor de Setas",
+      htmlContent: `<p>Tu código de acceso es:</p><p style="font-size:28px;font-weight:bold;letter-spacing:4px">${code}</p><p>Caduca en ${CODE_WINDOW_MINUTES} minutos.</p>`,
+    }),
+  });
+  if (!res.ok) {
+    const errText = await res.text();
+    throw new Error(`Brevo ha fallat (status ${res.status}): ${errText}`);
+  }
+}
+
+/**
+ * Sistema de sessió: un cop verificat el codi, es genera un token signat
+ * (HMAC amb un secret intern del Worker) amb una data de caducitat. El
+ * navegador el desa i el reenvia a cada petició; el Worker només ha de
+ * verificar la signatura, sense estat.
+ */
+
+const SESSION_DAYS = 30;
+
 async function createSessionToken(env) {
   const expires = Date.now() + SESSION_DAYS * 24 * 60 * 60 * 1000;
   const payload = `${expires}`;
-  const sig = await hmacSign(env.APP_PASSWORD, payload);
+  const sig = await hmacSign(env.SESSION_SECRET, payload);
   return `${payload}.${sig}`;
 }
 
 async function verifySessionToken(env, token) {
   if (!token || !token.includes(".")) return false;
   const [payload, sig] = token.split(".");
-  const expected = await hmacSign(env.APP_PASSWORD, payload);
+  const expected = await hmacSign(env.SESSION_SECRET, payload);
   if (sig !== expected) return false;
   const expires = parseInt(payload, 10);
   if (isNaN(expires) || Date.now() > expires) return false;
@@ -261,17 +337,57 @@ export default {
     const url = new URL(request.url);
 
     try {
-      // --- Ruta d'autenticació: no requereix sessió prèvia ---
+      // --- Ruta per demanar un codi d'accés: no requereix sessió prèvia ---
+      if (url.pathname === "/request-code" && request.method === "POST") {
+        const body = await request.json();
+        const email = normalizeEmail(body.email);
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          return new Response(JSON.stringify({ error: "Email inválido" }), {
+            status: 400,
+            headers: { ...corsHeaders(), "Content-Type": "application/json" },
+          });
+        }
+        if (!isEmailAuthorized(env, email)) {
+          // Mateixa mitigació que abans amb la contrasenya: petit retard per
+          // encarir intents automatitzats, i el mateix missatge tant si
+          // l'email no existeix com si no està autoritzat (no revelar quins
+          // emails concrets són vàlids).
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+          return new Response(JSON.stringify({ error: "Este email no tiene acceso autorizado" }), {
+            status: 403,
+            headers: { ...corsHeaders(), "Content-Type": "application/json" },
+          });
+        }
+        try {
+          const code = await generateLoginCode(env, email);
+          await sendLoginCodeEmail(env, email, code);
+          return new Response(JSON.stringify({ ok: true }), {
+            headers: { ...corsHeaders(), "Content-Type": "application/json" },
+          });
+        } catch (e) {
+          return new Response(JSON.stringify({ error: `No se ha podido enviar el código: ${e.message}` }), {
+            status: 502,
+            headers: { ...corsHeaders(), "Content-Type": "application/json" },
+          });
+        }
+      }
+
+      // --- Ruta d'autenticació (email + codi rebut): no requereix sessió prèvia ---
       if (url.pathname === "/auth" && request.method === "POST") {
         const body = await request.json();
-        const password = typeof body.password === "string" ? body.password.slice(0, 200) : "";
-        if (password !== env.APP_PASSWORD) {
-          // Mitigació senzilla contra intents automatitzats: petit retard
-          // abans de respondre. No és un rate limiting complet (caldria
-          // Cloudflare KV per comptar intents per IP de forma persistent),
-          // però encareix una mica els intents massius sense infraestructura addicional.
+        const email = normalizeEmail(body.email);
+        const code = typeof body.code === "string" ? body.code.trim().slice(0, 10) : "";
+        if (!email || !code || !isEmailAuthorized(env, email)) {
           await new Promise((resolve) => setTimeout(resolve, 1000));
-          return new Response(JSON.stringify({ error: "Contraseña incorrecta" }), {
+          return new Response(JSON.stringify({ error: "Código o email incorrectos" }), {
+            status: 401,
+            headers: { ...corsHeaders(), "Content-Type": "application/json" },
+          });
+        }
+        const valid = await verifyLoginCode(env, email, code);
+        if (!valid) {
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+          return new Response(JSON.stringify({ error: "Código incorrecto o caducado" }), {
             status: 401,
             headers: { ...corsHeaders(), "Content-Type": "application/json" },
           });
