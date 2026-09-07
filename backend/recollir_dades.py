@@ -1972,14 +1972,20 @@ def build_results():
 
     print("Consultant Meteoclimatic (contrast estacions amateur, historial propi)...")
     history = load_history()
+    data_coverage = {
+        "open_meteo": {"ok": True, "detail": f"{len(ZONES)} zones"},
+    }
     try:
         mc_stations = retry_with_backoff(fetch_meteoclimatic_stations, description="Meteoclimatic")
         print(f"  Meteoclimatic: {len(mc_stations)} estacions rebudes")
         mc_stations = geocode_meteoclimatic_batch(mc_stations)
         history = update_history_with_meteoclimatic(history, ZONES, mc_stations)
         history = save_history(history)
+        data_coverage["meteoclimatic"] = {"ok": True, "detail": f"{len(mc_stations)} estacions"}
     except Exception as e:
         print(f"  AVÍS: no s'ha pogut consultar Meteoclimatic ({e}) — es continua sense actualitzar l'historial")
+        mc_stations = []
+        data_coverage["meteoclimatic"] = {"ok": False, "detail": str(e)}
 
     print("Resolent noms de zona reals...")
     zone_names = geocode_zones_batch(ZONES)
@@ -2048,10 +2054,13 @@ def build_results():
             print("Consultant AEMET (estacions reals) per contrastar...")
             aemet_stations = retry_with_backoff(lambda: fetch_aemet_observations(aemet_key), description="AEMET")
             print(f"AEMET: {len(aemet_stations)} estacions amb dades rebudes")
+            data_coverage["aemet"] = {"ok": True, "detail": f"{len(aemet_stations)} estacions"}
         except Exception as e:
             print(f"AVÍS: no s'ha pogut consultar AEMET ({e}) — es continua sense contrast")
+            data_coverage["aemet"] = {"ok": False, "detail": str(e)}
     else:
         print("AVÍS: no hi ha AEMET_API_KEY configurada — es continua sense contrast")
+        data_coverage["aemet"] = {"ok": False, "detail": "sense API key configurada"}
 
     meteocat_key = os.environ.get("METEOCAT_API_KEY")
     meteocat_stations = []
@@ -2060,10 +2069,13 @@ def build_results():
             print("Consultant Meteocat/XEMA (estacions reals oficials) per contrastar...")
             meteocat_stations = retry_with_backoff(lambda: fetch_meteocat_observations(meteocat_key), description="Meteocat")
             print(f"Meteocat: {len(meteocat_stations)} estacions amb dades de pluja rebudes")
+            data_coverage["meteocat"] = {"ok": True, "detail": f"{len(meteocat_stations)} estacions"}
         except Exception as e:
             print(f"AVÍS: no s'ha pogut consultar Meteocat ({e}) — es continua sense contrast")
+            data_coverage["meteocat"] = {"ok": False, "detail": str(e)}
     else:
         print("AVÍS: no hi ha METEOCAT_API_KEY configurada — es continua sense contrast")
+        data_coverage["meteocat"] = {"ok": False, "detail": "sense API key configurada"}
 
     print("Consultant GBIF (històric real d'avistaments, FungaCAT)...")
     gbif_distributions = build_gbif_distributions()
@@ -2143,6 +2155,7 @@ def build_results():
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "default_threshold": DEFAULT_SCORE_THRESHOLD,
         "credential_warnings": credential_warnings,
+        "data_coverage": data_coverage,
         "zones": zones_out,
         "species_catalog": [{"id": sp["id"], "name": sp["name"]} for sp in SPECIES],
     }
@@ -2311,7 +2324,9 @@ def compute_model_accuracy(hallazgos, evolution):
             franja_stats["aciertos"] += 1
 
     if results["total_comparable"] > 0:
-        results["precision_global"] = round(results["aciertos"] / results["total_comparable"] * 100, 1)
+        tasa = round(results["aciertos"] / results["total_comparable"] * 100, 1)
+        results["tasa_confirmacion"] = tasa
+        results["precision_global"] = tasa  # alias per compatibilitat, mateix valor
     return results
 
 
