@@ -144,6 +144,7 @@
   <h1>Predictor de setas — Catalunya</h1>
   <p class="subtitle">Puntuación por evidencia acumulada: lluvia, temperatura, temporada y contraste entre fuentes</p>
   <div id="credential-warnings"></div>
+  <div id="data-coverage-warning"></div>
   <div id="status">Cargando datos...</div>
 
   <div class="threshold-box">
@@ -165,8 +166,8 @@
   </div>
 
   <div class="sighting-box">
-    <h3>🍄 Registrar un hallazgo</h3>
-    <p class="hint">Toca "Marcar en el mapa" y luego haz clic en el lugar exacto donde estabas. Con el tiempo esto ayuda a afinar el modelo.</p>
+    <h3>🍄 Registrar una salida</h3>
+    <p class="hint">Toca "Marcar en el mapa" y luego haz clic en el lugar exacto donde estabas. Con el tiempo esto ayuda a afinar el modelo — incluso cuando no encontráis nada.</p>
     <div class="sighting-form">
       <button type="button" id="sighting-pick-btn" class="popup-btn" style="margin-bottom:4px">📍 Marcar en el mapa</button>
       <p id="sighting-coords-hint" class="hint" style="margin:0"></p>
@@ -175,6 +176,15 @@
         <input type="text" id="sighting-place" placeholder="Malniu, Berga, Montseny, Montnegre, Guilleries...">
       </div>
       <div>
+        <label>Resultado de la salida</label>
+        <select id="sighting-result">
+          <option value="mucho">🍄 Encontré mucho</option>
+          <option value="poco">🍄 Encontré poco</option>
+          <option value="buscado_nada">🔍 Busqué y no encontré nada</option>
+          <option value="no_buscado">🚶 No llegué a buscar bien</option>
+        </select>
+      </div>
+      <div id="sighting-species-wrap">
         <label>Especie</label>
         <select id="sighting-species"></select>
       </div>
@@ -199,14 +209,7 @@
         <label>Fecha</label>
         <input type="date" id="sighting-date">
       </div>
-      <div>
-        <label>Cantidad encontrada</label>
-        <select id="sighting-amount">
-          <option value="mucho">Mucho</option>
-          <option value="poco">Poco</option>
-        </select>
-      </div>
-      <button id="sighting-save">Guardar hallazgo</button>
+      <button id="sighting-save">Guardar</button>
     </div>
   </div>
 
@@ -553,7 +556,7 @@ async function renderSightings() {
       .join('');
 
     marker.bindPopup(`
-      <p class="popup-title">📍 ${cluster.place} — ${total} hallazgo${total === 1 ? '' : 's'}</p>
+      <p class="popup-title">📍 ${cluster.place} — ${total} salida${total === 1 ? '' : 's'}</p>
       ${speciesSummary}
       <p class="popup-detail" style="margin-top:6px">Detalle:</p>
       ${itemsList}
@@ -697,6 +700,16 @@ function setupSightingForm() {
   document.getElementById('sighting-pick-btn').addEventListener('click', togglePickingMode);
   map.on('click', handleMapClickForSighting);
 
+  const resultSel = document.getElementById('sighting-result');
+  const speciesWrap = document.getElementById('sighting-species-wrap');
+  const updateSpeciesVisibility = () => {
+    // "Busqué y no encontré" sí lleva especie (qué buscabais sin éxito);
+    // "No llegué a buscar bien" no tiene sentido asociarlo a una especie.
+    speciesWrap.style.display = resultSel.value === 'no_buscado' ? 'none' : 'block';
+  };
+  resultSel.addEventListener('change', updateSpeciesVisibility);
+  updateSpeciesVisibility();
+
   document.getElementById('sighting-save').addEventListener('click', async () => {
     if (!pickedLatLng) {
       alert('Marca primero el punto en el mapa.');
@@ -707,15 +720,30 @@ function setupSightingForm() {
       alert('Escribe el nombre del lugar.');
       return;
     }
-    const speciesId = speciesSel.value;
-    const speciesName = speciesSel.options[speciesSel.selectedIndex].textContent;
+    const resultValue = resultSel.value;
+    const date = document.getElementById('sighting-date').value;
+    if (!date) return;
+
+    // "No llegué a buscar bien" no aporta información fiable sobre el
+    // modelo (no hubo búsqueda real) — se descarta sin guardar nada,
+    // solo se limpia el formulario para no confundir el dato.
+    if (resultValue === 'no_buscado') {
+      document.getElementById('sighting-place').value = '';
+      pickedLatLng = null;
+      if (pickMarker) { map.removeLayer(pickMarker); pickMarker = null; }
+      updatePickedCoordsHint();
+      alert('Vale, no se guarda como dato — gracias por avisar igualmente.');
+      return;
+    }
+
+    const amount = resultValue === 'buscado_nada' ? 'nada' : resultValue;
+    const hasSpecies = resultValue !== 'buscado_nada';
+    const speciesId = hasSpecies ? speciesSel.value : '';
+    const speciesName = hasSpecies ? speciesSel.options[speciesSel.selectedIndex].textContent : 'Ninguna especie';
     const alt = altSel.value;
     const treeSel = document.getElementById('sighting-tree');
     const tree = treeSel.value;
     const treeName = treeSel.options[treeSel.selectedIndex].textContent;
-    const date = document.getElementById('sighting-date').value;
-    const amount = document.getElementById('sighting-amount').value;
-    if (!date) return;
 
     const saveBtn = document.getElementById('sighting-save');
     const originalText = saveBtn.textContent;
@@ -733,7 +761,7 @@ function setupSightingForm() {
       updatePickedCoordsHint();
       await renderSightings();
     } catch (e) {
-      alert('No se ha podido guardar el hallazgo. Comprueba tu conexión e inténtalo de nuevo.');
+      alert('No se ha podido guardar. Comprueba tu conexión e inténtalo de nuevo.');
     } finally {
       saveBtn.disabled = false;
       saveBtn.textContent = originalText;
@@ -760,6 +788,25 @@ function renderCredentialWarnings(warnings) {
   });
 }
 
+const SOURCE_LABELS = {
+  open_meteo: 'Open-Meteo', aemet: 'AEMET', meteocat: 'Meteocat',
+  meteoclimatic: 'Meteoclimatic',
+};
+
+function renderDataCoverage(coverage) {
+  const container = document.getElementById('data-coverage-warning');
+  container.innerHTML = '';
+  if (!coverage) return;
+  const failed = Object.entries(coverage).filter(([, v]) => !v.ok);
+  if (failed.length === 0) return; // todo funcionó bien, no hace falta mostrar nada
+
+  const box = document.createElement('div');
+  box.className = 'cred-warning';
+  const items = failed.map(([key, v]) => `${SOURCE_LABELS[key] || key} (${v.detail})`).join(', ');
+  box.innerHTML = `<strong>⚠️ Cobertura de datos incompleta en esta actualización:</strong> ${items} no respondieron. Las puntuaciones de hoy pueden estar basadas en menos fuentes de lo habitual.`;
+  container.appendChild(box);
+}
+
 function renderAccuracyPanel(accuracy) {
   const container = document.getElementById('accuracy-panel');
   container.innerHTML = '';
@@ -774,11 +821,11 @@ function renderAccuracyPanel(accuracy) {
     .join('');
   const negativos = accuracy.negativos || 0;
   const soloPositivosNota = negativos === 0
-    ? `<p style="margin-top:6px;font-style:italic">Nota: todos los hallazgos registrados son positivos (mucho/poco), así que esta cifra solo confirma aciertos cuando el modelo dijo "sí hay" — no mide todavía si el modelo se equivoca diciendo que hay algo cuando no lo hay.</p>`
+    ? `<p style="margin-top:6px;font-style:italic">Nota: todos los hallazgos registrados son positivos (mucho/poco), así que esta cifra solo cuenta confirmaciones cuando el modelo dijo "sí hay" — no mide si el modelo se equivoca diciendo que hay algo cuando no lo hay, ni cómo le va en zonas nunca visitadas.</p>`
     : '';
   box.innerHTML = `
-    <p class="headline">📊 Precisión del modelo con vuestros hallazgos: ${accuracy.precision_global}%</p>
-    <p>${accuracy.aciertos} de ${accuracy.total_comparable} hallazgos contrastables coinciden con lo que predijo el modelo ese día.</p>
+    <p class="headline">📊 Tasa de confirmación: ${accuracy.precision_global}%</p>
+    <p>${accuracy.aciertos} de ${accuracy.total_comparable} salidas registradas con puntuación por encima del umbral confirmaron la especie ese día. Esto no es una "precisión" en sentido estricto — solo cuenta las salidas que registrasteis, no una muestra representativa de todas las zonas.</p>
     <div class="franjas">${franjasHtml}</div>
     ${soloPositivosNota}
   `;
@@ -800,6 +847,7 @@ async function loadData() {
 
     renderCredentialWarnings(DATA.credential_warnings || []);
     renderAccuracyPanel(DATA.model_accuracy);
+    renderDataCoverage(DATA.data_coverage);
 
     map = L.map('map', {scrollWheelZoom: false}).setView([41.85, 1.55], 8);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
