@@ -133,9 +133,17 @@
 <body>
 <div id="login-screen">
   <h1>🍄 Predictor de setas</h1>
-  <p>Introduce la contraseña de acceso</p>
-  <input type="password" id="login-password" placeholder="Contraseña" autocomplete="current-password">
-  <button id="login-submit">Entrar</button>
+  <div id="login-step-email">
+    <p>Introduce tu email para recibir un código de acceso</p>
+    <input type="email" id="login-email" placeholder="tu@email.com" autocomplete="email">
+    <button id="login-request-code">Enviar código</button>
+  </div>
+  <div id="login-step-code" style="display:none">
+    <p>Te hemos enviado un código a <strong id="login-email-shown"></strong>. Introdúcelo aquí (caduca en 10 minutos):</p>
+    <input type="text" id="login-code" placeholder="Código de 6 dígitos" inputmode="numeric" maxlength="6">
+    <button id="login-submit">Entrar</button>
+    <p class="hint" style="margin-top:10px"><a href="#" id="login-change-email">Usar otro email</a></p>
+  </div>
   <p id="login-error"></p>
 </div>
 
@@ -412,7 +420,39 @@ function showApp() {
   loadData();
 }
 
-async function attemptLogin(password) {
+let pendingLoginEmail = null;
+
+async function requestLoginCode(email) {
+  const errEl = document.getElementById('login-error');
+  const btn = document.getElementById('login-request-code');
+  errEl.textContent = '';
+  btn.disabled = true;
+  btn.textContent = 'Enviando...';
+  try {
+    const res = await fetch(HALLAZGOS_WORKER_URL + 'request-code', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({email}),
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      errEl.textContent = data.error || 'No se ha podido enviar el código.';
+      return;
+    }
+    pendingLoginEmail = email;
+    document.getElementById('login-email-shown').textContent = email;
+    document.getElementById('login-step-email').style.display = 'none';
+    document.getElementById('login-step-code').style.display = 'block';
+    document.getElementById('login-code').focus();
+  } catch (e) {
+    errEl.textContent = 'No se ha podido enviar el código. Revisa tu conexión.';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Enviar código';
+  }
+}
+
+async function attemptLogin(code) {
   const errEl = document.getElementById('login-error');
   const btn = document.getElementById('login-submit');
   errEl.textContent = '';
@@ -422,17 +462,17 @@ async function attemptLogin(password) {
     const res = await fetch(HALLAZGOS_WORKER_URL + 'auth', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({password}),
+      body: JSON.stringify({email: pendingLoginEmail, code}),
     });
+    const data = await res.json();
     if (!res.ok) {
-      errEl.textContent = 'Contraseña incorrecta.';
+      errEl.textContent = data.error || 'Código incorrecto.';
       return;
     }
-    const data = await res.json();
     setSessionToken(data.token);
     showApp();
   } catch (e) {
-    errEl.textContent = 'No se ha podido comprobar la contraseña. Revisa tu conexión.';
+    errEl.textContent = 'No se ha podido comprobar el código. Revisa tu conexión.';
   } finally {
     btn.disabled = false;
     btn.textContent = 'Entrar';
@@ -445,15 +485,37 @@ async function initAuth() {
     showApp();
     return;
   }
-  document.getElementById('login-submit').addEventListener('click', () => {
-    const pw = document.getElementById('login-password').value;
-    if (pw) attemptLogin(pw);
+
+  document.getElementById('login-request-code').addEventListener('click', () => {
+    const email = document.getElementById('login-email').value.trim();
+    if (email) requestLoginCode(email);
   });
-  document.getElementById('login-password').addEventListener('keydown', (e) => {
+  document.getElementById('login-email').addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
-      const pw = document.getElementById('login-password').value;
-      if (pw) attemptLogin(pw);
+      const email = document.getElementById('login-email').value.trim();
+      if (email) requestLoginCode(email);
     }
+  });
+
+  document.getElementById('login-submit').addEventListener('click', () => {
+    const code = document.getElementById('login-code').value.trim();
+    if (code) attemptLogin(code);
+  });
+  document.getElementById('login-code').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const code = document.getElementById('login-code').value.trim();
+      if (code) attemptLogin(code);
+    }
+  });
+
+  document.getElementById('login-change-email').addEventListener('click', (e) => {
+    e.preventDefault();
+    pendingLoginEmail = null;
+    document.getElementById('login-code').value = '';
+    document.getElementById('login-error').textContent = '';
+    document.getElementById('login-step-code').style.display = 'none';
+    document.getElementById('login-step-email').style.display = 'block';
+    document.getElementById('login-email').focus();
   });
 }
 
