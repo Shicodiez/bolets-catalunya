@@ -759,6 +759,126 @@ def nearest_aemet_station(lat, lon, stations, max_km=40):
 
 
 # ---------------------------------------------------------------------------
+# 4b. METEOCAT / XEMA — TERCERA XARXA D'ESTACIONS REALS
+# ---------------------------------------------------------------------------
+# Xarxa oficial de la Generalitat (~190 estacions), la més densa de les tres
+# que fem servir. A diferència de Meteoclimatic, l'API ja dona coordenades
+# directament — no cal geocodificar res. El codi de variable de precipitació
+# és el 35 (confirmat contra la documentació oficial i un client de tercers
+# independent). Les metadades d'estacions es cauegen (les coordenades no
+# canvien mai) i les lectures es consulten fresques cada execució.
+
+METEOCAT_BASE_URL = "https://api.meteo.cat/xema/v1"
+METEOCAT_PRECIP_VARIABLE = 35
+METEOCAT_STATIONS_CACHE_PATH = "../data/meteocat_stations_cache.json"
+METEOCAT_STATIONS_CACHE_MAX_DAYS = 90
+
+
+def fetch_meteocat_station_metadata(api_key, timeout=20):
+    """Consulta les metadades de totes les estacions XEMA operatives (codi,
+    nom, coordenades, altitud) — inclou lat/lon directament, no cal geocodificar."""
+    url = f"{METEOCAT_BASE_URL}/estacions/metadades?estat=ope"
+    req = urllib.request.Request(url, headers={
+        "X-Api-Key": api_key, "User-Agent": "bolets-catalunya-app/1.0",
+    })
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        data = json.loads(resp.read().decode("utf-8"))
+
+    parsed = []
+    for st in data:
+        coords = st.get("coordenades", {})
+        lat, lon = coords.get("latitud"), coords.get("longitud")
+        if lat is None or lon is None:
+            continue
+        parsed.append({
+            "codi": st.get("codi"), "nom": st.get("nom", "?"),
+            "lat": float(lat), "lon": float(lon), "alt": st.get("altitud"),
+        })
+    return parsed
+
+
+def load_meteocat_stations_cache():
+    try:
+        with open(METEOCAT_STATIONS_CACHE_PATH, "r", encoding="utf-8") as f:
+            cache = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return None
+    cached_at = cache.get("cached_at")
+    if not cached_at:
+        return None
+    try:
+        age_days = (datetime.now(timezone.utc) - datetime.fromisoformat(cached_at)).days
+    except ValueError:
+        return None
+    if age_days > METEOCAT_STATIONS_CACHE_MAX_DAYS:
+        return None
+    return cache.get("stations")
+
+
+def save_meteocat_stations_cache(stations):
+    cache = {"cached_at": datetime.now(timezone.utc).isoformat(), "stations": stations}
+    with open(METEOCAT_STATIONS_CACHE_PATH, "w", encoding="utf-8") as f:
+        json.dump(cache, f, ensure_ascii=False)
+
+
+def fetch_meteocat_latest_precipitation(api_key, timeout=25):
+    """Consulta l'última lectura de precipitació (variable 35) per a totes
+    les estacions XEMA en una sola petició."""
+    url = f"{METEOCAT_BASE_URL}/variables/mesurades/{METEOCAT_PRECIP_VARIABLE}/ultimes"
+    req = urllib.request.Request(url, headers={
+        "X-Api-Key": api_key, "User-Agent": "bolets-catalunya-app/1.0",
+    })
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        data = json.loads(resp.read().decode("utf-8"))
+
+    # L'API pot retornar una llista amb una entrada per estació, cadascuna
+    # amb el seu codi i les lectures més recents.
+    readings = {}
+    for entry in data if isinstance(data, list) else [data]:
+        codi = entry.get("codi")
+        lectures = entry.get("lectures", [])
+        if codi is not None and lectures:
+            last = lectures[-1]
+            readings[codi] = {"valor": last.get("valor"), "data": last.get("data"), "estat": last.get("estat")}
+    return readings
+
+
+def fetch_meteocat_observations(api_key):
+    """
+    Combina metadades d'estacions (cauejades) amb les últimes lectures de
+    precipitació (sempre fresques), en el mateix format que fem servir per
+    a AEMET perquè es puguin combinar directament a la triangulació.
+    """
+    if not api_key:
+        return []
+
+    stations = load_meteocat_stations_cache()
+    if stations is None:
+        print("  Meteocat: metadades d'estacions no cauejades, consultant...")
+        stations = fetch_meteocat_station_metadata(api_key)
+        save_meteocat_stations_cache(stations)
+        print(f"  Meteocat: {len(stations)} estacions XEMA trobades")
+    else:
+        print(f"  Meteocat: {len(stations)} estacions XEMA (des de cache)")
+
+    readings = fetch_meteocat_latest_precipitation(api_key)
+
+    parsed = []
+    for st in stations:
+        reading = readings.get(st["codi"])
+        if reading is None or reading.get("valor") is None:
+            continue
+        # S'estandarditza al mateix format que fem servir per a AEMET
+        # (lat, lon, name, prec_1h) perquè triangulate_rain els pugui
+        # combinar sense distingir la font.
+        parsed.append({
+            "lat": st["lat"], "lon": st["lon"], "name": st["nom"],
+            "prec_1h": reading["valor"], "fint": reading.get("data"),
+        })
+    return parsed
+
+
+# ---------------------------------------------------------------------------
 # 5. ICGC — TIPUS DE BOSC REAL (WMS GetFeatureInfo)
 # ---------------------------------------------------------------------------
 
@@ -1589,12 +1709,13 @@ def nearest_meteoclimatic_station(lat, lon, stations, max_km=25):
     return None
 
 
-def triangulate_rain(lat, lon, aemet_stations, mc_stations, max_km=30, max_stations=4, min_distance_km=0.5):
+def triangulate_rain(lat, lon, aemet_stations, mc_stations, meteocat_stations=None, max_km=30, max_stations=4, min_distance_km=0.5):
     """
     Estima la pluja d'avui a un punt combinant les estacions reals més
-    properes (AEMET + Meteoclimatic juntes) mitjançant IDW (Inverse Distance
-    Weighting): cada estació pesa segons 1/distància², de manera que les més
-    properes dominen l'estimació però les llunyanes encara hi aporten.
+    properes (AEMET + Meteoclimatic + Meteocat/XEMA juntes) mitjançant IDW
+    (Inverse Distance Weighting): cada estació pesa segons 1/distància², de
+    manera que les més properes dominen l'estimació però les llunyanes
+    encara hi aporten.
 
     És una millora del "agafar només l'estació més propera": suavitza dades
     puntuals estranyes d'una sola estació i dona una estimació més fiable
@@ -1619,6 +1740,14 @@ def triangulate_rain(lat, lon, aemet_stations, mc_stations, max_km=30, max_stati
         d = haversine_km(lat, lon, st["lat"], st["lon"])
         if d <= max_km:
             candidates.append({"rain": st["rain_today_mm"], "distance_km": d, "source": "meteoclimatic", "name": st.get("location")})
+
+    for st in meteocat_stations or []:
+        rain = st.get("prec_1h")
+        if rain is None:
+            continue
+        d = haversine_km(lat, lon, st["lat"], st["lon"])
+        if d <= max_km:
+            candidates.append({"rain": rain, "distance_km": d, "source": "meteocat", "name": st.get("name")})
 
     if not candidates:
         return None
@@ -1709,6 +1838,7 @@ def own_history_days_count(history, zone_id):
 CREDENTIAL_EXPIRATIONS = [
     {"name": "API key d'AEMET", "expires_on": "2026-11-25", "renew_url": "https://opendata.aemet.es"},
     {"name": "Token de GitHub (Worker d'hallazgos)", "expires_on": "2026-11-24", "renew_url": "https://github.com/settings/tokens?type=beta"},
+    {"name": "API key de Meteocat", "expires_on": "2027-08-31", "renew_url": "https://apidocs.meteocat.gencat.cat"},
 ]
 
 CREDENTIAL_WARNING_DAYS = 15
@@ -1822,6 +1952,18 @@ def build_results():
     else:
         print("AVÍS: no hi ha AEMET_API_KEY configurada — es continua sense contrast")
 
+    meteocat_key = os.environ.get("METEOCAT_API_KEY")
+    meteocat_stations = []
+    if meteocat_key:
+        try:
+            print("Consultant Meteocat/XEMA (estacions reals oficials) per contrastar...")
+            meteocat_stations = retry_with_backoff(lambda: fetch_meteocat_observations(meteocat_key), description="Meteocat")
+            print(f"Meteocat: {len(meteocat_stations)} estacions amb dades de pluja rebudes")
+        except Exception as e:
+            print(f"AVÍS: no s'ha pogut consultar Meteocat ({e}) — es continua sense contrast")
+    else:
+        print("AVÍS: no hi ha METEOCAT_API_KEY configurada — es continua sense contrast")
+
     print("Consultant GBIF (històric real d'avistaments, FungaCAT)...")
     gbif_distributions = build_gbif_distributions()
 
@@ -1852,7 +1994,7 @@ def build_results():
 
         mc_rain_today = today_history.get(str(zone["id"]), {}).get("meteoclimatic")
 
-        triangulation = triangulate_rain(zone["lat"], zone["lon"], aemet_stations, mc_stations)
+        triangulation = triangulate_rain(zone["lat"], zone["lon"], aemet_stations, mc_stations, meteocat_stations=meteocat_stations)
 
         species_scores = []
         if tree not in NON_FOREST:
