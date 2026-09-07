@@ -165,6 +165,8 @@
     </select>
   </div>
 
+  <div id="map"></div>
+
   <div class="sighting-box">
     <h3>🍄 Registrar una salida</h3>
     <p class="hint">Toca "Marcar en el mapa" y luego haz clic en el lugar exacto donde estabas. Con el tiempo esto ayuda a afinar el modelo — incluso cuando no encontráis nada.</p>
@@ -212,8 +214,6 @@
       <button id="sighting-save">Guardar</button>
     </div>
   </div>
-
-  <div id="map"></div>
 
   <div class="legend">
     <p>La puntuación (0-100) suma evidencia de varios factores: lluvia acumulada, días desde la lluvia, temperatura mínima nocturna, humedad real del suelo (no solo lo que ha llovido, sino si esa agua sigue en la tierra), temporada típica de la especie según altitud/mes, y contraste con AEMET y estaciones amateur (Meteoclimatic). Ningún factor por sí solo descarta una especie salvo el tipo de bosque — mueve el umbral para ver más o menos zonas.</p>
@@ -486,92 +486,15 @@ async function saveSighting(hallazgo) {
   return res.json();
 }
 
-async function deleteSightingRemote(id) {
-  const res = await fetch(HALLAZGOS_WORKER_URL, {
-    method: 'DELETE',
-    headers: {'Content-Type': 'application/json', 'X-Session-Token': getSessionToken() || ''},
-    body: JSON.stringify({id}),
-  });
-  if (!res.ok) throw new Error('No se ha podido borrar el hallazgo');
-  return res.json();
-}
-
 const AMOUNT_ICON = {mucho: '🍄🍄🍄', poco: '🍄', nada: '❌'};
-let sightingMarkers = [];
-const SIGHTING_CLUSTER_KM = 2; // hallazgos a menys d'aquesta distància es consideren la mateixa zona
-
-function clusterSightings(list) {
-  const withCoords = list.filter(s => typeof s.lat === 'number' && typeof s.lng === 'number');
-  const clusters = [];
-  withCoords.forEach(s => {
-    let cluster = clusters.find(c => haversineKm(c.lat, c.lng, s.lat, s.lng) <= SIGHTING_CLUSTER_KM);
-    if (!cluster) {
-      cluster = {lat: s.lat, lng: s.lng, place: s.place, items: []};
-      clusters.push(cluster);
-    }
-    cluster.items.push(s);
-  });
-  return clusters;
-}
-
-function haversineKm(lat1, lon1, lat2, lon2) {
-  const R = 6371;
-  const dLat = (lat2 - lat1) * Math.PI / 180;
-  const dLon = (lon2 - lon1) * Math.PI / 180;
-  const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) ** 2;
-  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-}
 
 async function renderSightings() {
-  sightingMarkers.forEach(m => map.removeLayer(m));
-  sightingMarkers = [];
-
-  const list = await loadSightings();
-  const clusters = clusterSightings(list);
-
-  clusters.forEach(cluster => {
-    const total = cluster.items.length;
-    const positivos = cluster.items.filter(s => s.amount === 'mucho' || s.amount === 'poco').length;
-    const ratio = positivos / total;
-
-    // Color e intensidad según la proporción de hallazgos positivos en la zona
-    const color = ratio >= 0.6 ? '#1D9E75' : ratio >= 0.3 ? '#EF9F27' : '#B4B2A9';
-    const radius = Math.min(20, 6 + total * 2); // crece con el número de hallazgos, con techo
-
-    const marker = L.circleMarker([cluster.lat, cluster.lng], {
-      radius, fillColor: color, color: '#ffffff', weight: 2, opacity: 1, fillOpacity: 0.65,
-    }).addTo(map);
-
-    const bySpecies = {};
-    cluster.items.forEach(s => {
-      bySpecies[s.speciesName] = bySpecies[s.speciesName] || {mucho: 0, poco: 0, nada: 0};
-      bySpecies[s.speciesName][s.amount] = (bySpecies[s.speciesName][s.amount] || 0) + 1;
-    });
-    const speciesSummary = Object.entries(bySpecies)
-      .map(([name, counts]) => `<div class="popup-species-row"><span>${name}</span><span>${AMOUNT_ICON.mucho}×${counts.mucho||0} ${AMOUNT_ICON.poco}×${counts.poco||0} ${AMOUNT_ICON.nada}×${counts.nada||0}</span></div>`)
-      .join('');
-    const itemsList = cluster.items
-      .slice().sort((a, b) => b.date.localeCompare(a.date))
-      .map(s => `<p class="popup-detail">${AMOUNT_ICON[s.amount]||''} ${s.date} · ${s.speciesName} <a href="#" onclick="deleteSighting('${s.id}');return false;" style="margin-left:6px">borrar</a></p>`)
-      .join('');
-
-    marker.bindPopup(`
-      <p class="popup-title">📍 ${cluster.place} — ${total} salida${total === 1 ? '' : 's'}</p>
-      ${speciesSummary}
-      <p class="popup-detail" style="margin-top:6px">Detalle:</p>
-      ${itemsList}
-    `, {autoPanPadding: [20, 20], maxHeight: 280});
-    sightingMarkers.push(marker);
-  });
-}
-
-async function deleteSighting(id) {
-  try {
-    await deleteSightingRemote(id);
-    await renderSightings();
-  } catch (e) {
-    alert('No se ha podido borrar el hallazgo. Inténtalo de nuevo.');
-  }
+  // Las salidas registradas ya NO se muestran en el mapa (a petición del
+  // usuario): quedan como historial permanente que alimenta la evolución
+  // y la tasa de confirmación, pero sin competir visualmente con los
+  // puntos de predicción. No hay forma de borrarlas desde la web —
+  // el registro es intencionadamente permanente.
+  await loadSightings();
 }
 
 let pickingLocation = false;
