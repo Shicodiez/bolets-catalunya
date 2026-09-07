@@ -843,15 +843,21 @@ def fetch_meteocat_latest_precipitation(api_key, timeout=25):
     if entries:
         print(f"    [DEBUG Meteocat] primera entrada (mostra): {json.dumps(entries[0], ensure_ascii=False)[:400]}")
 
-    # L'API pot retornar una llista amb una entrada per estació, cadascuna
-    # amb el seu codi i les lectures més recents.
+    # L'API retorna, per a cada estació, un objecte amb 'codi' i una llista
+    # 'variables' (una per variable consultada); les lectures viuen dins de
+    # cada variable, no directament a l'arrel de l'entrada de l'estació:
+    # {"codi": "C6", "variables": [{"codi": 35, "lectures": [{"valor": 0, ...}]}]}
     readings = {}
     for entry in entries:
         codi = entry.get("codi")
-        lectures = entry.get("lectures", [])
-        if codi is not None and lectures:
-            last = lectures[-1]
-            readings[codi] = {"valor": last.get("valor"), "data": last.get("data"), "estat": last.get("estat")}
+        variables = entry.get("variables", [])
+        if codi is None or not variables:
+            continue
+        lectures = variables[0].get("lectures", [])
+        if not lectures:
+            continue
+        last = lectures[-1]
+        readings[codi] = {"valor": last.get("valor"), "data": last.get("data"), "estat": last.get("estat")}
     print(f"    [DEBUG Meteocat] lectures parsejades amb codi+valor: {len(readings)}")
     return readings
 
