@@ -1634,7 +1634,77 @@ def geocode_place(location_name, timeout=10):
     return None
 
 
-def geocode_meteoclimatic_batch(stations):
+# ---------------------------------------------------------------------------
+# NOMS DE ZONA REALS (reverse geocoding de les 390 coordenades fixes)
+# ---------------------------------------------------------------------------
+# Substitueix "Punt 275" per un nom de lloc reconeixible (poble, comarca...).
+# Com que les 390 coordenades no canvien mai, el cache és permanent i només
+# cal completar-lo una vegada — es fa per lots per respectar el límit de
+# Nominatim (4 peticions/minut per a scripts automàtics).
+
+ZONE_NAMES_CACHE_PATH = "../data/zone_names_cache.json"
+ZONE_NAMES_BATCH_PER_RUN = 20
+
+
+def reverse_geocode_place(lat, lon, timeout=10):
+    """Retorna un nom de lloc reconeixible per a unes coordenades (poble,
+    llogaret o, si no n'hi ha, comarca/paratge), via Nominatim (OSM)."""
+    params = f"?lat={lat}&lon={lon}&format=json&zoom=12&accept-language=ca"
+    url = "https://nominatim.openstreetmap.org/reverse" + params
+    req = urllib.request.Request(url, headers={"User-Agent": "bolets-catalunya-app/1.0 (github.com/Shicodiez/bolets-catalunya)"})
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+        addr = data.get("address", {})
+        name = (
+            addr.get("village") or addr.get("town") or addr.get("hamlet")
+            or addr.get("municipality") or addr.get("city") or addr.get("county")
+        )
+        return name
+    except Exception:
+        return None
+
+
+def load_zone_names_cache():
+    try:
+        with open(ZONE_NAMES_CACHE_PATH, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {}
+
+
+def save_zone_names_cache(cache):
+    with open(ZONE_NAMES_CACHE_PATH, "w", encoding="utf-8") as f:
+        json.dump(cache, f, ensure_ascii=False)
+
+
+def geocode_zones_batch(zones):
+    """
+    Completa per lots (respectant el límit de Nominatim) el nom real de
+    cada zona de la graella. Cache permanent — les coordenades de les
+    zones no canvien mai, així que un cop resolt un punt no cal repetir-ho.
+    """
+    cache = load_zone_names_cache()
+    missing = [z for z in zones if str(z["id"]) not in cache]
+
+    if not missing:
+        print("  Noms de zona: totes ja són al cache")
+    else:
+        batch = missing[:ZONE_NAMES_BATCH_PER_RUN]
+        print(f"  Noms de zona: {len(missing)} pendents, resolent {len(batch)} aquesta execució...")
+        for i, z in enumerate(batch):
+            name = reverse_geocode_place(z["lat"], z["lon"])
+            cache[str(z["id"])] = name  # es desa també si és None, per no reintentar
+            if i < len(batch) - 1:
+                time.sleep(GEOCODE_DELAY_SECONDS)
+        save_zone_names_cache(cache)
+        found = sum(1 for z in batch if cache.get(str(z["id"])))
+        print(f"  Noms de zona: {found}/{len(batch)} trobats aquesta execució")
+
+    return cache
+
+
+
     """
     Geocodifica un lot limitat d'estacions de Meteoclimatic per execució,
     respectant el límit de Nominatim (4 peticions/minut per a scripts
@@ -1767,8 +1837,21 @@ def triangulate_rain(lat, lon, aemet_stations, mc_stations, meteocat_stations=No
     if not candidates:
         return None
 
+    # Deduplicació: la mateixa estació (mateix nom i coordenades pràcticament
+    # idèntiques, arrodonides a 3 decimals ~110m) no ha de comptar dues
+    # vegades encara que aparegui repetida a la font (s'ha observat que
+    # passa, per exemple amb AEMET). Es queda amb la primera aparició un cop
+    # ordenat per distància.
     candidates.sort(key=lambda c: c["distance_km"])
-    candidates = candidates[:max_stations]
+    seen = set()
+    deduped = []
+    for c in candidates:
+        key = (c.get("name"), round(c["distance_km"], 2))
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append(c)
+    candidates = deduped[:max_stations]
 
     weighted_sum = 0.0
     weight_total = 0.0
@@ -1898,6 +1981,9 @@ def build_results():
     except Exception as e:
         print(f"  AVÍS: no s'ha pogut consultar Meteoclimatic ({e}) — es continua sense actualitzar l'historial")
 
+    print("Resolent noms de zona reals...")
+    zone_names = geocode_zones_batch(ZONES)
+
     print("Consultant tipus de bosc (amb cache)...")
     tree_types = load_tree_cache()
     missing_zones = [z for z in ZONES if z["id"] not in tree_types]
@@ -2025,9 +2111,10 @@ def build_results():
         species_scores.sort(key=lambda x: x["score"], reverse=True)
         matching_species = [s for s in species_scores if s["score"] >= DEFAULT_SCORE_THRESHOLD]
 
+        real_name = zone_names.get(str(zone["id"]))
         zones_out.append({
             "id": zone["id"],
-            "name": f"Punt {zone['id']}",
+            "name": real_name if real_name else f"Punt {zone['id']}",
             "lat": zone["lat"],
             "lon": zone["lon"],
             "alt": zone["alt"],
