@@ -204,7 +204,6 @@
         <select id="sighting-amount">
           <option value="mucho">Mucho</option>
           <option value="poco">Poco</option>
-          <option value="nada">Nada</option>
         </select>
       </div>
       <button id="sighting-save">Guardar hallazgo</button>
@@ -773,10 +772,15 @@ function renderAccuracyPanel(accuracy) {
     .sort((a, b) => parseInt(b[0]) - parseInt(a[0]))
     .map(([franja, s]) => `<span>${franja}: ${Math.round(s.aciertos / s.total * 100)}% (${s.aciertos}/${s.total})</span>`)
     .join('');
+  const negativos = accuracy.negativos || 0;
+  const soloPositivosNota = negativos === 0
+    ? `<p style="margin-top:6px;font-style:italic">Nota: todos los hallazgos registrados son positivos (mucho/poco), así que esta cifra solo confirma aciertos cuando el modelo dijo "sí hay" — no mide todavía si el modelo se equivoca diciendo que hay algo cuando no lo hay.</p>`
+    : '';
   box.innerHTML = `
     <p class="headline">📊 Precisión del modelo con vuestros hallazgos: ${accuracy.precision_global}%</p>
     <p>${accuracy.aciertos} de ${accuracy.total_comparable} hallazgos contrastables coinciden con lo que predijo el modelo ese día.</p>
     <div class="franjas">${franjasHtml}</div>
+    ${soloPositivosNota}
   `;
   container.appendChild(box);
 }
