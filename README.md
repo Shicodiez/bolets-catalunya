@@ -131,6 +131,13 @@ bajado. Además, cuando hay suficientes hallazgos registrados, el backend
 cruza cada uno con la puntuación que tenía esa zona ese día y calcula un
 **% de precisión real** del modelo, desglosado por franja de puntuación.
 
+Como el formulario ya no permite registrar "no encontré nada" (solo
+mucho/poco), esta precisión mide sobre todo **aciertos confirmados**
+(el modelo dijo "sí hay" y de verdad había) — todavía no detecta el caso
+contrario (el modelo dice que sí hay, pero no hay). La web avisa de esta
+limitación cuando aplica. El backend sigue soportando el valor `nada` por
+si queda algún hallazgo antiguo o se reactiva esa opción en el futuro.
+
 ### El Worker de Cloudflare (`worker/index.js`)
 
 Como GitHub Pages solo sirve archivos estáticos, hay un Worker en
@@ -164,8 +171,10 @@ La web pide una contraseña antes de mostrar nada:
 ### Registro de hallazgos propios
 
 Desde la web se marca en el mapa el punto exacto: especie, altitud (tramos
-de 50m), tipo de árbol, fecha, cantidad (mucho/poco/nada). El nombre del
-lugar se rellena solo (geocodificación inversa) pero es editable.
+de 50m), tipo de árbol, fecha, cantidad (mucho/poco). El nombre del lugar
+se rellena solo (geocodificación inversa) pero es editable. No existe
+opción para registrar "no encontré nada" — se simplificó a propósito, solo
+se anotan hallazgos positivos.
 
 En el mapa, los hallazgos **no se muestran individualmente** — se agrupan
 por proximidad (~2km) en un único círculo por zona, cuyo color y tamaño
