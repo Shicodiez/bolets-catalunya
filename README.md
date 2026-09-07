@@ -123,20 +123,30 @@ límite de Nominatim para scripts automáticos) hasta resolver las 390, lo
 que tarda unos días desde que se activó. Mientras un punto no tiene nombre
 resuelto, se muestra como "Punt X" de forma temporal.
 
-### Evolución y precisión histórica
+### Evolución, tasa de confirmación y cobertura de datos
 
 Cada día se guarda un snapshot de la mejor puntuación de cada zona. La web
 compara con hace 7 días y marca **▲/▼** en las zonas que más han subido o
-bajado. Además, cuando hay suficientes hallazgos registrados, el backend
-cruza cada uno con la puntuación que tenía esa zona ese día y calcula un
-**% de precisión real** del modelo, desglosado por franja de puntuación.
+bajado.
 
-Como el formulario ya no permite registrar "no encontré nada" (solo
-mucho/poco), esta precisión mide sobre todo **aciertos confirmados**
-(el modelo dijo "sí hay" y de verdad había) — todavía no detecta el caso
-contrario (el modelo dice que sí hay, pero no hay). La web avisa de esta
-limitación cuando aplica. El backend sigue soportando el valor `nada` por
-si queda algún hallazgo antiguo o se reactiva esa opción en el futuro.
+Cuando hay suficientes salidas registradas, el backend cruza cada una con
+la puntuación que tenía esa zona ese día y calcula una **tasa de
+confirmación** (deliberadamente no se llama "precisión": no es una
+muestra representativa de todas las zonas, solo de las que alguien
+visitó y registró — un matiz importante que la propia web explica).
+
+El formulario permite registrar 4 resultados de una salida: encontré
+mucho, encontré poco, busqué y no encontré nada, o no llegué a buscar
+bien (esta última no se guarda como dato — no aporta información fiable
+sobre el modelo, ya que no hubo búsqueda real). Con la opción de "no
+encontré nada" de vuelta, la tasa de confirmación ya puede detectar
+también cuando el modelo predice mal en sentido contrario (dice que hay
+condiciones, pero no se encuentra nada), no solo confirmar aciertos.
+
+La web también avisa cuando alguna fuente de datos (Open-Meteo, AEMET,
+Meteocat, Meteoclimatic) ha fallado en la última actualización, para
+dejar claro que las puntuaciones de ese momento pueden estar basadas en
+menos fuentes de lo habitual — en vez de fallar en silencio.
 
 ### El Worker de Cloudflare (`worker/index.js`)
 
@@ -159,6 +169,16 @@ and variables → Actions):
 - `AEMET_API_KEY` — caduca cada 3 meses (próxima: 25/11/2026).
 - `METEOCAT_API_KEY` — caduca 31/08/2027.
 
+**Seguridad del Worker** — el Worker nunca confía en lo que le manda el
+navegador y lo valida todo por su cuenta: rango geográfico real de
+Catalunya para las coordenadas, lista blanca de especies y tipos de
+árbol válidos, límites de longitud en textos, formato de fecha (sin
+fechas futuras ni de hace más de 10 años), límite de tamaño de payload
+(10KB), y un pequeño retraso tras una contraseña incorrecta para
+encarecer intentos automatizados. Un rate limiting completo por IP
+requeriría añadir Cloudflare KV, que de momento no se ha considerado
+necesario para el volumen de uso actual.
+
 ### Control de acceso
 
 La web pide una contraseña antes de mostrar nada:
@@ -168,22 +188,29 @@ La web pide una contraseña antes de mostrar nada:
   `APP_PASSWORD` en el Worker. Todas las sesiones antiguas dejan de valer
   al instante.
 
-### Registro de hallazgos propios
+### Registro de salidas propias
 
-Desde la web se marca en el mapa el punto exacto: especie, altitud (tramos
-de 50m), tipo de árbol, fecha, cantidad (mucho/poco). El nombre del lugar
-se rellena solo (geocodificación inversa) pero es editable. No existe
-opción para registrar "no encontré nada" — se simplificó a propósito, solo
-se anotan hallazgos positivos.
+Desde la web se marca en el mapa el punto exacto y se elige el resultado
+de la salida:
+- **🍄 Encontré mucho / poco** — pide la especie, altitud (tramos de 50m) y
+  tipo de árbol.
+- **🔍 Busqué y no encontré nada** — misma información, pero la especie es
+  opcional (puede ser una búsqueda sin objetivo concreto).
+- **🚶 No llegué a buscar bien** — no se guarda como dato; sirve solo para
+  que quien registra pueda "descartar" la salida sin que ensucie las
+  estadísticas del modelo (una salida sin búsqueda real no dice nada
+  sobre si el modelo acertó o no).
 
-En el mapa, los hallazgos **no se muestran individualmente** — se agrupan
+El nombre del lugar se rellena solo (geocodificación inversa) pero es
+editable.
+
+En el mapa, las salidas **no se muestran individualmente** — se agrupan
 por proximidad (~2km) en un único círculo por zona, cuyo color y tamaño
-reflejan cuántos hallazgos hay y qué proporción son positivos. Al hacer
-clic se ve el detalle completo del grupo (especie por especie, fecha por
-fecha), con opción de borrar cada hallazgo individual. Así el mapa sigue
-siendo legible aunque haya miles de registros, sin perder ningún dato de
-cara al análisis futuro (precisión histórica, zonas con hallazgos
-repetidos, etc.).
+reflejan cuántas hay y qué proporción son positivas. Al hacer clic se ve
+el detalle completo del grupo (especie por especie, fecha por fecha), con
+opción de borrar cada registro individual. Así el mapa sigue siendo
+legible aunque haya miles de registros, sin perder ningún dato de cara al
+análisis futuro (tasa de confirmación, zonas con salidas repetidas, etc.).
 
 ### Mantenimiento
 
@@ -216,3 +243,21 @@ devolviendo menos valores de los esperados en el caso de hábitat
 incompatible; triangulación contando la misma estación varias veces sin
 deduplicar; modelo de DeepSeek retirado sin aviso (`deepseek-chat` →
 `deepseek-v4-flash`).
+
+### Ideas evaluadas y aparcadas deliberadamente
+
+Un análisis externo detallado (ChatGPT) señaló varias mejoras de fondo que
+se decidió no abordar todavía, por ser más apropiadas cuando haya bastante
+más volumen de datos de campo real: pesos del scoring calibrados por
+especie en vez de globales (actualmente los rangos de lluvia/temperatura
+sí son por especie, pero los pesos de cada componente son iguales para
+las 10); convertir los componentes en curvas de respuesta biológica en
+vez de tramos lineales; una rejilla geográfica adaptativa en vez de
+puntos fijos cada ~10km; orientación y pendiente del terreno vía modelo
+digital de elevación; corregir el sesgo de que la gente solo visita zonas
+con puntuación alta (podría atacarse en el futuro sugiriendo
+deliberadamente "zonas de validación" con puntuación media, para no
+sesgar el aprendizaje del sistema); incertidumbre explícita en la
+estimación de lluvia triangulada (ej. "18mm ±9mm"); y evaluar modelos de
+machine learning una vez exista un conjunto de datos de validación
+suficientemente grande y no sesgado.
