@@ -1,14 +1,18 @@
 /**
- * Worker de Cloudflare: recibe un hallazgo des de la web de bolets-catalunya
- * i el desa de forma permanent al fitxer data/hallazgos.json del repositori
- * de GitHub, fent servir un token guardat de forma segura com a "Secret"
- * (GITHUB_TOKEN), mai visible des del navegador.
+ * Worker de Cloudflare: recibe una salida des de la web de bolets-catalunya
+ * i el desa de forma permanent i IRREVERSIBLE al fitxer data/hallazgos.json
+ * del repositori de GitHub, fent servir un token guardat de forma segura
+ * com a "Secret" (GITHUB_TOKEN), mai visible des del navegador.
  *
  * Flux:
- *  1. La web envia un POST amb el hallazgo (JSON).
+ *  1. La web envia un POST amb la salida (JSON).
  *  2. Aquest Worker llegeix el fitxer actual de GitHub (per obtenir el sha).
- *  3. Afegeix el hallazgo nou a la llista.
+ *  3. Afegeix la salida nova a la llista.
  *  4. Torna a pujar el fitxer sencer a GitHub amb el sha correcte.
+ *
+ * No existeix cap endpoint per esborrar: un cop registrada, una salida
+ * queda per sempre — decisió deliberada per protegir l'historial que
+ * alimenta l'evolució i la tasa de confirmació del model.
  */
 
 /**
@@ -124,7 +128,7 @@ const ALLOWED_ORIGIN = "https://shicodiez.github.io";
 function corsHeaders() {
   return {
     "Access-Control-Allow-Origin": ALLOWED_ORIGIN,
-    "Access-Control-Allow-Methods": "GET, POST, DELETE, OPTIONS",
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type, X-Session-Token",
   };
 }
@@ -348,23 +352,11 @@ export default {
         });
       }
 
-      if (request.method === "DELETE") {
-        const { id } = await request.json();
-        const isValidId = typeof id === "string" && id.length <= 60 && /^[a-zA-Z0-9-]+$/.test(id);
-        if (!isValidId) {
-          return new Response(JSON.stringify({ error: "Id inválido" }), {
-            status: 400,
-            headers: { ...corsHeaders(), "Content-Type": "application/json" },
-          });
-        }
-        const { sha, hallazgos } = await getCurrentFile(env);
-        const filtered = hallazgos.filter((h) => h.id !== id);
-        await saveFile(env, filtered, sha, `Borrar hallazgo ${id}`);
-
-        return new Response(JSON.stringify({ ok: true }), {
-          headers: { ...corsHeaders(), "Content-Type": "application/json" },
-        });
-      }
+      // NOTA: no hi ha endpoint DELETE — les salides registrades són
+      // permanents a propòsit (decisió de l'usuari): un cop guardades,
+      // no es poden esborrar per cap via, ni des de la web ni cridant
+      // directament el Worker. Això protegeix l'historial de dades reals
+      // que alimenta l'evolució i la tasa de confirmació del model.
 
       if (request.method === "GET") {
         const { hallazgos } = await getCurrentFile(env);
