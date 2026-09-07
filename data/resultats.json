@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-07T20:31:13.340869+00:00",
+  "generated_at": "2026-09-07T20:58:51.556446+00:00",
   "default_threshold": 70,
   "credential_warnings": [],
   "data_coverage": {
@@ -9,11 +9,11 @@
     },
     "meteoclimatic": {
       "ok": true,
-      "detail": "413 estacions"
+      "detail": "415 estacions"
     },
     "aemet": {
       "ok": true,
-      "detail": "10502 estacions"
+      "detail": "10612 estacions"
     },
     "meteocat": {
       "ok": true,
@@ -75,7 +75,7 @@
         "soil_moisture_now": 0.278,
         "soil_moisture_avg_7d": 0.26,
         "soil_moisture_trend": 0.0082,
-        "evapotranspiration_7d": 29.6
+        "evapotranspiration_7d": 29.8
       }
     },
     {
@@ -189,7 +189,7 @@
         "soil_moisture_now": 0.267,
         "soil_moisture_avg_7d": 0.261,
         "soil_moisture_trend": 0.0022,
-        "evapotranspiration_7d": 30.9
+        "evapotranspiration_7d": 31.0
       }
     },
     {
@@ -246,7 +246,7 @@
         "soil_moisture_now": 0.278,
         "soil_moisture_avg_7d": 0.26,
         "soil_moisture_trend": 0.0082,
-        "evapotranspiration_7d": 29.6
+        "evapotranspiration_7d": 29.8
       }
     },
     {
@@ -303,7 +303,7 @@
         "soil_moisture_now": 0.0,
         "soil_moisture_avg_7d": 0.0,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 28.6
+        "evapotranspiration_7d": 29.0
       }
     },
     {
@@ -360,7 +360,7 @@
         "soil_moisture_now": 0.191,
         "soil_moisture_avg_7d": 0.199,
         "soil_moisture_trend": -0.0067,
-        "evapotranspiration_7d": 34.7
+        "evapotranspiration_7d": 34.8
       }
     },
     {
@@ -417,7 +417,7 @@
         "soil_moisture_now": 0.155,
         "soil_moisture_avg_7d": 0.157,
         "soil_moisture_trend": -0.0025,
-        "evapotranspiration_7d": 33.0
+        "evapotranspiration_7d": 33.2
       }
     },
     {
@@ -474,7 +474,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": -0.0005,
-        "evapotranspiration_7d": 31.8
+        "evapotranspiration_7d": 31.9
       }
     },
     {
@@ -531,7 +531,7 @@
         "soil_moisture_now": 0.284,
         "soil_moisture_avg_7d": 0.276,
         "soil_moisture_trend": 0.0009,
-        "evapotranspiration_7d": 30.2
+        "evapotranspiration_7d": 30.4
       }
     },
     {
@@ -588,7 +588,7 @@
         "soil_moisture_now": 0.0,
         "soil_moisture_avg_7d": 0.0,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 27.8
+        "evapotranspiration_7d": 28.3
       }
     },
     {
@@ -645,7 +645,7 @@
         "soil_moisture_now": 0.0,
         "soil_moisture_avg_7d": 0.0,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 28.3
+        "evapotranspiration_7d": 28.8
       }
     },
     {
@@ -702,7 +702,7 @@
         "soil_moisture_now": 0.132,
         "soil_moisture_avg_7d": 0.131,
         "soil_moisture_trend": 0.0008,
-        "evapotranspiration_7d": 34.7
+        "evapotranspiration_7d": 34.4
       }
     },
     {
@@ -759,7 +759,7 @@
         "soil_moisture_now": 0.109,
         "soil_moisture_avg_7d": 0.107,
         "soil_moisture_trend": 0.0008,
-        "evapotranspiration_7d": 35.6
+        "evapotranspiration_7d": 35.8
       }
     },
     {
@@ -816,7 +816,7 @@
         "soil_moisture_now": 0.192,
         "soil_moisture_avg_7d": 0.198,
         "soil_moisture_trend": -0.0057,
-        "evapotranspiration_7d": 32.4
+        "evapotranspiration_7d": 32.6
       }
     },
     {
@@ -873,7 +873,7 @@
         "soil_moisture_now": 0.137,
         "soil_moisture_avg_7d": 0.139,
         "soil_moisture_trend": -0.0008,
-        "evapotranspiration_7d": 31.5
+        "evapotranspiration_7d": 31.6
       }
     },
     {
@@ -930,7 +930,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 31.3
+        "evapotranspiration_7d": 31.5
       }
     },
     {
@@ -987,7 +987,7 @@
         "soil_moisture_now": 0.0,
         "soil_moisture_avg_7d": 0.0,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 27.8
+        "evapotranspiration_7d": 28.2
       }
     },
     {
@@ -1044,7 +1044,7 @@
         "soil_moisture_now": 0.0,
         "soil_moisture_avg_7d": 0.0,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 27.9
+        "evapotranspiration_7d": 28.4
       }
     },
     {
@@ -1101,7 +1101,7 @@
         "soil_moisture_now": 0.0,
         "soil_moisture_avg_7d": 0.0,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 28.1
+        "evapotranspiration_7d": 28.6
       }
     },
     {
@@ -1158,7 +1158,7 @@
         "soil_moisture_now": 0.0,
         "soil_moisture_avg_7d": 0.0,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 28.3
+        "evapotranspiration_7d": 28.7
       }
     },
     {
@@ -1215,7 +1215,7 @@
         "soil_moisture_now": 0.201,
         "soil_moisture_avg_7d": 0.208,
         "soil_moisture_trend": -0.0049,
-        "evapotranspiration_7d": 35.9
+        "evapotranspiration_7d": 36.0
       }
     },
     {
@@ -1315,7 +1315,7 @@
         "soil_moisture_now": 0.203,
         "soil_moisture_avg_7d": 0.211,
         "soil_moisture_trend": -0.007,
-        "evapotranspiration_7d": 34.5
+        "evapotranspiration_7d": 34.7
       }
     },
     {
@@ -1415,7 +1415,7 @@
         "soil_moisture_now": 0.203,
         "soil_moisture_avg_7d": 0.211,
         "soil_moisture_trend": -0.007,
-        "evapotranspiration_7d": 35.1
+        "evapotranspiration_7d": 35.3
       }
     },
     {
@@ -1515,7 +1515,7 @@
         "soil_moisture_now": 0.184,
         "soil_moisture_avg_7d": 0.189,
         "soil_moisture_trend": -0.0019,
-        "evapotranspiration_7d": 33.8
+        "evapotranspiration_7d": 33.9
       }
     },
     {
@@ -1572,7 +1572,7 @@
         "soil_moisture_now": 0.108,
         "soil_moisture_avg_7d": 0.106,
         "soil_moisture_trend": 0.0028,
-        "evapotranspiration_7d": 33.1
+        "evapotranspiration_7d": 33.4
       }
     },
     {
@@ -1672,7 +1672,7 @@
         "soil_moisture_now": 0.198,
         "soil_moisture_avg_7d": 0.205,
         "soil_moisture_trend": -0.0044,
-        "evapotranspiration_7d": 31.3
+        "evapotranspiration_7d": 31.4
       }
     },
     {
@@ -1729,7 +1729,7 @@
         "soil_moisture_now": 0.213,
         "soil_moisture_avg_7d": 0.219,
         "soil_moisture_trend": -0.0045,
-        "evapotranspiration_7d": 28.9
+        "evapotranspiration_7d": 29.3
       }
     },
     {
@@ -1786,7 +1786,7 @@
         "soil_moisture_now": 0.213,
         "soil_moisture_avg_7d": 0.219,
         "soil_moisture_trend": -0.0045,
-        "evapotranspiration_7d": 28.5
+        "evapotranspiration_7d": 28.9
       }
     },
     {
@@ -1843,7 +1843,7 @@
         "soil_moisture_now": 0.0,
         "soil_moisture_avg_7d": 0.0,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 27.5
+        "evapotranspiration_7d": 27.9
       }
     },
     {
@@ -1900,7 +1900,7 @@
         "soil_moisture_now": 0.0,
         "soil_moisture_avg_7d": 0.0,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 28.0
+        "evapotranspiration_7d": 28.3
       }
     },
     {
@@ -1957,7 +1957,7 @@
         "soil_moisture_now": 0.0,
         "soil_moisture_avg_7d": 0.0,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 28.2
+        "evapotranspiration_7d": 28.6
       }
     },
     {
@@ -2014,7 +2014,7 @@
         "soil_moisture_now": 0.21,
         "soil_moisture_avg_7d": 0.22,
         "soil_moisture_trend": -0.0087,
-        "evapotranspiration_7d": 36.6
+        "evapotranspiration_7d": 36.9
       }
     },
     {
@@ -2071,7 +2071,7 @@
         "soil_moisture_now": 0.186,
         "soil_moisture_avg_7d": 0.196,
         "soil_moisture_trend": -0.0067,
-        "evapotranspiration_7d": 36.0
+        "evapotranspiration_7d": 36.3
       }
     },
     {
@@ -2128,7 +2128,7 @@
         "soil_moisture_now": 0.202,
         "soil_moisture_avg_7d": 0.208,
         "soil_moisture_trend": -0.0046,
-        "evapotranspiration_7d": 36.3
+        "evapotranspiration_7d": 36.5
       }
     },
     {
@@ -2185,7 +2185,7 @@
         "soil_moisture_now": 0.102,
         "soil_moisture_avg_7d": 0.103,
         "soil_moisture_trend": -0.0008,
-        "evapotranspiration_7d": 35.8
+        "evapotranspiration_7d": 35.9
       }
     },
     {
@@ -2242,7 +2242,7 @@
         "soil_moisture_now": 0.103,
         "soil_moisture_avg_7d": 0.104,
         "soil_moisture_trend": -0.0009,
-        "evapotranspiration_7d": 36.8
+        "evapotranspiration_7d": 37.0
       }
     },
     {
@@ -2299,7 +2299,7 @@
         "soil_moisture_now": 0.198,
         "soil_moisture_avg_7d": 0.205,
         "soil_moisture_trend": -0.0044,
-        "evapotranspiration_7d": 31.3
+        "evapotranspiration_7d": 31.5
       }
     },
     {
@@ -2356,7 +2356,7 @@
         "soil_moisture_now": 0.147,
         "soil_moisture_avg_7d": 0.151,
         "soil_moisture_trend": -0.0034,
-        "evapotranspiration_7d": 30.7
+        "evapotranspiration_7d": 30.9
       }
     },
     {
@@ -2413,7 +2413,7 @@
         "soil_moisture_now": 0.213,
         "soil_moisture_avg_7d": 0.219,
         "soil_moisture_trend": -0.0045,
-        "evapotranspiration_7d": 28.5
+        "evapotranspiration_7d": 28.9
       }
     },
     {
@@ -2470,7 +2470,7 @@
         "soil_moisture_now": 0.169,
         "soil_moisture_avg_7d": 0.172,
         "soil_moisture_trend": -0.0027,
-        "evapotranspiration_7d": 30.7
+        "evapotranspiration_7d": 30.9
       }
     },
     {
@@ -2527,7 +2527,7 @@
         "soil_moisture_now": 0.175,
         "soil_moisture_avg_7d": 0.179,
         "soil_moisture_trend": -0.0036,
-        "evapotranspiration_7d": 28.7
+        "evapotranspiration_7d": 29.0
       }
     },
     {
@@ -2584,7 +2584,7 @@
         "soil_moisture_now": 0.0,
         "soil_moisture_avg_7d": 0.0,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 27.9
+        "evapotranspiration_7d": 28.3
       }
     },
     {
@@ -2641,7 +2641,7 @@
         "soil_moisture_now": 0.0,
         "soil_moisture_avg_7d": 0.0,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 28.3
+        "evapotranspiration_7d": 28.7
       }
     },
     {
@@ -2698,7 +2698,7 @@
         "soil_moisture_now": 0.21,
         "soil_moisture_avg_7d": 0.222,
         "soil_moisture_trend": -0.0101,
-        "evapotranspiration_7d": 37.4
+        "evapotranspiration_7d": 37.6
       }
     },
     {
@@ -2755,7 +2755,7 @@
         "soil_moisture_now": 0.187,
         "soil_moisture_avg_7d": 0.2,
         "soil_moisture_trend": -0.01,
-        "evapotranspiration_7d": 38.0
+        "evapotranspiration_7d": 38.3
       }
     },
     {
@@ -2812,7 +2812,7 @@
         "soil_moisture_now": 0.187,
         "soil_moisture_avg_7d": 0.2,
         "soil_moisture_trend": -0.01,
-        "evapotranspiration_7d": 37.6
+        "evapotranspiration_7d": 37.8
       }
     },
     {
@@ -2912,7 +2912,7 @@
         "soil_moisture_now": 0.109,
         "soil_moisture_avg_7d": 0.109,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 35.6
+        "evapotranspiration_7d": 35.8
       }
     },
     {
@@ -3026,7 +3026,7 @@
         "soil_moisture_now": 0.199,
         "soil_moisture_avg_7d": 0.205,
         "soil_moisture_trend": -0.0037,
-        "evapotranspiration_7d": 34.0
+        "evapotranspiration_7d": 34.3
       }
     },
     {
@@ -3083,7 +3083,7 @@
         "soil_moisture_now": 0.2,
         "soil_moisture_avg_7d": 0.208,
         "soil_moisture_trend": -0.0074,
-        "evapotranspiration_7d": 30.8
+        "evapotranspiration_7d": 30.9
       }
     },
     {
@@ -3140,7 +3140,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 31.7
+        "evapotranspiration_7d": 31.9
       }
     },
     {
@@ -3197,7 +3197,7 @@
         "soil_moisture_now": 0.169,
         "soil_moisture_avg_7d": 0.172,
         "soil_moisture_trend": -0.0027,
-        "evapotranspiration_7d": 30.5
+        "evapotranspiration_7d": 30.7
       }
     },
     {
@@ -3254,7 +3254,7 @@
         "soil_moisture_now": 0.175,
         "soil_moisture_avg_7d": 0.179,
         "soil_moisture_trend": -0.0036,
-        "evapotranspiration_7d": 28.6
+        "evapotranspiration_7d": 28.9
       }
     },
     {
@@ -3311,7 +3311,7 @@
         "soil_moisture_now": 0.163,
         "soil_moisture_avg_7d": 0.166,
         "soil_moisture_trend": -0.0014,
-        "evapotranspiration_7d": 31.3
+        "evapotranspiration_7d": 31.6
       }
     },
     {
@@ -3368,7 +3368,7 @@
         "soil_moisture_now": 0.182,
         "soil_moisture_avg_7d": 0.182,
         "soil_moisture_trend": 0.0001,
-        "evapotranspiration_7d": 29.6
+        "evapotranspiration_7d": 30.0
       }
     },
     {
@@ -3425,7 +3425,7 @@
         "soil_moisture_now": 0.182,
         "soil_moisture_avg_7d": 0.182,
         "soil_moisture_trend": 0.0001,
-        "evapotranspiration_7d": 29.6
+        "evapotranspiration_7d": 30.0
       }
     },
     {
@@ -3482,7 +3482,7 @@
         "soil_moisture_now": 0.0,
         "soil_moisture_avg_7d": 0.0,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 29.0
+        "evapotranspiration_7d": 29.4
       }
     },
     {
@@ -3539,7 +3539,7 @@
         "soil_moisture_now": 0.0,
         "soil_moisture_avg_7d": 0.0,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 29.8
+        "evapotranspiration_7d": 30.2
       }
     },
     {
@@ -3596,7 +3596,7 @@
         "soil_moisture_now": 0.203,
         "soil_moisture_avg_7d": 0.211,
         "soil_moisture_trend": -0.0059,
-        "evapotranspiration_7d": 36.9
+        "evapotranspiration_7d": 37.0
       }
     },
     {
@@ -3653,7 +3653,7 @@
         "soil_moisture_now": 0.298,
         "soil_moisture_avg_7d": 0.309,
         "soil_moisture_trend": -0.0067,
-        "evapotranspiration_7d": 37.5
+        "evapotranspiration_7d": 37.7
       }
     },
     {
@@ -3710,7 +3710,7 @@
         "soil_moisture_now": 0.203,
         "soil_moisture_avg_7d": 0.212,
         "soil_moisture_trend": -0.0077,
-        "evapotranspiration_7d": 37.8
+        "evapotranspiration_7d": 38.0
       }
     },
     {
@@ -3867,7 +3867,7 @@
         "soil_moisture_now": 0.191,
         "soil_moisture_avg_7d": 0.196,
         "soil_moisture_trend": -0.0017,
-        "evapotranspiration_7d": 37.5
+        "evapotranspiration_7d": 37.6
       }
     },
     {
@@ -3967,7 +3967,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.111,
         "soil_moisture_trend": -0.0021,
-        "evapotranspiration_7d": 37.1
+        "evapotranspiration_7d": 37.0
       }
     },
     {
@@ -4067,7 +4067,7 @@
         "soil_moisture_now": 0.109,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": -0.0002,
-        "evapotranspiration_7d": 32.9
+        "evapotranspiration_7d": 32.8
       }
     },
     {
@@ -4167,7 +4167,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": 0.0005,
-        "evapotranspiration_7d": 33.3
+        "evapotranspiration_7d": 33.2
       }
     },
     {
@@ -4224,7 +4224,7 @@
         "soil_moisture_now": 0.177,
         "soil_moisture_avg_7d": 0.183,
         "soil_moisture_trend": -0.0031,
-        "evapotranspiration_7d": 33.3
+        "evapotranspiration_7d": 33.5
       }
     },
     {
@@ -4281,7 +4281,7 @@
         "soil_moisture_now": 0.123,
         "soil_moisture_avg_7d": 0.125,
         "soil_moisture_trend": -0.0017,
-        "evapotranspiration_7d": 33.2
+        "evapotranspiration_7d": 33.3
       }
     },
     {
@@ -4338,7 +4338,7 @@
         "soil_moisture_now": 0.165,
         "soil_moisture_avg_7d": 0.168,
         "soil_moisture_trend": -0.0018,
-        "evapotranspiration_7d": 31.9
+        "evapotranspiration_7d": 32.1
       }
     },
     {
@@ -4395,7 +4395,7 @@
         "soil_moisture_now": 0.158,
         "soil_moisture_avg_7d": 0.161,
         "soil_moisture_trend": -0.0015,
-        "evapotranspiration_7d": 32.6
+        "evapotranspiration_7d": 32.7
       }
     },
     {
@@ -4452,7 +4452,7 @@
         "soil_moisture_now": 0.164,
         "soil_moisture_avg_7d": 0.164,
         "soil_moisture_trend": 0.0008,
-        "evapotranspiration_7d": 31.9
+        "evapotranspiration_7d": 32.2
       }
     },
     {
@@ -4509,7 +4509,7 @@
         "soil_moisture_now": 0.162,
         "soil_moisture_avg_7d": 0.164,
         "soil_moisture_trend": -0.0024,
-        "evapotranspiration_7d": 31.4
+        "evapotranspiration_7d": 31.9
       }
     },
     {
@@ -4566,7 +4566,7 @@
         "soil_moisture_now": 0.187,
         "soil_moisture_avg_7d": 0.191,
         "soil_moisture_trend": -0.0031,
-        "evapotranspiration_7d": 31.9
+        "evapotranspiration_7d": 32.3
       }
     },
     {
@@ -4623,7 +4623,7 @@
         "soil_moisture_now": 0.177,
         "soil_moisture_avg_7d": 0.177,
         "soil_moisture_trend": 0.0004,
-        "evapotranspiration_7d": 31.6
+        "evapotranspiration_7d": 32.0
       }
     },
     {
@@ -4680,7 +4680,7 @@
         "soil_moisture_now": 0.214,
         "soil_moisture_avg_7d": 0.216,
         "soil_moisture_trend": -0.0011,
-        "evapotranspiration_7d": 30.4
+        "evapotranspiration_7d": 30.9
       }
     },
     {
@@ -4737,7 +4737,7 @@
         "soil_moisture_now": 0.285,
         "soil_moisture_avg_7d": 0.296,
         "soil_moisture_trend": -0.0063,
-        "evapotranspiration_7d": 36.7
+        "evapotranspiration_7d": 36.9
       }
     },
     {
@@ -4794,7 +4794,7 @@
         "soil_moisture_now": 0.301,
         "soil_moisture_avg_7d": 0.312,
         "soil_moisture_trend": -0.0095,
-        "evapotranspiration_7d": 37.8
+        "evapotranspiration_7d": 38.1
       }
     },
     {
@@ -4894,7 +4894,7 @@
         "soil_moisture_now": 0.301,
         "soil_moisture_avg_7d": 0.312,
         "soil_moisture_trend": -0.0095,
-        "evapotranspiration_7d": 37.4
+        "evapotranspiration_7d": 37.6
       }
     },
     {
@@ -5008,7 +5008,7 @@
         "soil_moisture_now": 0.186,
         "soil_moisture_avg_7d": 0.196,
         "soil_moisture_trend": -0.0084,
-        "evapotranspiration_7d": 39.2
+        "evapotranspiration_7d": 39.1
       }
     },
     {
@@ -5108,7 +5108,7 @@
         "soil_moisture_now": 0.174,
         "soil_moisture_avg_7d": 0.177,
         "soil_moisture_trend": 0.0008,
-        "evapotranspiration_7d": 38.7
+        "evapotranspiration_7d": 38.6
       }
     },
     {
@@ -5208,7 +5208,7 @@
         "soil_moisture_now": 0.109,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": -0.0002,
-        "evapotranspiration_7d": 37.1
+        "evapotranspiration_7d": 37.0
       }
     },
     {
@@ -5308,7 +5308,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": 0.0006,
-        "evapotranspiration_7d": 34.6
+        "evapotranspiration_7d": 34.4
       }
     },
     {
@@ -5365,7 +5365,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.113,
         "soil_moisture_trend": -0.0051,
-        "evapotranspiration_7d": 32.4
+        "evapotranspiration_7d": 32.5
       }
     },
     {
@@ -5422,7 +5422,7 @@
         "soil_moisture_now": 0.128,
         "soil_moisture_avg_7d": 0.13,
         "soil_moisture_trend": -0.0016,
-        "evapotranspiration_7d": 35.0
+        "evapotranspiration_7d": 35.1
       }
     },
     {
@@ -5622,7 +5622,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": 0.0001,
-        "evapotranspiration_7d": 33.9
+        "evapotranspiration_7d": 34.0
       }
     },
     {
@@ -5679,7 +5679,7 @@
         "soil_moisture_now": 0.145,
         "soil_moisture_avg_7d": 0.146,
         "soil_moisture_trend": 0.0002,
-        "evapotranspiration_7d": 32.7
+        "evapotranspiration_7d": 32.8
       }
     },
     {
@@ -5779,7 +5779,7 @@
         "soil_moisture_now": 0.109,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": -0.0008,
-        "evapotranspiration_7d": 33.6
+        "evapotranspiration_7d": 33.7
       }
     },
     {
@@ -5879,7 +5879,7 @@
         "soil_moisture_now": 0.143,
         "soil_moisture_avg_7d": 0.148,
         "soil_moisture_trend": -0.0039,
-        "evapotranspiration_7d": 34.2
+        "evapotranspiration_7d": 34.3
       }
     },
     {
@@ -5936,7 +5936,7 @@
         "soil_moisture_now": 0.177,
         "soil_moisture_avg_7d": 0.177,
         "soil_moisture_trend": 0.0004,
-        "evapotranspiration_7d": 31.6
+        "evapotranspiration_7d": 31.9
       }
     },
     {
@@ -5993,7 +5993,7 @@
         "soil_moisture_now": 0.214,
         "soil_moisture_avg_7d": 0.216,
         "soil_moisture_trend": -0.0011,
-        "evapotranspiration_7d": 30.4
+        "evapotranspiration_7d": 30.9
       }
     },
     {
@@ -6050,7 +6050,7 @@
         "soil_moisture_now": 0.0,
         "soil_moisture_avg_7d": 0.0,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 30.1
+        "evapotranspiration_7d": 30.5
       }
     },
     {
@@ -6107,7 +6107,7 @@
         "soil_moisture_now": 0.0,
         "soil_moisture_avg_7d": 0.0,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 30.6
+        "evapotranspiration_7d": 31.0
       }
     },
     {
@@ -6164,7 +6164,7 @@
         "soil_moisture_now": 0.0,
         "soil_moisture_avg_7d": 0.0,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 31.1
+        "evapotranspiration_7d": 31.5
       }
     },
     {
@@ -6278,7 +6278,7 @@
         "soil_moisture_now": 0.185,
         "soil_moisture_avg_7d": 0.185,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 39.6
+        "evapotranspiration_7d": 39.7
       }
     },
     {
@@ -6492,7 +6492,7 @@
         "soil_moisture_now": 0.206,
         "soil_moisture_avg_7d": 0.215,
         "soil_moisture_trend": -0.0062,
-        "evapotranspiration_7d": 42.1
+        "evapotranspiration_7d": 42.0
       }
     },
     {
@@ -6549,7 +6549,7 @@
         "soil_moisture_now": 0.186,
         "soil_moisture_avg_7d": 0.191,
         "soil_moisture_trend": -0.0043,
-        "evapotranspiration_7d": 42.3
+        "evapotranspiration_7d": 42.2
       }
     },
     {
@@ -6606,7 +6606,7 @@
         "soil_moisture_now": 0.141,
         "soil_moisture_avg_7d": 0.143,
         "soil_moisture_trend": -0.0011,
-        "evapotranspiration_7d": 40.9
+        "evapotranspiration_7d": 40.8
       }
     },
     {
@@ -6663,7 +6663,7 @@
         "soil_moisture_now": 0.171,
         "soil_moisture_avg_7d": 0.17,
         "soil_moisture_trend": 0.0014,
-        "evapotranspiration_7d": 37.0
+        "evapotranspiration_7d": 37.2
       }
     },
     {
@@ -6763,7 +6763,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 37.1
+        "evapotranspiration_7d": 37.2
       }
     },
     {
@@ -6820,7 +6820,7 @@
         "soil_moisture_now": 0.122,
         "soil_moisture_avg_7d": 0.124,
         "soil_moisture_trend": -0.0006,
-        "evapotranspiration_7d": 35.4
+        "evapotranspiration_7d": 35.2
       }
     },
     {
@@ -6877,7 +6877,7 @@
         "soil_moisture_now": 0.116,
         "soil_moisture_avg_7d": 0.12,
         "soil_moisture_trend": 0.0003,
-        "evapotranspiration_7d": 34.1
+        "evapotranspiration_7d": 33.9
       }
     },
     {
@@ -6977,7 +6977,7 @@
         "soil_moisture_now": 0.134,
         "soil_moisture_avg_7d": 0.136,
         "soil_moisture_trend": -0.0024,
-        "evapotranspiration_7d": 36.4
+        "evapotranspiration_7d": 36.3
       }
     },
     {
@@ -7034,7 +7034,7 @@
         "soil_moisture_now": 0.131,
         "soil_moisture_avg_7d": 0.132,
         "soil_moisture_trend": -0.0003,
-        "evapotranspiration_7d": 35.9
+        "evapotranspiration_7d": 36.0
       }
     },
     {
@@ -7191,7 +7191,7 @@
         "soil_moisture_now": 0.151,
         "soil_moisture_avg_7d": 0.152,
         "soil_moisture_trend": -0.0018,
-        "evapotranspiration_7d": 35.0
+        "evapotranspiration_7d": 35.3
       }
     },
     {
@@ -7291,7 +7291,7 @@
         "soil_moisture_now": 0.147,
         "soil_moisture_avg_7d": 0.148,
         "soil_moisture_trend": -0.0019,
-        "evapotranspiration_7d": 32.8
+        "evapotranspiration_7d": 32.9
       }
     },
     {
@@ -7348,7 +7348,7 @@
         "soil_moisture_now": 0.202,
         "soil_moisture_avg_7d": 0.201,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 31.8
+        "evapotranspiration_7d": 32.1
       }
     },
     {
@@ -7405,7 +7405,7 @@
         "soil_moisture_now": 0.1,
         "soil_moisture_avg_7d": 0.1,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 33.2
+        "evapotranspiration_7d": 33.6
       }
     },
     {
@@ -7462,7 +7462,7 @@
         "soil_moisture_now": 0.149,
         "soil_moisture_avg_7d": 0.149,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 32.8
+        "evapotranspiration_7d": 33.2
       }
     },
     {
@@ -7519,7 +7519,7 @@
         "soil_moisture_now": 0.0,
         "soil_moisture_avg_7d": 0.0,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 31.1
+        "evapotranspiration_7d": 31.6
       }
     },
     {
@@ -7576,7 +7576,7 @@
         "soil_moisture_now": 0.0,
         "soil_moisture_avg_7d": 0.0,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 31.4
+        "evapotranspiration_7d": 31.8
       }
     },
     {
@@ -7690,7 +7690,7 @@
         "soil_moisture_now": 0.185,
         "soil_moisture_avg_7d": 0.185,
         "soil_moisture_trend": 0.0002,
-        "evapotranspiration_7d": 39.4
+        "evapotranspiration_7d": 39.5
       }
     },
     {
@@ -7918,7 +7918,7 @@
         "soil_moisture_now": 0.21,
         "soil_moisture_avg_7d": 0.214,
         "soil_moisture_trend": -0.0032,
-        "evapotranspiration_7d": 39.7
+        "evapotranspiration_7d": 39.8
       }
     },
     {
@@ -7975,7 +7975,7 @@
         "soil_moisture_now": 0.133,
         "soil_moisture_avg_7d": 0.134,
         "soil_moisture_trend": -0.0007,
-        "evapotranspiration_7d": 38.8
+        "evapotranspiration_7d": 39.0
       }
     },
     {
@@ -8132,7 +8132,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.114,
         "soil_moisture_trend": -0.0042,
-        "evapotranspiration_7d": 36.4
+        "evapotranspiration_7d": 36.2
       }
     },
     {
@@ -8189,7 +8189,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.114,
         "soil_moisture_trend": -0.0047,
-        "evapotranspiration_7d": 38.1
+        "evapotranspiration_7d": 38.0
       }
     },
     {
@@ -8289,7 +8289,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": -0.0001,
-        "evapotranspiration_7d": 36.7
+        "evapotranspiration_7d": 36.5
       }
     },
     {
@@ -8430,13 +8430,13 @@
           },
           {
             "source": "meteoclimatic",
-            "name": "Piera ",
+            "name": "Piera",
             "distance_km": 4.7,
             "rain": 0.0
           },
           {
             "source": "meteoclimatic",
-            "name": "Piera",
+            "name": "Piera ",
             "distance_km": 4.7,
             "rain": 0.0
           }
@@ -8446,7 +8446,7 @@
         "soil_moisture_now": 0.158,
         "soil_moisture_avg_7d": 0.167,
         "soil_moisture_trend": -0.007,
-        "evapotranspiration_7d": 36.6
+        "evapotranspiration_7d": 36.7
       }
     },
     {
@@ -8503,7 +8503,7 @@
         "soil_moisture_now": 0.162,
         "soil_moisture_avg_7d": 0.164,
         "soil_moisture_trend": -0.003,
-        "evapotranspiration_7d": 35.6
+        "evapotranspiration_7d": 35.8
       }
     },
     {
@@ -8560,7 +8560,7 @@
         "soil_moisture_now": 0.151,
         "soil_moisture_avg_7d": 0.153,
         "soil_moisture_trend": -0.0014,
-        "evapotranspiration_7d": 34.7
+        "evapotranspiration_7d": 35.0
       }
     },
     {
@@ -8617,7 +8617,7 @@
         "soil_moisture_now": 0.143,
         "soil_moisture_avg_7d": 0.145,
         "soil_moisture_trend": -0.0014,
-        "evapotranspiration_7d": 33.4
+        "evapotranspiration_7d": 33.5
       }
     },
     {
@@ -8717,7 +8717,7 @@
         "soil_moisture_now": 0.1,
         "soil_moisture_avg_7d": 0.1,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 32.1
+        "evapotranspiration_7d": 32.5
       }
     },
     {
@@ -8774,7 +8774,7 @@
         "soil_moisture_now": 0.149,
         "soil_moisture_avg_7d": 0.149,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 32.8
+        "evapotranspiration_7d": 33.2
       }
     },
     {
@@ -8831,7 +8831,7 @@
         "soil_moisture_now": 0.1,
         "soil_moisture_avg_7d": 0.1,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 33.8
+        "evapotranspiration_7d": 34.2
       }
     },
     {
@@ -8888,7 +8888,7 @@
         "soil_moisture_now": 0.0,
         "soil_moisture_avg_7d": 0.0,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 31.4
+        "evapotranspiration_7d": 31.9
       }
     },
     {
@@ -8945,7 +8945,7 @@
         "soil_moisture_now": 0.185,
         "soil_moisture_avg_7d": 0.185,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 38.1
+        "evapotranspiration_7d": 38.2
       }
     },
     {
@@ -9116,12 +9116,12 @@
         "soil_moisture_now": 0.25,
         "soil_moisture_avg_7d": 0.252,
         "soil_moisture_trend": 0.0001,
-        "evapotranspiration_7d": 38.5
+        "evapotranspiration_7d": 38.6
       }
     },
     {
       "id": 141,
-      "name": "Punt 141",
+      "name": "Torregrossa",
       "lat": 41.601,
       "lon": 0.832,
       "alt": 520,
@@ -9173,12 +9173,12 @@
         "soil_moisture_now": 0.182,
         "soil_moisture_avg_7d": 0.183,
         "soil_moisture_trend": -0.0007,
-        "evapotranspiration_7d": 39.4
+        "evapotranspiration_7d": 39.6
       }
     },
     {
       "id": 142,
-      "name": "Punt 142",
+      "name": "Vilanova de Bellpuig",
       "lat": 41.601,
       "lon": 0.954,
       "alt": 520,
@@ -9230,12 +9230,12 @@
         "soil_moisture_now": 0.183,
         "soil_moisture_avg_7d": 0.184,
         "soil_moisture_trend": -0.0004,
-        "evapotranspiration_7d": 38.6
+        "evapotranspiration_7d": 38.7
       }
     },
     {
       "id": 143,
-      "name": "Punt 143",
+      "name": "Preixana",
       "lat": 41.601,
       "lon": 1.076,
       "alt": 520,
@@ -9287,12 +9287,12 @@
         "soil_moisture_now": 0.184,
         "soil_moisture_avg_7d": 0.184,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 39.8
+        "evapotranspiration_7d": 40.0
       }
     },
     {
       "id": 144,
-      "name": "Punt 144",
+      "name": "Montornès de Segarra",
       "lat": 41.601,
       "lon": 1.198,
       "alt": 520,
@@ -9349,7 +9349,7 @@
     },
     {
       "id": 145,
-      "name": "Punt 145",
+      "name": "Ribera d'Ondara",
       "lat": 41.601,
       "lon": 1.32,
       "alt": 520,
@@ -9500,12 +9500,12 @@
         "soil_moisture_now": 0.143,
         "soil_moisture_avg_7d": 0.14,
         "soil_moisture_trend": 0.0047,
-        "evapotranspiration_7d": 38.6
+        "evapotranspiration_7d": 38.7
       }
     },
     {
       "id": 146,
-      "name": "Punt 146",
+      "name": "Argençola",
       "lat": 41.601,
       "lon": 1.441,
       "alt": 520,
@@ -9661,7 +9661,7 @@
     },
     {
       "id": 147,
-      "name": "Punt 147",
+      "name": "Jorba",
       "lat": 41.601,
       "lon": 1.563,
       "alt": 520,
@@ -9761,7 +9761,7 @@
     },
     {
       "id": 148,
-      "name": "Punt 148",
+      "name": "Castellolí",
       "lat": 41.601,
       "lon": 1.685,
       "alt": 520,
@@ -9813,12 +9813,12 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.122,
         "soil_moisture_trend": -0.0166,
-        "evapotranspiration_7d": 37.3
+        "evapotranspiration_7d": 37.4
       }
     },
     {
       "id": 149,
-      "name": "Punt 149",
+      "name": "el Bruc",
       "lat": 41.601,
       "lon": 1.807,
       "alt": 270,
@@ -9870,12 +9870,12 @@
         "soil_moisture_now": 0.122,
         "soil_moisture_avg_7d": 0.122,
         "soil_moisture_trend": 0.0013,
-        "evapotranspiration_7d": 34.7
+        "evapotranspiration_7d": 34.8
       }
     },
     {
       "id": 150,
-      "name": "Punt 150",
+      "name": "Vacarisses",
       "lat": 41.601,
       "lon": 1.929,
       "alt": 270,
@@ -9970,12 +9970,12 @@
         "soil_moisture_now": 0.109,
         "soil_moisture_avg_7d": 0.113,
         "soil_moisture_trend": -0.0036,
-        "evapotranspiration_7d": 36.2
+        "evapotranspiration_7d": 36.3
       }
     },
     {
       "id": 151,
-      "name": "Punt 151",
+      "name": "Castellar del Vallès",
       "lat": 41.601,
       "lon": 2.051,
       "alt": 270,
@@ -10070,12 +10070,12 @@
         "soil_moisture_now": 0.146,
         "soil_moisture_avg_7d": 0.148,
         "soil_moisture_trend": -0.003,
-        "evapotranspiration_7d": 36.7
+        "evapotranspiration_7d": 36.9
       }
     },
     {
       "id": 152,
-      "name": "Punt 152",
+      "name": "Palau-solità i Plegamans",
       "lat": 41.601,
       "lon": 2.173,
       "alt": 270,
@@ -10170,12 +10170,12 @@
         "soil_moisture_now": 0.136,
         "soil_moisture_avg_7d": 0.136,
         "soil_moisture_trend": 0.0007,
-        "evapotranspiration_7d": 37.0
+        "evapotranspiration_7d": 37.2
       }
     },
     {
       "id": 153,
-      "name": "Punt 153",
+      "name": "Granollers",
       "lat": 41.601,
       "lon": 2.295,
       "alt": 270,
@@ -10227,12 +10227,12 @@
         "soil_moisture_now": 0.139,
         "soil_moisture_avg_7d": 0.138,
         "soil_moisture_trend": 0.0005,
-        "evapotranspiration_7d": 35.5
+        "evapotranspiration_7d": 35.7
       }
     },
     {
       "id": 154,
-      "name": "Punt 154",
+      "name": "Dosrius",
       "lat": 41.601,
       "lon": 2.417,
       "alt": 120,
@@ -10327,12 +10327,12 @@
         "soil_moisture_now": 0.12,
         "soil_moisture_avg_7d": 0.12,
         "soil_moisture_trend": -0.0005,
-        "evapotranspiration_7d": 34.3
+        "evapotranspiration_7d": 34.5
       }
     },
     {
       "id": 155,
-      "name": "Punt 155",
+      "name": "Arenys de Munt",
       "lat": 41.601,
       "lon": 2.539,
       "alt": 120,
@@ -10427,7 +10427,7 @@
         "soil_moisture_now": 0.1,
         "soil_moisture_avg_7d": 0.1,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 33.8
+        "evapotranspiration_7d": 34.1
       }
     },
     {
@@ -10484,7 +10484,7 @@
         "soil_moisture_now": 0.1,
         "soil_moisture_avg_7d": 0.1,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 32.8
+        "evapotranspiration_7d": 33.1
       }
     },
     {
@@ -10541,12 +10541,12 @@
         "soil_moisture_now": 0.1,
         "soil_moisture_avg_7d": 0.1,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 32.9
+        "evapotranspiration_7d": 33.2
       }
     },
     {
       "id": 158,
-      "name": "Punt 158",
+      "name": "Gimenells i el Pla de la Font",
       "lat": 41.691,
       "lon": 0.344,
       "alt": 600,
@@ -10598,12 +10598,12 @@
         "soil_moisture_now": 0.185,
         "soil_moisture_avg_7d": 0.185,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 38.5
+        "evapotranspiration_7d": 38.6
       }
     },
     {
       "id": 159,
-      "name": "Punt 159",
+      "name": "Lleida",
       "lat": 41.691,
       "lon": 0.466,
       "alt": 600,
@@ -10655,12 +10655,12 @@
         "soil_moisture_now": 0.185,
         "soil_moisture_avg_7d": 0.185,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 38.8
+        "evapotranspiration_7d": 38.9
       }
     },
     {
       "id": 160,
-      "name": "Punt 160",
+      "name": "Rosselló",
       "lat": 41.691,
       "lon": 0.588,
       "alt": 600,
@@ -10712,7 +10712,7 @@
         "soil_moisture_now": 0.185,
         "soil_moisture_avg_7d": 0.185,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 38.9
+        "evapotranspiration_7d": 38.8
       }
     },
     {
@@ -10769,7 +10769,7 @@
         "soil_moisture_now": 0.181,
         "soil_moisture_avg_7d": 0.181,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 39.2
+        "evapotranspiration_7d": 39.3
       }
     },
     {
@@ -10826,7 +10826,7 @@
         "soil_moisture_now": 0.183,
         "soil_moisture_avg_7d": 0.183,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 39.6
+        "evapotranspiration_7d": 39.7
       }
     },
     {
@@ -10883,7 +10883,7 @@
         "soil_moisture_now": 0.183,
         "soil_moisture_avg_7d": 0.184,
         "soil_moisture_trend": -0.0005,
-        "evapotranspiration_7d": 39.1
+        "evapotranspiration_7d": 39.3
       }
     },
     {
@@ -10940,7 +10940,7 @@
         "soil_moisture_now": 0.184,
         "soil_moisture_avg_7d": 0.185,
         "soil_moisture_trend": -0.0006,
-        "evapotranspiration_7d": 39.5
+        "evapotranspiration_7d": 39.6
       }
     },
     {
@@ -10997,7 +10997,7 @@
         "soil_moisture_now": 0.204,
         "soil_moisture_avg_7d": 0.21,
         "soil_moisture_trend": -0.0058,
-        "evapotranspiration_7d": 39.6
+        "evapotranspiration_7d": 39.8
       }
     },
     {
@@ -11054,7 +11054,7 @@
         "soil_moisture_now": 0.171,
         "soil_moisture_avg_7d": 0.168,
         "soil_moisture_trend": 0.0016,
-        "evapotranspiration_7d": 40.6
+        "evapotranspiration_7d": 40.8
       }
     },
     {
@@ -11168,7 +11168,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.112,
         "soil_moisture_trend": -0.0019,
-        "evapotranspiration_7d": 37.6
+        "evapotranspiration_7d": 37.5
       }
     },
     {
@@ -11325,7 +11325,7 @@
         "soil_moisture_now": 0.158,
         "soil_moisture_avg_7d": 0.158,
         "soil_moisture_trend": -0.0031,
-        "evapotranspiration_7d": 37.8
+        "evapotranspiration_7d": 37.9
       }
     },
     {
@@ -11425,7 +11425,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.111,
         "soil_moisture_trend": 0.0001,
-        "evapotranspiration_7d": 37.1
+        "evapotranspiration_7d": 37.2
       }
     },
     {
@@ -11525,7 +11525,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": -0.0001,
-        "evapotranspiration_7d": 36.4
+        "evapotranspiration_7d": 36.5
       }
     },
     {
@@ -11582,7 +11582,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.111,
         "soil_moisture_trend": -0.0007,
-        "evapotranspiration_7d": 37.6
+        "evapotranspiration_7d": 37.8
       }
     },
     {
@@ -11682,7 +11682,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.111,
         "soil_moisture_trend": -0.0012,
-        "evapotranspiration_7d": 37.4
+        "evapotranspiration_7d": 37.5
       }
     },
     {
@@ -11739,7 +11739,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": -0.0,
-        "evapotranspiration_7d": 35.5
+        "evapotranspiration_7d": 35.6
       }
     },
     {
@@ -11839,7 +11839,7 @@
         "soil_moisture_now": 0.1,
         "soil_moisture_avg_7d": 0.1,
         "soil_moisture_trend": 0.0005,
-        "evapotranspiration_7d": 35.0
+        "evapotranspiration_7d": 35.2
       }
     },
     {
@@ -11995,7 +11995,7 @@
         "soil_moisture_now": 0.1,
         "soil_moisture_avg_7d": 0.1,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 34.2
+        "evapotranspiration_7d": 34.6
       }
     },
     {
@@ -12095,7 +12095,7 @@
         "soil_moisture_now": 0.1,
         "soil_moisture_avg_7d": 0.1,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 32.4
+        "evapotranspiration_7d": 32.7
       }
     },
     {
@@ -12152,7 +12152,7 @@
         "soil_moisture_now": 0.1,
         "soil_moisture_avg_7d": 0.1,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 33.1
+        "evapotranspiration_7d": 33.6
       }
     },
     {
@@ -12266,7 +12266,7 @@
         "soil_moisture_now": 0.185,
         "soil_moisture_avg_7d": 0.185,
         "soil_moisture_trend": 0.001,
-        "evapotranspiration_7d": 38.6
+        "evapotranspiration_7d": 38.7
       }
     },
     {
@@ -12437,7 +12437,7 @@
         "soil_moisture_now": 0.184,
         "soil_moisture_avg_7d": 0.185,
         "soil_moisture_trend": -0.0002,
-        "evapotranspiration_7d": 39.0
+        "evapotranspiration_7d": 39.2
       }
     },
     {
@@ -12494,7 +12494,7 @@
         "soil_moisture_now": 0.184,
         "soil_moisture_avg_7d": 0.184,
         "soil_moisture_trend": 0.0002,
-        "evapotranspiration_7d": 39.6
+        "evapotranspiration_7d": 39.8
       }
     },
     {
@@ -12551,7 +12551,7 @@
         "soil_moisture_now": 0.184,
         "soil_moisture_avg_7d": 0.185,
         "soil_moisture_trend": -0.0006,
-        "evapotranspiration_7d": 40.1
+        "evapotranspiration_7d": 40.3
       }
     },
     {
@@ -12608,7 +12608,7 @@
         "soil_moisture_now": 0.211,
         "soil_moisture_avg_7d": 0.218,
         "soil_moisture_trend": -0.0065,
-        "evapotranspiration_7d": 39.2
+        "evapotranspiration_7d": 39.4
       }
     },
     {
@@ -12665,7 +12665,7 @@
         "soil_moisture_now": 0.137,
         "soil_moisture_avg_7d": 0.137,
         "soil_moisture_trend": -0.0021,
-        "evapotranspiration_7d": 40.2
+        "evapotranspiration_7d": 40.4
       }
     },
     {
@@ -12722,7 +12722,7 @@
         "soil_moisture_now": 0.146,
         "soil_moisture_avg_7d": 0.143,
         "soil_moisture_trend": 0.0039,
-        "evapotranspiration_7d": 39.6
+        "evapotranspiration_7d": 39.7
       }
     },
     {
@@ -12879,7 +12879,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 38.5
+        "evapotranspiration_7d": 38.6
       }
     },
     {
@@ -12936,7 +12936,7 @@
         "soil_moisture_now": 0.151,
         "soil_moisture_avg_7d": 0.154,
         "soil_moisture_trend": -0.0032,
-        "evapotranspiration_7d": 38.0
+        "evapotranspiration_7d": 38.1
       }
     },
     {
@@ -13036,7 +13036,7 @@
         "soil_moisture_now": 0.108,
         "soil_moisture_avg_7d": 0.108,
         "soil_moisture_trend": 0.0007,
-        "evapotranspiration_7d": 40.2
+        "evapotranspiration_7d": 40.4
       }
     },
     {
@@ -13249,7 +13249,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.112,
         "soil_moisture_trend": -0.0031,
-        "evapotranspiration_7d": 35.2
+        "evapotranspiration_7d": 35.3
       }
     },
     {
@@ -13349,7 +13349,7 @@
         "soil_moisture_now": 0.109,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": -0.001,
-        "evapotranspiration_7d": 34.5
+        "evapotranspiration_7d": 34.4
       }
     },
     {
@@ -13563,7 +13563,7 @@
         "soil_moisture_now": 0.109,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": -0.0005,
-        "evapotranspiration_7d": 37.3
+        "evapotranspiration_7d": 37.4
       }
     },
     {
@@ -13663,7 +13663,7 @@
         "soil_moisture_now": 0.098,
         "soil_moisture_avg_7d": 0.097,
         "soil_moisture_trend": 0.0005,
-        "evapotranspiration_7d": 34.6
+        "evapotranspiration_7d": 34.8
       }
     },
     {
@@ -13720,7 +13720,7 @@
         "soil_moisture_now": 0.102,
         "soil_moisture_avg_7d": 0.1,
         "soil_moisture_trend": 0.0042,
-        "evapotranspiration_7d": 33.6
+        "evapotranspiration_7d": 33.8
       }
     },
     {
@@ -13820,7 +13820,7 @@
         "soil_moisture_now": 0.097,
         "soil_moisture_avg_7d": 0.097,
         "soil_moisture_trend": 0.0013,
-        "evapotranspiration_7d": 32.6
+        "evapotranspiration_7d": 32.8
       }
     },
     {
@@ -14162,7 +14162,7 @@
         "soil_moisture_now": 0.192,
         "soil_moisture_avg_7d": 0.197,
         "soil_moisture_trend": -0.0052,
-        "evapotranspiration_7d": 39.7
+        "evapotranspiration_7d": 39.8
       }
     },
     {
@@ -14219,7 +14219,7 @@
         "soil_moisture_now": 0.129,
         "soil_moisture_avg_7d": 0.131,
         "soil_moisture_trend": -0.0012,
-        "evapotranspiration_7d": 40.3
+        "evapotranspiration_7d": 40.4
       }
     },
     {
@@ -14276,7 +14276,7 @@
         "soil_moisture_now": 0.2,
         "soil_moisture_avg_7d": 0.203,
         "soil_moisture_trend": -0.003,
-        "evapotranspiration_7d": 38.4
+        "evapotranspiration_7d": 38.5
       }
     },
     {
@@ -14432,7 +14432,7 @@
         "soil_moisture_now": 0.196,
         "soil_moisture_avg_7d": 0.199,
         "soil_moisture_trend": -0.0034,
-        "evapotranspiration_7d": 38.9
+        "evapotranspiration_7d": 39.0
       }
     },
     {
@@ -14489,7 +14489,7 @@
         "soil_moisture_now": 0.169,
         "soil_moisture_avg_7d": 0.169,
         "soil_moisture_trend": -0.0013,
-        "evapotranspiration_7d": 40.7
+        "evapotranspiration_7d": 40.8
       }
     },
     {
@@ -14589,7 +14589,7 @@
         "soil_moisture_now": 0.109,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": -0.0005,
-        "evapotranspiration_7d": 41.6
+        "evapotranspiration_7d": 41.8
       }
     },
     {
@@ -14845,7 +14845,7 @@
         "soil_moisture_now": 0.079,
         "soil_moisture_avg_7d": 0.079,
         "soil_moisture_trend": 0.0005,
-        "evapotranspiration_7d": 38.7
+        "evapotranspiration_7d": 38.8
       }
     },
     {
@@ -14902,7 +14902,7 @@
         "soil_moisture_now": 0.163,
         "soil_moisture_avg_7d": 0.17,
         "soil_moisture_trend": -0.008,
-        "evapotranspiration_7d": 38.0
+        "evapotranspiration_7d": 38.1
       }
     },
     {
@@ -15002,7 +15002,7 @@
         "soil_moisture_now": 0.165,
         "soil_moisture_avg_7d": 0.167,
         "soil_moisture_trend": -0.0055,
-        "evapotranspiration_7d": 38.3
+        "evapotranspiration_7d": 38.5
       }
     },
     {
@@ -15059,7 +15059,7 @@
         "soil_moisture_now": 0.109,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": -0.0003,
-        "evapotranspiration_7d": 39.4
+        "evapotranspiration_7d": 39.5
       }
     },
     {
@@ -15315,7 +15315,7 @@
         "soil_moisture_now": 0.109,
         "soil_moisture_avg_7d": 0.112,
         "soil_moisture_trend": -0.0019,
-        "evapotranspiration_7d": 36.9
+        "evapotranspiration_7d": 37.1
       }
     },
     {
@@ -15372,7 +15372,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.112,
         "soil_moisture_trend": -0.002,
-        "evapotranspiration_7d": 34.4
+        "evapotranspiration_7d": 34.5
       }
     },
     {
@@ -15472,7 +15472,7 @@
         "soil_moisture_now": 0.109,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": -0.0004,
-        "evapotranspiration_7d": 35.6
+        "evapotranspiration_7d": 35.8
       }
     },
     {
@@ -15614,7 +15614,7 @@
         "soil_moisture_now": 0.1,
         "soil_moisture_avg_7d": 0.1,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 36.5
+        "evapotranspiration_7d": 36.8
       }
     },
     {
@@ -15686,7 +15686,7 @@
         "soil_moisture_now": 0.185,
         "soil_moisture_avg_7d": 0.185,
         "soil_moisture_trend": 0.0003,
-        "evapotranspiration_7d": 36.0
+        "evapotranspiration_7d": 36.1
       }
     },
     {
@@ -15786,7 +15786,7 @@
         "soil_moisture_now": 0.185,
         "soil_moisture_avg_7d": 0.185,
         "soil_moisture_trend": 0.0003,
-        "evapotranspiration_7d": 35.2
+        "evapotranspiration_7d": 35.4
       }
     },
     {
@@ -15886,7 +15886,7 @@
         "soil_moisture_now": 0.175,
         "soil_moisture_avg_7d": 0.171,
         "soil_moisture_trend": 0.0052,
-        "evapotranspiration_7d": 34.0
+        "evapotranspiration_7d": 34.4
       }
     },
     {
@@ -15943,7 +15943,7 @@
         "soil_moisture_now": 0.185,
         "soil_moisture_avg_7d": 0.186,
         "soil_moisture_trend": -0.0008,
-        "evapotranspiration_7d": 41.0
+        "evapotranspiration_7d": 40.9
       }
     },
     {
@@ -16000,7 +16000,7 @@
         "soil_moisture_now": 0.186,
         "soil_moisture_avg_7d": 0.19,
         "soil_moisture_trend": -0.0019,
-        "evapotranspiration_7d": 40.5
+        "evapotranspiration_7d": 40.4
       }
     },
     {
@@ -16114,7 +16114,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.111,
         "soil_moisture_trend": -0.0005,
-        "evapotranspiration_7d": 39.4
+        "evapotranspiration_7d": 39.1
       }
     },
     {
@@ -16214,7 +16214,7 @@
         "soil_moisture_now": 0.125,
         "soil_moisture_avg_7d": 0.132,
         "soil_moisture_trend": -0.0054,
-        "evapotranspiration_7d": 40.6
+        "evapotranspiration_7d": 40.5
       }
     },
     {
@@ -16271,7 +16271,7 @@
         "soil_moisture_now": 0.141,
         "soil_moisture_avg_7d": 0.141,
         "soil_moisture_trend": 0.0041,
-        "evapotranspiration_7d": 38.1
+        "evapotranspiration_7d": 37.9
       }
     },
     {
@@ -16427,7 +16427,7 @@
         "soil_moisture_now": 0.193,
         "soil_moisture_avg_7d": 0.196,
         "soil_moisture_trend": -0.0023,
-        "evapotranspiration_7d": 40.0
+        "evapotranspiration_7d": 40.1
       }
     },
     {
@@ -16541,7 +16541,7 @@
         "soil_moisture_now": 0.185,
         "soil_moisture_avg_7d": 0.188,
         "soil_moisture_trend": -0.0025,
-        "evapotranspiration_7d": 40.4
+        "evapotranspiration_7d": 40.5
       }
     },
     {
@@ -16641,7 +16641,7 @@
         "soil_moisture_now": 0.108,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": -0.0012,
-        "evapotranspiration_7d": 41.3
+        "evapotranspiration_7d": 41.5
       }
     },
     {
@@ -16855,7 +16855,7 @@
         "soil_moisture_now": 0.109,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": -0.0002,
-        "evapotranspiration_7d": 39.1
+        "evapotranspiration_7d": 39.3
       }
     },
     {
@@ -17011,7 +17011,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.112,
         "soil_moisture_trend": -0.0016,
-        "evapotranspiration_7d": 38.6
+        "evapotranspiration_7d": 38.7
       }
     },
     {
@@ -17111,7 +17111,7 @@
         "soil_moisture_now": 0.109,
         "soil_moisture_avg_7d": 0.111,
         "soil_moisture_trend": -0.0012,
-        "evapotranspiration_7d": 38.9
+        "evapotranspiration_7d": 39.0
       }
     },
     {
@@ -17168,7 +17168,7 @@
         "soil_moisture_now": 0.109,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": -0.0009,
-        "evapotranspiration_7d": 40.2
+        "evapotranspiration_7d": 40.3
       }
     },
     {
@@ -17225,7 +17225,7 @@
         "soil_moisture_now": 0.108,
         "soil_moisture_avg_7d": 0.109,
         "soil_moisture_trend": -0.0006,
-        "evapotranspiration_7d": 37.7
+        "evapotranspiration_7d": 37.8
       }
     },
     {
@@ -17282,7 +17282,7 @@
         "soil_moisture_now": 0.108,
         "soil_moisture_avg_7d": 0.109,
         "soil_moisture_trend": -0.0009,
-        "evapotranspiration_7d": 38.0
+        "evapotranspiration_7d": 38.1
       }
     },
     {
@@ -17382,7 +17382,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.111,
         "soil_moisture_trend": -0.0003,
-        "evapotranspiration_7d": 34.2
+        "evapotranspiration_7d": 34.3
       }
     },
     {
@@ -17482,7 +17482,7 @@
         "soil_moisture_now": 0.109,
         "soil_moisture_avg_7d": 0.111,
         "soil_moisture_trend": -0.0021,
-        "evapotranspiration_7d": 35.8
+        "evapotranspiration_7d": 36.0
       }
     },
     {
@@ -17539,7 +17539,7 @@
         "soil_moisture_now": 0.108,
         "soil_moisture_avg_7d": 0.114,
         "soil_moisture_trend": -0.0062,
-        "evapotranspiration_7d": 35.6
+        "evapotranspiration_7d": 36.0
       }
     },
     {
@@ -17596,7 +17596,7 @@
         "soil_moisture_now": 0.185,
         "soil_moisture_avg_7d": 0.186,
         "soil_moisture_trend": -0.0013,
-        "evapotranspiration_7d": 35.9
+        "evapotranspiration_7d": 36.0
       }
     },
     {
@@ -17696,7 +17696,7 @@
         "soil_moisture_now": 0.162,
         "soil_moisture_avg_7d": 0.158,
         "soil_moisture_trend": 0.0042,
-        "evapotranspiration_7d": 34.3
+        "evapotranspiration_7d": 34.4
       }
     },
     {
@@ -17753,7 +17753,7 @@
         "soil_moisture_now": 0.179,
         "soil_moisture_avg_7d": 0.176,
         "soil_moisture_trend": 0.0028,
-        "evapotranspiration_7d": 35.4
+        "evapotranspiration_7d": 35.7
       }
     },
     {
@@ -17810,7 +17810,7 @@
         "soil_moisture_now": 0.185,
         "soil_moisture_avg_7d": 0.185,
         "soil_moisture_trend": -0.0011,
-        "evapotranspiration_7d": 33.7
+        "evapotranspiration_7d": 34.0
       }
     },
     {
@@ -17924,7 +17924,7 @@
         "soil_moisture_now": 0.132,
         "soil_moisture_avg_7d": 0.136,
         "soil_moisture_trend": -0.0009,
-        "evapotranspiration_7d": 38.0
+        "evapotranspiration_7d": 37.9
       }
     },
     {
@@ -17981,7 +17981,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.113,
         "soil_moisture_trend": -0.0028,
-        "evapotranspiration_7d": 35.9
+        "evapotranspiration_7d": 35.7
       }
     },
     {
@@ -18081,7 +18081,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": 0.0,
-        "evapotranspiration_7d": 38.6
+        "evapotranspiration_7d": 38.4
       }
     },
     {
@@ -18138,7 +18138,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": 0.0006,
-        "evapotranspiration_7d": 39.5
+        "evapotranspiration_7d": 39.4
       }
     },
     {
@@ -18536,7 +18536,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": -0.0002,
-        "evapotranspiration_7d": 41.7
+        "evapotranspiration_7d": 41.5
       }
     },
     {
@@ -18693,7 +18693,7 @@
         "soil_moisture_now": 0.152,
         "soil_moisture_avg_7d": 0.145,
         "soil_moisture_trend": 0.0149,
-        "evapotranspiration_7d": 38.5
+        "evapotranspiration_7d": 38.6
       }
     },
     {
@@ -18750,7 +18750,7 @@
         "soil_moisture_now": 0.163,
         "soil_moisture_avg_7d": 0.159,
         "soil_moisture_trend": 0.012,
-        "evapotranspiration_7d": 37.6
+        "evapotranspiration_7d": 37.7
       }
     },
     {
@@ -18807,7 +18807,7 @@
         "soil_moisture_now": 0.14,
         "soil_moisture_avg_7d": 0.135,
         "soil_moisture_trend": 0.0086,
-        "evapotranspiration_7d": 38.4
+        "evapotranspiration_7d": 38.5
       }
     },
     {
@@ -19006,7 +19006,7 @@
         "soil_moisture_now": 0.117,
         "soil_moisture_avg_7d": 0.127,
         "soil_moisture_trend": -0.006,
-        "evapotranspiration_7d": 38.4
+        "evapotranspiration_7d": 38.6
       }
     },
     {
@@ -19047,15 +19047,15 @@
           },
           {
             "source": "meteoclimatic",
-            "name": "Santa Cecília de Voltregà",
-            "distance_km": 7.7,
+            "name": "Cussons - Sora",
+            "distance_km": 5.3,
             "rain": 0.0
           },
           {
-            "source": "meteocat",
-            "name": "Montesquiu",
-            "distance_km": 7.8,
-            "rain": 0
+            "source": "meteoclimatic",
+            "name": "Santa Cecília de Voltregà",
+            "distance_km": 7.7,
+            "rain": 0.0
           }
         ]
       },
@@ -19063,7 +19063,7 @@
         "soil_moisture_now": 0.107,
         "soil_moisture_avg_7d": 0.107,
         "soil_moisture_trend": -0.0001,
-        "evapotranspiration_7d": 37.0
+        "evapotranspiration_7d": 37.1
       }
     },
     {
@@ -19149,6 +19149,12 @@
         "stations_used": [
           {
             "source": "meteoclimatic",
+            "name": "Sant Marti Sescorts",
+            "distance_km": 5.0,
+            "rain": 0.0
+          },
+          {
+            "source": "meteoclimatic",
             "name": "Bellmunt",
             "distance_km": 5.5,
             "rain": 0.0
@@ -19164,12 +19170,6 @@
             "name": "Sant Pere de Casserres",
             "distance_km": 6.8,
             "rain": 0.0
-          },
-          {
-            "source": "meteocat",
-            "name": "Orís",
-            "distance_km": 7.5,
-            "rain": 0
           }
         ]
       },
@@ -19177,7 +19177,7 @@
         "soil_moisture_now": 0.109,
         "soil_moisture_avg_7d": 0.111,
         "soil_moisture_trend": -0.0024,
-        "evapotranspiration_7d": 38.1
+        "evapotranspiration_7d": 38.4
       }
     },
     {
@@ -19223,10 +19223,10 @@
             "rain": 0.0
           },
           {
-            "source": "meteocat",
-            "name": "Pantà de Sau",
-            "distance_km": 9.3,
-            "rain": 0
+            "source": "meteoclimatic",
+            "name": "Sant Marti Sescorts",
+            "distance_km": 8.7,
+            "rain": 0.0
           }
         ]
       },
@@ -19234,7 +19234,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": -0.0002,
-        "evapotranspiration_7d": 33.9
+        "evapotranspiration_7d": 34.1
       }
     },
     {
@@ -19348,7 +19348,7 @@
         "soil_moisture_now": 0.109,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": -0.0005,
-        "evapotranspiration_7d": 36.2
+        "evapotranspiration_7d": 36.5
       }
     },
     {
@@ -19448,7 +19448,7 @@
         "soil_moisture_now": 0.109,
         "soil_moisture_avg_7d": 0.111,
         "soil_moisture_trend": -0.0004,
-        "evapotranspiration_7d": 34.6
+        "evapotranspiration_7d": 35.0
       }
     },
     {
@@ -19548,7 +19548,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.109,
         "soil_moisture_trend": 0.0019,
-        "evapotranspiration_7d": 35.6
+        "evapotranspiration_7d": 36.0
       }
     },
     {
@@ -19704,7 +19704,7 @@
         "soil_moisture_now": 0.185,
         "soil_moisture_avg_7d": 0.19,
         "soil_moisture_trend": -0.0063,
-        "evapotranspiration_7d": 35.9
+        "evapotranspiration_7d": 36.0
       }
     },
     {
@@ -19761,7 +19761,7 @@
         "soil_moisture_now": 0.26,
         "soil_moisture_avg_7d": 0.252,
         "soil_moisture_trend": 0.0078,
-        "evapotranspiration_7d": 34.5
+        "evapotranspiration_7d": 34.7
       }
     },
     {
@@ -19818,7 +19818,7 @@
         "soil_moisture_now": 0.252,
         "soil_moisture_avg_7d": 0.241,
         "soil_moisture_trend": 0.0106,
-        "evapotranspiration_7d": 32.6
+        "evapotranspiration_7d": 32.7
       }
     },
     {
@@ -19869,7 +19869,7 @@
         "soil_moisture_now": 0.128,
         "soil_moisture_avg_7d": 0.135,
         "soil_moisture_trend": -0.0033,
-        "evapotranspiration_7d": 39.6
+        "evapotranspiration_7d": 39.4
       }
     },
     {
@@ -19926,7 +19926,7 @@
         "soil_moisture_now": 0.114,
         "soil_moisture_avg_7d": 0.116,
         "soil_moisture_trend": -0.0006,
-        "evapotranspiration_7d": 39.9
+        "evapotranspiration_7d": 39.7
       }
     },
     {
@@ -20040,7 +20040,7 @@
         "soil_moisture_now": 0.114,
         "soil_moisture_avg_7d": 0.116,
         "soil_moisture_trend": -0.0006,
-        "evapotranspiration_7d": 35.7
+        "evapotranspiration_7d": 35.5
       }
     },
     {
@@ -20097,7 +20097,7 @@
         "soil_moisture_now": 0.109,
         "soil_moisture_avg_7d": 0.109,
         "soil_moisture_trend": 0.0001,
-        "evapotranspiration_7d": 37.7
+        "evapotranspiration_7d": 37.5
       }
     },
     {
@@ -20154,7 +20154,7 @@
         "soil_moisture_now": 0.109,
         "soil_moisture_avg_7d": 0.109,
         "soil_moisture_trend": 0.0001,
-        "evapotranspiration_7d": 41.6
+        "evapotranspiration_7d": 41.5
       }
     },
     {
@@ -20211,7 +20211,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.113,
         "soil_moisture_trend": -0.0038,
-        "evapotranspiration_7d": 38.6
+        "evapotranspiration_7d": 38.5
       }
     },
     {
@@ -20268,7 +20268,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.113,
         "soil_moisture_trend": -0.0038,
-        "evapotranspiration_7d": 36.4
+        "evapotranspiration_7d": 36.3
       }
     },
     {
@@ -20325,7 +20325,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": 0.0005,
-        "evapotranspiration_7d": 38.3
+        "evapotranspiration_7d": 38.1
       }
     },
     {
@@ -20382,7 +20382,7 @@
         "soil_moisture_now": 0.137,
         "soil_moisture_avg_7d": 0.148,
         "soil_moisture_trend": -0.0084,
-        "evapotranspiration_7d": 35.2
+        "evapotranspiration_7d": 35.1
       }
     },
     {
@@ -20524,7 +20524,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.113,
         "soil_moisture_trend": -0.0042,
-        "evapotranspiration_7d": 34.1
+        "evapotranspiration_7d": 33.8
       }
     },
     {
@@ -20666,7 +20666,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.113,
         "soil_moisture_trend": -0.0042,
-        "evapotranspiration_7d": 35.4
+        "evapotranspiration_7d": 35.3
       }
     },
     {
@@ -20808,7 +20808,7 @@
         "soil_moisture_now": 0.126,
         "soil_moisture_avg_7d": 0.142,
         "soil_moisture_trend": -0.0123,
-        "evapotranspiration_7d": 33.7
+        "evapotranspiration_7d": 33.6
       }
     },
     {
@@ -21064,7 +21064,7 @@
         "soil_moisture_now": 0.109,
         "soil_moisture_avg_7d": 0.111,
         "soil_moisture_trend": -0.0015,
-        "evapotranspiration_7d": 35.6
+        "evapotranspiration_7d": 35.7
       }
     },
     {
@@ -21098,6 +21098,12 @@
             "rain": 0
           },
           {
+            "source": "meteoclimatic",
+            "name": "Cussons - Sora",
+            "distance_km": 5.4,
+            "rain": 0.0
+          },
+          {
             "source": "aemet",
             "name": "RIPOLL",
             "distance_km": 5.8,
@@ -21108,12 +21114,6 @@
             "name": "Orís",
             "distance_km": 8.1,
             "rain": 0
-          },
-          {
-            "source": "meteocat",
-            "name": "Sant Joan de les Abadesses",
-            "distance_km": 10.6,
-            "rain": 0
           }
         ]
       },
@@ -21121,7 +21121,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.111,
         "soil_moisture_trend": -0.0015,
-        "evapotranspiration_7d": 34.5
+        "evapotranspiration_7d": 34.7
       }
     },
     {
@@ -21218,16 +21218,16 @@
             "rain": 0
           },
           {
+            "source": "meteoclimatic",
+            "name": "Cussons - Sora",
+            "distance_km": 9.6,
+            "rain": 0.0
+          },
+          {
             "source": "aemet",
             "name": "RIPOLL",
             "distance_km": 9.8,
             "rain": 0.0
-          },
-          {
-            "source": "meteocat",
-            "name": "Sant Joan de les Abadesses",
-            "distance_km": 9.9,
-            "rain": 0
           }
         ]
       },
@@ -21235,7 +21235,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.115,
         "soil_moisture_trend": -0.0047,
-        "evapotranspiration_7d": 33.2
+        "evapotranspiration_7d": 33.4
       }
     },
     {
@@ -21449,7 +21449,7 @@
         "soil_moisture_now": 0.109,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": -0.0004,
-        "evapotranspiration_7d": 33.7
+        "evapotranspiration_7d": 33.8
       }
     },
     {
@@ -21549,7 +21549,7 @@
         "soil_moisture_now": 0.109,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": -0.0004,
-        "evapotranspiration_7d": 34.5
+        "evapotranspiration_7d": 34.6
       }
     },
     {
@@ -21606,7 +21606,7 @@
         "soil_moisture_now": 0.186,
         "soil_moisture_avg_7d": 0.188,
         "soil_moisture_trend": -0.0011,
-        "evapotranspiration_7d": 39.0
+        "evapotranspiration_7d": 39.2
       }
     },
     {
@@ -21762,7 +21762,7 @@
         "soil_moisture_now": 0.186,
         "soil_moisture_avg_7d": 0.188,
         "soil_moisture_trend": -0.0011,
-        "evapotranspiration_7d": 38.2
+        "evapotranspiration_7d": 38.5
       }
     },
     {
@@ -21819,7 +21819,7 @@
         "soil_moisture_now": 0.243,
         "soil_moisture_avg_7d": 0.234,
         "soil_moisture_trend": 0.0114,
-        "evapotranspiration_7d": 40.0
+        "evapotranspiration_7d": 40.2
       }
     },
     {
@@ -21876,7 +21876,7 @@
         "soil_moisture_now": 0.243,
         "soil_moisture_avg_7d": 0.234,
         "soil_moisture_trend": 0.0114,
-        "evapotranspiration_7d": 31.4
+        "evapotranspiration_7d": 31.8
       }
     },
     {
@@ -21933,7 +21933,7 @@
         "soil_moisture_now": 0.151,
         "soil_moisture_avg_7d": 0.164,
         "soil_moisture_trend": -0.0063,
-        "evapotranspiration_7d": 38.0
+        "evapotranspiration_7d": 37.7
       }
     },
     {
@@ -21990,7 +21990,7 @@
         "soil_moisture_now": 0.137,
         "soil_moisture_avg_7d": 0.143,
         "soil_moisture_trend": -0.0013,
-        "evapotranspiration_7d": 39.5
+        "evapotranspiration_7d": 39.2
       }
     },
     {
@@ -22047,7 +22047,7 @@
         "soil_moisture_now": 0.122,
         "soil_moisture_avg_7d": 0.136,
         "soil_moisture_trend": -0.0118,
-        "evapotranspiration_7d": 37.9
+        "evapotranspiration_7d": 37.7
       }
     },
     {
@@ -22104,7 +22104,7 @@
         "soil_moisture_now": 0.111,
         "soil_moisture_avg_7d": 0.114,
         "soil_moisture_trend": -0.0015,
-        "evapotranspiration_7d": 37.4
+        "evapotranspiration_7d": 37.2
       }
     },
     {
@@ -22161,7 +22161,7 @@
         "soil_moisture_now": 0.111,
         "soil_moisture_avg_7d": 0.122,
         "soil_moisture_trend": -0.0091,
-        "evapotranspiration_7d": 35.1
+        "evapotranspiration_7d": 34.9
       }
     },
     {
@@ -22275,7 +22275,7 @@
         "soil_moisture_now": 0.109,
         "soil_moisture_avg_7d": 0.109,
         "soil_moisture_trend": 0.0001,
-        "evapotranspiration_7d": 41.4
+        "evapotranspiration_7d": 41.2
       }
     },
     {
@@ -22375,7 +22375,7 @@
         "soil_moisture_now": 0.111,
         "soil_moisture_avg_7d": 0.119,
         "soil_moisture_trend": -0.0064,
-        "evapotranspiration_7d": 36.1
+        "evapotranspiration_7d": 35.9
       }
     },
     {
@@ -22432,7 +22432,7 @@
         "soil_moisture_now": 0.109,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": -0.0004,
-        "evapotranspiration_7d": 34.8
+        "evapotranspiration_7d": 34.5
       }
     },
     {
@@ -22532,7 +22532,7 @@
         "soil_moisture_now": 0.109,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": -0.0004,
-        "evapotranspiration_7d": 35.7
+        "evapotranspiration_7d": 35.4
       }
     },
     {
@@ -22589,7 +22589,7 @@
         "soil_moisture_now": 0.109,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": -0.0004,
-        "evapotranspiration_7d": 35.3
+        "evapotranspiration_7d": 35.1
       }
     },
     {
@@ -22646,7 +22646,7 @@
         "soil_moisture_now": 0.137,
         "soil_moisture_avg_7d": 0.148,
         "soil_moisture_trend": -0.0084,
-        "evapotranspiration_7d": 35.4
+        "evapotranspiration_7d": 35.3
       }
     },
     {
@@ -22703,7 +22703,7 @@
         "soil_moisture_now": 0.137,
         "soil_moisture_avg_7d": 0.148,
         "soil_moisture_trend": -0.0084,
-        "evapotranspiration_7d": 36.2
+        "evapotranspiration_7d": 36.1
       }
     },
     {
@@ -22917,7 +22917,7 @@
         "soil_moisture_now": 0.109,
         "soil_moisture_avg_7d": 0.112,
         "soil_moisture_trend": -0.0013,
-        "evapotranspiration_7d": 34.6
+        "evapotranspiration_7d": 34.5
       }
     },
     {
@@ -22974,7 +22974,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.115,
         "soil_moisture_trend": -0.0069,
-        "evapotranspiration_7d": 34.6
+        "evapotranspiration_7d": 34.8
       }
     },
     {
@@ -23202,7 +23202,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.112,
         "soil_moisture_trend": -0.002,
-        "evapotranspiration_7d": 33.3
+        "evapotranspiration_7d": 33.5
       }
     },
     {
@@ -23259,7 +23259,7 @@
         "soil_moisture_now": 0.109,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": -0.0004,
-        "evapotranspiration_7d": 33.9
+        "evapotranspiration_7d": 34.0
       }
     },
     {
@@ -23359,7 +23359,7 @@
         "soil_moisture_now": 0.109,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": -0.0004,
-        "evapotranspiration_7d": 35.2
+        "evapotranspiration_7d": 35.3
       }
     },
     {
@@ -23459,7 +23459,7 @@
         "soil_moisture_now": 0.109,
         "soil_moisture_avg_7d": 0.11,
         "soil_moisture_trend": -0.0004,
-        "evapotranspiration_7d": 37.7
+        "evapotranspiration_7d": 37.9
       }
     },
     {
@@ -23516,7 +23516,7 @@
         "soil_moisture_now": 0.104,
         "soil_moisture_avg_7d": 0.103,
         "soil_moisture_trend": 0.0014,
-        "evapotranspiration_7d": 35.4
+        "evapotranspiration_7d": 35.6
       }
     },
     {
@@ -23573,7 +23573,7 @@
         "soil_moisture_now": 0.235,
         "soil_moisture_avg_7d": 0.229,
         "soil_moisture_trend": 0.0085,
-        "evapotranspiration_7d": 39.4
+        "evapotranspiration_7d": 39.6
       }
     },
     {
@@ -23630,7 +23630,7 @@
         "soil_moisture_now": 0.235,
         "soil_moisture_avg_7d": 0.229,
         "soil_moisture_trend": 0.0085,
-        "evapotranspiration_7d": 39.8
+        "evapotranspiration_7d": 39.9
       }
     },
     {
@@ -23687,7 +23687,7 @@
         "soil_moisture_now": 0.243,
         "soil_moisture_avg_7d": 0.234,
         "soil_moisture_trend": 0.0114,
-        "evapotranspiration_7d": 31.4
+        "evapotranspiration_7d": 31.7
       }
     },
     {
@@ -23744,7 +23744,7 @@
         "soil_moisture_now": 0.121,
         "soil_moisture_avg_7d": 0.138,
         "soil_moisture_trend": -0.0124,
-        "evapotranspiration_7d": 36.4
+        "evapotranspiration_7d": 36.0
       }
     },
     {
@@ -23801,7 +23801,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.125,
         "soil_moisture_trend": -0.0142,
-        "evapotranspiration_7d": 35.8
+        "evapotranspiration_7d": 35.5
       }
     },
     {
@@ -23858,7 +23858,7 @@
         "soil_moisture_now": 0.122,
         "soil_moisture_avg_7d": 0.136,
         "soil_moisture_trend": -0.0118,
-        "evapotranspiration_7d": 36.2
+        "evapotranspiration_7d": 35.8
       }
     },
     {
@@ -23915,7 +23915,7 @@
         "soil_moisture_now": 0.111,
         "soil_moisture_avg_7d": 0.125,
         "soil_moisture_trend": -0.013,
-        "evapotranspiration_7d": 35.7
+        "evapotranspiration_7d": 35.5
       }
     },
     {
@@ -23972,7 +23972,7 @@
         "soil_moisture_now": 0.114,
         "soil_moisture_avg_7d": 0.137,
         "soil_moisture_trend": -0.0229,
-        "evapotranspiration_7d": 36.4
+        "evapotranspiration_7d": 36.2
       }
     },
     {
@@ -24128,7 +24128,7 @@
         "soil_moisture_now": 0.111,
         "soil_moisture_avg_7d": 0.122,
         "soil_moisture_trend": -0.0091,
-        "evapotranspiration_7d": 34.6
+        "evapotranspiration_7d": 34.3
       }
     },
     {
@@ -24185,7 +24185,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.114,
         "soil_moisture_trend": -0.003,
-        "evapotranspiration_7d": 35.0
+        "evapotranspiration_7d": 34.7
       }
     },
     {
@@ -24242,7 +24242,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.111,
         "soil_moisture_trend": -0.0022,
-        "evapotranspiration_7d": 34.8
+        "evapotranspiration_7d": 34.7
       }
     },
     {
@@ -24299,7 +24299,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.111,
         "soil_moisture_trend": -0.0022,
-        "evapotranspiration_7d": 35.1
+        "evapotranspiration_7d": 35.0
       }
     },
     {
@@ -24441,7 +24441,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.118,
         "soil_moisture_trend": -0.0075,
-        "evapotranspiration_7d": 35.9
+        "evapotranspiration_7d": 35.7
       }
     },
     {
@@ -24654,7 +24654,7 @@
         "soil_moisture_now": 0.1,
         "soil_moisture_avg_7d": 0.112,
         "soil_moisture_trend": -0.0102,
-        "evapotranspiration_7d": 34.3
+        "evapotranspiration_7d": 34.1
       }
     },
     {
@@ -24711,7 +24711,7 @@
         "soil_moisture_now": 0.1,
         "soil_moisture_avg_7d": 0.112,
         "soil_moisture_trend": -0.0102,
-        "evapotranspiration_7d": 33.9
+        "evapotranspiration_7d": 33.8
       }
     },
     {
@@ -24768,7 +24768,7 @@
         "soil_moisture_now": 0.177,
         "soil_moisture_avg_7d": 0.192,
         "soil_moisture_trend": -0.0156,
-        "evapotranspiration_7d": 32.3
+        "evapotranspiration_7d": 32.2
       }
     },
     {
@@ -24825,7 +24825,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.115,
         "soil_moisture_trend": -0.0069,
-        "evapotranspiration_7d": 33.7
+        "evapotranspiration_7d": 33.6
       }
     },
     {
@@ -25167,7 +25167,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.115,
         "soil_moisture_trend": -0.006,
-        "evapotranspiration_7d": 34.2
+        "evapotranspiration_7d": 34.3
       }
     },
     {
@@ -25267,7 +25267,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.114,
         "soil_moisture_trend": -0.0044,
-        "evapotranspiration_7d": 34.5
+        "evapotranspiration_7d": 34.6
       }
     },
     {
@@ -25367,7 +25367,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.111,
         "soil_moisture_trend": -0.0014,
-        "evapotranspiration_7d": 34.3
+        "evapotranspiration_7d": 34.4
       }
     },
     {
@@ -25424,7 +25424,7 @@
         "soil_moisture_now": 0.1,
         "soil_moisture_avg_7d": 0.102,
         "soil_moisture_trend": -0.002,
-        "evapotranspiration_7d": 39.5
+        "evapotranspiration_7d": 39.6
       }
     },
     {
@@ -25481,7 +25481,7 @@
         "soil_moisture_now": 0.216,
         "soil_moisture_avg_7d": 0.203,
         "soil_moisture_trend": 0.0178,
-        "evapotranspiration_7d": 37.9
+        "evapotranspiration_7d": 38.0
       }
     },
     {
@@ -25589,7 +25589,7 @@
         "soil_moisture_now": 0.126,
         "soil_moisture_avg_7d": 0.144,
         "soil_moisture_trend": -0.0145,
-        "evapotranspiration_7d": 34.5
+        "evapotranspiration_7d": 34.2
       }
     },
     {
@@ -25646,7 +25646,7 @@
         "soil_moisture_now": 0.121,
         "soil_moisture_avg_7d": 0.138,
         "soil_moisture_trend": -0.0124,
-        "evapotranspiration_7d": 36.2
+        "evapotranspiration_7d": 35.9
       }
     },
     {
@@ -25703,7 +25703,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.125,
         "soil_moisture_trend": -0.0142,
-        "evapotranspiration_7d": 36.4
+        "evapotranspiration_7d": 36.1
       }
     },
     {
@@ -25760,7 +25760,7 @@
         "soil_moisture_now": 0.116,
         "soil_moisture_avg_7d": 0.135,
         "soil_moisture_trend": -0.0172,
-        "evapotranspiration_7d": 35.2
+        "evapotranspiration_7d": 35.0
       }
     },
     {
@@ -25817,7 +25817,7 @@
         "soil_moisture_now": 0.111,
         "soil_moisture_avg_7d": 0.125,
         "soil_moisture_trend": -0.013,
-        "evapotranspiration_7d": 34.5
+        "evapotranspiration_7d": 34.2
       }
     },
     {
@@ -25874,7 +25874,7 @@
         "soil_moisture_now": 0.114,
         "soil_moisture_avg_7d": 0.137,
         "soil_moisture_trend": -0.0229,
-        "evapotranspiration_7d": 35.2
+        "evapotranspiration_7d": 35.0
       }
     },
     {
@@ -25931,7 +25931,7 @@
         "soil_moisture_now": 0.148,
         "soil_moisture_avg_7d": 0.169,
         "soil_moisture_trend": -0.0214,
-        "evapotranspiration_7d": 36.8
+        "evapotranspiration_7d": 36.5
       }
     },
     {
@@ -25988,7 +25988,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.114,
         "soil_moisture_trend": -0.003,
-        "evapotranspiration_7d": 34.0
+        "evapotranspiration_7d": 33.9
       }
     },
     {
@@ -26045,7 +26045,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.111,
         "soil_moisture_trend": -0.0022,
-        "evapotranspiration_7d": 32.3
+        "evapotranspiration_7d": 32.1
       }
     },
     {
@@ -26102,7 +26102,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.111,
         "soil_moisture_trend": -0.0022,
-        "evapotranspiration_7d": 34.7
+        "evapotranspiration_7d": 34.6
       }
     },
     {
@@ -26159,7 +26159,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.118,
         "soil_moisture_trend": -0.0075,
-        "evapotranspiration_7d": 35.3
+        "evapotranspiration_7d": 35.1
       }
     },
     {
@@ -26216,7 +26216,7 @@
         "soil_moisture_now": 0.134,
         "soil_moisture_avg_7d": 0.147,
         "soil_moisture_trend": -0.012,
-        "evapotranspiration_7d": 34.9
+        "evapotranspiration_7d": 34.8
       }
     },
     {
@@ -26273,7 +26273,7 @@
         "soil_moisture_now": 0.134,
         "soil_moisture_avg_7d": 0.147,
         "soil_moisture_trend": -0.012,
-        "evapotranspiration_7d": 34.9
+        "evapotranspiration_7d": 34.8
       }
     },
     {
@@ -26330,7 +26330,7 @@
         "soil_moisture_now": 0.1,
         "soil_moisture_avg_7d": 0.112,
         "soil_moisture_trend": -0.0102,
-        "evapotranspiration_7d": 36.0
+        "evapotranspiration_7d": 35.9
       }
     },
     {
@@ -26387,7 +26387,7 @@
         "soil_moisture_now": 0.101,
         "soil_moisture_avg_7d": 0.113,
         "soil_moisture_trend": -0.0104,
-        "evapotranspiration_7d": 37.3
+        "evapotranspiration_7d": 37.2
       }
     },
     {
@@ -26558,7 +26558,7 @@
         "soil_moisture_now": 0.147,
         "soil_moisture_avg_7d": 0.157,
         "soil_moisture_trend": -0.0078,
-        "evapotranspiration_7d": 32.6
+        "evapotranspiration_7d": 32.4
       }
     },
     {
@@ -26615,7 +26615,7 @@
         "soil_moisture_now": 0.117,
         "soil_moisture_avg_7d": 0.122,
         "soil_moisture_trend": -0.0029,
-        "evapotranspiration_7d": 33.5
+        "evapotranspiration_7d": 33.4
       }
     },
     {
@@ -26885,7 +26885,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.111,
         "soil_moisture_trend": -0.0014,
-        "evapotranspiration_7d": 39.0
+        "evapotranspiration_7d": 38.9
       }
     },
     {
@@ -26942,7 +26942,7 @@
         "soil_moisture_now": 0.1,
         "soil_moisture_avg_7d": 0.102,
         "soil_moisture_trend": -0.002,
-        "evapotranspiration_7d": 39.3
+        "evapotranspiration_7d": 39.1
       }
     },
     {
@@ -26999,7 +26999,7 @@
         "soil_moisture_now": 0.187,
         "soil_moisture_avg_7d": 0.209,
         "soil_moisture_trend": -0.0188,
-        "evapotranspiration_7d": 33.6
+        "evapotranspiration_7d": 33.5
       }
     },
     {
@@ -27056,7 +27056,7 @@
         "soil_moisture_now": 0.14,
         "soil_moisture_avg_7d": 0.165,
         "soil_moisture_trend": -0.0229,
-        "evapotranspiration_7d": 33.6
+        "evapotranspiration_7d": 33.5
       }
     },
     {
@@ -27113,7 +27113,7 @@
         "soil_moisture_now": 0.169,
         "soil_moisture_avg_7d": 0.189,
         "soil_moisture_trend": -0.0198,
-        "evapotranspiration_7d": 34.1
+        "evapotranspiration_7d": 33.9
       }
     },
     {
@@ -27170,7 +27170,7 @@
         "soil_moisture_now": 0.111,
         "soil_moisture_avg_7d": 0.125,
         "soil_moisture_trend": -0.013,
-        "evapotranspiration_7d": 34.4
+        "evapotranspiration_7d": 34.0
       }
     },
     {
@@ -27227,7 +27227,7 @@
         "soil_moisture_now": 0.148,
         "soil_moisture_avg_7d": 0.159,
         "soil_moisture_trend": -0.0108,
-        "evapotranspiration_7d": 32.1
+        "evapotranspiration_7d": 31.9
       }
     },
     {
@@ -27284,7 +27284,7 @@
         "soil_moisture_now": 0.148,
         "soil_moisture_avg_7d": 0.159,
         "soil_moisture_trend": -0.0108,
-        "evapotranspiration_7d": 29.4
+        "evapotranspiration_7d": 29.3
       }
     },
     {
@@ -27341,7 +27341,7 @@
         "soil_moisture_now": 0.148,
         "soil_moisture_avg_7d": 0.159,
         "soil_moisture_trend": -0.0108,
-        "evapotranspiration_7d": 30.1
+        "evapotranspiration_7d": 29.9
       }
     },
     {
@@ -27350,99 +27350,14 @@
       "lat": 42.502,
       "lon": 1.198,
       "alt": 1330,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "avet",
+      "tree_label": "abetal",
       "is_forest": true,
       "rain_10d": 15,
       "avg_temp": 21,
       "min_temp": 15,
       "days_since_rain": 14,
-      "species_scores": [
-        {
-          "id": "fredolic",
-          "name": "Fredolic",
-          "score": 72,
-          "confidence": "mitjana",
-          "breakdown": {
-            "pluja": 14.9,
-            "dies_pluja": 25,
-            "temperatura": 16.7,
-            "humitat_sol": 0,
-            "temporada": 15,
-            "corroboracio": 0
-          }
-        },
-        {
-          "id": "rovellons",
-          "name": "Rovellons",
-          "score": 71,
-          "confidence": "mitjana",
-          "breakdown": {
-            "pluja": 11.2,
-            "dies_pluja": 25,
-            "temperatura": 20,
-            "humitat_sol": 0,
-            "temporada": 15,
-            "corroboracio": 0
-          }
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 71,
-          "confidence": "mitjana",
-          "breakdown": {
-            "pluja": 11.2,
-            "dies_pluja": 25,
-            "temperatura": 20,
-            "humitat_sol": 0,
-            "temporada": 15,
-            "corroboracio": 0
-          }
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 71,
-          "confidence": "mitjana",
-          "breakdown": {
-            "pluja": 11.2,
-            "dies_pluja": 25,
-            "temperatura": 20,
-            "humitat_sol": 0,
-            "temporada": 15,
-            "corroboracio": 0
-          }
-        },
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 66,
-          "confidence": "mitjana",
-          "breakdown": {
-            "pluja": 6.0,
-            "dies_pluja": 25,
-            "temperatura": 20,
-            "humitat_sol": 0,
-            "temporada": 15,
-            "corroboracio": 0
-          }
-        },
-        {
-          "id": "colmenilles",
-          "name": "Colmenilles",
-          "score": 60,
-          "confidence": "mitjana",
-          "breakdown": {
-            "pluja": 22,
-            "dies_pluja": 25,
-            "temperatura": 13.3,
-            "humitat_sol": 0,
-            "temporada": 0,
-            "corroboracio": 0
-          }
-        }
-      ],
+      "species_scores": [],
       "aemet_check": {
         "station_name": "PORT AINE  L?ORRI",
         "distance_km": 10.3,
@@ -27483,7 +27398,7 @@
         "soil_moisture_now": 0.11,
         "soil_moisture_avg_7d": 0.114,
         "soil_moisture_trend": -0.0046,
-        "evapotranspiration_7d": 35.4
+        "evapotranspiration_7d": 35.1
       }
     },
     {
@@ -27711,7 +27626,7 @@
         "soil_moisture_now": 0.133,
         "soil_moisture_avg_7d": 0.144,
         "soil_moisture_trend": -0.0099,
-        "evapotranspiration_7d": 30.4
+        "evapotranspiration_7d": 30.6
       }
     },
     {
@@ -27768,7 +27683,7 @@
         "soil_moisture_now": 0.181,
         "soil_moisture_avg_7d": 0.201,
         "soil_moisture_trend": -0.0175,
-        "evapotranspiration_7d": 32.6
+        "evapotranspiration_7d": 32.5
       }
     },
     {
@@ -27825,7 +27740,7 @@
         "soil_moisture_now": 0.181,
         "soil_moisture_avg_7d": 0.201,
         "soil_moisture_trend": -0.0175,
-        "evapotranspiration_7d": 31.0
+        "evapotranspiration_7d": 30.8
       }
     },
     {
@@ -27882,7 +27797,7 @@
         "soil_moisture_now": 0.183,
         "soil_moisture_avg_7d": 0.198,
         "soil_moisture_trend": -0.0137,
-        "evapotranspiration_7d": 31.1
+        "evapotranspiration_7d": 30.9
       }
     },
     {
@@ -27939,7 +27854,7 @@
         "soil_moisture_now": 0.183,
         "soil_moisture_avg_7d": 0.198,
         "soil_moisture_trend": -0.0137,
-        "evapotranspiration_7d": 28.8
+        "evapotranspiration_7d": 28.9
       }
     },
     {
@@ -28209,7 +28124,7 @@
         "soil_moisture_now": 0.137,
         "soil_moisture_avg_7d": 0.148,
         "soil_moisture_trend": -0.0098,
-        "evapotranspiration_7d": 32.7
+        "evapotranspiration_7d": 32.4
       }
     },
     {
@@ -28365,7 +28280,7 @@
         "soil_moisture_now": 0.137,
         "soil_moisture_avg_7d": 0.148,
         "soil_moisture_trend": -0.0098,
-        "evapotranspiration_7d": 35.1
+        "evapotranspiration_7d": 34.9
       }
     },
     {
@@ -28635,7 +28550,7 @@
         "soil_moisture_now": 0.109,
         "soil_moisture_avg_7d": 0.112,
         "soil_moisture_trend": -0.0054,
-        "evapotranspiration_7d": 31.3
+        "evapotranspiration_7d": 31.1
       }
     },
     {
@@ -28777,7 +28692,7 @@
         "soil_moisture_now": 0.183,
         "soil_moisture_avg_7d": 0.198,
         "soil_moisture_trend": -0.0137,
-        "evapotranspiration_7d": 31.7
+        "evapotranspiration_7d": 31.6
       }
     }
   ],
