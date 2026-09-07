@@ -19,9 +19,10 @@ Catalunya es más probable encontrar cada tipo de bolet ahora mismo.
 5. Si tocas "¿Por qué esta puntuación?" te da una explicación en lenguaje
    normal de qué la ha hecho subir o bajar.
 6. Cuando salgáis al monte, marcad en el mapa lo que encontréis (o no
-   encontréis) con el botón de "Marcar en el mapa" — cuantos más hallazgos
-   registremos, mejor se irá afinando el modelo con datos reales vuestros,
-   no solo con teoría.
+   encontréis) con "Marcar en el mapa" — cuantos más hallazgos registremos,
+   mejor se irá afinando el modelo con datos reales vuestros. Los hallazgos
+   se agrupan por zona (no verás una chincheta por cada uno) para que el
+   mapa siga siendo legible aunque haya miles registrados.
 
 Los datos se actualizan solos cada 6 horas. No hace falta hacer nada para
 que esté al día.
@@ -46,6 +47,8 @@ con contraseña)
 - `data/gbif_cache.json` — caché de distribución mensual y de altitud de cada especie según GBIF/FungaCAT, 60 días.
 - `data/historial_lluvia.json` — historial propio de lluvia diaria vía Meteoclimatic, 30 días.
 - `data/geocode_cache.json` — caché permanente de coordenadas de estaciones de Meteoclimatic (Nominatim).
+- `data/meteocat_stations_cache.json` — caché de metadatos de estaciones XEMA/Meteocat, 90 días.
+- `data/zone_names_cache.json` — caché permanente de nombres reales de las 390 zonas (Nominatim, reverse geocoding).
 - `data/evolucion.json` — snapshot diario de la mejor puntuación por zona, 30 días.
 - `data/hallazgos.json` — hallazgos reales registrados por los usuarios. Se actualiza vía el Worker.
 - `web/index.html` — la web: login, mapa, deslizador de umbral, formulario de hallazgos, panel de precisión histórica, explicaciones de DeepSeek.
@@ -56,14 +59,23 @@ con contraseña)
 
 | Fuente | Para qué se usa |
 |---|---|
-| **Open-Meteo** | Histórico de lluvia y temperatura (16 días); también humedad real del suelo y evapotranspiración (variables `hourly`), sin API key |
-| **AEMET OpenData** | Contraste con la estación real más cercana a cada zona (API key, caduca cada 3 meses) |
-| **Meteoclimatic** | Segunda red de estaciones amateur; se geocodifica con Nominatim porque el feed no da coordenadas |
+| **Open-Meteo** | Histórico de lluvia y temperatura (16 días); también humedad real del suelo y evapotranspiración, sin API key |
+| **AEMET OpenData** | Estación real más cercana a cada zona, para la triangulación (API key, caduca cada 3 meses) |
+| **Meteocat / XEMA** | Red oficial de la Generalitat (~190 estaciones), la más densa para Catalunya; misma triangulación (API key, caduca 31/08/2027) |
+| **Meteoclimatic** | Red de estaciones amateur; se geocodifica con Nominatim porque el feed no da coordenadas |
 | **ICGC** | Tipo de bosque genérico (coníferas/frondosas/perennifolias), vía WMS |
 | **VEGETACIO** (Generalitat) | Especie exacta de árbol, refinando el dato del ICGC |
 | **GBIF / FungaCAT** | Histórico real de avistamientos: temporada real (mes) y altitud típica de cada especie |
-| **Nominatim (OpenStreetMap)** | Nombres de lugar ↔ coordenadas, en ambos sentidos |
+| **Nominatim (OpenStreetMap)** | Nombres de lugar ↔ coordenadas, en ambos sentidos (estaciones, zonas y formulario de hallazgos) |
 | **DeepSeek** | Explicaciones en lenguaje natural del "por qué" de una puntuación, a petición del usuario — nunca decide el cálculo |
+
+Se investigaron y descartaron por no ser viables sin coste o sin
+intervención manual: **SIAR** (acceso API requiere aprobación previa, pocas
+estaciones útiles en Catalunya), **Ecowitt** y **Weather Underground** (su
+API solo da acceso a quien sea dueño de su propia estación física, no hay
+endpoint público de todas las estaciones) y **Netatmo** (aunque tiene un
+endpoint público real, exige login manual en navegador vía OAuth2,
+incompatible con un backend que se ejecuta solo sin intervención humana).
 
 ### Cómo funciona el cálculo
 
@@ -75,11 +87,10 @@ evidencia de seis componentes:
 - **Días desde que empezó a llover** (0-25 pts) — cada especie tiene su rango
 - **Temperatura mínima nocturna** (0-20 pts) — no la media del día
 - **Humedad real del suelo** (0-8 pts) — distingue si el agua caída sigue en
-  la tierra o se ha perdido (sequía previa, evapotranspiración), con bonus
-  si la tendencia es a humedecerse y penalización si se está secando
+  la tierra o se ha perdido, con bonus si la tendencia es a humedecerse
 - **Temporada real de la especie** (0-15 pts) según GBIF, por mes y altitud
 - **Corroboración entre fuentes** (0-10 pts) — bonus si varias estaciones
-  reales (triangulación IDW de AEMET+Meteoclimatic) confirman la lluvia
+  reales (triangulación IDW de AEMET+Meteocat+Meteoclimatic) confirman la lluvia
 
 El único requisito "duro" (que descarta una especie por completo) es el
 tipo de bosque — el resto es gradual, así que un solo dato flojo de una
@@ -87,8 +98,7 @@ fuente no hace desaparecer una especie con buena evidencia por lo demás.
 
 Junto a cada puntuación se muestra un nivel de **confianza** (🟢🟠🔴),
 independiente del valor numérico: refleja cuánta evidencia real la
-respalda (registros GBIF, estaciones triangulando), para no transmitir una
-falsa sensación de precisión.
+respalda (registros GBIF, nº de estaciones triangulando).
 
 La web muestra las zonas por encima de un **umbral ajustable** (por defecto
 70, con deslizador).
@@ -96,11 +106,22 @@ La web muestra las zonas por encima de un **umbral ajustable** (por defecto
 ### Triangulación de estaciones (IDW)
 
 En vez de usar solo la estación real más cercana a cada zona, se combinan
-hasta 4 estaciones (AEMET + Meteoclimatic) ponderadas por 1/distancia² —
-las más cercanas pesan más, pero las algo más lejanas también aportan.
-Esto da una estimación de lluvia del día más fiable que depender de una
-sola estación aislada, y aumenta la confianza reportada cuando hay 2+
-estaciones de acuerdo.
+hasta 4 estaciones (AEMET + Meteocat/XEMA + Meteoclimatic) ponderadas por
+1/distancia² — las más cercanas pesan más, pero las algo más lejanas
+también aportan. Se deduplica por nombre+distancia para que la misma
+estación no cuente dos veces. Esto da una estimación de lluvia del día más
+fiable que depender de una sola estación aislada, y aumenta la confianza
+reportada cuando hay 2+ estaciones de acuerdo.
+
+### Nombres de zona reales
+
+Las 390 coordenadas fijas de la rejilla se resuelven a un nombre de lugar
+real (pueblo, comarca) vía reverse geocoding (Nominatim), en vez de
+mostrar "Punt 275". Como las coordenadas no cambian, el caché es
+permanente — el proceso completa 20 nombres por ejecución (respetando el
+límite de Nominatim para scripts automáticos) hasta resolver las 390, lo
+que tarda unos días desde que se activó. Mientras un punto no tiene nombre
+resuelto, se muestra como "Punt X" de forma temporal.
 
 ### Evolución y precisión histórica
 
@@ -124,7 +145,12 @@ Secrets configurados en el Worker (Cloudflare → Workers & Pages →
 `bolets-hallazgos` → Settings → Variables and Secrets):
 - `GITHUB_TOKEN` — Contents read/write solo sobre `bolets-catalunya`. Caduca el 24/11/2026.
 - `APP_PASSWORD` — la contraseña de acceso a la web.
-- `DEEPSEEK_API_KEY` — key de la API de DeepSeek.
+- `DEEPSEEK_API_KEY` — key de la API de DeepSeek (modelo `deepseek-v4-flash`).
+
+Secrets configurados en GitHub Actions (repositorio → Settings → Secrets
+and variables → Actions):
+- `AEMET_API_KEY` — caduca cada 3 meses (próxima: 25/11/2026).
+- `METEOCAT_API_KEY` — caduca 31/08/2027.
 
 ### Control de acceso
 
@@ -139,21 +165,30 @@ La web pide una contraseña antes de mostrar nada:
 
 Desde la web se marca en el mapa el punto exacto: especie, altitud (tramos
 de 50m), tipo de árbol, fecha, cantidad (mucho/poco/nada). El nombre del
-lugar se rellena solo (geocodificación inversa) pero es editable. Cada
-hallazgo aparece como marcador propio en el mapa, guardado de forma
-permanente vía el Worker.
+lugar se rellena solo (geocodificación inversa) pero es editable.
+
+En el mapa, los hallazgos **no se muestran individualmente** — se agrupan
+por proximidad (~2km) en un único círculo por zona, cuyo color y tamaño
+reflejan cuántos hallazgos hay y qué proporción son positivos. Al hacer
+clic se ve el detalle completo del grupo (especie por especie, fecha por
+fecha), con opción de borrar cada hallazgo individual. Así el mapa sigue
+siendo legible aunque haya miles de registros, sin perder ningún dato de
+cara al análisis futuro (precisión histórica, zonas con hallazgos
+repetidos, etc.).
 
 ### Mantenimiento
 
 - **API key de AEMET** caduca cada 3 meses (próxima: 25/11/2026) — renovar en
-  https://opendata.aemet.es y actualizar `AEMET_API_KEY` en GitHub Secrets.
+  https://opendata.aemet.es y actualizar el secreto `AEMET_API_KEY` en
+  GitHub Secrets.
+- **API key de Meteocat** caduca 31/08/2027 — renovar en
+  https://apidocs.meteocat.gencat.cat y actualizar `METEOCAT_API_KEY`.
 - **Token de GitHub del Worker** caduca el 24/11/2026 — regenerar en
-  https://github.com/settings/tokens?type=beta y actualizar `GITHUB_TOKEN`
-  en el Worker.
+  https://github.com/settings/tokens?type=beta (mismos permisos: Contents
+  read/write solo en `bolets-catalunya`) y actualizar `GITHUB_TOKEN` en el
+  Worker de Cloudflare.
 - La web avisa automáticamente en rojo cuando a cualquiera de estas
   credenciales le quedan 15 días o menos.
-- Meteocat (XEMA) pendiente de aprobación — cuando llegue, se puede sumar
-  como fuente adicional de contraste.
 - El backend se ejecuta cada 6 horas vía GitHub Actions; también se puede
   lanzar a mano desde "Actions" → "Actualitzar dades de bolets" → "Run workflow".
 
@@ -162,9 +197,13 @@ permanente vía el Worker.
 Por si hace falta depurar de nuevo: uso de temperatura media en vez de
 mínima nocturna; "días desde lluvia" que solo miraba el último chubasco en
 vez del inicio de la tanda completa; ventana de lluvia acumulada fija a 10
-días que perdía agua real en tandas largas; un bug de edición donde una
-función quedó fusionada dentro de otra sin dar error de sintaxis;
-Meteoclimatic usando el campo de lluvia equivocado del XML; el feed de
-Meteoclimatic sin coordenadas (requirió geocodificación); y una función de
-scoring que devolvía menos valores de los esperados en el caso de hábitat
-incompatible, rompiendo el proceso completo en producción.
+días que perdía agua real en tandas largas; funciones que quedaron
+fusionadas o con su `def` accidentalmente borrado al editar el archivo
+(dos veces — sin error de sintaxis, solo fallo en producción); Meteoclimatic
+usando el campo de lluvia equivocado del XML y sin coordenadas en el feed;
+API de Meteocat exigiendo el parámetro `data` junto con `estat`, y
+anidando las lecturas dentro de `variables[0].lectures`; scoring
+devolviendo menos valores de los esperados en el caso de hábitat
+incompatible; triangulación contando la misma estación varias veces sin
+deduplicar; modelo de DeepSeek retirado sin aviso (`deepseek-chat` →
+`deepseek-v4-flash`).
