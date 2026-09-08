@@ -269,6 +269,11 @@ function soilMoistureLine(z) {
   return `<p class="popup-detail">💧 Humedad del suelo (7d): ${pct}% ${trendIcon}</p>`;
 }
 
+function radarLine(z) {
+  if (z.radar_mm === null || z.radar_mm === undefined) return '';
+  return `<p class="popup-detail">📡 Radar (cobertura del punto exacto): ${z.radar_mm}mm/h ahora mismo</p>`;
+}
+
 function triangulationLine(z) {
   const t = z.triangulation;
   if (!t || t.estimated_rain_mm === null || t.estimated_rain_mm === undefined) return '';
@@ -324,6 +329,7 @@ function renderMap(filterVal) {
       ${speciesRows}
       <p class="popup-detail">Lluvia acumulada: ${z.rain_10d}mm · Mín. noche: ${z.min_temp}°C · ${z.days_since_rain}d desde inicio de lluvia</p>
       ${soilMoistureLine(z)}
+      ${radarLine(z)}
       ${triangulationLine(z)}
       ${z.own_history_days ? `<p class="popup-detail">📊 Historial propio: ${z.own_history_days}d acumulados</p>` : ''}
       ${aemetLine(z)}
