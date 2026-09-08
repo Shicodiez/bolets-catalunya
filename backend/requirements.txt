@@ -1,5 +1,7 @@
 # Aquest projecte fa servir sobretot llibreries estàndard de Python
-# (json, urllib, datetime). L'única dependència externa és rasterio,
-# necessària per llegir les imatges GeoTIFF del radar meteorològic
-# (precipitació de superfície, complementa les estacions puntuals).
+# (json, urllib, datetime). Dependències externes:
+# - rasterio: llegir les imatges GeoTIFF del radar AEMET (actualment pausat,
+#   la imatge d'aquell endpoint no ve realment georeferenciada)
+# - Pillow: llegir les tesseŀles PNG del mosaic de radar RainViewer
 rasterio>=1.3
+Pillow>=10.0
