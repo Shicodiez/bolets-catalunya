@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-08T07:27:49.484500+00:00",
+  "generated_at": "2026-09-08T07:54:55.549228+00:00",
   "default_threshold": 70,
   "credential_warnings": [],
   "data_coverage": {
@@ -9,15 +9,19 @@
     },
     "meteoclimatic": {
       "ok": true,
-      "detail": "411 estacions"
+      "detail": "414 estacions"
     },
     "aemet": {
       "ok": true,
-      "detail": "9726 estacions"
+      "detail": "10578 estacions"
     },
     "radar_aemet": {
       "ok": false,
       "detail": "0 punts"
+    },
+    "rainviewer": {
+      "ok": true,
+      "detail": "1 punts"
     },
     "meteocat": {
       "ok": true,
@@ -1987,7 +1991,7 @@
           }
         ]
       },
-      "radar_mm": null,
+      "radar_mm": 0.0,
       "soil_stats": {
         "soil_moisture_now": 0.0,
         "soil_moisture_avg_7d": 0.0,
@@ -7076,10 +7080,10 @@
             "rain": 0
           },
           {
-            "source": "meteocat",
-            "name": "Sant Martí Sarroca",
-            "distance_km": 7.6,
-            "rain": 0
+            "source": "meteoclimatic",
+            "name": "Font-Rubí",
+            "distance_km": 7.2,
+            "rain": 0.0
           }
         ]
       },
@@ -7117,6 +7121,12 @@
         "stations_used": [
           {
             "source": "meteoclimatic",
+            "name": "Font-Rubí",
+            "distance_km": 3.0,
+            "rain": 0.0
+          },
+          {
+            "source": "meteoclimatic",
             "name": "Sant Pere de Riudebitlles",
             "distance_km": 3.9,
             "rain": 0.0
@@ -7132,12 +7142,6 @@
             "name": "Font-rubí",
             "distance_km": 5.3,
             "rain": 0
-          },
-          {
-            "source": "meteoclimatic",
-            "name": "La Granada",
-            "distance_km": 5.7,
-            "rain": 0.0
           }
         ]
       },
@@ -8562,13 +8566,13 @@
           },
           {
             "source": "meteoclimatic",
-            "name": "Piera ",
+            "name": "Piera",
             "distance_km": 4.7,
             "rain": 0.0
           },
           {
             "source": "meteoclimatic",
-            "name": "Piera",
+            "name": "Piera ",
             "distance_km": 4.7,
             "rain": 0.0
           }
@@ -17417,7 +17421,7 @@
     },
     {
       "id": 241,
-      "name": "Punt 241",
+      "name": "Gurb",
       "lat": 41.961,
       "lon": 2.173,
       "alt": 840,
@@ -17475,7 +17479,7 @@
     },
     {
       "id": 242,
-      "name": "Punt 242",
+      "name": "Tavèrnoles",
       "lat": 41.961,
       "lon": 2.295,
       "alt": 840,
@@ -17533,7 +17537,7 @@
     },
     {
       "id": 243,
-      "name": "Punt 243",
+      "name": "Vilanova de Sau",
       "lat": 41.961,
       "lon": 2.417,
       "alt": 440,
@@ -17634,7 +17638,7 @@
     },
     {
       "id": 244,
-      "name": "Punt 244",
+      "name": "Osor",
       "lat": 41.961,
       "lon": 2.539,
       "alt": 440,
@@ -17735,7 +17739,7 @@
     },
     {
       "id": 245,
-      "name": "Punt 245",
+      "name": "Anglès",
       "lat": 41.961,
       "lon": 2.661,
       "alt": 440,
@@ -17793,7 +17797,7 @@
     },
     {
       "id": 246,
-      "name": "Punt 246",
+      "name": "Vilablareix",
       "lat": 41.961,
       "lon": 2.783,
       "alt": 440,
@@ -17851,7 +17855,7 @@
     },
     {
       "id": 247,
-      "name": "Punt 247",
+      "name": "Quart",
       "lat": 41.961,
       "lon": 2.905,
       "alt": 440,
@@ -17952,7 +17956,7 @@
     },
     {
       "id": 248,
-      "name": "Punt 248",
+      "name": "Cruïlles, Monells i Sant Sadurní de l'Heura",
       "lat": 41.961,
       "lon": 3.027,
       "alt": 440,
@@ -18010,7 +18014,7 @@
     },
     {
       "id": 249,
-      "name": "Punt 249",
+      "name": "Pals",
       "lat": 41.961,
       "lon": 3.149,
       "alt": 440,
@@ -18068,7 +18072,7 @@
     },
     {
       "id": 250,
-      "name": "Punt 250",
+      "name": "Ribagorça",
       "lat": 42.052,
       "lon": 0.466,
       "alt": 930,
@@ -18126,7 +18130,7 @@
     },
     {
       "id": 251,
-      "name": "Punt 251",
+      "name": "Estopanyà",
       "lat": 42.052,
       "lon": 0.588,
       "alt": 930,
@@ -18184,7 +18188,7 @@
     },
     {
       "id": 252,
-      "name": "Punt 252",
+      "name": "Àger",
       "lat": 42.052,
       "lon": 0.71,
       "alt": 930,
@@ -18242,7 +18246,7 @@
     },
     {
       "id": 253,
-      "name": "Punt 253",
+      "name": "Sant Esteve de la Sarga",
       "lat": 42.052,
       "lon": 0.832,
       "alt": 930,
@@ -18343,7 +18347,7 @@
     },
     {
       "id": 254,
-      "name": "Punt 254",
+      "name": "Gavet de la Conca",
       "lat": 42.052,
       "lon": 0.954,
       "alt": 930,
@@ -18401,7 +18405,7 @@
     },
     {
       "id": 255,
-      "name": "Punt 255",
+      "name": "Gavet de la Conca",
       "lat": 42.052,
       "lon": 1.076,
       "alt": 930,
@@ -18558,7 +18562,7 @@
     },
     {
       "id": 256,
-      "name": "Punt 256",
+      "name": "la Baronia de Rialb",
       "lat": 42.052,
       "lon": 1.198,
       "alt": 930,
@@ -18659,7 +18663,7 @@
     },
     {
       "id": 257,
-      "name": "Punt 257",
+      "name": "Oliana",
       "lat": 42.052,
       "lon": 1.32,
       "alt": 930,
@@ -18802,7 +18806,7 @@
     },
     {
       "id": 258,
-      "name": "Punt 258",
+      "name": "Lladurs",
       "lat": 42.052,
       "lon": 1.441,
       "alt": 930,
@@ -18860,7 +18864,7 @@
     },
     {
       "id": 259,
-      "name": "Punt 259",
+      "name": "Lladurs",
       "lat": 42.052,
       "lon": 1.563,
       "alt": 930,
@@ -18961,7 +18965,7 @@
     },
     {
       "id": 260,
-      "name": "Punt 260",
+      "name": "Montmajor",
       "lat": 42.052,
       "lon": 1.685,
       "alt": 930,
@@ -19417,6 +19421,12 @@
         "stations_used": [
           {
             "source": "meteoclimatic",
+            "name": "Sant Marti Sescorts",
+            "distance_km": 5.0,
+            "rain": 0.0
+          },
+          {
+            "source": "meteoclimatic",
             "name": "Bellmunt",
             "distance_km": 5.5,
             "rain": 0.0
@@ -19432,12 +19442,6 @@
             "name": "Sant Pere de Casserres",
             "distance_km": 6.8,
             "rain": 0.0
-          },
-          {
-            "source": "meteocat",
-            "name": "Orís",
-            "distance_km": 7.5,
-            "rain": 0
           }
         ]
       },
@@ -19492,10 +19496,10 @@
             "rain": 0.0
           },
           {
-            "source": "meteocat",
-            "name": "Pantà de Sau",
-            "distance_km": 9.3,
-            "rain": 0
+            "source": "meteoclimatic",
+            "name": "Sant Marti Sescorts",
+            "distance_km": 8.7,
+            "rain": 0.0
           }
         ]
       },
