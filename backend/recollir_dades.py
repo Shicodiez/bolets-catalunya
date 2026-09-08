@@ -873,6 +873,175 @@ def build_radar_lookup(api_key, zones):
 
 
 # ---------------------------------------------------------------------------
+# 4d. RAINVIEWER — RADAR AGREGAT (mosaic europeu, sense clau, cobertura de superfície)
+# ---------------------------------------------------------------------------
+# Alternativa al radar d'AEMET (que no dona la imatge realment georeferenciada
+# en l'endpoint que fem servir). RainViewer agrega dades de moltes xarxes de
+# radar (incloent AEMET i Meteocat) en un mosaic amb teseŀles XYZ estàndard
+# (Web Mercator), documentat oficialment i sense necessitat de clau.
+#
+# El valor que es rep és un COLOR (RGBA), no un mm directe — es tradueix a
+# dBZ buscant el color més proper a la taula oficial "Universal Blue" (l'únic
+# esquema realment documentat per RainViewer), i després es converteix dBZ a
+# mm/h amb la relació de Marshall-Palmer (la mateixa que fa servir AEMET):
+# Z = 200 * R^1.6  →  R = (Z/200)^(1/1.6), on Z = 10^(dBZ/10).
+#
+# Nota: la taula de colors pel tram de dBZ molt baixos (-10 a 14, semi-
+# transparent, sense pluja significativa) és una aproximació dins d'aquest
+# rang — el tram que realment importa per detectar pluja (15-95 dBZ) prové
+# exactament del CSV oficial de RainViewer.
+
+RAINVIEWER_UNIVERSAL_BLUE_TABLE = (
+    (-32, 0, 0, 0, 0), (-31, 0, 0, 0, 0), (-30, 0, 0, 0, 0), (-29, 0, 0, 0, 0),
+    (-28, 0, 0, 0, 0), (-27, 0, 0, 0, 0), (-26, 0, 0, 0, 0), (-25, 0, 0, 0, 0),
+    (-24, 0, 0, 0, 0), (-23, 0, 0, 0, 0), (-22, 0, 0, 0, 0), (-21, 0, 0, 0, 0),
+    (-20, 0, 0, 0, 0), (-19, 0, 0, 0, 0), (-18, 0, 0, 0, 0), (-17, 0, 0, 0, 0),
+    (-16, 0, 0, 0, 0), (-15, 0, 0, 0, 0), (-14, 0, 0, 0, 0), (-13, 0, 0, 0, 0),
+    (-12, 0, 0, 0, 0), (-11, 0, 0, 0, 0), (-10, 99, 97, 89, 20), (-9, 102, 99, 90, 25),
+    (-8, 105, 102, 92, 30), (-7, 108, 104, 93, 36), (-6, 111, 107, 95, 41), (-5, 114, 110, 97, 46),
+    (-4, 117, 112, 98, 52), (-3, 120, 115, 100, 57), (-2, 124, 117, 101, 62), (-1, 127, 120, 103, 68),
+    (0, 130, 123, 105, 73), (1, 133, 125, 106, 78), (2, 136, 128, 108, 84), (3, 139, 130, 109, 89),
+    (4, 142, 133, 111, 94), (5, 146, 136, 113, 100), (6, 158, 147, 117, 110), (7, 170, 158, 121, 120),
+    (8, 182, 169, 126, 130), (9, 194, 180, 130, 140), (10, 206, 192, 135, 150), (11, 210, 196, 139, 160),
+    (12, 214, 200, 143, 170), (13, 218, 204, 147, 180), (14, 222, 208, 151, 190), (15, 136, 221, 238, 255),
+    (16, 108, 209, 235, 255), (17, 81, 197, 232, 255), (18, 54, 186, 229, 255), (19, 27, 174, 226, 255),
+    (20, 0, 163, 224, 255), (21, 0, 154, 213, 255), (22, 0, 145, 202, 255), (23, 0, 136, 191, 255),
+    (24, 0, 127, 180, 255), (25, 0, 119, 170, 255), (26, 0, 112, 163, 255), (27, 0, 105, 156, 255),
+    (28, 0, 98, 149, 255), (29, 0, 91, 142, 255), (30, 0, 85, 136, 255), (31, 0, 81, 128, 255),
+    (32, 0, 78, 120, 255), (33, 0, 74, 112, 255), (34, 0, 71, 104, 255), (35, 255, 238, 0, 255),
+    (36, 255, 224, 0, 255), (37, 255, 210, 0, 255), (38, 255, 197, 0, 255), (39, 255, 183, 0, 255),
+    (40, 255, 170, 0, 255), (41, 255, 159, 0, 255), (42, 255, 149, 0, 255), (43, 255, 139, 0, 255),
+    (44, 255, 129, 0, 255), (45, 255, 68, 0, 255), (46, 242, 54, 0, 255), (47, 230, 40, 0, 255),
+    (48, 217, 27, 0, 255), (49, 205, 13, 0, 255), (50, 193, 0, 0, 255), (51, 168, 0, 0, 255),
+    (52, 143, 0, 0, 255), (53, 118, 0, 0, 255), (54, 93, 0, 0, 255), (55, 255, 170, 255, 255),
+    (56, 255, 159, 255, 255), (57, 255, 149, 255, 255), (58, 255, 139, 255, 255), (59, 255, 129, 255, 255),
+    (60, 255, 119, 255, 255), (61, 255, 108, 255, 255), (62, 255, 98, 255, 255), (63, 255, 88, 255, 255),
+    (64, 255, 78, 255, 255), (65, 255, 255, 255, 255), (66, 255, 255, 255, 255), (67, 255, 255, 255, 255),
+    (68, 255, 255, 255, 255), (69, 255, 255, 255, 255), (70, 255, 255, 255, 255), (71, 255, 255, 255, 255),
+    (72, 255, 255, 255, 255), (73, 255, 255, 255, 255), (74, 255, 255, 255, 255), (75, 0, 255, 0, 255),
+    (76, 0, 255, 0, 255), (77, 0, 255, 0, 255), (78, 0, 255, 0, 255), (79, 0, 255, 0, 255),
+    (80, 0, 255, 0, 255), (81, 0, 255, 0, 255), (82, 0, 255, 0, 255), (83, 0, 255, 0, 255),
+    (84, 0, 255, 0, 255), (85, 0, 255, 0, 255), (86, 0, 255, 0, 255), (87, 0, 255, 0, 255),
+    (88, 0, 255, 0, 255), (89, 0, 255, 0, 255), (90, 0, 255, 0, 255), (91, 0, 255, 0, 255),
+    (92, 0, 255, 0, 255), (93, 0, 255, 0, 255), (94, 0, 255, 0, 255), (95, 0, 255, 0, 255),
+)
+
+RAINVIEWER_ZOOM = 7  # màxim permès pel pla gratuït/ús personal
+RAINVIEWER_TILE_SIZE = 256
+
+
+def latlon_to_tile_pixel(lat, lon, zoom=RAINVIEWER_ZOOM, tile_size=RAINVIEWER_TILE_SIZE):
+    """Converteix lat/lon al sistema estàndard de teseŀles Web Mercator
+    (el mateix que Google Maps, OpenStreetMap i RainViewer)."""
+    lat_rad = math.radians(lat)
+    n = 2.0 ** zoom
+    x = (lon + 180.0) / 360.0 * n
+    y = (1.0 - math.asinh(math.tan(lat_rad)) / math.pi) / 2.0 * n
+    tile_x, tile_y = int(x), int(y)
+    pixel_x = int((x - tile_x) * tile_size)
+    pixel_y = int((y - tile_y) * tile_size)
+    return tile_x, tile_y, pixel_x, pixel_y
+
+
+def rgba_to_dbz(r, g, b, a, max_distance=60):
+    """Troba el dBZ de la taula Universal Blue amb el color RGBA més proper
+    (distància euclidiana). Si el píxel és transparent (a=0) o el color no
+    s'assembla prou a cap entrada de la taula (per exemple, és el mapa base,
+    no radar), retorna None — no s'inventa un valor de pluja."""
+    if a is not None and a < 10:
+        return None  # transparent = sense cobertura de radar en aquest punt
+    best_dbz, best_dist = None, max_distance
+    for dbz, tr, tg, tb, ta in RAINVIEWER_UNIVERSAL_BLUE_TABLE:
+        dist = ((r - tr) ** 2 + (g - tg) ** 2 + (b - tb) ** 2) ** 0.5
+        if dist < best_dist:
+            best_dbz, best_dist = dbz, dist
+    return best_dbz
+
+
+def dbz_to_mm_per_hour(dbz):
+    """Relació de Marshall-Palmer (Z=200·R^1.6), la mateixa que fa servir
+    AEMET per convertir reflectivitat a intensitat de pluja."""
+    if dbz is None or dbz < 0:
+        return 0.0
+    z = 10 ** (dbz / 10)
+    r = (z / 200) ** (1 / 1.6)
+    return round(r, 2)
+
+
+def fetch_rainviewer_frame_info(timeout=15):
+    """Consulta quin és el fotograma de radar més recent disponible."""
+    url = "https://api.rainviewer.com/public/weather-maps.json"
+    req = urllib.request.Request(url, headers={"User-Agent": "bolets-catalunya-app/1.0"})
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        data = json.loads(resp.read().decode("utf-8"))
+    past_frames = data.get("radar", {}).get("past", [])
+    if not past_frames:
+        raise Exception("RainViewer no ha retornat cap fotograma disponible")
+    latest = past_frames[-1]
+    return data["host"], latest["path"]
+
+
+def fetch_rainviewer_tile(host, path, tile_x, tile_y, zoom=RAINVIEWER_ZOOM, timeout=15):
+    """Descarrega una tessel·la PNG concreta amb l'esquema de color Universal
+    Blue (color=2, l'únic realment documentat per RainViewer)."""
+    url = f"{host}{path}/{RAINVIEWER_TILE_SIZE}/{zoom}/{tile_x}/{tile_y}/2/1_1.png"
+    req = urllib.request.Request(url, headers={"User-Agent": "bolets-catalunya-app/1.0"})
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        return resp.read()
+
+
+def build_rainviewer_lookup(zones):
+    """
+    Per a totes les zones, calcula quina tessel·la (x,y a zoom 7) els
+    correspon, descarrega només les tessel·les úniques necessàries (moltes
+    zones cauen a la mateixa tessel·la, ja que Catalunya és petita a zoom 7),
+    i extreu el valor de pluja (mm/h) de cada punt llegint el píxel exacte.
+
+    Si qualsevol pas falla (servei caigut, format inesperat), es retorna un
+    diccionari buit i es continua sense aquesta font — mai trenca la resta.
+    """
+    try:
+        from PIL import Image
+        import io
+    except ImportError:
+        print("  AVÍS: Pillow no disponible — es continua sense RainViewer")
+        return {}
+
+    try:
+        host, path = fetch_rainviewer_frame_info()
+    except Exception as e:
+        print(f"  AVÍS: no s'ha pogut consultar RainViewer ({e}) — es continua sense aquesta font")
+        return {}
+
+    zone_tiles = {}
+    for z in zones:
+        tx, ty, px, py = latlon_to_tile_pixel(z["lat"], z["lon"])
+        zone_tiles.setdefault((tx, ty), []).append((z["id"], px, py))
+
+    lookup = {}
+    tiles_ok, tiles_failed = 0, 0
+    for (tx, ty), points in zone_tiles.items():
+        try:
+            png_bytes = fetch_rainviewer_tile(host, path, tx, ty)
+            img = Image.open(io.BytesIO(png_bytes)).convert("RGBA")
+            tiles_ok += 1
+        except Exception:
+            tiles_failed += 1
+            continue
+        for zone_id, px, py in points:
+            try:
+                r, g, b, a = img.getpixel((px, py))
+                dbz = rgba_to_dbz(r, g, b, a)
+                if dbz is not None:
+                    lookup[zone_id] = dbz_to_mm_per_hour(dbz)
+            except Exception:
+                continue
+
+    print(f"  RainViewer: {tiles_ok} tessel·les llegides, {tiles_failed} fallades")
+    return lookup
+
+
+# ---------------------------------------------------------------------------
 # 4b. METEOCAT / XEMA — TERCERA XARXA D'ESTACIONS REALS
 # ---------------------------------------------------------------------------
 # Xarxa oficial de la Generalitat (~190 estacions), la més densa de les tres
@@ -2194,6 +2363,19 @@ def build_results():
         except Exception as e:
             print(f"  AVÍS: no s'ha pogut processar el radar AEMET ({e}) — es continua sense radar")
             data_coverage["radar_aemet"] = {"ok": False, "detail": str(e)}
+
+    print("Consultant RainViewer (mosaic de radar europeu, cobertura de superfície)...")
+    try:
+        rainviewer_lookup = build_rainviewer_lookup(ZONES)
+        print(f"  RainViewer: {len(rainviewer_lookup)}/{len(ZONES)} punts amb valor extret")
+        data_coverage["rainviewer"] = {"ok": len(rainviewer_lookup) > 0, "detail": f"{len(rainviewer_lookup)} punts"}
+        # Si AEMET no ha donat valor per a un punt (o no estava disponible),
+        # es completa amb RainViewer — no se sobreescriu si AEMET sí en tenia.
+        for zid, mm in rainviewer_lookup.items():
+            radar_lookup.setdefault(zid, mm)
+    except Exception as e:
+        print(f"  AVÍS: no s'ha pogut consultar RainViewer ({e}) — es continua sense aquesta font")
+        data_coverage["rainviewer"] = {"ok": False, "detail": str(e)}
 
     meteocat_key = os.environ.get("METEOCAT_API_KEY")
     meteocat_stations = []
