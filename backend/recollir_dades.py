@@ -1020,6 +1020,7 @@ def build_rainviewer_lookup(zones):
 
     lookup = {}
     tiles_ok, tiles_failed = 0, 0
+    transparent_count, no_match_count, sample_pixels = 0, 0, []
     for (tx, ty), points in zone_tiles.items():
         try:
             png_bytes = fetch_rainviewer_tile(host, path, tx, ty)
@@ -1031,13 +1032,23 @@ def build_rainviewer_lookup(zones):
         for zone_id, px, py in points:
             try:
                 r, g, b, a = img.getpixel((px, py))
+                if len(sample_pixels) < 5:
+                    sample_pixels.append((zone_id, r, g, b, a))
+                if a is not None and a < 10:
+                    transparent_count += 1
+                    continue
                 dbz = rgba_to_dbz(r, g, b, a)
                 if dbz is not None:
                     lookup[zone_id] = dbz_to_mm_per_hour(dbz)
+                else:
+                    no_match_count += 1
             except Exception:
                 continue
 
     print(f"  RainViewer: {tiles_ok} tessel·les llegides, {tiles_failed} fallades")
+    print(f"  RainViewer diagnòstic: {transparent_count} punts transparents (sense pluja), "
+          f"{no_match_count} punts amb color sense coincidència a la taula, {len(lookup)} amb valor")
+    print(f"  RainViewer mostra de píxels (zone_id, r, g, b, a): {sample_pixels}")
     return lookup
 
 
