@@ -283,7 +283,7 @@ def haversine_km(lat1, lon1, lat2, lon2):
 # 3. METEOROLOGIA — OPEN-METEO
 # ---------------------------------------------------------------------------
 
-def fetch_weather_batch(zones, timeout=30):
+def fetch_weather_batch(zones, timeout=60):
     """Consulta Open-Meteo per a un grup de zones en una sola petició.
     Inclou humitat del sòl (soil_moisture_9_27cm, capa on viu el miceli de
     la majoria d'espècies) i evapotranspiració, per saber si l'aigua caiguda
@@ -305,13 +305,21 @@ def fetch_weather_batch(zones, timeout=30):
     return data if isinstance(data, list) else [data]
 
 
-def fetch_weather(zones, batch_size=100):
-    """Open-Meteo accepta moltes coordenades per petició, però separem en lots
-    per seguretat i per no fer una URL massa llarga."""
+def fetch_weather(zones, batch_size=40):
+    """Open-Meteo accepta moltes coordenades per petició, però es fan lots
+    més petits (40, abans 100) perquè amb la graella més densa (~1570
+    punts) i les dades horàries completes (16 dies x 24h x 2 variables per
+    punt), lots grans trigaven massa a generar-se al servidor i acabaven en
+    timeout de handshake — cada lot ara es reintenta amb retry_with_backoff."""
     all_results = []
     for i in range(0, len(zones), batch_size):
         batch = zones[i:i + batch_size]
-        all_results.extend(fetch_weather_batch(batch))
+        batch_num = i // batch_size + 1
+        results = retry_with_backoff(
+            lambda b=batch: fetch_weather_batch(b),
+            description=f"Open-Meteo lot {batch_num}",
+        )
+        all_results.extend(results)
     return all_results
 
 
@@ -2029,7 +2037,7 @@ def build_results():
     print(f"[{datetime.now(timezone.utc).isoformat()}] Graella de {len(ZONES)} punts")
 
     print("Consultant Open-Meteo (meteorologia)...")
-    weather_results = retry_with_backoff(lambda: fetch_weather(ZONES), description="Open-Meteo")
+    weather_results = fetch_weather(ZONES)  # cada lot ja es reintenta individualment dins de fetch_weather
 
     print("Consultant Meteoclimatic (contrast estacions amateur, historial propi)...")
     history = load_history()
