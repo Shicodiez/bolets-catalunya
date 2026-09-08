@@ -266,7 +266,10 @@ function soilMoistureLine(z) {
   let trendIcon = '➡️';
   if (s.soil_moisture_trend > 0.01) trendIcon = '📈';
   else if (s.soil_moisture_trend < -0.02) trendIcon = '📉';
-  return `<p class="popup-detail">💧 Humedad del suelo (7d): ${pct}% ${trendIcon}</p>`;
+  const airPart = (s.air_humidity_avg_3d !== null && s.air_humidity_avg_3d !== undefined)
+    ? ` · 🌫️ Aire (3d): ${Math.round(s.air_humidity_avg_3d)}%`
+    : '';
+  return `<p class="popup-detail">💧 Humedad del suelo (7d): ${pct}% ${trendIcon}${airPart}</p>`;
 }
 
 function radarLine(z) {
