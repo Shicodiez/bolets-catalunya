@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-08T08:25:52.802533+00:00",
+  "generated_at": "2026-09-08T08:43:59.578771+00:00",
   "default_threshold": 70,
   "credential_warnings": [],
   "data_coverage": {
@@ -13,15 +13,15 @@
     },
     "aemet": {
       "ok": true,
-      "detail": "9727 estacions"
+      "detail": "10581 estacions"
     },
     "rainviewer": {
-      "ok": false,
-      "detail": "0 punts"
+      "ok": true,
+      "detail": "1 punts amb pluja"
     },
     "meteocat": {
       "ok": true,
-      "detail": "186 estacions"
+      "detail": "187 estacions"
     }
   },
   "zones": [
@@ -1249,42 +1249,14 @@
       "lat": 40.97,
       "lon": 0.344,
       "alt": 250,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 1,
       "avg_temp": 25,
       "min_temp": 19,
       "days_since_rain": 20,
       "species_scores": [
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 42,
-          "confidence": "mitjana",
-          "breakdown": {
-            "pluja": 0,
-            "dies_pluja": 15.4,
-            "temperatura": 16.7,
-            "humitat_sol": 3.2,
-            "temporada": 7,
-            "corroboracio": 0
-          }
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 39,
-          "confidence": "mitjana",
-          "breakdown": {
-            "pluja": 0,
-            "dies_pluja": 15.4,
-            "temperatura": 13.3,
-            "humitat_sol": 3.2,
-            "temporada": 7,
-            "corroboracio": 0
-          }
-        },
         {
           "id": "fredolic",
           "name": "Fredolic",
@@ -1308,20 +1280,6 @@
             "pluja": 0,
             "dies_pluja": 13.0,
             "temperatura": 10.0,
-            "humitat_sol": 3.2,
-            "temporada": 7,
-            "corroboracio": 0
-          }
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 27,
-          "confidence": "mitjana",
-          "breakdown": {
-            "pluja": 0,
-            "dies_pluja": 10.6,
-            "temperatura": 6.7,
             "humitat_sol": 3.2,
             "temporada": 7,
             "corroboracio": 0
@@ -1652,42 +1610,14 @@
       "lat": 40.97,
       "lon": 0.832,
       "alt": 250,
-      "tree": "pi_altres",
-      "tree_label": "bosque de coníferas (especie no diferenciada)",
+      "tree": "pi_blanc",
+      "tree_label": "pinar de pino blanco",
       "is_forest": true,
       "rain_10d": 5,
       "avg_temp": 26,
       "min_temp": 22,
       "days_since_rain": 15,
       "species_scores": [
-        {
-          "id": "ceps",
-          "name": "Ceps",
-          "score": 42,
-          "confidence": "mitjana",
-          "breakdown": {
-            "pluja": 0,
-            "dies_pluja": 25,
-            "temperatura": 6.7,
-            "humitat_sol": 2.9,
-            "temporada": 7,
-            "corroboracio": 0
-          }
-        },
-        {
-          "id": "rossinyols",
-          "name": "Rossinyols",
-          "score": 38,
-          "confidence": "mitjana",
-          "breakdown": {
-            "pluja": 0,
-            "dies_pluja": 25,
-            "temperatura": 3.3,
-            "humitat_sol": 2.9,
-            "temporada": 7,
-            "corroboracio": 0
-          }
-        },
         {
           "id": "rovellons",
           "name": "Rovellons",
@@ -1710,20 +1640,6 @@
           "breakdown": {
             "pluja": 0,
             "dies_pluja": 25,
-            "temperatura": 0,
-            "humitat_sol": 2.9,
-            "temporada": 7,
-            "corroboracio": 0
-          }
-        },
-        {
-          "id": "pinetell",
-          "name": "Pinetell",
-          "score": 33,
-          "confidence": "mitjana",
-          "breakdown": {
-            "pluja": 0,
-            "dies_pluja": 22.6,
             "temperatura": 0,
             "humitat_sol": 2.9,
             "temporada": 7,
@@ -2767,7 +2683,7 @@
           }
         ]
       },
-      "radar_mm": null,
+      "radar_mm": 0.0,
       "soil_stats": {
         "soil_moisture_now": 0.0,
         "soil_moisture_avg_7d": 0.0,
@@ -22554,7 +22470,7 @@
     },
     {
       "id": 301,
-      "name": "Punt 301",
+      "name": "Conca de Dalt",
       "lat": 42.232,
       "lon": 0.954,
       "alt": 1090,
@@ -22669,7 +22585,7 @@
     },
     {
       "id": 302,
-      "name": "Punt 302",
+      "name": "Conca de Dalt",
       "lat": 42.232,
       "lon": 1.076,
       "alt": 1090,
@@ -22770,7 +22686,7 @@
     },
     {
       "id": 303,
-      "name": "Punt 303",
+      "name": "Cabó",
       "lat": 42.232,
       "lon": 1.198,
       "alt": 1090,
@@ -22828,7 +22744,7 @@
     },
     {
       "id": 304,
-      "name": "Punt 304",
+      "name": "Organyà",
       "lat": 42.232,
       "lon": 1.32,
       "alt": 1090,
@@ -22929,7 +22845,7 @@
     },
     {
       "id": 305,
-      "name": "Punt 305",
+      "name": "la Vansa i Fórnols",
       "lat": 42.232,
       "lon": 1.441,
       "alt": 1090,
@@ -22987,7 +22903,7 @@
     },
     {
       "id": 306,
-      "name": "Punt 306",
+      "name": "Josa i Tuixén",
       "lat": 42.232,
       "lon": 1.563,
       "alt": 1090,
@@ -23045,7 +22961,7 @@
     },
     {
       "id": 307,
-      "name": "Punt 307",
+      "name": "Gósol",
       "lat": 42.232,
       "lon": 1.685,
       "alt": 1090,
@@ -23103,7 +23019,7 @@
     },
     {
       "id": 308,
-      "name": "Punt 308",
+      "name": "Vallcebre",
       "lat": 42.232,
       "lon": 1.807,
       "alt": 1090,
@@ -23204,7 +23120,7 @@
     },
     {
       "id": 309,
-      "name": "Punt 309",
+      "name": "la Pobla de Lillet",
       "lat": 42.232,
       "lon": 1.929,
       "alt": 1090,
@@ -23319,7 +23235,7 @@
     },
     {
       "id": 310,
-      "name": "Punt 310",
+      "name": "Gombrèn",
       "lat": 42.232,
       "lon": 2.051,
       "alt": 1090,
@@ -23377,7 +23293,7 @@
     },
     {
       "id": 311,
-      "name": "Punt 311",
+      "name": "Campdevànol",
       "lat": 42.232,
       "lon": 2.173,
       "alt": 1090,
@@ -23492,7 +23408,7 @@
     },
     {
       "id": 312,
-      "name": "Punt 312",
+      "name": "Sant Joan de les Abadesses",
       "lat": 42.232,
       "lon": 2.295,
       "alt": 1090,
@@ -23607,7 +23523,7 @@
     },
     {
       "id": 313,
-      "name": "Punt 313",
+      "name": "la Vall de Bianya",
       "lat": 42.232,
       "lon": 2.417,
       "alt": 1090,
@@ -23665,7 +23581,7 @@
     },
     {
       "id": 314,
-      "name": "Punt 314",
+      "name": "Sant Joan les Fonts",
       "lat": 42.232,
       "lon": 2.539,
       "alt": 1090,
@@ -23766,7 +23682,7 @@
     },
     {
       "id": 315,
-      "name": "Punt 315",
+      "name": "Sales de Llierca",
       "lat": 42.232,
       "lon": 2.661,
       "alt": 1090,
@@ -23867,7 +23783,7 @@
     },
     {
       "id": 316,
-      "name": "Punt 316",
+      "name": "Cabanelles",
       "lat": 42.232,
       "lon": 2.783,
       "alt": 1090,
@@ -23925,7 +23841,7 @@
     },
     {
       "id": 317,
-      "name": "Punt 317",
+      "name": "Avinyonet de Puigventós",
       "lat": 42.232,
       "lon": 2.905,
       "alt": 1090,
@@ -23983,7 +23899,7 @@
     },
     {
       "id": 318,
-      "name": "Punt 318",
+      "name": "Fortià",
       "lat": 42.232,
       "lon": 3.027,
       "alt": 1090,
@@ -24099,7 +24015,7 @@
     },
     {
       "id": 320,
-      "name": "Punt 320",
+      "name": "Ribagorça",
       "lat": 42.322,
       "lon": 0.344,
       "alt": 1170,
@@ -29050,8 +28966,8 @@
   "score_changes_7d": {
     "22": {
       "previous": 30,
-      "current": 42,
-      "change": 12
+      "current": 34,
+      "change": 4
     },
     "23": {
       "previous": 30,
@@ -29065,8 +28981,8 @@
     },
     "26": {
       "previous": 50,
-      "current": 42,
-      "change": -8
+      "current": 35,
+      "change": -15
     },
     "47": {
       "previous": 27,
