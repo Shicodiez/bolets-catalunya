@@ -305,21 +305,26 @@ def fetch_weather_batch(zones, timeout=60):
     return data if isinstance(data, list) else [data]
 
 
-def fetch_weather(zones, batch_size=40):
+def fetch_weather(zones, batch_size=40, delay_between_batches=1.5):
     """Open-Meteo accepta moltes coordenades per petició, però es fan lots
-    més petits (40, abans 100) perquè amb la graella més densa (~1570
-    punts) i les dades horàries completes (16 dies x 24h x 2 variables per
-    punt), lots grans trigaven massa a generar-se al servidor i acabaven en
-    timeout de handshake — cada lot ara es reintenta amb retry_with_backoff."""
+    més petits (40, abans 100) i amb una petita pausa entre ells. El primer
+    intent (només lots petits, sense pausa) va seguir fallant amb timeout
+    de handshake SSL al voltant del lot 16 — un handshake fallit (no un
+    timeout de lectura de dades) apunta a massa connexions seguides sense
+    respir, no només a respostes individuals pesades. Cada lot es reintenta
+    amb retry_with_backoff."""
     all_results = []
+    n_batches = -(-len(zones) // batch_size)
     for i in range(0, len(zones), batch_size):
         batch = zones[i:i + batch_size]
         batch_num = i // batch_size + 1
         results = retry_with_backoff(
             lambda b=batch: fetch_weather_batch(b),
-            description=f"Open-Meteo lot {batch_num}",
+            description=f"Open-Meteo lot {batch_num}/{n_batches}",
         )
         all_results.extend(results)
+        if batch_num < n_batches:
+            time.sleep(delay_between_batches)
     return all_results
 
 
