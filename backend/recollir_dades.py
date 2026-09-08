@@ -766,6 +766,14 @@ def nearest_aemet_station(lat, lon, stations, max_km=40):
 # superfície — important per detectar tempestes molt localitzades que caiguin
 # entre estacions. Format GeoTIFF (EPSG:4326), es processa amb rasterio.
 # Codi de radar "ba" (Barcelona) confirmat contra la documentació oficial.
+#
+# DESACTIVAT A PROPÒSIT (AEMET_RADAR_ENABLED = False): la imatge que retorna
+# l'endpoint /api/red/radar/regional/{radar} NO porta georeferenciació real
+# (verificat: CRS=None, transform=identitat) — descartar-la evita fer servir
+# coordenades incorrectes. El codi es conserva intacte per si en el futur es
+# descobreix com obtenir el producte realment georeferenciat d'AEMET; per
+# reactivar-lo només cal canviar aquesta constant a True.
+AEMET_RADAR_ENABLED = False
 
 AEMET_RADAR_CODE = "ba"  # Barcelona — confirmat contra la documentació oficial d'AEMET OpenData
 AEMET_RADAR_MAX_AGE_MINUTES = 30  # el radar s'actualitza cada ~10 min; si la imatge és més vella, es descarta
@@ -2365,7 +2373,7 @@ def build_results():
         data_coverage["aemet"] = {"ok": False, "detail": "sense API key configurada"}
 
     radar_lookup = {}
-    if aemet_key:
+    if AEMET_RADAR_ENABLED and aemet_key:
         try:
             print("Consultant radar AEMET (cobertura de superfície, no només punts)...")
             radar_lookup = build_radar_lookup(aemet_key, ZONES)
@@ -2374,6 +2382,8 @@ def build_results():
         except Exception as e:
             print(f"  AVÍS: no s'ha pogut processar el radar AEMET ({e}) — es continua sense radar")
             data_coverage["radar_aemet"] = {"ok": False, "detail": str(e)}
+    else:
+        print("Radar AEMET desactivat a propòsit (georeferenciació no fiable) — no es compta com a font incompleta")
 
     print("Consultant RainViewer (mosaic de radar europeu, cobertura de superfície)...")
     try:
