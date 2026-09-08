@@ -306,13 +306,16 @@ def fetch_weather_batch(zones, timeout=60):
     la majoria d'espècies) i evapotranspiració, per saber si l'aigua caiguda
     realment ha quedat al sòl o s'ha perdut — la pluja per si sola no ho
     distingeix (50mm sobre sòl ja humit no és el mateix que 50mm sobre sòl
-    ressec, encara que la suma de pluja sigui idèntica)."""
+    ressec, encara que la suma de pluja sigui idèntica). També humitat
+    relativa de l'aire (relative_humidity_2m) — complementa la del sòl: un
+    aire molt sec pot ressecar la capa més superficial i el mateix barret
+    del bolet encara que el sòl profund segueixi humit."""
     lats = ",".join(str(z["lat"]) for z in zones)
     lons = ",".join(str(z["lon"]) for z in zones)
     params = (
         f"?latitude={lats}&longitude={lons}"
         f"&daily=precipitation_sum,temperature_2m_max,temperature_2m_min"
-        f"&hourly=soil_moisture_9_27cm,et0_fao_evapotranspiration"
+        f"&hourly=soil_moisture_9_27cm,et0_fao_evapotranspiration,relative_humidity_2m"
         f"&past_days=16&forecast_days=1&timezone=Europe%2FMadrid"
     )
     url = OPEN_METEO_URL + params
@@ -349,8 +352,8 @@ def fetch_weather(zones, batch_size=40, delay_between_batches=3):
 
 def compute_soil_moisture_stats(hourly):
     """
-    A partir del bloc 'hourly' d'Open-Meteo (soil_moisture_9_27cm i
-    et0_fao_evapotranspiration), calcula:
+    A partir del bloc 'hourly' d'Open-Meteo (soil_moisture_9_27cm,
+    et0_fao_evapotranspiration i relative_humidity_2m), calcula:
     - soil_moisture_now: valor més recent d'humitat del sòl (m³/m³, 0-1)
     - soil_moisture_avg_7d: mitjana dels últims 7 dies
     - soil_moisture_trend: diferència entre la mitjana dels últims 3 dies i
@@ -359,12 +362,17 @@ def compute_soil_moisture_stats(hourly):
     - evapotranspiration_7d: evapotranspiració acumulada 7 dies (quanta
       aigua "es perd" cap a l'atmosfera/plantes — a més evapotranspiració,
       menys queda realment disponible al sòl per molt que hagi plogut)
+    - air_humidity_avg_3d: mitjana d'humitat relativa de l'aire dels últims
+      3 dies (%) — complementa la del sòl: un aire molt sec pot ressecar la
+      capa més superficial i el mateix barret del bolet encara que el sòl
+      profund segueixi humit
 
     Aquestes dades permeten distingir "50mm sobre sòl ja humit" de "50mm
     sobre sòl ressec que se'ls beu" — la pluja per si sola no ho fa.
     """
     moisture = hourly.get("soil_moisture_9_27cm") or []
     evapo = hourly.get("et0_fao_evapotranspiration") or []
+    air_humidity = hourly.get("relative_humidity_2m") or []
 
     valid_moisture = [v for v in moisture if v is not None]
     if not valid_moisture:
@@ -386,11 +394,15 @@ def compute_soil_moisture_stats(hourly):
     evapo_7d_values = [v for v in evapo[-last_7d_hours:] if v is not None]
     evapotranspiration_7d = round(sum(evapo_7d_values), 1) if evapo_7d_values else None
 
+    air_humidity_values = [v for v in air_humidity[-last_3d_hours:] if v is not None]
+    air_humidity_avg_3d = round(sum(air_humidity_values) / len(air_humidity_values), 1) if air_humidity_values else None
+
     return {
         "soil_moisture_now": soil_moisture_now,
         "soil_moisture_avg_7d": soil_moisture_avg_7d,
         "soil_moisture_trend": trend,
         "evapotranspiration_7d": evapotranspiration_7d,
+        "air_humidity_avg_3d": air_humidity_avg_3d,
     }
 
 
@@ -1171,6 +1183,17 @@ def species_score(sp, rain_10d, min_temp, tree, days_since_rain, alt, month, aem
             soil_score = min(8, soil_score + 1.5)
         elif trend < -0.02:
             soil_score = max(0, soil_score - 1.5)
+        # Humitat relativa de l'aire (complementa la del sòl, no la
+        # substitueix): un aire molt sec pot ressecar la capa més
+        # superficial i el barret del bolet encara que el sòl profund
+        # segueixi humit — petit ajust dins del mateix component, no un de
+        # nou, perquè el total de 100 punts no es descompensi.
+        air_humidity = soil_stats.get("air_humidity_avg_3d")
+        if air_humidity is not None:
+            if air_humidity < 50:
+                soil_score = max(0, soil_score - 1)
+            elif air_humidity >= 80:
+                soil_score = min(8, soil_score + 1)
     breakdown["humitat_sol"] = round(soil_score, 1)
     score += soil_score
 
