@@ -255,6 +255,13 @@ def retry_with_backoff(func, max_attempts=3, base_delay=2, description="operaci�
     espera creixent entre intents (2s, 4s, 8s...). Si tots els intents
     fallen, es propaga l'última excepció perquè el crida decideixi què fer
     (normalment continuar sense aquella font, com ja es feia abans).
+
+    Cas especial: HTTP 429 (Too Many Requests) — molts serveis (Open-Meteo
+    inclòs) no tenen un límit fix per minut documentat, sinó que apliquen
+    "throttling" temporal si detecten ràfegues de peticions seguides. En
+    aquest cas s'espera més temps del backoff normal (respectant la
+    capçalera Retry-After si el servidor la envia) perquè un backoff curt
+    no dona temps real a que es desbloquegi.
     """
     last_exception = None
     for attempt in range(1, max_attempts + 1):
@@ -263,8 +270,18 @@ def retry_with_backoff(func, max_attempts=3, base_delay=2, description="operaci�
         except Exception as e:
             last_exception = e
             if attempt < max_attempts:
-                delay = base_delay * (2 ** (attempt - 1))
-                print(f"    AVÍS: {description} ha fallat (intent {attempt}/{max_attempts}: {type(e).__name__}) — reintentant en {delay}s...")
+                is_429 = isinstance(e, urllib.error.HTTPError) and e.code == 429
+                if is_429:
+                    retry_after = None
+                    try:
+                        retry_after = int(e.headers.get("Retry-After", "0"))
+                    except (ValueError, AttributeError, TypeError):
+                        pass
+                    delay = retry_after if retry_after and retry_after > 0 else base_delay * (2 ** (attempt - 1)) * 5
+                    print(f"    AVÍS: {description} ha rebut 429 (massa peticions) — esperant {delay}s abans de reintentar...")
+                else:
+                    delay = base_delay * (2 ** (attempt - 1))
+                    print(f"    AVÍS: {description} ha fallat (intent {attempt}/{max_attempts}: {type(e).__name__}) — reintentant en {delay}s...")
                 time.sleep(delay)
     raise last_exception
 
@@ -305,14 +322,15 @@ def fetch_weather_batch(zones, timeout=60):
     return data if isinstance(data, list) else [data]
 
 
-def fetch_weather(zones, batch_size=40, delay_between_batches=1.5):
+def fetch_weather(zones, batch_size=40, delay_between_batches=3):
     """Open-Meteo accepta moltes coordenades per petició, però es fan lots
-    més petits (40, abans 100) i amb una petita pausa entre ells. El primer
-    intent (només lots petits, sense pausa) va seguir fallant amb timeout
-    de handshake SSL al voltant del lot 16 — un handshake fallit (no un
-    timeout de lectura de dades) apunta a massa connexions seguides sense
-    respir, no només a respostes individuals pesades. Cada lot es reintenta
-    amb retry_with_backoff."""
+    més petits (40, abans 100) i amb una pausa entre ells (3s, abans 1.5s).
+    Confirmat amb un HTTP 429 explícit que Open-Meteo aplica "throttling"
+    temporal si detecta ràfegues de peticions seguides (no documenten un
+    límit fix per minut, però avisen que "excessive bursting may be
+    throttled") — amb ~1570 punts i 37 lots calia més marge del que dona
+    una pausa curta. Cada lot es reintenta amb retry_with_backoff, que ara
+    tracta el 429 amb una espera més llarga."""
     all_results = []
     n_batches = -(-len(zones) // batch_size)
     for i in range(0, len(zones), batch_size):
@@ -320,6 +338,7 @@ def fetch_weather(zones, batch_size=40, delay_between_batches=1.5):
         batch_num = i // batch_size + 1
         results = retry_with_backoff(
             lambda b=batch: fetch_weather_batch(b),
+            max_attempts=5,
             description=f"Open-Meteo lot {batch_num}/{n_batches}",
         )
         all_results.extend(results)
