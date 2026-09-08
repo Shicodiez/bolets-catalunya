@@ -2,17 +2,30 @@
 Predictor de bolets a Catalunya — recollida de dades i càlcul de puntuació.
 
 Aquest script:
-1. Genera una graella densa de punts sobre Catalunya (~150 punts, cada ~16km).
-2. Consulta dades meteorològiques en viu (Open-Meteo) per a tota la graella.
-3. Consulta AEMET OpenData per contrastar amb l'estació real més propera a cada punt.
-4. Consulta el WMS de cobertes del sòl de l'ICGC per obtenir el tipus de bosc
-   real de cada punt (pi roig, alzinar, fageda, etc.).
-5. Calcula una puntuació de 0-100 per a cada espècie de bolet en cada punt,
-   segons pluja acumulada, dies des de l'última pluja forta, temperatura i
-   compatibilitat d'hàbitat.
-6. Desa el resultat en un fitxer JSON (data/resultats.json) que la web llegeix.
+1. Genera (o carrega del cache) una graella densa de punts sobre Catalunya
+   (~1470 punts vàlids, cada ~5km), amb altitud real (Copernicus DEM via
+   Open-Meteo Elevation API) i nom de lloc real (reverse geocoding).
+2. Consulta dades meteorològiques en viu (Open-Meteo): pluja, temperatura,
+   humitat del sòl, evapotranspiració i humitat relativa de l'aire.
+3. Contrasta amb estacions reals mitjançant triangulació IDW combinant
+   AEMET, Meteocat/XEMA i Meteoclimatic — i amb radar de superfície
+   (RainViewer; el radar d'AEMET queda desactivat, ver AEMET_RADAR_ENABLED).
+4. Consulta el WMS de cobertes del sòl de l'ICGC per al tipus de bosc
+   genèric de cada punt, refinat a espècie exacta d'arbre amb el servei
+   VEGETACIO de la Generalitat.
+5. Consulta GBIF/FungaCAT per a la distribució mensual i d'altitud real
+   de cada espècie de bolet, en comptes d'una estimació manual.
+6. Calcula una puntuació de 0-100 per a cada espècie de bolet en cada punt
+   (evidència acumulada, no tot-o-res), amb un nivell de confiança
+   independent de la puntuació.
+7. Compara amb l'històric propi (evolució 7 dies) i amb les sortides reals
+   registrades pels usuaris (tasa de confirmació).
+8. Desa el resultat en un fitxer JSON (data/resultats.json) que la web
+   llegeix, junt amb diversos fitxers de cache a data/.
 
-Pensat per executar-se automàticament cada poques hores (veure README.md).
+Pensat per executar-se automàticament cada 6 hores via GitHub Actions
+(veure .github/workflows/actualitzar.yml i README.md per al detall complet
+de cada font de dades).
 """
 
 import json
@@ -25,13 +38,15 @@ import urllib.parse
 from datetime import datetime, timezone, timedelta
 
 # ---------------------------------------------------------------------------
-# 1. GRAELLA DE PUNTS DE CATALUNYA (~150 punts, generada automàticament)
+# 1. GRAELLA DE PUNTS DE CATALUNYA (~1470 punts, generada i cacheada automàticament)
 # ---------------------------------------------------------------------------
-# Cada punt: id, latitud, longitud, altitud aproximada (m).
-# L'altitud és una estimació geogràfica (nord=més alt, costa=més baix);
-# el tipus de bosc es consulta en viu al WMS de l'ICGC per a cada punt.
+# Cada punt: id, latitud, longitud, altitud REAL (m, Copernicus DEM via
+# Open-Meteo Elevation API — no una estimació). Es genera un cop (filtrant
+# amb un polígon aproximat de Catalunya per no caure al mar) i es guarda en
+# cache permanent (data/zones_grid.json); el tipus de bosc es consulta en
+# viu al WMS de l'ICGC per a cada punt per separat, més avall.
 
-GRID_SPACING_KM = 5  # densitat de la graella (abans 10km/390 punts, ara 5km/~1570 punts)
+GRID_SPACING_KM = 5  # densitat de la graella (5km, ~1570 punts generats, ~1470 vàlids tras filtrar mar/altitud invàlida)
 GRID_CACHE_PATH = "../data/zones_grid.json"
 
 CATALUNYA_LAT_MIN, CATALUNYA_LAT_MAX = 40.50, 42.95
@@ -794,8 +809,8 @@ def build_rainviewer_lookup(zones):
 
     Retorna (lookup, connection_ok). connection_ok reflecteix si el servei
     ha respost correctament — és independent de si hi havia pluja: un dia
-    sense pluja a Catalunya és una resposta vàlida (390 punts transparents),
-    no un error, i no s'ha de comptar com a "font incompleta".
+    sense pluja a Catalunya és una resposta vàlida (tots els punts
+    transparents), no un error, i no s'ha de comptar com a "font incompleta".
 
     Si qualsevol pas falla de debò (servei caigut, format inesperat), es
     retorna un diccionari buit amb connection_ok=False — mai trenca la resta.
@@ -1751,12 +1766,13 @@ def geocode_place(location_name, timeout=10):
 
 
 # ---------------------------------------------------------------------------
-# NOMS DE ZONA REALS (reverse geocoding de les 390 coordenades fixes)
+# NOMS DE ZONA REALS (reverse geocoding de les coordenades fixes de la graella)
 # ---------------------------------------------------------------------------
 # Substitueix "Punt 275" per un nom de lloc reconeixible (poble, comarca...).
-# Com que les 390 coordenades no canvien mai, el cache és permanent i només
-# cal completar-lo una vegada — es fa per lots per respectar el límit de
-# Nominatim (4 peticions/minut per a scripts automàtics).
+# Com que les coordenades no canvien mai (~1470 punts), el cache és permanent
+# i només cal completar-lo una vegada — es fa per lots per respectar el
+# límit de Nominatim (4 peticions/minut per a scripts automàtics; amb la
+# graella actual, completar tots els noms tarda ~2-3 setmanes).
 
 ZONE_NAMES_CACHE_PATH = "../data/zone_names_cache.json"
 ZONE_NAMES_BATCH_PER_RUN = 20
