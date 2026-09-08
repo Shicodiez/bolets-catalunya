@@ -1005,21 +1005,26 @@ def build_rainviewer_lookup(zones):
     zones cauen a la mateixa tessel·la, ja que Catalunya és petita a zoom 7),
     i extreu el valor de pluja (mm/h) de cada punt llegint el píxel exacte.
 
-    Si qualsevol pas falla (servei caigut, format inesperat), es retorna un
-    diccionari buit i es continua sense aquesta font — mai trenca la resta.
+    Retorna (lookup, connection_ok). connection_ok reflecteix si el servei
+    ha respost correctament — és independent de si hi havia pluja: un dia
+    sense pluja a Catalunya és una resposta vàlida (390 punts transparents),
+    no un error, i no s'ha de comptar com a "font incompleta".
+
+    Si qualsevol pas falla de debò (servei caigut, format inesperat), es
+    retorna un diccionari buit amb connection_ok=False — mai trenca la resta.
     """
     try:
         from PIL import Image
         import io
     except ImportError:
         print("  AVÍS: Pillow no disponible — es continua sense RainViewer")
-        return {}
+        return {}, False
 
     try:
         host, path = fetch_rainviewer_frame_info()
     except Exception as e:
         print(f"  AVÍS: no s'ha pogut consultar RainViewer ({e}) — es continua sense aquesta font")
-        return {}
+        return {}, False
 
     zone_tiles = {}
     for z in zones:
@@ -1057,7 +1062,10 @@ def build_rainviewer_lookup(zones):
     print(f"  RainViewer diagnòstic: {transparent_count} punts transparents (sense pluja), "
           f"{no_match_count} punts amb color sense coincidència a la taula, {len(lookup)} amb valor")
     print(f"  RainViewer mostra de píxels (zone_id, r, g, b, a): {sample_pixels}")
-    return lookup
+    # La connexió es considera correcta si s'ha llegit almenys una tessel·la
+    # (independentment de si aquell dia hi havia pluja o no).
+    connection_ok = tiles_ok > 0
+    return lookup, connection_ok
 
 
 # ---------------------------------------------------------------------------
@@ -2387,9 +2395,13 @@ def build_results():
 
     print("Consultant RainViewer (mosaic de radar europeu, cobertura de superfície)...")
     try:
-        rainviewer_lookup = build_rainviewer_lookup(ZONES)
+        rainviewer_lookup, rainviewer_ok = build_rainviewer_lookup(ZONES)
         print(f"  RainViewer: {len(rainviewer_lookup)}/{len(ZONES)} punts amb valor extret")
-        data_coverage["rainviewer"] = {"ok": len(rainviewer_lookup) > 0, "detail": f"{len(rainviewer_lookup)} punts"}
+        if rainviewer_ok:
+            detail = f"{len(rainviewer_lookup)} punts amb pluja" if rainviewer_lookup else "sense pluja detectada (resposta correcta)"
+        else:
+            detail = "no s'ha pogut connectar"
+        data_coverage["rainviewer"] = {"ok": rainviewer_ok, "detail": detail}
         # Si AEMET no ha donat valor per a un punt (o no estava disponible),
         # es completa amb RainViewer — no se sobreescriu si AEMET sí en tenia.
         for zid, mm in rainviewer_lookup.items():
