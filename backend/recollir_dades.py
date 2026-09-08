@@ -31,398 +31,141 @@ from datetime import datetime, timezone, timedelta
 # L'altitud és una estimació geogràfica (nord=més alt, costa=més baix);
 # el tipus de bosc es consulta en viu al WMS de l'ICGC per a cada punt.
 
-ZONES = [
-    {"id": 1, "lat": 40.61, "lon": 0.832, "alt": 250},
-    {"id": 2, "lat": 40.7, "lon": 0.588, "alt": 250},
-    {"id": 3, "lat": 40.7, "lon": 0.71, "alt": 250},
-    {"id": 4, "lat": 40.7, "lon": 0.832, "alt": 250},
-    {"id": 5, "lat": 40.7, "lon": 0.954, "alt": 250},
-    {"id": 6, "lat": 40.79, "lon": 0.466, "alt": 250},
-    {"id": 7, "lat": 40.79, "lon": 0.588, "alt": 250},
-    {"id": 8, "lat": 40.79, "lon": 0.71, "alt": 250},
-    {"id": 9, "lat": 40.79, "lon": 0.832, "alt": 250},
-    {"id": 10, "lat": 40.79, "lon": 0.954, "alt": 250},
-    {"id": 11, "lat": 40.79, "lon": 1.076, "alt": 250},
-    {"id": 12, "lat": 40.88, "lon": 0.344, "alt": 250},
-    {"id": 13, "lat": 40.88, "lon": 0.466, "alt": 250},
-    {"id": 14, "lat": 40.88, "lon": 0.588, "alt": 250},
-    {"id": 15, "lat": 40.88, "lon": 0.71, "alt": 250},
-    {"id": 16, "lat": 40.88, "lon": 0.832, "alt": 250},
-    {"id": 17, "lat": 40.88, "lon": 0.954, "alt": 250},
-    {"id": 18, "lat": 40.88, "lon": 1.076, "alt": 250},
-    {"id": 19, "lat": 40.88, "lon": 1.198, "alt": 250},
-    {"id": 20, "lat": 40.88, "lon": 1.32, "alt": 250},
-    {"id": 21, "lat": 40.97, "lon": 0.222, "alt": 250},
-    {"id": 22, "lat": 40.97, "lon": 0.344, "alt": 250},
-    {"id": 23, "lat": 40.97, "lon": 0.466, "alt": 250},
-    {"id": 24, "lat": 40.97, "lon": 0.588, "alt": 250},
-    {"id": 25, "lat": 40.97, "lon": 0.71, "alt": 250},
-    {"id": 26, "lat": 40.97, "lon": 0.832, "alt": 250},
-    {"id": 27, "lat": 40.97, "lon": 0.954, "alt": 250},
-    {"id": 28, "lat": 40.97, "lon": 1.076, "alt": 250},
-    {"id": 29, "lat": 40.97, "lon": 1.198, "alt": 250},
-    {"id": 30, "lat": 40.97, "lon": 1.32, "alt": 250},
-    {"id": 31, "lat": 40.97, "lon": 1.441, "alt": 250},
-    {"id": 32, "lat": 41.061, "lon": 0.222, "alt": 250},
-    {"id": 33, "lat": 41.061, "lon": 0.344, "alt": 250},
-    {"id": 34, "lat": 41.061, "lon": 0.466, "alt": 250},
-    {"id": 35, "lat": 41.061, "lon": 0.588, "alt": 250},
-    {"id": 36, "lat": 41.061, "lon": 0.71, "alt": 250},
-    {"id": 37, "lat": 41.061, "lon": 0.832, "alt": 250},
-    {"id": 38, "lat": 41.061, "lon": 0.954, "alt": 250},
-    {"id": 39, "lat": 41.061, "lon": 1.076, "alt": 250},
-    {"id": 40, "lat": 41.061, "lon": 1.198, "alt": 250},
-    {"id": 41, "lat": 41.061, "lon": 1.32, "alt": 250},
-    {"id": 42, "lat": 41.061, "lon": 1.441, "alt": 250},
-    {"id": 43, "lat": 41.061, "lon": 1.563, "alt": 250},
-    {"id": 44, "lat": 41.151, "lon": 0.222, "alt": 250},
-    {"id": 45, "lat": 41.151, "lon": 0.344, "alt": 250},
-    {"id": 46, "lat": 41.151, "lon": 0.466, "alt": 250},
-    {"id": 47, "lat": 41.151, "lon": 0.588, "alt": 250},
-    {"id": 48, "lat": 41.151, "lon": 0.71, "alt": 250},
-    {"id": 49, "lat": 41.151, "lon": 0.832, "alt": 250},
-    {"id": 50, "lat": 41.151, "lon": 0.954, "alt": 250},
-    {"id": 51, "lat": 41.151, "lon": 1.076, "alt": 250},
-    {"id": 52, "lat": 41.151, "lon": 1.198, "alt": 250},
-    {"id": 53, "lat": 41.151, "lon": 1.32, "alt": 250},
-    {"id": 54, "lat": 41.151, "lon": 1.441, "alt": 250},
-    {"id": 55, "lat": 41.151, "lon": 1.563, "alt": 250},
-    {"id": 56, "lat": 41.151, "lon": 1.685, "alt": 250},
-    {"id": 57, "lat": 41.151, "lon": 1.807, "alt": 30},
-    {"id": 58, "lat": 41.151, "lon": 1.929, "alt": 30},
-    {"id": 59, "lat": 41.241, "lon": 0.222, "alt": 250},
-    {"id": 60, "lat": 41.241, "lon": 0.344, "alt": 250},
-    {"id": 61, "lat": 41.241, "lon": 0.466, "alt": 250},
-    {"id": 62, "lat": 41.241, "lon": 0.588, "alt": 250},
-    {"id": 63, "lat": 41.241, "lon": 0.71, "alt": 250},
-    {"id": 64, "lat": 41.241, "lon": 0.832, "alt": 250},
-    {"id": 65, "lat": 41.241, "lon": 0.954, "alt": 250},
-    {"id": 66, "lat": 41.241, "lon": 1.076, "alt": 250},
-    {"id": 67, "lat": 41.241, "lon": 1.198, "alt": 250},
-    {"id": 68, "lat": 41.241, "lon": 1.32, "alt": 250},
-    {"id": 69, "lat": 41.241, "lon": 1.441, "alt": 250},
-    {"id": 70, "lat": 41.241, "lon": 1.563, "alt": 250},
-    {"id": 71, "lat": 41.241, "lon": 1.685, "alt": 250},
-    {"id": 72, "lat": 41.241, "lon": 1.807, "alt": 30},
-    {"id": 73, "lat": 41.241, "lon": 1.929, "alt": 30},
-    {"id": 74, "lat": 41.241, "lon": 2.051, "alt": 30},
-    {"id": 75, "lat": 41.241, "lon": 2.173, "alt": 30},
-    {"id": 76, "lat": 41.331, "lon": 0.222, "alt": 280},
-    {"id": 77, "lat": 41.331, "lon": 0.344, "alt": 280},
-    {"id": 78, "lat": 41.331, "lon": 0.466, "alt": 280},
-    {"id": 79, "lat": 41.331, "lon": 0.588, "alt": 280},
-    {"id": 80, "lat": 41.331, "lon": 0.71, "alt": 280},
-    {"id": 81, "lat": 41.331, "lon": 0.832, "alt": 280},
-    {"id": 82, "lat": 41.331, "lon": 0.954, "alt": 280},
-    {"id": 83, "lat": 41.331, "lon": 1.076, "alt": 280},
-    {"id": 84, "lat": 41.331, "lon": 1.198, "alt": 280},
-    {"id": 85, "lat": 41.331, "lon": 1.32, "alt": 280},
-    {"id": 86, "lat": 41.331, "lon": 1.441, "alt": 280},
-    {"id": 87, "lat": 41.331, "lon": 1.563, "alt": 280},
-    {"id": 88, "lat": 41.331, "lon": 1.685, "alt": 280},
-    {"id": 89, "lat": 41.331, "lon": 1.807, "alt": 30},
-    {"id": 90, "lat": 41.331, "lon": 1.929, "alt": 30},
-    {"id": 91, "lat": 41.331, "lon": 2.051, "alt": 30},
-    {"id": 92, "lat": 41.331, "lon": 2.173, "alt": 30},
-    {"id": 93, "lat": 41.331, "lon": 2.295, "alt": 30},
-    {"id": 94, "lat": 41.331, "lon": 2.417, "alt": 30},
-    {"id": 95, "lat": 41.331, "lon": 2.539, "alt": 30},
-    {"id": 96, "lat": 41.421, "lon": 0.222, "alt": 360},
-    {"id": 97, "lat": 41.421, "lon": 0.344, "alt": 360},
-    {"id": 98, "lat": 41.421, "lon": 0.466, "alt": 360},
-    {"id": 99, "lat": 41.421, "lon": 0.588, "alt": 360},
-    {"id": 100, "lat": 41.421, "lon": 0.71, "alt": 360},
-    {"id": 101, "lat": 41.421, "lon": 0.832, "alt": 360},
-    {"id": 102, "lat": 41.421, "lon": 0.954, "alt": 360},
-    {"id": 103, "lat": 41.421, "lon": 1.076, "alt": 360},
-    {"id": 104, "lat": 41.421, "lon": 1.198, "alt": 360},
-    {"id": 105, "lat": 41.421, "lon": 1.32, "alt": 360},
-    {"id": 106, "lat": 41.421, "lon": 1.441, "alt": 360},
-    {"id": 107, "lat": 41.421, "lon": 1.563, "alt": 360},
-    {"id": 108, "lat": 41.421, "lon": 1.685, "alt": 360},
-    {"id": 109, "lat": 41.421, "lon": 1.807, "alt": 110},
-    {"id": 110, "lat": 41.421, "lon": 1.929, "alt": 110},
-    {"id": 111, "lat": 41.421, "lon": 2.051, "alt": 110},
-    {"id": 112, "lat": 41.421, "lon": 2.173, "alt": 110},
-    {"id": 113, "lat": 41.421, "lon": 2.295, "alt": 110},
-    {"id": 114, "lat": 41.421, "lon": 2.417, "alt": 30},
-    {"id": 115, "lat": 41.421, "lon": 2.539, "alt": 30},
-    {"id": 116, "lat": 41.421, "lon": 2.661, "alt": 30},
-    {"id": 117, "lat": 41.511, "lon": 0.344, "alt": 440},
-    {"id": 118, "lat": 41.511, "lon": 0.466, "alt": 440},
-    {"id": 119, "lat": 41.511, "lon": 0.588, "alt": 440},
-    {"id": 120, "lat": 41.511, "lon": 0.71, "alt": 440},
-    {"id": 121, "lat": 41.511, "lon": 0.832, "alt": 440},
-    {"id": 122, "lat": 41.511, "lon": 0.954, "alt": 440},
-    {"id": 123, "lat": 41.511, "lon": 1.076, "alt": 440},
-    {"id": 124, "lat": 41.511, "lon": 1.198, "alt": 440},
-    {"id": 125, "lat": 41.511, "lon": 1.32, "alt": 440},
-    {"id": 126, "lat": 41.511, "lon": 1.441, "alt": 440},
-    {"id": 127, "lat": 41.511, "lon": 1.563, "alt": 440},
-    {"id": 128, "lat": 41.511, "lon": 1.685, "alt": 440},
-    {"id": 129, "lat": 41.511, "lon": 1.807, "alt": 190},
-    {"id": 130, "lat": 41.511, "lon": 1.929, "alt": 190},
-    {"id": 131, "lat": 41.511, "lon": 2.051, "alt": 190},
-    {"id": 132, "lat": 41.511, "lon": 2.173, "alt": 190},
-    {"id": 133, "lat": 41.511, "lon": 2.295, "alt": 190},
-    {"id": 134, "lat": 41.511, "lon": 2.417, "alt": 40},
-    {"id": 135, "lat": 41.511, "lon": 2.539, "alt": 40},
-    {"id": 136, "lat": 41.511, "lon": 2.661, "alt": 40},
-    {"id": 137, "lat": 41.601, "lon": 0.344, "alt": 520},
-    {"id": 138, "lat": 41.601, "lon": 0.466, "alt": 520},
-    {"id": 139, "lat": 41.601, "lon": 0.588, "alt": 520},
-    {"id": 140, "lat": 41.601, "lon": 0.71, "alt": 520},
-    {"id": 141, "lat": 41.601, "lon": 0.832, "alt": 520},
-    {"id": 142, "lat": 41.601, "lon": 0.954, "alt": 520},
-    {"id": 143, "lat": 41.601, "lon": 1.076, "alt": 520},
-    {"id": 144, "lat": 41.601, "lon": 1.198, "alt": 520},
-    {"id": 145, "lat": 41.601, "lon": 1.32, "alt": 520},
-    {"id": 146, "lat": 41.601, "lon": 1.441, "alt": 520},
-    {"id": 147, "lat": 41.601, "lon": 1.563, "alt": 520},
-    {"id": 148, "lat": 41.601, "lon": 1.685, "alt": 520},
-    {"id": 149, "lat": 41.601, "lon": 1.807, "alt": 270},
-    {"id": 150, "lat": 41.601, "lon": 1.929, "alt": 270},
-    {"id": 151, "lat": 41.601, "lon": 2.051, "alt": 270},
-    {"id": 152, "lat": 41.601, "lon": 2.173, "alt": 270},
-    {"id": 153, "lat": 41.601, "lon": 2.295, "alt": 270},
-    {"id": 154, "lat": 41.601, "lon": 2.417, "alt": 120},
-    {"id": 155, "lat": 41.601, "lon": 2.539, "alt": 120},
-    {"id": 156, "lat": 41.601, "lon": 2.661, "alt": 120},
-    {"id": 157, "lat": 41.601, "lon": 2.783, "alt": 120},
-    {"id": 158, "lat": 41.691, "lon": 0.344, "alt": 600},
-    {"id": 159, "lat": 41.691, "lon": 0.466, "alt": 600},
-    {"id": 160, "lat": 41.691, "lon": 0.588, "alt": 600},
-    {"id": 161, "lat": 41.691, "lon": 0.71, "alt": 600},
-    {"id": 162, "lat": 41.691, "lon": 0.832, "alt": 600},
-    {"id": 163, "lat": 41.691, "lon": 0.954, "alt": 600},
-    {"id": 164, "lat": 41.691, "lon": 1.076, "alt": 600},
-    {"id": 165, "lat": 41.691, "lon": 1.198, "alt": 600},
-    {"id": 166, "lat": 41.691, "lon": 1.32, "alt": 600},
-    {"id": 167, "lat": 41.691, "lon": 1.441, "alt": 600},
-    {"id": 168, "lat": 41.691, "lon": 1.563, "alt": 600},
-    {"id": 169, "lat": 41.691, "lon": 1.685, "alt": 600},
-    {"id": 170, "lat": 41.691, "lon": 1.807, "alt": 350},
-    {"id": 171, "lat": 41.691, "lon": 1.929, "alt": 350},
-    {"id": 172, "lat": 41.691, "lon": 2.051, "alt": 350},
-    {"id": 173, "lat": 41.691, "lon": 2.173, "alt": 350},
-    {"id": 174, "lat": 41.691, "lon": 2.295, "alt": 350},
-    {"id": 175, "lat": 41.691, "lon": 2.417, "alt": 200},
-    {"id": 176, "lat": 41.691, "lon": 2.539, "alt": 200},
-    {"id": 177, "lat": 41.691, "lon": 2.661, "alt": 200},
-    {"id": 178, "lat": 41.691, "lon": 2.783, "alt": 200},
-    {"id": 179, "lat": 41.691, "lon": 2.905, "alt": 200},
-    {"id": 180, "lat": 41.781, "lon": 0.344, "alt": 680},
-    {"id": 181, "lat": 41.781, "lon": 0.466, "alt": 680},
-    {"id": 182, "lat": 41.781, "lon": 0.588, "alt": 680},
-    {"id": 183, "lat": 41.781, "lon": 0.71, "alt": 680},
-    {"id": 184, "lat": 41.781, "lon": 0.832, "alt": 680},
-    {"id": 185, "lat": 41.781, "lon": 0.954, "alt": 680},
-    {"id": 186, "lat": 41.781, "lon": 1.076, "alt": 680},
-    {"id": 187, "lat": 41.781, "lon": 1.198, "alt": 680},
-    {"id": 188, "lat": 41.781, "lon": 1.32, "alt": 680},
-    {"id": 189, "lat": 41.781, "lon": 1.441, "alt": 680},
-    {"id": 190, "lat": 41.781, "lon": 1.563, "alt": 680},
-    {"id": 191, "lat": 41.781, "lon": 1.685, "alt": 680},
-    {"id": 192, "lat": 41.781, "lon": 1.807, "alt": 430},
-    {"id": 193, "lat": 41.781, "lon": 1.929, "alt": 430},
-    {"id": 194, "lat": 41.781, "lon": 2.051, "alt": 430},
-    {"id": 195, "lat": 41.781, "lon": 2.173, "alt": 430},
-    {"id": 196, "lat": 41.781, "lon": 2.295, "alt": 430},
-    {"id": 197, "lat": 41.781, "lon": 2.417, "alt": 280},
-    {"id": 198, "lat": 41.781, "lon": 2.539, "alt": 280},
-    {"id": 199, "lat": 41.781, "lon": 2.661, "alt": 280},
-    {"id": 200, "lat": 41.781, "lon": 2.783, "alt": 280},
-    {"id": 201, "lat": 41.781, "lon": 2.905, "alt": 280},
-    {"id": 202, "lat": 41.871, "lon": 0.222, "alt": 760},
-    {"id": 203, "lat": 41.871, "lon": 0.344, "alt": 760},
-    {"id": 204, "lat": 41.871, "lon": 0.466, "alt": 760},
-    {"id": 205, "lat": 41.871, "lon": 0.588, "alt": 760},
-    {"id": 206, "lat": 41.871, "lon": 0.71, "alt": 760},
-    {"id": 207, "lat": 41.871, "lon": 0.832, "alt": 760},
-    {"id": 208, "lat": 41.871, "lon": 0.954, "alt": 760},
-    {"id": 209, "lat": 41.871, "lon": 1.076, "alt": 760},
-    {"id": 210, "lat": 41.871, "lon": 1.198, "alt": 760},
-    {"id": 211, "lat": 41.871, "lon": 1.32, "alt": 760},
-    {"id": 212, "lat": 41.871, "lon": 1.441, "alt": 760},
-    {"id": 213, "lat": 41.871, "lon": 1.563, "alt": 760},
-    {"id": 214, "lat": 41.871, "lon": 1.685, "alt": 760},
-    {"id": 215, "lat": 41.871, "lon": 1.807, "alt": 510},
-    {"id": 216, "lat": 41.871, "lon": 1.929, "alt": 510},
-    {"id": 217, "lat": 41.871, "lon": 2.051, "alt": 510},
-    {"id": 218, "lat": 41.871, "lon": 2.173, "alt": 510},
-    {"id": 219, "lat": 41.871, "lon": 2.295, "alt": 510},
-    {"id": 220, "lat": 41.871, "lon": 2.417, "alt": 360},
-    {"id": 221, "lat": 41.871, "lon": 2.539, "alt": 360},
-    {"id": 222, "lat": 41.871, "lon": 2.661, "alt": 360},
-    {"id": 223, "lat": 41.871, "lon": 2.783, "alt": 360},
-    {"id": 224, "lat": 41.871, "lon": 2.905, "alt": 360},
-    {"id": 225, "lat": 41.871, "lon": 3.027, "alt": 360},
-    {"id": 226, "lat": 41.961, "lon": 0.344, "alt": 840},
-    {"id": 227, "lat": 41.961, "lon": 0.466, "alt": 840},
-    {"id": 228, "lat": 41.961, "lon": 0.588, "alt": 840},
-    {"id": 229, "lat": 41.961, "lon": 0.71, "alt": 840},
-    {"id": 230, "lat": 41.961, "lon": 0.832, "alt": 840},
-    {"id": 231, "lat": 41.961, "lon": 0.954, "alt": 840},
-    {"id": 232, "lat": 41.961, "lon": 1.076, "alt": 840},
-    {"id": 233, "lat": 41.961, "lon": 1.198, "alt": 840},
-    {"id": 234, "lat": 41.961, "lon": 1.32, "alt": 840},
-    {"id": 235, "lat": 41.961, "lon": 1.441, "alt": 840},
-    {"id": 236, "lat": 41.961, "lon": 1.563, "alt": 840},
-    {"id": 237, "lat": 41.961, "lon": 1.685, "alt": 840},
-    {"id": 238, "lat": 41.961, "lon": 1.807, "alt": 840},
-    {"id": 239, "lat": 41.961, "lon": 1.929, "alt": 840},
-    {"id": 240, "lat": 41.961, "lon": 2.051, "alt": 840},
-    {"id": 241, "lat": 41.961, "lon": 2.173, "alt": 840},
-    {"id": 242, "lat": 41.961, "lon": 2.295, "alt": 840},
-    {"id": 243, "lat": 41.961, "lon": 2.417, "alt": 440},
-    {"id": 244, "lat": 41.961, "lon": 2.539, "alt": 440},
-    {"id": 245, "lat": 41.961, "lon": 2.661, "alt": 440},
-    {"id": 246, "lat": 41.961, "lon": 2.783, "alt": 440},
-    {"id": 247, "lat": 41.961, "lon": 2.905, "alt": 440},
-    {"id": 248, "lat": 41.961, "lon": 3.027, "alt": 440},
-    {"id": 249, "lat": 41.961, "lon": 3.149, "alt": 440},
-    {"id": 250, "lat": 42.052, "lon": 0.466, "alt": 930},
-    {"id": 251, "lat": 42.052, "lon": 0.588, "alt": 930},
-    {"id": 252, "lat": 42.052, "lon": 0.71, "alt": 930},
-    {"id": 253, "lat": 42.052, "lon": 0.832, "alt": 930},
-    {"id": 254, "lat": 42.052, "lon": 0.954, "alt": 930},
-    {"id": 255, "lat": 42.052, "lon": 1.076, "alt": 930},
-    {"id": 256, "lat": 42.052, "lon": 1.198, "alt": 930},
-    {"id": 257, "lat": 42.052, "lon": 1.32, "alt": 930},
-    {"id": 258, "lat": 42.052, "lon": 1.441, "alt": 930},
-    {"id": 259, "lat": 42.052, "lon": 1.563, "alt": 930},
-    {"id": 260, "lat": 42.052, "lon": 1.685, "alt": 930},
-    {"id": 261, "lat": 42.052, "lon": 1.807, "alt": 930},
-    {"id": 262, "lat": 42.052, "lon": 1.929, "alt": 930},
-    {"id": 263, "lat": 42.052, "lon": 2.051, "alt": 930},
-    {"id": 264, "lat": 42.052, "lon": 2.173, "alt": 930},
-    {"id": 265, "lat": 42.052, "lon": 2.295, "alt": 930},
-    {"id": 266, "lat": 42.052, "lon": 2.417, "alt": 530},
-    {"id": 267, "lat": 42.052, "lon": 2.539, "alt": 530},
-    {"id": 268, "lat": 42.052, "lon": 2.661, "alt": 530},
-    {"id": 269, "lat": 42.052, "lon": 2.783, "alt": 530},
-    {"id": 270, "lat": 42.052, "lon": 2.905, "alt": 530},
-    {"id": 271, "lat": 42.052, "lon": 3.027, "alt": 530},
-    {"id": 272, "lat": 42.052, "lon": 3.149, "alt": 530},
-    {"id": 273, "lat": 42.142, "lon": 0.466, "alt": 1010},
-    {"id": 274, "lat": 42.142, "lon": 0.588, "alt": 1010},
-    {"id": 275, "lat": 42.142, "lon": 0.71, "alt": 1010},
-    {"id": 276, "lat": 42.142, "lon": 0.832, "alt": 1010},
-    {"id": 277, "lat": 42.142, "lon": 0.954, "alt": 1010},
-    {"id": 278, "lat": 42.142, "lon": 1.076, "alt": 1010},
-    {"id": 279, "lat": 42.142, "lon": 1.198, "alt": 1010},
-    {"id": 280, "lat": 42.142, "lon": 1.32, "alt": 1010},
-    {"id": 281, "lat": 42.142, "lon": 1.441, "alt": 1010},
-    {"id": 282, "lat": 42.142, "lon": 1.563, "alt": 1010},
-    {"id": 283, "lat": 42.142, "lon": 1.685, "alt": 1010},
-    {"id": 284, "lat": 42.142, "lon": 1.807, "alt": 1010},
-    {"id": 285, "lat": 42.142, "lon": 1.929, "alt": 1010},
-    {"id": 286, "lat": 42.142, "lon": 2.051, "alt": 1010},
-    {"id": 287, "lat": 42.142, "lon": 2.173, "alt": 1010},
-    {"id": 288, "lat": 42.142, "lon": 2.295, "alt": 1010},
-    {"id": 289, "lat": 42.142, "lon": 2.417, "alt": 1010},
-    {"id": 290, "lat": 42.142, "lon": 2.539, "alt": 1010},
-    {"id": 291, "lat": 42.142, "lon": 2.661, "alt": 1010},
-    {"id": 292, "lat": 42.142, "lon": 2.783, "alt": 1010},
-    {"id": 293, "lat": 42.142, "lon": 2.905, "alt": 1010},
-    {"id": 294, "lat": 42.142, "lon": 3.027, "alt": 1010},
-    {"id": 295, "lat": 42.142, "lon": 3.149, "alt": 1010},
-    {"id": 296, "lat": 42.232, "lon": 0.344, "alt": 1090},
-    {"id": 297, "lat": 42.232, "lon": 0.466, "alt": 1090},
-    {"id": 298, "lat": 42.232, "lon": 0.588, "alt": 1090},
-    {"id": 299, "lat": 42.232, "lon": 0.71, "alt": 1090},
-    {"id": 300, "lat": 42.232, "lon": 0.832, "alt": 1090},
-    {"id": 301, "lat": 42.232, "lon": 0.954, "alt": 1090},
-    {"id": 302, "lat": 42.232, "lon": 1.076, "alt": 1090},
-    {"id": 303, "lat": 42.232, "lon": 1.198, "alt": 1090},
-    {"id": 304, "lat": 42.232, "lon": 1.32, "alt": 1090},
-    {"id": 305, "lat": 42.232, "lon": 1.441, "alt": 1090},
-    {"id": 306, "lat": 42.232, "lon": 1.563, "alt": 1090},
-    {"id": 307, "lat": 42.232, "lon": 1.685, "alt": 1090},
-    {"id": 308, "lat": 42.232, "lon": 1.807, "alt": 1090},
-    {"id": 309, "lat": 42.232, "lon": 1.929, "alt": 1090},
-    {"id": 310, "lat": 42.232, "lon": 2.051, "alt": 1090},
-    {"id": 311, "lat": 42.232, "lon": 2.173, "alt": 1090},
-    {"id": 312, "lat": 42.232, "lon": 2.295, "alt": 1090},
-    {"id": 313, "lat": 42.232, "lon": 2.417, "alt": 1090},
-    {"id": 314, "lat": 42.232, "lon": 2.539, "alt": 1090},
-    {"id": 315, "lat": 42.232, "lon": 2.661, "alt": 1090},
-    {"id": 316, "lat": 42.232, "lon": 2.783, "alt": 1090},
-    {"id": 317, "lat": 42.232, "lon": 2.905, "alt": 1090},
-    {"id": 318, "lat": 42.232, "lon": 3.027, "alt": 1090},
-    {"id": 319, "lat": 42.232, "lon": 3.149, "alt": 1090},
-    {"id": 320, "lat": 42.322, "lon": 0.344, "alt": 1170},
-    {"id": 321, "lat": 42.322, "lon": 0.466, "alt": 1170},
-    {"id": 322, "lat": 42.322, "lon": 0.588, "alt": 1170},
-    {"id": 323, "lat": 42.322, "lon": 0.71, "alt": 1170},
-    {"id": 324, "lat": 42.322, "lon": 0.832, "alt": 1170},
-    {"id": 325, "lat": 42.322, "lon": 0.954, "alt": 1170},
-    {"id": 326, "lat": 42.322, "lon": 1.076, "alt": 1170},
-    {"id": 327, "lat": 42.322, "lon": 1.198, "alt": 1170},
-    {"id": 328, "lat": 42.322, "lon": 1.32, "alt": 1170},
-    {"id": 329, "lat": 42.322, "lon": 1.441, "alt": 1170},
-    {"id": 330, "lat": 42.322, "lon": 1.563, "alt": 1170},
-    {"id": 331, "lat": 42.322, "lon": 1.685, "alt": 1170},
-    {"id": 332, "lat": 42.322, "lon": 1.807, "alt": 1170},
-    {"id": 333, "lat": 42.322, "lon": 1.929, "alt": 1170},
-    {"id": 334, "lat": 42.322, "lon": 2.051, "alt": 1170},
-    {"id": 335, "lat": 42.322, "lon": 2.173, "alt": 1170},
-    {"id": 336, "lat": 42.322, "lon": 2.295, "alt": 1170},
-    {"id": 337, "lat": 42.322, "lon": 2.417, "alt": 1170},
-    {"id": 338, "lat": 42.322, "lon": 2.539, "alt": 1170},
-    {"id": 339, "lat": 42.322, "lon": 2.661, "alt": 1170},
-    {"id": 340, "lat": 42.322, "lon": 2.783, "alt": 1170},
-    {"id": 341, "lat": 42.322, "lon": 2.905, "alt": 1170},
-    {"id": 342, "lat": 42.322, "lon": 3.027, "alt": 1170},
-    {"id": 343, "lat": 42.322, "lon": 3.149, "alt": 1170},
-    {"id": 344, "lat": 42.412, "lon": 0.222, "alt": 1250},
-    {"id": 345, "lat": 42.412, "lon": 0.344, "alt": 1250},
-    {"id": 346, "lat": 42.412, "lon": 0.466, "alt": 1250},
-    {"id": 347, "lat": 42.412, "lon": 0.588, "alt": 1250},
-    {"id": 348, "lat": 42.412, "lon": 0.71, "alt": 1250},
-    {"id": 349, "lat": 42.412, "lon": 0.832, "alt": 1250},
-    {"id": 350, "lat": 42.412, "lon": 0.954, "alt": 1250},
-    {"id": 351, "lat": 42.412, "lon": 1.076, "alt": 1250},
-    {"id": 352, "lat": 42.412, "lon": 1.198, "alt": 1250},
-    {"id": 353, "lat": 42.412, "lon": 1.32, "alt": 1250},
-    {"id": 354, "lat": 42.412, "lon": 1.441, "alt": 1250},
-    {"id": 355, "lat": 42.412, "lon": 1.563, "alt": 1250},
-    {"id": 356, "lat": 42.412, "lon": 1.685, "alt": 1250},
-    {"id": 357, "lat": 42.412, "lon": 1.807, "alt": 1250},
-    {"id": 358, "lat": 42.412, "lon": 1.929, "alt": 1250},
-    {"id": 359, "lat": 42.412, "lon": 2.051, "alt": 1250},
-    {"id": 360, "lat": 42.412, "lon": 2.173, "alt": 1250},
-    {"id": 361, "lat": 42.412, "lon": 2.295, "alt": 1250},
-    {"id": 362, "lat": 42.412, "lon": 2.417, "alt": 1250},
-    {"id": 363, "lat": 42.412, "lon": 2.539, "alt": 1250},
-    {"id": 364, "lat": 42.412, "lon": 2.661, "alt": 1250},
-    {"id": 365, "lat": 42.412, "lon": 2.783, "alt": 1250},
-    {"id": 366, "lat": 42.412, "lon": 2.905, "alt": 1250},
-    {"id": 367, "lat": 42.502, "lon": 0.344, "alt": 1330},
-    {"id": 368, "lat": 42.502, "lon": 0.466, "alt": 1330},
-    {"id": 369, "lat": 42.502, "lon": 0.588, "alt": 1330},
-    {"id": 370, "lat": 42.502, "lon": 0.71, "alt": 1330},
-    {"id": 371, "lat": 42.502, "lon": 0.832, "alt": 1330},
-    {"id": 372, "lat": 42.502, "lon": 0.954, "alt": 1330},
-    {"id": 373, "lat": 42.502, "lon": 1.076, "alt": 1330},
-    {"id": 374, "lat": 42.502, "lon": 1.198, "alt": 1330},
-    {"id": 375, "lat": 42.502, "lon": 1.32, "alt": 1330},
-    {"id": 376, "lat": 42.502, "lon": 1.441, "alt": 1330},
-    {"id": 377, "lat": 42.502, "lon": 1.563, "alt": 1330},
-    {"id": 378, "lat": 42.502, "lon": 1.685, "alt": 1330},
-    {"id": 379, "lat": 42.592, "lon": 0.466, "alt": 1410},
-    {"id": 380, "lat": 42.592, "lon": 0.588, "alt": 1410},
-    {"id": 381, "lat": 42.592, "lon": 0.71, "alt": 1410},
-    {"id": 382, "lat": 42.592, "lon": 0.832, "alt": 1410},
-    {"id": 383, "lat": 42.592, "lon": 0.954, "alt": 1410},
-    {"id": 384, "lat": 42.592, "lon": 1.076, "alt": 1410},
-    {"id": 385, "lat": 42.592, "lon": 1.198, "alt": 1410},
-    {"id": 386, "lat": 42.592, "lon": 1.32, "alt": 1410},
-    {"id": 387, "lat": 42.592, "lon": 1.441, "alt": 1410},
-    {"id": 388, "lat": 42.682, "lon": 0.588, "alt": 1490},
-    {"id": 389, "lat": 42.682, "lon": 0.71, "alt": 1490},
-    {"id": 390, "lat": 42.682, "lon": 0.832, "alt": 1490},
+GRID_SPACING_KM = 5  # densitat de la graella (abans 10km/390 punts, ara 5km/~1570 punts)
+GRID_CACHE_PATH = "../data/zones_grid.json"
+
+CATALUNYA_LAT_MIN, CATALUNYA_LAT_MAX = 40.50, 42.95
+CATALUNYA_LON_MIN, CATALUNYA_LON_MAX = -0.05, 3.30
+
+# Polígon aproximat de Catalunya (vèrtexs principals de costa i fronteres),
+# per evitar generar massa punts al mar en comptes d'un simple rectangle.
+CATALUNYA_POLYGON = [
+    (42.90, 0.65), (42.85, 1.70), (42.45, 2.90), (41.75, 3.15),
+    (41.35, 2.30), (41.15, 1.20), (40.55, 0.55), (40.75, 0.10),
+    (41.40, 0.05), (42.30, 0.60), (42.90, 0.65),
 ]
+
+
+def point_in_catalunya_polygon(lat, lon):
+    """Ray casting simple per saber si un punt cau dins el polígon aproximat."""
+    polygon = CATALUNYA_POLYGON
+    n = len(polygon)
+    inside = False
+    p1lat, p1lon = polygon[0]
+    lat_intersect = None
+    for i in range(n + 1):
+        p2lat, p2lon = polygon[i % n]
+        if lon > min(p1lon, p2lon):
+            if lon <= max(p1lon, p2lon):
+                if lat <= max(p1lat, p2lat):
+                    if p1lon != p2lon:
+                        lat_intersect = (lon - p1lon) * (p2lat - p1lat) / (p2lon - p1lon) + p1lat
+                    if p1lat == p2lat or lat_intersect is None or lat <= lat_intersect:
+                        inside = not inside
+        p1lat, p1lon = p2lat, p2lon
+    return inside
+
+
+def generate_grid_points(spacing_km=GRID_SPACING_KM):
+    """Genera coordenades en graella regular sobre Catalunya, filtrant amb el
+    polígon aproximat per no generar massa punts al mar. La graella
+    resultant (~1570 punts a 5km) és 4x més densa que l'anterior (390 a
+    10km), verificada perquè amb 10km dona ~393 punts (gairebé idèntic als
+    390 originals, confirma que el polígon és prou fidel)."""
+    lat_step = spacing_km / 111.0
+    avg_lat = (CATALUNYA_LAT_MIN + CATALUNYA_LAT_MAX) / 2
+    lon_step = spacing_km / (111.0 * math.cos(math.radians(avg_lat)))
+
+    points = []
+    lat = CATALUNYA_LAT_MIN
+    while lat <= CATALUNYA_LAT_MAX:
+        lon = CATALUNYA_LON_MIN
+        while lon <= CATALUNYA_LON_MAX:
+            if point_in_catalunya_polygon(lat, lon):
+                points.append((round(lat, 4), round(lon, 4)))
+            lon += lon_step
+        lat += lat_step
+    return points
+
+
+def fetch_elevations_batch(points, timeout=20):
+    """Consulta l'altitud REAL (Copernicus DEM, 90m) de fins a 100 punts de
+    cop via l'Elevation API d'Open-Meteo (gratuïta, sense clau, el mateix
+    proveïdor que ja fem servir per a la resta de dades meteorològiques)."""
+    lats = ",".join(str(p[0]) for p in points)
+    lons = ",".join(str(p[1]) for p in points)
+    url = f"https://api.open-meteo.com/v1/elevation?latitude={lats}&longitude={lons}"
+    req = urllib.request.Request(url, headers={"User-Agent": "bolets-catalunya-app/1.0"})
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        data = json.loads(resp.read().decode("utf-8"))
+    return data.get("elevation", [])
+
+
+def build_zones_with_real_elevation():
+    """
+    Genera la graella de punts i consulta l'altitud REAL de cadascun (en
+    comptes de l'aproximació per blocs que es feia servir abans — es va
+    detectar que 69 dels 390 punts originals compartien exactament la
+    mateixa altitud "250", senyal que no era una dada real per coordenada).
+    Es couen 100 punts per petició (16 peticions per a ~1570 punts).
+    """
+    grid_points = generate_grid_points()
+    print(f"  Graella generada: {len(grid_points)} punts (abans de consultar altitud)")
+
+    all_elevations = []
+    batch_size = 100
+    for i in range(0, len(grid_points), batch_size):
+        batch = grid_points[i:i + batch_size]
+        try:
+            elevs = retry_with_backoff(
+                lambda b=batch: fetch_elevations_batch(b),
+                description=f"Elevation API lot {i // batch_size + 1}",
+            )
+            all_elevations.extend(elevs)
+        except Exception as e:
+            print(f"  AVÍS: lot d'altituds {i // batch_size + 1} ha fallat ({e}) — es descarten aquests punts")
+            all_elevations.extend([None] * len(batch))
+        time.sleep(1)  # cortesia amb el servei gratuït
+
+    zones = []
+    for idx, ((lat, lon), elev) in enumerate(zip(grid_points, all_elevations), start=1):
+        if elev is None or elev < 0:
+            continue  # probablement mar o dada no disponible
+        zones.append({"id": idx, "lat": lat, "lon": lon, "alt": round(elev)})
+
+    print(f"  Zones finals amb altitud real vàlida: {len(zones)}")
+    return zones
+
+
+def load_or_build_zones():
+    """
+    Carrega la graella des del cache si existeix (mai caduca — les
+    coordenades i l'altitud del terreny no canvien), o la genera de nou la
+    primera vegada (o si el fitxer no existeix / està malmès).
+    """
+    try:
+        with open(GRID_CACHE_PATH, "r", encoding="utf-8") as f:
+            cached = json.load(f)
+        zones = cached.get("zones")
+        if zones and len(zones) > 100:  # comprovació bàsica de sanitat
+            print(f"  Graella carregada des del cache: {len(zones)} punts")
+            return zones
+    except (FileNotFoundError, json.JSONDecodeError):
+        pass
+
+    print("  Graella no trobada al cache — generant-la de nou (només passa un cop)...")
+    zones = build_zones_with_real_elevation()
+    try:
+        with open(GRID_CACHE_PATH, "w", encoding="utf-8") as f:
+            json.dump({"generated_at": datetime.now(timezone.utc).isoformat(), "zones": zones}, f, ensure_ascii=False)
+    except Exception as e:
+        print(f"  AVÍS: no s'ha pogut desar el cache de la graella ({e}) — es tornarà a generar la propera execució")
+    return zones
+
+
+# ZONES es carrega/genera al final del fitxer (després que totes les
+# funcions auxiliars, incloent retry_with_backoff, ja estiguin definides).
+
 
 # ---------------------------------------------------------------------------
 # 2. ESPÈCIES DE BOLETS I LA SEVA LÒGICA
@@ -2316,7 +2059,8 @@ def build_results():
         print(f"  {len(missing_zones)} punts sense cache — consultant ICGC...")
         layer_name, available_layers = discover_icgc_layer()
         icgc_start = time.time()
-        icgc_max_seconds = 280
+        icgc_max_seconds = 1000  # augmentat de 280 a 1000: amb la graella nova (~1570 punts),
+        # la primera execució té TOTS els punts sense cache de cop — cal prou marge
         for i, z in enumerate(missing_zones):
             if time.time() - icgc_start > icgc_max_seconds:
                 print(f"  ICGC: límit de temps ({icgc_max_seconds}s) assolit a {i}/{len(missing_zones)} — es continua sense la resta")
@@ -2346,7 +2090,7 @@ def build_results():
     refined_count = 0
     if vegetacio_layers:
         veg_start = time.time()
-        veg_max_seconds = 200
+        veg_max_seconds = 400  # augmentat de 200 a 400 en passar de 390 a ~1570 punts
         for zone in ZONES:
             if time.time() - veg_start > veg_max_seconds:
                 print(f"  VEGETACIO: límit de temps ({veg_max_seconds}s) assolit — es continua sense refinar la resta")
@@ -2711,6 +2455,12 @@ def main():
     forest_count = sum(1 for z in results["zones"] if z["is_forest"])
     print(f"Fet. {len(results['zones'])} zones desades a {out_path} ({forest_count} boscoses)")
     print(f"Generat: {results['generated_at']}")
+
+
+# Es carrega/genera aquí (i no a l'inici del fitxer) perquè depèn de
+# retry_with_backoff, definida més amunt però després del punt on abans
+# s'executava aquesta línia.
+ZONES = load_or_build_zones()
 
 
 if __name__ == "__main__":
