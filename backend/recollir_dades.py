@@ -2456,6 +2456,45 @@ def compute_model_accuracy(hallazgos, evolution):
     return results
 
 
+def test_geologia_layer():
+    """
+    PROVA CONTROLADA (no afecta el resultat principal): comprova si la capa
+    UGEO_PA del WMS geològic de l'ICGC (icgc_mg250m, la mateixa família de
+    servei que ja fem servir per a bosc/vegetació) dona informació útil per
+    distingir sòls silicis de calcaris en 5 punts coneguts de Catalunya —
+    abans d'integrar-ho de debò cal saber quin camp/atribut porta la
+    litologia i com interpretar-lo.
+    """
+    test_points = [
+        {"name": "Val d'Aran (granits, hauria de ser silici)", "lat": 42.68, "lon": 0.83},
+        {"name": "Prepirineu calcari (Berguedà)", "lat": 42.10, "lon": 1.85},
+        {"name": "Montseny (granits/gneis, silici)", "lat": 41.77, "lon": 2.43},
+        {"name": "Priorat (llicorella/pissarra, silici)", "lat": 41.23, "lon": 0.82},
+        {"name": "Garrotxa (volcànic)", "lat": 42.18, "lon": 2.53},
+    ]
+    base_url = "https://geoserveis.icgc.cat/servei/catalunya/icgc_mg250m/wms"
+
+    print("\n--- PROVA CONTROLADA: capa geològica UGEO_PA (icgc_mg250m) ---")
+    for point in test_points:
+        d = 0.01
+        params = (
+            f"?REQUEST=GetFeatureInfo&SERVICE=WMS&VERSION=1.1.1&LAYERS=UGEO_PA"
+            f"&STYLES=&FORMAT=image/png&SRS=EPSG:4326"
+            f"&BBOX={point['lon']-d},{point['lat']-d},{point['lon']+d},{point['lat']+d}"
+            f"&WIDTH=101&HEIGHT=101&QUERY_LAYERS=UGEO_PA&X=50&Y=50&INFO_FORMAT=text/plain"
+        )
+        url = base_url + params
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "bolets-catalunya-app/1.0"})
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                txt = resp.read().decode("utf-8", errors="ignore")
+            snippet = txt[:500].replace("\n", " | ")
+            print(f"  {point['name']}: {snippet}")
+        except Exception as e:
+            print(f"  {point['name']}: ERROR ({type(e).__name__}: {e})")
+    print("--- FI PROVA CONTROLADA ---\n")
+
+
 def main():
     try:
         results = build_results()
@@ -2487,6 +2526,11 @@ def main():
     forest_count = sum(1 for z in results["zones"] if z["is_forest"])
     print(f"Fet. {len(results['zones'])} zones desades a {out_path} ({forest_count} boscoses)")
     print(f"Generat: {results['generated_at']}")
+
+    try:
+        test_geologia_layer()
+    except Exception as e:
+        print(f"AVÍS: la prova controlada de geologia ha fallat sencera ({e}) — no afecta el resultat principal")
 
 
 # Es carrega/genera aquí (i no a l'inici del fitxer) perquè depèn de
