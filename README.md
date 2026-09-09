@@ -27,6 +27,9 @@ encontrar cada tipo de bolet ahora mismo.
    más registremos, mejor se irá afinando el modelo con datos reales
    vuestros. Estas salidas no se ven en el mapa (para no saturarlo), pero
    sí cuentan por detrás.
+7. Más abajo hay un desplegable de "Estaciones meteorológicas" donde
+   puedes elegir cualquiera de las estaciones reales que usa el sistema
+   (AEMET, Meteocat, Meteoclimatic) y ver sus datos tal cual llegan.
 
 Los datos se actualizan solos cada 6 horas. No hace falta hacer nada para
 que esté al día.
@@ -55,6 +58,7 @@ con verificación de email)
 - `data/historial_lluvia.json` — historial propio de lluvia diaria vía Meteoclimatic, 30 días.
 - `data/geocode_cache.json` — caché permanente de coordenadas de estaciones de Meteoclimatic (Nominatim).
 - `data/meteocat_stations_cache.json` — caché de metadatos de estaciones XEMA/Meteocat, 90 días.
+- `data/geologia_cache.json` — caché permanente de litología (silici/calcari) por zona, 180 días.
 - `data/zone_names_cache.json` — caché permanente de nombres reales de las zonas (Nominatim, reverse geocoding).
 - `data/evolucion.json` — snapshot diario de la mejor puntuación por zona, 30 días.
 - `data/hallazgos.json` — salidas reales registradas por los usuarios. Se actualiza vía el Worker.
@@ -91,7 +95,7 @@ excesiva.
 | **Meteocat / XEMA** | Red oficial de la Generalitat (~190 estaciones), la más densa para Catalunya; misma triangulación (API key, caduca 31/08/2027) |
 | **Meteoclimatic** | Red de estaciones amateur; se geocodifica con Nominatim porque el feed no da coordenadas |
 | **RainViewer** | Mosaico de radar europeo (agrega AEMET, Meteocat y redes europeas), cobertura de superficie en tiempo real. Sin API key |
-| **ICGC** | Tipo de bosque genérico, vía WMS. También investigando su mapa geológico para litología del suelo (ver más abajo) |
+| **ICGC** | Tipo de bosque genérico y geología del suelo (silici/calcari), vía WMS |
 | **VEGETACIO** (Generalitat) | Especie exacta de árbol, refinando el dato del ICGC |
 | **GBIF / FungaCAT** | Histórico real de avistamientos: temporada real (mes) y altitud típica de cada especie |
 | **Nominatim (OpenStreetMap)** | Nombres de lugar ↔ coordenadas, en ambos sentidos |
@@ -99,8 +103,8 @@ excesiva.
 
 Se investigaron y descartaron por no ser viables sin coste o sin
 intervención manual: **SIAR**, **Ecowitt**, **Weather Underground**,
-**Netatmo** (login manual vía OAuth2), y **el radar de AEMET vía API REST**
-(ver apartado propio más abajo).
+**Netatmo** (login manual vía OAuth2), **el radar de AEMET vía API REST**,
+**Meteocat/XRAD** y **Tempestes.cat** (ver apartado de radar más abajo).
 
 ### Cómo funciona el cálculo
 
@@ -116,7 +120,10 @@ evidencia de seis componentes:
   humedecerse. Incluye un pequeño ajuste (±1 pt) por humedad relativa del
   aire: un aire muy seco puede resecar la capa más superficial y el
   sombrero del bolet aunque el suelo profundo siga húmedo.
-- **Temporada real de la especie** (0-15 pts) según GBIF, por mes y altitud
+- **Temporada real de la especie** (0-15 pts) según GBIF, por mes y
+  altitud. Incluye un pequeño ajuste (±1.5 pts) por geología del suelo,
+  solo para las 3 especies con evidencia clara (Ceps y Ou de reig
+  prefieren silici, Camagrocs prefiere calcari).
 - **Corroboración entre fuentes** (0-10 pts) — el radar tiene prioridad
   máxima (cobertura directa del punto exacto); si no hay radar, se usa la
   triangulación de estaciones (AEMET+Meteocat+Meteoclimatic)
@@ -133,30 +140,66 @@ La web muestra las zonas por encima de un **umbral ajustable** (por defecto
 
 ### Radar meteorológico
 
+Da cobertura de **superficie continua** en vez de solo puntos con
+estación — importante porque una tormenta muy localizada puede caer justo
+entre dos estaciones y no detectarse de otro modo. Es una estimación (no
+tan exacta como un pluviómetro físico) del instante actual (no
+acumulado), pero cubre cualquiera de los ~1.470 puntos, tengan o no una
+estación cerca.
+
 - **RainViewer (activo)**: mosaico europeo gratuito, sin API key. Da un
   color (RGBA) por píxel, traducido a dBZ (tabla oficial "Universal Blue")
   y luego a mm/h (Marshall-Palmer). Si un día no llueve en ningún punto,
   es una respuesta válida (no un fallo) — el sistema lo distingue
-  correctamente.
+  correctamente. Tiene prioridad máxima en el bonus de corroboración
+  cuando detecta lluvia, por dar cobertura directa del punto exacto.
 - **AEMET (implementado pero desactivado)**: el endpoint
   `/api/red/radar/regional/{radar}` no devuelve la imagen realmente
   georreferenciada (verificado: sin CRS, transform de identidad). Hay un
   interruptor `AEMET_RADAR_ENABLED = False` en `recollir_dades.py`;
   cambiarlo a `True` reactiva el intento si algún día se resuelve.
-- **Meteocat/XRAD (pendiente)**: mejor cobertura para Catalunya (4 radares
-  propios), pero no disponible en la API REST estándar — solo vía
-  "Sol·licitud de serveis" (proceso manual). Se escribió al soporte
-  pidiendo aclaración; pendiente de respuesta.
+- **Meteocat/XRAD y Tempestes.cat (descartados, cerrado definitivamente)**:
+  Meteocat tiene la mejor cobertura teórica para Catalunya (4 radares
+  propios), pero confirmado dos veces con acceso directo a la cuenta real
+  (secciones "Operacions" y "Plans i registre" de `apidocs.meteocat.gencat.cat`)
+  que el radar no está disponible bajo ningún plan de la API — solo las
+  categorías XEMA, XDDE y Dades de Predicció. Tempestes.cat (portal
+  catalán con radar) tampoco es una alternativa real: su propia web
+  confirma que combina AEMET + Meteo-France, sin API pública para
+  desarrolladores — es un agregador como RainViewer, no una fuente nueva.
 
-### Geología del suelo (en curso)
+### Geología del suelo (silici / calcari)
 
-Investigando el mapa geológico del ICGC (`icgc_mg250m`, capa `UGEO_PA`,
-mismo servicio WMS que ya usamos para bosque/vegetación) para poder
-distinguir suelo silíceo de calcáreo — un factor biológico real que
-determina qué especies pueden fructificar. Hay una prueba controlada en
-el código (`test_geologia_layer`, no afecta al cálculo real) sobre 5
-puntos con litología conocida, para confirmar qué campo de la respuesta
-indica la litología antes de integrarlo de verdad en el scoring.
+Como iFong, distingue suelo silíceo de calcáreo — un factor biológico
+real que determina qué especies pueden fructificar. Servicio WMS del ICGC
+(`geoserveis.icgc.cat/servei/catalunya/geologia-territorial/wms`, capa
+`unitats-geologiques-50000`) — confirmado en la práctica tras dos
+intentos fallidos con URLs de un servicio antiguo ya dado de baja
+(`icgc_mg50m`/`icgc_mg250m`/`UGEO_PA`).
+
+Se clasifica por palabras clave del texto de respuesta (`Descripcio` y
+`Descripcio_protolit`): "calcària", "marbre", "guix"... → calcari;
+"granit", "pissarra", "gres", "basalt"... → silici; ambos tipos presentes
+→ mixt. Caché permanente (180 días, la geología no cambia) completándose
+por lotes como VEGETACIO/ICGC.
+
+Ajuste pequeño y honesto en el scoring (±1.5 puntos dentro del componente
+de temporada) — solo para las 3 especies con evidencia clara encontrada:
+**Ceps** y **Ou de reig** prefieren suelo silíceo, **Camagrocs** prefiere
+calcáreo. El resto de especies no tienen ajuste (no hay evidencia
+suficientemente fiable para inventar una preferencia).
+
+### Estaciones meteorológicas: consulta directa
+
+En la web, entre el formulario de "Registrar salida" y la lista de zonas,
+hay un desplegable con todas las estaciones reales que usa el sistema
+(AEMET + Meteocat/XEMA + Meteoclimatic) — al elegir una se muestra su
+fuente, coordenadas, lluvia registrada y hora de la última actualización
+(cuando la fuente la da). Combina las tres redes con `build_all_stations_list()`,
+filtrando solo estaciones dentro del bounding box de Catalunya (AEMET
+devuelve estaciones de toda España) y deduplicando por nombre+coordenadas
+(AEMET puede dar varias lecturas horarias de la misma estación como si
+fueran entradas distintas).
 
 ### Evolución, tasa de confirmación y cobertura de datos
 
@@ -236,12 +279,13 @@ Generate APK(s).
 
 iFong (app catalana de setas ya publicada, ~8 especies) usa datos de
 ~497 estaciones, mapa de hábitats de 2018, y geología del suelo
-silici/calcari — este último es un punto real donde nos lleva ventaja
-(ver apartado de geología, en curso). Nuestro proyecto es más rico en
-número de fuentes cruzadas (radar de superficie, humedad de satélite,
-histórico real de avistamientos vía GBIF) y más transparente (nivel de
-confianza explícito, explicaciones en lenguaje natural, aprendizaje real
-de las salidas propias registradas) — algo que iFong no menciona tener.
+silici/calcari. Ese último punto, que era su ventaja diferencial, ya está
+también integrado aquí (ver apartado de geología más arriba). Nuestro
+proyecto sigue siendo más rico en número de fuentes cruzadas (radar de
+superficie, humedad de suelo y aire, histórico real de avistamientos vía
+GBIF) y más transparente (nivel de confianza explícito, explicaciones en
+lenguaje natural, aprendizaje real de las salidas propias registradas) —
+algo que iFong no menciona tener.
 
 ### Mantenimiento
 
@@ -269,7 +313,20 @@ la rejilla (confirmado con un HTTP 429 explícito); docstring de cabecera
 del script desactualizado durante meses (citaba "~150 puntos" y solo
 2 fuentes, cuando ya eran ~1.470 puntos y 8+ fuentes) — vale la pena
 revisar los comentarios del código de vez en cuando, no solo el
-comportamiento real.
+comportamiento real; el desplegable de estaciones mostraba de entrada
+todas las estaciones de AEMET (España entera, no solo Catalunya) y
+repetidas varias veces (AEMET da varias lecturas horarias de la misma
+estación como si fueran entradas distintas) — corregido con un filtro
+geográfico por bounding box y deduplicación por nombre+coordenadas;
+Meteoclimatic y Meteocat no exponían la hora real de su última lectura
+en el desplegable (el dato sí existía en sus respuestas — `pubDate` en
+el XML de Meteoclimatic, `data` en la lectura de Meteocat — solo faltaba
+leerlo). Nota operativa real: una corrección de este mismo desplegable se
+perdió una vez porque se aplicó sobre una copia local del archivo en vez
+del archivo real subido a GitHub — para casos así, la forma fiable de
+confirmar es pedir directamente el contenido del archivo en producción
+(o del propio `resultats.json` generado) antes de asumir que un cambio
+"debería" estar aplicado.
 
 ### Ideas evaluadas y aparcadas deliberadamente
 
