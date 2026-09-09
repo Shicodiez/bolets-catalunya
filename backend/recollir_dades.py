@@ -2357,32 +2357,39 @@ def build_all_stations_list(aemet_stations, meteocat_stations, mc_stations):
     per exposar-la al resultat final i que la web pugui oferir un
     desplegable amb totes elles (l'usuari tria una i veu les seves dades
     reals, en comptes de només veure-les indirectament via triangulació).
+
+    Filtra per el bounding box de Catalunya (AEMET dona TOTES les
+    estacions d'Espanya, no només les catalanes — sense filtrar sortien
+    estacions de Galícia, Canàries, etc.) i dedup·lica per nom+coordenades
+    (AEMET dona diverses lectures/hores de la mateixa estació com si fossin
+    entrades diferents), quedant-se amb la primera trobada de cadascuna.
     """
+    def in_catalunya(lat, lon):
+        return (CATALUNYA_LAT_MIN <= lat <= CATALUNYA_LAT_MAX
+                and CATALUNYA_LON_MIN <= lon <= CATALUNYA_LON_MAX)
+
     all_stations = []
+    seen = set()
+
+    def add_station(source, name, lat, lon, rain_mm, updated_at):
+        if lat is None or lon is None or not in_catalunya(lat, lon):
+            return
+        key = (name, round(lat, 3), round(lon, 3))
+        if key in seen:
+            return
+        seen.add(key)
+        all_stations.append({
+            "source": source, "name": name, "lat": lat, "lon": lon,
+            "rain_mm": rain_mm, "updated_at": updated_at,
+        })
+
     for st in aemet_stations or []:
-        if st.get("lat") is None or st.get("lon") is None:
-            continue
-        all_stations.append({
-            "source": "aemet", "name": st.get("name", "?"),
-            "lat": st["lat"], "lon": st["lon"],
-            "rain_mm": st.get("prec_1h"), "updated_at": st.get("fint"),
-        })
+        add_station("aemet", st.get("name", "?"), st.get("lat"), st.get("lon"), st.get("prec_1h"), st.get("fint"))
     for st in meteocat_stations or []:
-        if st.get("lat") is None or st.get("lon") is None:
-            continue
-        all_stations.append({
-            "source": "meteocat", "name": st.get("name", "?"),
-            "lat": st["lat"], "lon": st["lon"],
-            "rain_mm": st.get("prec_1h"), "updated_at": None,
-        })
+        add_station("meteocat", st.get("name", "?"), st.get("lat"), st.get("lon"), st.get("prec_1h"), None)
     for st in mc_stations or []:
-        if st.get("lat") is None or st.get("lon") is None:
-            continue
-        all_stations.append({
-            "source": "meteoclimatic", "name": st.get("location", "?"),
-            "lat": st["lat"], "lon": st["lon"],
-            "rain_mm": st.get("rain_today_mm"), "updated_at": None,
-        })
+        add_station("meteoclimatic", st.get("location", "?"), st.get("lat"), st.get("lon"), st.get("rain_today_mm"), None)
+
     # Ordenades per nom perquè el desplegable de la web sigui fàcil de cercar
     all_stations.sort(key=lambda s: s["name"] or "")
     return all_stations
