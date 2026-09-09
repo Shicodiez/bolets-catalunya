@@ -68,5 +68,19 @@
     "lng": 2.5236797332763676,
     "id": "6cd77ce7-f307-4c2e-9069-1e469ea26291",
     "createdAt": "2026-09-09T18:23:37.907Z"
+  },
+  {
+    "speciesId": "trompetes",
+    "speciesName": "Trompetes de la mort",
+    "place": "la Batllòria",
+    "alt": "50",
+    "tree": "mixt",
+    "treeName": "Mixto / no lo sé",
+    "date": "2025-11-09",
+    "amount": "mucho",
+    "lat": 41.71572002043112,
+    "lng": 2.5743198394775395,
+    "id": "8651c1f9-f644-424d-abe4-6ed525c618fb",
+    "createdAt": "2026-09-09T18:23:55.877Z"
   }
 ]
