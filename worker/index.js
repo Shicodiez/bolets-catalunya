@@ -300,15 +300,22 @@ function validateHallazgo(h) {
   if (h.lat < CATALUNYA_BOUNDS.latMin || h.lat > CATALUNYA_BOUNDS.latMax) return false;
   if (h.lng < CATALUNYA_BOUNDS.lonMin || h.lng > CATALUNYA_BOUNDS.lonMax) return false;
   if (!["mucho", "poco", "nada"].includes(h.amount)) return false;
-  // Amb "nada" (buscat i no trobat) l'espècie és opcional: pot ser una
+
+  // Fins a 5 espècies per sortida (speciesIds/speciesNames, arrays). Amb
+  // "nada" (buscat i no trobat) la llista pot ser buida — pot ser una
   // cerca general sense objectiu concret. Amb "mucho"/"poco" cal indicar
-  // quina espècie s'ha trobat.
-  if (h.amount === "nada") {
-    if (h.speciesId !== "" && (typeof h.speciesId !== "string" || !VALID_SPECIES_IDS.has(h.speciesId))) return false;
-  } else {
-    if (typeof h.speciesId !== "string" || !VALID_SPECIES_IDS.has(h.speciesId)) return false;
+  // com a mínim una espècie trobada.
+  if (!Array.isArray(h.speciesIds) || !Array.isArray(h.speciesNames)) return false;
+  if (h.speciesIds.length > 5 || h.speciesNames.length > 5) return false;
+  if (h.speciesIds.length !== h.speciesNames.length) return false;
+  if (h.amount !== "nada" && h.speciesIds.length === 0) return false;
+  for (const id of h.speciesIds) {
+    if (typeof id !== "string" || !VALID_SPECIES_IDS.has(id)) return false;
   }
-  if (typeof h.speciesName !== "string" || h.speciesName.length > 80) return false;
+  for (const name of h.speciesNames) {
+    if (typeof name !== "string" || name.length > 80) return false;
+  }
+
   if (typeof h.place !== "string" || !h.place.trim() || h.place.length > 120) return false;
   if (!isValidDateString(h.date)) return false;
   if (h.tree !== undefined && !VALID_TREE_IDS.has(h.tree)) return false;
@@ -460,7 +467,10 @@ export default {
 
         const { sha, hallazgos } = await getCurrentFile(env);
         hallazgos.push(newHallazgo);
-        await saveFile(env, hallazgos, sha, `Nuevo hallazgo: ${newHallazgo.speciesName} en ${newHallazgo.place}`);
+        const speciesLabel = (newHallazgo.speciesNames && newHallazgo.speciesNames.length > 0)
+          ? newHallazgo.speciesNames.join(", ")
+          : "sin especie";
+        await saveFile(env, hallazgos, sha, `Nueva salida: ${speciesLabel} en ${newHallazgo.place}`);
 
         return new Response(JSON.stringify({ ok: true, hallazgo: newHallazgo }), {
           status: 201,
