@@ -54,5 +54,19 @@
     "lng": 2.5741481781005864,
     "id": "6010a06b-eb9d-4b30-9963-e4a60b028f36",
     "createdAt": "2026-09-09T18:23:05.505Z"
+  },
+  {
+    "speciesId": "trompetes",
+    "speciesName": "Trompetes de la mort",
+    "place": "Gualba",
+    "alt": "50",
+    "tree": "mixt",
+    "treeName": "Mixto / no lo sé",
+    "date": "2025-11-09",
+    "amount": "mucho",
+    "lat": 41.72507338472234,
+    "lng": 2.5236797332763676,
+    "id": "6cd77ce7-f307-4c2e-9069-1e469ea26291",
+    "createdAt": "2026-09-09T18:23:37.907Z"
   }
 ]
