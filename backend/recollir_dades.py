@@ -38,16 +38,37 @@ import urllib.parse
 from datetime import datetime, timezone, timedelta
 
 # ---------------------------------------------------------------------------
-# 1. GRAELLA DE PUNTS DE CATALUNYA (~1470 punts, generada i cacheada automàticament)
+# 1. GRAELLA ADAPTATIVA DE PUNTS DE CATALUNYA
 # ---------------------------------------------------------------------------
-# Cada punt: id, latitud, longitud, altitud REAL (m, Copernicus DEM via
-# Open-Meteo Elevation API — no una estimació). Es genera un cop (filtrant
-# amb un polígon aproximat de Catalunya per no caure al mar) i es guarda en
-# cache permanent (data/zones_grid.json); el tipus de bosc es consulta en
-# viu al WMS de l'ICGC per a cada punt per separat, més avall.
+# Sistema de dues fases perquè la densitat de punts es concentri on
+# realment hi ha bosc (on poden créixer bolets), en comptes de malgastar
+# densitat uniforme sobre mar, ciutats, conreus o roca:
+#
+#   FASE DE SONDEIG (5km): es genera la graella base (com abans) i per a
+#   cada cel·la es consulten l'ICGC en el punt central MÉS 4 punts de
+#   verificació (N/S/E/O a 1.5km) — si CAP dels 5 punts és bosc real, la
+#   cel·la es descarta; verificar amb 5 punts en comptes d'1 de sol evita
+#   perdre zones forestals reals només perquè el punt central caigui per
+#   casualitat en un clar o un camí dins del bosc.
+#
+#   FASE DE DENSIFICACIÓ (2.5km): per a cada cel·la de 5km confirmada com a
+#   forestal (almenys 1 dels 5 punts de sondeig ho era), es genera una
+#   micro-graella de 9 punts (3x3, espaiats 2.5km) dins d'aquella cel·la,
+#   substituint el punt únic original. Les cel·les no forestals es
+#   descarten del tot (no hi surten bolets ni val la pena mantenir-hi cap
+#   punt).
+#
+# Resultat estimat: ~1.660 punts finals (davant dels ~1.470 amb 5km
+# uniforme a tota Catalunya) — més densitat real (2.5km) allà on importa,
+# sense el salt de mida (~10.000 punts) que suposaria 2.5km arreu.
 
-GRID_SPACING_KM = 5  # densitat de la graella (5km, ~1570 punts generats, ~1470 vàlids tras filtrar mar/altitud invàlida)
+GRID_SPACING_KM = 5  # espaiat de la graella de sondeig
+DENSE_SPACING_KM = 2.5  # espaiat de la micro-graella dins de cel·les forestals
+VERIFICATION_OFFSET_KM = 1.5  # distància dels 4 punts de verificació al centre de cada cel·la
 GRID_CACHE_PATH = "../data/zones_grid.json"
+FOREST_SURVEY_CACHE_PATH = "../data/forest_survey_cache.json"
+FOREST_SURVEY_MAX_SECONDS = 600  # límit de temps per execució per a la fase de sondeig (reduït de 900 per deixar marge a les altres fases ICGC de la mateixa execució: bosc detallat ~1000s, VEGETACIO ~400s)
+FOREST_SURVEY_MAX_DAYS = 365  # el bosc real no canvia sovint; cache llarg
 
 CATALUNYA_LAT_MIN, CATALUNYA_LAT_MAX = 40.50, 42.95
 CATALUNYA_LON_MIN, CATALUNYA_LON_MAX = -0.05, 3.30
@@ -83,10 +104,7 @@ def point_in_catalunya_polygon(lat, lon):
 
 def generate_grid_points(spacing_km=GRID_SPACING_KM):
     """Genera coordenades en graella regular sobre Catalunya, filtrant amb el
-    polígon aproximat per no generar massa punts al mar. La graella
-    resultant (~1570 punts a 5km) és 4x més densa que l'anterior (390 a
-    10km), verificada perquè amb 10km dona ~393 punts (gairebé idèntic als
-    390 originals, confirma que el polígon és prou fidel)."""
+    polígon aproximat per no generar massa punts al mar."""
     lat_step = spacing_km / 111.0
     avg_lat = (CATALUNYA_LAT_MIN + CATALUNYA_LAT_MAX) / 2
     lon_step = spacing_km / (111.0 * math.cos(math.radians(avg_lat)))
@@ -103,6 +121,115 @@ def generate_grid_points(spacing_km=GRID_SPACING_KM):
     return points
 
 
+def generate_verification_points(center_lat, center_lon, offset_km=VERIFICATION_OFFSET_KM):
+    """Genera 4 punts de verificació N/S/E/O al voltant del centre d'una
+    cel·la, per comprovar si hi ha bosc real sense dependre només del punt
+    central exacte (que pot caure per casualitat en un clar o un camí)."""
+    lat_offset = offset_km / 111.0
+    lon_offset = offset_km / (111.0 * math.cos(math.radians(center_lat)))
+    return [
+        (round(center_lat + lat_offset, 4), round(center_lon, 4)),
+        (round(center_lat - lat_offset, 4), round(center_lon, 4)),
+        (round(center_lat, 4), round(center_lon + lon_offset, 4)),
+        (round(center_lat, 4), round(center_lon - lon_offset, 4)),
+    ]
+
+
+def generate_dense_subgrid(center_lat, center_lon, cell_size_km=GRID_SPACING_KM, sub_spacing_km=DENSE_SPACING_KM):
+    """Genera una micro-graella (normalment 3x3=9 punts) dins d'una cel·la
+    de cell_size_km, amb espaiat sub_spacing_km, per substituir el punt
+    únic original en cel·les confirmades com a forestals."""
+    half_cell = cell_size_km / 2
+    lat_range = half_cell / 111.0
+    lon_range = half_cell / (111.0 * math.cos(math.radians(center_lat)))
+    sub_lat_step = sub_spacing_km / 111.0
+    sub_lon_step = sub_spacing_km / (111.0 * math.cos(math.radians(center_lat)))
+
+    points = []
+    lat = center_lat - lat_range
+    while lat <= center_lat + lat_range + 1e-9:
+        lon = center_lon - lon_range
+        while lon <= center_lon + lon_range + 1e-9:
+            if point_in_catalunya_polygon(lat, lon):
+                points.append((round(lat, 4), round(lon, 4)))
+            lon += sub_lon_step
+        lat += sub_lat_step
+    return points
+
+
+def load_forest_survey_cache():
+    """Cache del sondeig forestal: {codi_cel·la: True/False}, indica si una
+    cel·la de la graella de 5km té bosc real confirmat (almenys 1 dels 5
+    punts de verificació ho era). Cache llarg (365 dies) — el bosc real no
+    canvia d'una execució a una altra."""
+    try:
+        with open(FOREST_SURVEY_CACHE_PATH, "r", encoding="utf-8") as f:
+            cache = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {}
+    cached_at = cache.get("cached_at")
+    if not cached_at:
+        return {}
+    try:
+        age_days = (datetime.now(timezone.utc) - datetime.fromisoformat(cached_at)).days
+    except ValueError:
+        return {}
+    if age_days > FOREST_SURVEY_MAX_DAYS:
+        return {}
+    return cache.get("cells", {})
+
+
+def save_forest_survey_cache(cells):
+    cache = {"cached_at": datetime.now(timezone.utc).isoformat(), "cells": cells}
+    with open(FOREST_SURVEY_CACHE_PATH, "w", encoding="utf-8") as f:
+        json.dump(cache, f, ensure_ascii=False)
+
+
+def cell_key(lat, lon):
+    return f"{lat:.4f},{lon:.4f}"
+
+
+def survey_forest_cells(base_points, layer_name):
+    """
+    FASE DE SONDEIG: per a cada punt base (cel·la de 5km) encara no
+    cacuejat, consulta el punt central + 4 punts de verificació a l'ICGC.
+    Si CAP dels 5 és bosc real, la cel·la es marca com a no forestal
+    (es descartarà). Es processa per lots amb límit de temps, com
+    VEGETACIO/ICGC — amb ~1470 cel·les x 5 consultes, es completa en
+    diverses execucions successives.
+    """
+    cache = load_forest_survey_cache()
+    missing = [p for p in base_points if cell_key(*p) not in cache]
+
+    if not missing:
+        print("  Sondeig forestal: totes les cel·les ja són al cache")
+        return cache
+
+    print(f"  Sondeig forestal: {len(missing)} cel·les sense cache — consultant...")
+    start = time.time()
+    consulted = 0
+    for lat, lon in missing:
+        if time.time() - start > FOREST_SURVEY_MAX_SECONDS:
+            print(f"  Sondeig forestal: límit de temps ({FOREST_SURVEY_MAX_SECONDS}s) assolit a {consulted} cel·les — es continua la propera execució")
+            break
+        points_to_check = [(lat, lon)] + generate_verification_points(lat, lon)
+        is_forest = False
+        for vlat, vlon in points_to_check:
+            try:
+                tree, _ = fetch_tree_type(vlat, vlon, layer_name)
+                if tree not in NON_FOREST and tree != "desconegut":
+                    is_forest = True
+                    break  # ja no cal comprovar la resta d'aquesta cel·la
+            except Exception:
+                continue
+        cache[cell_key(lat, lon)] = is_forest
+        consulted += 1
+    save_forest_survey_cache(cache)
+    forest_count = sum(1 for v in cache.values() if v)
+    print(f"  Sondeig forestal: {consulted} cel·les noves consultades ({forest_count}/{len(cache)} forestals fins ara)")
+    return cache
+
+
 def fetch_elevations_batch(points, timeout=20):
     """Consulta l'altitud REAL (Copernicus DEM, 90m) de fins a 100 punts de
     cop via l'Elevation API d'Open-Meteo (gratuïta, sense clau, el mateix
@@ -116,21 +243,12 @@ def fetch_elevations_batch(points, timeout=20):
     return data.get("elevation", [])
 
 
-def build_zones_with_real_elevation():
-    """
-    Genera la graella de punts i consulta l'altitud REAL de cadascun (en
-    comptes de l'aproximació per blocs que es feia servir abans — es va
-    detectar que 69 dels 390 punts originals compartien exactament la
-    mateixa altitud "250", senyal que no era una dada real per coordenada).
-    Es couen 100 punts per petició (16 peticions per a ~1570 punts).
-    """
-    grid_points = generate_grid_points()
-    print(f"  Graella generada: {len(grid_points)} punts (abans de consultar altitud)")
-
+def fetch_elevations_for_points(points):
+    """Consulta l'altitud real per a una llista de punts, en lots de 100."""
     all_elevations = []
     batch_size = 100
-    for i in range(0, len(grid_points), batch_size):
-        batch = grid_points[i:i + batch_size]
+    for i in range(0, len(points), batch_size):
+        batch = points[i:i + batch_size]
         try:
             elevs = retry_with_backoff(
                 lambda b=batch: fetch_elevations_batch(b),
@@ -141,40 +259,107 @@ def build_zones_with_real_elevation():
             print(f"  AVÍS: lot d'altituds {i // batch_size + 1} ha fallat ({e}) — es descarten aquests punts")
             all_elevations.extend([None] * len(batch))
         time.sleep(1)  # cortesia amb el servei gratuït
+    return all_elevations
+
+
+def build_zones_with_real_elevation():
+    """
+    Genera la graella adaptativa completa:
+    1. Graella base de sondeig (5km).
+    2. Per a cada cel·la, sondeig forestal (5 punts de verificació) via
+       ICGC — amb cache propi de llarga durada, es completa per lots en
+       diverses execucions.
+    3. Cel·les forestals confirmades -> es densifiquen amb una micro-graella
+       de 2.5km (9 punts). Cel·les no forestals -> es descarten del tot.
+    4. Altitud REAL (Copernicus DEM) per a tots els punts finals.
+
+    Retorna (zones, survey_complete). Si el sondeig encara no ha cobert
+    totes les cel·les base, survey_complete és False i les cel·les
+    pendents es tracten de moment com a "no forestals" (es descarten
+    d'aquesta graella provisional) — load_or_build_zones() no fixa la
+    graella al cache fins que survey_complete sigui True, per no perdre
+    zones boscoses reals de manera permanent.
+    """
+    base_points = generate_grid_points()
+    print(f"  Graella de sondeig generada: {len(base_points)} cel·les (5km)")
+
+    layer_name, _ = discover_icgc_layer()
+    forest_survey = survey_forest_cells(base_points, layer_name)
+
+    final_points = []
+    forest_cells, non_forest_cells, pending_cells = 0, 0, 0
+    for lat, lon in base_points:
+        key = cell_key(lat, lon)
+        is_forest = forest_survey.get(key)
+        if is_forest is True:
+            final_points.extend(generate_dense_subgrid(lat, lon))
+            forest_cells += 1
+        elif is_forest is False:
+            non_forest_cells += 1
+        else:
+            pending_cells += 1  # encara no sondejada — es descarta per ara, conservador
+
+    print(f"  Cel·les: {forest_cells} forestals (densificades), {non_forest_cells} no forestals (descartades), {pending_cells} pendents de sondeig")
+    print(f"  Punts totals abans de consultar altitud: {len(final_points)}")
+
+    survey_complete = pending_cells == 0
+    if not survey_complete:
+        print(f"  AVÍS: {pending_cells} cel·les encara no sondejades — la graella NO es fixarà al cache fins que el sondeig estigui complet")
+        print(f"  (Es calcula igualment l'altitud i s'usa aquesta graella provisional aquesta execució, perquè la web segueixi tenint zones útils mentre el sondeig avança)")
+
+    all_elevations = fetch_elevations_for_points(final_points)
 
     zones = []
-    for idx, ((lat, lon), elev) in enumerate(zip(grid_points, all_elevations), start=1):
+    for idx, ((lat, lon), elev) in enumerate(zip(final_points, all_elevations), start=1):
         if elev is None or elev < 0:
             continue  # probablement mar o dada no disponible
         zones.append({"id": idx, "lat": lat, "lon": lon, "alt": round(elev)})
 
     print(f"  Zones finals amb altitud real vàlida: {len(zones)}")
-    return zones
+    return zones, survey_complete
 
 
 def load_or_build_zones():
     """
-    Carrega la graella des del cache si existeix (mai caduca — les
-    coordenades i l'altitud del terreny no canvien), o la genera de nou la
-    primera vegada (o si el fitxer no existeix / està malmès).
+    Carrega la graella des del cache si existeix (mai caduca un cop fixada
+    — les coordenades i l'altitud del terreny no canvien), o la genera/
+    avança la primera vegada.
+
+    IMPORTANT: la graella final NOMÉS es fixa al cache un cop el sondeig
+    forestal (survey_forest_cells) ha cobert el 100% de les cel·les base.
+    Fixar-la abans (amb cel·les encara pendents tractades com "no
+    forestal") perdria zones boscoses reals de manera permanent. Mentre el
+    sondeig no estigui complet, cada execució avança el sondeig una mica
+    més (per lots, com VEGETACIO) i usa una graella "provisional" (només
+    amb les cel·les ja confirmades) sense desar-la — un cop el sondeig
+    arribi al 100%, la següent execució la fixa i totes les posteriors la
+    carreguen del cache a l'instant.
     """
     try:
         with open(GRID_CACHE_PATH, "r", encoding="utf-8") as f:
             cached = json.load(f)
         zones = cached.get("zones")
-        if zones and len(zones) > 100:  # comprovació bàsica de sanitat
-            print(f"  Graella carregada des del cache: {len(zones)} punts")
+        if zones and len(zones) > 100 and cached.get("survey_complete"):
+            print(f"  Graella carregada des del cache (sondeig complet): {len(zones)} punts")
             return zones
     except (FileNotFoundError, json.JSONDecodeError):
         pass
 
-    print("  Graella no trobada al cache — generant-la de nou (només passa un cop)...")
-    zones = build_zones_with_real_elevation()
+    print("  Graella encara no fixada (sondeig forestal en curs) — generant/avançant...")
+    zones, survey_complete = build_zones_with_real_elevation()
     try:
         with open(GRID_CACHE_PATH, "w", encoding="utf-8") as f:
-            json.dump({"generated_at": datetime.now(timezone.utc).isoformat(), "zones": zones}, f, ensure_ascii=False)
+            json.dump({
+                "generated_at": datetime.now(timezone.utc).isoformat(),
+                "zones": zones,
+                "survey_complete": survey_complete,
+            }, f, ensure_ascii=False)
+        if survey_complete:
+            print(f"  Sondeig forestal complet — graella fixada amb {len(zones)} punts (les properes execucions la carregaran del cache)")
+        else:
+            print(f"  Sondeig encara incomplet — graella provisional d'aquesta execució: {len(zones)} punts (no fixada del tot)")
     except Exception as e:
-        print(f"  AVÍS: no s'ha pogut desar el cache de la graella ({e}) — es tornarà a generar la propera execució")
+        print(f"  AVÍS: no s'ha pogut desar el cache de la graella ({e})")
     return zones
 
 
