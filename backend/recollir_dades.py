@@ -2497,75 +2497,42 @@ def compute_model_accuracy(hallazgos, evolution):
 
 def test_geologia_layer():
     """
-    PROVA CONTROLADA (no afecta el resultat principal): en comptes de
-    seguir endevinant l'URL exacta del servei geològic de l'ICGC (ja han
-    fallat dos intents amb 404: icgc_mg250m i icgc_mg50m), aquesta prova
-    primer demana GetCapabilities a diversos candidats plausibles i només
-    es queda amb el que respongui de debò — igual que ja fa
-    discover_icgc_layer() per al mapa de boscos. Un cop trobat un servei
-    que respon, es llisten les seves capes reals (noms exactes) perquè es
-    pugui triar la correcta amb dades reals, no suposicions.
+    PROVA CONTROLADA (no afecta el resultat principal): l'URL i el nom de
+    capa correctes es van confirmar directament a la pàgina oficial de
+    l'ICGC (icgc.cat/.../WMS-Geologia-territorial) — els intents anteriors
+    amb "icgc_mg50m"/"icgc_mg250m"/"UGEO_PA" eren noms d'un servei antic ja
+    donat de baixa. El servei real i actiu és "geologia-territorial", amb
+    la capa "unitats-geologiques-50000" (1:50.000, més detallada) per a
+    obtenir la unitat geològica de cada punt.
     """
-    candidate_bases = [
-        "https://geoserveis.icgc.cat/servei/catalunya/icgc_mg50m/wms",
-        "https://geoserveis.icgc.cat/servei/catalunya/icgc_mg250m/wms",
-        "https://geoserveis.icgc.cat/servei/catalunya/geologia/wms",
-        "https://geoserveis.icgc.cat/servei/catalunya/mapa-geologic/wms",
-        "https://geoserveis.icgc.cat/icgc_mg50m/wms/service",
-    ]
-
-    print("\n--- PROVA CONTROLADA: descobriment del servei geològic de l'ICGC ---")
-    working_base = None
-    for base_url in candidate_bases:
-        cap_url = f"{base_url}?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetCapabilities"
-        try:
-            req = urllib.request.Request(cap_url, headers={"User-Agent": "bolets-catalunya-app/1.0"})
-            with urllib.request.urlopen(req, timeout=10) as resp:
-                txt = resp.read().decode("utf-8", errors="ignore")
-            import re
-            layer_names = re.findall(r"<Name>([^<]+)</Name>", txt)
-            print(f"  OK {base_url} — {len(layer_names)} capes trobades: {layer_names[:15]}")
-            if working_base is None:
-                working_base = base_url
-                working_layers = layer_names
-        except Exception as e:
-            print(f"  FALLA {base_url}: {type(e).__name__}: {e}")
-
-    if working_base is None:
-        print("  Cap dels URL candidats ha respost — cal buscar l'URL correcta manualment.")
-        print("--- FI PROVA CONTROLADA ---\n")
-        return
-
-    # Amb el primer servei que ha funcionat, es prova GetFeatureInfo sobre
-    # la primera capa que sembli geològica (conté "geo", "litol", "ugeo" al nom)
-    candidate_layers = [l for l in working_layers if any(k in l.lower() for k in ["geo", "litol", "ugeo", "unitat"])]
-    if not candidate_layers and working_layers:
-        candidate_layers = working_layers[:3]
-
-    print(f"\n  Provant GetFeatureInfo amb el servei {working_base}, capes candidates: {candidate_layers[:5]}")
+    base_url = "https://geoserveis.icgc.cat/servei/catalunya/geologia-territorial/wms"
+    layer = "unitats-geologiques-50000"
     test_points = [
         {"name": "Val d'Aran (granits, hauria de ser silici)", "lat": 42.68, "lon": 0.83},
         {"name": "Prepirineu calcari (Berguedà)", "lat": 42.10, "lon": 1.85},
+        {"name": "Montseny (granits/gneis, silici)", "lat": 41.77, "lon": 2.43},
         {"name": "Priorat (llicorella/pissarra, silici)", "lat": 41.23, "lon": 0.82},
+        {"name": "Garrotxa (volcànic)", "lat": 42.18, "lon": 2.53},
     ]
-    for layer in candidate_layers[:3]:
-        for point in test_points:
-            d = 0.01
-            params = (
-                f"?REQUEST=GetFeatureInfo&SERVICE=WMS&VERSION=1.1.1&LAYERS={layer}"
-                f"&STYLES=&FORMAT=image/png&SRS=EPSG:4326"
-                f"&BBOX={point['lon']-d},{point['lat']-d},{point['lon']+d},{point['lat']+d}"
-                f"&WIDTH=101&HEIGHT=101&QUERY_LAYERS={layer}&X=50&Y=50&INFO_FORMAT=text/plain"
-            )
-            url = working_base + params
-            try:
-                req = urllib.request.Request(url, headers={"User-Agent": "bolets-catalunya-app/1.0"})
-                with urllib.request.urlopen(req, timeout=10) as resp:
-                    txt = resp.read().decode("utf-8", errors="ignore")
-                snippet = txt[:400].replace("\n", " | ")
-                print(f"    [{layer}] {point['name']}: {snippet}")
-            except Exception as e:
-                print(f"    [{layer}] {point['name']}: ERROR ({type(e).__name__}: {e})")
+
+    print(f"\n--- PROVA CONTROLADA: capa geològica {layer} (geologia-territorial) ---")
+    for point in test_points:
+        d = 0.01
+        params = (
+            f"?REQUEST=GetFeatureInfo&SERVICE=WMS&VERSION=1.1.1&LAYERS={layer}"
+            f"&STYLES=&FORMAT=image/png&SRS=EPSG:4326"
+            f"&BBOX={point['lon']-d},{point['lat']-d},{point['lon']+d},{point['lat']+d}"
+            f"&WIDTH=101&HEIGHT=101&QUERY_LAYERS={layer}&X=50&Y=50&INFO_FORMAT=text/plain"
+        )
+        url = base_url + params
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "bolets-catalunya-app/1.0"})
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                txt = resp.read().decode("utf-8", errors="ignore")
+            snippet = txt[:600].replace("\n", " | ")
+            print(f"  {point['name']}: {snippet}")
+        except Exception as e:
+            print(f"  {point['name']}: ERROR ({type(e).__name__}: {e})")
     print("--- FI PROVA CONTROLADA ---\n")
 
 
