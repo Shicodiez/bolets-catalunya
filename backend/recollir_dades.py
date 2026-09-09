@@ -1904,6 +1904,7 @@ def fetch_meteoclimatic_stations(timeout=20):
     for st in all_stations:
         st_id = st.findtext("id", default="")
         location = st.findtext("location", default="")
+        pub_date = st.findtext("pubDate", default=None)  # RFC 822, ex: "Mon, 09 Sep 2026 14:00:00 GMT"
         lat = None  # es completa després via geocodificació (el feed no dona coordenades)
         lon = None
 
@@ -1919,6 +1920,7 @@ def fetch_meteoclimatic_stations(timeout=20):
         stations.append({
             "id": st_id, "location": location,
             "lat": lat, "lon": lon, "rain_today_mm": rain_now,
+            "updated_at": pub_date,
         })
     return stations
 
@@ -2386,9 +2388,9 @@ def build_all_stations_list(aemet_stations, meteocat_stations, mc_stations):
     for st in aemet_stations or []:
         add_station("aemet", st.get("name", "?"), st.get("lat"), st.get("lon"), st.get("prec_1h"), st.get("fint"))
     for st in meteocat_stations or []:
-        add_station("meteocat", st.get("name", "?"), st.get("lat"), st.get("lon"), st.get("prec_1h"), None)
+        add_station("meteocat", st.get("name", "?"), st.get("lat"), st.get("lon"), st.get("prec_1h"), st.get("fint"))
     for st in mc_stations or []:
-        add_station("meteoclimatic", st.get("location", "?"), st.get("lat"), st.get("lon"), st.get("rain_today_mm"), None)
+        add_station("meteoclimatic", st.get("location", "?"), st.get("lat"), st.get("lon"), st.get("rain_today_mm"), st.get("updated_at"))
 
     # Ordenades per nom perquè el desplegable de la web sigui fàcil de cercar
     all_stations.sort(key=lambda s: s["name"] or "")
