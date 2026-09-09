@@ -26,5 +26,19 @@
     "lng": 2.0521259307861333,
     "id": "ed16f970-f23f-469e-820b-a80c1263f593",
     "createdAt": "2026-09-07T14:09:19.258Z"
+  },
+  {
+    "speciesId": "ceps",
+    "speciesName": "Ceps",
+    "place": "Sant Celoni",
+    "alt": "500",
+    "tree": "mixt",
+    "treeName": "Mixto / no lo sé",
+    "date": "2025-10-09",
+    "amount": "mucho",
+    "lat": 41.666881053253206,
+    "lng": 2.5645351409912114,
+    "id": "934a3aa2-af46-4774-a1d0-1cddd0fc205b",
+    "createdAt": "2026-09-09T18:22:12.794Z"
   }
 ]
