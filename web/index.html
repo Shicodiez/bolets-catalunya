@@ -120,6 +120,19 @@
     margin-top: 4px; padding: 10px; border-radius: var(--radius); border: none;
     background: var(--green-bar); color: white; font-size: 14px; font-weight: 500; cursor: pointer;
   }
+  .species-checkbox-list {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    border: 0.5px solid var(--border); border-radius: var(--radius);
+    background: var(--surface-1); padding: 8px 10px;
+  }
+  .species-checkbox-item {
+    display: flex; align-items: center; gap: 4px;
+    font-size: 13px; padding: 4px 8px; border-radius: 14px;
+    background: var(--surface-2); cursor: pointer; user-select: none;
+  }
+  .species-checkbox-item input { margin: 0; cursor: pointer; }
+  .species-checkbox-item.checked { background: var(--green-bar); color: white; }
+  .species-checkbox-item.disabled { opacity: 0.4; cursor: not-allowed; }
   /* sighting-marker-icon: eliminada, ya no se usan marcadores individuales por hallazgo */
   .sighting-item {
     font-size: 12px; padding: 8px 10px; background: var(--surface-1); border-radius: 8px;
@@ -212,8 +225,8 @@
         </select>
       </div>
       <div id="sighting-species-wrap">
-        <label>Especie</label>
-        <select id="sighting-species"></select>
+        <label>Especies (hasta 5)</label>
+        <div id="sighting-species-checkboxes" class="species-checkbox-list"></div>
       </div>
       <div>
         <label>Altitud aproximada</label>
@@ -698,12 +711,26 @@ async function reverseGeocodePlace(lat, lng) {
 }
 
 function setupSightingForm() {
-  const speciesSel = document.getElementById('sighting-species');
+  const checkboxContainer = document.getElementById('sighting-species-checkboxes');
+  const MAX_SPECIES = 5;
+
+  function updateCheckboxStates() {
+    const checked = checkboxContainer.querySelectorAll('input:checked').length;
+    checkboxContainer.querySelectorAll('.species-checkbox-item').forEach(item => {
+      const input = item.querySelector('input');
+      item.classList.toggle('checked', input.checked);
+      const atLimit = checked >= MAX_SPECIES && !input.checked;
+      input.disabled = atLimit;
+      item.classList.toggle('disabled', atLimit);
+    });
+  }
+
   DATA.species_catalog.forEach(sp => {
-    const opt = document.createElement('option');
-    opt.value = sp.id;
-    opt.textContent = sp.name;
-    speciesSel.appendChild(opt);
+    const item = document.createElement('label');
+    item.className = 'species-checkbox-item';
+    item.innerHTML = `<input type="checkbox" value="${sp.id}" data-name="${sp.name}"> ${sp.name}`;
+    item.querySelector('input').addEventListener('change', updateCheckboxStates);
+    checkboxContainer.appendChild(item);
   });
 
   const altSel = document.getElementById('sighting-alt');
@@ -723,7 +750,7 @@ function setupSightingForm() {
   const resultSel = document.getElementById('sighting-result');
   const speciesWrap = document.getElementById('sighting-species-wrap');
   const updateSpeciesVisibility = () => {
-    // "Busqué y no encontré" sí lleva especie (qué buscabais sin éxito);
+    // "Busqué y no encontré" sí permite especies (qué buscabais sin éxito);
     // "No llegué a buscar bien" no tiene sentido asociarlo a una especie.
     speciesWrap.style.display = resultSel.value === 'no_buscado' ? 'none' : 'block';
   };
@@ -757,9 +784,15 @@ function setupSightingForm() {
     }
 
     const amount = resultValue === 'buscado_nada' ? 'nada' : resultValue;
-    const hasSpecies = resultValue !== 'buscado_nada';
-    const speciesId = hasSpecies ? speciesSel.value : '';
-    const speciesName = hasSpecies ? speciesSel.options[speciesSel.selectedIndex].textContent : 'Ninguna especie';
+    const checkedInputs = Array.from(checkboxContainer.querySelectorAll('input:checked'));
+    const speciesIds = checkedInputs.map(i => i.value);
+    const speciesNames = checkedInputs.map(i => i.dataset.name);
+
+    if (amount !== 'nada' && speciesIds.length === 0) {
+      alert('Marca al menos una especie encontrada.');
+      return;
+    }
+
     const alt = altSel.value;
     const treeSel = document.getElementById('sighting-tree');
     const tree = treeSel.value;
@@ -772,10 +805,12 @@ function setupSightingForm() {
 
     try {
       await saveSighting({
-        speciesId, speciesName, place, alt, tree, treeName, date, amount,
+        speciesIds, speciesNames, place, alt, tree, treeName, date, amount,
         lat: pickedLatLng.lat, lng: pickedLatLng.lng,
       });
       document.getElementById('sighting-place').value = '';
+      checkboxContainer.querySelectorAll('input:checked').forEach(i => { i.checked = false; });
+      updateCheckboxStates();
       pickedLatLng = null;
       if (pickMarker) { map.removeLayer(pickMarker); pickMarker = null; }
       updatePickedCoordsHint();
