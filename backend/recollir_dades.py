@@ -2498,11 +2498,14 @@ def compute_model_accuracy(hallazgos, evolution):
 def test_geologia_layer():
     """
     PROVA CONTROLADA (no afecta el resultat principal): comprova si la capa
-    UGEO_PA del WMS geològic de l'ICGC (icgc_mg250m, la mateixa família de
-    servei que ja fem servir per a bosc/vegetació) dona informació útil per
-    distingir sòls silicis de calcaris en 5 punts coneguts de Catalunya —
-    abans d'integrar-ho de debò cal saber quin camp/atribut porta la
-    litologia i com interpretar-lo.
+    UGEO_PA del WMS geològic de l'ICGC dona informació útil per distingir
+    sòls silicis de calcaris en 5 punts coneguts de Catalunya.
+
+    S'usa el servei icgc_mg50m (Mapa geològic comarcal 1:50.000) — la
+    versió icgc_mg250m NO és correcta (404): segons la pròpia documentació
+    de l'ICGC, els geoserveis WMS del mapa 1:250.000 "es donen de baixa",
+    així que directament es fa servir el de 1:50.000, que és més detallat
+    i confirmat actiu.
     """
     test_points = [
         {"name": "Val d'Aran (granits, hauria de ser silici)", "lat": 42.68, "lon": 0.83},
@@ -2511,26 +2514,27 @@ def test_geologia_layer():
         {"name": "Priorat (llicorella/pissarra, silici)", "lat": 41.23, "lon": 0.82},
         {"name": "Garrotxa (volcànic)", "lat": 42.18, "lon": 2.53},
     ]
-    base_url = "https://geoserveis.icgc.cat/servei/catalunya/icgc_mg250m/wms"
+    base_url = "https://geoserveis.icgc.cat/servei/catalunya/icgc_mg50m/wms"
 
-    print("\n--- PROVA CONTROLADA: capa geològica UGEO_PA (icgc_mg250m) ---")
+    print("\n--- PROVA CONTROLADA: capa geològica UGEO_PA (icgc_mg50m) ---")
     for point in test_points:
         d = 0.01
-        params = (
-            f"?REQUEST=GetFeatureInfo&SERVICE=WMS&VERSION=1.1.1&LAYERS=UGEO_PA"
-            f"&STYLES=&FORMAT=image/png&SRS=EPSG:4326"
-            f"&BBOX={point['lon']-d},{point['lat']-d},{point['lon']+d},{point['lat']+d}"
-            f"&WIDTH=101&HEIGHT=101&QUERY_LAYERS=UGEO_PA&X=50&Y=50&INFO_FORMAT=text/plain"
-        )
-        url = base_url + params
-        try:
-            req = urllib.request.Request(url, headers={"User-Agent": "bolets-catalunya-app/1.0"})
-            with urllib.request.urlopen(req, timeout=10) as resp:
-                txt = resp.read().decode("utf-8", errors="ignore")
-            snippet = txt[:500].replace("\n", " | ")
-            print(f"  {point['name']}: {snippet}")
-        except Exception as e:
-            print(f"  {point['name']}: ERROR ({type(e).__name__}: {e})")
+        for info_format in ["text/plain", "application/vnd.ogc.gml"]:
+            params = (
+                f"?REQUEST=GetFeatureInfo&SERVICE=WMS&VERSION=1.1.1&LAYERS=UGEO_PA"
+                f"&STYLES=&FORMAT=image/png&SRS=EPSG:4326"
+                f"&BBOX={point['lon']-d},{point['lat']-d},{point['lon']+d},{point['lat']+d}"
+                f"&WIDTH=101&HEIGHT=101&QUERY_LAYERS=UGEO_PA&X=50&Y=50&INFO_FORMAT={info_format}"
+            )
+            url = base_url + params
+            try:
+                req = urllib.request.Request(url, headers={"User-Agent": "bolets-catalunya-app/1.0"})
+                with urllib.request.urlopen(req, timeout=10) as resp:
+                    txt = resp.read().decode("utf-8", errors="ignore")
+                snippet = txt[:600].replace("\n", " | ")
+                print(f"  {point['name']} [{info_format}]: {snippet}")
+            except Exception as e:
+                print(f"  {point['name']} [{info_format}]: ERROR ({type(e).__name__}: {e})")
     print("--- FI PROVA CONTROLADA ---\n")
 
 
