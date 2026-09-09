@@ -1117,7 +1117,7 @@ def fetch_all_tree_types(zones, layer_name, delay=0.05, max_total_seconds=280):
 # 6. SCORING
 # ---------------------------------------------------------------------------
 
-def species_score(sp, rain_10d, min_temp, tree, days_since_rain, alt, month, aemet_rain_1h=None, mc_rain_today=None, gbif_distributions=None, triangulation=None, soil_stats=None, radar_value=None):
+def species_score(sp, rain_10d, min_temp, tree, days_since_rain, alt, month, aemet_rain_1h=None, mc_rain_today=None, gbif_distributions=None, triangulation=None, soil_stats=None, radar_value=None, geologia=None):
     """
     Sistema de puntuació 0-100 per evidència acumulada, no tot-o-res. Cada
     factor suma punts segons com d'a prop està del rang òptim (amb tolerància
@@ -1216,6 +1216,17 @@ def species_score(sp, rain_10d, min_temp, tree, days_since_rain, alt, month, aem
     # Coneixement micològic establert: cada espècie té una temporada més
     # probable segons l'altitud, independentment del detall exacte del dia.
     season_score = seasonal_climate_score(sp, alt, month, gbif_distributions)
+    # Ajust petit i honest per geologia del sòl (silici/calcari): només per
+    # a les espècies amb evidència clara i consistent trobada (ceps i ou de
+    # reig prefereixen sòl silici; camagrocs prefereix calcari). Per a la
+    # resta d'espècies, o si no hi ha dada de geologia, no s'aplica cap
+    # ajust — millor no ajustar que inventar una preferència dubtosa.
+    preferred_soil = SPECIES_SOIL_PREFERENCE.get(sp["id"])
+    if preferred_soil and geologia:
+        if geologia == preferred_soil:
+            season_score = min(15, season_score + 1.5)
+        elif geologia not in ("mixt", None):
+            season_score = max(0, season_score - 1.5)
     breakdown["temporada"] = round(season_score, 1)
     score += season_score
 
@@ -2208,6 +2219,17 @@ def build_results():
     else:
         print("Radar AEMET desactivat a propòsit (georeferenciació no fiable) — no es compta com a font incompleta")
 
+    print("Consultant geologia del sòl (silici/calcari) amb l'ICGC...")
+    try:
+        geologia_lookup = build_geologia_lookup(ZONES)
+        found_count = sum(1 for v in geologia_lookup.values() if v is not None)
+        print(f"  Geologia: {found_count}/{len(geologia_lookup)} punts classificats")
+        data_coverage["geologia"] = {"ok": True, "detail": f"{found_count} punts classificats"}
+    except Exception as e:
+        print(f"  AVÍS: no s'ha pogut consultar la geologia ({e}) — es continua sense aquest ajust")
+        geologia_lookup = {}
+        data_coverage["geologia"] = {"ok": False, "detail": str(e)}
+
     print("Consultant RainViewer (mosaic de radar europeu, cobertura de superfície)...")
     try:
         rainviewer_lookup, rainviewer_ok = build_rainviewer_lookup(ZONES)
@@ -2270,6 +2292,7 @@ def build_results():
 
         mc_rain_today = today_history.get(str(zone["id"]), {}).get("meteoclimatic")
         radar_value = radar_lookup.get(zone["id"])
+        geologia = geologia_lookup.get(str(zone["id"]))
 
         triangulation = triangulate_rain(zone["lat"], zone["lon"], aemet_stations, mc_stations, meteocat_stations=meteocat_stations)
 
@@ -2280,7 +2303,7 @@ def build_results():
                     sp, rain_10d, min_temp, tree, days_since_rain, zone["alt"], current_month,
                     aemet_rain_1h=aemet_rain_1h, mc_rain_today=mc_rain_today,
                     gbif_distributions=gbif_distributions, triangulation=triangulation,
-                    soil_stats=soil_stats, radar_value=radar_value,
+                    soil_stats=soil_stats, radar_value=radar_value, geologia=geologia,
                 )
                 if s > 0:
                     species_scores.append({"id": sp["id"], "name": sp["name"], "score": s, "confidence": confidence, "breakdown": breakdown})
@@ -2306,6 +2329,7 @@ def build_results():
             "own_history_days": own_history_days_count(history, zone["id"]),
             "triangulation": triangulation,
             "radar_mm": radar_value,
+            "geologia": geologia,
             "soil_stats": soil_stats,
         })
 
@@ -2323,7 +2347,45 @@ def build_results():
         "data_coverage": data_coverage,
         "zones": zones_out,
         "species_catalog": [{"id": sp["id"], "name": sp["name"]} for sp in SPECIES],
+        "all_stations": build_all_stations_list(aemet_stations, meteocat_stations, mc_stations),
     }
+
+
+def build_all_stations_list(aemet_stations, meteocat_stations, mc_stations):
+    """
+    Combina les tres xarxes d'estacions en una llista única i uniforme,
+    per exposar-la al resultat final i que la web pugui oferir un
+    desplegable amb totes elles (l'usuari tria una i veu les seves dades
+    reals, en comptes de només veure-les indirectament via triangulació).
+    """
+    all_stations = []
+    for st in aemet_stations or []:
+        if st.get("lat") is None or st.get("lon") is None:
+            continue
+        all_stations.append({
+            "source": "aemet", "name": st.get("name", "?"),
+            "lat": st["lat"], "lon": st["lon"],
+            "rain_mm": st.get("prec_1h"), "updated_at": st.get("fint"),
+        })
+    for st in meteocat_stations or []:
+        if st.get("lat") is None or st.get("lon") is None:
+            continue
+        all_stations.append({
+            "source": "meteocat", "name": st.get("name", "?"),
+            "lat": st["lat"], "lon": st["lon"],
+            "rain_mm": st.get("prec_1h"), "updated_at": None,
+        })
+    for st in mc_stations or []:
+        if st.get("lat") is None or st.get("lon") is None:
+            continue
+        all_stations.append({
+            "source": "meteoclimatic", "name": st.get("location", "?"),
+            "lat": st["lat"], "lon": st["lon"],
+            "rain_mm": st.get("rain_today_mm"), "updated_at": None,
+        })
+    # Ordenades per nom perquè el desplegable de la web sigui fàcil de cercar
+    all_stations.sort(key=lambda s: s["name"] or "")
+    return all_stations
 
 
 EVOLUTION_PATH = "../data/evolucion.json"
@@ -2495,45 +2557,135 @@ def compute_model_accuracy(hallazgos, evolution):
     return results
 
 
-def test_geologia_layer():
-    """
-    PROVA CONTROLADA (no afecta el resultat principal): l'URL i el nom de
-    capa correctes es van confirmar directament a la pàgina oficial de
-    l'ICGC (icgc.cat/.../WMS-Geologia-territorial) — els intents anteriors
-    amb "icgc_mg50m"/"icgc_mg250m"/"UGEO_PA" eren noms d'un servei antic ja
-    donat de baixa. El servei real i actiu és "geologia-territorial", amb
-    la capa "unitats-geologiques-50000" (1:50.000, més detallada) per a
-    obtenir la unitat geològica de cada punt.
-    """
-    base_url = "https://geoserveis.icgc.cat/servei/catalunya/geologia-territorial/wms"
-    layer = "unitats-geologiques-50000"
-    test_points = [
-        {"name": "Val d'Aran (granits, hauria de ser silici)", "lat": 42.68, "lon": 0.83},
-        {"name": "Prepirineu calcari (Berguedà)", "lat": 42.10, "lon": 1.85},
-        {"name": "Montseny (granits/gneis, silici)", "lat": 41.77, "lon": 2.43},
-        {"name": "Priorat (llicorella/pissarra, silici)", "lat": 41.23, "lon": 0.82},
-        {"name": "Garrotxa (volcànic)", "lat": 42.18, "lon": 2.53},
-    ]
+# ---------------------------------------------------------------------------
+# GEOLOGIA DEL SÒL (silici vs calcari) — WMS geologia-territorial de l'ICGC
+# ---------------------------------------------------------------------------
+# Confirmat contra la documentació oficial de l'ICGC (URL i nom de capa
+# reals, els dos intents anteriors amb "icgc_mg50m"/"UGEO_PA" eren un servei
+# antic ja donat de baixa). La capa "unitats-geologiques-50000" retorna un
+# text estructurat amb els camps Descripcio i Descripcio_protolit — es
+# classifica per paraules clau litològiques presents en aquest text.
+#
+# Verificat amb 5 punts reals: Val d'Aran (marbres/calcàries → calcari, no
+# l'esperat "silici" — la geologia real hi és mixta, confirma que la capa
+# funciona per coordenada real, no per suposició geogràfica general),
+# Berguedà (margues/gresos → mixt), Montseny (fil·lites/pissarres → silici),
+# Priorat (gresos/pissarres → silici), Garrotxa (basalts → silici).
 
-    print(f"\n--- PROVA CONTROLADA: capa geològica {layer} (geologia-territorial) ---")
-    for point in test_points:
-        d = 0.01
-        params = (
-            f"?REQUEST=GetFeatureInfo&SERVICE=WMS&VERSION=1.1.1&LAYERS={layer}"
-            f"&STYLES=&FORMAT=image/png&SRS=EPSG:4326"
-            f"&BBOX={point['lon']-d},{point['lat']-d},{point['lon']+d},{point['lat']+d}"
-            f"&WIDTH=101&HEIGHT=101&QUERY_LAYERS={layer}&X=50&Y=50&INFO_FORMAT=text/plain"
-        )
-        url = base_url + params
-        try:
-            req = urllib.request.Request(url, headers={"User-Agent": "bolets-catalunya-app/1.0"})
-            with urllib.request.urlopen(req, timeout=10) as resp:
-                txt = resp.read().decode("utf-8", errors="ignore")
-            snippet = txt[:600].replace("\n", " | ")
-            print(f"  {point['name']}: {snippet}")
-        except Exception as e:
-            print(f"  {point['name']}: ERROR ({type(e).__name__}: {e})")
-    print("--- FI PROVA CONTROLADA ---\n")
+GEOLOGIA_WMS_URL = "https://geoserveis.icgc.cat/servei/catalunya/geologia-territorial/wms"
+GEOLOGIA_LAYER = "unitats-geologiques-50000"
+GEOLOGIA_CACHE_PATH = "../data/geologia_cache.json"
+GEOLOGIA_CACHE_MAX_DAYS = 180  # la geologia del terreny no canvia mai
+
+GEOLOGIA_KEYWORDS_CALCARI = [
+    "calcària", "calcàries", "calcaria", "marbre", "guix", "dolomia", "margu",
+    "marga", "travertí",
+]
+GEOLOGIA_KEYWORDS_SILICI = [
+    "granit", "pissarra", "gres", "quarsita", "fil·lit", "filita", "basalt",
+    "andesita", "esquist", "gneis", "conglomerat", "llicorella",
+]
+
+# Ajust petit i honest al bonus de temporada/hàbitat — només per a les 3
+# espècies amb evidència clara i consistent trobada (ceps i ou de reig
+# prefereixen sòl silici/àcid; camagrocs prefereix sòl calcari). Per a la
+# resta d'espècies no s'aplica cap ajust (no hi ha prou evidència fiable).
+SPECIES_SOIL_PREFERENCE = {
+    "ceps": "silici",
+    "oureig": "silici",
+    "camagrocs": "calcari",
+}
+
+
+def classify_geologia_text(text):
+    """Retorna 'silici', 'calcari', 'mixt' o None segons quines paraules
+    clau apareixen al text de la resposta GetFeatureInfo."""
+    if not text:
+        return None
+    lower = text.lower()
+    has_calcari = any(kw in lower for kw in GEOLOGIA_KEYWORDS_CALCARI)
+    has_silici = any(kw in lower for kw in GEOLOGIA_KEYWORDS_SILICI)
+    if has_calcari and has_silici:
+        return "mixt"
+    if has_calcari:
+        return "calcari"
+    if has_silici:
+        return "silici"
+    return None
+
+
+def fetch_geologia_at_point(lat, lon, timeout=10):
+    """Consulta la unitat geològica en un punt concret i la classifica."""
+    d = 0.01
+    params = (
+        f"?REQUEST=GetFeatureInfo&SERVICE=WMS&VERSION=1.1.1&LAYERS={GEOLOGIA_LAYER}"
+        f"&STYLES=&FORMAT=image/png&SRS=EPSG:4326"
+        f"&BBOX={lon-d},{lat-d},{lon+d},{lat+d}"
+        f"&WIDTH=101&HEIGHT=101&QUERY_LAYERS={GEOLOGIA_LAYER}&X=50&Y=50&INFO_FORMAT=text/plain"
+    )
+    url = GEOLOGIA_WMS_URL + params
+    req = urllib.request.Request(url, headers={"User-Agent": "bolets-catalunya-app/1.0"})
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        txt = resp.read().decode("utf-8", errors="ignore")
+    return classify_geologia_text(txt)
+
+
+def load_geologia_cache():
+    try:
+        with open(GEOLOGIA_CACHE_PATH, "r", encoding="utf-8") as f:
+            cache = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {}
+    cached_at = cache.get("cached_at")
+    if not cached_at:
+        return {}
+    try:
+        age_days = (datetime.now(timezone.utc) - datetime.fromisoformat(cached_at)).days
+    except ValueError:
+        return {}
+    if age_days > GEOLOGIA_CACHE_MAX_DAYS:
+        print(f"  Cache de geologia caducat ({age_days} dies) — es torna a consultar")
+        return {}
+    print(f"  Cache de geologia trobat ({age_days} dies)")
+    return cache.get("points", {})
+
+
+def save_geologia_cache(points):
+    cache = {"cached_at": datetime.now(timezone.utc).isoformat(), "points": points}
+    with open(GEOLOGIA_CACHE_PATH, "w", encoding="utf-8") as f:
+        json.dump(cache, f, ensure_ascii=False)
+
+
+def build_geologia_lookup(zones, max_seconds=300, batch_per_run=150):
+    """
+    Completa el cache de geologia per lots (com el refinament de VEGETACIO):
+    consulta només els punts encara no cacheados, amb un límit de temps i
+    de quantitat per execució perquè no allargui massa el procés — amb
+    ~1470 punts, es completarà en diverses execucions successives.
+    """
+    cache = load_geologia_cache()
+    missing = [z for z in zones if str(z["id"]) not in cache]
+
+    if missing:
+        print(f"  Geologia: {len(missing)} punts sense cache — consultant...")
+        start = time.time()
+        consulted = 0
+        for z in missing[:batch_per_run]:
+            if time.time() - start > max_seconds:
+                print(f"  Geologia: límit de temps ({max_seconds}s) assolit a {consulted} punts — es continua la propera execució")
+                break
+            try:
+                classification = fetch_geologia_at_point(z["lat"], z["lon"])
+                cache[str(z["id"])] = classification  # es desa també si és None, per no reintentar
+            except Exception:
+                cache[str(z["id"])] = None
+            consulted += 1
+        save_geologia_cache(cache)
+        print(f"  Geologia: {consulted} punts nous consultats aquesta execució")
+    else:
+        print("  Geologia: tots els punts ja són al cache")
+
+    return cache
 
 
 def main():
