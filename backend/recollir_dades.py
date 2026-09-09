@@ -1786,13 +1786,22 @@ def geocode_place(location_name, timeout=10):
 # graella actual, completar tots els noms tarda ~2-3 setmanes).
 
 ZONE_NAMES_CACHE_PATH = "../data/zone_names_cache.json"
-ZONE_NAMES_BATCH_PER_RUN = 20
+ZONE_NAMES_BATCH_PER_RUN = 60  # 60/execució (~4-5 dies per completar les 1474 zones); pujat de 20 quan es va reiniciar el cache sencer per corregir el zoom de Nominatim (12→14, evitava municipis administratius llunyans en zones rurals poc mapejades)
 
 
 def reverse_geocode_place(lat, lon, timeout=10):
     """Retorna un nom de lloc reconeixible per a unes coordenades (poble,
-    llogaret o, si no n'hi ha, comarca/paratge), via Nominatim (OSM)."""
-    params = f"?lat={lat}&lon={lon}&format=json&zoom=12&accept-language=ca"
+    llogaret o, si no n'hi ha, comarca/paratge), via Nominatim (OSM).
+
+    zoom=14 (nivell "suburb/barri") en comptes de zoom=12 (nivell
+    "town/municipi"): amb zoom=12, en zones rurals poc mapejades a OSM,
+    Nominatim pot retornar el municipi/entitat administrativa més propera
+    a la seva base de dades encara que estigui a força distància real del
+    punt (confirmat amb un cas real: un punt a la Ribera d'Ebre va rebre
+    el nom "Ribera d'Ondara", una entitat de la Segarra, molt lluny). Amb
+    zoom=14 es prioritzen nuclis de població més petits i propers abans
+    de caure en una entitat administrativa àmplia."""
+    params = f"?lat={lat}&lon={lon}&format=json&zoom=14&accept-language=ca"
     url = "https://nominatim.openstreetmap.org/reverse" + params
     req = urllib.request.Request(url, headers={"User-Agent": "bolets-catalunya-app/1.0 (github.com/Shicodiez/bolets-catalunya)"})
     try:
@@ -1800,8 +1809,9 @@ def reverse_geocode_place(lat, lon, timeout=10):
             data = json.loads(resp.read().decode("utf-8"))
         addr = data.get("address", {})
         name = (
-            addr.get("village") or addr.get("town") or addr.get("hamlet")
-            or addr.get("municipality") or addr.get("city") or addr.get("county")
+            addr.get("hamlet") or addr.get("village") or addr.get("suburb")
+            or addr.get("town") or addr.get("municipality") or addr.get("city")
+            or addr.get("county")
         )
         return name
     except Exception:
@@ -2342,6 +2352,7 @@ def build_results():
             estat = "JA HA CADUCAT" if w["expired"] else f"caduca en {w['days_left']} dies"
             print(f"  - {w['name']}: {estat} ({w['expires_on']})")
 
+    zone_names_with_real_name = sum(1 for z in zones_out if not z["name"].startswith("Punt "))
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "default_threshold": DEFAULT_SCORE_THRESHOLD,
@@ -2350,6 +2361,7 @@ def build_results():
         "zones": zones_out,
         "species_catalog": [{"id": sp["id"], "name": sp["name"]} for sp in SPECIES],
         "all_stations": build_all_stations_list(aemet_stations, meteocat_stations, mc_stations),
+        "zone_names_progress": {"done": zone_names_with_real_name, "total": len(zones_out)},
     }
 
 
