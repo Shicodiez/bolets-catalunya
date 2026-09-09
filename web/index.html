@@ -92,6 +92,23 @@
   }
   .sighting-box h3 { font-size: 15px; margin: 0 0 4px; }
   .sighting-box p.hint { font-size: 12px; color: var(--text-secondary); margin: 0 0 12px; }
+  .stations-box {
+    background: var(--surface-2); border: 0.5px solid var(--border); border-radius: 12px;
+    padding: 16px; margin-top: 20px;
+  }
+  .stations-box h3 { font-size: 15px; margin: 0 0 4px; }
+  .stations-box p.hint { font-size: 12px; color: var(--text-secondary); margin: 0 0 12px; }
+  .stations-box select {
+    width: 100%; padding: 8px 10px; border-radius: var(--radius);
+    border: 0.5px solid var(--border); background: var(--surface-1); font-size: 14px;
+    font-family: inherit;
+  }
+  #station-detail { margin-top: 10px; font-size: 13px; }
+  #station-detail p { margin: 4px 0; }
+  .station-source-badge {
+    display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 10px;
+    background: var(--surface-1); color: var(--text-secondary); margin-bottom: 6px;
+  }
   .sighting-form { display: flex; flex-direction: column; gap: 8px; }
   .sighting-form label { font-size: 12px; color: var(--text-secondary); }
   .sighting-form select, .sighting-form input, .sighting-form textarea {
@@ -221,6 +238,15 @@
       </div>
       <button id="sighting-save">Guardar</button>
     </div>
+  </div>
+
+  <div class="stations-box">
+    <h3>📡 Estaciones meteorológicas</h3>
+    <p class="hint">Consulta los datos reales que está usando el sistema, tal cual llegan de cada red.</p>
+    <select id="station-select">
+      <option value="">Elige una estación...</option>
+    </select>
+    <div id="station-detail"></div>
   </div>
 
   <div class="legend">
@@ -801,6 +827,44 @@ function renderDataCoverage(coverage) {
   container.appendChild(box);
 }
 
+const STATION_SOURCE_LABELS = {
+  aemet: 'AEMET', meteocat: 'Meteocat / XEMA', meteoclimatic: 'Meteoclimatic',
+};
+
+function setupStationsDropdown(stations) {
+  const select = document.getElementById('station-select');
+  const detail = document.getElementById('station-detail');
+  select.innerHTML = '<option value="">Elige una estación...</option>';
+
+  if (!stations || stations.length === 0) {
+    detail.innerHTML = '<p class="hint">No hay estaciones disponibles en esta actualización.</p>';
+    return;
+  }
+
+  stations.forEach((st, idx) => {
+    const opt = document.createElement('option');
+    opt.value = String(idx);
+    opt.textContent = `${st.name} (${STATION_SOURCE_LABELS[st.source] || st.source})`;
+    select.appendChild(opt);
+  });
+
+  select.addEventListener('change', () => {
+    detail.innerHTML = '';
+    if (select.value === '') return;
+    const st = stations[parseInt(select.value, 10)];
+    if (!st) return;
+    const rainText = (st.rain_mm !== null && st.rain_mm !== undefined) ? `${st.rain_mm}mm` : 'sin dato';
+    const updatedText = st.updated_at ? `<p>Última actualización: ${st.updated_at}</p>` : '';
+    detail.innerHTML = `
+      <span class="station-source-badge">${STATION_SOURCE_LABELS[st.source] || st.source}</span>
+      <p><strong>${st.name}</strong></p>
+      <p>Coordenadas: ${st.lat.toFixed(4)}, ${st.lon.toFixed(4)}</p>
+      <p>Lluvia registrada: ${rainText}</p>
+      ${updatedText}
+    `;
+  });
+}
+
 function renderAccuracyPanel(accuracy) {
   const container = document.getElementById('accuracy-panel');
   container.innerHTML = '';
@@ -842,6 +906,7 @@ async function loadData() {
     renderCredentialWarnings(DATA.credential_warnings || []);
     renderAccuracyPanel(DATA.model_accuracy);
     renderDataCoverage(DATA.data_coverage);
+    setupStationsDropdown(DATA.all_stations || []);
 
     map = L.map('map', {scrollWheelZoom: false}).setView([41.85, 1.55], 8);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
