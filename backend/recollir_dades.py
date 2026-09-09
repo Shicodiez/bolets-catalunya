@@ -2720,11 +2720,6 @@ def main():
     print(f"Fet. {len(results['zones'])} zones desades a {out_path} ({forest_count} boscoses)")
     print(f"Generat: {results['generated_at']}")
 
-    try:
-        test_geologia_layer()
-    except Exception as e:
-        print(f"AVÍS: la prova controlada de geologia ha fallat sencera ({e}) — no afecta el resultat principal")
-
 
 # Es carrega/genera aquí (i no a l'inici del fitxer) perquè depèn de
 # retry_with_backoff, definida més amunt però després del punt on abans
