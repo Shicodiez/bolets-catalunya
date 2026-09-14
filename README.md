@@ -31,7 +31,7 @@ encontrar cada tipo de bolet ahora mismo.
    puedes elegir cualquiera de las estaciones reales que usa el sistema
    (AEMET, Meteocat, Meteoclimatic) y ver sus datos tal cual llegan.
 
-Los datos se actualizan solos cada 6 horas. No hace falta hacer nada para
+Los datos se actualizan solos cada 3 horas. No hace falta hacer nada para
 que esté al día.
 
 ---
@@ -47,7 +47,7 @@ con verificación de email)
 
 - `backend/recollir_dades.py` — recoge datos de todas las fuentes, calcula
   la puntuación de cada bolet en cada zona, y guarda el resultado. Se
-  ejecuta automáticamente cada 6 horas.
+  ejecuta automáticamente cada 3 horas.
 - `backend/requirements.txt` — dependencias externas (rasterio, Pillow).
 - `data/resultats.json` — el resultado del cálculo. La web lo lee.
 - `data/zones_grid.json` — caché permanente de la rejilla (coordenadas y
@@ -64,7 +64,7 @@ con verificación de email)
 - `data/hallazgos.json` — salidas reales registradas por los usuarios. Se actualiza vía el Worker.
 - `web/index.html` — la web: login, mapa, deslizador de umbral, formulario de salidas, panel de tasa de confirmación, explicaciones de DeepSeek.
 - `worker/index.js` — código del Worker de Cloudflare. **Se despliega directamente en el editor de Cloudflare, subirlo a GitHub NO lo actualiza en producción.**
-- `.github/workflows/actualitzar.yml` — automatización que ejecuta el backend cada 6 horas.
+- `.github/workflows/actualitzar.yml` — automatización que ejecuta el backend cada 3 horas.
 
 ### La rejilla de predicción
 
@@ -294,7 +294,7 @@ algo que iFong no menciona tener.
 - **Token de GitHub del Worker** caduca el 24/11/2026.
 - La web avisa automáticamente en rojo cuando a cualquiera de estas
   credenciales le quedan 15 días o menos.
-- El backend se ejecuta cada 6 horas vía GitHub Actions; también se puede
+- El backend se ejecuta cada 3 horas vía GitHub Actions; también se puede
   lanzar a mano desde "Actions" → "Actualitzar dades de bolets" → "Run workflow".
 
 ### Fallos reales detectados y corregidos durante el desarrollo
