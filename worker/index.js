@@ -177,7 +177,9 @@ Escribe la explicación en tono cercano, como si hablaras con un aficionado a lo
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      model: "deepseek-v4-flash",
+      model: "deepseek-flash", // deepseek-v4-flash es va retirar el 10/09/2026 (substituït per V4.1 Flash);
+      // "deepseek-flash" és el nom de model oficial actual — l'antic queda enrutat
+      // temporalment per compatibilitat, però pot donar respostes inesperades
       messages: [{ role: "user", content: prompt }],
       temperature: 0.5,
       max_tokens: 200,
@@ -189,7 +191,16 @@ Escribe la explicación en tono cercano, como si hablaras con un aficionado a lo
     throw new Error(`DeepSeek ha fallat (status ${res.status}): ${errText}`);
   }
   const data = await res.json();
-  return data.choices?.[0]?.message?.content?.trim() || "No se ha podido generar una explicación.";
+  const content = data.choices?.[0]?.message?.content?.trim();
+  if (!content) {
+    // Abans es retornava silenciosament "No se ha podido generar una
+    // explicación." com si fos un èxit (ok:true) — l'usuari ho veia com
+    // l'explicació real sense cap pista de què havia fallat. Ara es
+    // llança una excepció amb el cos real de la resposta, que la ruta
+    // /explain ja captura i retorna com a error 502 amb el motiu.
+    throw new Error(`DeepSeek ha respost sense contingut útil: ${JSON.stringify(data).slice(0, 300)}`);
+  }
+  return content;
 }
 
 const OWNER = "Shicodiez";
