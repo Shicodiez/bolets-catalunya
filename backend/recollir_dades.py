@@ -749,9 +749,19 @@ def fetch_weather_rotating(zones):
     """
     Orquestra el sistema de blocs rotatius: només el bloc del torn actual es
     consulta de debò a Open-Meteo; la resta de zones usen el seu últim
-    valor guardat al cache (data/weather_block_cache.json). Retorna la
-    llista de resultats en el mateix ordre que 'zones', igual que
-    fetch_weather(), perquè build_results() no hagi de canviar res més.
+    resum guardat al cache (data/weather_block_cache.json).
+
+    IMPORTANT: es desa només el RESUM compacte (rain_10d, avg_temp,
+    min_temp, days_since_rain + soil_stats — uns 10 números per punt), NO
+    el bloc 'daily'/'hourly' complet tal com arriba d'Open-Meteo (17 dies
+    x 24h x 3 variables = 1275 valors per punt). Es va detectar un cas
+    real: guardant l'històric complet per als ~7300 punts, el fitxer de
+    cache pesava 108 MB — GitHub rebutja fitxers de més de 100 MB. Amb el
+    resum, el pes és uns 100x més petit.
+
+    Retorna una llista de tuples (rain_stats, soil_stats) en el mateix
+    ordre que 'zones', ja processades — build_results() ja no ha de cridar
+    compute_rain_stats/compute_soil_moisture_stats pel seu compte.
 
     Si una zona encara no té cap valor al cache (per exemple, punts nous
     del Pirineu recuperats fa poc), es consulta igualment encara que no li
@@ -768,10 +778,18 @@ def fetch_weather_rotating(zones):
     print(f"  Blocs rotatius: torn del bloc {current_block}/{WEATHER_N_BLOCKS - 1} — "
           f"{len(zones_to_fetch)} punts a refrescar, {len(zones_from_cache)} des del cache")
 
-    fresh_results = fetch_weather(zones_to_fetch)
-    for z, result in zip(zones_to_fetch, fresh_results):
-        if result:  # no es desa un placeholder buit d'un lot fallat
-            cache[cell_key(z["lat"], z["lon"])] = result
+    fresh_raw = fetch_weather(zones_to_fetch)
+    for z, raw in zip(zones_to_fetch, fresh_raw):
+        if not raw:
+            continue  # placeholder buit d'un lot fallat — no es desa, es reintenta la propera
+        daily = raw.get("daily", {})
+        hourly = raw.get("hourly", {})
+        rain_10d, avg_temp, min_temp, days_since_rain = compute_rain_stats(daily)
+        soil_stats = compute_soil_moisture_stats(hourly)
+        cache[cell_key(z["lat"], z["lon"])] = {
+            "rain_10d": rain_10d, "avg_temp": avg_temp, "min_temp": min_temp,
+            "days_since_rain": days_since_rain, "soil_stats": soil_stats,
+        }
     save_weather_block_cache(cache)
 
     next_block = (current_block + 1) % WEATHER_N_BLOCKS
@@ -2714,11 +2732,15 @@ def build_results():
     today_history = history.get(today_str, {})
 
     zones_out = []
-    for zone, daily_wrapper in zip(ZONES, weather_results):
-        daily = daily_wrapper.get("daily", {})
-        hourly = daily_wrapper.get("hourly", {})
-        rain_10d, avg_temp, min_temp, days_since_rain = compute_rain_stats(daily)
-        soil_stats = compute_soil_moisture_stats(hourly)
+    for zone, weather_summary in zip(ZONES, weather_results):
+        # weather_summary ja ve pre-processat de fetch_weather_rotating
+        # (rain_10d, avg_temp, min_temp, days_since_rain, soil_stats) — no
+        # calen daily/hourly crus aquí, ja no es guarden al cache de blocs.
+        rain_10d = weather_summary.get("rain_10d", 0)
+        avg_temp = weather_summary.get("avg_temp", 0)
+        min_temp = weather_summary.get("min_temp", 0)
+        days_since_rain = weather_summary.get("days_since_rain", 0)
+        soil_stats = weather_summary.get("soil_stats")
         tree = tree_types.get(zone["id"], "desconegut")
 
         aemet_info = None
