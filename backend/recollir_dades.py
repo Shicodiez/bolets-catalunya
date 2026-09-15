@@ -615,26 +615,39 @@ def fetch_weather_batch(zones, timeout=60):
     return data if isinstance(data, list) else [data]
 
 
-def fetch_weather(zones, batch_size=50, delay_between_batches=1.5):
-    """Open-Meteo accepta moltes coordenades per petició. batch_size pujat
-    de 40 a 50 i la pausa reduïda de 3s a 1.5s (amb la graella adaptativa
-    de ~6200 punts, 155 lots amb 3s de pausa fixa costaven per si sols
-    ~7.7 min només en pauses) — el mecanisme de retry_with_backoff ja
-    tracta el 429 amb una espera llarga i específica quan de debò cal, així
-    que no fa falta una pausa fixa tan gran per precaució en el cas normal."""
+def fetch_weather(zones, batch_size=50, delay_between_batches=2.5):
+    """Open-Meteo accepta moltes coordenades per petició.
+
+    IMPORTANT: si un lot esgota tots els seus reintents (max_attempts),
+    ABANS es propagava l'excepció i avortava TOT el procés (incloent tot
+    el treball ja fet de sondeig/altitud d'aquesta execució, que sí s'havia
+    desat correctament però la resta de fonts no arribaven a consultar-se
+    ni a desar-se). Ara, un lot que falla del tot es marca amb valors buits
+    per als seus punts (es tracten com "sense dada" en aquesta execució,
+    reintentats la propera) i el procés CONTINUA amb la resta — un fallo
+    puntual d'Open-Meteo no ha de bloquejar tota la resta del pipeline
+    (radar, GBIF, VEGETACIO, geologia...)."""
     all_results = []
     n_batches = -(-len(zones) // batch_size)
+    failed_batches = 0
     for i in range(0, len(zones), batch_size):
         batch = zones[i:i + batch_size]
         batch_num = i // batch_size + 1
-        results = retry_with_backoff(
-            lambda b=batch: fetch_weather_batch(b),
-            max_attempts=5,
-            description=f"Open-Meteo lot {batch_num}/{n_batches}",
-        )
-        all_results.extend(results)
+        try:
+            results = retry_with_backoff(
+                lambda b=batch: fetch_weather_batch(b),
+                max_attempts=6,
+                description=f"Open-Meteo lot {batch_num}/{n_batches}",
+            )
+            all_results.extend(results)
+        except Exception as e:
+            print(f"    AVÍS: Open-Meteo lot {batch_num}/{n_batches} ha fallat del tot ({e}) — {len(batch)} punts sense dada meteorològica aquesta execució")
+            failed_batches += 1
+            all_results.extend([{}] * len(batch))  # placeholder buit, compute_rain_stats ja gestiona dades absents
         if batch_num < n_batches:
             time.sleep(delay_between_batches)
+    if failed_batches:
+        print(f"  Open-Meteo: {failed_batches}/{n_batches} lots han fallat del tot — aquests punts es reintentaran a la propera execució")
     return all_results
 
 
