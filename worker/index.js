@@ -183,6 +183,11 @@ Escribe la explicación en tono cercano, como si hablaras con un aficionado a lo
       messages: [{ role: "user", content: prompt }],
       temperature: 0.5,
       max_tokens: 200,
+      thinking: { type: "disabled" }, // IMPORTANT: els models V4/V4.1 Flash tenen el "thinking
+      // mode" activat per defecte i poden gastar-se centenars de tokens "pensant" abans de
+      // respondre — amb max_tokens=200 això esgotava tot el pressupost sense arribar mai a
+      // escriure la resposta final (content buit). Confirmat amb la documentació oficial de
+      // DeepSeek: la manera correcta de desactivar-ho és aquest paràmetre explícit.
     }),
   });
 
