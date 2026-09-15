@@ -623,6 +623,92 @@ def fetch_weather_batch(zones, timeout=60):
     return data if isinstance(data, list) else [data]
 
 
+# ---------------------------------------------------------------------------
+# BLOCS ROTATIUS GEOGRÀFICS PER A OPEN-METEO
+# ---------------------------------------------------------------------------
+# Amb la graella adaptativa (~7300 punts), consultar Open-Meteo sencer cada
+# execució satura el servei gratuït (confirmat amb un patró real de fallades
+# massives — la majoria de lots fallant el primer intent). En comptes de
+# reduir la graella, es reparteix la càrrega: la graella es divideix en 3
+# blocs geogràfics compactes (k-means simple per proximitat, sense cap
+# llibreria externa), i cada execució només refresca UN bloc, rotant
+# 0→1→2→0... Els punts dels blocs que no toquen mantenen el seu últim valor
+# meteorològic vàlid (cache propi) — amb execucions cada 4h i 3 blocs, cada
+# punt es refresca cada ~12h, acceptable per a dades que ja són un històric
+# de 16 dies, no només l'instant actual (el radar, que sí és molt sensible
+# al moment exacte, es consulta sencer cada execució, sense rotar).
+
+WEATHER_N_BLOCKS = 3
+WEATHER_BLOCK_CACHE_PATH = "../data/weather_block_cache.json"
+WEATHER_TURN_PATH = "../data/weather_turn.json"
+
+
+def simple_kmeans(points, k, iterations=15, seed=42):
+    """K-means simple sense dependències externes, per agrupar punts per
+    proximitat geogràfica en k blocs compactes."""
+    import random
+    rng = random.Random(seed)
+    centroids = rng.sample(points, k)
+
+    for _ in range(iterations):
+        clusters = [[] for _ in range(k)]
+        for p in points:
+            distances = [(p[0] - c[0]) ** 2 + (p[1] - c[1]) ** 2 for c in centroids]
+            closest = distances.index(min(distances))
+            clusters[closest].append(p)
+        new_centroids = []
+        for cluster in clusters:
+            if cluster:
+                avg_lat = sum(p[0] for p in cluster) / len(cluster)
+                avg_lon = sum(p[1] for p in cluster) / len(cluster)
+                new_centroids.append((avg_lat, avg_lon))
+            else:
+                new_centroids.append(rng.choice(points))
+        centroids = new_centroids
+
+    labels = []
+    for p in points:
+        distances = [(p[0] - c[0]) ** 2 + (p[1] - c[1]) ** 2 for c in centroids]
+        labels.append(distances.index(min(distances)))
+    return labels
+
+
+def assign_weather_blocks(zones):
+    """Assigna cada zona a un dels WEATHER_N_BLOCKS blocs geogràfics.
+    Determinista (seed fixa): la mateixa graella sempre dona els mateixos
+    blocs, així que no cal cache — es recalcula cada execució (és barat,
+    pur càlcul local sense xarxa)."""
+    points = [(z["lat"], z["lon"]) for z in zones]
+    labels = simple_kmeans(points, WEATHER_N_BLOCKS)
+    return {z["id"]: label for z, label in zip(zones, labels)}
+
+
+def load_weather_turn():
+    try:
+        with open(WEATHER_TURN_PATH, "r", encoding="utf-8") as f:
+            return json.load(f).get("next_block", 0)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return 0
+
+
+def save_weather_turn(next_block):
+    with open(WEATHER_TURN_PATH, "w", encoding="utf-8") as f:
+        json.dump({"next_block": next_block}, f, ensure_ascii=False)
+
+
+def load_weather_block_cache():
+    try:
+        with open(WEATHER_BLOCK_CACHE_PATH, "r", encoding="utf-8") as f:
+            return json.load(f).get("points", {})
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {}
+
+
+def save_weather_block_cache(points):
+    with open(WEATHER_BLOCK_CACHE_PATH, "w", encoding="utf-8") as f:
+        json.dump({"points": points}, f, ensure_ascii=False)
+
+
 def fetch_weather(zones, batch_size=50, delay_between_batches=2.5):
     """Open-Meteo accepta moltes coordenades per petició.
 
@@ -656,6 +742,46 @@ def fetch_weather(zones, batch_size=50, delay_between_batches=2.5):
             time.sleep(delay_between_batches)
     if failed_batches:
         print(f"  Open-Meteo: {failed_batches}/{n_batches} lots han fallat del tot — aquests punts es reintentaran a la propera execució")
+    return all_results
+
+
+def fetch_weather_rotating(zones):
+    """
+    Orquestra el sistema de blocs rotatius: només el bloc del torn actual es
+    consulta de debò a Open-Meteo; la resta de zones usen el seu últim
+    valor guardat al cache (data/weather_block_cache.json). Retorna la
+    llista de resultats en el mateix ordre que 'zones', igual que
+    fetch_weather(), perquè build_results() no hagi de canviar res més.
+
+    Si una zona encara no té cap valor al cache (per exemple, punts nous
+    del Pirineu recuperats fa poc), es consulta igualment encara que no li
+    toqui el torn — millor una petició extra que una zona sense cap dada.
+    """
+    blocks = assign_weather_blocks(zones)
+    current_block = load_weather_turn()
+    cache = load_weather_block_cache()
+
+    zones_to_fetch = [z for z in zones if blocks[z["id"]] == current_block or cell_key(z["lat"], z["lon"]) not in cache]
+    ids_to_fetch = {z["id"] for z in zones_to_fetch}
+    zones_from_cache = [z for z in zones if z["id"] not in ids_to_fetch]
+
+    print(f"  Blocs rotatius: torn del bloc {current_block}/{WEATHER_N_BLOCKS - 1} — "
+          f"{len(zones_to_fetch)} punts a refrescar, {len(zones_from_cache)} des del cache")
+
+    fresh_results = fetch_weather(zones_to_fetch)
+    for z, result in zip(zones_to_fetch, fresh_results):
+        if result:  # no es desa un placeholder buit d'un lot fallat
+            cache[cell_key(z["lat"], z["lon"])] = result
+    save_weather_block_cache(cache)
+
+    next_block = (current_block + 1) % WEATHER_N_BLOCKS
+    save_weather_turn(next_block)
+
+    # Reconstrueix la llista final en el mateix ordre que 'zones'
+    all_results = []
+    for z in zones:
+        key = cell_key(z["lat"], z["lon"])
+        all_results.append(cache.get(key, {}))
     return all_results
 
 
@@ -2417,7 +2543,7 @@ def build_results():
     print(f"[{datetime.now(timezone.utc).isoformat()}] Graella de {len(ZONES)} punts")
 
     print("Consultant Open-Meteo (meteorologia)...")
-    weather_results = fetch_weather(ZONES)  # cada lot ja es reintenta individualment dins de fetch_weather
+    weather_results = fetch_weather_rotating(ZONES)  # sistema de blocs rotatius (3 blocs, un per execució) per no saturar Open-Meteo
 
     print("Consultant Meteoclimatic (contrast estacions amateur, historial propi)...")
     history = load_history()
