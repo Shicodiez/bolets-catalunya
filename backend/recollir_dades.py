@@ -240,7 +240,7 @@ def survey_forest_cells(base_points, layer_name):
             try:
                 tree, _ = fetch_tree_type(vlat, vlon, layer_name, timeout=12)
                 any_success = True
-                if tree not in NON_FOREST and tree != "desconegut":
+                if tree not in NON_FOREST and tree != UNRESOLVED_TREE:
                     is_forest = True
                     break  # ja no cal comprovar la resta d'aquesta cel·la
             except Exception:
@@ -482,8 +482,16 @@ TREE_LABELS = {
     "matollar": "matorral", "prat": "prado/pastizal", "desconegut": "tipo de bosque desconocido",
 }
 
-# Mapa de tipus de bosc no forestal / desconegut que no assignem a cap espècie
-NON_FOREST = {"conreu", "urba", "desconegut", "aigua", "roca", "matollar", "prat"}
+# Mapa de tipus de bosc CONFIRMATS com a no forestals (mai assignem cap espècie).
+# "desconegut" NO hi és inclòs a propòsit: significa "encara no s'ha pogut
+# determinar" (timeout, error de xarxa, límit de temps assolit...), no
+# "confirmat que no hi ha bosc" — són coses molt diferents. Es va detectar un
+# cas real: zones amb bosc real (confirmat per coneixement de camp de
+# l'usuari a la zona de Berga) quedaven marcades "desconegut" per fallades
+# de l'ICGC/límit de temps, i en tractar "desconegut" igual que "conreu"
+# desapareixien silenciosament de la graella densificada per sempre.
+NON_FOREST = {"conreu", "urba", "aigua", "roca", "matollar", "prat"}
+UNRESOLVED_TREE = "desconegut"  # pendent de determinar — mai s'ha de tractar com a "confirmat sense bosc"
 
 # Llindar de puntuació per defecte per considerar una espècie "probable" en una
 # zona. La web permet ajustar-lo amb un control lliscant sense recalcular:
@@ -2441,18 +2449,30 @@ def build_results():
         icgc_start = time.time()
         icgc_max_seconds = 2200  # augmentat de 1000 a 2200: amb la graella adaptativa (~6200 punts,
         # 4.2x més gran que quan es va fixar en 1000s), calia més marge
+        unresolved_this_run = {}  # 'desconegut' d'aquesta execució — NO es guarden al cache permanent
         for i, z in enumerate(missing_zones):
             if time.time() - icgc_start > icgc_max_seconds:
-                print(f"  ICGC: límit de temps ({icgc_max_seconds}s) assolit a {i}/{len(missing_zones)} — es continua sense la resta")
+                print(f"  ICGC: límit de temps ({icgc_max_seconds}s) assolit a {i}/{len(missing_zones)} — es continua sense la resta (es reintentaran, no es fixen com a 'desconegut')")
                 for remaining in missing_zones[i:]:
-                    tree_types[remaining["id"]] = "desconegut"
+                    unresolved_this_run[remaining["id"]] = UNRESOLVED_TREE
                 break
             tree, _label = fetch_tree_type(z["lat"], z["lon"], layer_name, debug=False)
-            tree_types[z["id"]] = tree
+            if tree == UNRESOLVED_TREE:
+                # Fallada puntual (timeout, error de xarxa...) — no és el
+                # mateix que "confirmat sense bosc". No es guarda al cache
+                # perquè es reintenti la propera execució (un cas real: aixi
+                # es van perdre silenciosament zones amb bosc real confirmat
+                # per coneixement de camp, a la zona de Berga).
+                unresolved_this_run[z["id"]] = tree
+            else:
+                tree_types[z["id"]] = tree
             time.sleep(0.05)
             if (i + 1) % 50 == 0:
                 print(f"  ICGC: {i + 1}/{len(missing_zones)} punts consultats...")
+        if unresolved_this_run:
+            print(f"  ICGC: {len(unresolved_this_run)} punts sense resoldre aquesta execució (timeout/error) — es reintentaran, NO es fixen al cache")
         save_tree_cache(tree_types)
+        tree_types.update(unresolved_this_run)  # per usar-los NOMÉS en aquesta execució, no s'han desat
     else:
         print("  Tots els punts trobats al cache — no cal consultar l'ICGC")
 
@@ -2595,7 +2615,7 @@ def build_results():
         triangulation = triangulate_rain(zone["lat"], zone["lon"], aemet_stations, mc_stations, meteocat_stations=meteocat_stations)
 
         species_scores = []
-        if tree not in NON_FOREST:
+        if tree not in NON_FOREST and tree != UNRESOLVED_TREE:
             for sp in SPECIES:
                 s, breakdown, confidence = species_score(
                     sp, rain_10d, min_temp, tree, days_since_rain, zone["alt"], current_month,
@@ -2617,7 +2637,7 @@ def build_results():
             "alt": zone["alt"],
             "tree": tree,
             "tree_label": TREE_LABELS.get(tree, tree),
-            "is_forest": tree not in NON_FOREST,
+            "is_forest": tree not in NON_FOREST and tree != UNRESOLVED_TREE,
             "rain_10d": rain_10d,
             "avg_temp": avg_temp,
             "min_temp": min_temp,
