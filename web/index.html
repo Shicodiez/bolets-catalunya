@@ -23,6 +23,12 @@
   .wrap { max-width: 760px; margin: 0 auto; }
   h1 { font-size: 22px; font-weight: 500; margin: 0 0 4px; }
   .subtitle { font-size: 14px; color: var(--text-secondary); margin: 0 0 20px; }
+  .apk-download-btn {
+    display: inline-block; margin: -12px 0 20px; padding: 10px 16px;
+    background: var(--surface-2); border: 0.5px solid var(--border); border-radius: var(--radius);
+    color: var(--text-primary); text-decoration: none; font-size: 14px; font-weight: 500;
+  }
+  .apk-download-btn:active { background: var(--surface-1); }
   #status { font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; }
   .controls { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
   select {
@@ -183,6 +189,7 @@
 <div class="wrap">
   <h1>Predictor de setas — Catalunya</h1>
   <p class="subtitle">Puntuación por evidencia acumulada: lluvia, temperatura, temporada y contraste entre fuentes</p>
+  <a href="app-debug.apk" download class="apk-download-btn">📲 Descargar app Android (APK)</a>
   <div id="credential-warnings"></div>
   <div id="data-coverage-warning"></div>
   <div id="status">Cargando datos...</div>
