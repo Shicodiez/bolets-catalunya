@@ -22,13 +22,14 @@
   }
   .wrap { max-width: 760px; margin: 0 auto; }
   h1 { font-size: 22px; font-weight: 500; margin: 0 0 4px; }
-  .subtitle { font-size: 14px; color: var(--text-secondary); margin: 0 0 20px; }
+  .subtitle { font-size: 14px; color: var(--text-secondary); margin: 0 0 16px; }
   .apk-download-btn {
-    display: inline-block; margin: -12px 0 20px; padding: 10px 16px;
-    background: var(--surface-2); border: 0.5px solid var(--border); border-radius: var(--radius);
-    color: var(--text-primary); text-decoration: none; font-size: 14px; font-weight: 500;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    width: 100%; box-sizing: border-box; margin: 0 0 20px; padding: 12px 16px;
+    background: var(--green-bar); border: none; border-radius: var(--radius);
+    color: white; text-decoration: none; font-size: 15px; font-weight: 600;
   }
-  .apk-download-btn:active { background: var(--surface-1); }
+  .apk-download-btn:active { opacity: 0.85; }
   #status { font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; }
   .controls { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
   select {
@@ -132,13 +133,16 @@
     background: var(--surface-1); padding: 6px;
   }
   .species-checkbox-item {
-    display: flex; align-items: center; gap: 8px;
-    font-size: 14px; padding: 8px 10px; border-radius: 8px;
+    display: grid; grid-template-columns: 20px 1fr; align-items: center; gap: 10px;
+    font-size: 14px; padding: 10px; border-radius: 8px;
     background: var(--surface-2); cursor: pointer; user-select: none;
     width: 100%; box-sizing: border-box;
   }
-  .species-checkbox-item input { margin: 0; cursor: pointer; flex-shrink: 0; }
-  .species-checkbox-item span { flex: 1; }
+  .species-checkbox-item input {
+    width: 18px; height: 18px; margin: 0; padding: 0; cursor: pointer;
+    accent-color: var(--green-bar);
+  }
+  .species-checkbox-item span { min-width: 0; overflow-wrap: break-word; }
   .species-checkbox-item.checked { background: var(--green-bar); color: white; }
   .species-checkbox-item.disabled { opacity: 0.4; cursor: not-allowed; }
   /* sighting-marker-icon: eliminada, ya no se usan marcadores individuales por hallazgo */
