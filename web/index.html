@@ -121,16 +121,18 @@
     background: var(--green-bar); color: white; font-size: 14px; font-weight: 500; cursor: pointer;
   }
   .species-checkbox-list {
-    display: flex; flex-wrap: wrap; gap: 6px;
+    display: flex; flex-direction: column; gap: 4px;
     border: 0.5px solid var(--border); border-radius: var(--radius);
-    background: var(--surface-1); padding: 8px 10px;
+    background: var(--surface-1); padding: 6px;
   }
   .species-checkbox-item {
-    display: flex; align-items: center; gap: 4px;
-    font-size: 13px; padding: 4px 8px; border-radius: 14px;
+    display: flex; align-items: center; gap: 8px;
+    font-size: 14px; padding: 8px 10px; border-radius: 8px;
     background: var(--surface-2); cursor: pointer; user-select: none;
+    width: 100%; box-sizing: border-box;
   }
-  .species-checkbox-item input { margin: 0; cursor: pointer; }
+  .species-checkbox-item input { margin: 0; cursor: pointer; flex-shrink: 0; }
+  .species-checkbox-item span { flex: 1; }
   .species-checkbox-item.checked { background: var(--green-bar); color: white; }
   .species-checkbox-item.disabled { opacity: 0.4; cursor: not-allowed; }
   /* sighting-marker-icon: eliminada, ya no se usan marcadores individuales por hallazgo */
@@ -728,7 +730,7 @@ function setupSightingForm() {
   DATA.species_catalog.forEach(sp => {
     const item = document.createElement('label');
     item.className = 'species-checkbox-item';
-    item.innerHTML = `<input type="checkbox" value="${sp.id}" data-name="${sp.name}"> ${sp.name}`;
+    item.innerHTML = `<input type="checkbox" value="${sp.id}" data-name="${sp.name}"><span>${sp.name}</span>`;
     item.querySelector('input').addEventListener('change', updateCheckboxStates);
     checkboxContainer.appendChild(item);
   });
