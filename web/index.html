@@ -33,7 +33,7 @@
   h1 { font-size: 22px; font-weight: 500; margin: 0 0 4px; }
   .subtitle { font-size: 14px; color: var(--text-secondary); margin: 0 0 16px; }
   .install-buttons {
-    display: flex; gap: 8px; margin: 0 0 20px; flex-wrap: wrap;
+    display: flex; gap: 8px; margin: 24px 0 8px; flex-wrap: wrap;
   }
   .install-btn {
     flex: 1 1 200px; display: flex; align-items: center; justify-content: center; gap: 8px;
@@ -228,25 +228,6 @@
 <div class="wrap">
   <h1>Predictor de setas — Catalunya</h1>
   <p class="subtitle">Puntuación por evidencia acumulada: lluvia, temperatura, temporada y contraste entre fuentes</p>
-  <div class="install-buttons" id="install-buttons">
-    <a href="app-debug.apk" download class="install-btn android">🤖 Android · Descargar APK</a>
-    <button type="button" class="install-btn apple" id="apple-install-btn">🍎 iPhone / iPad · Instalar como app</button>
-  </div>
-  <div class="install-modal-backdrop" id="install-modal-backdrop">
-    <div class="install-modal" role="dialog" aria-modal="true" aria-labelledby="install-modal-title">
-      <h3 id="install-modal-title">🍎 Instalar en iPhone / iPad</h3>
-      <div class="warn" id="install-modal-warn">
-        Apple no permite instalar apps fuera de la App Store, así que se instala la propia web como app: queda con su icono y se abre a pantalla completa, igual que una app normal.
-      </div>
-      <ol id="install-modal-steps">
-        <li>Abre esta página en <strong>Safari</strong> (en iPhone tiene que ser Safari, no Chrome ni Brave).</li>
-        <li>Pulsa el botón <strong>Compartir</strong> (el cuadrado con la flecha hacia arriba, abajo en el centro).</li>
-        <li>Desliza y elige <strong>«Añadir a pantalla de inicio»</strong>.</li>
-        <li>Pulsa <strong>Añadir</strong>. Ya tienes el icono 🍄 en tu pantalla de inicio.</li>
-      </ol>
-      <button type="button" id="install-modal-close">Entendido</button>
-    </div>
-  </div>
   <div id="credential-warnings"></div>
   <div id="data-coverage-warning"></div>
   <div id="status">Cargando datos...</div>
@@ -343,6 +324,27 @@
   <div id="zones-list"></div>
 
   <p class="footer-note" id="generated-note"></p>
+
+  <!-- Instalación de la app: al final de la página a propósito -->
+  <div class="install-buttons" id="install-buttons">
+    <a href="app-debug.apk" download class="install-btn android">🤖 Android · Descargar APK</a>
+    <button type="button" class="install-btn apple" id="apple-install-btn">🍎 iPhone / iPad · Instalar como app</button>
+  </div>
+  <div class="install-modal-backdrop" id="install-modal-backdrop">
+    <div class="install-modal" role="dialog" aria-modal="true" aria-labelledby="install-modal-title">
+      <h3 id="install-modal-title">🍎 Instalar en iPhone / iPad</h3>
+      <div class="warn" id="install-modal-warn">
+        Apple no permite instalar apps fuera de la App Store, así que se instala la propia web como app: queda con su icono y se abre a pantalla completa, igual que una app normal.
+      </div>
+      <ol id="install-modal-steps">
+        <li>Abre esta página en <strong>Safari</strong> (en iPhone tiene que ser Safari, no Chrome ni Brave).</li>
+        <li>Pulsa el botón <strong>Compartir</strong> (el cuadrado con la flecha hacia arriba, abajo en el centro).</li>
+        <li>Desliza y elige <strong>«Añadir a pantalla de inicio»</strong>.</li>
+        <li>Pulsa <strong>Añadir</strong>. Ya tienes el icono 🍄 en tu pantalla de inicio.</li>
+      </ol>
+      <button type="button" id="install-modal-close">Entendido</button>
+    </div>
+  </div>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
