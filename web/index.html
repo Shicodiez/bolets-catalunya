@@ -2,8 +2,17 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Predictor de setas — Catalunya</title>
+<!-- Instalación como app (PWA): manifest para Android/PC y etiquetas propias de Apple -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1D9E75">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Setas">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" href="icon-192.png">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
   :root {
@@ -23,13 +32,39 @@
   .wrap { max-width: 760px; margin: 0 auto; }
   h1 { font-size: 22px; font-weight: 500; margin: 0 0 4px; }
   .subtitle { font-size: 14px; color: var(--text-secondary); margin: 0 0 16px; }
-  .apk-download-btn {
-    display: flex; align-items: center; justify-content: center; gap: 8px;
-    width: 100%; box-sizing: border-box; margin: 0 0 20px; padding: 12px 16px;
-    background: var(--green-bar); border: none; border-radius: var(--radius);
-    color: white; text-decoration: none; font-size: 15px; font-weight: 600;
+  .install-buttons {
+    display: flex; gap: 8px; margin: 0 0 20px; flex-wrap: wrap;
   }
-  .apk-download-btn:active { opacity: 0.85; }
+  .install-btn {
+    flex: 1 1 200px; display: flex; align-items: center; justify-content: center; gap: 8px;
+    box-sizing: border-box; padding: 12px 16px; border-radius: var(--radius);
+    font-size: 15px; font-weight: 600; text-decoration: none; cursor: pointer;
+    border: none; font-family: inherit; min-height: 48px;
+  }
+  .install-btn.android { background: var(--green-bar); color: white; }
+  .install-btn.apple { background: #1a1a18; color: white; }
+  .install-btn:active { opacity: 0.85; }
+  .install-modal-backdrop {
+    display: none; position: fixed; inset: 0; z-index: 9999;
+    background: rgba(0,0,0,0.5); align-items: center; justify-content: center; padding: 16px;
+  }
+  .install-modal-backdrop.open { display: flex; }
+  .install-modal {
+    background: var(--surface-2); border-radius: 12px; padding: 20px;
+    max-width: 380px; width: 100%; max-height: 90vh; overflow-y: auto; box-sizing: border-box;
+  }
+  .install-modal h3 { margin: 0 0 10px; font-size: 17px; }
+  .install-modal ol { margin: 0 0 14px; padding-left: 20px; font-size: 14px; line-height: 1.6; }
+  .install-modal li { margin-bottom: 6px; }
+  .install-modal .warn {
+    background: var(--surface-1); border-radius: 8px; padding: 10px 12px;
+    font-size: 13px; color: var(--text-secondary); margin-bottom: 14px;
+  }
+  .install-modal button {
+    width: 100%; padding: 12px; border: none; border-radius: var(--radius);
+    background: var(--green-bar); color: white; font-size: 15px; font-weight: 600;
+    cursor: pointer; font-family: inherit;
+  }
   #status { font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; }
   .controls { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
   select {
@@ -193,7 +228,25 @@
 <div class="wrap">
   <h1>Predictor de setas — Catalunya</h1>
   <p class="subtitle">Puntuación por evidencia acumulada: lluvia, temperatura, temporada y contraste entre fuentes</p>
-  <a href="app-debug.apk" download class="apk-download-btn">📲 Descargar app Android (APK)</a>
+  <div class="install-buttons" id="install-buttons">
+    <a href="app-debug.apk" download class="install-btn android">🤖 Android · Descargar APK</a>
+    <button type="button" class="install-btn apple" id="apple-install-btn">🍎 iPhone / iPad · Instalar como app</button>
+  </div>
+  <div class="install-modal-backdrop" id="install-modal-backdrop">
+    <div class="install-modal" role="dialog" aria-modal="true" aria-labelledby="install-modal-title">
+      <h3 id="install-modal-title">🍎 Instalar en iPhone / iPad</h3>
+      <div class="warn" id="install-modal-warn">
+        Apple no permite instalar apps fuera de la App Store, así que se instala la propia web como app: queda con su icono y se abre a pantalla completa, igual que una app normal.
+      </div>
+      <ol id="install-modal-steps">
+        <li>Abre esta página en <strong>Safari</strong> (en iPhone tiene que ser Safari, no Chrome ni Brave).</li>
+        <li>Pulsa el botón <strong>Compartir</strong> (el cuadrado con la flecha hacia arriba, abajo en el centro).</li>
+        <li>Desliza y elige <strong>«Añadir a pantalla de inicio»</strong>.</li>
+        <li>Pulsa <strong>Añadir</strong>. Ya tienes el icono 🍄 en tu pantalla de inicio.</li>
+      </ol>
+      <button type="button" id="install-modal-close">Entendido</button>
+    </div>
+  </div>
   <div id="credential-warnings"></div>
   <div id="data-coverage-warning"></div>
   <div id="status">Cargando datos...</div>
@@ -577,6 +630,68 @@ async function initAuth() {
     document.getElementById('login-step-code').style.display = 'none';
     document.getElementById('login-step-email').style.display = 'block';
     document.getElementById('login-email').focus();
+  });
+}
+
+// ---------------------------------------------------------------------------
+// INSTALACIÓN COMO APP (botones Android / Apple)
+// ---------------------------------------------------------------------------
+// iOS no permite disparar la instalación desde un botón: solo Safari puede
+// añadir una web a la pantalla de inicio (Compartir → Añadir a pantalla de
+// inicio). Por eso el botón de Apple muestra las instrucciones. En Chrome,
+// Edge o Brave (Android/PC) sí existe instalación directa (evento
+// beforeinstallprompt), y el botón de Apple la usa si está disponible.
+(function setupInstallButtons() {
+  const ua = navigator.userAgent || '';
+  const isIOS = /iPad|iPhone|iPod/.test(ua) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1); // iPad moderno se identifica como Mac
+  // En iOS todos los navegadores usan WebKit, pero solo Safari puede añadir a pantalla de inicio.
+  const isIOSNotSafari = isIOS && /CriOS|FxiOS|EdgiOS|OPiOS|Brave|DuckDuckGo/.test(ua);
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+
+  const container = document.getElementById('install-buttons');
+  const appleBtn = document.getElementById('apple-install-btn');
+  const backdrop = document.getElementById('install-modal-backdrop');
+  const closeBtn = document.getElementById('install-modal-close');
+  const warn = document.getElementById('install-modal-warn');
+  if (!container || !appleBtn || !backdrop) return;
+
+  // Si ya está abierta como app instalada, no tiene sentido mostrar los botones.
+  if (isStandalone) { container.style.display = 'none'; return; }
+
+  let deferredPrompt = null;
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+  });
+
+  function openModal() {
+    if (isIOSNotSafari) {
+      warn.innerHTML = '⚠️ Estás usando un navegador que <strong>no es Safari</strong>. En iPhone/iPad solo Safari puede instalar la web como app: copia esta dirección, ábrela en Safari y sigue los pasos.';
+    }
+    backdrop.classList.add('open');
+  }
+  function closeModal() { backdrop.classList.remove('open'); }
+
+  appleBtn.addEventListener('click', async () => {
+    // Si el navegador ofrece instalación directa (Chrome/Edge/Brave), se usa.
+    if (deferredPrompt && !isIOS) {
+      deferredPrompt.prompt();
+      try { await deferredPrompt.userChoice; } catch (e) {}
+      deferredPrompt = null;
+      return;
+    }
+    openModal();
+  });
+  closeBtn.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', (e) => { if (e.target === backdrop) closeModal(); });
+})();
+
+// Service worker: necesario para que Chrome/Android/PC ofrezcan la instalación
+// directa. No cachea nada (los datos siempre se piden en vivo).
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
   });
 }
 
