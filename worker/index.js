@@ -19,13 +19,26 @@
  * Utilitat de firma HMAC, base tant del sistema de sessió com del sistema
  * de codis d'un sol ús per email.
  */
-async function hmacSign(secret, message) {
+async function hmacBytes(secret, message) {
   const enc = new TextEncoder();
   const key = await crypto.subtle.importKey(
     "raw", enc.encode(secret), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]
   );
-  const sig = await crypto.subtle.sign("HMAC", key, enc.encode(message));
-  return btoa(String.fromCharCode(...new Uint8Array(sig)));
+  return new Uint8Array(await crypto.subtle.sign("HMAC", key, enc.encode(message)));
+}
+
+async function hmacSign(secret, message) {
+  const bytes = await hmacBytes(secret, message);
+  return btoa(String.fromCharCode(...bytes));
+}
+
+// Comparació en temps constant (evita filtrar, pel temps de resposta, quants
+// caràcters d'un codi o d'una signatura coincideixen).
+function timingSafeEqual(a, b) {
+  if (typeof a !== "string" || typeof b !== "string" || a.length !== b.length) return false;
+  let diff = 0;
+  for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return diff === 0;
 }
 
 /**
@@ -57,11 +70,21 @@ function isEmailAuthorized(env, email) {
 }
 
 async function computeCodeForWindow(env, email, windowIndex) {
-  const sig = await hmacSign(env.SESSION_SECRET, `${normalizeEmail(email)}:${windowIndex}`);
-  // Es fan servir els primers dígits del hash com a codi de 6 xifres.
-  const digits = sig.replace(/[^0-9]/g, "");
-  const padded = (digits + "000000").slice(0, 6);
-  return padded;
+  // Codi de 6 xifres UNIFORME (000000-999999): es llegeixen paraules de 32 bits
+  // del HMAC i es descarten les que caurien en el "residu" final que
+  // faria alguns codis una mica més probables (rebuig de biaix). Abans es
+  // treien els dígits del Base64 del hash: en ~31% dels casos hi havia menys
+  // de 6 dígits i el codi s'omplia amb zeros (menys entropia real).
+  const bytes = await hmacBytes(env.SESSION_SECRET, `code:${normalizeEmail(email)}:${windowIndex}`);
+  const LIMIT = 4294000000; // el múltiple de 1.000.000 més gran que cap dins de 2^32
+  for (let i = 0; i + 4 <= bytes.length; i += 4) {
+    const n = ((bytes[i] << 24) | (bytes[i + 1] << 16) | (bytes[i + 2] << 8) | bytes[i + 3]) >>> 0;
+    if (n < LIMIT) return String(n % 1000000).padStart(6, "0");
+  }
+  // Pràcticament impossible (probabilitat ~1e-70): torna a derivar amb un sufix.
+  const extra = await hmacBytes(env.SESSION_SECRET, `code2:${normalizeEmail(email)}:${windowIndex}`);
+  const n = ((extra[0] << 24) | (extra[1] << 16) | (extra[2] << 8) | extra[3]) >>> 0;
+  return String(n % 1000000).padStart(6, "0");
 }
 
 async function generateLoginCode(env, email) {
@@ -75,9 +98,76 @@ async function verifyLoginCode(env, email, code) {
   // quan estava a punt de canviar (marge de fins a ~10 minuts addicionals).
   for (const w of [currentWindow, currentWindow - 1]) {
     const expected = await computeCodeForWindow(env, email, w);
-    if (expected === code) return true;
+    if (timingSafeEqual(expected, code)) return true;
   }
   return false;
+}
+
+/**
+ * LIMITACIÓ D'INTENTS (anti força bruta i anti abús). Necessita un "KV namespace"
+ * de Cloudflare (gratuït) enllaçat al Worker amb el nom LIMITS. Si no està
+ * enllaçat, el Worker funciona igual però SENSE límits (es deixa constància
+ * al log). Els comptadors són per finestra fixa i caduquen soles.
+ *
+ *  - Codis demanats:  5 per hora per email i 10 per hora per IP
+ *  - Intents fallits: 5 per 15 min per email i 15 per 15 min per IP (després, bloqueig)
+ *  - Explicacions DeepSeek: 150 per dia en total (protegeix el cost de l'API)
+ *  - Identificacions per foto: 120 per dia en total (a més, Workers AI té el seu propi cupo gratuït diari)
+ *
+ * KV no és atòmic: dues peticions simultànies podrien colar-se una xifra més
+ * enllà del límit. Per a aquest ús és irrellevant.
+ */
+const LIMITS_CFG = {
+  codeReqEmail: { max: 5, windowSec: 3600 },
+  codeReqIp: { max: 10, windowSec: 3600 },
+  authFailEmail: { max: 5, windowSec: 900 },
+  authFailIp: { max: 15, windowSec: 900 },
+  explainDay: { max: 150, windowSec: 86400 },
+  identifyDay: { max: 120, windowSec: 86400 },
+};
+
+function clientIp(request) {
+  return request.headers.get("CF-Connecting-IP") || "unknown";
+}
+
+function limitKey(name, id, windowSec) {
+  const windowIndex = Math.floor(Date.now() / (windowSec * 1000));
+  return `rl:${name}:${id}:${windowIndex}`;
+}
+
+// Mira si encara hi ha marge (sense comptar-hi). Retorna {allowed, enabled}.
+async function limitCheck(env, name, id) {
+  const cfg = LIMITS_CFG[name];
+  if (!env.LIMITS) return { allowed: true, enabled: false };
+  try {
+    const raw = await env.LIMITS.get(limitKey(name, id, cfg.windowSec));
+    const count = raw ? parseInt(raw, 10) || 0 : 0;
+    return { allowed: count < cfg.max, enabled: true };
+  } catch (e) {
+    // Si el KV falla, per a l'autenticació és més segur denegar que deixar passar.
+    return { allowed: false, enabled: true, error: true };
+  }
+}
+
+// Suma 1 al comptador. No llança mai (un error de KV no ha de trencar la resposta).
+async function limitHit(env, name, id) {
+  const cfg = LIMITS_CFG[name];
+  if (!env.LIMITS) return;
+  try {
+    const key = limitKey(name, id, cfg.windowSec);
+    const raw = await env.LIMITS.get(key);
+    const count = raw ? parseInt(raw, 10) || 0 : 0;
+    await env.LIMITS.put(key, String(count + 1), { expirationTtl: Math.max(cfg.windowSec * 2, 60) });
+  } catch (e) {
+    console.log(`Límit ${name}: no s'ha pogut escriure al KV (${e.message})`);
+  }
+}
+
+function tooManyRequests(message) {
+  return new Response(JSON.stringify({ error: message }), {
+    status: 429,
+    headers: { ...corsHeaders(), "Content-Type": "application/json", "Retry-After": "900" },
+  });
 }
 
 async function sendLoginCodeEmail(env, email, code) {
@@ -121,7 +211,7 @@ async function verifySessionToken(env, token) {
   if (!token || !token.includes(".")) return false;
   const [payload, sig] = token.split(".");
   const expected = await hmacSign(env.SESSION_SECRET, payload);
-  if (sig !== expected) return false;
+  if (!timingSafeEqual(sig, expected)) return false;
   const expires = parseInt(payload, 10);
   if (isNaN(expires) || Date.now() > expires) return false;
   return true;
@@ -299,8 +389,8 @@ const CATALUNYA_BOUNDS = { latMin: 40.4, latMax: 42.95, lonMin: 0.05, lonMax: 3.
 
 // Llista blanca d'ids d'espècie vàlids — ha de coincidir amb SPECIES del backend.
 const VALID_SPECIES_IDS = new Set([
-  "rovellons", "ceps", "camagrocs", "trompetes", "oureig", "rossinyols",
-  "colmenilles", "llengua", "pinetell", "fredolic",
+  "rovellons", "ceps", "cep", "cepfosc", "cepestiu", "camagrocs", "trompetes", "oureig", "rossinyols",
+  "colmenilles", "llengua", "pinetell", "fredolic", "escarlet", "llenega",
 ]);
 
 const VALID_TREE_IDS = new Set(["pi", "roure", "alzina", "madrono", "suro", "faig", "avet", "mixt"]);
@@ -348,6 +438,254 @@ function validateHallazgo(h) {
   return true;
 }
 
+// ---------------------------------------------------------------------------
+// LECTURA DE RASGOS DE FOTOS (Cloudflare Workers AI: model de visió general, GRATUÏT dins del cupo diari de
+// del compte; en el pla gratuït, quan s'acaba el cupo la crida falla i no es cobra res).
+//
+// Requereix enllaçar al Worker el "binding" de Workers AI amb el nom AI (Settings → Bindings). Sense ell, el
+// Worker funciona igual i /identify respon que no està disponible.
+//
+// IMPORTANT: la IA NO identifica l'espècie ni diu mai que una cosa sigui comestible. Només LLEGEIX trets senzills
+// (color del barret, làmines o porus, anell...) triant entre opcions tancades (IDENT_VOCAB). La comparació amb les
+// fitxes i el percentatge de coincidència els calcula la pàgina de la guia (web/guia.html), no el model.
+// Cada petició porta UNA foto i la part de la seta que ensenya (sombrero | debajo | pie): per a 3 fotos, la guia
+// fa 3 peticions i ajunta els trets. El vocabulari es genera amb `python3 tools/generar_guia.py --vocab` i una
+// prova (tests/test_model.py) comprova que coincideix amb tools/rasgos_datos.py.
+// ---------------------------------------------------------------------------
+const IDENT_MODEL = "@cf/meta/llama-3.2-11b-vision-instruct";
+const IDENT_MAX_CHARS = 1500000;          // mida màxima de la foto (text base64) — el navegador la redueix a ~800 px
+const IDENT_MAX_BODY = 1600000;           // mida màxima de la petició (només per a /identify)
+const IDENT_VOCAB = {
+  "sombrero": {
+    "titulo": "Sombrero, visto desde arriba",
+    "descripcion": "la parte de ARRIBA del sombrero (color, superficie y forma)",
+    "dims": {
+      "s_color": {
+        "etq": "Color del sombrero",
+        "valores": {
+          "blanco": "Blanco o crema",
+          "amarillo": "Amarillo",
+          "naranja": "Naranja",
+          "rojo": "Rojo o rojo vinoso",
+          "rosa": "Rosa o asalmonado",
+          "pardo": "Marrón, ocre o castaño",
+          "gris": "Gris",
+          "verde": "Verde u oliva",
+          "negro": "Negro u oscuro",
+          "violeta": "Violeta o lila"
+        }
+      },
+      "s_super": {
+        "etq": "Superficie del sombrero",
+        "valores": {
+          "lisa": "Lisa y seca",
+          "viscosa": "Viscosa (pegajosa o babosa)",
+          "escamas": "Con escamas, verrugas o motas",
+          "fibrosa": "Con fibrillas (como pelitos finos)"
+        }
+      },
+      "s_forma": {
+        "etq": "Forma del sombrero",
+        "valores": {
+          "convexo": "Convexo o plano (el normal)",
+          "conico": "Cónico o de campana",
+          "embudo": "En embudo o trompeta",
+          "alveolado": "Con alvéolos, como un panal",
+          "cerebro": "Con pliegues como un cerebro"
+        }
+      }
+    }
+  },
+  "debajo": {
+    "titulo": "Debajo del sombrero",
+    "descripcion": "la parte de DEBAJO del sombrero, donde se ven las láminas, los poros, los pliegues o las púas",
+    "dims": {
+      "h_tipo": {
+        "etq": "Qué hay debajo del sombrero",
+        "valores": {
+          "laminas": "Láminas (como hojitas finas)",
+          "poros": "Poros (como una esponja de tubitos)",
+          "pliegues": "Pliegues gruesos, venosos y ramificados",
+          "puas": "Púas (como agujitas)",
+          "liso": "Liso o casi liso, sin láminas ni poros ni púas"
+        }
+      },
+      "h_color": {
+        "etq": "Color de lo de debajo",
+        "valores": {
+          "blanco": "Blanco o crema",
+          "amarillo": "Amarillo",
+          "naranja": "Naranja",
+          "rojo": "Rojo",
+          "rosa": "Rosa o salmón",
+          "pardo": "Marrón u óxido",
+          "gris": "Gris",
+          "verde": "Verde oliva",
+          "violeta": "Violeta o lila"
+        }
+      }
+    }
+  },
+  "pie": {
+    "titulo": "Pie y base",
+    "descripcion": "el PIE y su BASE (si tiene anillo, si hay bolsa o bulbo, y cómo es la superficie)",
+    "dims": {
+      "p_anillo": {
+        "etq": "Anillo en el pie",
+        "valores": {
+          "si": "Sí, tiene anillo (falda o collar)",
+          "no": "No tiene anillo"
+        }
+      },
+      "p_base": {
+        "etq": "Base del pie",
+        "valores": {
+          "bolsa": "Dentro de una bolsa o saco (volva)",
+          "ensanchada": "Ensanchada (bulbo o panza), sin bolsa",
+          "normal": "Normal: recta o afinada"
+        }
+      },
+      "p_super": {
+        "etq": "Superficie del pie",
+        "valores": {
+          "lisa": "Lisa",
+          "red": "Con una red (malla fina)",
+          "puntos": "Con puntitos, escamas o bandas"
+        }
+      },
+      "p_color": {
+        "etq": "Color del pie",
+        "valores": {
+          "blanco": "Blanco o crema",
+          "amarillo": "Amarillo",
+          "naranja": "Naranja",
+          "rojo": "Rojo o rojizo",
+          "pardo": "Marrón",
+          "gris": "Gris",
+          "negro": "Negro",
+          "violeta": "Violeta o lila"
+        }
+      }
+    }
+  }
+};
+const IDENT_PARTES_VISTAS = new Set([...Object.keys(IDENT_VOCAB), "otra", "no_es_seta"]);
+
+const IDENT_SYSTEM =
+  "Eres un ayudante que describe fotos de setas para un aficionado. No dices qué especie es ni si se puede comer: " +
+  "solo marcas rasgos que se ven, eligiendo entre opciones cerradas. " +
+  "Responde SIEMPRE y SOLO con un objeto JSON válido, sin texto antes ni después.";
+
+function identUserPrompt(parte) {
+  const v = IDENT_VOCAB[parte];
+  const dims = Object.entries(v.dims).map(([id, d]) =>
+    `- ${id} (${d.etq}): ` + Object.entries(d.valores).map(([k, t]) => `${k} = ${t}`).join(" | ")).join("\n");
+  const ejemplo = Object.keys(v.dims).map((id) => `"${id}": null`).join(", ");
+  return (
+    `Esta foto debería enseñar ${v.descripcion}.\n` +
+    "Devuelve SOLO este JSON:\n" +
+    `{"parte_vista": "sombrero" | "debajo" | "pie" | "otra" | "no_es_seta", "rasgos": {${ejemplo}}}\n` +
+    "En parte_vista pon lo que enseña de verdad la foto: sombrero = la cara de arriba del sombrero; " +
+    "debajo = la cara de abajo del sombrero (láminas, poros, pliegues...); pie = el pie y su base; " +
+    "otra = la seta entera u otra cosa; no_es_seta = no hay ninguna seta.\n" +
+    "En cada rasgo pon UNA de las opciones (la palabra de antes del signo =) o null si no se ve con claridad en esta foto. " +
+    "No adivines: es mejor null que acertar por suerte.\n" +
+    "Rasgos y opciones:\n" + dims
+  );
+}
+
+function validIdentImage(img) {
+  return typeof img === "string" && img.length <= IDENT_MAX_CHARS &&
+    /^data:image\/(?:jpeg|png|webp);base64,[A-Za-z0-9+/]+={0,2}$/.test(img);
+}
+
+function validIdentParte(parte) {
+  return typeof parte === "string" && Object.prototype.hasOwnProperty.call(IDENT_VOCAB, parte);
+}
+
+// Acepta el id de la opción ("blanco") o su texto completo ("Blanco o crema"), sin mirar mayúsculas.
+function identValor(def, val) {
+  if (typeof val !== "string") return null;
+  const v = val.trim().toLowerCase();
+  if (!v) return null;
+  for (const [id, texto] of Object.entries(def.valores)) {
+    if (v === id.toLowerCase() || v === texto.toLowerCase()) return id;
+  }
+  return null;
+}
+
+// Convierte la respuesta del modelo (texto con un JSON dentro) en un resultado SEGURO: solo los rasgos de la parte
+// pedida y solo con valores del vocabulario cerrado. Devuelve null si no hay manera de leerla.
+function parseIdentResponse(raw, parte) {
+  let obj = raw;
+  if (typeof raw === "string") {
+    const a = raw.indexOf("{");
+    const b = raw.lastIndexOf("}");
+    if (a < 0 || b <= a) return null;
+    try { obj = JSON.parse(raw.slice(a, b + 1)); } catch (e) { return null; }
+  }
+  if (!obj || typeof obj !== "object" || Array.isArray(obj)) return null;
+  if (!("rasgos" in obj) && !("parte_vista" in obj) && !("se_ve_seta" in obj)) return null;
+  let vista = typeof obj.parte_vista === "string" ? obj.parte_vista.trim().toLowerCase() : "";
+  if (!IDENT_PARTES_VISTAS.has(vista)) vista = "otra";
+  const noEsSeta = vista === "no_es_seta" || obj.se_ve_seta === false;
+  const rasgos = {};
+  if (!noEsSeta && obj.rasgos && typeof obj.rasgos === "object" && !Array.isArray(obj.rasgos)) {
+    for (const [dim, def] of Object.entries(IDENT_VOCAB[parte].dims)) {
+      const id = identValor(def, obj.rasgos[dim]);
+      if (id) rasgos[dim] = id;
+    }
+  }
+  return { parte, parte_vista: noEsSeta ? "no_es_seta" : vista, se_ve_seta: !noEsSeta, rasgos };
+}
+
+// Llama al modelo de visión. Cloudflare documenta dos maneras de pasar la imagen según el modelo; se prueba la del
+// tutorial oficial y, si falla, la otra. Si el modelo pide aceptar la licencia de Meta (una sola vez por cuenta),
+// se acepta automáticamente y se repite.
+async function runVision(env, dataUrl, parte) {
+  const user = identUserPrompt(parte);
+  const base = { max_tokens: 300, temperature: 0.1 };
+  const intentos = [
+    { ...base, messages: [{ role: "system", content: IDENT_SYSTEM }, { role: "user", content: user }], image: dataUrl },
+    { ...base, messages: [
+      { role: "system", content: IDENT_SYSTEM },
+      { role: "user", content: [{ type: "text", text: user }, { type: "image_url", image_url: { url: dataUrl } }] },
+    ] },
+  ];
+  let ultimo;
+  for (const input of intentos) {
+    try {
+      try {
+        return await env.AI.run(IDENT_MODEL, input);
+      } catch (e) {
+        if (!/agree|licen[cs]e|5016/i.test(String(e && e.message))) throw e;
+        await env.AI.run(IDENT_MODEL, { prompt: "agree" });
+        return await env.AI.run(IDENT_MODEL, input);
+      }
+    } catch (e) {
+      ultimo = e;
+      if (/allocation|quota|neurons|daily/i.test(String(e && e.message))) break;   // reintentar no sirve
+    }
+  }
+  throw ultimo;
+}
+
+async function identifyWithAI(env, dataUrl, parte) {
+  const out = await runVision(env, dataUrl, parte);
+  const texto = out && typeof out === "object" && "response" in out ? out.response : out;
+  const resultado = parseIdentResponse(texto, parte);
+  if (!resultado) throw new Error("La IA no ha devuelto una respuesta que se pueda leer. Prueba con otra foto.");
+  return resultado;
+}
+
+function identErrorMessage(e) {
+  const m = String(e && e.message);
+  if (/allocation|quota|neurons|daily/i.test(m)) {
+    return "Se ha agotado el cupo gratuito de IA de hoy. Vuelve a probar mañana.";
+  }
+  return `No se ha podido identificar la foto: ${m}`;
+}
+
 export default {
   async fetch(request, env) {
     if (request.method === "OPTIONS") {
@@ -357,38 +695,47 @@ export default {
     // Límit de mida del payload (10KB és més que suficient per a un
     // hallazgo o una petició d'autenticació/explicació) — evita que algú
     // enviï cossos enormes per esgotar recursos del Worker.
+    // (Solo /identify admite una petición mayor: lleva una foto reducida y exige sesión iniciada.)
+    const url = new URL(request.url);
     const contentLength = request.headers.get("content-length");
-    if (contentLength && parseInt(contentLength, 10) > 10240) {
+    const maxBody = url.pathname === "/identify" ? IDENT_MAX_BODY : 10240;
+    if (contentLength && parseInt(contentLength, 10) > maxBody) {
       return new Response(JSON.stringify({ error: "Petición demasiado grande" }), {
         status: 413,
         headers: { ...corsHeaders(), "Content-Type": "application/json" },
       });
     }
 
-    const url = new URL(request.url);
-
     try {
       // --- Ruta per demanar un codi d'accés: no requereix sessió prèvia ---
       if (url.pathname === "/request-code" && request.method === "POST") {
         const body = await request.json();
         const email = normalizeEmail(body.email);
+        const ip = clientIp(request);
         if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
           return new Response(JSON.stringify({ error: "Email inválido" }), {
             status: 400,
             headers: { ...corsHeaders(), "Content-Type": "application/json" },
           });
         }
+        // Límit per IP abans de res més (també frena la prova d'emails a l'engròs)
+        const ipOk = await limitCheck(env, "codeReqIp", ip);
+        if (!ipOk.allowed) return tooManyRequests("Demasiadas solicitudes de código. Espera un rato e inténtalo de nuevo.");
+        await limitHit(env, "codeReqIp", ip);
+
         if (!isEmailAuthorized(env, email)) {
-          // Mateixa mitigació que abans amb la contrasenya: petit retard per
-          // encarir intents automatitzats, i el mateix missatge tant si
-          // l'email no existeix com si no està autoritzat (no revelar quins
-          // emails concrets són vàlids).
+          // Petit retard per encarir intents automatitzats, i el mateix
+          // missatge tant si l'email no existeix com si no està autoritzat.
           await new Promise((resolve) => setTimeout(resolve, 1000));
           return new Response(JSON.stringify({ error: "Este email no tiene acceso autorizado" }), {
             status: 403,
             headers: { ...corsHeaders(), "Content-Type": "application/json" },
           });
         }
+        // Límit per email: evita que algú inundi la teva bústia o gasti la quota d'enviaments de Brevo
+        const emailOk = await limitCheck(env, "codeReqEmail", email);
+        if (!emailOk.allowed) return tooManyRequests("Ya se han enviado varios códigos a este email. Espera un rato e inténtalo de nuevo.");
+        await limitHit(env, "codeReqEmail", email);
         try {
           const code = await generateLoginCode(env, email);
           await sendLoginCodeEmail(env, email, code);
@@ -408,7 +755,17 @@ export default {
         const body = await request.json();
         const email = normalizeEmail(body.email);
         const code = typeof body.code === "string" ? body.code.trim().slice(0, 10) : "";
+        const ip = clientIp(request);
+
+        // Bloqueig per massa intents fallits (per email i per IP) ABANS de comprovar res
+        const lockEmail = await limitCheck(env, "authFailEmail", email || "-");
+        const lockIp = await limitCheck(env, "authFailIp", ip);
+        if (!lockEmail.allowed || !lockIp.allowed) {
+          return tooManyRequests("Demasiados intentos fallidos. Espera unos 15 minutos e inténtalo de nuevo.");
+        }
+
         if (!email || !code || !isEmailAuthorized(env, email)) {
+          await limitHit(env, "authFailIp", ip);
           await new Promise((resolve) => setTimeout(resolve, 1000));
           return new Response(JSON.stringify({ error: "Código o email incorrectos" }), {
             status: 401,
@@ -417,6 +774,8 @@ export default {
         }
         const valid = await verifyLoginCode(env, email, code);
         if (!valid) {
+          await limitHit(env, "authFailEmail", email);
+          await limitHit(env, "authFailIp", ip);
           await new Promise((resolve) => setTimeout(resolve, 1000));
           return new Response(JSON.stringify({ error: "Código incorrecto o caducado" }), {
             status: 401,
@@ -447,10 +806,45 @@ export default {
         });
       }
 
+      if (url.pathname === "/identify" && request.method === "POST") {
+        const enJson = (obj, status) => new Response(JSON.stringify(obj), {
+          status, headers: { ...corsHeaders(), "Content-Type": "application/json" },
+        });
+        if (!env.AI) {
+          return enJson({ error: "La identificación por foto no está activada en el Worker (falta añadir «Workers AI»)." }, 503);
+        }
+        const dayOk = await limitCheck(env, "identifyDay", "all");
+        if (!dayOk.allowed) {
+          return enJson({ error: "Se ha alcanzado el límite diario de identificaciones. Vuelve a probar mañana." }, 429);
+        }
+        const body = await request.json().catch(() => null);
+        if (!body || !validIdentImage(body.image)) {
+          return enJson({ error: "Foto no válida: tiene que ser JPG, PNG o WebP y no demasiado grande." }, 400);
+        }
+        if (!validIdentParte(body.parte)) {
+          return enJson({ error: "Falta indicar qué parte de la seta enseña la foto (sombrero, debajo o pie)." }, 400);
+        }
+        try {
+          await limitHit(env, "identifyDay", "all");
+          const resultado = await identifyWithAI(env, body.image, body.parte);
+          return enJson({ ok: true, resultado }, 200);
+        } catch (e) {
+          return enJson({ error: identErrorMessage(e) }, 502);
+        }
+      }
+
       if (url.pathname === "/explain" && request.method === "POST") {
         if (!env.DEEPSEEK_API_KEY) {
           return new Response(JSON.stringify({ error: "Explicación no disponible ahora mismo (falta configurar DEEPSEEK_API_KEY)" }), {
             status: 503,
+            headers: { ...corsHeaders(), "Content-Type": "application/json" },
+          });
+        }
+        // Tope diari de llamadas a DeepSeek (protege el coste de la API)
+        const dayOk = await limitCheck(env, "explainDay", "all");
+        if (!dayOk.allowed) {
+          return new Response(JSON.stringify({ error: "Se ha alcanzado el límite diario de explicaciones. Vuelve a probar mañana." }), {
+            status: 429,
             headers: { ...corsHeaders(), "Content-Type": "application/json" },
           });
         }
@@ -463,6 +857,7 @@ export default {
           });
         }
         try {
+          await limitHit(env, "explainDay", "all");
           const explanation = await explainWithDeepSeek(env, zoneData);
           return new Response(JSON.stringify({ ok: true, explanation }), {
             headers: { ...corsHeaders(), "Content-Type": "application/json" },
