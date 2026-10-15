@@ -420,10 +420,33 @@ if ('serviceWorker' in navigator) {
   }
   window.addEventListener('hashchange', abrirPorHash);
   document.addEventListener('click', function (ev) {
-    var a = ev.target.closest ? ev.target.closest('a.chip') : null;
-    if (a) setTimeout(abrirPorHash, 0);   // por si el enlace apunta a la misma ficha que ya estaba en la barra
+    var a = ev.target.closest ? ev.target.closest('a[href^="#"]') : null;
+    if (!a) return;
+    var h = a.getAttribute('href');
+    if (!h || h.length < 2) return;
+    // Los enlaces internos (#cep, #phalloides...) REEMPLAZAN la entrada del historial en vez de añadir una nueva:
+    // así el botón «atrás» del móvil (o «← Volver al predictor») va directo al mapa y no ficha por ficha.
+    try { history.replaceState(null, '', h); } catch (e) { setTimeout(abrirPorHash, 0); return; }
+    ev.preventDefault();
+    if (fichaDeHash()) { abrirPorHash(); return; }
+    var id = ''; try { id = decodeURIComponent(h.slice(1)); } catch (e2) { return; }
+    var destino = document.getElementById(id);
+    if (destino) destino.scrollIntoView({ block: 'start' });
   });
   abrirPorHash();
+
+  // «← Volver al predictor»: si se llegó desde el predictor, vuelve con el historial (así el mapa conserva la seta,
+  // el umbral y la posición); si no (guía abierta directamente), sigue el enlace normal.
+  var volver = document.querySelector('a.back');
+  if (volver) volver.addEventListener('click', function (ev) {
+    try {
+      var r = document.referrer ? new URL(document.referrer) : null;
+      if (r && r.origin === location.origin && !/guia\.html$/.test(r.pathname) && history.length > 1) {
+        ev.preventDefault();
+        history.back();
+      }
+    } catch (e) { /* enlace normal */ }
+  });
 
   // ---------- Fotos (de fotos/creditos.json; si no hay, la guía queda sin fotos) ----------
   function pintaFotos(cred) {

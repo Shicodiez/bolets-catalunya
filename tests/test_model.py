@@ -672,5 +672,19 @@ if _idx:
     check("hallazgos: l'avís diu que el relleno són estimacions i que la seta i el resultat els tria la persona",
           "son estimaciones" in _idx and "La seta y el resultado los eliges tú" in _idx)
 
+# ---- Llindar per defecte de la web, memòria de pantalla i botó «enrere» (15/10/2026) ----
+if _idx:
+    check("pantalla: el llindar de la web comença en 90 (número, lliscador i constant) i el 70 del backend no el trepitja",
+          'id="threshold-value">90<' in _idx and 'id="threshold-slider" min="0" max="100" value="90"' in _idx
+          and "const DEFAULT_UI_THRESHOLD = 90;" in _idx and "threshold = DATA.default_threshold" not in _idx
+          and m.DEFAULT_SCORE_THRESHOLD == 70)
+    check("pantalla: es recorda espècie, llindar, ordre, mapa, scroll i fitxa oberta a sessionStorage, amb protecció si no es pot guardar",
+          "sessionStorage.setItem(UI_STATE_KEY" in _idx and "catch (e) { /* sin almacenamiento" in _idx
+          and all(k in _idx for k in ("uiStateSave({threshold", "species: filterVal", "view: {lat", "scrollY", "popup: z.id")))
+    check("pantalla: la llegenda ja no diu «umbral-79» (amb 90 la mitjana és «per sota de 80»)", "umbral-79" not in _idx and "Media (por debajo de 80)" in _idx)
+if _guia:
+    check("guia: els enllaços interns (#cep...) substitueixen l'entrada de l'historial i «← Volver al predictor» fa servir history.back()",
+          "history.replaceState(null, '', h)" in _guia and "history.back()" in _guia and "a[href^=\"#\"]" in _guia)
+
 print("\n%d proves fallides" % len(fails) if fails else "\nTotes les proves OK")
 sys.exit(1 if fails else 0)

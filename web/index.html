@@ -238,9 +238,9 @@
   <div class="threshold-box">
     <div class="threshold-label">
       <span>Umbral de sensibilidad</span>
-      <strong id="threshold-value">70</strong>
+      <strong id="threshold-value">90</strong>
     </div>
-    <input type="range" id="threshold-slider" min="0" max="100" value="70" step="5">
+    <input type="range" id="threshold-slider" min="0" max="100" value="90" step="5">
   </div>
 
   <div class="controls">
@@ -320,7 +320,7 @@
     <p style="margin-top:8px">Después se aplican <strong>frenos biológicos</strong> propios de cada especie que pueden bajar mucho la nota aunque haya llovido: que todavía sea pronto (el Ou de reig tarda 15-20 días), la época del año, la altitud, la temperatura (el Ou de reig necesita calor; rovellons, camagrocs o trompetes se frenan con el calor; casi todas se resienten con las heladas) y el tipo de suelo (el Ou de reig es de suelo ácido, no calcáreo; las trompetes y las colmenillas prefieren el calcáreo). Cuando algo frena una especie, lo verás con un ⚠️ en la zona.</p>
     <div class="legend-items">
       <span><span class="legend-dot" style="background:#1D9E75"></span>Alta (≥80)</span>
-      <span><span class="legend-dot" style="background:#EF9F27"></span>Media (umbral-79)</span>
+      <span><span class="legend-dot" style="background:#EF9F27"></span>Media (por debajo de 80)</span>
     </div>
     <p style="margin-top:10px">🟢🟠🔴 = confianza en la puntuación (cuánta evidencia real la respalda: registros históricos de GBIF y corroboración entre fuentes meteorológicas). Una puntuación alta con confianza baja significa que se basa sobre todo en el cálculo del día, no en histórico contrastado.</p>
   </div>
@@ -359,7 +359,26 @@
 let DATA = null;
 let map = null;
 let markers = [];
-let threshold = 70;
+// Umbral con el que arranca la web. Es solo de pantalla: el backend sigue usando su propio 70 para calcular la
+// «tasa de confirmación» (no se toca para no cambiar esa estadística).
+const DEFAULT_UI_THRESHOLD = 90;
+let threshold = DEFAULT_UI_THRESHOLD;
+
+// Estado de la pantalla (seta, umbral, orden, mapa, scroll y ficha abierta). Se guarda en sessionStorage para que, al
+// ir a la guía y volver, todo siga como estaba. Dura mientras la app/pestaña siga abierta; al abrirla de nuevo
+// empieza otra vez en el umbral por defecto. Si el navegador no deja guardar, simplemente no se recuerda nada.
+const UI_STATE_KEY = 'bolets_ui_estado';
+let uiState = {};
+let restoringUi = false;
+try { uiState = JSON.parse(sessionStorage.getItem(UI_STATE_KEY) || '{}') || {}; } catch (e) { uiState = {}; }
+function uiStateSave(patch) {
+  if (restoringUi) return;
+  try {
+    uiState = Object.assign(uiState, patch);
+    sessionStorage.setItem(UI_STATE_KEY, JSON.stringify(uiState));
+  } catch (e) { /* sin almacenamiento: no se recuerda, y ya está */ }
+}
+let renderingMarkers = false; // para no confundir «el mapa se redibuja» con «el usuario cierra la ficha»
 
 function colorForScore(s) {
   if (s >= 80) return {bg: '#E1F5EE', text: '#04342C', dot: '#1D9E75'};
@@ -413,6 +432,7 @@ function getRows(filterVal) {
 }
 
 function renderMap(filterVal) {
+  renderingMarkers = true;
   markers.forEach(m => map.removeLayer(m));
   markers = [];
 
@@ -454,8 +474,12 @@ function renderMap(filterVal) {
       ${aemetLine(z)}
       <button class="popup-btn" onclick="prefillSighting(${z.id})">Registrar hallazgo aquí</button>
     `, {maxHeight: 320, autoPanPadding: [20, 20]});
+    marker._zoneId = z.id;
+    marker.on('popupopen', () => uiStateSave({popup: z.id}));
+    marker.on('popupclose', () => { if (!renderingMarkers) uiStateSave({popup: null}); });
     markers.push(marker);
   });
+  renderingMarkers = false;
 }
 
 function renderList(filterVal, sortVal) {
@@ -500,6 +524,7 @@ function renderList(filterVal, sortVal) {
 function render() {
   const filterVal = document.getElementById('species-filter').value;
   const sortVal = document.getElementById('sort-mode').value;
+  uiStateSave({species: filterVal, sort: sortVal, popup: null}); // al redibujar, las fichas del mapa se cierran
   renderMap(filterVal);
   renderList(filterVal, sortVal);
   const matchCount = getRows(filterVal).filter(z => z.hasMatch).length;
@@ -509,6 +534,7 @@ function render() {
 document.getElementById('threshold-slider').addEventListener('input', (e) => {
   threshold = parseInt(e.target.value, 10);
   document.getElementById('threshold-value').textContent = threshold;
+  uiStateSave({threshold: threshold});
   render();
 });
 
@@ -1190,18 +1216,30 @@ async function loadData() {
     if (!res.ok) throw new Error('No se ha encontrado resultats.json');
     DATA = await res.json();
 
-    if (DATA.default_threshold) {
-      threshold = DATA.default_threshold;
-      document.getElementById('threshold-slider').value = threshold;
-      document.getElementById('threshold-value').textContent = threshold;
-    }
+    // Umbral: el que el usuario tenía en esta sesión o, si no hay, el de pantalla (90).
+    // (DATA.default_threshold sigue en el JSON, pero ya no manda sobre el deslizador.)
+    threshold = (typeof uiState.threshold === 'number' && uiState.threshold >= 0 && uiState.threshold <= 100)
+      ? uiState.threshold : DEFAULT_UI_THRESHOLD;
+    document.getElementById('threshold-slider').value = threshold;
+    document.getElementById('threshold-value').textContent = threshold;
 
     renderCredentialWarnings(DATA.credential_warnings || []);
     renderAccuracyPanel(DATA.model_accuracy);
     renderDataCoverage(DATA.data_coverage);
     setupStationsDropdown(DATA.all_stations || []);
 
-    map = L.map('map', {scrollWheelZoom: false}).setView([41.85, 1.55], 8);
+    // Vista del mapa: la guardada en esta sesión (si es razonable) o la de Catalunya entera.
+    let startView = [[41.85, 1.55], 8];
+    const sv = uiState.view;
+    if (sv && typeof sv.lat === 'number' && typeof sv.lng === 'number' && typeof sv.zoom === 'number'
+        && sv.lat > 40 && sv.lat < 43.2 && sv.lng > -0.5 && sv.lng < 3.6 && sv.zoom >= 6 && sv.zoom <= 13) {
+      startView = [[sv.lat, sv.lng], sv.zoom];
+    }
+    map = L.map('map', {scrollWheelZoom: false}).setView(startView[0], startView[1]);
+    map.on('moveend', () => {
+      const c = map.getCenter();
+      uiStateSave({view: {lat: c.lat, lng: c.lng, zoom: map.getZoom()}});
+    });
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors',
       maxZoom: 13
@@ -1216,6 +1254,10 @@ async function loadData() {
     });
     filterSel.addEventListener('change', render);
     document.getElementById('sort-mode').addEventListener('change', render);
+    // Seta y orden que el usuario tenía (solo si siguen existiendo).
+    if (uiState.species && Array.from(filterSel.options).some(o => o.value === uiState.species)) filterSel.value = uiState.species;
+    const sortSel = document.getElementById('sort-mode');
+    if (uiState.sort && Array.from(sortSel.options).some(o => o.value === uiState.sort)) sortSel.value = uiState.sort;
 
     const genDate = new Date(DATA.generated_at);
     document.getElementById('generated-note').textContent =
@@ -1223,7 +1265,29 @@ async function loadData() {
     status.textContent = `${DATA.zones.length} zonas cargadas`;
 
     setupSightingForm();
+    restoringUi = true; // mientras se restaura no se pisa lo guardado
     render();
+    // Ficha que estaba abierta (sin mover el mapa) y posición de la página.
+    try {
+      const open = uiState.popup != null ? markers.find(mk => mk._zoneId === uiState.popup) : null;
+      if (open && open.getPopup()) {
+        const pop = open.getPopup();
+        const prevAuto = pop.options.autoPan;
+        pop.options.autoPan = false;
+        open.openPopup();
+        pop.options.autoPan = prevAuto;
+      }
+    } catch (e) { /* si no se puede reabrir, no pasa nada */ }
+    restoringUi = false;
+    if (typeof uiState.scrollY === 'number' && uiState.scrollY > 0) {
+      setTimeout(() => window.scrollTo(0, uiState.scrollY), 0);
+    }
+    let scrollTimer = null;
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => uiStateSave({scrollY: Math.round(window.scrollY)}), 250);
+    }, {passive: true});
+    window.addEventListener('pagehide', () => uiStateSave({scrollY: Math.round(window.scrollY)}));
   } catch (e) {
     status.textContent = 'Error cargando datos: ' + e.message;
   }

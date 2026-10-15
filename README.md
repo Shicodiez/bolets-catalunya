@@ -213,8 +213,26 @@ Junto a cada puntuación se muestra un nivel de **confianza** (🟢🟠🔴),
 independiente del valor numérico: refleja cuánta evidencia real la
 respalda.
 
-La web muestra las zonas por encima de un **umbral ajustable** (por defecto
-70, con deslizador).
+La web muestra las zonas por encima de un **umbral ajustable** con deslizador.
+Desde el 15/10/2026 **arranca en 90** (antes 70), a petición de Sergio: es un valor
+solo de pantalla. Con los datos del 15/10/2026 (2.052 zonas forestales) había 1.454
+zonas con alguna especie ≥ 70 y **109 con ≥ 90**; de estas, sobre todo Cep fosc
+(perfil provisional, confianza baja) y Llengua de bou, y la nota máxima era 94. El
+backend sigue usando su propio 70 (`DEFAULT_SCORE_THRESHOLD`) para la tasa de
+confirmación — así esa estadística no cambia con lo que ponga cada persona en
+pantalla — y el campo `default_threshold` del JSON ya no manda sobre el
+deslizador. Bajar el deslizador enseña más zonas (con 80 salen 986).
+
+**La pantalla recuerda lo que has elegido** mientras la app/pestaña siga abierta
+(`sessionStorage`): especie, umbral, orden, posición y zoom del mapa, posición de
+la página y la ficha de zona que tuvieras abierta. Así, al ir a «📖 Cómo
+reconocerla» (la guía) y volver, el mapa está como lo dejaste. Al abrir la app de
+nuevo, empieza otra vez en 90 y todas las especies. En la guía, los enlaces del
+índice (#cep, #phalloides…) ya no añaden entradas al historial y «← Volver al
+predictor» usa el historial: con **un solo «atrás»** (el del móvil o el enlace) se
+vuelve al mapa. En la **APK** (versión 1.1) el botón «atrás» del móvil retrocede por
+el historial de la web (`MainActivity.java`) y solo sale de la app cuando no hay nada
+que retroceder.
 
 ### Radar meteorológico
 
