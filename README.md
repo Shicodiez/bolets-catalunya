@@ -11,8 +11,9 @@ encontrar cada tipo de bolet ahora mismo.
 1. Escribe tu email (tiene que ser uno de los autorizados) y te llegará un
    código de acceso por correo — introdúcelo para entrar.
 2. En el mapa verás puntos de colores — cada uno es una zona de nuestra
-   rejilla de predicción (no son estaciones meteorológicas reales, son
-   ~1.470 puntos repartidos cada ~5km por Catalunya). Toca un punto para
+   rejilla de predicción (no son estaciones meteorológicas reales: son
+   unos 4.250 puntos por Catalunya, de los cuales unos 2.050 caen en bosque y
+   son los que tienen predicción; ver «La rejilla»). Toca un punto para
    ver qué especie cumple bien las condiciones, con qué puntuación (0-100,
    cuanto más alto mejor) y por qué.
 3. Puedes mover el deslizador de arriba para ver más o menos zonas (más
@@ -30,6 +31,17 @@ encontrar cada tipo de bolet ahora mismo.
 7. Más abajo hay un desplegable de "Estaciones meteorológicas" donde
    puedes elegir cualquiera de las estaciones reales que usa el sistema
    (AEMET, Meteocat, Meteoclimatic) y ver sus datos tal cual llegan.
+8. **Guía de identificación** (enlace arriba y en la pantalla de acceso, y
+   «📖 Cómo reconocerla» en cada especie de una zona): 30 fichas **desplegables
+   con foto** (las setas del predictor y las peligrosas con las que se
+   confunden). Arriba hay un botón **📷 Identificar con una foto**: haces una
+   foto (o eliges una de la galería) y la app te sugiere con qué fichas
+   compararla; para eso hay que haber entrado antes en el predictor y tener
+   cobertura. La guía en sí funciona **sin cobertura** una vez abierta con
+   conexión (guarda también las fotos), y no pide iniciar sesión. Ojo: el texto
+   lo ha redactado una IA y **no lo ha revisado ningún micólogo**, y la
+   identificación por foto es una sugerencia de un modelo de IA general que
+   puede equivocarse.
 
 Los datos se actualizan solos cada 3 horas. No hace falta hacer nada para
 que esté al día.
@@ -54,23 +66,44 @@ con verificación de email)
   altitud real de cada punto — nunca caduca, se genera una sola vez).
 - `data/bosc_cache.json` — caché del tipo de bosque genérico por zona (ICGC), 1 año.
 - `data/vegetacio_layers_cache.json` — lista de capas de especie de árbol (VEGETACIO, 90 días) **y** la especie exacta ya resuelta de cada punto (`points`, se completa por lotes y se conserva entre ejecuciones).
-- `data/weather_block_cache.json` — caché de tiempo por punto, con su **serie diaria propia** (hasta 45 días de lluvia y temperaturas) para detectar episodios de lluvia sin pedir más datos a Open-Meteo.
+- `data/weather_block_cache.json` — caché de tiempo por punto. Se refresca por **bloques rotatorios** (3 bloques geográficos, uno por ejecución, así que todos los puntos se renuevan cada ~9 h) y cada punto guarda además su **serie diaria propia** (lluvia y temperaturas; arranca con los ~16 días que devuelve Open-Meteo y acumula hasta 45) para detectar episodios de lluvia. Mientras un punto aún no tiene serie, se usa el resumen compacto (`rain_10d`, `days_since_rain`).
 - `data/gbif_cache.json` — caché de distribución mensual y de altitud de cada especie según GBIF/FungaCAT, 60 días.
 - `data/historial_lluvia.json` — historial propio de lluvia diaria vía Meteoclimatic, 30 días.
 - `data/geocode_cache.json` — caché permanente de coordenadas de estaciones de Meteoclimatic (Nominatim).
 - `data/meteocat_stations_cache.json` — caché de metadatos de estaciones XEMA/Meteocat, 90 días.
 - `data/geologia_cache.json` — caché permanente de litología (silici/calcari/mixt) por coordenadas, con el texto original del ICGC para poder reclasificar sin volver a consultar.
 - `data/zone_names_cache.json` — caché permanente de nombres reales de las zonas (Nominatim, reverse geocoding).
-- `data/evolucion.json` — snapshot diario de la mejor puntuación por zona, 30 días.
+- `data/evolucion.json` — snapshot diario de la mejor puntuación por zona, 30 días (solo para las flechas ▲/▼).
+- `data/validacio.json` — **predicciones congeladas** de cada salida registrada: la puntuación de cada especie en la zona más cercana el día en que el backend ve la salida (ver «Validación»). Permanente.
 - `data/hallazgos.json` — salidas reales registradas por los usuarios. Se actualiza vía el Worker.
 - `web/index.html` — la web: login, mapa, deslizador de umbral, formulario de salidas, panel de tasa de confirmación, explicaciones de DeepSeek.
+- `web/guia.html` — guía de identificación (una sola página, sin librerías externas; las fotos las carga de `web/fotos/`). **Se genera** con `python3 tools/generar_guia.py` a partir de `tools/guia_datos.py`: se edita el texto en ese archivo y se vuelve a generar, no el HTML a mano.
+- `web/fotos/` — fotos de las fichas (`<id>-<n>.jpg`), `creditos.json` (autor y licencia de cada una) e `informe.txt`. **No se escriben a mano**: las genera el workflow «Descargar fotos de la guia».
+- `web/sw.js` — service worker: guarda `guia.html`, sus fotos y la pantalla de la app para verlas sin cobertura (red primero, copia guardada como plan B; las fotos desde la copia guardada y se refrescan en segundo plano; los datos del mapa y la identificación por foto no se guardan).
+- `tools/` — `generar_guia.py` y `guia_datos.py` (contenido de la guía), `fotos_datos.py` (qué foto lleva cada ficha) y `descargar_fotos.py` (descarga de Wikimedia Commons).
+- `FUENTES-REVISADAS.md` — revisión de 35 webs, foros y artículos (15/10/2026): qué dice cada uno, qué sirve para el modelo y la guía, qué no se pudo leer y el aviso sobre la peste porcina africana.
 - `worker/index.js` — código del Worker de Cloudflare. **Se despliega directamente en el editor de Cloudflare, subirlo a GitHub NO lo actualiza en producción.**
 - `.github/workflows/actualitzar.yml` — automatización que ejecuta el backend cada 3 horas.
+- `.github/workflows/descargar_fotos.yml` — se lanza **a mano** (Actions → «Descargar fotos de la guia» → Run workflow): descarga las fotos de la guía de Wikimedia Commons (solo licencias libres) y las guarda en `web/fotos/`.
 
 ### La rejilla de predicción
 
-~1.470 puntos repartidos cada ~5km por Catalunya (no son estaciones
-meteorológicas reales — ver más abajo). Se generan una sola vez con:
+La rejilla es **adaptativa** (no son estaciones meteorológicas reales):
+sondeo a 5 km por toda Catalunya, y densificación a 2,5 km (3×3 puntos) solo
+en las celdas con bosque. **Cifras reales a 15/10/2026** (las que aparecían
+en versiones antiguas —1.470, 1.660, 3.000, 7.300— eran de etapas anteriores o
+estimaciones de diseño):
+
+| Etapa | Puntos |
+|---|---|
+| Rejilla generada (5 km + densificación 2,5 km, con los puntos de verificación del sondeo) | 8.285 |
+| Tras descartar los que están a menos de 0,5 km de otro (`dedupe_zones`; se conservan los `id`) | **4.248** (los que procesa el backend) |
+| De ellos, con bosque y predicción por especie | **≈ 2.050** |
+| Puntos con árbol genérico (`pi_altres`, `roure`, `alzina`) aún por afinar con VEGETACIO | se afinan por lotes de 900 s en cada ejecución (≈ 1-2 días hasta terminar) |
+
+Para saber la cifra exacta de hoy: `len(ZONES)` en el log de la Action
+(«… llocs diferents») o el número de zonas de `data/resultats.json`.
+Se generan una sola vez con:
 - **Filtro de polígono** aproximado de Catalunya, para no generar puntos
   en el mar (verificado dando ~393 puntos con espaciado de 10km, casi
   idéntico a la rejilla original manual de 390 puntos).
@@ -83,9 +116,8 @@ Se cachean en `data/zones_grid.json` de forma permanente (las coordenadas
 y la altitud del terreno no cambian). Aumentar la densidad más allá de
 esto tiene un límite real: la geocodificación de nombres de zona respeta
 el límite de Nominatim (4 peticiones/minuto para scripts automáticos),
-así que con ~1.470 puntos completar todos los nombres tarda unas 2-3
-semanas — es el máximo defendible sin alargar esa espera de forma
-excesiva.
+así que completar todos los nombres de los miles de puntos lleva semanas
+(mientras tanto una zona sin nombre muestra sus coordenadas).
 
 ### Fuentes de datos usadas (todas gratuitas)
 
@@ -110,7 +142,7 @@ intervención manual: **SIAR**, **Ecowitt**, **Weather Underground**,
 ### Cómo funciona el cálculo
 
 Para cada punto de la rejilla (~4.250 tras eliminar duplicados a menos de
-0,5 km), y cada una de las 10 especies del catálogo, se calcula una
+0,5 km), y cada una de las 14 especies del catálogo, se calcula una
 **puntuación de 0 a 100** en dos pasos: primero se suma evidencia de seis
 componentes y después se **multiplica por los limitantes biológicos**
 (ver más abajo). Componentes de la suma:
@@ -130,11 +162,13 @@ componentes y después se **multiplica por los limitantes biológicos**
   sombrero del bolet aunque el suelo profundo siga húmedo.
 - **Temporada real de la especie** (0-15 pts) según GBIF, por mes y
   altitud. Incluye un pequeño ajuste (±1.5 pts) por geología del suelo,
-  solo para las 3 especies con evidencia clara (Ceps y Ou de reig
+  solo para las 3 especies con evidencia clara (Cep y Ou de reig
   prefieren silici, Camagrocs prefiere calcari).
-- **Corroboración entre fuentes** (0-10 pts) — el radar tiene prioridad
-  máxima (cobertura directa del punto exacto); si no hay radar, se usa la
-  triangulación de estaciones (AEMET+Meteocat+Meteoclimatic)
+- **Corroboración entre fuentes** (0-10 pts) — orden de comprobación: 1) radar
+  (un fotograma instantáneo; si indica ≥ 3 mm/h → 10 pts); 2) si no, la
+  triangulación de estaciones (AEMET+Meteocat+Meteoclimatic); 3) si no, lecturas
+  sueltas de estación. Es un **bonus** de confianza: el radar NO entra en la
+  detección de episodios de lluvia ni en la cantidad de lluvia.
 
 ### Limitantes biológicos (`SPECIES_BIO`)
 
@@ -157,7 +191,10 @@ calcáreo) salía como «silici»; salían ou de reig a 1.986 m y colmenilles
 reales (`hallazgos`): `SPECIES_BIO` es el único sitio donde tocar.
 
 Además de los limitantes, el tipo de bosque sigue siendo un requisito duro:
-si el árbol no está en la lista `trees` de la especie, puntúa 0. Cuando
+si el árbol no está en la lista `trees` de la especie, puntúa 0. Algunas
+especies aceptan un árbol «menos habitual» con una rebaja (`tree_factor`):
+Trompetes bajo encina/alzina (×0,85), Cep fosc bajo haya (×0,85) y Cep d'estiu
+bajo encina (×0,85) — añadido tras salidas reales (ver «Validación»). Cuando
 VEGETACIO afina el tipo (pino rojo, pino blanco, abeto, haya, alcornoque…),
 las listas incluyen esos «hijos» donde la especie de verdad crece, para no
 perder avisos (comprobado en `tests/test_model.py`).
@@ -175,15 +212,18 @@ Da cobertura de **superficie continua** en vez de solo puntos con
 estación — importante porque una tormenta muy localizada puede caer justo
 entre dos estaciones y no detectarse de otro modo. Es una estimación (no
 tan exacta como un pluviómetro físico) del instante actual (no
-acumulado), pero cubre cualquiera de los ~1.470 puntos, tengan o no una
-estación cerca.
+acumulado), pero cubre cualquiera de los puntos de la rejilla, tengan o no
+una estación cerca. Solo se usa en el bonus de corroboración (y en la
+confianza); **no** decide la lluvia del episodio.
 
 - **RainViewer (activo)**: mosaico europeo gratuito, sin API key. Da un
   color (RGBA) por píxel, traducido a dBZ (tabla oficial "Universal Blue")
   y luego a mm/h (Marshall-Palmer). Si un día no llueve en ningún punto,
   es una respuesta válida (no un fallo) — el sistema lo distingue
-  correctamente. Tiene prioridad máxima en el bonus de corroboración
-  cuando detecta lluvia, por dar cobertura directa del punto exacto.
+  correctamente. En el código sus valores se vuelcan con `setdefault`: rellenan
+  los puntos que no tienen lectura de radar y **no sustituyen** una lectura que
+  ya existiera. Como el radar de AEMET está desactivado, hoy RainViewer es la
+  única fuente de radar y el «orden de prioridad» es solo el del bonus.
 - **AEMET (implementado pero desactivado)**: el endpoint
   `/api/red/radar/regional/{radar}` no devuelve la imagen realmente
   georreferenciada (verificado: sin CRS, transform de identidad). Hay un
@@ -219,7 +259,7 @@ red nunca se guarda como «sin dato» y 8 fallos seguidos paran la tanda.
 En el scoring la geología ya no es un ajuste de ±1,5: es un limitante
 fuerte para las especies acidófilas (Ou de reig).
 
-Preferencias usadas: **Ou de reig** acidófilo (limitante fuerte), **Ceps**
+Preferencias usadas: **Ou de reig** acidófilo (limitante fuerte), **Cep**
 ligera preferencia por silici, **Camagrocs** por calcari. El resto no tiene
 ajuste (no hay evidencia fiable para inventar una preferencia).
 
@@ -240,9 +280,10 @@ fueran entradas distintas).
 Cada día se guarda un snapshot de la mejor puntuación de cada zona. La web
 compara con hace 7 días y marca **▲/▼**.
 
-Cuando hay suficientes salidas registradas, el backend calcula una **tasa
-de confirmación** (no "precisión": no es una muestra representativa de
-todas las zonas, solo de las visitadas).
+Cuando hay salidas contrastables, el backend calcula una **tasa de
+confirmación** (no "precisión": no es una muestra representativa de todas las
+zonas, solo de las visitadas). Cómo se calcula exactamente, y por qué todavía
+no demuestra nada, se explica en «Validación».
 
 La web avisa cuando alguna fuente de datos ha fallado de verdad (no
 cuando simplemente no hay lluvia que detectar).
@@ -262,7 +303,8 @@ Secrets configurados en el Worker (Cloudflare → Workers & Pages →
 - `AUTHORIZED_EMAILS` — lista de emails con acceso, separados por comas.
 - `BREVO_API_KEY` — key de la API de Brevo, usada para enviar los códigos de acceso por email.
 - `SENDER_EMAIL` — el email verificado en Brevo desde el que se envían los códigos.
-- `DEEPSEEK_API_KEY` — key de la API de DeepSeek (modelo `deepseek-v4-flash`).
+- `DEEPSEEK_API_KEY` — key de la API de DeepSeek. El Worker usa el modelo `deepseek-flash` (V4.1 Flash). El identificador antiguo `deepseek-v4-flash` se retiró el 10/09/2026 y solo se enruta temporalmente al nuevo; no hay que usarlo.
+- `LIMITS` *(opcional pero recomendado)* — un «KV namespace» de Cloudflare (gratuito) enlazado al Worker con ese nombre. Activa los límites de intentos (ver «Seguridad»). Sin él, el Worker funciona igual pero sin límites.
 
 Secrets configurados en GitHub Actions (repositorio → Settings → Secrets
 and variables → Actions):
@@ -272,7 +314,15 @@ and variables → Actions):
 **Seguridad del Worker** — nunca confía en lo que le manda el navegador:
 rango geográfico real de Catalunya, lista blanca de especies/árboles,
 límites de longitud, formato de fecha válido, límite de tamaño de payload
-(10KB), retraso tras un intento fallido.
+(10KB), retraso tras un intento fallido, comparación de códigos y firmas en
+tiempo constante, y (con el KV `LIMITS` enlazado) límites reales de uso:
+5 códigos/hora por email y 10/hora por IP; bloqueo de 15 min tras 5 intentos
+fallidos por email o 15 por IP; tope de 150 explicaciones DeepSeek por día.
+Limitaciones asumidas: el KV no es atómico (dos peticiones simultáneas pueden
+pasarse un intento del límite); si alguien conoce tu email puede bloquearte el
+acceso 15 min a base de fallos (la sesión dura 30 días, así que casi no se
+nota); y el repositorio es público, así que `data/hallazgos.json` (las
+coordenadas exactas de tus salidas) es visible para cualquiera.
 
 **IMPORTANTE — `worker/index.js` no se despliega solo:** el archivo en
 GitHub es solo la copia de referencia. Para que un cambio tenga efecto de
@@ -282,12 +332,16 @@ verdad, hay que pegarlo directamente en Cloudflare (Edit code → Deploy).
 
 La web pide un email antes de mostrar nada:
 1. El Worker comprueba si el email está en `AUTHORIZED_EMAILS`.
-2. Si está autorizado, genera un código de 6 dígitos (válido 10 minutos) y
-   lo envía por email vía Brevo.
+2. Si está autorizado, genera un código de 6 dígitos **uniforme**
+   (000000-999999; antes salía de los dígitos de un Base64 y en ~31 % de los
+   casos se rellenaba con ceros, ≈ 16,8 bits de entropía frente a 19,9) válido
+   10-20 minutos, y lo envía por email vía Brevo.
 3. El navegador recibe un token de sesión firmado (30 días).
 
 El código no se guarda en ningún sitio: se deriva con HMAC (email +
-ventana de 10 min + `SESSION_SECRET`).
+ventana de 10 min + `SESSION_SECRET`) y se acepta el de la ventana actual y el
+de la anterior. Lo que protege contra la fuerza bruta no es el código sino el
+**límite de intentos** del KV `LIMITS` (ver «Seguridad del Worker»).
 
 - **Dar acceso**: añadir el email a `AUTHORIZED_EMAILS`.
 - **Quitar acceso**: quitar el email de esa lista.
@@ -308,6 +362,72 @@ web en vivo (`server.url` en `capacitor.config.json`) — los cambios en la
 web se reflejan solos, sin regenerar el APK. Para generar uno nuevo:
 `npx cap sync android` → `npx cap open android` → Android Studio → Build →
 Generate APK(s).
+
+### Comparativa con trobarbolets.cat (15/10/2026)
+
+Proyecto aficionado parecido (no oficial, sin autor nombrado). Mapa diario de
+«probabilidad» por municipio con dos fases: reglas de época, altitud y sequía y
+después *gradient boosting* entrenado con observaciones GBIF e iNaturalist; 29
+variables (lluvia acumulada de 3 a 30 días, días desde la última lluvia con
+umbrales de 2, 5 y 10 mm, temperatura, altitud, hábitat CORINE) y ~240
+estaciones oficiales interpoladas. Declara AUC 0,956 en validación cruzada pero
+solo ~0,81 en años no vistos (cifras suyas, no verificadas por nosotros).
+Aprendido de ahí: (1) una validación cruzada normal engaña, la validación debe
+hacerse **por años** (entrenar con ≤2020, evaluar con 2021 en adelante) y
+**por zonas**; (2) sus meses de mayor actividad coinciden con los de nuestro
+GBIF (cep, ou de reig, trompeta, rovelló, fredolic, llengua de bou; el camagroc
+difiere un mes); (3) separan *cep fosc* (72-1.405 m, sep-oct), *cep* (679-2.451 m)
+y *cep d'estiu*, lo que apoya la duda M4; (4) casi no registran pinetell (1
+observación, todo va a «rovelló»), así que con datos públicos rovelló y pinetell
+no se pueden separar para validar (duda M5). Nuestro punto distinto: no
+presentamos la puntuación como probabilidad.
+
+### Comparativa con bolets.app (15/10/2026)
+
+Otra web aficionada (se llama a sí misma «Bolets Atles»). Lo que declara —son
+cifras suyas, **no verificadas por nosotros**—: un índice 0-100 explícitamente
+«no una probabilidad», con bandas (0-19 muy bajo, 20-49 bajo, 50-69 moderado,
+70-79 alto, 80-100 muy alto) y un estado aparte «sin datos»; reconocimiento de
+setas por foto (438 especies, 98 % de acierto entre las 3 primeras, 0,8 % de
+errores «mortal tomada por comestible») con un modelo de 31 MB que funciona sin
+conexión; 62 fichas de especie, una página de 14 confusiones peligrosas, un método
+de campo en 7 pasos; mapa de hallazgos públicos a 10 × 10 km; y un aviso claro de
+que el contenido tiene «revisión editorial, sin revisión micológica
+independiente». Usa pH de SoilGrids, temperaturas de la XEMA y los modelos
+AROME/ECMWF.
+
+**Qué hemos cogido:**
+- La frase «la puntuación es un índice, no una probabilidad» (ahora en la leyenda de la web) y recordar que la app dice *dónde mirar*, no *qué se puede comer*.
+- Una **guía de identificación** (`web/guia.html`): las confusiones peligrosas primero, el método de campo en 7 pasos con esporada, teléfonos de urgencias y mitos desmentidos. Con el mismo aviso honesto: texto de IA, sin revisión micológica.
+- **Funcionamiento sin cobertura** (`web/sw.js`).
+
+**Reconocimiento por foto:** al principio no se hizo a propósito (una IA de fotos
+que se equivoque con una *Amanita phalloides* mata, y no podemos validar ni medir
+su error). El 15/10/2026 Sergio pidió expresamente poder identificar con la cámara
+y se hizo **como sugerencia, no como veredicto** (ver «Guía de identificación»):
+solo propone hasta 3 fichas de la guía con las que comparar, enseña lo que se ve y
+lo que la foto no enseña, y copia de cada ficha lo que la descarta y con qué se
+confunde. Por debajo es un modelo de visión general de Cloudflare, no un modelo
+entrenado con setas, y **su acierto no está medido**.
+
+**Ideas apuntadas (sin hacer):** bandas de interpretación y un estado «sin datos»
+cuando faltan fuentes; pH real del suelo (SoilGrids) para afinar las especies
+acidófilas; un mapa público de hallazgos a baja resolución (10 × 10 km rompería
+nuestro emparejamiento a 3,5 km, así que solo serviría para mostrar, no para
+validar). Esto último enlaza con la decisión pendiente de **privacidad de las
+coordenadas**: los hallazgos exactos están hoy en el repositorio público y en su
+historial.
+
+### Guía de identificación y modo sin conexión
+
+- `web/guia.html` se **genera** (`python3 tools/generar_guia.py`) con el texto de `tools/guia_datos.py`. Tiene 30 fichas **desplegables** (se toca la cabecera: miniatura, nombre y nombre científico): 16 peligrosas (oronja verde, amanitas blancas, lepiotas pequeñas, cortinarios, galerina, giromitra, inocibe de Patouillard, clitocibes blancos, entoloma lívido, boleto de Satanás, boletos de poros rojos, boleto amargo, tricoloma tigre, seta del olivo, matamoscas y amanita pantera, lactario torminoso) y 14 de las setas del predictor (las 11 que están en el mapa más apagallums, cama-sec y moixernó, marcadas «no está en el mapa»).
+- Cada ficha empieza por *lo que tiene que cumplir* y *lo que la descarta*, y lista las confusiones con su gravedad. Los **nombres científicos** son la referencia; se evitaron nombres comunes de los que no hay certeza.
+- **Secciones quitadas a petición de Sergio (15/10/2026):** «Léelo antes de nada» y «Si has comido una seta y tienes dudas» (con los teléfonos de urgencias). Se mantienen la franja roja de una línea de arriba, el método de campo en 7 pasos y los mitos (ahora plegados al final) y el aviso de «sin revisión micológica independiente» en el pie.
+- Los `id` de las fichas coinciden con los ids de especie del predictor, así que la ventana de cada zona enlaza con `guia.html#<id>` y el enlace abre la ficha (también con los alias `#cepfosc`, `#cepestiu`, `#pinetell`). Una prueba (`tests/test_model.py`) falla si se añade una especie sin ficha o sin foto asignada.
+- **Fotos:** vienen de **Wikimedia Commons** (vía Wikipedia) y solo se aceptan licencias libres (CC BY, CC BY-SA, CC0, dominio público; nada con NC ni ND). Debajo de cada foto se ve autor y licencia con enlace, como exigen esas licencias. `tools/fotos_datos.py` dice qué nombre científico se busca para cada ficha (y `FORZAR` permite fijar un archivo concreto si la foto automática no es buena); `tools/descargar_fotos.py` la descarga (miniaturas de 500 px) y se ejecuta desde el workflow `descargar_fotos.yml`, porque el entorno de desarrollo no tiene acceso a esas webs. Si no hay fotos, la guía funciona igual sin ellas.
+- **Identificar con una foto:** botón «Hacer foto» (abre la cámara del móvil) o «Elegir de la galería». El navegador reduce la foto a 800 px y la envía al Worker (`POST /identify`, exige sesión). El Worker se la pasa al modelo de visión `@cf/meta/llama-3.2-11b-vision-instruct` de **Cloudflare Workers AI** con la lista de las 30 fichas y pide un JSON (qué se ve, hasta 3 candidatas con su motivo, qué falta ver). Lo que devuelve el modelo se **sanea**: solo ids de la guía, sin duplicados, textos acotados. La app enseña esas candidatas junto con «Descártala si ves…» y «Se confunde con» de cada ficha y un botón para abrirla. **Coste: 0 €** en el plan gratuito de Workers AI (10.000 «neuronas» al día según su tabla de precios; al agotarse, la llamada falla y no se cobra; el Worker añade un tope propio de 120 identificaciones al día). Requiere añadir el *binding* **Workers AI** con el nombre `AI` al Worker (Settings → Bindings); sin él, `/identify` responde que no está activada. El Worker acepta aquí cuerpos de hasta 1,6 MB; el resto de rutas siguen limitadas a 10 KB. **No está probado con el modelo real** (desde el entorno de desarrollo no hay acceso a Cloudflare): las pruebas usan una IA simulada. El acierto del modelo con setas catalanas **no está medido**; hay que probarlo con setas conocidas.
+- **Sin conexión:** `sw.js` (caché `bolets-offline-v2`) guarda `guia.html`, los créditos y las fotos, la pantalla de la app, el manifiesto y un icono. Las páginas van red primero (4 s de espera) con la copia como plan B; las fotos salen de la copia y se refrescan en segundo plano. No guarda datos del mapa, así que no puede enseñar una puntuación antigua. Comprobado en Chromium con el servidor apagado de verdad (guía + 37 fotos); **no probado aún en un móvil real**: hay que abrir la guía una vez con cobertura y luego probar en modo avión. La identificación por foto necesita cobertura.
+- **Límites reconocidos:** texto redactado por una IA y **sin revisión de un micólogo** (conviene que la revise una sociedad micológica antes de difundirla); las fotos son la imagen principal del artículo de Wikipedia de cada especie y **no están revisadas una a una** (hay que mirarlas y fijar con `FORZAR` las que no sirvan); no cubre todas las setas, solo las del predictor y las confusiones más conocidas.
 
 ### Comparativa con otras apps (iFong)
 
@@ -375,14 +495,53 @@ limitantes de **calor excesivo** (`tmax_hot`, `tmin_hot`), **frío sostenido**
 |---|---|---|---|---|---|
 | Rovellons | pleno a los 14 d, dura hasta ~5 semanas | frena si máx. > 24 °C o noches > 15 °C; helada < −2 °C | indiferente (*L. deliciosus* silicícola, *L. sanguifluus* calcícola) | pinos (rojo, negro, blanco, piñonero, otros) | 200-1.700 m |
 | Pinetell | 14 d (pinar de montaña) | frena si máx. > 22 °C; tolera algo más de frío | silici (calcari ×0,85) | pinos | 700-1.700 m |
-| Ceps | 9-12 d, hasta ~20 d | óptimo medias ~13 °C (10-15); frena > 25 °C; heladas muy mal | silici (calcari ×0,75) | roble, haya, pino rojo/negro, abeto, alcornoque | 550-1.700 m (tierra baja penalizada) |
+| Cep (*B. edulis*, *B. pinophilus*) | 9-12 d, hasta ~20 d | óptimo medias ~13 °C (10-15); frena > 25 °C; heladas muy mal | silici (calcari ×0,75) | roble, haya, pino rojo/negro, abeto | 700-1.700 m, baja hasta 2.400 m (tierra baja muy penalizada) |
+| Cep fosc *(provisional)* (*B. aereus*) | 8 d, hasta ~18 d | calor tolerado (frena > 28 °C); necesita noches ≥ 6 °C | silici ≥ mixt > calcari (×0,85) | encina, alcornoque, roble (haya ×0,85) | 350-1.000 m, cae desde ~1.300 m (72-1.405 m según trobarbolets), sep-oct |
+| Cep d'estiu *(provisional)* (*B. reticulatus*) | 8 d, hasta ~20 d | calor tolerado (frena > 29 °C); necesita noches ≥ 8 °C | silici ≥ mixt > calcari (×0,85) | roble, haya (encina ×0,85) | 450-1.700 m, cae hasta 2.400 m (433-2.228 m según trobarbolets), jul-sep |
 | Camagrocs | 16 d, dura hasta ~6 semanas; necesita mucha humedad | frío: aguanta heladas; frena si máx. > 18 °C o noches > 11 °C | calcari ≥ mixt > silici | pinos, haya, roble, abeto | 400-1.500 m |
-| Trompetes de la mort | 16 d | frena si máx. > 20 °C | calcari (silici ×0,85) | haya y roble | 500-1.500 m |
+| Trompetes de la mort | 16 d | frena si máx. > 20 °C | casi indiferente (silici ×0,95) | haya y roble; encina (×0,85) | desde ~100 m (tierra baja frenada), hasta 1.500 m |
 | Ou de reig | 15-21 d | necesita noches ≥ 12 °C y días ≥ 22 °C; helada lo mata | silici (calcari ×0,12) | encina, roble, alcornoque | < 800 m |
 | Rossinyols | 7-9 d, hasta ~18 d | frena si máx. > 26 °C; heladas mal | silici (calcari ×0,8) | haya, roble, pinos, abeto | 600-1.800 m |
 | Colmenilles | 8 d (primavera) | necesita días ≥ 15 °C; frena si máx. > 20 °C; marzo-mayo | calcari ≥ silici | roble, pinos | < 1.600 m |
 | Llengua de bou | 12 d, hasta ~28 d | frena si máx. > 24 °C; heladas mal | silici/mixt (calcari ×0,8) | roble, haya, alcornoque, pino rojo/negro, abeto | 500-1.600 m |
 | Fredolic | 12 d, hasta ~32 d | necesita frío: frena si máx. > 20 °C; aguanta heladas | indiferente | pinos, encina | tierra baja (< 900 m) |
+| Escarlet *(provisional)* | 16 d, hasta ~40 d | frena si máx. > 20 °C; aguanta heladas suaves | calcari ≥ mixt > silici (×0,70) | encina, roble (haya y alcornoque ×0,85) | 100-1.000 m, hasta 1.650 m |
+| Llenega negra *(provisional)* | 14 d, hasta ~35 d | frena si máx. > 21 °C; aguanta bien el frío | calcari > mixt > silici (×0,65) | pinos (todos) | 150-1.200 m, hasta 1.650 m |
+
+**Escarlet** (*Hygrophorus russula*) y **llenega negra** (*Hygrophorus
+latitabundus*) se añadieron el 15/10/2026 a partir de las fichas públicas de
+trobarbolets.cat (hábitat, suelo, altitudes y meses de las observaciones
+GBIF/iNaturalist). Son **perfiles provisionales**: lo único con fuente es el
+hábitat, el suelo, el rango de altitud y los meses; los días tras la lluvia, la
+lluvia mínima y las temperaturas son **[EST]** y no hay ninguna salida de campo.
+Por eso su confianza es siempre 🔴 (baja) y la web les añade el aviso «Perfil
+provisional: sin datos de campo todavía». Las 9 especies
+anteriores que no son el cep no cambian (comprobado con una prueba de regresión).
+
+**Ceps separados en tres (15/10/2026).** Antes había un único «Ceps» que juntaba
+*B. edulis*, *B. pinophilus* y *B. aereus*; sus ecologías son distintas
+(según trobarbolets.cat: el cep fosc es de encinar y alcornocal a
+baja altitud y en septiembre-octubre; el cep d'estiu, de verano; el cep, de
+montaña). Ahora son `cep`, `cepfosc` y `cepestiu`. El `cep` conserva el perfil
+anterior salvo que ya no acepta encina ni alcornoque y que la tierra baja
+(< 500 m) puntúa mucho menos (a 600 m pasa de 90 a 74 en el escenario ideal; a
+nivel del mar de 27 a 9): eso era precisamente lo que mezclaba al cep fosc. Para
+las especies sin datos de GBIF suficientes, `peak_months` en `SPECIES_BIO` fija
+los meses de pico de la climatología de reserva. Cep fosc y cep d'estiu son
+**provisionales** (solo hábitat, suelo, altitud y meses tienen fuente; el resto
+es [EST]) y nacen con confianza 🔴. El id antiguo `ceps` ya no existe en el
+catálogo: las salidas antiguas con `ceps` se comparan con el máximo de las tres
+(`LEGACY_SPECIES_ALIASES`, así no se pierde ninguna validación). El Worker sigue
+aceptando `ceps` por compatibilidad. El GBIF de las especies nuevas se descarga
+solo en la primera ejecución de la Action.
+
+**No añadidas (apagallums, cama-sec, moixernó):** son de **prado** (*Macrolepiota
+procera*, *Marasmius oreades*, *Calocybe gambosa*). La rejilla se construye solo
+sobre celdas con bosque y la web solo dibuja puntos forestales, así que solo
+quedarían ~224 puntos de «prado» dentro de celdas con bosque (5 %) y casi nada
+de los prados de alta montaña (donde está el moixernó). Mostrarlas así daría
+falsos negativos silenciosos. Para hacerlo bien hace falta una rejilla propia de
+prados (más consultas y más tiempo de la Action): decisión pendiente.
 
 Pendiente de calibrar con salidas reales (`hallazgos`): todas las cifras
 **[EST]**. `tests/audit_species.py` imprime una tabla por especie (puntuación
@@ -419,11 +578,110 @@ había. Causas encontradas y corregidas:
   `python3 -I ../tests/test_model.py`) cubre episodios de lluvia con el caso
   real de Montnegre, curvas, limitantes, GBIF, duplicados y VEGETACIO.
 
-Pendiente / conocido: Open-Meteo infravalora lluvias convectivas muy
-localizadas (el 4/10: 24-32 mm frente a ~170 mm medidos en Montnegre); se
-podría fusionar con el historial de estaciones (`historial_lluvia.json`).
+Pendiente / conocido (revisado el 15/10/2026 con datos reales de producción):
+la estación de Vallgorguina midió ~170 mm el 4/10 (≈206 mm entre el 29/9 y el
+8/10). La suma de Open-Meteo para la tanda en los puntos del Montnegre
+(162-177 mm en 11 días) queda un ~10-20 % por debajo de la estación (≈183 mm):
+**no hay una infravaloración grande del acumulado**. La cifra «24-32 mm» de un
+día concreto que se anotó antes **no se ha podido reproducir** (la caché
+antigua no guardaba la serie diaria; con la serie propia ya será comprobable).
+En los 1.636 puntos con estación Meteoclimatic a ≤6 km, Open-Meteo suma de
+media ~22-34 mm MÁS que la estación vecina (436 puntos con >60 mm más, solo 51
+con >60 mm menos) y las estaciones aficionadas dan ceros (Terrassa y Sabadell
+0 mm frente a ~190) y picos de 333 mm. Fusionar sin filtrar empeoraría el
+modelo, por eso `historial_lluvia.json` solo se usa como contraste (bono de
+corroboración), no para rehacer los episodios de lluvia.
+
+### Validación: qué está demostrado y qué no (15/10/2026)
+
+**Lo que NO está demostrado:** que una puntuación de 85 signifique más
+probabilidad real de encontrar setas que una de 65. Las puntuaciones son un
+**modelo heurístico** (reglas biológicas con cifras mayormente **[EST]**,
+estimadas), no probabilidades calibradas. Que el código funcione y las fuentes
+se actualicen demuestra *fiabilidad técnica*, no *validez predictiva*.
+
+**Datos reales que existen hoy:** 6 salidas en `data/hallazgos.json`, todas
+positivas (4 «mucho», 2 «poco», ninguna «nada»), de dos épocas (octubre-noviembre
+de 2025 y agosto de 2026). Con 6 positivos no se puede medir ni acierto ni
+calibración; la tasa de confirmación de la web aún no tiene datos.
+
+**Primera comprobación retrospectiva (ya hecha):** ¿habría podido el modelo
+marcar esos 6 sitios con lluvia y temperatura ideales? (`tests/test_model.py`,
+sección «Troballa real»). Antes de esta revisión, **de las 5 salidas dentro de
+la rejilla, 4 eran imposibles de marcar** y la quinta solo desde un pinar genérico
+vecino —no por el tiempo, sino por reglas fijas—:
+- Ceps a ~2.000 m en pino negro (Ger, 25/08/2026): la curva de altitud ya
+  frenaba a ×0,40 a 2.000 m (sostre ≈ 21). Ahora la caída empieza más arriba
+  (×0,95 a 2.000 m, ×0,80 a 2.200 m, 0 a 2.550 m).
+- Ceps en encinar a ~400-500 m (Sant Celoni, 9/10/2025): `alzina` no estaba
+  en la lista de árboles de los ceps (aunque *Boletus aereus* —el cep negro—
+  ya figuraba en la especie), así que las zonas de encinar más cercanas daban 0
+  y solo un pinar genérico a 2,2 km podía marcar. Ahora se acepta con ×0,90.
+- Trompetes de la mort a 90-170 m (la Batllòria, Gualba; 3 salidas «mucho»):
+  la altitud ya frenaba a ×0,2-0,4 y `alzina` no estaba en la lista; además el
+  suelo silíceo (granito de la vall de la Tordera) las rebajaba por una
+  preferencia por el calcari que las propias salidas contradicen. Ahora:
+  altitud desde ~100 m, `alzina` ×0,85 y silici ×0,95. Resultado con tiempo
+  ideal: Gualba ≈ 73; la Batllòria sigue **marginal** (≈ 57-67 en octubre,
+  ≈ 70+ en noviembre) porque su punto más cercano (0,1 km) es un pinar
+  genérico (`pi_altres`, 0 para trompetes) pendiente de afinar con VEGETACIO.
+  No se ha forzado más el modelo: se deja anotado en las pruebas.
+- La 6.ª salida (Les Angles, 26/08/2026) cae fuera de la rejilla (Catalunya
+  Nord, a 9,5 km del punto más cercano): no es comparable.
+
+Esto se hizo **por evidencia de campo, no por ajuste fino**: son cambios
+mínimos para que el modelo *pueda* marcar lo que se sabe que existe. Hay un
+riesgo inverso (más falsos positivos), por eso hay pruebas de contención
+(trompetes bajo encina en la costa, en agosto, ceps bajo encina a baja altitud).
+Con 6 salidas de una sola persona, sobre todo en una comarca, esto NO es una
+calibración.
+
+*Nota (15/10/2026):* el «ceps» de estas salidas es hoy `cep`, `cepfosc` y
+`cepestiu`. El cep de encinar (Sant Celoni) corresponde ahora al **cep fosc**,
+que sí acepta encina; el cep a 2.000 m en pino negro, al **cep**. La validación
+de salidas antiguas con `ceps` usa el máximo de las tres.
+
+**Cómo se mide ahora la tasa de confirmación** (`freeze_predictions` y
+`compute_model_accuracy` en `backend/recollir_dades.py`):
+1. En cuanto el backend ve una salida nueva (registrada como mucho 3 días
+   después de la troballa), **congela** la puntuación de *todas las especies*
+   en la zona más cercana (≤ 3,5 km) en `data/validacio.json`.
+2. Se compara **la especie encontrada** (antes se comparaba con «la mejor
+   especie de la zona», lo que inflaba los aciertos) con el umbral (70).
+3. Salidas «nada» (buscado y no encontrado) cuentan como acierto si la
+   puntuación era < umbral; si no se indica especie, cuenta la mejor de la zona.
+4. Visitas repetidas (misma zona, día, especie y resultado) cuentan **una**.
+5. Las no contrastables (sin predicción guardada, fuera de rejilla, registradas
+   tarde) se declaran aparte (`no_contrastables`), no se cuentan.
+6. Se desglosa por especie y por franja de puntuación.
+
+Errores del método anterior que se corrigieron: solo comparaba con la mejor
+especie; el historial se borraba a los 30 días, así que cualquier salida más
+antigua era incomparable; la zona «más cercana» podía estar a 8 km; la cifra
+se llamaba `precision_global` aunque con solo positivos mide sensibilidad.
+(La clave `precision_global` se mantiene solo por compatibilidad con la web.)
+
+**Cómo hacer que la validación valga algo (protocolo propuesto):**
+- Registrar **también las búsquedas sin resultado** («busqué y no encontré
+  nada»), sobre todo en zonas que el modelo daba como buenas **y** en zonas
+  que daba como malas. Sin negativos no se puede saber si el modelo se
+  equivoca marcando zonas vacías.
+- Salir de vez en cuando a zonas con puntuación baja o media, no solo a las
+  recomendadas (el sesgo de selección es el mayor enemigo de esta validación).
+- Registrar la salida el mismo día o al siguiente.
+- No tocar las reglas biológicas por una sola salida: esperar a tener varias por
+  especie. Evaluar siempre por especie y por temporada, y comparar con una
+  referencia simple (p. ej. «sólo mes + altitud + árbol, sin tiempo»).
+- Con ~30 salidas por especie (positivas y negativas) ya se puede mirar si las
+  franjas altas rinden más que las bajas.
 
 ### Ideas evaluadas y aparcadas deliberadamente
+
+Una revisión posterior del propio README (ChatGPT, 15/10/2026), contrastada con
+el código: acertó en el código de acceso (sin límite de intentos y no
+uniforme), en la tasa de confirmación y en que el modelo no está validado;
+estaba desactualizada en cifras de puntos, en `deepseek-v4-flash` y, en parte,
+en la caché meteorológica. Lo corregido está arriba.
 
 Un análisis externo detallado (ChatGPT) señaló mejoras de fondo aparcadas:
 pesos del scoring calibrados por especie en vez de globales; curvas de
