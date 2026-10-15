@@ -23,8 +23,12 @@ encontrar cada tipo de bolet ahora mismo.
    basada solo en el cálculo del día. En verde, fíate más.
 5. Si tocas "¿Por qué esta puntuación?" te da una explicación en lenguaje
    normal de qué la ha hecho subir o bajar.
-6. Cuando salgáis al monte, marcad en el mapa el resultado de la salida
-   (encontrasteis mucho, poco, o buscasteis sin encontrar nada) — cuantos
+6. Cuando salgáis al monte, registrad el resultado de la salida
+   (encontrasteis mucho, poco, o buscasteis sin encontrar nada). Con **«📡 Usar mi
+   ubicación»** (GPS del móvil; o «📍 Marcar en el mapa») se rellenan solos el
+   lugar, la altitud, el tipo de árbol y la fecha; tú eliges la seta y el
+   resultado, y puedes corregir lo rellenado. Los ceps se registran como «Cep» a
+   secas (no importa la variedad). Cuantos
    más registremos, mejor se irá afinando el modelo con datos reales
    vuestros. Estas salidas no se ven en el mapa (para no saturarlo), pero
    sí cuentan por detrás.
@@ -441,7 +445,7 @@ historial.
 - **Nombres en tres idiomas (15/10/2026):** cada ficha lleva un bloque **Latín / Català / Castellano** y debajo las fuentes de esos nombres. Los datos están en `tools/nombres_datos.py`: el **nombre científico es la referencia**; un nombre popular solo se escribe si aparece en una fuente consultada (Enciclopèdia Catalana, bolets.com / boletaires.cat, Canal Salut, 3Cat, Institut Català d'Història Natural, listas de la Comunidad de Madrid y del Gobierno de La Rioja, Wikipedia en español) y se anota el código de esa fuente; si ninguna lo da, se muestra «—» (no se inventa). El buscador de la guía encuentra por cualquiera de los tres idiomas. Los nombres que usa el predictor (por ejemplo «Escarlet», «Cep fosc», «Cep d'estiu») **no se han cambiado**; las fichas lo explican en una nota. Recuento y fuentes en `NOMBRES-FUENTES.md` y `FUENTES-REVISADAS.md` (§7). Los nombres populares **varían según la zona** y no son oficiales: fíate del nombre científico.
 - **Ampliar la guía:** una seta nueva necesita (1) su ficha en `tools/guia_datos.py`, (2) su firma en `tools/rasgos_datos.py` (`FIRMAS`, usando solo lo que dice la ficha), (3) su hueco de foto en `tools/fotos_datos.py`, (4) sus nombres en `tools/nombres_datos.py` (con el código de la fuente); luego `python3 tools/generar_guia.py`, pegar el nuevo `worker/index.js` solo si cambió el vocabulario de rasgos (`--vocab`), y lanzar el workflow de fotos. `tests/test_model.py` falla si una ficha no tiene firma, foto o nombres, o si un nombre cita una fuente que no existe. **Vocabulario nuevo del 15/10/2026:** «violeta» (sombrero, láminas, pie), «amarillea» (carne al cortarla y látex), «fenol» (olor) y «chocolate»/«negra» (esporada); «violeta» es un valor que lee la IA, así que cambia `IDENT_VOCAB` del Worker y **hay que pegar de nuevo `worker/index.js`**.
 - **Sin conexión:** `sw.js` (caché `bolets-offline-v2`) guarda `guia.html`, los créditos y las fotos, la pantalla de la app, el manifiesto y un icono. Las páginas van red primero (4 s de espera) con la copia como plan B; las fotos salen de la copia y se refrescan en segundo plano. No guarda datos del mapa, así que no puede enseñar una puntuación antigua. Comprobado en Chromium con el servidor apagado de verdad (guía + 37 fotos); **no probado aún en un móvil real**: hay que abrir la guía una vez con cobertura y luego probar en modo avión. La identificación por foto necesita cobertura.
-- **Límites reconocidos:** texto redactado por una IA y **sin revisión de un micólogo** (conviene que la revise una sociedad micológica antes de difundirla); las fotos se buscan automáticamente (imagen principal del artículo de Wikipedia de cada especie) y el 15/10/2026 se **revisaron a ojo las 37 primeras**: 34 eran la seta correcta y 3 no (cep fosc con una foto de *B. pinophilus*, cep d'estiu con un archivo de nombre genérico y lactario torminoso con una foto de *Lactarius mairei*), que se corrigieron fijando el archivo con `FORZAR`. La revisión la hizo una IA mirando las fotos, **no un micólogo**; si ves una foto que no es, dímelo y se fija otra; **Las fotos de las 20 fichas nuevas aún no están descargadas ni revisadas** (se descargan con el workflow y luego hay que mirarlas una a una). Los textos de las 20 fichas nuevas están redactados por una IA a partir de las fuentes consultadas (fichas de especies de Wikipedia, listas oficiales, Enciclopèdia Catalana, bolets.com), **sin revisión de un micólogo**; el recuento de observaciones de GBIF solo indica esfuerzo de observación, no abundancia. Algunas fichas con pocos rasgos (marçot, carbonera) dan coincidencias holgadas por diseño. No cubre todas las setas, solo las del predictor, las más típicas añadidas y las confusiones más conocidas.
+- **Límites reconocidos:** texto redactado por una IA y **sin revisión de un micólogo** (conviene que la revise una sociedad micológica antes de difundirla); las fotos se buscan automáticamente (imagen principal del artículo de Wikipedia de cada especie) y el 15/10/2026 se **revisaron a ojo las 37 primeras**: 34 eran la seta correcta y 3 no (cep fosc con una foto de *B. pinophilus*, cep d'estiu con un archivo de nombre genérico y lactario torminoso con una foto de *Lactarius mairei*), que se corrigieron fijando el archivo con `FORZAR`. La revisión la hizo una IA mirando las fotos, **no un micólogo**; si ves una foto que no es, dímelo y se fija otra; Las **21 fotos de las 20 fichas nuevas** (el molleric lleva 2) se descargaron con el workflow el 15/10/2026 y se **revisaron a ojo** (otra vez una IA mirándolas, **no un micólogo**): las 21 parecen la especie de su ficha y no hizo falta `FORZAR`. Con una sola foto no se puede asegurar la especie en parejas como falso níscalo/níscalo (el informe avisó de que el archivo de *L. chrysorrheus* no lleva el nombre completo; su nombre abreviado sí coincide) o molinera/clitocibes blancas. Los textos de las 20 fichas nuevas están redactados por una IA a partir de las fuentes consultadas (fichas de especies de Wikipedia, listas oficiales, Enciclopèdia Catalana, bolets.com), **sin revisión de un micólogo**; el recuento de observaciones de GBIF solo indica esfuerzo de observación, no abundancia. Algunas fichas con pocos rasgos (marçot, carbonera) dan coincidencias holgadas por diseño. No cubre todas las setas, solo las del predictor, las más típicas añadidas y las confusiones más conocidas.
 
 ### Comparativa con otras apps (iFong)
 
@@ -548,6 +552,24 @@ catálogo: las salidas antiguas con `ceps` se comparan con el máximo de las tre
 (`LEGACY_SPECIES_ALIASES`, así no se pierde ninguna validación). El Worker sigue
 aceptando `ceps` por compatibilidad. El GBIF de las especies nuevas se descarga
 solo en la primera ejecución de la Action.
+
+**Formulario de hallazgos (15/10/2026, `web/index.html`):** el botón «Usar mi
+ubicación» pide el GPS (`getCurrentPosition`, 20 s de espera) y rechaza puntos fuera
+de Catalunya (los mismos límites que el Worker). Al fijar el punto —por GPS, por clic
+en el mapa o con el botón de la ventana de una zona— se rellenan: **lugar** (Nominatim;
+si falla, el nombre de la zona más cercana), **altitud** (servicio de elevación de
+Open-Meteo; si falla, la de la zona más cercana, redondeada a 50 m), **árbol** (el tipo
+de bosque de la zona más cercana a ≤ 6 km: pino, encina o roble; cultivo, matorral, etc.
+→ «mixto / no lo sé») y **fecha** de hoy. No se rellenan ni la seta ni el resultado. Son
+estimaciones (la zona más cercana está a unos 3,5 km) y el formulario lo dice. El árbol y
+la altitud del hallazgo solo se guardan como dato; el backend contrasta cada hallazgo con
+la zona más cercana. En la lista de setas del formulario, **cep, cep fosc y cep d'estiu
+son una sola opción «Cep»** (id `ceps`, que el backend contrasta con la mejor puntuación
+de los tres); el filtro del mapa sigue separándolos. **Límites:** la llamada a Open-Meteo
+no se ha podido probar contra el servicio real desde el entorno de desarrollo (en las
+pruebas está simulada; si falla, se usa la altitud de la zona); el relleno del árbol es
+muy grueso (no distingue haya, alcornoque ni madroño). Las fotos de la guía no se
+guardan con el hallazgo.
 
 **No añadidas (apagallums, cama-sec, moixernó):** son de **prado** (*Macrolepiota
 procera*, *Marasmius oreades*, *Calocybe gambosa*). La rejilla se construye solo
