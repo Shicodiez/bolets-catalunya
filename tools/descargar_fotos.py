@@ -1,7 +1,8 @@
 """Descarga las fotos de la guía desde Wikimedia Commons y las guarda en web/fotos/.
 
 Uso (lo ejecuta el GitHub Action «Descargar fotos de la guía»; no hace falta correrlo a mano):
-    python3 tools/descargar_fotos.py
+    python3 tools/descargar_fotos.py            # solo lo que falta o lo que se ha forzado
+    python3 tools/descargar_fotos.py --todo     # vuelve a buscar todas
 
 Qué hace, para cada ficha de fotos_datos.FOTOS:
   1. Busca en Wikipedia (en, es, ca, fr, de, it) el artículo del nombre científico y saca la lista de imágenes
@@ -12,8 +13,12 @@ Qué hace, para cada ficha de fotos_datos.FOTOS:
   4. Descarga la miniatura a web/fotos/<id>-<n>.jpg y apunta autor y licencia en web/fotos/creditos.json.
   5. Escribe web/fotos/informe.txt con lo que ha ido bien y lo que no.
 
-Solo usa la librería estándar de Python. Si una especie falla, las demás siguen; si falla una que ya tenía foto,
-se conserva la anterior.
+Solo usa la librería estándar de Python. Si una especie falla, las demás siguen.
+
+Las fotos que ya están descargadas NO se vuelven a buscar (así las que se han revisado a ojo no cambian): solo se
+rehacen los huecos que estén en FORZAR con otro archivo, o todos si se pasa --todo. Si en una ejecución --todo falla
+un hueco que ya tenía foto, se conserva la anterior (salvo que ese hueco esté en FORZAR).
+El informe marca con [REVISAR] las fotos cuyo nombre de archivo no menciona la especie buscada: pueden ser de otra.
 """
 import html
 import json
@@ -176,7 +181,16 @@ def buscar_foto(alternativas, forzada=None):
     return None, None
 
 
-def main():
+def _norm_archivo(x):
+    return (x or "").replace("_", " ").removeprefix("File:").strip().lower()
+
+
+def _epiteto_en_nombre(alternativas, archivo):
+    n = _norm_archivo(archivo)
+    return any(a.split()[-1].lower() in n for a in alternativas if a.split())
+
+
+def main(rehacer_todo=False):
     os.makedirs(DESTINO, exist_ok=True)
     ruta_cred = os.path.join(DESTINO, "creditos.json")
     try:
@@ -187,10 +201,21 @@ def main():
 
     informe, total_ok, total = [], 0, 0
     for ficha_id, huecos in FOTOS.items():
-        nuevos = []
+        previas = creditos.get(ficha_id, [])
+        nuevos, hay_forzada = [], False
         for n, alternativas in enumerate(huecos):
             total += 1
             forzada = (FORZAR.get(ficha_id) or {}).get(n)
+            hay_forzada = hay_forzada or bool(forzada)
+            previa = next((p for i, p in enumerate(previas) if p.get("hueco", i) == n), None)
+            # Foto ya descargada: se reutiliza (no se vuelve a buscar) salvo que se pida rehacerla.
+            if previa and not rehacer_todo and os.path.exists(os.path.join(DESTINO, os.path.basename(previa["f"]))) \
+                    and (not forzada or _norm_archivo(forzada) == _norm_archivo(previa.get("archivo"))):
+                previa["hueco"] = n
+                nuevos.append(previa)
+                total_ok += 1
+                informe.append(f"IGUAL  {ficha_id} #{n + 1}  {previa.get('sp')}: {previa.get('archivo')}  ({previa.get('lic')}) [ya estaba]")
+                continue
             print(f"[{ficha_id} #{n + 1}] {' / '.join(alternativas)}" + (f"  (forzada: {forzada})" if forzada else ""))
             titulo, info = buscar_foto(alternativas, forzada)
             if not info:
@@ -207,15 +232,22 @@ def main():
             with open(os.path.join(DESTINO, nombre_f), "wb") as fh:
                 fh.write(datos)
             nuevos.append({
-                "f": "fotos/" + nombre_f, "sp": titulo, "autor": info["autor"], "lic": info["lic"],
+                "f": "fotos/" + nombre_f, "hueco": n, "sp": titulo, "autor": info["autor"], "lic": info["lic"],
                 "licurl": info["licurl"], "pagina": info["pagina"], "archivo": info["archivo"],
             })
             total_ok += 1
-            informe.append(f"OK     {ficha_id} #{n + 1}  {titulo}: {info['archivo']}  ({info['lic']}, {len(datos) // 1024} KB)")
-            print(f"    -> {info['archivo']} · {info['lic']} · {len(datos) // 1024} KB")
-        # Si esta vez no se ha conseguido ninguna foto de la ficha, se conserva lo que ya hubiera.
-        if nuevos or ficha_id not in creditos:
+            marca = "" if (forzada or _epiteto_en_nombre(alternativas, info["archivo"])) else f" [REVISAR: el nombre del archivo no menciona «{alternativas[0].split()[-1]}»]"
+            informe.append(f"OK     {ficha_id} #{n + 1}  {titulo}: {info['archivo']}  ({info['lic']}, {len(datos) // 1024} KB){marca}")
+            print(f"    -> {info['archivo']} · {info['lic']} · {len(datos) // 1024} KB{marca}")
+        # Si esta vez no se ha conseguido ninguna foto de la ficha, se conserva lo que ya hubiera (salvo huecos forzados).
+        if nuevos or ficha_id not in creditos or hay_forzada:
             creditos[ficha_id] = nuevos
+    # Fotos sueltas que ya no figuran en los créditos (por ejemplo, la que se ha sustituido): se borran.
+    usadas = {os.path.basename(f["f"]) for lst in creditos.values() for f in lst}
+    for nombre in os.listdir(DESTINO):
+        if nombre.endswith(".jpg") and nombre not in usadas:
+            os.remove(os.path.join(DESTINO, nombre))
+            informe.append(f"BORRADA {nombre} (ya no se usa)")
     with open(ruta_cred, "w", encoding="utf-8") as fh:
         json.dump(creditos, fh, ensure_ascii=False, indent=1, sort_keys=True)
     resumen = f"Fotos: {total_ok} de {total} huecos cubiertos ({time.strftime('%Y-%m-%d %H:%M UTC', time.gmtime())})"
@@ -226,4 +258,4 @@ def main():
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(main(rehacer_todo="--todo" in sys.argv))

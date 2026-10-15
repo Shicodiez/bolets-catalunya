@@ -10,6 +10,7 @@ dominio público) y en cada foto se enseña autor y licencia, como exigen esas l
 FORZAR: si una foto automática no es buena (porque no es la seta, es un dibujo, es una foto mala...), se pone aquí el
 nombre exacto del archivo de Commons para esa ficha y esa posición y el script lo usa en lugar de buscar.
 Formato:  "id": {0: "Nombre del archivo.jpg"}   (0 = primer hueco, 1 = segundo...).
+Si el archivo forzado no sirve (no existe, licencia no libre...), ese hueco se queda SIN foto: nunca se deja la anterior.
 """
 
 FOTOS = {
@@ -47,4 +48,9 @@ FOTOS = {
     "moixerno": [["Calocybe gambosa", "Tricholoma georgii"]],
 }
 
-FORZAR = {}
+FORZAR = {
+    # Revisadas a ojo el 15/10/2026: la foto automática del cep fosc era de B. pinophilus, la del cep d'estiu tenía un
+    # nombre genérico («Boletus.JPG») y la del lactario torminoso era de Lactarius mairei (otra especie).
+    "cep": {1: "Boletus aereus IT.JPG", 2: "Boletus reticulatus (28576784573).jpg"},
+    "torminosus": {0: "Lactarius torminosus 041031w.jpg"},
+}
