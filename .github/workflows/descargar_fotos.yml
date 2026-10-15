@@ -1,0 +1,48 @@
+name: Descargar fotos de la guia
+
+# Se ejecuta SOLO a mano (Actions -> "Descargar fotos de la guia" -> Run workflow).
+# Descarga de Wikimedia Commons las fotos de las fichas de la guia (solo licencias libres, con autor y licencia)
+# y las guarda en web/fotos/. Se puede volver a ejecutar cuando se quiera: conserva las fotos que ya hay.
+
+on:
+  workflow_dispatch:
+
+# Misma cola que el workflow de datos: asi nunca se pisan al guardar en el repositorio.
+concurrency:
+  group: actualitzar-dades-bolets
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  fotos:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Descargar las fotos
+        id: fotos
+        continue-on-error: true
+        run: python tools/descargar_fotos.py
+
+      - name: Guardar las fotos y el informe en el repositorio
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add web/fotos
+          git diff --staged --quiet || git commit -m "Fotos de la guia (Wikimedia Commons)"
+          git push || (git pull --rebase && git push)
+
+      - name: Avisar si no se ha conseguido ninguna foto
+        if: steps.fotos.outcome == 'failure'
+        run: |
+          echo "No se ha conseguido ninguna foto. Mira web/fotos/informe.txt"
+          exit 1
