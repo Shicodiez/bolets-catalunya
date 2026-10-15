@@ -13,41 +13,79 @@
     --green: #1D9E75; --green-bg: #E1F5EE; --green-text: #04342C;
     --red: #B3261E; --red-bg: #FCE8E6; --red-text: #5C0F0A;
     --amber: #EF9F27; --amber-bg: #FAEEDA; --amber-text: #412402;
-    --gray-bg: #EFEEE8; --radius: 10px;
+    --gray-bg: #EFEEE8; --radius: 12px;
   }
   * { box-sizing: border-box; }
   body { margin: 0; padding: 0 0 60px; background: var(--bg); color: var(--text);
-         font-family: -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 16px; line-height: 1.55; }
-  .top-alert { position: sticky; top: 0; z-index: 10; background: var(--red); color: #fff;
-               padding: 8px 14px; font-size: 14px; font-weight: 600; text-align: center; }
-  .wrap { max-width: 760px; margin: 0 auto; padding: 16px 16px 0; }
-  h1 { font-size: 24px; margin: 12px 0 4px; }
-  h2 { font-size: 19px; margin: 28px 0 8px; }
-  h3 { font-size: 18px; margin: 0 0 6px; }
-  h4 { font-size: 14px; margin: 12px 0 4px; text-transform: uppercase; letter-spacing: .03em; color: var(--muted); }
-  .sub { color: var(--muted); font-size: 14px; margin: 0 0 12px; }
-  .sci { display: block; font-size: 13px; font-weight: 400; font-style: italic; color: var(--muted); margin-top: 2px; }
+         font-family: -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 16px; line-height: 1.5; }
+  .top-alert { background: var(--red); color: #fff; padding: 7px 14px; font-size: 13px; font-weight: 600; text-align: center; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 12px 14px 0; }
+  h1 { font-size: 24px; margin: 10px 0 2px; }
+  h2 { font-size: 19px; margin: 22px 0 8px; }
+  h4 { font-size: 13px; margin: 14px 0 4px; text-transform: uppercase; letter-spacing: .03em; color: var(--muted); }
+  .sub { color: var(--muted); font-size: 14px; margin: 0 0 10px; }
+  .sci { display: block; font-size: 13px; font-weight: 400; font-style: italic; color: var(--muted); margin-top: 1px; }
   .box { border-radius: var(--radius); padding: 12px 14px; margin: 12px 0; }
-  .box-red { background: var(--red-bg); color: var(--red-text); border: 1px solid #E8A8A3; }
   .box-green { background: var(--green-bg); color: var(--green-text); border: 1px solid #A9DCC9; }
   .box-amber { background: var(--amber-bg); color: var(--amber-text); border: 1px solid #EBC789; }
-  .box ul, .card ul { margin: 4px 0 4px 20px; padding: 0; }
-  .box li, .card li { margin: 3px 0; }
+  .box ul, .body ul { margin: 4px 0 4px 20px; padding: 0; }
+  .box li, .body li { margin: 3px 0; }
   .box p { margin: 6px 0; }
-  .back { display: inline-block; margin: 10px 0 0; font-size: 14px; color: var(--green); }
+  .back { display: inline-block; margin: 6px 0 0; font-size: 14px; color: var(--green); }
+
+  /* Identificar con foto */
+  .idbox h2 { margin: 0 0 4px; }
+  .idbtns { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0 4px; }
+  .btn { display: inline-block; padding: 12px 16px; border-radius: 10px; background: var(--green); color: #fff;
+         font-weight: 600; font-size: 15px; cursor: pointer; }
+  .btn-sec { background: #fff; color: var(--green-text); border: 1px solid #A9DCC9; }
+  #idres { margin-top: 10px; }
+  #idres .preview { width: 100%; max-height: 260px; object-fit: contain; background: #fff; border-radius: 10px; border: 1px solid var(--line); }
+  #idres .msg { margin: 8px 0; font-size: 15px; }
+  #idres .msg.err { color: var(--red-text); background: var(--red-bg); padding: 8px 10px; border-radius: 8px; }
+  #idres .cand { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; margin: 8px 0; color: var(--text); }
+  #idres .cand .nm { font-weight: 700; }
+  #idres .cand .why { font-size: 14px; color: var(--muted); margin: 3px 0 6px; }
+  #idres .cand .sec h4 { margin-top: 8px; }
+  #idres .cand ul { margin: 2px 0 2px 18px; padding: 0; font-size: 14px; }
+  #idres .aviso { font-size: 13px; color: var(--muted); margin-top: 8px; }
+
   input[type=search] { width: 100%; padding: 12px; border: 1px solid var(--line); border-radius: var(--radius);
                        font-size: 16px; background: #fff; }
   .tabs { display: flex; gap: 8px; margin: 10px 0; flex-wrap: wrap; }
   .tab { flex: 1 1 auto; padding: 10px 12px; border: 1px solid var(--line); border-radius: var(--radius);
          background: #fff; font-size: 14px; cursor: pointer; font-family: inherit; }
   .tab.on { background: var(--green); color: #fff; border-color: var(--green); }
-  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 14px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 12px; }
   .chip { padding: 5px 10px; border-radius: 999px; background: var(--green-bg); color: var(--green-text);
-          text-decoration: none; font-size: 13px; }
+          text-decoration: none; font-size: 13px; display: inline-block; }
   .chip-danger { background: var(--red-bg); color: var(--red-text); }
+
+  /* Fichas desplegables */
   .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
-          padding: 14px 16px; margin: 12px 0; scroll-margin-top: 54px; }
+          margin: 10px 0; scroll-margin-top: 10px; overflow: hidden; }
   .card.danger { border-left: 5px solid var(--red); }
+  .card > summary { list-style: none; display: flex; align-items: center; gap: 12px; padding: 10px 12px; cursor: pointer; }
+  .card > summary::-webkit-details-marker { display: none; }
+  .card > summary:active { background: var(--gray-bg); }
+  .thumb { flex: 0 0 60px; width: 60px; height: 60px; border-radius: 10px; background: var(--gray-bg); overflow: hidden;
+           display: flex; align-items: center; justify-content: center; }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .thumb .ph { font-size: 26px; opacity: .55; }
+  .ttl { flex: 1 1 auto; min-width: 0; font-size: 17px; font-weight: 700; line-height: 1.25; }
+  .ttl .sci { font-weight: 400; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .body > .sci { margin-top: 8px; }
+  .chev { flex: 0 0 auto; width: 10px; height: 10px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted);
+          transform: rotate(45deg); margin: 0 6px 4px 0; transition: transform .15s; }
+  .card[open] > summary .chev { transform: rotate(-135deg); margin-bottom: -4px; }
+  .card[open] > summary { border-bottom: 1px solid var(--line); }
+  .body { padding: 4px 14px 14px; }
+  .fotos { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 8px; margin: 10px 0 2px; }
+  .fotos:empty { display: none; }
+  .fotos figure { margin: 0; }
+  .fotos img { width: 100%; height: auto; display: block; border-radius: 8px; background: var(--gray-bg); }
+  .fotos figcaption { font-size: 11px; color: var(--muted); margin-top: 3px; line-height: 1.3; }
+  .fotos figcaption a { color: var(--muted); }
   .badge { display: inline-block; vertical-align: middle; font-size: 11px; font-weight: 700; padding: 2px 7px;
            border-radius: 999px; margin-left: 4px; letter-spacing: .02em; }
   .b-mortal { background: #7A0C05; color: #fff; }
@@ -56,15 +94,17 @@
   .b-nocom { background: #6b6a65; color: #fff; }
   .b-ok { background: var(--green); color: #fff; }
   .b-nomap { background: var(--gray-bg); color: var(--muted); font-weight: 600; }
-  .risk { font-size: 13px; margin: 0 0 4px; color: var(--muted); }
+  .risk { font-size: 13px; margin: 8px 0 0; color: var(--muted); }
   .risk-alto strong { color: var(--red); }
   .risk-medio strong { color: #B26A00; }
   .risk-bajo strong { color: var(--green); }
-  a[id] { scroll-margin-top: 54px; }
+  a[id] { scroll-margin-top: 10px; }
   .hidden { display: none !important; }
-  details { margin: 8px 0; }
-  summary { cursor: pointer; font-weight: 600; }
-  .foot { font-size: 13px; color: var(--muted); margin-top: 24px; }
+  details.mini { margin: 10px 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 10px 14px; }
+  details.mini > summary { cursor: pointer; font-weight: 600; }
+  details.mini ol, details.mini ul { margin: 8px 0 2px 20px; padding: 0; }
+  details.mini li { margin: 4px 0; }
+  .foot { font-size: 12px; color: var(--muted); margin-top: 24px; }
   #empty { display: none; padding: 16px; text-align: center; color: var(--muted); }
 </style>
 </head>
@@ -73,36 +113,17 @@
 <div class="wrap">
   <a class="back" href="index.html">← Volver al predictor</a>
   <h1>📖 Guía de identificación</h1>
-  <p class="sub">Funciona sin cobertura una vez abierta con conexión. Última revisión del texto: 15/10/2026.</p>
+  <p class="sub">Funciona sin cobertura una vez abierta con conexión (las fotos se guardan al abrirla). Última revisión del texto: 15/10/2026.</p>
 
-  <div class="box box-red">
-    <strong>Léelo antes de nada</strong>
-    <ul>
-      <li><strong>Esta guía no identifica setas.</strong> Sirve para descartar y para saber qué comprobar. Nunca dice «esta se puede comer».</li>
-      <li>Antes de comer una seta, una persona experta (sociedad micológica, aficionado con experiencia) tiene que verla <strong>entera</strong>.</li>
-      <li>Si tienes <strong>una sola duda</strong>, no se come.</li>
-      <li>Regla básica: <strong>láminas blancas + anillo + bolsa en la base del pie → no se come</strong> (así son las amanitas mortales). La excepción aparente, el ou de reig, tiene las láminas amarillas.</li>
-      <li>Texto elaborado con ayuda de una IA a partir de conocimiento micológico general. <strong>No lo ha revisado ningún micólogo</strong> y puede contener errores. Contrástalo con un libro de campo.</li>
-      <li>Esta app no hace reconocimiento por foto a propósito: un error con una seta mortal puede matar.</li>
-    </ul>
-  </div>
-
-  <div class="box box-amber">
-    <strong>Si has comido una seta y tienes dudas</strong>
-    <ul>
-      <li><strong>No esperes a notar síntomas.</strong> Las intoxicaciones más graves (amatoxinas, cortinarios) dan síntomas horas o días después, y puede haber una mejoría falsa.</li>
-      <li>Llama al <strong>112</strong> o al <strong>061</strong> (Salut Respon) y ve a urgencias. Servicio de Información Toxicológica (24 h): <strong>91 562 04 20</strong>.</li>
-      <li>Lleva restos de las setas (crudas y cocinadas), la foto del sitio y apunta a qué hora las comiste y cuándo empezaron los síntomas.</li>
-    </ul>
-  </div>
-
-  <h2>Método de campo en 7 pasos</h2>
-  <div class="box box-green"><ol style="margin:4px 0 4px 20px;padding:0"><li><strong>Recógela ENTERA.</strong> Excava alrededor de la base, no la cortes por el pie: ahí está la volva (la bolsa) de las Amanita. Recoge varios ejemplares de distinta edad y fotografía el sitio.</li><li><strong>Tamaño y silueta.</strong> Fíjate en el tamaño, en si es joven o vieja y en si crece suelta, en grupo o en mechón.</li><li><strong>Mira debajo del sombrero.</strong> ¿Láminas, tubos con poros, pliegues, púas o liso? ¿De qué color? ¿Cambia de color al tocarlo?</li><li><strong>El pie.</strong> Forma, red, anillo y base (bulbo, bolsa, enterrada). ¿Hueco o macizo?</li><li><strong>Córtala.</strong> Color de la carne y si cambia (azul, rojo, amarillo). Si sale látex (leche), su color. Olor.</li><li><strong>Esporada.</strong> Pon el sombrero con las láminas hacia abajo sobre un papel mitad blanco y mitad negro y déjalo unas horas. Color del polvo: blanco, crema, rosa, marrón óxido o negro. Cambia mucho el diagnóstico.</li><li><strong>Hábitat y época.</strong> Árbol cercano, suelo, madera o prado, altitud y mes. Si UN solo rasgo no cuadra, descártala.</li></ol></div>
-
-  <details>
-    <summary>Cosas que se creen y son falsas</summary>
-    <div class="box box-amber"><ul><li>«Si la comen los bichos o las babosas, es buena.» Falso: muchas setas mortales las comen.</li><li>«La cuchara de plata, el ajo o el vinagre detectan las tóxicas.» Falso.</li><li>«Pelar el sombrero, hervirla o congelarla la hace segura.» Falso: las amatoxinas resisten el calor.</li><li>«Si la he comido otros años, es buena.» Una confusión con una especie mortal solo hace falta una vez.</li><li>«Una foto o una aplicación bastan para saberlo.» Falso: ninguna aplicación puede garantizarlo.</li></ul></div>
-  </details>
+  <section class="box box-green idbox" id="identificar">
+    <h2>📷 Identificar con una foto</h2>
+    <p>Haz una foto de la seta (mejor entera y vista por debajo) y te digo con qué fichas compararla.</p>
+    <div class="idbtns">
+      <label class="btn">📷 Hacer foto<input type="file" id="foto-cam" accept="image/*" capture="environment" hidden></label>
+      <label class="btn btn-sec">🖼️ Elegir de la galería<input type="file" id="foto-gal" accept="image/*" hidden></label>
+    </div>
+    <div id="idres" aria-live="polite"></div>
+  </section>
 
   <h2>Buscar</h2>
   <input type="search" id="q" placeholder="Nombre en catalán o científico (rossinyol, Amanita...)" autocomplete="off">
@@ -114,121 +135,153 @@
 
   <div id="sec-peligrosas">
     <h2>⚠️ Las peligrosas, primero</h2>
-    <p class="sub">Las setas con las que más se confunden las comestibles. Cada una dice con qué se confunde.</p>
+    <p class="sub">Las setas con las que más se confunden las comestibles. Toca una para ver cómo es y con qué se confunde.</p>
     <div class="chips"><a class="chip chip-danger" href="#phalloides">Oronja verde</a><a class="chip chip-danger" href="#amanitas-blancas">Amanitas blancas</a><a class="chip chip-danger" href="#lepiota">Lepiotas pequeñas</a><a class="chip chip-danger" href="#cortinarius">Cortinarios</a><a class="chip chip-danger" href="#galerina">Galerina marginada</a><a class="chip chip-danger" href="#gyromitra">Giromitra</a><a class="chip chip-danger" href="#inosperma">Inocibe de Patouillard</a><a class="chip chip-danger" href="#clitocybe">Clitocibes blancos de prado</a><a class="chip chip-danger" href="#entoloma">Entoloma lívido</a><a class="chip chip-danger" href="#satanas">Boleto de Satanás</a><a class="chip chip-danger" href="#luridos">Boletos de poros rojos</a><a class="chip chip-danger" href="#tylopilus">Boleto amargo</a><a class="chip chip-danger" href="#pardinum">Tricoloma tigre</a><a class="chip chip-danger" href="#omphalotus">Seta del olivo</a><a class="chip chip-danger" href="#muscaria">Matamoscas y amanita pantera</a><a class="chip chip-danger" href="#torminosus">Lactario torminoso</a></div>
     
-<article class="card danger" id="phalloides" data-kind="peligrosa" data-search="oronja verde (amanita mortal) amanita phalloides farinera borda">
-  <h3>Oronja verde (amanita mortal) <span class="badge b-mortal">MORTAL</span><span class="sci">Amanita phalloides</span><span class="sci">También se le llama: farinera borda</span></h3>
-  <h4>Cómo reconocerla</h4>
-  <ul><li>Sombrero verde oliváceo (a veces amarillento o casi blanco), liso, con fibrillas radiales.</li><li>Láminas BLANCAS y pie blanco con anillo colgante.</li><li>Base del pie en un bulbo envuelto por una bolsa (volva) blanca, a menudo enterrada: por eso hay que excavar.</li><li>Es la responsable de la mayoría de las muertes por setas. Los síntomas empiezan 6-24 horas después de comerla y puede haber una mejoría falsa antes de que falle el hígado.</li></ul>
-  <h4>Con qué se confunde</h4>
-  <p>Con el ou de reig cuando está joven y cerrado en «huevo» (no se distinguen a simple vista: nunca recojas huevos cerrados), con russulas verdosas y con setas de sombrero verdoso.</p>
-</article>
-<article class="card danger" id="amanitas-blancas" data-kind="peligrosa" data-search="amanitas blancas amanita verna · amanita virosa · a. phalloides var. alba">
-  <h3>Amanitas blancas <span class="badge b-mortal">MORTAL</span><span class="sci">Amanita verna · Amanita virosa · A. phalloides var. alba</span></h3>
-  <h4>Cómo reconocerla</h4>
-  <ul><li>Setas enteramente blancas, con LÁMINAS BLANCAS, anillo y bolsa (volva) en la base.</li><li>Contienen amatoxinas, igual que la oronja verde.</li></ul>
-  <h4>Con qué se confunde</h4>
-  <p>Con champiñones silvestres (Agaricus): el champiñón tiene láminas ROSAS que pasan a pardo-chocolate y NO tiene bolsa en la base. Regla: láminas blancas + anillo + bolsa en la base → no se come.</p>
-</article>
-<article class="card danger" id="lepiota" data-kind="peligrosa" data-search="lepiotas pequeñas lepiota brunneoincarnata y otras lepiota">
-  <h3>Lepiotas pequeñas <span class="badge b-mortal">MORTAL</span><span class="sci">Lepiota brunneoincarnata y otras Lepiota</span></h3>
-  <h4>Cómo reconocerla</h4>
-  <ul><li>Setas pequeñas (sombrero de unos 2-6 cm) con escamas marrón-vinosas sobre fondo crema.</li><li>Anillo frágil que se pierde con la edad; láminas blancas, libres; esporada blanca.</li><li>Contienen amatoxinas (como la oronja verde).</li></ul>
-  <h4>Con qué se confunde</h4>
-  <p>Con los apagallums (Macrolepiota) pequeños o jóvenes. Recoge un apagallum solo si es grande y alto, y el pie tiene dibujo de piel de serpiente.</p>
-</article>
-<article class="card danger" id="cortinarius" data-kind="peligrosa" data-search="cortinarios cortinarius orellanus, c. rubellus y afines">
-  <h3>Cortinarios <span class="badge b-mortal">MORTAL</span><span class="sci">Cortinarius orellanus, C. rubellus y afines</span></h3>
-  <h4>Cómo reconocerla</h4>
-  <ul><li>Setas pardo-anaranjadas o color óxido; las láminas se tiñen de pardo-óxido al madurar (esporada marrón óxido).</li><li>De jóvenes tienen una «cortina» de hilos entre el pie y el borde del sombrero.</li><li>El veneno actúa tarde: los síntomas pueden tardar de 1 a 14 días o más y acaban en fallo de los riñones.</li></ul>
-  <h4>Con qué se confunde</h4>
-  <p>Hay cientos de especies de Cortinarius y no se distinguen a simple vista. Regla práctica: esporada marrón óxido o restos de cortina → no la comas.</p>
-</article>
-<article class="card danger" id="galerina" data-kind="peligrosa" data-search="galerina marginada galerina marginata">
-  <h3>Galerina marginada <span class="badge b-mortal">MORTAL</span><span class="sci">Galerina marginata</span></h3>
-  <h4>Cómo reconocerla</h4>
-  <ul><li>Pequeña, color miel-ocre, crece sobre madera muerta o restos leñosos, en mechones.</li><li>Anillo fino que se pierde con la edad; esporada marrón óxido.</li><li>Contiene amatoxinas.</li></ul>
-  <h4>Con qué se confunde</h4>
-  <p>Con otras setas pequeñas de mechón que crecen sobre madera (por ejemplo Kuehneromyces mutabilis). Si crece sobre madera y tiene anillo, no la recojas sin un experto.</p>
-</article>
-<article class="card danger" id="gyromitra" data-kind="peligrosa" data-search="giromitra (falsa colmenilla) gyromitra esculenta">
-  <h3>Giromitra (falsa colmenilla) <span class="badge b-mortal">MORTAL</span><span class="sci">Gyromitra esculenta</span></h3>
-  <h4>Cómo reconocerla</h4>
-  <ul><li>Sombrero cerebriforme (con circunvoluciones, no con alvéolos), rojo-pardo; cortada a lo largo, el interior tiene cámaras y tabiques.</li><li>Sale en primavera, a menudo en pinares. La toxina (giromitrina) puede ser mortal, incluso tras cocinarla o hervirla.</li></ul>
-  <h4>Con qué se confunde</h4>
-  <p>Con las colmenilles (Morchella): la colmenilla tiene alvéolos como un panal y, cortada a lo largo, UNA sola cavidad hueca continua desde el sombrero hasta el pie.</p>
-</article>
-<article class="card danger" id="inosperma" data-kind="peligrosa" data-search="inocibe de patouillard inosperma erubescens (inocybe patouillardii)">
-  <h3>Inocibe de Patouillard <span class="badge b-muyt">MUY TÓXICA</span><span class="sci">Inosperma erubescens (Inocybe patouillardii)</span></h3>
-  <h4>Cómo reconocerla</h4>
-  <ul><li>Sombrero fibroso-radial, crema que se enrojece con la edad y al tocarlo; láminas que se oscurecen y se manchan de rojo.</li><li>Contiene mucha muscarina; ha causado muertes.</li></ul>
-  <h4>Con qué se confunde</h4>
-  <p>Con el moixernó (Calocybe gambosa): el moixernó es carnoso, con láminas muy apretadas y blancas, huele a harina fresca y no enrojece.</p>
-</article>
-<article class="card danger" id="clitocybe" data-kind="peligrosa" data-search="clitocibes blancos de prado clitocybe rivulosa · clitocybe dealbata">
-  <h3>Clitocibes blancos de prado <span class="badge b-muyt">MUY TÓXICA</span><span class="sci">Clitocybe rivulosa · Clitocybe dealbata</span></h3>
-  <h4>Cómo reconocerla</h4>
-  <ul><li>Sombrero pequeño, blanquecino con zonas rosadas o grisáceas; láminas bastante apretadas; pie frágil que se rompe.</li><li>Contienen muscarina: sudor, salivación, lagrimeo y alteración del ritmo del corazón.</li></ul>
-  <h4>Con qué se confunde</h4>
-  <p>Con el cama-sec (Marasmius oreades): ¡pueden crecer en el mismo corro! El cama-sec tiene láminas muy separadas y un pie tenaz, que se retuerce como una cuerda sin romperse.</p>
-</article>
-<article class="card danger" id="entoloma" data-kind="peligrosa" data-search="entoloma lívido entoloma sinuatum">
-  <h3>Entoloma lívido <span class="badge b-toxica">TÓXICA</span><span class="sci">Entoloma sinuatum</span></h3>
-  <h4>Cómo reconocerla</h4>
-  <ul><li>Grande, blanquecino-grisáceo a ocre, carnoso; láminas amarillentas que viran a rosa salmón; esporada ROSA.</li><li>Olor a harina rancia. Causa una gastroenteritis intensa, a menudo con ingreso hospitalario.</li></ul>
-  <h4>Con qué se confunde</h4>
-  <p>Con otras setas blanquecinas y carnosas de los mismos bosques, como Clitocybe nebularis o la molinera (Clitopilus prunulus). Rasgo clave: láminas que viran a rosa y esporada rosa.</p>
-</article>
-<article class="card danger" id="satanas" data-kind="peligrosa" data-search="boleto de satanás rubroboletus satanas mataparent de satanàs">
-  <h3>Boleto de Satanás <span class="badge b-toxica">TÓXICA</span><span class="sci">Rubroboletus satanas</span><span class="sci">También se le llama: mataparent de Satanàs</span></h3>
-  <h4>Cómo reconocerla</h4>
-  <ul><li>Sombrero blanquecino-grisáceo; POROS ROJOS o naranja (no son láminas); pie abultado, amarillo con red roja; la carne azulea al cortarla.</li><li>Olor desagradable en ejemplares viejos. Provoca una gastroenteritis grave.</li></ul>
-  <h4>Con qué se confunde</h4>
-  <p>Con los ceps. Un cep nunca tiene los poros rojos ni anaranjados. Es una seta de robledales cálidos (según boletaires.cat, a 400-800 m), el mismo ambiente en el que sale el cep fosc: allí hay que mirar los poros con más cuidado.</p>
-</article>
-<article class="card danger" id="luridos" data-kind="peligrosa" data-search="boletos de poros rojos suillellus luridus · neoboletus erythropus">
-  <h3>Boletos de poros rojos <span class="badge b-toxica">TÓXICA</span><span class="sci">Suillellus luridus · Neoboletus erythropus</span></h3>
-  <h4>Cómo reconocerla</h4>
-  <ul><li>Sombrero pardo; poros rojo-anaranjados; la carne azulea de forma muy intensa al cortarla; el pie tiene red o puntos rojizos.</li><li>Mal tolerados crudos o poco cocinados, y provocan malestar grave si se toman con alcohol.</li></ul>
-  <h4>Con qué se confunde</h4>
-  <p>Con los ceps. Cualquier boleto con poros rojos o naranjas y carne que azulea: no es un cep.</p>
-</article>
-<article class="card danger" id="tylopilus" data-kind="peligrosa" data-search="boleto amargo tylopilus felleus">
-  <h3>Boleto amargo <span class="badge b-nocom">NO COMESTIBLE</span><span class="sci">Tylopilus felleus</span></h3>
-  <h4>Cómo reconocerla</h4>
-  <ul><li>Parecido a un cep, pero los poros se vuelven ROSADOS con la edad y la red del pie es OSCURA (marrón).</li><li>No es peligroso, pero es amarguísimo: un solo ejemplar estropea todo el plato.</li></ul>
-  <h4>Con qué se confunde</h4>
-  <p>Con los ceps (poros blancos que pasan a amarillo-verdoso; red del pie blanca o muy clara).</p>
-</article>
-<article class="card danger" id="pardinum" data-kind="peligrosa" data-search="tricoloma tigre tricholoma pardinum fredolic bord fredolic metzinós">
-  <h3>Tricoloma tigre <span class="badge b-toxica">TÓXICA</span><span class="sci">Tricholoma pardinum</span><span class="sci">También se le llama: fredolic bord, fredolic metzinós</span></h3>
-  <h4>Cómo reconocerla</h4>
-  <ul><li>Más grande y robusto que el fredolic; sombrero gris con escamas oscuras bien marcadas, aspecto «atigrado».</li><li>Olor a harina. Provoca una intoxicación digestiva muy violenta.</li></ul>
-  <h4>Con qué se confunde</h4>
-  <p>Con el fredolic (Tricholoma terreum): este es más pequeño, fibroso, gris ratón y sin escamas gruesas.</p>
-</article>
-<article class="card danger" id="omphalotus" data-kind="peligrosa" data-search="seta del olivo (bolet d&#x27;olivera) omphalotus olearius">
-  <h3>Seta del olivo (bolet d&#x27;olivera) <span class="badge b-toxica">TÓXICA</span><span class="sci">Omphalotus olearius</span></h3>
-  <h4>Cómo reconocerla</h4>
-  <ul><li>Naranja vivo, en MECHONES soldados por la base sobre troncos o raíces.</li><li>Láminas finas de verdad que bajan por el pie; carne anaranjada. Provoca vómitos y diarrea intensos.</li></ul>
-  <h4>Con qué se confunde</h4>
-  <p>Con los rossinyols: el rossinyol crece suelto sobre el suelo, tiene pliegues gruesos y ramificados (no láminas) y la carne blanquecina.</p>
-</article>
-<article class="card danger" id="muscaria" data-kind="peligrosa" data-search="matamoscas y amanita pantera amanita muscaria · amanita pantherina reig bord">
-  <h3>Matamoscas y amanita pantera <span class="badge b-toxica">TÓXICA</span><span class="sci">Amanita muscaria · Amanita pantherina</span><span class="sci">También se le llama: reig bord</span></h3>
-  <h4>Cómo reconocerla</h4>
-  <ul><li>Matamoscas: sombrero rojo con verrugas blancas (la lluvia puede lavarlas), láminas, pie y anillo BLANCOS.</li><li>Amanita pantera: sombrero pardo con verrugas blancas; igual de tóxica.</li><li>Intoxicación neurológica que puede requerir hospital.</li></ul>
-  <h4>Con qué se confunde</h4>
-  <p>El matamoscas, con el ou de reig: este tiene láminas, pie y anillo AMARILLOS y no tiene verrugas. Nunca te fíes solo del color del sombrero.</p>
-</article>
-<article class="card danger" id="torminosus" data-kind="peligrosa" data-search="lactario torminoso lactarius torminosus">
-  <h3>Lactario torminoso <span class="badge b-toxica">TÓXICA</span><span class="sci">Lactarius torminosus</span></h3>
-  <h4>Cómo reconocerla</h4>
-  <ul><li>Sombrero rosado-asalmonado con círculos y el margen muy peludo y enrollado; látex BLANCO.</li><li>Crece sobre todo bajo abedules. Provoca molestias digestivas.</li></ul>
-  <h4>Con qué se confunde</h4>
-  <p>Con los rovellons: el rovelló tiene el látex naranja o rojo vino y el margen liso.</p>
-</article>
+<details class="card danger" id="phalloides" data-kind="peligrosa" data-search="oronja verde (amanita mortal) amanita phalloides farinera borda">
+  <summary><span class="thumb" data-thumb="phalloides"><span class="ph">🍄</span></span><span class="ttl"><span class="nm">Oronja verde (amanita mortal) <span class="badge b-mortal">MORTAL</span></span><span class="sci">Amanita phalloides</span></span><span class="chev" aria-hidden="true"></span></summary>
+  <div class="body">
+    <div class="fotos" data-fotos="phalloides"></div>
+    <span class="sci">También se le llama: farinera borda</span>
+    <div class="sec" data-res><h4>Cómo reconocerla</h4><ul><li>Sombrero verde oliváceo (a veces amarillento o casi blanco), liso, con fibrillas radiales.</li><li>Láminas BLANCAS y pie blanco con anillo colgante.</li><li>Base del pie en un bulbo envuelto por una bolsa (volva) blanca, a menudo enterrada: por eso hay que excavar.</li><li>Es la responsable de la mayoría de las muertes por setas. Los síntomas empiezan 6-24 horas después de comerla y puede haber una mejoría falsa antes de que falle el hígado.</li></ul></div>
+    <div class="sec" data-res><h4>Con qué se confunde</h4><p>Con el ou de reig cuando está joven y cerrado en «huevo» (no se distinguen a simple vista: nunca recojas huevos cerrados), con russulas verdosas y con setas de sombrero verdoso.</p></div>
+  </div>
+</details>
+<details class="card danger" id="amanitas-blancas" data-kind="peligrosa" data-search="amanitas blancas amanita verna · amanita virosa · a. phalloides var. alba">
+  <summary><span class="thumb" data-thumb="amanitas-blancas"><span class="ph">🍄</span></span><span class="ttl"><span class="nm">Amanitas blancas <span class="badge b-mortal">MORTAL</span></span><span class="sci">Amanita verna · Amanita virosa · A. phalloides var. alba</span></span><span class="chev" aria-hidden="true"></span></summary>
+  <div class="body">
+    <div class="fotos" data-fotos="amanitas-blancas"></div>
+    
+    <div class="sec" data-res><h4>Cómo reconocerla</h4><ul><li>Setas enteramente blancas, con LÁMINAS BLANCAS, anillo y bolsa (volva) en la base.</li><li>Contienen amatoxinas, igual que la oronja verde.</li></ul></div>
+    <div class="sec" data-res><h4>Con qué se confunde</h4><p>Con champiñones silvestres (Agaricus): el champiñón tiene láminas ROSAS que pasan a pardo-chocolate y NO tiene bolsa en la base. Regla: láminas blancas + anillo + bolsa en la base → no se come.</p></div>
+  </div>
+</details>
+<details class="card danger" id="lepiota" data-kind="peligrosa" data-search="lepiotas pequeñas lepiota brunneoincarnata y otras lepiota">
+  <summary><span class="thumb" data-thumb="lepiota"><span class="ph">🍄</span></span><span class="ttl"><span class="nm">Lepiotas pequeñas <span class="badge b-mortal">MORTAL</span></span><span class="sci">Lepiota brunneoincarnata y otras Lepiota</span></span><span class="chev" aria-hidden="true"></span></summary>
+  <div class="body">
+    <div class="fotos" data-fotos="lepiota"></div>
+    
+    <div class="sec" data-res><h4>Cómo reconocerla</h4><ul><li>Setas pequeñas (sombrero de unos 2-6 cm) con escamas marrón-vinosas sobre fondo crema.</li><li>Anillo frágil que se pierde con la edad; láminas blancas, libres; esporada blanca.</li><li>Contienen amatoxinas (como la oronja verde).</li></ul></div>
+    <div class="sec" data-res><h4>Con qué se confunde</h4><p>Con los apagallums (Macrolepiota) pequeños o jóvenes. Recoge un apagallum solo si es grande y alto, y el pie tiene dibujo de piel de serpiente.</p></div>
+  </div>
+</details>
+<details class="card danger" id="cortinarius" data-kind="peligrosa" data-search="cortinarios cortinarius orellanus, c. rubellus y afines">
+  <summary><span class="thumb" data-thumb="cortinarius"><span class="ph">🍄</span></span><span class="ttl"><span class="nm">Cortinarios <span class="badge b-mortal">MORTAL</span></span><span class="sci">Cortinarius orellanus, C. rubellus y afines</span></span><span class="chev" aria-hidden="true"></span></summary>
+  <div class="body">
+    <div class="fotos" data-fotos="cortinarius"></div>
+    
+    <div class="sec" data-res><h4>Cómo reconocerla</h4><ul><li>Setas pardo-anaranjadas o color óxido; las láminas se tiñen de pardo-óxido al madurar (esporada marrón óxido).</li><li>De jóvenes tienen una «cortina» de hilos entre el pie y el borde del sombrero.</li><li>El veneno actúa tarde: los síntomas pueden tardar de 1 a 14 días o más y acaban en fallo de los riñones.</li></ul></div>
+    <div class="sec" data-res><h4>Con qué se confunde</h4><p>Hay cientos de especies de Cortinarius y no se distinguen a simple vista. Regla práctica: esporada marrón óxido o restos de cortina → no la comas.</p></div>
+  </div>
+</details>
+<details class="card danger" id="galerina" data-kind="peligrosa" data-search="galerina marginada galerina marginata">
+  <summary><span class="thumb" data-thumb="galerina"><span class="ph">🍄</span></span><span class="ttl"><span class="nm">Galerina marginada <span class="badge b-mortal">MORTAL</span></span><span class="sci">Galerina marginata</span></span><span class="chev" aria-hidden="true"></span></summary>
+  <div class="body">
+    <div class="fotos" data-fotos="galerina"></div>
+    
+    <div class="sec" data-res><h4>Cómo reconocerla</h4><ul><li>Pequeña, color miel-ocre, crece sobre madera muerta o restos leñosos, en mechones.</li><li>Anillo fino que se pierde con la edad; esporada marrón óxido.</li><li>Contiene amatoxinas.</li></ul></div>
+    <div class="sec" data-res><h4>Con qué se confunde</h4><p>Con otras setas pequeñas de mechón que crecen sobre madera (por ejemplo Kuehneromyces mutabilis). Si crece sobre madera y tiene anillo, no la recojas sin un experto.</p></div>
+  </div>
+</details>
+<details class="card danger" id="gyromitra" data-kind="peligrosa" data-search="giromitra (falsa colmenilla) gyromitra esculenta">
+  <summary><span class="thumb" data-thumb="gyromitra"><span class="ph">🍄</span></span><span class="ttl"><span class="nm">Giromitra (falsa colmenilla) <span class="badge b-mortal">MORTAL</span></span><span class="sci">Gyromitra esculenta</span></span><span class="chev" aria-hidden="true"></span></summary>
+  <div class="body">
+    <div class="fotos" data-fotos="gyromitra"></div>
+    
+    <div class="sec" data-res><h4>Cómo reconocerla</h4><ul><li>Sombrero cerebriforme (con circunvoluciones, no con alvéolos), rojo-pardo; cortada a lo largo, el interior tiene cámaras y tabiques.</li><li>Sale en primavera, a menudo en pinares. La toxina (giromitrina) puede ser mortal, incluso tras cocinarla o hervirla.</li></ul></div>
+    <div class="sec" data-res><h4>Con qué se confunde</h4><p>Con las colmenilles (Morchella): la colmenilla tiene alvéolos como un panal y, cortada a lo largo, UNA sola cavidad hueca continua desde el sombrero hasta el pie.</p></div>
+  </div>
+</details>
+<details class="card danger" id="inosperma" data-kind="peligrosa" data-search="inocibe de patouillard inosperma erubescens (inocybe patouillardii)">
+  <summary><span class="thumb" data-thumb="inosperma"><span class="ph">🍄</span></span><span class="ttl"><span class="nm">Inocibe de Patouillard <span class="badge b-muyt">MUY TÓXICA</span></span><span class="sci">Inosperma erubescens (Inocybe patouillardii)</span></span><span class="chev" aria-hidden="true"></span></summary>
+  <div class="body">
+    <div class="fotos" data-fotos="inosperma"></div>
+    
+    <div class="sec" data-res><h4>Cómo reconocerla</h4><ul><li>Sombrero fibroso-radial, crema que se enrojece con la edad y al tocarlo; láminas que se oscurecen y se manchan de rojo.</li><li>Contiene mucha muscarina; ha causado muertes.</li></ul></div>
+    <div class="sec" data-res><h4>Con qué se confunde</h4><p>Con el moixernó (Calocybe gambosa): el moixernó es carnoso, con láminas muy apretadas y blancas, huele a harina fresca y no enrojece.</p></div>
+  </div>
+</details>
+<details class="card danger" id="clitocybe" data-kind="peligrosa" data-search="clitocibes blancos de prado clitocybe rivulosa · clitocybe dealbata">
+  <summary><span class="thumb" data-thumb="clitocybe"><span class="ph">🍄</span></span><span class="ttl"><span class="nm">Clitocibes blancos de prado <span class="badge b-muyt">MUY TÓXICA</span></span><span class="sci">Clitocybe rivulosa · Clitocybe dealbata</span></span><span class="chev" aria-hidden="true"></span></summary>
+  <div class="body">
+    <div class="fotos" data-fotos="clitocybe"></div>
+    
+    <div class="sec" data-res><h4>Cómo reconocerla</h4><ul><li>Sombrero pequeño, blanquecino con zonas rosadas o grisáceas; láminas bastante apretadas; pie frágil que se rompe.</li><li>Contienen muscarina: sudor, salivación, lagrimeo y alteración del ritmo del corazón.</li></ul></div>
+    <div class="sec" data-res><h4>Con qué se confunde</h4><p>Con el cama-sec (Marasmius oreades): ¡pueden crecer en el mismo corro! El cama-sec tiene láminas muy separadas y un pie tenaz, que se retuerce como una cuerda sin romperse.</p></div>
+  </div>
+</details>
+<details class="card danger" id="entoloma" data-kind="peligrosa" data-search="entoloma lívido entoloma sinuatum">
+  <summary><span class="thumb" data-thumb="entoloma"><span class="ph">🍄</span></span><span class="ttl"><span class="nm">Entoloma lívido <span class="badge b-toxica">TÓXICA</span></span><span class="sci">Entoloma sinuatum</span></span><span class="chev" aria-hidden="true"></span></summary>
+  <div class="body">
+    <div class="fotos" data-fotos="entoloma"></div>
+    
+    <div class="sec" data-res><h4>Cómo reconocerla</h4><ul><li>Grande, blanquecino-grisáceo a ocre, carnoso; láminas amarillentas que viran a rosa salmón; esporada ROSA.</li><li>Olor a harina rancia. Causa una gastroenteritis intensa, a menudo con ingreso hospitalario.</li></ul></div>
+    <div class="sec" data-res><h4>Con qué se confunde</h4><p>Con otras setas blanquecinas y carnosas de los mismos bosques, como Clitocybe nebularis o la molinera (Clitopilus prunulus). Rasgo clave: láminas que viran a rosa y esporada rosa.</p></div>
+  </div>
+</details>
+<details class="card danger" id="satanas" data-kind="peligrosa" data-search="boleto de satanás rubroboletus satanas mataparent de satanàs">
+  <summary><span class="thumb" data-thumb="satanas"><span class="ph">🍄</span></span><span class="ttl"><span class="nm">Boleto de Satanás <span class="badge b-toxica">TÓXICA</span></span><span class="sci">Rubroboletus satanas</span></span><span class="chev" aria-hidden="true"></span></summary>
+  <div class="body">
+    <div class="fotos" data-fotos="satanas"></div>
+    <span class="sci">También se le llama: mataparent de Satanàs</span>
+    <div class="sec" data-res><h4>Cómo reconocerla</h4><ul><li>Sombrero blanquecino-grisáceo; POROS ROJOS o naranja (no son láminas); pie abultado, amarillo con red roja; la carne azulea al cortarla.</li><li>Olor desagradable en ejemplares viejos. Provoca una gastroenteritis grave.</li></ul></div>
+    <div class="sec" data-res><h4>Con qué se confunde</h4><p>Con los ceps. Un cep nunca tiene los poros rojos ni anaranjados. Es una seta de robledales cálidos (según boletaires.cat, a 400-800 m), el mismo ambiente en el que sale el cep fosc: allí hay que mirar los poros con más cuidado.</p></div>
+  </div>
+</details>
+<details class="card danger" id="luridos" data-kind="peligrosa" data-search="boletos de poros rojos suillellus luridus · neoboletus erythropus">
+  <summary><span class="thumb" data-thumb="luridos"><span class="ph">🍄</span></span><span class="ttl"><span class="nm">Boletos de poros rojos <span class="badge b-toxica">TÓXICA</span></span><span class="sci">Suillellus luridus · Neoboletus erythropus</span></span><span class="chev" aria-hidden="true"></span></summary>
+  <div class="body">
+    <div class="fotos" data-fotos="luridos"></div>
+    
+    <div class="sec" data-res><h4>Cómo reconocerla</h4><ul><li>Sombrero pardo; poros rojo-anaranjados; la carne azulea de forma muy intensa al cortarla; el pie tiene red o puntos rojizos.</li><li>Mal tolerados crudos o poco cocinados, y provocan malestar grave si se toman con alcohol.</li></ul></div>
+    <div class="sec" data-res><h4>Con qué se confunde</h4><p>Con los ceps. Cualquier boleto con poros rojos o naranjas y carne que azulea: no es un cep.</p></div>
+  </div>
+</details>
+<details class="card danger" id="tylopilus" data-kind="peligrosa" data-search="boleto amargo tylopilus felleus">
+  <summary><span class="thumb" data-thumb="tylopilus"><span class="ph">🍄</span></span><span class="ttl"><span class="nm">Boleto amargo <span class="badge b-nocom">NO COMESTIBLE</span></span><span class="sci">Tylopilus felleus</span></span><span class="chev" aria-hidden="true"></span></summary>
+  <div class="body">
+    <div class="fotos" data-fotos="tylopilus"></div>
+    
+    <div class="sec" data-res><h4>Cómo reconocerla</h4><ul><li>Parecido a un cep, pero los poros se vuelven ROSADOS con la edad y la red del pie es OSCURA (marrón).</li><li>No es peligroso, pero es amarguísimo: un solo ejemplar estropea todo el plato.</li></ul></div>
+    <div class="sec" data-res><h4>Con qué se confunde</h4><p>Con los ceps (poros blancos que pasan a amarillo-verdoso; red del pie blanca o muy clara).</p></div>
+  </div>
+</details>
+<details class="card danger" id="pardinum" data-kind="peligrosa" data-search="tricoloma tigre tricholoma pardinum fredolic bord fredolic metzinós">
+  <summary><span class="thumb" data-thumb="pardinum"><span class="ph">🍄</span></span><span class="ttl"><span class="nm">Tricoloma tigre <span class="badge b-toxica">TÓXICA</span></span><span class="sci">Tricholoma pardinum</span></span><span class="chev" aria-hidden="true"></span></summary>
+  <div class="body">
+    <div class="fotos" data-fotos="pardinum"></div>
+    <span class="sci">También se le llama: fredolic bord, fredolic metzinós</span>
+    <div class="sec" data-res><h4>Cómo reconocerla</h4><ul><li>Más grande y robusto que el fredolic; sombrero gris con escamas oscuras bien marcadas, aspecto «atigrado».</li><li>Olor a harina. Provoca una intoxicación digestiva muy violenta.</li></ul></div>
+    <div class="sec" data-res><h4>Con qué se confunde</h4><p>Con el fredolic (Tricholoma terreum): este es más pequeño, fibroso, gris ratón y sin escamas gruesas.</p></div>
+  </div>
+</details>
+<details class="card danger" id="omphalotus" data-kind="peligrosa" data-search="seta del olivo (bolet d&#x27;olivera) omphalotus olearius">
+  <summary><span class="thumb" data-thumb="omphalotus"><span class="ph">🍄</span></span><span class="ttl"><span class="nm">Seta del olivo (bolet d&#x27;olivera) <span class="badge b-toxica">TÓXICA</span></span><span class="sci">Omphalotus olearius</span></span><span class="chev" aria-hidden="true"></span></summary>
+  <div class="body">
+    <div class="fotos" data-fotos="omphalotus"></div>
+    
+    <div class="sec" data-res><h4>Cómo reconocerla</h4><ul><li>Naranja vivo, en MECHONES soldados por la base sobre troncos o raíces.</li><li>Láminas finas de verdad que bajan por el pie; carne anaranjada. Provoca vómitos y diarrea intensos.</li></ul></div>
+    <div class="sec" data-res><h4>Con qué se confunde</h4><p>Con los rossinyols: el rossinyol crece suelto sobre el suelo, tiene pliegues gruesos y ramificados (no láminas) y la carne blanquecina.</p></div>
+  </div>
+</details>
+<details class="card danger" id="muscaria" data-kind="peligrosa" data-search="matamoscas y amanita pantera amanita muscaria · amanita pantherina reig bord">
+  <summary><span class="thumb" data-thumb="muscaria"><span class="ph">🍄</span></span><span class="ttl"><span class="nm">Matamoscas y amanita pantera <span class="badge b-toxica">TÓXICA</span></span><span class="sci">Amanita muscaria · Amanita pantherina</span></span><span class="chev" aria-hidden="true"></span></summary>
+  <div class="body">
+    <div class="fotos" data-fotos="muscaria"></div>
+    <span class="sci">También se le llama: reig bord</span>
+    <div class="sec" data-res><h4>Cómo reconocerla</h4><ul><li>Matamoscas: sombrero rojo con verrugas blancas (la lluvia puede lavarlas), láminas, pie y anillo BLANCOS.</li><li>Amanita pantera: sombrero pardo con verrugas blancas; igual de tóxica.</li><li>Intoxicación neurológica que puede requerir hospital.</li></ul></div>
+    <div class="sec" data-res><h4>Con qué se confunde</h4><p>El matamoscas, con el ou de reig: este tiene láminas, pie y anillo AMARILLOS y no tiene verrugas. Nunca te fíes solo del color del sombrero.</p></div>
+  </div>
+</details>
+<details class="card danger" id="torminosus" data-kind="peligrosa" data-search="lactario torminoso lactarius torminosus">
+  <summary><span class="thumb" data-thumb="torminosus"><span class="ph">🍄</span></span><span class="ttl"><span class="nm">Lactario torminoso <span class="badge b-toxica">TÓXICA</span></span><span class="sci">Lactarius torminosus</span></span><span class="chev" aria-hidden="true"></span></summary>
+  <div class="body">
+    <div class="fotos" data-fotos="torminosus"></div>
+    
+    <div class="sec" data-res><h4>Cómo reconocerla</h4><ul><li>Sombrero rosado-asalmonado con círculos y el margen muy peludo y enrollado; látex BLANCO.</li><li>Crece sobre todo bajo abedules. Provoca molestias digestivas.</li></ul></div>
+    <div class="sec" data-res><h4>Con qué se confunde</h4><p>Con los rovellons: el rovelló tiene el látex naranja o rojo vino y el margen liso.</p></div>
+  </div>
+</details>
   </div>
 
   <div id="sec-fichas">
@@ -236,193 +289,309 @@
     <p class="sub">Cada ficha empieza por lo que tiene que cumplir y por lo que la descarta. Las del apartado «no está en el mapa» son de prado y todavía no se predicen.</p>
     <div class="chips"><a class="chip" href="#rovellons">Rovelló y pinetell</a><a class="chip" href="#cep">Ceps</a><a class="chip" href="#camagrocs">Camagroc</a><a class="chip" href="#rossinyols">Rossinyol</a><a class="chip" href="#trompetes">Trompeta de la muerte</a><a class="chip" href="#oureig">Ou de reig</a><a class="chip" href="#colmenilles">Colmenilla</a><a class="chip" href="#llengua">Llengua de bou</a><a class="chip" href="#fredolic">Fredolic</a><a class="chip" href="#escarlet">Escarlet</a><a class="chip" href="#llenega">Llenega negra</a><a class="chip" href="#apagallums">Apagallums</a><a class="chip" href="#camasec">Cama-sec</a><a class="chip" href="#moixerno">Moixernó</a></div>
     
-<a id="pinetell"></a><article class="card" id="rovellons" data-kind="ficha" data-search="rovelló y pinetell lactarius deliciosus · lactarius sanguifluus">
-  <h3>Rovelló y pinetell<span class="sci">Lactarius deliciosus · Lactarius sanguifluus</span></h3>
-  <p class="risk risk-medio">Riesgo de confusión: <strong>medio</strong></p>
-  <h4>Tiene que cumplir TODO esto</h4>
-  <ul><li>Crece bajo PINOS.</li><li>Sombrero naranja (deliciosus, a menudo con círculos concéntricos) o más rojizo-vinoso y verdoso (sanguifluus).</li><li>Al cortar o rascar las láminas sale un LÁTEX naranja (deliciosus) o rojo vino (sanguifluus). Con el tiempo, la carne y las manchas se vuelven verdosas.</li><li>Pie hueco, con manchas o hoyuelos más oscuros (deliciosus).</li></ul>
-  <h4>Descártala si ves…</h4>
-  <ul><li>Látex BLANCO, transparente o que amarillea enseguida.</li><li>Sombrero con el margen muy peludo.</li><li>No sale ningún látex.</li></ul>
-  <h4>Se confunde con</h4>
-  <ul><li><strong>Lactarius torminosus</strong> <span class="badge b-toxica">TÓXICA</span> — látex blanco, margen del sombrero peludo y lanoso.</li><li><strong>Otros Lactarius</strong> <span class="badge b-nocom">NO COMESTIBLE</span> — los que dan látex blanco o que amarillea no son rovellons y algunos son tóxicos.</li></ul>
-  <h4>Dónde y cuándo</h4>
-  <p>Pinares, sobre todo de pino rojo, negro y blanco; otoño. Cocinar siempre bien.</p>
-</article>
-<a id="cepfosc"></a><a id="cepestiu"></a><article class="card" id="cep" data-kind="ficha" data-search="ceps (boletus del grupo edulis) boletus edulis · b. pinophilus · b. aereus (cep fosc) · b. reticulatus (cep d&#x27;estiu) cep vermell (b. pinophilus) sureny fosc o cep negre (b. aereus)">
-  <h3>Ceps (Boletus del grupo edulis)<span class="sci">Boletus edulis · B. pinophilus · B. aereus (cep fosc) · B. reticulatus (cep d&#x27;estiu)</span><span class="sci">También se le llama: cep vermell (B. pinophilus), sureny fosc o cep negre (B. aereus)</span></h3>
-  <p class="risk risk-alto">Riesgo de confusión: <strong>alto</strong></p>
-  <h4>Tiene que cumplir TODO esto</h4>
-  <ul><li>Debajo del sombrero hay TUBOS con poros (no láminas): blancos de joven, luego amarillentos y verde-oliva.</li><li>Pie robusto, panzudo, blanquecino-pardo, con una red fina y clara al menos en la parte de arriba.</li><li>Carne blanca y firme, que NO se vuelve azul al cortarla; olor agradable, a avellana.</li><li>Cep (edulis): sombrero pardo-castaño, más claro en el borde; haya, abeto, pino y roble de montaña.</li><li>Cep de pino (pinophilus): sombrero pardo-rojizo vinoso, bajo pinos.</li><li>Cep fosc (aereus): sombrero marrón muy oscuro, aterciopelado; encinas, alcornoques y castaños a poca altitud; sale con calor.</li><li>Cep d&#x27;estiu (reticulatus): sombrero claro, a menudo agrietado en tiempo seco, red blanca muy marcada y larga; sale en verano.</li></ul>
-  <h4>Descártala si ves…</h4>
-  <ul><li>Poros ROJOS o anaranjados (en un cep son blancos, amarillos u oliva).</li><li>Pie amarillo con red roja.</li><li>Poros que se vuelven rosados con la edad, o red del pie oscura.</li><li>Carne que se vuelve azul de forma intensa.</li></ul>
-  <h4>Se confunde con</h4>
-  <ul><li><strong>Boleto de Satanás (Rubroboletus satanas)</strong> <span class="badge b-toxica">TÓXICA</span> — poros rojos, pie amarillo con red roja, azulea.</li><li><strong>Boletos de poros rojos (Suillellus luridus, Neoboletus erythropus)</strong> <span class="badge b-toxica">TÓXICA</span> — poros rojo-anaranjados y carne que azulea con fuerza.</li><li><strong>Boleto amargo (Tylopilus felleus)</strong> <span class="badge b-nocom">NO COMESTIBLE</span> — poros rosados con la edad, red oscura, amarguísimo.</li></ul>
-  <h4>Dónde y cuándo</h4>
-  <p>Cep y cep de pino: bosques de montaña (sobre todo por encima de ~700 m); agosto-octubre. Cep fosc: encinares, alcornocales y robledales de baja y media altitud; septiembre-octubre. Cep d&#x27;estiu: de julio a septiembre.</p>
-</article>
-<article class="card" id="camagrocs" data-kind="ficha" data-search="camagroc craterellus lutescens">
-  <h3>Camagroc<span class="sci">Craterellus lutescens</span></h3>
-  <p class="risk risk-medio">Riesgo de confusión: <strong>medio</strong></p>
-  <h4>Tiene que cumplir TODO esto</h4>
-  <ul><li>Embudo o trompeta pequeña, de sombrero pardo-grisáceo u oliva.</li><li>Debajo, PLIEGUES casi lisos de color amarillo a rosado-anaranjado, que bajan por el pie (sin láminas verdaderas).</li><li>Pie amarillo-anaranjado, hueco con la edad; olor afrutado.</li><li>Sale en bosques húmedos, entre musgo, en otoño-invierno.</li></ul>
-  <h4>Descártala si ves…</h4>
-  <ul><li>Láminas verdaderas, finas y apretadas.</li><li>Carne naranja intenso, o crecer en mechones sobre madera.</li></ul>
-  <h4>Se confunde con</h4>
-  <ul><li><strong>Craterellus tubaeformis</strong> <span class="badge b-ok">comestible</span> — comestible, de menos calidad; pliegues más marcados, pie más amarillo.</li><li><strong>Falso rebozuelo (Hygrophoropsis aurantiaca)</strong> <span class="badge b-nocom">NO COMESTIBLE</span> — láminas verdaderas finas y apretadas, color naranja.</li></ul>
-  <h4>Dónde y cuándo</h4>
-  <p>Bosques húmedos y musgosos; sobre todo otoño y primeros fríos.</p>
-</article>
-<article class="card" id="rossinyols" data-kind="ficha" data-search="rossinyol cantharellus cibarius">
-  <h3>Rossinyol<span class="sci">Cantharellus cibarius</span></h3>
-  <p class="risk risk-medio">Riesgo de confusión: <strong>medio</strong></p>
-  <h4>Tiene que cumplir TODO esto</h4>
-  <ul><li>Color amarillo huevo en todo el ejemplar.</li><li>Debajo, pliegues gruesos, ramificados y venosos que bajan por el pie (no hay láminas verdaderas).</li><li>Carne blanquecino-amarillenta, fibrosa; olor a albaricoque.</li><li>Crece SOBRE EL SUELO, suelto o en grupos dispersos (no sobre madera).</li></ul>
-  <h4>Descártala si ves…</h4>
-  <ul><li>Láminas finas, apretadas, que se separan con facilidad.</li><li>Carne naranja intenso.</li><li>Crecer en mechones soldados por la base sobre troncos o raíces.</li></ul>
-  <h4>Se confunde con</h4>
-  <ul><li><strong>Seta del olivo (Omphalotus olearius)</strong> <span class="badge b-toxica">TÓXICA</span> — naranja vivo, mechones sobre madera, láminas finas de verdad.</li><li><strong>Falso rebozuelo (Hygrophoropsis aurantiaca)</strong> <span class="badge b-nocom">NO COMESTIBLE</span> — láminas finas y apretadas, naranja.</li></ul>
-  <h4>Dónde y cuándo</h4>
-  <p>Bosques de planifolios y de coníferas; de verano a otoño.</p>
-</article>
-<article class="card" id="trompetes" data-kind="ficha" data-search="trompeta de la muerte craterellus cornucopioides">
-  <h3>Trompeta de la muerte<span class="sci">Craterellus cornucopioides</span></h3>
-  <p class="risk risk-bajo">Riesgo de confusión: <strong>bajo</strong></p>
-  <h4>Tiene que cumplir TODO esto</h4>
-  <ul><li>Trompeta o embudo negro-grisáceo, HUECO hasta la base.</li><li>Sin láminas: la cara de abajo es lisa o apenas arrugada, gris-ceniza.</li><li>Carne muy fina y frágil; olor afrutado.</li><li>Sale en grupos entre hojarasca o musgo en bosques húmedos de hayas y robles.</li></ul>
-  <h4>Descártala si ves…</h4>
-  <ul><li>Láminas verdaderas bajo el sombrero.</li><li>Colores vivos (amarillo, naranja, rojo).</li></ul>
-  <h4>Se confunde con</h4>
-  <ul><li><strong>Craterellus cinereus</strong> <span class="badge b-ok">comestible</span> — comestible; más gris y con pliegues más marcados.</li><li><strong>Otras setas oscuras en embudo</strong> <span class="badge b-nocom">NO COMESTIBLE</span> — comprueba siempre que es un embudo hueco sin láminas.</li></ul>
-  <h4>Dónde y cuándo</h4>
-  <p>Hayedos, robledales y encinares húmedos; sobre todo octubre-noviembre.</p>
-</article>
-<article class="card" id="oureig" data-kind="ficha" data-search="ou de reig amanita caesarea">
-  <h3>Ou de reig<span class="sci">Amanita caesarea</span></h3>
-  <p class="risk risk-alto">Riesgo de confusión: <strong>alto</strong></p>
-  <h4>Tiene que cumplir TODO esto</h4>
-  <ul><li>Sombrero rojo-anaranjado brillante, liso, con el borde estriado; sin verrugas (a veces queda un resto de la bolsa blanca).</li><li>Láminas AMARILLAS, pie AMARILLO y anillo AMARILLO colgante.</li><li>En la base, una bolsa (volva) blanca membranosa que envuelve el pie, a veces enterrada: excava.</li><li>De joven sale de un «huevo» blanco.</li></ul>
-  <h4>Descártala si ves…</h4>
-  <ul><li>Láminas blancas.</li><li>Sombrero con verrugas blancas (matamoscas).</li><li>Sombrero verdoso con láminas blancas (oronja verde).</li><li>Cualquier duda con el estadio de huevo cerrado: no lo recojas.</li></ul>
-  <h4>Se confunde con</h4>
-  <ul><li><strong>Oronja verde (Amanita phalloides)</strong> <span class="badge b-mortal">MORTAL</span> — láminas blancas, sombrero verde oliváceo; el huevo cerrado no se distingue.</li><li><strong>Matamoscas (Amanita muscaria)</strong> <span class="badge b-toxica">TÓXICA</span> — verrugas blancas, láminas y pie blancos.</li></ul>
-  <h4>Dónde y cuándo</h4>
-  <p>Encinares, alcornocales y robledales cálidos de poca altitud, sobre suelo ácido; verano y principios de otoño (agosto-octubre).</p>
-</article>
-<article class="card" id="colmenilles" data-kind="ficha" data-search="colmenilla (múrgola) morchella esculenta · m. elata">
-  <h3>Colmenilla (múrgola)<span class="sci">Morchella esculenta · M. elata</span></h3>
-  <p class="risk risk-medio">Riesgo de confusión: <strong>medio</strong></p>
-  <h4>Tiene que cumplir TODO esto</h4>
-  <ul><li>Sombrero con ALVÉOLOS, como un panal, unido al pie por la parte de abajo.</li><li>Cortada a lo largo: UNA sola cavidad hueca continua desde el sombrero hasta el pie.</li><li>Sale en primavera, en riberas, zonas quemadas y suelos removidos.</li></ul>
-  <h4>Descártala si ves…</h4>
-  <ul><li>Sombrero con circunvoluciones (como un cerebro) en vez de alvéolos.</li><li>Interior con cámaras, tabiques o relleno algodonoso.</li><li>Sombrero que cuelga libre del pie como una falda (Verpa).</li></ul>
-  <h4>Se confunde con</h4>
-  <ul><li><strong>Giromitra (Gyromitra esculenta)</strong> <span class="badge b-mortal">MORTAL</span> — cerebriforme, con cámaras por dentro; ver la ficha de peligrosas.</li><li><strong>Verpa bohemica</strong> <span class="badge b-toxica">TÓXICA</span> — sombrero libre, como una falda; tóxica para algunas personas.</li></ul>
-  <h4>Dónde y cuándo</h4>
-  <p>Primavera (marzo-mayo). Son tóxicas crudas o poco cocinadas: cocinar siempre bien.</p>
-</article>
-<article class="card" id="llengua" data-kind="ficha" data-search="llengua de bou hydnum repandum">
-  <h3>Llengua de bou<span class="sci">Hydnum repandum</span></h3>
-  <p class="risk risk-bajo">Riesgo de confusión: <strong>bajo</strong></p>
-  <h4>Tiene que cumplir TODO esto</h4>
-  <ul><li>Debajo del sombrero hay PÚAS (aguijones) frágiles, no láminas ni poros.</li><li>Sombrero crema-anaranjado pálido, algo irregular; pie blanco, corto y grueso.</li><li>Carne blanca y quebradiza.</li></ul>
-  <h4>Descártala si ves…</h4>
-  <ul><li>Cualquier otra estructura bajo el sombrero (láminas finas, poros): no es una llengua de bou.</li></ul>
-  <h4>Se confunde con</h4>
-  <ul><li><strong>Hydnum rufescens</strong> <span class="badge b-ok">comestible</span> — más pequeña y más anaranjada; también comestible.</li><li><strong>Otras setas con púas (Hydnellum, Sarcodon)</strong> <span class="badge b-nocom">NO COMESTIBLE</span> — duras o amargas; no se aprovechan.</li></ul>
-  <h4>Dónde y cuándo</h4>
-  <p>Bosques de planifolios y de coníferas; otoño. Los ejemplares viejos amargan.</p>
-</article>
-<article class="card" id="fredolic" data-kind="ficha" data-search="fredolic tricholoma terreum">
-  <h3>Fredolic<span class="sci">Tricholoma terreum</span></h3>
-  <p class="risk risk-alto">Riesgo de confusión: <strong>alto</strong></p>
-  <h4>Tiene que cumplir TODO esto</h4>
-  <ul><li>Sombrero cónico o campanulado, gris ratón, FIBROSO (fibrillas finas, no escamas gruesas), seco.</li><li>Láminas blancas a gris claro; pie blanco; olor a harina.</li><li>Tamaño pequeño-mediano; bajo pinos, en otoño frío.</li></ul>
-  <h4>Descártala si ves…</h4>
-  <ul><li>Seta grande y robusta con escamas oscuras bien marcadas («atigrada»).</li><li>Sombrero viscoso amarillo-verdoso (Tricholoma equestre y afines: asociados a intoxicaciones graves).</li><li>Cualquier duda por el tamaño: descarta.</li></ul>
-  <h4>Se confunde con</h4>
-  <ul><li><strong>Tricoloma tigre (Tricholoma pardinum)</strong> <span class="badge b-toxica">TÓXICA</span> — grande, robusto, con escamas oscuras; muy tóxico para el estómago.</li><li><strong>Tricholoma equestre</strong> <span class="badge b-toxica">TÓXICA</span> — amarillo-verdoso y viscoso; se ha asociado a casos graves de daño muscular.</li></ul>
-  <h4>Dónde y cuándo</h4>
-  <p>Pinares de baja y media altitud; octubre-diciembre.</p>
-</article>
-<article class="card" id="escarlet" data-kind="ficha" data-search="escarlet hygrophorus russula">
-  <h3>Escarlet<span class="sci">Hygrophorus russula</span></h3>
-  <p class="risk risk-medio">Riesgo de confusión: <strong>medio</strong></p>
-  <h4>Tiene que cumplir TODO esto</h4>
-  <ul><li>Sombrero carnoso rojo vinoso con manchas rosadas irregulares, borde enrollado.</li><li>Láminas blancas a crema, gruesas, separadas, que bajan por el pie y se manchan de rojo vino con la edad.</li><li>Carne blanca, muy dura y compacta; esporada blanca.</li><li>Encinares y robledales, otoño tardío, suelo calcáreo.</li></ul>
-  <h4>Descártala si ves…</h4>
-  <ul><li>Láminas que viran a rosa salmón o esporada rosa (Entoloma).</li><li>Sabor amargo.</li></ul>
-  <h4>Se confunde con</h4>
-  <ul><li><strong>Hygrophorus erubescens</strong> <span class="badge b-nocom">NO COMESTIBLE</span> — parecido en el color; suele crecer bajo coníferas y es amargo.</li><li><strong>Entoloma sinuatum</strong> <span class="badge b-toxica">TÓXICA</span> — comparte bosques; láminas rosa salmón y esporada rosa. Comprueba láminas y esporada.</li></ul>
-  <h4>Dónde y cuándo</h4>
-  <p>Encinares y robledales; octubre-noviembre.</p>
-</article>
-<article class="card" id="llenega" data-kind="ficha" data-search="llenega negra hygrophorus latitabundus">
-  <h3>Llenega negra<span class="sci">Hygrophorus latitabundus</span></h3>
-  <p class="risk risk-medio">Riesgo de confusión: <strong>medio</strong></p>
-  <h4>Tiene que cumplir TODO esto</h4>
-  <ul><li>Sombrero grande, gris-pardo, MUY viscoso (baboso) con humedad, convexo.</li><li>Láminas blancas, gruesas y separadas que bajan por el pie.</li><li>Pie blanco, robusto, con la parte baja viscosa; a menudo medio enterrado entre acículas.</li><li>Esporada blanca. Pinares.</li></ul>
-  <h4>Descártala si ves…</h4>
-  <ul><li>Láminas que se oscurecen a pardo-óxido o esporada marrón (no es un Hygrophorus).</li></ul>
-  <h4>Se confunde con</h4>
-  <ul><li><strong>Otros Hygrophorus de pinar</strong> <span class="badge b-ok">comestible</span> — parecidos; también comestibles con precaución.</li></ul>
-  <h4>Dónde y cuándo</h4>
-  <p>Pinares; octubre-noviembre. Conviene quitar la viscosidad del sombrero antes de cocinarla.</p>
-</article>
-<article class="card" id="apagallums" data-kind="ficha" data-search="apagallums (parasol) macrolepiota procera">
-  <h3>Apagallums (parasol) <span class="badge b-nomap">no está en el mapa</span><span class="sci">Macrolepiota procera</span></h3>
-  <p class="risk risk-alto">Riesgo de confusión: <strong>alto</strong></p>
-  <h4>Tiene que cumplir TODO esto</h4>
-  <ul><li>Seta GRANDE y alta (sombrero de 10-35 cm, pie alto) con escamas marrones sobre fondo claro.</li><li>Pie delgado con dibujo de PIEL DE SERPIENTE (bandas marrones).</li><li>Anillo doble que se DESLIZA libremente por el pie.</li><li>Láminas blancas, libres; esporada blanca. Prados, claros y bordes de bosque.</li></ul>
-  <h4>Descártala si ves…</h4>
-  <ul><li>Seta pequeña (sombrero de menos de 10 cm) o con el pie sin dibujo de serpiente.</li><li>Anillo que no se mueve.</li><li>Ejemplares jóvenes cerrados («tambores») en los que no ves el pie: no los recojas.</li></ul>
-  <h4>Se confunde con</h4>
-  <ul><li><strong>Lepiotas pequeñas (Lepiota brunneoincarnata)</strong> <span class="badge b-mortal">MORTAL</span> — pequeñas, escamas vinosas, anillo frágil; ver la ficha de peligrosas.</li><li><strong>Chlorophyllum rhacodes</strong> <span class="badge b-ok">comestible</span> — pie liso y carne que enrojece al cortarla; puede sentar mal a algunas personas.</li></ul>
-  <h4>Dónde y cuándo</h4>
-  <p>Prados y claros; mayo y sobre todo septiembre-noviembre. No está en el mapa (las setas de prado no se predicen todavía).</p>
-</article>
-<article class="card" id="camasec" data-kind="ficha" data-search="cama-sec (corro de bruja) marasmius oreades">
-  <h3>Cama-sec (corro de bruja) <span class="badge b-nomap">no está en el mapa</span><span class="sci">Marasmius oreades</span></h3>
-  <p class="risk risk-alto">Riesgo de confusión: <strong>alto</strong></p>
-  <h4>Tiene que cumplir TODO esto</h4>
-  <ul><li>Pequeño (sombrero de 2-5 cm), crema a pardo claro, con un abultamiento central.</li><li>Láminas anchas y MUY SEPARADAS, crema.</li><li>Pie delgado y TENAZ: se retuerce como una cuerda sin romperse.</li><li>Crece en CORROS en prados, pastos y bordes de camino; olor a almendra.</li></ul>
-  <h4>Descártala si ves…</h4>
-  <ul><li>Láminas apretadas, o pie que se parte con facilidad.</li><li>Crece en bosque o sobre madera.</li></ul>
-  <h4>Se confunde con</h4>
-  <ul><li><strong>Clitocibes blancos de prado (Clitocybe rivulosa)</strong> <span class="badge b-muyt">MUY TÓXICA</span> — pueden crecer en el mismo corro; láminas más apretadas, pie frágil, muscarina.</li></ul>
-  <h4>Dónde y cuándo</h4>
-  <p>Prados y pastos; mayo-junio y septiembre-noviembre. No está en el mapa (las setas de prado no se predicen todavía).</p>
-</article>
-<article class="card" id="moixerno" data-kind="ficha" data-search="moixernó calocybe gambosa">
-  <h3>Moixernó <span class="badge b-nomap">no está en el mapa</span><span class="sci">Calocybe gambosa</span></h3>
-  <p class="risk risk-alto">Riesgo de confusión: <strong>alto</strong></p>
-  <h4>Tiene que cumplir TODO esto</h4>
-  <ul><li>Primaveral (abril-junio), carnoso, blanco-crema, sombrero convexo con el borde enrollado.</li><li>Láminas MUY apretadas, finas, blancas a crema.</li><li>Olor y sabor a HARINA FRESCA muy marcado.</li><li>Crece en corros en prados de montaña y bordes de bosque.</li></ul>
-  <h4>Descártala si ves…</h4>
-  <ul><li>Olor que no es a harina fresca.</li><li>Sombrero fibroso o que se enrojece con la edad o al tocarlo.</li><li>Láminas que se oscurecen o que viran a rosa.</li></ul>
-  <h4>Se confunde con</h4>
-  <ul><li><strong>Inocibe de Patouillard (Inosperma erubescens)</strong> <span class="badge b-muyt">MUY TÓXICA</span> — se enrojece, sombrero fibroso, láminas que se oscurecen; muscarina.</li></ul>
-  <h4>Dónde y cuándo</h4>
-  <p>Prados de montaña; sobre todo mayo-junio. No está en el mapa (las setas de prado no se predicen todavía). Ojo con los nombres: el «marçot» es otra seta (Hygrophorus marzuolus, de bosque y frío) y el «moixernó de tardor» es Clitocybe nebularis, no Calocybe gambosa; ante la duda, usa el nombre científico.</p>
-</article>
+<a id="pinetell"></a><details class="card" id="rovellons" data-kind="ficha" data-search="rovelló y pinetell lactarius deliciosus · lactarius sanguifluus">
+  <summary><span class="thumb" data-thumb="rovellons"><span class="ph">🍄</span></span><span class="ttl"><span class="nm">Rovelló y pinetell</span><span class="sci">Lactarius deliciosus · Lactarius sanguifluus</span></span><span class="chev" aria-hidden="true"></span></summary>
+  <div class="body">
+    <div class="fotos" data-fotos="rovellons"></div>
+    
+    <p class="risk risk-medio">Riesgo de confusión: <strong>medio</strong></p>
+    <h4>Tiene que cumplir TODO esto</h4>
+    <ul><li>Crece bajo PINOS.</li><li>Sombrero naranja (deliciosus, a menudo con círculos concéntricos) o más rojizo-vinoso y verdoso (sanguifluus).</li><li>Al cortar o rascar las láminas sale un LÁTEX naranja (deliciosus) o rojo vino (sanguifluus). Con el tiempo, la carne y las manchas se vuelven verdosas.</li><li>Pie hueco, con manchas o hoyuelos más oscuros (deliciosus).</li></ul>
+    <div class="sec" data-res><h4>Descártala si ves…</h4><ul><li>Látex BLANCO, transparente o que amarillea enseguida.</li><li>Sombrero con el margen muy peludo.</li><li>No sale ningún látex.</li></ul></div>
+    <div class="sec" data-res><h4>Se confunde con</h4><ul><li><strong>Lactarius torminosus</strong> <span class="badge b-toxica">TÓXICA</span> — látex blanco, margen del sombrero peludo y lanoso.</li><li><strong>Otros Lactarius</strong> <span class="badge b-nocom">NO COMESTIBLE</span> — los que dan látex blanco o que amarillea no son rovellons y algunos son tóxicos.</li></ul></div>
+    <h4>Dónde y cuándo</h4>
+    <p>Pinares, sobre todo de pino rojo, negro y blanco; otoño. Cocinar siempre bien.</p>
+  </div>
+</details>
+<a id="cepfosc"></a><a id="cepestiu"></a><details class="card" id="cep" data-kind="ficha" data-search="ceps (boletus del grupo edulis) boletus edulis · b. pinophilus · b. aereus (cep fosc) · b. reticulatus (cep d&#x27;estiu) cep vermell (b. pinophilus) sureny fosc o cep negre (b. aereus)">
+  <summary><span class="thumb" data-thumb="cep"><span class="ph">🍄</span></span><span class="ttl"><span class="nm">Ceps (Boletus del grupo edulis)</span><span class="sci">Boletus edulis · B. pinophilus · B. aereus (cep fosc) · B. reticulatus (cep d&#x27;estiu)</span></span><span class="chev" aria-hidden="true"></span></summary>
+  <div class="body">
+    <div class="fotos" data-fotos="cep"></div>
+    <span class="sci">También se le llama: cep vermell (B. pinophilus), sureny fosc o cep negre (B. aereus)</span>
+    <p class="risk risk-alto">Riesgo de confusión: <strong>alto</strong></p>
+    <h4>Tiene que cumplir TODO esto</h4>
+    <ul><li>Debajo del sombrero hay TUBOS con poros (no láminas): blancos de joven, luego amarillentos y verde-oliva.</li><li>Pie robusto, panzudo, blanquecino-pardo, con una red fina y clara al menos en la parte de arriba.</li><li>Carne blanca y firme, que NO se vuelve azul al cortarla; olor agradable, a avellana.</li><li>Cep (edulis): sombrero pardo-castaño, más claro en el borde; haya, abeto, pino y roble de montaña.</li><li>Cep de pino (pinophilus): sombrero pardo-rojizo vinoso, bajo pinos.</li><li>Cep fosc (aereus): sombrero marrón muy oscuro, aterciopelado; encinas, alcornoques y castaños a poca altitud; sale con calor.</li><li>Cep d&#x27;estiu (reticulatus): sombrero claro, a menudo agrietado en tiempo seco, red blanca muy marcada y larga; sale en verano.</li></ul>
+    <div class="sec" data-res><h4>Descártala si ves…</h4><ul><li>Poros ROJOS o anaranjados (en un cep son blancos, amarillos u oliva).</li><li>Pie amarillo con red roja.</li><li>Poros que se vuelven rosados con la edad, o red del pie oscura.</li><li>Carne que se vuelve azul de forma intensa.</li></ul></div>
+    <div class="sec" data-res><h4>Se confunde con</h4><ul><li><strong>Boleto de Satanás (Rubroboletus satanas)</strong> <span class="badge b-toxica">TÓXICA</span> — poros rojos, pie amarillo con red roja, azulea.</li><li><strong>Boletos de poros rojos (Suillellus luridus, Neoboletus erythropus)</strong> <span class="badge b-toxica">TÓXICA</span> — poros rojo-anaranjados y carne que azulea con fuerza.</li><li><strong>Boleto amargo (Tylopilus felleus)</strong> <span class="badge b-nocom">NO COMESTIBLE</span> — poros rosados con la edad, red oscura, amarguísimo.</li></ul></div>
+    <h4>Dónde y cuándo</h4>
+    <p>Cep y cep de pino: bosques de montaña (sobre todo por encima de ~700 m); agosto-octubre. Cep fosc: encinares, alcornocales y robledales de baja y media altitud; septiembre-octubre. Cep d&#x27;estiu: de julio a septiembre.</p>
+  </div>
+</details>
+<details class="card" id="camagrocs" data-kind="ficha" data-search="camagroc craterellus lutescens">
+  <summary><span class="thumb" data-thumb="camagrocs"><span class="ph">🍄</span></span><span class="ttl"><span class="nm">Camagroc</span><span class="sci">Craterellus lutescens</span></span><span class="chev" aria-hidden="true"></span></summary>
+  <div class="body">
+    <div class="fotos" data-fotos="camagrocs"></div>
+    
+    <p class="risk risk-medio">Riesgo de confusión: <strong>medio</strong></p>
+    <h4>Tiene que cumplir TODO esto</h4>
+    <ul><li>Embudo o trompeta pequeña, de sombrero pardo-grisáceo u oliva.</li><li>Debajo, PLIEGUES casi lisos de color amarillo a rosado-anaranjado, que bajan por el pie (sin láminas verdaderas).</li><li>Pie amarillo-anaranjado, hueco con la edad; olor afrutado.</li><li>Sale en bosques húmedos, entre musgo, en otoño-invierno.</li></ul>
+    <div class="sec" data-res><h4>Descártala si ves…</h4><ul><li>Láminas verdaderas, finas y apretadas.</li><li>Carne naranja intenso, o crecer en mechones sobre madera.</li></ul></div>
+    <div class="sec" data-res><h4>Se confunde con</h4><ul><li><strong>Craterellus tubaeformis</strong> <span class="badge b-ok">comestible</span> — comestible, de menos calidad; pliegues más marcados, pie más amarillo.</li><li><strong>Falso rebozuelo (Hygrophoropsis aurantiaca)</strong> <span class="badge b-nocom">NO COMESTIBLE</span> — láminas verdaderas finas y apretadas, color naranja.</li></ul></div>
+    <h4>Dónde y cuándo</h4>
+    <p>Bosques húmedos y musgosos; sobre todo otoño y primeros fríos.</p>
+  </div>
+</details>
+<details class="card" id="rossinyols" data-kind="ficha" data-search="rossinyol cantharellus cibarius">
+  <summary><span class="thumb" data-thumb="rossinyols"><span class="ph">🍄</span></span><span class="ttl"><span class="nm">Rossinyol</span><span class="sci">Cantharellus cibarius</span></span><span class="chev" aria-hidden="true"></span></summary>
+  <div class="body">
+    <div class="fotos" data-fotos="rossinyols"></div>
+    
+    <p class="risk risk-medio">Riesgo de confusión: <strong>medio</strong></p>
+    <h4>Tiene que cumplir TODO esto</h4>
+    <ul><li>Color amarillo huevo en todo el ejemplar.</li><li>Debajo, pliegues gruesos, ramificados y venosos que bajan por el pie (no hay láminas verdaderas).</li><li>Carne blanquecino-amarillenta, fibrosa; olor a albaricoque.</li><li>Crece SOBRE EL SUELO, suelto o en grupos dispersos (no sobre madera).</li></ul>
+    <div class="sec" data-res><h4>Descártala si ves…</h4><ul><li>Láminas finas, apretadas, que se separan con facilidad.</li><li>Carne naranja intenso.</li><li>Crecer en mechones soldados por la base sobre troncos o raíces.</li></ul></div>
+    <div class="sec" data-res><h4>Se confunde con</h4><ul><li><strong>Seta del olivo (Omphalotus olearius)</strong> <span class="badge b-toxica">TÓXICA</span> — naranja vivo, mechones sobre madera, láminas finas de verdad.</li><li><strong>Falso rebozuelo (Hygrophoropsis aurantiaca)</strong> <span class="badge b-nocom">NO COMESTIBLE</span> — láminas finas y apretadas, naranja.</li></ul></div>
+    <h4>Dónde y cuándo</h4>
+    <p>Bosques de planifolios y de coníferas; de verano a otoño.</p>
+  </div>
+</details>
+<details class="card" id="trompetes" data-kind="ficha" data-search="trompeta de la muerte craterellus cornucopioides">
+  <summary><span class="thumb" data-thumb="trompetes"><span class="ph">🍄</span></span><span class="ttl"><span class="nm">Trompeta de la muerte</span><span class="sci">Craterellus cornucopioides</span></span><span class="chev" aria-hidden="true"></span></summary>
+  <div class="body">
+    <div class="fotos" data-fotos="trompetes"></div>
+    
+    <p class="risk risk-bajo">Riesgo de confusión: <strong>bajo</strong></p>
+    <h4>Tiene que cumplir TODO esto</h4>
+    <ul><li>Trompeta o embudo negro-grisáceo, HUECO hasta la base.</li><li>Sin láminas: la cara de abajo es lisa o apenas arrugada, gris-ceniza.</li><li>Carne muy fina y frágil; olor afrutado.</li><li>Sale en grupos entre hojarasca o musgo en bosques húmedos de hayas y robles.</li></ul>
+    <div class="sec" data-res><h4>Descártala si ves…</h4><ul><li>Láminas verdaderas bajo el sombrero.</li><li>Colores vivos (amarillo, naranja, rojo).</li></ul></div>
+    <div class="sec" data-res><h4>Se confunde con</h4><ul><li><strong>Craterellus cinereus</strong> <span class="badge b-ok">comestible</span> — comestible; más gris y con pliegues más marcados.</li><li><strong>Otras setas oscuras en embudo</strong> <span class="badge b-nocom">NO COMESTIBLE</span> — comprueba siempre que es un embudo hueco sin láminas.</li></ul></div>
+    <h4>Dónde y cuándo</h4>
+    <p>Hayedos, robledales y encinares húmedos; sobre todo octubre-noviembre.</p>
+  </div>
+</details>
+<details class="card" id="oureig" data-kind="ficha" data-search="ou de reig amanita caesarea">
+  <summary><span class="thumb" data-thumb="oureig"><span class="ph">🍄</span></span><span class="ttl"><span class="nm">Ou de reig</span><span class="sci">Amanita caesarea</span></span><span class="chev" aria-hidden="true"></span></summary>
+  <div class="body">
+    <div class="fotos" data-fotos="oureig"></div>
+    
+    <p class="risk risk-alto">Riesgo de confusión: <strong>alto</strong></p>
+    <h4>Tiene que cumplir TODO esto</h4>
+    <ul><li>Sombrero rojo-anaranjado brillante, liso, con el borde estriado; sin verrugas (a veces queda un resto de la bolsa blanca).</li><li>Láminas AMARILLAS, pie AMARILLO y anillo AMARILLO colgante.</li><li>En la base, una bolsa (volva) blanca membranosa que envuelve el pie, a veces enterrada: excava.</li><li>De joven sale de un «huevo» blanco.</li></ul>
+    <div class="sec" data-res><h4>Descártala si ves…</h4><ul><li>Láminas blancas.</li><li>Sombrero con verrugas blancas (matamoscas).</li><li>Sombrero verdoso con láminas blancas (oronja verde).</li><li>Cualquier duda con el estadio de huevo cerrado: no lo recojas.</li></ul></div>
+    <div class="sec" data-res><h4>Se confunde con</h4><ul><li><strong>Oronja verde (Amanita phalloides)</strong> <span class="badge b-mortal">MORTAL</span> — láminas blancas, sombrero verde oliváceo; el huevo cerrado no se distingue.</li><li><strong>Matamoscas (Amanita muscaria)</strong> <span class="badge b-toxica">TÓXICA</span> — verrugas blancas, láminas y pie blancos.</li></ul></div>
+    <h4>Dónde y cuándo</h4>
+    <p>Encinares, alcornocales y robledales cálidos de poca altitud, sobre suelo ácido; verano y principios de otoño (agosto-octubre).</p>
+  </div>
+</details>
+<details class="card" id="colmenilles" data-kind="ficha" data-search="colmenilla (múrgola) morchella esculenta · m. elata">
+  <summary><span class="thumb" data-thumb="colmenilles"><span class="ph">🍄</span></span><span class="ttl"><span class="nm">Colmenilla (múrgola)</span><span class="sci">Morchella esculenta · M. elata</span></span><span class="chev" aria-hidden="true"></span></summary>
+  <div class="body">
+    <div class="fotos" data-fotos="colmenilles"></div>
+    
+    <p class="risk risk-medio">Riesgo de confusión: <strong>medio</strong></p>
+    <h4>Tiene que cumplir TODO esto</h4>
+    <ul><li>Sombrero con ALVÉOLOS, como un panal, unido al pie por la parte de abajo.</li><li>Cortada a lo largo: UNA sola cavidad hueca continua desde el sombrero hasta el pie.</li><li>Sale en primavera, en riberas, zonas quemadas y suelos removidos.</li></ul>
+    <div class="sec" data-res><h4>Descártala si ves…</h4><ul><li>Sombrero con circunvoluciones (como un cerebro) en vez de alvéolos.</li><li>Interior con cámaras, tabiques o relleno algodonoso.</li><li>Sombrero que cuelga libre del pie como una falda (Verpa).</li></ul></div>
+    <div class="sec" data-res><h4>Se confunde con</h4><ul><li><strong>Giromitra (Gyromitra esculenta)</strong> <span class="badge b-mortal">MORTAL</span> — cerebriforme, con cámaras por dentro; ver la ficha de peligrosas.</li><li><strong>Verpa bohemica</strong> <span class="badge b-toxica">TÓXICA</span> — sombrero libre, como una falda; tóxica para algunas personas.</li></ul></div>
+    <h4>Dónde y cuándo</h4>
+    <p>Primavera (marzo-mayo). Son tóxicas crudas o poco cocinadas: cocinar siempre bien.</p>
+  </div>
+</details>
+<details class="card" id="llengua" data-kind="ficha" data-search="llengua de bou hydnum repandum">
+  <summary><span class="thumb" data-thumb="llengua"><span class="ph">🍄</span></span><span class="ttl"><span class="nm">Llengua de bou</span><span class="sci">Hydnum repandum</span></span><span class="chev" aria-hidden="true"></span></summary>
+  <div class="body">
+    <div class="fotos" data-fotos="llengua"></div>
+    
+    <p class="risk risk-bajo">Riesgo de confusión: <strong>bajo</strong></p>
+    <h4>Tiene que cumplir TODO esto</h4>
+    <ul><li>Debajo del sombrero hay PÚAS (aguijones) frágiles, no láminas ni poros.</li><li>Sombrero crema-anaranjado pálido, algo irregular; pie blanco, corto y grueso.</li><li>Carne blanca y quebradiza.</li></ul>
+    <div class="sec" data-res><h4>Descártala si ves…</h4><ul><li>Cualquier otra estructura bajo el sombrero (láminas finas, poros): no es una llengua de bou.</li></ul></div>
+    <div class="sec" data-res><h4>Se confunde con</h4><ul><li><strong>Hydnum rufescens</strong> <span class="badge b-ok">comestible</span> — más pequeña y más anaranjada; también comestible.</li><li><strong>Otras setas con púas (Hydnellum, Sarcodon)</strong> <span class="badge b-nocom">NO COMESTIBLE</span> — duras o amargas; no se aprovechan.</li></ul></div>
+    <h4>Dónde y cuándo</h4>
+    <p>Bosques de planifolios y de coníferas; otoño. Los ejemplares viejos amargan.</p>
+  </div>
+</details>
+<details class="card" id="fredolic" data-kind="ficha" data-search="fredolic tricholoma terreum">
+  <summary><span class="thumb" data-thumb="fredolic"><span class="ph">🍄</span></span><span class="ttl"><span class="nm">Fredolic</span><span class="sci">Tricholoma terreum</span></span><span class="chev" aria-hidden="true"></span></summary>
+  <div class="body">
+    <div class="fotos" data-fotos="fredolic"></div>
+    
+    <p class="risk risk-alto">Riesgo de confusión: <strong>alto</strong></p>
+    <h4>Tiene que cumplir TODO esto</h4>
+    <ul><li>Sombrero cónico o campanulado, gris ratón, FIBROSO (fibrillas finas, no escamas gruesas), seco.</li><li>Láminas blancas a gris claro; pie blanco; olor a harina.</li><li>Tamaño pequeño-mediano; bajo pinos, en otoño frío.</li></ul>
+    <div class="sec" data-res><h4>Descártala si ves…</h4><ul><li>Seta grande y robusta con escamas oscuras bien marcadas («atigrada»).</li><li>Sombrero viscoso amarillo-verdoso (Tricholoma equestre y afines: asociados a intoxicaciones graves).</li><li>Cualquier duda por el tamaño: descarta.</li></ul></div>
+    <div class="sec" data-res><h4>Se confunde con</h4><ul><li><strong>Tricoloma tigre (Tricholoma pardinum)</strong> <span class="badge b-toxica">TÓXICA</span> — grande, robusto, con escamas oscuras; muy tóxico para el estómago.</li><li><strong>Tricholoma equestre</strong> <span class="badge b-toxica">TÓXICA</span> — amarillo-verdoso y viscoso; se ha asociado a casos graves de daño muscular.</li></ul></div>
+    <h4>Dónde y cuándo</h4>
+    <p>Pinares de baja y media altitud; octubre-diciembre.</p>
+  </div>
+</details>
+<details class="card" id="escarlet" data-kind="ficha" data-search="escarlet hygrophorus russula">
+  <summary><span class="thumb" data-thumb="escarlet"><span class="ph">🍄</span></span><span class="ttl"><span class="nm">Escarlet</span><span class="sci">Hygrophorus russula</span></span><span class="chev" aria-hidden="true"></span></summary>
+  <div class="body">
+    <div class="fotos" data-fotos="escarlet"></div>
+    
+    <p class="risk risk-medio">Riesgo de confusión: <strong>medio</strong></p>
+    <h4>Tiene que cumplir TODO esto</h4>
+    <ul><li>Sombrero carnoso rojo vinoso con manchas rosadas irregulares, borde enrollado.</li><li>Láminas blancas a crema, gruesas, separadas, que bajan por el pie y se manchan de rojo vino con la edad.</li><li>Carne blanca, muy dura y compacta; esporada blanca.</li><li>Encinares y robledales, otoño tardío, suelo calcáreo.</li></ul>
+    <div class="sec" data-res><h4>Descártala si ves…</h4><ul><li>Láminas que viran a rosa salmón o esporada rosa (Entoloma).</li><li>Sabor amargo.</li></ul></div>
+    <div class="sec" data-res><h4>Se confunde con</h4><ul><li><strong>Hygrophorus erubescens</strong> <span class="badge b-nocom">NO COMESTIBLE</span> — parecido en el color; suele crecer bajo coníferas y es amargo.</li><li><strong>Entoloma sinuatum</strong> <span class="badge b-toxica">TÓXICA</span> — comparte bosques; láminas rosa salmón y esporada rosa. Comprueba láminas y esporada.</li></ul></div>
+    <h4>Dónde y cuándo</h4>
+    <p>Encinares y robledales; octubre-noviembre.</p>
+  </div>
+</details>
+<details class="card" id="llenega" data-kind="ficha" data-search="llenega negra hygrophorus latitabundus">
+  <summary><span class="thumb" data-thumb="llenega"><span class="ph">🍄</span></span><span class="ttl"><span class="nm">Llenega negra</span><span class="sci">Hygrophorus latitabundus</span></span><span class="chev" aria-hidden="true"></span></summary>
+  <div class="body">
+    <div class="fotos" data-fotos="llenega"></div>
+    
+    <p class="risk risk-medio">Riesgo de confusión: <strong>medio</strong></p>
+    <h4>Tiene que cumplir TODO esto</h4>
+    <ul><li>Sombrero grande, gris-pardo, MUY viscoso (baboso) con humedad, convexo.</li><li>Láminas blancas, gruesas y separadas que bajan por el pie.</li><li>Pie blanco, robusto, con la parte baja viscosa; a menudo medio enterrado entre acículas.</li><li>Esporada blanca. Pinares.</li></ul>
+    <div class="sec" data-res><h4>Descártala si ves…</h4><ul><li>Láminas que se oscurecen a pardo-óxido o esporada marrón (no es un Hygrophorus).</li></ul></div>
+    <div class="sec" data-res><h4>Se confunde con</h4><ul><li><strong>Otros Hygrophorus de pinar</strong> <span class="badge b-ok">comestible</span> — parecidos; también comestibles con precaución.</li></ul></div>
+    <h4>Dónde y cuándo</h4>
+    <p>Pinares; octubre-noviembre. Conviene quitar la viscosidad del sombrero antes de cocinarla.</p>
+  </div>
+</details>
+<details class="card" id="apagallums" data-kind="ficha" data-search="apagallums (parasol) macrolepiota procera">
+  <summary><span class="thumb" data-thumb="apagallums"><span class="ph">🍄</span></span><span class="ttl"><span class="nm">Apagallums (parasol) <span class="badge b-nomap">no está en el mapa</span></span><span class="sci">Macrolepiota procera</span></span><span class="chev" aria-hidden="true"></span></summary>
+  <div class="body">
+    <div class="fotos" data-fotos="apagallums"></div>
+    
+    <p class="risk risk-alto">Riesgo de confusión: <strong>alto</strong></p>
+    <h4>Tiene que cumplir TODO esto</h4>
+    <ul><li>Seta GRANDE y alta (sombrero de 10-35 cm, pie alto) con escamas marrones sobre fondo claro.</li><li>Pie delgado con dibujo de PIEL DE SERPIENTE (bandas marrones).</li><li>Anillo doble que se DESLIZA libremente por el pie.</li><li>Láminas blancas, libres; esporada blanca. Prados, claros y bordes de bosque.</li></ul>
+    <div class="sec" data-res><h4>Descártala si ves…</h4><ul><li>Seta pequeña (sombrero de menos de 10 cm) o con el pie sin dibujo de serpiente.</li><li>Anillo que no se mueve.</li><li>Ejemplares jóvenes cerrados («tambores») en los que no ves el pie: no los recojas.</li></ul></div>
+    <div class="sec" data-res><h4>Se confunde con</h4><ul><li><strong>Lepiotas pequeñas (Lepiota brunneoincarnata)</strong> <span class="badge b-mortal">MORTAL</span> — pequeñas, escamas vinosas, anillo frágil; ver la ficha de peligrosas.</li><li><strong>Chlorophyllum rhacodes</strong> <span class="badge b-ok">comestible</span> — pie liso y carne que enrojece al cortarla; puede sentar mal a algunas personas.</li></ul></div>
+    <h4>Dónde y cuándo</h4>
+    <p>Prados y claros; mayo y sobre todo septiembre-noviembre. No está en el mapa (las setas de prado no se predicen todavía).</p>
+  </div>
+</details>
+<details class="card" id="camasec" data-kind="ficha" data-search="cama-sec (corro de bruja) marasmius oreades">
+  <summary><span class="thumb" data-thumb="camasec"><span class="ph">🍄</span></span><span class="ttl"><span class="nm">Cama-sec (corro de bruja) <span class="badge b-nomap">no está en el mapa</span></span><span class="sci">Marasmius oreades</span></span><span class="chev" aria-hidden="true"></span></summary>
+  <div class="body">
+    <div class="fotos" data-fotos="camasec"></div>
+    
+    <p class="risk risk-alto">Riesgo de confusión: <strong>alto</strong></p>
+    <h4>Tiene que cumplir TODO esto</h4>
+    <ul><li>Pequeño (sombrero de 2-5 cm), crema a pardo claro, con un abultamiento central.</li><li>Láminas anchas y MUY SEPARADAS, crema.</li><li>Pie delgado y TENAZ: se retuerce como una cuerda sin romperse.</li><li>Crece en CORROS en prados, pastos y bordes de camino; olor a almendra.</li></ul>
+    <div class="sec" data-res><h4>Descártala si ves…</h4><ul><li>Láminas apretadas, o pie que se parte con facilidad.</li><li>Crece en bosque o sobre madera.</li></ul></div>
+    <div class="sec" data-res><h4>Se confunde con</h4><ul><li><strong>Clitocibes blancos de prado (Clitocybe rivulosa)</strong> <span class="badge b-muyt">MUY TÓXICA</span> — pueden crecer en el mismo corro; láminas más apretadas, pie frágil, muscarina.</li></ul></div>
+    <h4>Dónde y cuándo</h4>
+    <p>Prados y pastos; mayo-junio y septiembre-noviembre. No está en el mapa (las setas de prado no se predicen todavía).</p>
+  </div>
+</details>
+<details class="card" id="moixerno" data-kind="ficha" data-search="moixernó calocybe gambosa">
+  <summary><span class="thumb" data-thumb="moixerno"><span class="ph">🍄</span></span><span class="ttl"><span class="nm">Moixernó <span class="badge b-nomap">no está en el mapa</span></span><span class="sci">Calocybe gambosa</span></span><span class="chev" aria-hidden="true"></span></summary>
+  <div class="body">
+    <div class="fotos" data-fotos="moixerno"></div>
+    
+    <p class="risk risk-alto">Riesgo de confusión: <strong>alto</strong></p>
+    <h4>Tiene que cumplir TODO esto</h4>
+    <ul><li>Primaveral (abril-junio), carnoso, blanco-crema, sombrero convexo con el borde enrollado.</li><li>Láminas MUY apretadas, finas, blancas a crema.</li><li>Olor y sabor a HARINA FRESCA muy marcado.</li><li>Crece en corros en prados de montaña y bordes de bosque.</li></ul>
+    <div class="sec" data-res><h4>Descártala si ves…</h4><ul><li>Olor que no es a harina fresca.</li><li>Sombrero fibroso o que se enrojece con la edad o al tocarlo.</li><li>Láminas que se oscurecen o que viran a rosa.</li></ul></div>
+    <div class="sec" data-res><h4>Se confunde con</h4><ul><li><strong>Inocibe de Patouillard (Inosperma erubescens)</strong> <span class="badge b-muyt">MUY TÓXICA</span> — se enrojece, sombrero fibroso, láminas que se oscurecen; muscarina.</li></ul></div>
+    <h4>Dónde y cuándo</h4>
+    <p>Prados de montaña; sobre todo mayo-junio. No está en el mapa (las setas de prado no se predicen todavía). Ojo con los nombres: el «marçot» es otra seta (Hygrophorus marzuolus, de bosque y frío) y el «moixernó de tardor» es Clitocybe nebularis, no Calocybe gambosa; ante la duda, usa el nombre científico.</p>
+  </div>
+</details>
   </div>
 
   <p id="empty">No hay resultados.</p>
 
-  <p class="foot">Redacción propia, sin imágenes. Como referencia de qué confusiones peligrosas importan se consultó (15/10/2026) la página de confusiones de bolets.app. Los nombres comunes cambian de una zona a otra: fíate del nombre científico. Estado del texto: sin revisión micológica independiente.</p>
+  <details class="mini">
+    <summary>Método de campo en 7 pasos</summary>
+    <ol><li><strong>Recógela ENTERA.</strong> Excava alrededor de la base, no la cortes por el pie: ahí está la volva (la bolsa) de las Amanita. Recoge varios ejemplares de distinta edad y fotografía el sitio.</li><li><strong>Tamaño y silueta.</strong> Fíjate en el tamaño, en si es joven o vieja y en si crece suelta, en grupo o en mechón.</li><li><strong>Mira debajo del sombrero.</strong> ¿Láminas, tubos con poros, pliegues, púas o liso? ¿De qué color? ¿Cambia de color al tocarlo?</li><li><strong>El pie.</strong> Forma, red, anillo y base (bulbo, bolsa, enterrada). ¿Hueco o macizo?</li><li><strong>Córtala.</strong> Color de la carne y si cambia (azul, rojo, amarillo). Si sale látex (leche), su color. Olor.</li><li><strong>Esporada.</strong> Pon el sombrero con las láminas hacia abajo sobre un papel mitad blanco y mitad negro y déjalo unas horas. Color del polvo: blanco, crema, rosa, marrón óxido o negro. Cambia mucho el diagnóstico.</li><li><strong>Hábitat y época.</strong> Árbol cercano, suelo, madera o prado, altitud y mes. Si UN solo rasgo no cuadra, descártala.</li></ol>
+  </details>
+  <details class="mini">
+    <summary>Cosas que se creen y son falsas</summary>
+    <ul><li>«Si la comen los bichos o las babosas, es buena.» Falso: muchas setas mortales las comen.</li><li>«La cuchara de plata, el ajo o el vinagre detectan las tóxicas.» Falso.</li><li>«Pelar el sombrero, hervirla o congelarla la hace segura.» Falso: las amatoxinas resisten el calor.</li><li>«Si la he comido otros años, es buena.» Una confusión con una especie mortal solo hace falta una vez.</li><li>«Una foto o una aplicación bastan para saberlo.» Falso: ninguna aplicación puede garantizarlo.</li></ul>
+  </details>
+
+  <p class="foot">Fotos: Wikimedia Commons, con licencias libres (el autor y la licencia están debajo de cada foto). Texto de redacción propia, sin revisión micológica independiente. Como referencia de qué confusiones peligrosas importan se consultó (15/10/2026) la página de confusiones de bolets.app. Los nombres comunes cambian de una zona a otra: fíate del nombre científico. La identificación por foto es una sugerencia automática de un modelo de IA general y puede equivocarse.</p>
 </div>
 <script>
-// Registra el service worker (guarda esta página para verla sin cobertura). Si falla, la guía funciona igual con conexión.
+// Registra el service worker (guarda esta página y sus fotos para verlas sin cobertura). Si falla, la guía funciona igual con conexión.
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function () {
     navigator.serviceWorker.register('sw.js').catch(function () {});
   });
 }
 (function () {
-  var q = document.getElementById('q');
+  var WORKER = 'https://bolets-hallazgos.shicoars.workers.dev/';
+  var TOKEN_KEY = 'bolets_session_token';
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var porId = {};
+  cards.forEach(function (c) { porId[c.id] = c; });
+
+  function $(id) { return document.getElementById(id); }
+  function norm(s) { return (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); }
+  function el(tag, cls, txt) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (txt != null) n.textContent = txt;
+    return n;
+  }
+
+  // ---------- Abrir la ficha que pide el enlace (#cep, #phalloides...) ----------
+  function fichaDeHash() {
+    var id = ''; try { id = decodeURIComponent((location.hash || '').slice(1)); } catch (e) { return null; }
+    if (!id) return null;
+    var x = document.getElementById(id);
+    if (!x) return null;
+    if (x.tagName === 'DETAILS') return x;
+    var d = x.closest('details');
+    if (d) return d;
+    var sig = x.nextElementSibling;   // alias de una ficha compartida (#pinetell → rovellons; #cepfosc y #cepestiu → ceps)
+    while (sig && sig.tagName === 'A') sig = sig.nextElementSibling;
+    return sig && sig.tagName === 'DETAILS' ? sig : null;
+  }
+  function abrirPorHash() {
+    var d = fichaDeHash();
+    if (!d) return;
+    d.classList.remove('hidden');
+    d.open = true;
+    setTimeout(function () { d.scrollIntoView({ block: 'start' }); }, 30);
+  }
+  window.addEventListener('hashchange', abrirPorHash);
+  document.addEventListener('click', function (ev) {
+    var a = ev.target.closest ? ev.target.closest('a.chip') : null;
+    if (a) setTimeout(abrirPorHash, 0);   // por si el enlace apunta a la misma ficha que ya estaba en la barra
+  });
+  abrirPorHash();
+
+  // ---------- Fotos (de fotos/creditos.json; si no hay, la guía queda sin fotos) ----------
+  function pintaFotos(cred) {
+    cards.forEach(function (card) {
+      var lista = cred[card.id];
+      if (!lista || !lista.length) return;
+      var thumb = card.querySelector('[data-thumb]');
+      var cont = card.querySelector('[data-fotos]');
+      lista.forEach(function (f, i) {
+        if (i === 0 && thumb) {
+          var t = new Image();
+          t.alt = '';
+          t.onload = function () { thumb.textContent = ''; thumb.appendChild(t); };
+          t.src = f.f;
+        }
+        if (!cont) return;
+        var fig = el('figure');
+        var im = new Image();
+        im.alt = f.sp || '';
+        im.onerror = function () { fig.parentNode && fig.parentNode.removeChild(fig); };
+        im.src = f.f;
+        fig.appendChild(im);
+        var cap = el('figcaption');
+        cap.appendChild(document.createTextNode((f.sp ? f.sp + ' · ' : '') + 'Foto: ' + (f.autor || 'desconocido') + ' · '));
+        if (f.pagina && /^https:\/\/commons\.wikimedia\.org\//.test(f.pagina)) {
+          var a = el('a', null, f.lic || 'licencia');
+          a.href = f.pagina; a.target = '_blank'; a.rel = 'noopener';
+          cap.appendChild(a);
+        } else {
+          cap.appendChild(document.createTextNode(f.lic || ''));
+        }
+        fig.appendChild(cap);
+        cont.appendChild(fig);
+      });
+    });
+  }
+  fetch('fotos/creditos.json').then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (c) { if (c) pintaFotos(c); }).catch(function () {});
+
+  // ---------- Buscar y filtrar ----------
+  var q = $('q');
   var tabs = document.querySelectorAll('.tab');
-  var cards = document.querySelectorAll('.card');
   var mode = 'all';
-  function norm(s) { return (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
   function apply() {
     var term = norm(q.value.trim());
     var shown = 0, shownP = 0, shownF = 0;
@@ -434,9 +603,9 @@ if ('serviceWorker' in navigator) {
       c.classList.toggle('hidden', !show);
       if (show) { shown++; if (kind === 'peligrosa') shownP++; else shownF++; }
     });
-    document.getElementById('sec-peligrosas').classList.toggle('hidden', shownP === 0);
-    document.getElementById('sec-fichas').classList.toggle('hidden', shownF === 0);
-    document.getElementById('empty').style.display = shown === 0 ? 'block' : 'none';
+    $('sec-peligrosas').classList.toggle('hidden', shownP === 0);
+    $('sec-fichas').classList.toggle('hidden', shownF === 0);
+    $('empty').style.display = shown === 0 ? 'block' : 'none';
   }
   q.addEventListener('input', apply);
   tabs.forEach(function (t) {
@@ -445,6 +614,130 @@ if ('serviceWorker' in navigator) {
       t.classList.add('on');
       mode = t.getAttribute('data-f');
       apply();
+    });
+  });
+
+  // ---------- Identificar con una foto ----------
+  var box = $('idres');
+  function token() {
+    try { return sessionStorage.getItem(TOKEN_KEY) || localStorage.getItem(TOKEN_KEY) || ''; } catch (e) { return ''; }
+  }
+  function mensaje(texto, error) {
+    var m = el('p', 'msg' + (error ? ' err' : ''), texto);
+    box.appendChild(m);
+    return m;
+  }
+  function reducir(file, lado) {
+    return new Promise(function (resolve, reject) {
+      var url = URL.createObjectURL(file);
+      var img = new Image();
+      img.onload = function () {
+        var k = Math.min(1, lado / Math.max(img.naturalWidth, img.naturalHeight));
+        var c = document.createElement('canvas');
+        c.width = Math.max(1, Math.round(img.naturalWidth * k));
+        c.height = Math.max(1, Math.round(img.naturalHeight * k));
+        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+        URL.revokeObjectURL(url);
+        resolve(c.toDataURL('image/jpeg', 0.82));
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); reject(new Error('No he podido leer la foto.')); };
+      img.src = url;
+    });
+  }
+  function lista(items) {
+    var u = el('ul');
+    items.forEach(function (t) { u.appendChild(el('li', null, t)); });
+    return u;
+  }
+  function pinta(res) {
+    if (res.se_ve_seta === false) {
+      mensaje('No parece que haya una seta en la foto. Prueba con otra, de cerca y con buena luz.', true);
+      return;
+    }
+    if (res.rasgos && res.rasgos.length) {
+      box.appendChild(el('h4', null, 'Lo que se ve en la foto'));
+      box.appendChild(lista(res.rasgos));
+    }
+    var cands = (res.candidatas || []).filter(function (c) { return porId[c.id]; });
+    if (!cands.length) {
+      mensaje('No veo una candidata clara entre las fichas. Mira las fichas por tu cuenta o prueba con otra foto (por debajo del sombrero y de la base del pie).');
+    } else {
+      box.appendChild(el('h4', null, 'Candidatas para comparar'));
+      cands.forEach(function (c) {
+        var card = porId[c.id];
+        var d = el('div', 'cand');
+        var nm = card.querySelector('.nm');
+        var cab = el('div', 'nm');
+        if (nm) cab.innerHTML = nm.innerHTML;
+        d.appendChild(cab);
+        var sci = card.querySelector('.ttl > .sci');
+        if (sci) d.appendChild(el('div', 'sci', sci.textContent));
+        if (c.motivo) d.appendChild(el('div', 'why', c.motivo));
+        card.querySelectorAll('.sec[data-res]').forEach(function (s) { d.appendChild(s.cloneNode(true)); });
+        var ab = el('a', 'chip', 'Abrir la ficha con fotos');
+        ab.href = '#' + card.id;
+        d.appendChild(ab);
+        box.appendChild(d);
+      });
+    }
+    if (res.falta_ver && res.falta_ver.length) {
+      box.appendChild(el('h4', null, 'Lo que la foto no enseña y hay que comprobar'));
+      box.appendChild(lista(res.falta_ver));
+    }
+    box.appendChild(el('p', 'aviso', 'Es una sugerencia automática de un modelo de IA general: puede equivocarse. Sirve para saber con qué fichas comparar, no para decidir.'));
+  }
+  function identificar(file) {
+    box.textContent = '';
+    if (!file) return;
+    if (!navigator.onLine) {
+      mensaje('Sin cobertura: la identificación por foto necesita internet. Usa las fichas y el método de 7 pasos.', true);
+      return;
+    }
+    var tk = token();
+    if (!tk) {
+      var m = el('p', 'msg err');
+      m.appendChild(document.createTextNode('Para identificar con foto entra primero en el '));
+      var a = el('a', null, 'predictor'); a.href = 'index.html';
+      m.appendChild(a);
+      m.appendChild(document.createTextNode(' (te pide el código del email) y vuelve aquí.'));
+      box.appendChild(m);
+      return;
+    }
+    reducir(file, 800).then(function (dataUrl) {
+      var pv = el('img', 'preview'); pv.src = dataUrl; pv.alt = 'Tu foto';
+      box.appendChild(pv);
+      var espera = mensaje('Analizando la foto… (puede tardar unos segundos)');
+      var ctl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+      var reloj = setTimeout(function () { if (ctl) ctl.abort(); }, 60000);
+      return fetch(WORKER + 'identify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Session-Token': tk },
+        body: JSON.stringify({ image: dataUrl }),
+        signal: ctl ? ctl.signal : undefined
+      }).then(function (r) {
+        clearTimeout(reloj);
+        return r.json().catch(function () { return {}; }).then(function (j) { return { status: r.status, json: j }; });
+      }).then(function (o) {
+        if (espera.parentNode) espera.parentNode.removeChild(espera);
+        if (o.status === 401) return mensaje('La sesión ha caducado: entra otra vez en el predictor y vuelve.', true);
+        if (o.status === 429 || o.status === 503 || o.status >= 400 || !o.json || !o.json.ok) {
+          return mensaje((o.json && o.json.error) || 'No se ha podido identificar ahora mismo. Inténtalo más tarde.', true);
+        }
+        pinta(o.json.resultado || {});
+      }).catch(function () {
+        if (espera.parentNode) espera.parentNode.removeChild(espera);
+        mensaje('No se ha podido contactar con el servidor (¿sin cobertura?). Inténtalo de nuevo.', true);
+      });
+    }).catch(function (err) {
+      mensaje(err && err.message ? err.message : 'No he podido leer la foto.', true);
+    });
+  }
+  ['foto-cam', 'foto-gal'].forEach(function (id) {
+    var inp = $(id);
+    inp.addEventListener('change', function () {
+      var f = inp.files && inp.files[0];
+      inp.value = '';
+      identificar(f);
     });
   });
 })();
