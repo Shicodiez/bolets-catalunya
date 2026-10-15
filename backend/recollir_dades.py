@@ -462,16 +462,117 @@ def load_or_build_zones():
 # ---------------------------------------------------------------------------
 SPECIES = [
     {"id": "rovellons",   "name": "Rovellons",           "scientific": ["Lactarius deliciosus", "Lactarius sanguifluus"],      "trees": ["pi_roig", "pi_negre", "pi_pinyer", "pi_blanc", "pi_altres"], "rain_days": [7, 15],  "temp_range": [4, 16],  "min_rain": 20},
-    {"id": "ceps",        "name": "Ceps",                 "scientific": ["Boletus edulis", "Boletus aereus", "Boletus pinophilus"], "trees": ["roure", "faig", "pi_roig", "pi_negre", "pi_altres"],        "rain_days": [8, 16],  "temp_range": [6, 18],  "min_rain": 25},
-    {"id": "camagrocs",   "name": "Camagrocs",            "scientific": ["Craterellus lutescens"],                              "trees": ["faig", "roure", "alzina"],                                  "rain_days": [10, 20], "temp_range": [6, 16],  "min_rain": 20},
+    {"id": "ceps",        "name": "Ceps",                 "scientific": ["Boletus edulis", "Boletus aereus", "Boletus pinophilus"], "trees": ["roure", "faig", "pi_roig", "pi_negre", "avet", "pi_altres"], "rain_days": [8, 16],  "temp_range": [6, 18],  "min_rain": 25},
+    {"id": "camagrocs",   "name": "Camagrocs",            "scientific": ["Craterellus lutescens"],                              "trees": ["faig", "roure", "pi_roig", "pi_negre", "pi_blanc", "pi_altres", "avet"], "rain_days": [10, 20], "temp_range": [6, 16],  "min_rain": 20},
     {"id": "trompetes",   "name": "Trompetes de la mort", "scientific": ["Craterellus cornucopioides"],                         "trees": ["faig", "roure"],                                            "rain_days": [10, 20], "temp_range": [5, 15],  "min_rain": 25},
-    {"id": "oureig",      "name": "Ou de reig",           "scientific": ["Amanita caesarea"],                                   "trees": ["alzina", "roure", "suro"],                                  "rain_days": [6, 14],  "temp_range": [10, 22], "min_rain": 18},
-    {"id": "rossinyols",  "name": "Rossinyols",           "scientific": ["Cantharellus cibarius"],                              "trees": ["faig", "roure", "pi_roig", "pi_altres"],                    "rain_days": [7, 16],  "temp_range": [6, 17],  "min_rain": 20},
-    {"id": "colmenilles", "name": "Colmenilles",          "scientific": ["Morchella esculenta", "Morchella elata"],             "trees": ["roure", "pi_blanc", "pi_altres"],                           "rain_days": [8, 18],  "temp_range": [2, 13],  "min_rain": 15},
-    {"id": "llengua",     "name": "Llengua de bou",       "scientific": ["Hydnum repandum"],                                    "trees": ["roure", "suro"],                                            "rain_days": [10, 20], "temp_range": [8, 18],  "min_rain": 20},
-    {"id": "pinetell",    "name": "Pinetell",             "scientific": ["Lactarius deliciosus"],                               "trees": ["pi_roig", "pi_negre", "pi_altres"],                         "rain_days": [7, 14],  "temp_range": [4, 15],  "min_rain": 20},
-    {"id": "fredolic",    "name": "Fredolic",             "scientific": ["Tricholoma terreum"],                                 "trees": ["pi_blanc", "alzina", "pi_altres"],                          "rain_days": [9, 18],  "temp_range": [3, 14],  "min_rain": 18},
+    {"id": "oureig",      "name": "Ou de reig",           "scientific": ["Amanita caesarea"],                                   "trees": ["alzina", "roure", "suro"],                                  "rain_days": [15, 20], "temp_range": [12, 22], "min_rain": 18},
+    {"id": "rossinyols",  "name": "Rossinyols",           "scientific": ["Cantharellus cibarius"],                              "trees": ["faig", "roure", "pi_roig", "pi_negre", "avet", "pi_altres"], "rain_days": [7, 16],  "temp_range": [6, 17],  "min_rain": 20},
+    {"id": "colmenilles", "name": "Colmenilles",          "scientific": ["Morchella esculenta", "Morchella elata"],             "trees": ["roure", "pi_blanc", "pi_roig", "pi_negre", "pi_altres"], "rain_days": [8, 18],  "temp_range": [2, 13],  "min_rain": 15},
+    {"id": "llengua",     "name": "Llengua de bou",       "scientific": ["Hydnum repandum"],                                    "trees": ["roure", "faig", "suro"],                                    "rain_days": [10, 20], "temp_range": [8, 18],  "min_rain": 20},
+    {"id": "pinetell",    "name": "Pinetell",             "scientific": ["Lactarius deliciosus"],                               "trees": ["pi_roig", "pi_negre", "pi_pinyer", "pi_blanc", "pi_altres"], "rain_days": [7, 14],  "temp_range": [4, 15],  "min_rain": 20},
+    {"id": "fredolic",    "name": "Fredolic",             "scientific": ["Tricholoma terreum"],                                 "trees": ["pi_blanc", "pi_roig", "pi_negre", "pi_pinyer", "alzina", "pi_altres"], "rain_days": [9, 18],  "temp_range": [3, 14],  "min_rain": 18},
 ]
+
+# ---------------------------------------------------------------------------
+# 2b. PERFIL BIOLÒGIC PER ESPÈCIE (LIMITANTS DURS)
+# ---------------------------------------------------------------------------
+# Fins ara la puntuació era una SUMA de factors: una espècie podia superar el
+# llindar (70) encara que fallés el més important. Casos reals detectats el
+# 15/10/2026 amb dades de producció:
+#   - Ou de reig a Montnegre amb 88-92 punts només 7 dies després de la
+#     pluja, quan triga 15-20 dies i necessita calor.
+#   - Ou de reig a Matadepera / Sant Llorenç (conglomerats amb ciment
+#     calcari) classificat com a sòl "silici" i amb la geologia pesant ±1.5
+#     punts sobre 100.
+#   - Ou de reig fins a 1.986 m i colmenilles (bolet de primavera) amb 71
+#     punts a l'octubre.
+# Ara, a més de la suma d'evidència, cada espècie té LIMITANTS que
+# MULTIPLIQUEN el resultat (valors 0-1): moment respecte a la pluja
+# principal, època de l'any, altitud, calor i geologia. Si un limitant és
+# 0.3, la puntuació no pot passar de 30 per bones que siguin les altres
+# condicions — com al bosc: un ou de reig no surt si encara és massa aviat,
+# o si fa massa fred, o en un sòl calcari, encara que hagi plogut molt.
+#
+# Els punts de cada corba són (valor, multiplicador) amb interpolació lineal.
+# Fonts: bolets.com, Associació Boletaire Independent, sporas.io,
+# Enciclopèdia Catalana, GBIF/FungaCAT i observacions de camp de l'usuari
+# (Ou de reig: 15-20 dies després de la pluja, necessita calor). Són valors
+# de partida calibrables: si les sortides reals (hallazgos) els contradiuen,
+# aquest és l'únic lloc on cal tocar.
+SPECIES_BIO = {
+    "oureig": {
+        # dies des de la PLUJA PRINCIPAL (no des de l'últim ruixat)
+        "timing": [(4, 0.05), (8, 0.25), (12, 0.65), (15, 1.0), (21, 1.0), (28, 0.65), (38, 0.25), (50, 0.10)],
+        # gairebé no passa de 1.000 m (ocasionalment fins a 1.400)
+        "alt": [(0, 1.0), (800, 1.0), (1000, 0.45), (1150, 0.15), (1300, 0.0)],
+        # termòfil: mínimes nocturnes i màximes diürnes dels darrers 7 dies
+        "heat": {"tmin": [(6, 0.0), (9, 0.45), (11, 0.85), (12, 1.0)],
+                 "tmax": [(13, 0.0), (17, 0.45), (20, 0.85), (22, 1.0)]},
+        # acidòfil (pH 4-6, pissarres/granits): molt rar en sòls calcaris
+        "soil": {"silici": 1.0, "silici_prov": 0.85, "mixt": 0.60, "calcari": 0.12, None: 0.85},
+        "season_manual": ((8, 5), (10, 31)),
+    },
+    "rovellons": {
+        "alt": [(0, 0.8), (200, 1.0), (1700, 1.0), (2000, 0.35), (2250, 0.0)],
+        "season_manual": ((9, 15), (12, 15)),
+    },
+    "ceps": {
+        "alt": [(0, 0.8), (250, 1.0), (1700, 1.0), (2000, 0.40), (2300, 0.0)],
+        "soil": {"silici": 1.0, "silici_prov": 1.0, "mixt": 0.97, "calcari": 0.90, None: 0.97},
+        "season_manual": ((6, 15), (11, 30)),
+    },
+    "camagrocs": {
+        "alt": [(0, 0.30), (300, 0.65), (600, 1.0), (1700, 1.0), (2000, 0.40), (2300, 0.0)],
+        "soil": {"calcari": 1.0, "mixt": 1.0, "silici": 0.85, "silici_prov": 0.90, None: 0.95},
+        "season_manual": ((9, 10), (1, 5)),
+    },
+    "trompetes": {
+        "alt": [(0, 0.20), (300, 0.60), (500, 1.0), (1500, 1.0), (1800, 0.40), (2100, 0.0)],
+        "season_manual": ((9, 15), (12, 20)),
+    },
+    "rossinyols": {
+        "alt": [(0, 0.70), (300, 1.0), (1800, 1.0), (2100, 0.40), (2400, 0.0)],
+        "season_manual": ((6, 10), (11, 10)),
+    },
+    "colmenilles": {
+        "alt": [(0, 0.90), (200, 1.0), (1600, 1.0), (1900, 0.40), (2200, 0.0)],
+        "season_manual": ((3, 5), (5, 31)),
+    },
+    "llengua": {
+        "alt": [(0, 0.70), (300, 1.0), (1600, 1.0), (1900, 0.40), (2200, 0.0)],
+        "season_manual": ((8, 20), (12, 20)),
+    },
+    "pinetell": {
+        "alt": [(0, 0.80), (200, 1.0), (1700, 1.0), (2000, 0.40), (2250, 0.0)],
+        "season_manual": ((9, 25), (12, 15)),
+    },
+    "fredolic": {
+        # bolet tardà de terra baixa (fins poc abans de Nadal)
+        "alt": [(0, 1.0), (900, 1.0), (1300, 0.50), (1700, 0.15), (2000, 0.0)],
+        "season_manual": ((10, 1), (12, 31)),
+    },
+}
+
+# Corba de moment per defecte (derivada de rain_days de cada espècie) per a
+# les espècies sense "timing" propi: pocs dies després de la pluja encara no
+# han sortit; molts dies després la tanda s'està acabant.
+def default_timing_curve(rain_days):
+    lo, hi = rain_days
+    return [(max(1, lo - 6), 0.15), (max(2, lo - 3), 0.60), (lo, 1.0), (hi, 1.0), (hi + 8, 0.55), (hi + 20, 0.20)]
+
+
+def interp_curve(points, x):
+    """Interpolació lineal sobre una llista de (x, y) ordenada per x;
+    fora dels extrems es manté el valor de l'extrem."""
+    if x <= points[0][0]:
+        return points[0][1]
+    for (x0, y0), (x1, y1) in zip(points, points[1:]):
+        if x <= x1:
+            if x1 == x0:
+                return y1
+            return y0 + (y1 - y0) * (x - x0) / (x1 - x0)
+    return points[-1][1]
+
 
 TREE_LABELS = {
     "pi_roig": "pinar de pino rojo", "pi_negre": "pinar de pino negro", "avet": "abetal",
@@ -481,6 +582,14 @@ TREE_LABELS = {
     "faig": "hayedo", "suro": "alcornocal", "mixt": "bosque mixto",
     "matollar": "matorral", "prat": "prado/pastizal", "desconegut": "tipo de bosque desconocido",
 }
+
+# IMPORTANT (llistes "trees" de SPECIES): una espècie només puntua en un punt
+# si el seu tipus d'arbre és a la llista. Quan VEGETACIO afina un "pi_altres"
+# a pi_roig / pi_negre / pi_blanc / pi_pinyer / avet, un "roure" a faig o un
+# "alzina" a suro, el punt deixa de ser el genèric. Per no perdre espècies que
+# sí hi creixen, cada llista inclou els fills del genèric on l'espècie
+# realment es fa (p. ex. cep i rossinyol també a l'abetar; llengua de bou a la
+# fageda; pinetell i fredolic a qualsevol pineda). Prova a tests/test_model.py.
 
 # Mapa de tipus de bosc CONFIRMATS com a no forestals (mai assignem cap espècie).
 # "desconegut" NO hi és inclòs a propòsit: significa "encara no s'ha pogut
@@ -784,12 +893,24 @@ def fetch_weather_rotating(zones):
             continue  # placeholder buit d'un lot fallat — no es desa, es reintenta la propera
         daily = raw.get("daily", {})
         hourly = raw.get("hourly", {})
+        key = cell_key(z["lat"], z["lon"])
         rain_10d, avg_temp, min_temp, days_since_rain = compute_rain_stats(daily)
         soil_stats = compute_soil_moisture_stats(hourly)
-        cache[cell_key(z["lat"], z["lon"])] = {
+        entry = {
             "rain_10d": rain_10d, "avg_temp": avg_temp, "min_temp": min_temp,
             "days_since_rain": days_since_rain, "soil_stats": soil_stats,
         }
+        # Sèrie diària pròpia (veure "3b"): fusiona els 16 dies nous amb els
+        # que el punt ja tenia, fins a SERIES_MAX_DAYS.
+        series = merge_daily_series((cache.get(key) or {}).get("series"), daily)
+        if series:
+            entry["series"] = series
+        cache[key] = entry
+
+    # La graella pot haver canviat (p. ex. en eliminar punts duplicats):
+    # no s'arrosseguen entrades de punts que ja no existeixen.
+    valid_keys = {cell_key(z["lat"], z["lon"]) for z in zones}
+    cache = {k: v for k, v in cache.items() if k in valid_keys}
     save_weather_block_cache(cache)
 
     next_block = (current_block + 1) % WEATHER_N_BLOCKS
@@ -945,6 +1066,200 @@ def compute_days_since_rain_episode_start(precip):
         i -= 1
 
     return max(1, days_counted)
+
+
+# ---------------------------------------------------------------------------
+# 3b. SÈRIE DIÀRIA PRÒPIA I ESDEVENIMENTS DE PLUJA
+# ---------------------------------------------------------------------------
+# Problemes reals detectats el 15/10/2026 comparant amb estacions:
+#
+# 1) El "temps des de la pluja" es comptava des de l'ÚLTIM dia amb >= 5 mm.
+#    El 4/10 van caure ~170 mm a Montnegre i ~100 mm a Castellar/Matadepera
+#    (Meteoclimatic), però un ruixat de 3-7 mm el dia 8 reiniciava el rellotge
+#    i el model deia "fa 7 dies" quan la pluja forta era de fa 11. Ara es
+#    detecten ESDEVENIMENTS de pluja (tandes de dies plujosos amb buits
+#    curts) i es data cada un pel dia en què havia caigut la meitat de
+#    l'aigua (el "gruix" de la remullada), no pel primer ni l'últim dia.
+#
+# 2) Open-Meteo només dona 16 dies d'històric, però espècies com l'ou de
+#    reig (15-20 dies) o els camagrocs/trompetes (fins a 20) necessiten
+#    veure més enrere. Demanar 30+ dies a Open-Meteo multiplica el cost de
+#    cada crida (el servei gratuït ja s'havia saturat), així que en comptes
+#    d'això cada punt acumula la seva PRÒPIA sèrie diària (pluja, màx i mín)
+#    fusionant cada refresc de 16 dies amb el que ja tenia, fins a 45 dies.
+#    Els primers dies després de desplegar-ho només hi haurà els 16 dies
+#    habituals; la memòria va creixent sola.
+SERIES_MAX_DAYS = 45
+RAIN_WET_DAY_MM = 2.0        # dia "plujós" (per agrupar esdeveniments)
+RAIN_EVENT_GAP_DAYS = 4      # fins a 4 dies secs seguits dins del mateix esdeveniment
+RAIN_EVENT_MIN_MM = 8.0      # menys d'això no és una remullada rellevant
+NO_EVENT_DAYS = 20           # sentinella heretada: "cap pluja rellevant visible"
+
+
+def today_madrid():
+    """Data d'avui a Catalunya (Open-Meteo dona els dies en Europe/Madrid;
+    el servidor de GitHub va en UTC, que pot anar 1-2h per darrere)."""
+    try:
+        from zoneinfo import ZoneInfo
+        return datetime.now(ZoneInfo("Europe/Madrid")).date()
+    except Exception:
+        return (datetime.now(timezone.utc) + timedelta(hours=2)).date()
+
+
+def _round1(v):
+    return None if v is None else round(float(v), 1)
+
+
+def merge_daily_series(old_series, daily):
+    """Fusiona la sèrie diària ja guardada d'un punt amb el bloc 'daily'
+    acabat de rebre d'Open-Meteo (els valors nous manen sobre els vells).
+    Retorna {"d0": "YYYY-MM-DD", "p": [...], "x": [...], "n": [...]}:
+    pluja (mm), temperatura màxima i mínima diàries, dies consecutius, amb
+    None quan no hi ha dada, com a molt SERIES_MAX_DAYS dies."""
+    by_date = {}
+    if old_series and old_series.get("d0"):
+        try:
+            d0 = datetime.fromisoformat(old_series["d0"]).date()
+            for i, (p, x, n) in enumerate(zip(old_series["p"], old_series["x"], old_series["n"])):
+                by_date[d0 + timedelta(days=i)] = (p, x, n)
+        except (ValueError, KeyError, TypeError):
+            by_date = {}
+
+    times = (daily or {}).get("time") or []
+    prec = (daily or {}).get("precipitation_sum") or []
+    tmax = (daily or {}).get("temperature_2m_max") or []
+    tmin = (daily or {}).get("temperature_2m_min") or []
+    for i, t in enumerate(times):
+        try:
+            d = datetime.fromisoformat(t).date()
+        except (ValueError, TypeError):
+            continue
+        new = (
+            _round1(prec[i]) if i < len(prec) else None,
+            _round1(tmax[i]) if i < len(tmax) else None,
+            _round1(tmin[i]) if i < len(tmin) else None,
+        )
+        if all(v is None for v in new):
+            continue  # no s'esborra una dada bona amb un forat nou
+        by_date[d] = new
+
+    if not by_date:
+        return old_series
+    last = max(by_date)
+    first = max(min(by_date), last - timedelta(days=SERIES_MAX_DAYS - 1))
+    p_list, x_list, n_list = [], [], []
+    d = first
+    while d <= last:
+        p, x, n = by_date.get(d, (None, None, None))
+        p_list.append(p); x_list.append(x); n_list.append(n)
+        d += timedelta(days=1)
+    return {"d0": first.isoformat(), "p": p_list, "x": x_list, "n": n_list}
+
+
+def detect_rain_events(precip):
+    """
+    Detecta esdeveniments de pluja a una llista de mm/dia en ordre
+    cronològic on l'ÚLTIM element és AHIR. Un esdeveniment és un grup de dies
+    plujosos (>= RAIN_WET_DAY_MM) amb com a molt RAIN_EVENT_GAP_DAYS dies
+    secs seguits entre ells; es descarten els de menys de RAIN_EVENT_MIN_MM.
+
+    Per a cada un retorna (més antic primer):
+    - age_start / age_end: dies des del primer / últim dia plujós fins avui
+      (ahir = 1)
+    - age_mid: dies des del dia en què ja havia caigut la meitat de l'aigua
+      (el "gruix" de la remullada; és la referència per a la fructificació)
+    - mm: pluja de l'esdeveniment; mm_since: pluja des de l'inici fins ahir
+      (inclou ruixats lleus posteriors)
+    """
+    vals = [(p or 0.0) for p in precip]
+    n = len(vals)
+    wet_idx = [i for i, v in enumerate(vals) if v >= RAIN_WET_DAY_MM]
+    groups = []
+    for i in wet_idx:
+        if groups and i - groups[-1][1] - 1 <= RAIN_EVENT_GAP_DAYS:
+            groups[-1][1] = i
+        else:
+            groups.append([i, i])
+    events = []
+    for s, e in groups:
+        mm = sum(vals[s:e + 1])
+        if mm < RAIN_EVENT_MIN_MM:
+            continue
+        half, cum, mid = mm / 2.0, 0.0, s
+        for i in range(s, e + 1):
+            cum += vals[i]
+            if cum >= half:
+                mid = i
+                break
+        events.append({
+            "age_start": n - s, "age_end": n - e, "age_mid": n - mid,
+            "mm": round(mm, 1), "mm_since": round(sum(vals[s:]), 1),
+        })
+    return events
+
+
+def derive_weather_view(entry, today=None):
+    """
+    A partir de l'entrada del cache de blocs d'un punt retorna el que necessita
+    el scoring, calculat sempre amb la DATA D'AVUI (no amb la del moment del
+    refresc, que pot tenir fins a 12h):
+    - events: esdeveniments de pluja (veure detect_rain_events)
+    - tmin_7d / tmax_7d: mitjana de mínimes i màximes dels darrers 7 dies
+    - rain_10d / days_since_rain / min_temp / avg_temp: camps heretats que la
+      web mostra (rain_10d = pluja des de l'inici de l'últim esdeveniment;
+      days_since_rain = dies des del gruix d'aquest esdeveniment)
+    - has_series: False si el punt encara no té sèrie pròpia (primeres
+      execucions després d'actualitzar): llavors es fa servir el resum antic.
+    """
+    today = today or today_madrid()
+    series = (entry or {}).get("series")
+    legacy = {
+        "rain_10d": (entry or {}).get("rain_10d", 0),
+        "avg_temp": (entry or {}).get("avg_temp", 0),
+        "min_temp": (entry or {}).get("min_temp", 0),
+        "days_since_rain": (entry or {}).get("days_since_rain", NO_EVENT_DAYS),
+        "soil_stats": (entry or {}).get("soil_stats"),
+    }
+    if not series or not series.get("d0"):
+        view = dict(legacy)
+        view.update({"events": None, "tmin_7d": None, "tmax_7d": None, "has_series": False})
+        return view
+
+    try:
+        d0 = datetime.fromisoformat(series["d0"]).date()
+    except (ValueError, TypeError):
+        view = dict(legacy)
+        view.update({"events": None, "tmin_7d": None, "tmax_7d": None, "has_series": False})
+        return view
+
+    # Només dies COMPLETS (fins ahir): el d'avui és parcial / previsió.
+    n_days = (today - d0).days            # nombre de dies des de d0 fins ahir
+    n_days = max(0, n_days)
+    p, x, n = series["p"], series["x"], series["n"]
+    precip = [(p[i] if i < len(p) else None) for i in range(n_days)]
+    tmax_l = [(x[i] if i < len(x) else None) for i in range(n_days)]
+    tmin_l = [(n[i] if i < len(n) else None) for i in range(n_days)]
+
+    events = detect_rain_events(precip)
+
+    def avg_last(lst, k):
+        vals = [v for v in lst[-k:] if v is not None]
+        return round(sum(vals) / len(vals), 1) if vals else None
+
+    tmin_7d, tmax_7d = avg_last(tmin_l, 7), avg_last(tmax_l, 7)
+    view = dict(legacy)
+    if events:
+        last = events[-1]
+        view["days_since_rain"] = last["age_mid"]
+        view["rain_10d"] = round(last["mm_since"])
+    else:
+        view["days_since_rain"] = NO_EVENT_DAYS
+        view["rain_10d"] = round(sum((v or 0.0) for v in precip[-10:]))
+    if tmin_7d is not None and tmax_7d is not None:
+        view["min_temp"] = round(tmin_7d)
+        view["avg_temp"] = round((tmin_7d + tmax_7d) / 2)
+    view.update({"events": events, "tmin_7d": tmin_7d, "tmax_7d": tmax_7d, "has_series": True})
+    return view
 
 
 # ---------------------------------------------------------------------------
@@ -1555,77 +1870,226 @@ def fetch_all_tree_types(zones, layer_name, delay=0.05, max_total_seconds=280):
 # 6. SCORING
 # ---------------------------------------------------------------------------
 
-def species_score(sp, rain_10d, min_temp, tree, days_since_rain, alt, month, aemet_rain_1h=None, mc_rain_today=None, gbif_distributions=None, triangulation=None, soil_stats=None, radar_value=None, geologia=None):
-    """
-    Sistema de puntuació 0-100 per evidència acumulada, no tot-o-res. Cada
-    factor suma punts segons com d'a prop està del rang òptim (amb tolerància
-    als marges, no un tall sec), i s'hi afegeixen factors climàtics/geogràfics
-    que no depenen només de la lectura meteorològica exacta d'un dia concret.
+def _rain_component(ratio):
+    """Puntuació de pluja (0-22) segons ratio = pluja / pluja mínima de l'espècie."""
+    if ratio >= 1:
+        return 22.0
+    if ratio >= 0.7:
+        return 22 * ((ratio - 0.7) / 0.3) * 0.6 + 9
+    if ratio >= 0.4:
+        return 9 * ((ratio - 0.4) / 0.3)
+    return 0.0
 
-    Retorna 0 si l'hàbitat és incompatible (això sí és un requisit dur —
-    un rovelló no surt sota una alzina, per molt bones que siguin la resta
-    de condicions). La resta de factors són graduals.
+
+def _days_component(sp, days):
+    """Puntuació de dies des de la pluja principal (0-25), amb marges tous."""
+    lo, hi = sp["rain_days"]
+    if lo <= days <= hi:
+        return 25.0
+    mid = (lo + hi) / 2
+    dist = abs(days - mid) - (hi - lo) / 2
+    return max(0.0, 25 - (dist / 5) * 12)
+
+
+def _day_of_year_pair(month, day):
+    return month * 31 + day  # ordre cronològic suficient per comparar (no és un dia de l'any real)
+
+
+def season_multiplier(sp, today, gbif_data=None):
+    """
+    Limitant d'ÈPOCA (0.03-1). Fa servir la distribució mensual REAL de
+    registres GBIF/FungaCAT si n'hi ha prou (>= 15); si no, la finestra
+    manual de SPECIES_BIO. Amb GBIF s'interpola entre els centres de mes per
+    dia (el 31 d'octubre ja és mig camí cap al novembre), i es compara amb el
+    mes de màxim: un mes amb >= 50% del màxim compta com a plena temporada.
+    Retorna (multiplicador, text o None).
+    """
+    counts = None
+    if gbif_data:
+        raw = gbif_data.get("month_counts") or {}
+        counts = {m: (raw.get(m, 0) or raw.get(str(m), 0) or 0) for m in range(1, 13)}
+        if sum(counts.values()) < 15:
+            counts = None
+
+    if counts:
+        peak = max(counts.values()) or 1
+        m, d = today.month, today.day
+        # interpolació entre centres de mes (dia 15)
+        if d >= 15:
+            m2 = 1 if m == 12 else m + 1
+            frac = (d - 15) / 30.0
+        else:
+            m2 = 12 if m == 1 else m - 1
+            frac = (15 - d) / 30.0
+        value = counts[m] * (1 - frac) + counts[m2] * frac
+        ratio = value / peak
+        mult = max(0.03, min(1.0, ratio / 0.5))
+    else:
+        bio = SPECIES_BIO.get(sp["id"], {})
+        window = bio.get("season_manual")
+        if not window:
+            return 1.0, None
+        start, end = _day_of_year_pair(*window[0]), _day_of_year_pair(*window[1])
+        now = _day_of_year_pair(today.month, today.day)
+        inside = (start <= now <= end) if start <= end else (now >= start or now <= end)
+        if inside:
+            mult = 1.0
+        else:
+            # marge de ~15 dies a cada banda amb caiguda lineal
+            def gap(a, b):
+                return abs(a - b) if abs(a - b) < 200 else 372 - abs(a - b)
+            dist = min(gap(now, start), gap(now, end))
+            mult = max(0.05, 1.0 - dist / 15.0 * 0.8)
+    text = None
+    if mult < 0.9:
+        text = "Fuera de su época habitual" if mult < 0.5 else "Cerca del final (o del inicio) de su época"
+    return mult, text
+
+
+def timing_multiplier(sp, age):
+    """Limitant de MOMENT: dies des de la pluja principal respecte al que
+    necessita l'espècie. Retorna (multiplicador, text o None)."""
+    bio = SPECIES_BIO.get(sp["id"], {})
+    curve = bio.get("timing") or default_timing_curve(sp["rain_days"])
+    mult = interp_curve(curve, age)
+    lo, hi = sp["rain_days"]
+    text = None
+    if mult < 0.9:
+        if age < lo:
+            text = f"Aún pronto: la lluvia principal fue hace {age} días y suele salir a los {lo}-{hi} días"
+        else:
+            text = f"La lluvia principal fue hace {age} días; lo habitual es {lo}-{hi}, la tanda puede estar acabando"
+    return mult, text
+
+
+def altitude_multiplier(sp, alt):
+    bio = SPECIES_BIO.get(sp["id"], {})
+    curve = bio.get("alt")
+    if not curve:
+        return 1.0, None
+    mult = interp_curve(curve, alt)
+    text = None
+    if mult < 0.9:
+        text = f"Altitud poco habitual para esta especie ({int(alt)} m)"
+    return mult, text
+
+
+def heat_multiplier(sp, tmin, tmax):
+    """Limitant de CALOR per a espècies termòfiles (ou de reig). tmin/tmax:
+    mitjana dels darrers 7 dies. Si no hi ha tmax es dedueix de la mitjana."""
+    heat = SPECIES_BIO.get(sp["id"], {}).get("heat")
+    if not heat or tmin is None:
+        return 1.0, None
+    m_min = interp_curve(heat["tmin"], tmin)
+    m_max = interp_curve(heat["tmax"], tmax) if tmax is not None else 1.0
+    mult = min(m_min, m_max)
+    text = None
+    if mult < 0.9:
+        t_full_min, t_full_max = heat["tmin"][-1][0], heat["tmax"][-1][0]
+        mx = f"{tmax:.0f}" if tmax is not None else "?"
+        intro = "Demasiado fresco" if mult < 0.7 else "Algo justo de calor"
+        text = (f"{intro} para esta especie, que necesita calor "
+                f"(últimos 7 días: mínimas {tmin:.0f}°C y máximas {mx}°C; "
+                f"lo ideal es ≥{t_full_min}°C y ≥{t_full_max}°C)")
+    return mult, text
+
+
+def soil_multiplier(sp, geologia):
+    soil = SPECIES_BIO.get(sp["id"], {}).get("soil")
+    if not soil:
+        return 1.0, None
+    mult = soil.get(geologia, soil.get(None, 1.0))
+    text = None
+    if mult < 0.9:
+        if geologia == "calcari":
+            text = "Suelo calcáreo: poco favorable para esta especie"
+        elif geologia in ("mixt",):
+            text = "Geología mixta o de cemento calcáreo: poco favorable para esta especie"
+        elif geologia in ("silici_prov",):
+            text = "Geología aún por confirmar"
+        elif geologia is None:
+            text = "Geología sin clasificar: no se puede confirmar el tipo de suelo"
+        elif geologia == "silici":
+            text = None
+    return mult, text
+
+
+def species_score(sp, rain_10d, min_temp, tree, days_since_rain, alt, month, aemet_rain_1h=None, mc_rain_today=None, gbif_distributions=None, triangulation=None, soil_stats=None, radar_value=None, geologia=None, wx=None, today=None):
+    """
+    Sistema de puntuació 0-100 per evidència acumulada MÉS limitants
+    biològics que la multipliquen (veure SPECIES_BIO): moment respecte a la
+    pluja principal, època, altitud, calor i geologia. Cada factor suma
+    punts segons com d'a prop està del rang òptim (amb tolerància als
+    marges), i després els limitants poden reduir el total — una espècie no
+    pot sortir "probable" només perquè la pluja i la temperatura vagin bé
+    si encara és massa aviat, o massa a dalt, o en un sòl que no li va.
+
+    Retorna 0 si l'hàbitat és incompatible (requisit dur: un rovelló no surt
+    sota una alzina). Retorna (puntuació, desglossament, confiança, limitants)
+    on 'limitants' és una llista de textos curts (castellà, per a la web)
+    amb el que frena la puntuació.
+
+    'wx' (opcional): vista meteorològica de derive_weather_view amb els
+    esdeveniments de pluja i les temperatures dels darrers 7 dies. Si no hi
+    és (punts sense sèrie pròpia encara), s'usen els valors resumits.
     """
     if tree not in sp["trees"]:
-        return 0, {}, "baja"
+        return 0, {}, "baja", []
 
+    today = today or today_madrid()
     breakdown = {}
+    limits = []
     score = 0.0
 
-    # --- Pluja acumulada (0-22 punts, amb tolerància) ---
-    # Es redueix respecte al disseny anterior (0-30) perquè ara la humitat
-    # real del sòl (component nou, més avall) recull part d'aquesta
-    # evidència de forma més directa quan hi ha dada disponible.
-    min_rain = sp["min_rain"]
-    ratio = rain_10d / min_rain if min_rain else 1
-    if ratio >= 1:
-        rain_score = 22
-    elif ratio >= 0.7:
-        rain_score = 22 * ((ratio - 0.7) / 0.3) * 0.6 + 9
-    elif ratio >= 0.4:
-        rain_score = 9 * ((ratio - 0.4) / 0.3)
+    # --- Esdeveniment de pluja determinant ---
+    # Candidats: tots els esdeveniments rellevants dels darrers dies. Se'n
+    # tria el que millor encaixa amb l'espècie (pluja suficient i moment
+    # adequat). Sense sèrie pròpia: l'únic esdeveniment és el del resum.
+    if wx and wx.get("events") is not None:
+        candidates = [(e["age_mid"], e["mm_since"]) for e in wx["events"]]
+    elif days_since_rain is not None and days_since_rain < NO_EVENT_DAYS:
+        candidates = [(days_since_rain, rain_10d)]
     else:
-        rain_score = 0
+        candidates = []
+
+    min_rain = sp["min_rain"]
+    best = None
+    for age, mm in candidates:
+        r = _rain_component(mm / min_rain if min_rain else 1)
+        d = _days_component(sp, age)
+        t_mult, _ = timing_multiplier(sp, age)
+        fitness = (r + d) * t_mult
+        if best is None or fitness > best[0]:
+            best = (fitness, age, mm, r, d)
+
+    if best is None:
+        rain_score, days_score, event_age, event_mm = 0.0, 0.0, None, rain_10d
+    else:
+        _, event_age, event_mm, rain_score, days_score = best
+
     breakdown["pluja"] = round(rain_score, 1)
     score += rain_score
-
-    # --- Dies des de la pluja (0-25 punts, amb marges tous) ---
-    lo, hi = sp["rain_days"]
-    if lo <= days_since_rain <= hi:
-        days_score = 25
-    else:
-        mid = (lo + hi) / 2
-        span = (hi - lo) / 2 + 5  # marge de tolerància més enllà del rang
-        dist = abs(days_since_rain - mid) - (hi - lo) / 2
-        days_score = max(0, 25 - (dist / 5) * 12)
     breakdown["dies_pluja"] = round(days_score, 1)
     score += days_score
 
     # --- Temperatura mínima (0-20 punts, amb marges tous) ---
+    tmin_now = wx.get("tmin_7d") if wx and wx.get("tmin_7d") is not None else min_temp
+    tmax_now = wx.get("tmax_7d") if wx and wx.get("tmax_7d") is not None else None
     tlo, thi = sp["temp_range"]
-    if tlo <= min_temp <= thi:
+    if tlo <= tmin_now <= thi:
         temp_score = 20
     else:
         tmid = (tlo + thi) / 2
-        dist = abs(min_temp - tmid) - (thi - tlo) / 2
+        dist = abs(tmin_now - tmid) - (thi - tlo) / 2
         temp_score = max(0, 20 - (dist / 3) * 10)
     breakdown["temperatura"] = round(temp_score, 1)
     score += temp_score
 
-    # --- Humitat real del sòl (0-8 punts) — distingeix "pluja que ha quedat
-    # al sòl" de "pluja que se l'ha begut la terra ressecada o l'ha perdut
-    # l'evapotranspiració". Nomes s'aplica si hi ha dada (Open-Meteo pot no
-    # donar-la per a tots els punts); si no n'hi ha, aquests punts es
-    # reparteixen proporcionalment entre els altres components perquè el
-    # total segueixi sent 100 com a màxim teòric.
+    # --- Humitat real del sòl (0-8 punts) ---
     soil_score = 0
     if soil_stats and soil_stats.get("soil_moisture_avg_7d") is not None:
         moisture = soil_stats["soil_moisture_avg_7d"]
         trend = soil_stats.get("soil_moisture_trend") or 0
-        # Llindars orientatius: per sobre de 0.30 m³/m³ el sòl sol estar prou
-        # humit per a la majoria de sòls forestals catalans; per sota de 0.15
-        # sol estar sec. S'hi suma un petit bonus si la tendència és a l'alça
-        # (el sòl s'està humitejant, no només "ja ho estava").
         if moisture >= 0.30:
             soil_score = 8
         elif moisture >= 0.15:
@@ -1636,11 +2100,6 @@ def species_score(sp, rain_10d, min_temp, tree, days_since_rain, alt, month, aem
             soil_score = min(8, soil_score + 1.5)
         elif trend < -0.02:
             soil_score = max(0, soil_score - 1.5)
-        # Humitat relativa de l'aire (complementa la del sòl, no la
-        # substitueix): un aire molt sec pot ressecar la capa més
-        # superficial i el barret del bolet encara que el sòl profund
-        # segueixi humit — petit ajust dins del mateix component, no un de
-        # nou, perquè el total de 100 punts no es descompensi.
         air_humidity = soil_stats.get("air_humidity_avg_3d")
         if air_humidity is not None:
             if air_humidity < 50:
@@ -1651,29 +2110,11 @@ def species_score(sp, rain_10d, min_temp, tree, days_since_rain, alt, month, aem
     score += soil_score
 
     # --- Climatologia de temporada per altitud (0-15 punts) ---
-    # Coneixement micològic establert: cada espècie té una temporada més
-    # probable segons l'altitud, independentment del detall exacte del dia.
     season_score = seasonal_climate_score(sp, alt, month, gbif_distributions)
-    # Ajust petit i honest per geologia del sòl (silici/calcari): només per
-    # a les espècies amb evidència clara i consistent trobada (ceps i ou de
-    # reig prefereixen sòl silici; camagrocs prefereix calcari). Per a la
-    # resta d'espècies, o si no hi ha dada de geologia, no s'aplica cap
-    # ajust — millor no ajustar que inventar una preferència dubtosa.
-    preferred_soil = SPECIES_SOIL_PREFERENCE.get(sp["id"])
-    if preferred_soil and geologia:
-        if geologia == preferred_soil:
-            season_score = min(15, season_score + 1.5)
-        elif geologia not in ("mixt", None):
-            season_score = max(0, season_score - 1.5)
     breakdown["temporada"] = round(season_score, 1)
     score += season_score
 
     # --- Corroboració entre fonts (0-10 punts bonus) ---
-    # El radar dona cobertura de superfície directa del propi punt (no d'una
-    # estació propera), així que és la senyal més fiable quan hi és
-    # disponible — detecta tempestes molt localitzades que cap estació
-    # puntual pot haver captat. Si no hi ha radar, es fa servir la
-    # triangulació d'estacions com abans.
     corrob_score = 0
     if radar_value is not None and radar_value >= 3:
         corrob_score = 10
@@ -1692,10 +2133,35 @@ def species_score(sp, rain_10d, min_temp, tree, days_since_rain, alt, month, aem
     breakdown["corroboracio"] = corrob_score
     score += corrob_score
 
-    final_score = max(0, min(100, round(score)))
-    confidence = compute_confidence(sp, gbif_distributions, aemet_rain_1h, mc_rain_today, triangulation, radar_value)
+    # --- LIMITANTS BIOLÒGICS (multipliquen la suma anterior) ---
+    gbif_data = gbif_distributions.get(sp["id"]) if gbif_distributions else None
+    factors = []   # (multiplicador, text)
+    if event_age is None:
+        factors.append((0.30, "Sin una lluvia suficiente en las últimas semanas"))
+    else:
+        factors.append(timing_multiplier(sp, event_age))
+    factors.append(season_multiplier(sp, today, gbif_data))
+    factors.append(altitude_multiplier(sp, alt))
+    factors.append(heat_multiplier(sp, tmin_now, tmax_now))
+    factors.append(soil_multiplier(sp, geologia))
 
-    return final_score, breakdown, confidence
+    limit_mult = 1.0
+    for mult, _text in factors:
+        limit_mult *= mult
+    for mult, text in sorted(factors, key=lambda f: f[0]):
+        if text and len(limits) < 3:
+            limits.append(text)
+    breakdown["limitants"] = round(limit_mult, 2)
+    if event_age is not None:
+        breakdown["edat_pluja"] = event_age
+
+    final_score = max(0, min(100, round(score * limit_mult)))
+    confidence = compute_confidence(sp, gbif_distributions, aemet_rain_1h, mc_rain_today, triangulation, radar_value)
+    # La geologia desconeguda o provisional resta fiabilitat a les espècies que en depenen
+    if SPECIES_BIO.get(sp["id"], {}).get("soil") and geologia in (None, "silici_prov") and confidence == "alta":
+        confidence = "mitjana"
+
+    return final_score, breakdown, confidence, limits
 
 
 def compute_confidence(sp, gbif_distributions, aemet_rain_1h, mc_rain_today, triangulation=None, radar_value=None):
@@ -1840,7 +2306,25 @@ def load_gbif_cache():
         return {}
 
     print(f"  Cache de GBIF trobat ({age_days} dies)")
-    return cache.get("species", {})
+    # Es va detectar que el cache de producció tenia un FORMAT ANTIC (només
+    # els comptes mensuals plans {"1": n, ...}, sense "month_counts" ni
+    # "alt_bucket_counts"): el codi nou no hi trobava res i, en silenci, el
+    # GBIF no s'usava mai (calia el calendari manual). Es normalitza aquí i
+    # les entrades antigues es marquen "legacy" perquè es reconsultin.
+    normalized = {}
+    for sid, data in cache.get("species", {}).items():
+        if not isinstance(data, dict):
+            continue
+        if "month_counts" in data:
+            normalized[sid] = data
+        else:
+            normalized[sid] = {
+                "month_counts": {str(k): v for k, v in data.items() if str(k).isdigit()},
+                "alt_bucket_counts": {},
+                "total_with_elevation": 0,
+                "legacy": True,
+            }
+    return normalized
 
 
 def save_gbif_cache(species_distributions):
@@ -1859,7 +2343,7 @@ def build_gbif_distributions():
     científics (sinònims/espècies properes) d'aquella espècie.
     """
     cache = load_gbif_cache()
-    missing = [sp for sp in SPECIES if sp["id"] not in cache]
+    missing = [sp for sp in SPECIES if sp["id"] not in cache or cache[sp["id"]].get("legacy")]
 
     if missing:
         print(f"  GBIF: consultant {len(missing)} espècies sense cache...")
@@ -1877,12 +2361,22 @@ def build_gbif_distributions():
                     total_elevation += result["total_with_elevation"]
                 except Exception as e:
                     print(f"    AVÍS: GBIF ha fallat per '{name}' ({e})")
-            cache[sp["id"]] = {
+            total = sum(combined_months.values())
+            if total < 15 and sp["id"] in cache:
+                # Si la consulta ha fallat (xarxa) NO es sobreescriu una dada
+                # antiga bona amb zeros: es manté i es reintenta.
+                print(f"    {sp['name']}: GBIF no ha respost ({total} registres) — es manté la dada anterior i es reintenta")
+                continue
+            entry = {
                 "month_counts": combined_months,
                 "alt_bucket_counts": {str(k): v for k, v in combined_alt_buckets.items()},
                 "total_with_elevation": total_elevation,
             }
-            total = sum(combined_months.values())
+            if total >= 15:
+                cache[sp["id"]] = entry
+            else:
+                print(f"    {sp['name']}: només {total} registres — no es desa al cache (es reintenta la propera execució)")
+                continue
             print(f"    {sp['name']}: {total} registres GBIF trobats ({total_elevation} amb altitud)")
         save_gbif_cache(cache)
     else:
@@ -2067,21 +2561,81 @@ def load_vegetacio_layers_cache():
     return cache.get("layers")
 
 
+def _read_vegetacio_file():
+    try:
+        with open(VEGETACIO_LAYERS_CACHE_PATH, "r", encoding="utf-8") as f:
+            cache = json.load(f)
+        return cache if isinstance(cache, dict) else {}
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {}
+
+
 def save_vegetacio_layers_cache(layers):
-    cache = {"cached_at": datetime.now(timezone.utc).isoformat(), "layers": layers}
+    # El mateix fitxer també guarda el resultat del refinament per punt
+    # ("points"): es conserva en renovar la llista de capes. (S'aprofita
+    # aquest fitxer perquè ja és al "git add" del workflow.)
+    cache = _read_vegetacio_file()
+    cache["cached_at"] = datetime.now(timezone.utc).isoformat()
+    cache["layers"] = layers
     with open(VEGETACIO_LAYERS_CACHE_PATH, "w", encoding="utf-8") as f:
         json.dump(cache, f, ensure_ascii=False)
 
 
+def load_vegetacio_points():
+    points = _read_vegetacio_file().get("points")
+    return points if isinstance(points, dict) else {}
+
+
+def save_vegetacio_points(points):
+    cache = _read_vegetacio_file()
+    cache.setdefault("cached_at", datetime.now(timezone.utc).isoformat())
+    cache["points"] = points
+    with open(VEGETACIO_LAYERS_CACHE_PATH, "w", encoding="utf-8") as f:
+        json.dump(cache, f, ensure_ascii=False)
+
+
+def vegetacio_group_of_layer(layer_name):
+    """Grup genèric ICGC (pi_altres/roure/alzina) al qual pertany una capa
+    d'espècie, o None si la capa no és d'espècie d'arbre (PTGMFC, RPALTRESESP,
+    XARXAPUNTSAIGUA, ZONESACTUACIOURG...). Es tria la clau més LLARGA que
+    coincideix: abans "QUERCUS" (roure) guanyava a "QUERCUSILEX" /
+    "QUERCUSSUBER" (alzina), de manera que per als punts d'alzinar mai es
+    consultava l'alzina ni el suro (i per això no sortia mai "suro")."""
+    best = None
+    for species_key, group in VEGETACIO_SPECIES_TO_GROUP.items():
+        if species_key in layer_name and (best is None or len(species_key) > len(best[0])):
+            best = (species_key, group)
+    return best[1] if best else None
+
+
+# Ordre de consulta dins de cada grup: primer les espècies més esteses a
+# Catalunya, així la majoria de punts es resolen amb 1-3 peticions en comptes
+# de 7. (Només afecta a quina es mira primer si en un punt se'n solapen dues.)
+VEGETACIO_LAYER_PRIORITY = [
+    "PINUSHALEPENSIS", "PINUSSYLVESTRIS", "PINUSNIGRA", "PINUSUNCINATA", "PINUSPINEA", "PINUSPINASTER", "ABIESALBA",
+    "QUERCUSHUMILIS", "QUERCUSFAGINEA", "FAGUSSYLVATICA", "QUERCUSPETRAEA", "QUERCUSROBUR", "QUERCUSPYRENAICA",
+    "QUERCUSCANARIENSIS",
+    "QUERCUSILEX", "QUERCUSSUBER",
+]
+
+
+def layers_for_group(layers, tree_group):
+    """Capes d'espècie que cal consultar per a un grup genèric, ordenades per
+    prioritat."""
+    def rank(name):
+        for i, key in enumerate(VEGETACIO_LAYER_PRIORITY):
+            if key in name:
+                return i
+        return len(VEGETACIO_LAYER_PRIORITY)
+    return sorted((l for l in layers if layer_relevant_for_group(l, tree_group)), key=rank)
+
+
 def layer_relevant_for_group(layer_name, tree_group):
     """Decideix si val la pena consultar aquesta capa d'espècie per a un punt
-    del grup genèric donat (pi_altres/roure/alzina), per no fer peticions
-    innecessàries. Si l'espècie no està mapejada, es consulta igualment
-    (millor un punt de més que perdre'n un de vàlid)."""
-    for species_key, group in VEGETACIO_SPECIES_TO_GROUP.items():
-        if species_key in layer_name:
-            return group == tree_group
-    return True
+    del grup genèric donat, per no fer peticions innecessàries. Les capes que
+    no són d'espècie d'arbre ja no es consulten mai (abans es consultaven per
+    a tots els punts i una coincidència en una d'elles aturava la cerca)."""
+    return vegetacio_group_of_layer(layer_name) == tree_group
 
 
 def fetch_vegetacio_species_for_point(lat, lon, layer_name, timeout=6):
@@ -2094,13 +2648,18 @@ def fetch_vegetacio_species_for_point(lat, lon, layer_name, timeout=6):
         f"&QUERY_LAYERS={layer_name}&X=50&Y=50&INFO_FORMAT=text/plain"
     )
     url = VEGETACIO_WMS_URL + params
-    try:
-        req = urllib.request.Request(url, headers={"User-Agent": "bolets-catalunya-app/1.0"})
-        with urllib.request.urlopen(req, timeout=timeout) as resp:
-            txt = resp.read().decode("utf-8", errors="ignore")
-        return "Feature" in txt or "<gml" in txt.lower()
-    except Exception:
-        return False
+    # IMPORTANT: ja NO es captura l'excepció aquí. Abans qualsevol error de
+    # xarxa/timeout retornava False ("aquesta espècie no hi és"), igual que
+    # una resposta buida real; en refinar-ho tot en memòria cada execució no
+    # es notava, però en cachejar-ho s'haurien fixat falsos negatius. Ara el
+    # cridant distingeix "no hi és" (False) de "no s'ha pogut saber" (excepció).
+    req = urllib.request.Request(url, headers={"User-Agent": "bolets-catalunya-app/1.0"})
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        txt = resp.read().decode("utf-8", errors="ignore")
+    low = txt.lower()
+    if "serviceexception" in low or "<html" in low:
+        raise RuntimeError("resposta d'error del servei VEGETACIO")
+    return "Feature" in txt or "<gml" in low
 
 
 def species_layer_to_tree_key(layer_name):
@@ -2120,8 +2679,102 @@ def species_layer_to_tree_key(layer_name):
     return None
 
 
+VEGETACIO_GENERIC_GROUPS = ("pi_altres", "roure", "alzina")
+
+
+def refine_tree_species(zones, tree_types, layers, max_seconds=900, save_every=100):
+    """
+    Afina el tipus de bosc genèric de l'ICGC (pi_altres / roure / alzina) a
+    l'espècie exacta de VEGETACIO, AMB MEMÒRIA entre execucions.
+
+    Abans el resultat només vivia en memòria i la tanda tenia un límit de
+    temps: cada execució tornava a començar pels mateixos primers punts i la
+    resta no s'arribava mai a afinar (a producció, ~158 punts de ~3.000).
+    Ara cada punt resolt es desa a data/vegetacio_layers_cache.json ("points")
+    i les execucions següents només consulten els pendents, fins completar-ho.
+
+    Regles:
+      - Només es desa un punt si TOTES les capes consultades han respost
+        (una fallada de xarxa no es pot confondre amb "aquesta espècie no hi
+        és"); si un punt falla, es reintenta la propera execució.
+      - Si fallen 8 punts seguits, s'atura la tanda (servei caigut).
+      - La memòria és vàlida només si el tipus base del punt no ha canviat.
+      - Es consulten només les capes d'espècie del grup del punt (no PTGMFC,
+        RPALTRESESP, XARXAPUNTSAIGUA...).
+    Retorna (aplicats_de_la_memoria, resolts_ara, pendents_restants).
+    """
+    points = load_vegetacio_points()
+    applied = 0
+    pending = []
+    for z in zones:
+        base = tree_types.get(z["id"])
+        if base not in VEGETACIO_GENERIC_GROUPS:
+            continue
+        key = cell_key(z["lat"], z["lon"])
+        entry = points.get(key)
+        if isinstance(entry, dict) and entry.get("b") == base:
+            found = entry.get("t")
+            if found and found != base:
+                tree_types[z["id"]] = found
+                applied += 1
+            continue
+        pending.append((z, base, key))
+
+    if not pending:
+        print(f"  VEGETACIO: tots els punts ja són afinats (memòria: {applied} amb espècie exacta)")
+        return applied, 0, 0
+
+    print(f"  VEGETACIO: {applied} punts ja afinats de la memòria; {len(pending)} pendents — tanda de com a molt {max_seconds}s")
+    start = time.time()
+    resolved = failed = consecutive_fail = 0
+    stopped_early = False
+    for z, base, key in pending:
+        if time.time() - start > max_seconds:
+            print(f"  VEGETACIO: límit de temps ({max_seconds}s) assolit — la resta es farà les properes execucions")
+            stopped_early = True
+            break
+        found = None
+        incomplete = False
+        for layer in layers_for_group(layers, base):
+            try:
+                hit = fetch_vegetacio_species_for_point(z["lat"], z["lon"], layer)
+            except Exception:
+                incomplete = True
+                break
+            if hit:
+                found = species_layer_to_tree_key(layer)
+                break
+        if incomplete:
+            failed += 1
+            consecutive_fail += 1
+            if consecutive_fail >= 8:
+                print("  VEGETACIO: 8 fallades seguides — servei no disponible, s'atura la tanda (es reintentarà)")
+                stopped_early = True
+                break
+            continue
+        consecutive_fail = 0
+        points[key] = {"b": base, "t": found if found and found != base else None}
+        resolved += 1
+        if points[key]["t"]:
+            tree_types[z["id"]] = points[key]["t"]
+            applied += 1
+        if resolved % save_every == 0:
+            save_vegetacio_points(points)
+    if resolved:
+        save_vegetacio_points(points)
+    remaining = len(pending) - resolved
+    print(f"  VEGETACIO: {resolved} punts resolts ara, {failed} fallades (no desades), {remaining} pendents"
+          + (" (tanda aturada)" if stopped_early else ""))
+    return applied, resolved, remaining
+
+
 TREE_CACHE_PATH = "../data/bosc_cache.json"
-TREE_CACHE_MAX_DAYS = 30
+# Abans eren 30 dies. Com que el cache només es re-desa mentre queden punts
+# per resoldre, un cop complet envellia i als 30 dies s'ometia sencer: calia
+# tornar a consultar l'ICGC per als ~8000 punts d'un cop (i els que fallessin
+# quedaven "desconegut" i sortien de la graella). La cobertura forestal no
+# canvia en un mes: un any, com el sondeig forestal.
+TREE_CACHE_MAX_DAYS = 365
 
 
 def load_tree_cache():
@@ -2620,8 +3273,9 @@ def build_results():
     else:
         print("  Tots els punts trobats al cache — no cal consultar l'ICGC")
 
-    known_trees = sum(1 for t in tree_types.values() if t not in NON_FOREST)
-    print(f"Bosc: {known_trees}/{len(ZONES)} punts amb tipus de bosc identificat")
+    known_trees = sum(1 for z in ZONES if tree_types.get(z["id"], UNRESOLVED_TREE) not in NON_FOREST
+                      and tree_types.get(z["id"], UNRESOLVED_TREE) != UNRESOLVED_TREE)
+    print(f"Bosc: {known_trees}/{len(ZONES)} punts forestals identificats")
 
     print("Refinant espècie exacta amb VEGETACIO (sig.gencat.cat)...")
     vegetacio_layers = load_vegetacio_layers_cache()
@@ -2631,27 +3285,10 @@ def build_results():
             save_vegetacio_layers_cache(vegetacio_layers)
     print(f"  VEGETACIO: {len(vegetacio_layers)} capes d'espècie disponibles")
 
-    refined_count = 0
     if vegetacio_layers:
-        veg_start = time.time()
-        veg_max_seconds = 900  # augmentat de 400 a 900: amb la graella adaptativa (~6200 punts)
-        for zone in ZONES:
-            if time.time() - veg_start > veg_max_seconds:
-                print(f"  VEGETACIO: límit de temps ({veg_max_seconds}s) assolit — es continua sense refinar la resta")
-                break
-            current_tree = tree_types.get(zone["id"], "desconegut")
-            if current_tree in NON_FOREST:
-                continue
-            for layer in vegetacio_layers:
-                if not layer_relevant_for_group(layer, current_tree):
-                    continue
-                if fetch_vegetacio_species_for_point(zone["lat"], zone["lon"], layer):
-                    refined_tree = species_layer_to_tree_key(layer)
-                    if refined_tree:
-                        tree_types[zone["id"]] = refined_tree
-                        refined_count += 1
-                    break  # ja trobada una espècie coincident per aquest punt
-    print(f"  VEGETACIO: {refined_count} punts refinats amb espècie exacta")
+        refine_tree_species(ZONES, tree_types, vegetacio_layers, max_seconds=900)
+    else:
+        print("  VEGETACIO: sense llista de capes — no es refina l'espècie en aquesta execució")
 
     aemet_key = os.environ.get("AEMET_API_KEY")
     aemet_stations = []
@@ -2683,10 +3320,11 @@ def build_results():
 
     print("Consultant geologia del sòl (silici/calcari) amb l'ICGC...")
     try:
-        geologia_lookup = build_geologia_lookup(ZONES)
-        found_count = sum(1 for v in geologia_lookup.values() if v is not None)
-        print(f"  Geologia: {found_count}/{len(geologia_lookup)} punts classificats")
-        data_coverage["geologia"] = {"ok": True, "detail": f"{found_count} punts classificats"}
+        geologia_lookup, geologia_points = build_geologia_lookup(ZONES, tree_types=tree_types)
+        confirmed = sum(1 for e in geologia_points.values() if not e.get("legacy"))
+        classified = sum(1 for v in geologia_lookup.values() if v is not None)
+        print(f"  Geologia: {classified}/{len(geologia_lookup)} punts classificats ({confirmed} reconfirmats amb les regles noves)")
+        data_coverage["geologia"] = {"ok": True, "detail": f"{classified} punts classificats, {confirmed} reconfirmats"}
     except Exception as e:
         print(f"  AVÍS: no s'ha pogut consultar la geologia ({e}) — es continua sense aquest ajust")
         geologia_lookup = {}
@@ -2727,20 +3365,23 @@ def build_results():
     print("Consultant GBIF (històric real d'avistaments, FungaCAT)...")
     gbif_distributions = build_gbif_distributions()
 
-    current_month = datetime.now(timezone.utc).month
+    today_local = today_madrid()
+    current_month = today_local.month
     today_str = datetime.now(timezone.utc).date().isoformat()
     today_history = history.get(today_str, {})
 
     zones_out = []
     for zone, weather_summary in zip(ZONES, weather_results):
-        # weather_summary ja ve pre-processat de fetch_weather_rotating
-        # (rain_10d, avg_temp, min_temp, days_since_rain, soil_stats) — no
-        # calen daily/hourly crus aquí, ja no es guarden al cache de blocs.
-        rain_10d = weather_summary.get("rain_10d", 0)
-        avg_temp = weather_summary.get("avg_temp", 0)
-        min_temp = weather_summary.get("min_temp", 0)
-        days_since_rain = weather_summary.get("days_since_rain", 0)
-        soil_stats = weather_summary.get("soil_stats")
+        # weather_summary és l'entrada del cache de blocs d'aquest punt
+        # (resum + sèrie diària pròpia). derive_weather_view la converteix
+        # en esdeveniments de pluja i temperatures dels darrers 7 dies
+        # calculats amb la data d'AVUI, no la del darrer refresc.
+        wx = derive_weather_view(weather_summary, today_local)
+        rain_10d = wx["rain_10d"]
+        avg_temp = wx["avg_temp"]
+        min_temp = wx["min_temp"]
+        days_since_rain = wx["days_since_rain"]
+        soil_stats = wx.get("soil_stats")
         tree = tree_types.get(zone["id"], "desconegut")
 
         aemet_info = None
@@ -2758,21 +3399,22 @@ def build_results():
 
         mc_rain_today = today_history.get(str(zone["id"]), {}).get("meteoclimatic")
         radar_value = radar_lookup.get(zone["id"])
-        geologia = geologia_lookup.get(str(zone["id"]))
+        geologia = geologia_lookup.get(cell_key(zone["lat"], zone["lon"]))
 
         triangulation = triangulate_rain(zone["lat"], zone["lon"], aemet_stations, mc_stations, meteocat_stations=meteocat_stations)
 
         species_scores = []
         if tree not in NON_FOREST and tree != UNRESOLVED_TREE:
             for sp in SPECIES:
-                s, breakdown, confidence = species_score(
+                s, breakdown, confidence, limits = species_score(
                     sp, rain_10d, min_temp, tree, days_since_rain, zone["alt"], current_month,
                     aemet_rain_1h=aemet_rain_1h, mc_rain_today=mc_rain_today,
                     gbif_distributions=gbif_distributions, triangulation=triangulation,
                     soil_stats=soil_stats, radar_value=radar_value, geologia=geologia,
+                    wx=wx, today=today_local,
                 )
                 if s > 0:
-                    species_scores.append({"id": sp["id"], "name": sp["name"], "score": s, "confidence": confidence, "breakdown": breakdown})
+                    species_scores.append({"id": sp["id"], "name": sp["name"], "score": s, "confidence": confidence, "breakdown": breakdown, "limits": limits})
         species_scores.sort(key=lambda x: x["score"], reverse=True)
         matching_species = [s for s in species_scores if s["score"] >= DEFAULT_SCORE_THRESHOLD]
 
@@ -2789,6 +3431,7 @@ def build_results():
             "rain_10d": rain_10d,
             "avg_temp": avg_temp,
             "min_temp": min_temp,
+            "max_temp": round(wx["tmax_7d"]) if wx.get("tmax_7d") is not None else None,
             "days_since_rain": days_since_rain,
             "species_scores": species_scores,
             "aemet_check": aemet_info,
@@ -3047,50 +3690,100 @@ def compute_model_accuracy(hallazgos, evolution):
 # Berguedà (margues/gresos → mixt), Montseny (fil·lites/pissarres → silici),
 # Priorat (gresos/pissarres → silici), Garrotxa (basalts → silici).
 
+# REVISIÓ 15/10/2026 — tres problemes reals detectats amb dades de producció:
+#
+# 1) CLASSIFICACIÓ: "conglomerat" i "gres" comptaven com a silici segur. Però
+#    els conglomerats de Sant Llorenç del Munt / Montserrat (Matadepera) són
+#    de ciment calcari, i molts gresos (Prepirineu, Vallès) també. Resultat:
+#    l'ou de reig, acidòfil, sortia a Matadepera. Ara hi ha TRES nivells:
+#    roques silícies segures (granit, pissarra, fil·lita, esquist, gneis,
+#    quarsita, basalt...), calcàries segures (calcària, dolomia, marga, guix,
+#    marbre...) i roques DETRÍTIQUES ambigües (gres, conglomerat, argila,
+#    sorra...) que, soles, es classifiquen com a "mixt" (no es pot assegurar
+#    que siguin àcides).
+# 2) FALLADES DE XARXA GUARDADES COM A "SENSE DADA": una excepció es desava
+#    com a None per sempre ("per no reintentar"). Ara una fallada NO es desa:
+#    es reintenta la propera execució. Només es desa un resultat confirmat.
+# 3) CLAU PER id: el cache anava per id de zona; qualsevol canvi de graella
+#    (com treure els punts duplicats) desalinea tot el cache. Ara va per
+#    coordenades, igual que la resta de caches de la graella. També es desa un
+#    fragment del text original de l'ICGC per poder reclassificar sense tornar
+#    a consultar si es retoquen les paraules clau.
+#
+# El cache antic (per id, classificat amb les regles velles) es migra a
+# coordenades i es continua usant mentre es reconsulta: els "silici" antics
+# queden com a "silici_prov" (provisional, pes menor) fins que es confirmen,
+# perquè podien ser conglomerats/gresos; calcari i mixt antics es mantenen.
+
+import re
+
 GEOLOGIA_WMS_URL = "https://geoserveis.icgc.cat/servei/catalunya/geologia-territorial/wms"
 GEOLOGIA_LAYER = "unitats-geologiques-50000"
 GEOLOGIA_CACHE_PATH = "../data/geologia_cache.json"
-GEOLOGIA_CACHE_MAX_DAYS = 180  # la geologia del terreny no canvia mai
+GEOLOGIA_CACHE_MAX_DAYS = 3650  # la geologia del terreny no canvia mai (abans 180: caducava de cop un cop completat)
+GEOLOGIA_CACHE_VERSION = 2
 
-GEOLOGIA_KEYWORDS_CALCARI = [
-    "calcària", "calcàries", "calcaria", "marbre", "guix", "dolomia", "margu",
-    "marga", "travertí",
+# Silici SEGUR (roques àcides): intrusives, metamòrfiques, volcàniques.
+GEO_SILICI = [
+    r"granit", r"granodiorit", r"tonalit", r"diorit", r"gabre", r"pegmatit", r"aplit",
+    r"pissarr", r"fil[·.]?lit", r"filit", r"esquist", r"micaesquist", r"gneis", r"ortogneis",
+    r"migmatit", r"quarsit", r"cornubianit", r"corneana", r"llicorell", r"riolit",
+    r"riodacit", r"dacit", r"andesit", r"porfir", r"basalt", r"ignimbrit", r"lidit",
+    r"saul[óo]", r"buntsandstein", r"gres(os)? vermell", r"volc[àa]n",
 ]
-GEOLOGIA_KEYWORDS_SILICI = [
-    "granit", "pissarra", "gres", "quarsita", "fil·lit", "filita", "basalt",
-    "andesita", "esquist", "gneis", "conglomerat", "llicorella",
+# Calcari SEGUR
+GEO_CALCARI = [
+    r"calc[àa]", r"calci", r"marbre", r"dolom", r"guix", r"margu", r"\bmarga",
+    r"travert", r"carbonat", r"oolit", r"muschelkalk", r"keuper",
 ]
-
-# Ajust petit i honest al bonus de temporada/hàbitat — només per a les 3
-# espècies amb evidència clara i consistent trobada (ceps i ou de reig
-# prefereixen sòl silici/àcid; camagrocs prefereix sòl calcari). Per a la
-# resta d'espècies no s'aplica cap ajust (no hi ha prou evidència fiable).
-SPECIES_SOIL_PREFERENCE = {
-    "ceps": "silici",
-    "oureig": "silici",
-    "camagrocs": "calcari",
-}
+# DETRÍTIC ambigu: pot ser àcid o amb ciment calcari — soles no es consideren silici
+GEO_DETRITIC = [
+    r"\bgres", r"conglomerat", r"arenisc", r"lutit", r"\bargil", r"\bllim", r"\bsorr",
+    r"\bgrav", r"bretx", r"arcos",
+]
 
 
 def classify_geologia_text(text):
-    """Retorna 'silici', 'calcari', 'mixt' o None segons quines paraules
-    clau apareixen al text de la resposta GetFeatureInfo."""
+    """Retorna 'silici', 'calcari', 'mixt' o None segons la litologia.
+    - silici SEGUR sol -> silici; calcari SEGUR sol -> calcari
+    - silici i calcari junts, o calcari + detrític (margues i gresos) -> mixt
+    - només detrític (gres, conglomerat, argila...) -> mixt (ambigu)
+    - res reconeixible -> None"""
     if not text:
         return None
     lower = text.lower()
-    has_calcari = any(kw in lower for kw in GEOLOGIA_KEYWORDS_CALCARI)
-    has_silici = any(kw in lower for kw in GEOLOGIA_KEYWORDS_SILICI)
-    if has_calcari and has_silici:
+    has_si = any(re.search(p, lower) for p in GEO_SILICI)
+    has_ca = any(re.search(p, lower) for p in GEO_CALCARI)
+    has_de = any(re.search(p, lower) for p in GEO_DETRITIC)
+    if has_si and has_ca:
         return "mixt"
-    if has_calcari:
-        return "calcari"
-    if has_silici:
+    if has_ca:
+        return "mixt" if has_de else "calcari"
+    if has_si:
         return "silici"
+    if has_de:
+        return "mixt"
     return None
 
 
+def extract_geologia_description(txt):
+    """Fragment curt del text de l'ICGC (camps de descripció), per desar-lo al
+    cache i poder reclassificar més endavant sense tornar a consultar."""
+    parts = []
+    for line in txt.splitlines():
+        l = line.strip()
+        low = l.lower()
+        if low.startswith("descripcio") or low.startswith("descripció") or "litolog" in low:
+            parts.append(l[:160])
+    snippet = " | ".join(parts) if parts else " ".join(txt.split())[:200]
+    return snippet[:260]
+
+
 def fetch_geologia_at_point(lat, lon, timeout=10):
-    """Consulta la unitat geològica en un punt concret i la classifica."""
+    """Consulta la unitat geològica en un punt. Retorna (classe, fragment de
+    text). LLANÇA excepció si el servei falla o respon amb un error: el
+    cridant NO ha de desar res en aquest cas (no és el mateix que 'sense
+    roca reconeguda')."""
     d = 0.01
     params = (
         f"?REQUEST=GetFeatureInfo&SERVICE=WMS&VERSION=1.1.1&LAYERS={GEOLOGIA_LAYER}"
@@ -3102,65 +3795,128 @@ def fetch_geologia_at_point(lat, lon, timeout=10):
     req = urllib.request.Request(url, headers={"User-Agent": "bolets-catalunya-app/1.0"})
     with urllib.request.urlopen(req, timeout=timeout) as resp:
         txt = resp.read().decode("utf-8", errors="ignore")
-    return classify_geologia_text(txt)
+    low = txt.lower()
+    if "serviceexception" in low or "<html" in low or "exception" in low[:300]:
+        raise RuntimeError("resposta d'error del servei de geologia")
+    return classify_geologia_text(txt), extract_geologia_description(txt)
 
 
-def load_geologia_cache():
+def load_geologia_cache(zones=None):
+    """Carrega el cache de geologia (versió 2, per coordenades). Si troba el
+    format antic (per id de zona, sense versió) el migra a coordenades fent
+    servir 'zones' i marca cada entrada com a 'legacy'. Retorna {cellkey:
+    {"c": classe, "t": text, "legacy": bool}}."""
     try:
         with open(GEOLOGIA_CACHE_PATH, "r", encoding="utf-8") as f:
             cache = json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
         return {}
     cached_at = cache.get("cached_at")
-    if not cached_at:
+    if cached_at:
+        try:
+            age_days = (datetime.now(timezone.utc) - datetime.fromisoformat(cached_at)).days
+        except ValueError:
+            age_days = 0
+        if age_days > GEOLOGIA_CACHE_MAX_DAYS:
+            print(f"  Cache de geologia caducat ({age_days} dies) — es torna a consultar")
+            return {}
+
+    points = cache.get("points", {})
+    if cache.get("version") == GEOLOGIA_CACHE_VERSION:
+        return points
+
+    # Format antic: {id: classe}. Es migra a coordenades.
+    if not zones:
         return {}
-    try:
-        age_days = (datetime.now(timezone.utc) - datetime.fromisoformat(cached_at)).days
-    except ValueError:
-        return {}
-    if age_days > GEOLOGIA_CACHE_MAX_DAYS:
-        print(f"  Cache de geologia caducat ({age_days} dies) — es torna a consultar")
-        return {}
-    print(f"  Cache de geologia trobat ({age_days} dies)")
-    return cache.get("points", {})
+    by_id = {str(z["id"]): cell_key(z["lat"], z["lon"]) for z in zones}
+    migrated = {}
+    for zid, cls in points.items():
+        key = by_id.get(zid)
+        if key is None:
+            continue
+        migrated[key] = {"c": cls, "t": "", "legacy": True}
+    print(f"  Geologia: cache antic (per id) migrat a coordenades — {len(migrated)} punts, a reconfirmar amb les regles noves")
+    return migrated
 
 
 def save_geologia_cache(points):
-    cache = {"cached_at": datetime.now(timezone.utc).isoformat(), "points": points}
+    cache = {
+        "version": GEOLOGIA_CACHE_VERSION,
+        "cached_at": datetime.now(timezone.utc).isoformat(),
+        "points": points,
+    }
     with open(GEOLOGIA_CACHE_PATH, "w", encoding="utf-8") as f:
         json.dump(cache, f, ensure_ascii=False)
 
 
-def build_geologia_lookup(zones, max_seconds=700, batch_per_run=350):
-    """
-    Completa el cache de geologia per lots (com el refinament de VEGETACIO):
-    consulta només els punts encara no cacheados, amb un límit de temps i
-    de quantitat per execució perquè no allargui massa el procés — amb
-    ~1470 punts, es completarà en diverses execucions successives.
-    """
-    cache = load_geologia_cache()
-    missing = [z for z in zones if str(z["id"]) not in cache]
+def geologia_label(entry):
+    """Etiqueta que usa el scoring per a una entrada del cache. Un 'silici'
+    antic (no reconfirmat) és 'silici_prov': podia ser conglomerat o gres."""
+    if not entry:
+        return None
+    cls = entry.get("c")
+    if entry.get("legacy") and cls == "silici":
+        return "silici_prov"
+    return cls
 
-    if missing:
-        print(f"  Geologia: {len(missing)} punts sense cache — consultant...")
+
+def build_geologia_lookup(zones, tree_types=None, max_seconds=700, batch_per_run=350):
+    """
+    Completa / reconfirma el cache de geologia per lots (com el refinament de
+    VEGETACIO): consulta els punts sense dada i els antics encara
+    provisionals, amb un límit de temps i de quantitat per execució.
+    Prioritat: punts forestals primer; sense dada abans que reconfirmar; entre
+    els reconfirmables, primer els 'silici' antics i els que van quedar None
+    (podien ser fallades de xarxa). Els calcari / mixt antics es mantenen.
+
+    Una fallada de xarxa NO es desa (es reintenta la propera execució) i, si
+    fallen 8 consultes seguides, s'atura la tanda (servei caigut).
+    """
+    points = load_geologia_cache(zones)
+    tree_types = tree_types or {}
+
+    def forest_rank(z):
+        t = tree_types.get(z["id"])
+        return 0 if (t and t not in NON_FOREST and t != UNRESOLVED_TREE) else 1
+
+    pending = []
+    for z in zones:
+        key = cell_key(z["lat"], z["lon"])
+        entry = points.get(key)
+        if entry is None:
+            pending.append((0, forest_rank(z), z))
+        elif entry.get("legacy"):
+            if entry.get("c") == "silici":
+                pending.append((1, forest_rank(z), z))
+            elif entry.get("c") is None:
+                pending.append((2, forest_rank(z), z))
+    pending.sort(key=lambda t: (t[1], t[0]))  # forestals primer; dins, sense dada > silici antic > None antic
+
+    if pending:
+        print(f"  Geologia: {len(pending)} punts per consultar/reconfirmar — fent una tanda de com a molt {batch_per_run}...")
         start = time.time()
-        consulted = 0
-        for z in missing[:batch_per_run]:
+        consulted = failed = consecutive_fail = 0
+        for _rank, _forest, z in pending[:batch_per_run]:
             if time.time() - start > max_seconds:
                 print(f"  Geologia: límit de temps ({max_seconds}s) assolit a {consulted} punts — es continua la propera execució")
                 break
             try:
-                classification = fetch_geologia_at_point(z["lat"], z["lon"])
-                cache[str(z["id"])] = classification  # es desa també si és None, per no reintentar
+                cls, snippet = fetch_geologia_at_point(z["lat"], z["lon"])
+                points[cell_key(z["lat"], z["lon"])] = {"c": cls, "t": snippet}
+                consulted += 1
+                consecutive_fail = 0
             except Exception:
-                cache[str(z["id"])] = None
-            consulted += 1
-        save_geologia_cache(cache)
-        print(f"  Geologia: {consulted} punts nous consultats aquesta execució")
+                failed += 1
+                consecutive_fail += 1
+                if consecutive_fail >= 8:
+                    print("  Geologia: 8 fallades seguides — servei no disponible, s'atura la tanda (es reintentarà)")
+                    break
+        save_geologia_cache(points)
+        print(f"  Geologia: {consulted} punts consultats, {failed} fallades (no desades, es reintenten)")
     else:
-        print("  Geologia: tots els punts ja són al cache")
+        print("  Geologia: tots els punts ja són al cache i reconfirmats")
 
-    return cache
+    return {key: geologia_label(entry) for key, entry in points.items()}, points
 
 
 def main():
@@ -3196,10 +3952,63 @@ def main():
     print(f"Generat: {results['generated_at']}")
 
 
+def dedupe_zones(zones, min_km=0.5):
+    """
+    Elimina els punts de la graella que cauen gairebé al mateix lloc.
+
+    Es va detectar (15/10/2026) que ~70% dels punts tenien un "bessó" a menys
+    de 100 m (la densificació a 2.5 km tornava a incloure els nodes de la
+    graella base de 5 km i els punts de verificació del sondeig): 8285 punts
+    eren només ~4900 llocs diferents. Efectes: consultes duplicades a
+    Open-Meteo / ICGC, resultats.json el doble de gran, i quatre marcadors
+    "Matadepera" apilats al mapa. Entre els punts no hi ha cap distància
+    entre 200 m i 2 km, així que qualsevol llindar entre 0.2 i 2 km és segur;
+    0.5 km.
+
+    No es renumera res: es conserva l'id original del punt que es queda (de
+    cada parell, un de forestal abans que un de no forestal, i si empaten
+    l'id més baix), perquè els caches indexats per id (bosc, noms de zona,
+    evolució) segueixin sent vàlids.
+    """
+    try:
+        tree_cache = load_tree_cache()
+    except Exception:
+        tree_cache = {}
+
+    def rank(z):
+        t = tree_cache.get(z["id"])
+        is_forest = bool(t) and t not in NON_FOREST and t != UNRESOLVED_TREE
+        return (0 if is_forest else 1, z["id"])
+
+    cell = 0.01  # ~1.1 km
+    grid = {}
+    kept = []
+    for z in sorted(zones, key=rank):
+        ci, cj = int(z["lat"] / cell), int(z["lon"] / cell)
+        duplicate = False
+        for di in (-1, 0, 1):
+            for dj in (-1, 0, 1):
+                for k in grid.get((ci + di, cj + dj), ()):
+                    if haversine_km(z["lat"], z["lon"], k["lat"], k["lon"]) < min_km:
+                        duplicate = True
+                        break
+                if duplicate:
+                    break
+            if duplicate:
+                break
+        if not duplicate:
+            kept.append(z)
+            grid.setdefault((ci, cj), []).append(z)
+    kept.sort(key=lambda z: z["id"])
+    if len(kept) < len(zones):
+        print(f"  Graella: {len(zones) - len(kept)} punts duplicats (< {min_km} km d'un altre) descartats — {len(kept)} llocs diferents")
+    return kept
+
+
 # Es carrega/genera aquí (i no a l'inici del fitxer) perquè depèn de
 # retry_with_backoff, definida més amunt però després del punt on abans
 # s'executava aquesta línia.
-ZONES = load_or_build_zones()
+ZONES = dedupe_zones(load_or_build_zones())
 
 
 if __name__ == "__main__":
