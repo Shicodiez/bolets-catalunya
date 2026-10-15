@@ -461,16 +461,19 @@ def load_or_build_zones():
 # 2. ESPÈCIES DE BOLETS I LA SEVA LÒGICA
 # ---------------------------------------------------------------------------
 SPECIES = [
-    {"id": "rovellons",   "name": "Rovellons",           "scientific": ["Lactarius deliciosus", "Lactarius sanguifluus"],      "trees": ["pi_roig", "pi_negre", "pi_pinyer", "pi_blanc", "pi_altres"], "rain_days": [7, 15],  "temp_range": [4, 16],  "min_rain": 20},
-    {"id": "ceps",        "name": "Ceps",                 "scientific": ["Boletus edulis", "Boletus aereus", "Boletus pinophilus"], "trees": ["roure", "faig", "pi_roig", "pi_negre", "avet", "pi_altres"], "rain_days": [8, 16],  "temp_range": [6, 18],  "min_rain": 25},
-    {"id": "camagrocs",   "name": "Camagrocs",            "scientific": ["Craterellus lutescens"],                              "trees": ["faig", "roure", "pi_roig", "pi_negre", "pi_blanc", "pi_altres", "avet"], "rain_days": [10, 20], "temp_range": [6, 16],  "min_rain": 20},
-    {"id": "trompetes",   "name": "Trompetes de la mort", "scientific": ["Craterellus cornucopioides"],                         "trees": ["faig", "roure"],                                            "rain_days": [10, 20], "temp_range": [5, 15],  "min_rain": 25},
+    # rain_days = dies des de la PLUJA PRINCIPAL en què la tanda és plena
+    # (coherent amb la corba "timing" de SPECIES_BIO); temp_range = mínima
+    # nocturna mitjana (7 dies) ideal; min_rain = mm de l'episodi de pluja.
+    {"id": "rovellons",   "name": "Rovellons",           "scientific": ["Lactarius deliciosus", "Lactarius sanguifluus"],      "trees": ["pi_roig", "pi_negre", "pi_pinyer", "pi_blanc", "pi_altres"], "rain_days": [14, 35], "temp_range": [5, 14],  "min_rain": 20},
+    {"id": "ceps",        "name": "Ceps",                 "scientific": ["Boletus edulis", "Boletus aereus", "Boletus pinophilus"], "trees": ["roure", "faig", "pi_roig", "pi_negre", "avet", "suro", "pi_altres"], "rain_days": [10, 20], "temp_range": [6, 16],  "min_rain": 25},
+    {"id": "camagrocs",   "name": "Camagrocs",            "scientific": ["Craterellus lutescens"],                              "trees": ["faig", "roure", "pi_roig", "pi_negre", "pi_blanc", "pi_altres", "avet"], "rain_days": [16, 40], "temp_range": [3, 13],  "min_rain": 25},
+    {"id": "trompetes",   "name": "Trompetes de la mort", "scientific": ["Craterellus cornucopioides"],                         "trees": ["faig", "roure"],                                            "rain_days": [16, 35], "temp_range": [4, 14],  "min_rain": 25},
     {"id": "oureig",      "name": "Ou de reig",           "scientific": ["Amanita caesarea"],                                   "trees": ["alzina", "roure", "suro"],                                  "rain_days": [15, 20], "temp_range": [12, 22], "min_rain": 18},
-    {"id": "rossinyols",  "name": "Rossinyols",           "scientific": ["Cantharellus cibarius"],                              "trees": ["faig", "roure", "pi_roig", "pi_negre", "avet", "pi_altres"], "rain_days": [7, 16],  "temp_range": [6, 17],  "min_rain": 20},
-    {"id": "colmenilles", "name": "Colmenilles",          "scientific": ["Morchella esculenta", "Morchella elata"],             "trees": ["roure", "pi_blanc", "pi_roig", "pi_negre", "pi_altres"], "rain_days": [8, 18],  "temp_range": [2, 13],  "min_rain": 15},
-    {"id": "llengua",     "name": "Llengua de bou",       "scientific": ["Hydnum repandum"],                                    "trees": ["roure", "faig", "suro"],                                    "rain_days": [10, 20], "temp_range": [8, 18],  "min_rain": 20},
-    {"id": "pinetell",    "name": "Pinetell",             "scientific": ["Lactarius deliciosus"],                               "trees": ["pi_roig", "pi_negre", "pi_pinyer", "pi_blanc", "pi_altres"], "rain_days": [7, 14],  "temp_range": [4, 15],  "min_rain": 20},
-    {"id": "fredolic",    "name": "Fredolic",             "scientific": ["Tricholoma terreum"],                                 "trees": ["pi_blanc", "pi_roig", "pi_negre", "pi_pinyer", "alzina", "pi_altres"], "rain_days": [9, 18],  "temp_range": [3, 14],  "min_rain": 18},
+    {"id": "rossinyols",  "name": "Rossinyols",           "scientific": ["Cantharellus cibarius"],                              "trees": ["faig", "roure", "pi_roig", "pi_negre", "avet", "pi_altres"], "rain_days": [9, 18],  "temp_range": [7, 17],  "min_rain": 20},
+    {"id": "colmenilles", "name": "Colmenilles",          "scientific": ["Morchella esculenta", "Morchella elata"],             "trees": ["roure", "pi_blanc", "pi_roig", "pi_negre", "pi_altres"],    "rain_days": [8, 20],  "temp_range": [3, 11],  "min_rain": 15},
+    {"id": "llengua",     "name": "Llengua de bou",       "scientific": ["Hydnum repandum"],                                    "trees": ["roure", "faig", "suro", "pi_roig", "pi_negre", "avet", "pi_altres"], "rain_days": [12, 28], "temp_range": [5, 16],  "min_rain": 20},
+    {"id": "pinetell",    "name": "Pinetell",             "scientific": ["Lactarius deliciosus"],                               "trees": ["pi_roig", "pi_negre", "pi_pinyer", "pi_blanc", "pi_altres"], "rain_days": [14, 32], "temp_range": [3, 13],  "min_rain": 20},
+    {"id": "fredolic",    "name": "Fredolic",             "scientific": ["Tricholoma terreum"],                                 "trees": ["pi_blanc", "pi_roig", "pi_negre", "pi_pinyer", "alzina", "pi_altres"], "rain_days": [12, 32], "temp_range": [2, 13],  "min_rain": 18},
 ]
 
 # ---------------------------------------------------------------------------
@@ -488,68 +491,173 @@ SPECIES = [
 #     punts a l'octubre.
 # Ara, a més de la suma d'evidència, cada espècie té LIMITANTS que
 # MULTIPLIQUEN el resultat (valors 0-1): moment respecte a la pluja
-# principal, època de l'any, altitud, calor i geologia. Si un limitant és
-# 0.3, la puntuació no pot passar de 30 per bones que siguin les altres
-# condicions — com al bosc: un ou de reig no surt si encara és massa aviat,
-# o si fa massa fred, o en un sòl calcari, encara que hagi plogut molt.
+# principal, època de l'any, altitud, temperatura (calor, fred, gelada) i
+# geologia. Si un limitant és 0.3, la puntuació no pot passar de 30 per
+# bones que siguin les altres condicions.
 #
 # Els punts de cada corba són (valor, multiplicador) amb interpolació lineal.
-# Fonts: bolets.com, Associació Boletaire Independent, sporas.io,
-# Enciclopèdia Catalana, GBIF/FungaCAT i observacions de camp de l'usuari
-# (Ou de reig: 15-20 dies després de la pluja, necessita calor). Són valors
-# de partida calibrables: si les sortides reals (hallazgos) els contradiuen,
-# aquest és l'únic lloc on cal tocar.
+#
+# FONTS i NIVELL DE CERTESA (important per a qui calibri):
+#   [FONT]  confirmat en fonts consultades el 15/10/2026: Enciclopèdia
+#           Catalana (Història Natural dels Països Catalans: cantarel·làcies,
+#           hidnàcies, amanitàcies, tricolomatàcies), DIEC, MITECO (fitxa
+#           Lactarius deliciosus), estudi de la Serra dels Ports (Senienc),
+#           CTFC/Martínez de Aragón (premsa 3Cat/Ara/NacióDigital/Vilaweb),
+#           estudi de 10 anys de Boletus edulis (bioRxiv 2025: temperatura
+#           mitjana òptima ~13 °C a 20 dies, pluja acumulada a 26 dies),
+#           Wikipedia (habitat) i micocyl.es (parts de bolets).
+#   [EST]   estimació raonada de qui ho va escriure: les fonts donen la
+#           direcció (necessita calor / fred, sòl àcid...) però NO els
+#           números exactes. Són el que cal contrastar amb les sortides
+#           reals (hallazgos) de l'usuari.
+# Si una sortida real contradiu un perfil, aquest és l'únic lloc on tocar.
+#
+# Clau "heat" (tot sobre mitjanes dels darrers 7 dies, excepte "frost"):
+#   tmin / tmax : corba CRESCENT (necessita calor: nits / dies càlids)
+#   cold        : corba CRESCENT sobre la mínima mitjana (fred sostingut)
+#   tmax_hot    : corba DECRESCENT sobre la màxima mitjana (massa calor)
+#   tmin_hot    : corba DECRESCENT sobre la mínima mitjana (nits massa càlides)
+#   frost       : corba CRESCENT sobre la mínima ABSOLUTA dels 7 dies (gelada)
 SPECIES_BIO = {
     "oureig": {
-        # dies des de la PLUJA PRINCIPAL (no des de l'últim ruixat)
+        # [FONT] triga ~15-20 dies (observació de camp de l'usuari; l'estudi
+        # de Ports situa 2-3 setmanes per a la majoria d'espècies). Dies des
+        # de la PLUJA PRINCIPAL, no des de l'últim ruixat.
         "timing": [(4, 0.05), (8, 0.25), (12, 0.65), (15, 1.0), (21, 1.0), (28, 0.65), (38, 0.25), (50, 0.10)],
-        # gairebé no passa de 1.000 m (ocasionalment fins a 1.400)
+        # [FONT] "normalment per sota dels 1.000 m" (Surt de Casa/ECat)
         "alt": [(0, 1.0), (800, 1.0), (1000, 0.45), (1150, 0.15), (1300, 0.0)],
-        # termòfil: mínimes nocturnes i màximes diürnes dels darrers 7 dies
+        # [FONT] espècie de clima càlid: "només quan coincideixen calor i
+        # pluja" (ECat). [EST] els números.
         "heat": {"tmin": [(6, 0.0), (9, 0.45), (11, 0.85), (12, 1.0)],
-                 "tmax": [(13, 0.0), (17, 0.45), (20, 0.85), (22, 1.0)]},
-        # acidòfil (pH 4-6, pissarres/granits): molt rar en sòls calcaris
+                 "tmax": [(13, 0.0), (17, 0.45), (20, 0.85), (22, 1.0)],
+                 "frost": [(-2, 0.05), (1, 0.30), (4, 0.80), (6, 1.0)]},
+        # [FONT] sureres i alzinars càlids; a la Serra dels Ports (sòls calcaris)
+        # "no apareix". Acidòfil. 
         "soil": {"silici": 1.0, "silici_prov": 0.85, "mixt": 0.60, "calcari": 0.12, None: 0.85},
-        "season_manual": ((8, 5), (10, 31)),
+        # [FONT] gairebé desaparegut a principis de novembre (Surt de Casa, 2/11/2015)
+        "season_manual": ((8, 5), (10, 25)),
     },
     "rovellons": {
+        # [FONT] ~3 setmanes després de les primeres pluges fortes (Ports);
+        # 2-3 setmanes (Ara/CTFC); una tanda al mateix lloc pot durar fins a
+        # ~6 setmanes (3Cat). Pluja fina i de dies millor que un xàfec.
+        "timing": [(5, 0.10), (9, 0.40), (12, 0.85), (14, 1.0), (35, 1.0), (45, 0.60), (60, 0.25)],
+        # [FONT] necessiten que baixin les temperatures; les gelades els
+        # aturen (Ara). [EST] els números.
+        "heat": {"tmax_hot": [(24, 1.0), (28, 0.65), (31, 0.35), (34, 0.10)],
+                 "tmin_hot": [(15, 1.0), (18, 0.60), (21, 0.25)],
+                 "cold": [(0, 0.50), (3, 1.0)],
+                 "frost": [(-5, 0.25), (-2, 0.65), (0, 0.90), (2, 1.0)]},
+        # L. deliciosus (silicícola) i L. sanguifluus (calcícola) -> sense preferència de sòl
         "alt": [(0, 0.8), (200, 1.0), (1700, 1.0), (2000, 0.35), (2250, 0.0)],
-        "season_manual": ((9, 15), (12, 15)),
+        "season_manual": ((8, 20), (12, 15)),
     },
     "ceps": {
-        "alt": [(0, 0.8), (250, 1.0), (1700, 1.0), (2000, 0.40), (2300, 0.0)],
-        "soil": {"silici": 1.0, "silici_prov": 1.0, "mixt": 0.97, "calcari": 0.90, None: 0.97},
+        # [FONT] 20 dies de finestra tèrmica i 26 de pluja acumulada (B. edulis,
+        # bioRxiv); a la pràctica 8-14 dies després de la pluja. [EST] la corba.
+        "timing": [(3, 0.10), (6, 0.45), (9, 0.90), (11, 1.0), (20, 1.0), (28, 0.60), (38, 0.25)],
+        # [FONT] B. edulis: mitjana diària òptima ~13 °C (10-15 °C); B. aereus
+        # tolera/prefereix la calor; les gelades i el fred els frenen (Surt de
+        # Casa: "el fred d'alguns dies els ha frenat"). [EST] els números.
+        "heat": {"tmax_hot": [(25, 1.0), (28, 0.70), (31, 0.40), (34, 0.15)],
+                 "cold": [(0, 0.40), (4, 1.0)],
+                 "frost": [(-5, 0.20), (-2, 0.50), (0, 0.80), (2, 1.0)]},
+        # [EST] sobretot muntanya mitjana i alta (Pirineu, Prepirineu, Montseny,
+        # Guilleries); només a baixa altitud sota sureda (B. aereus). Penalitza
+        # la terra baixa perquè, mentre "pi_altres" és genèric (pins costaners
+        # inclosos), no surtin ceps a les pinedes de Barcelona.
+        "alt": [(0, 0.30), (200, 0.55), (400, 0.90), (550, 1.0), (1700, 1.0), (2000, 0.40), (2300, 0.0)],
+        # [FONT] sòls àcids; a la Serra dels Ports (calcaris) no apareixen
+        "soil": {"silici": 1.0, "silici_prov": 1.0, "mixt": 0.90, "calcari": 0.75, None: 0.95},
         "season_manual": ((6, 15), (11, 30)),
     },
     "camagrocs": {
-        "alt": [(0, 0.30), (300, 0.65), (600, 1.0), (1700, 1.0), (2000, 0.40), (2300, 0.0)],
+        # [FONT] bolet tardà de pinedes i molsa; necessita molta humitat i
+        # "no ha plogut prou" fins a l'octubre (Surt de Casa). [EST] la corba.
+        "timing": [(5, 0.10), (9, 0.35), (13, 0.80), (16, 1.0), (40, 1.0), (52, 0.60), (65, 0.25)],
+        # [FONT] tardor-hivern; costa/prelitoral a finals d'octubre-desembre,
+        # Pirineu <1.600 m a mitjans-finals d'octubre; tolera el fred.
+        "heat": {"tmax_hot": [(18, 1.0), (22, 0.60), (26, 0.25), (30, 0.05)],
+                 "tmin_hot": [(11, 1.0), (14, 0.60), (17, 0.20)],
+                 "frost": [(-8, 0.30), (-5, 0.60), (-3, 0.90), (-1, 1.0)]},
+        # [FONT] "a gairebé tot el país excepte les cotes altes del Pirineu";
+        # [EST] els números (pinedes prelitorals fins a 200-400 m).
+        "alt": [(0, 0.6), (200, 0.85), (400, 1.0), (1500, 1.0), (1800, 0.40), (2100, 0.0)],
         "soil": {"calcari": 1.0, "mixt": 1.0, "silici": 0.85, "silici_prov": 0.90, None: 0.95},
-        "season_manual": ((9, 10), (1, 5)),
+        "season_manual": ((9, 25), (1, 10)),
     },
     "trompetes": {
+        # [FONT] boscos humits i frescos de planifolis entre molsa (Surt de
+        # Casa); [EST] el moment i els números.
+        "timing": [(5, 0.10), (9, 0.40), (13, 0.85), (16, 1.0), (35, 1.0), (45, 0.60), (60, 0.25)],
+        "heat": {"tmax_hot": [(20, 1.0), (24, 0.60), (28, 0.25), (32, 0.05)],
+                 "tmin_hot": [(12, 1.0), (15, 0.60), (18, 0.20)],
+                 "frost": [(-6, 0.30), (-3, 0.65), (-1, 0.95), (1, 1.0)]},
         "alt": [(0, 0.20), (300, 0.60), (500, 1.0), (1500, 1.0), (1800, 0.40), (2100, 0.0)],
-        "season_manual": ((9, 15), (12, 20)),
+        # [FONT] prefereix sòls calcaris (Wikipedia: "heavy calcareous soil")
+        "soil": {"calcari": 1.0, "mixt": 1.0, "silici": 0.85, "silici_prov": 0.90, None: 0.95},
+        "season_manual": ((9, 1), (12, 10)),
     },
     "rossinyols": {
-        "alt": [(0, 0.70), (300, 1.0), (1800, 1.0), (2100, 0.40), (2400, 0.0)],
+        # [EST] surt relativament de pressa (1-2 setmanes)
+        "timing": [(3, 0.15), (5, 0.55), (7, 0.90), (9, 1.0), (18, 1.0), (26, 0.60), (36, 0.25)],
+        # [FONT] juny-octubre; són dels primers a sortir al Pirineu; la
+        # sequera i la calor els aturen; les gelades els fan malbé.
+        "heat": {"tmax_hot": [(26, 1.0), (29, 0.70), (32, 0.40), (35, 0.15)],
+                 "tmin_hot": [(18, 1.0), (21, 0.60)],
+                 "frost": [(-4, 0.25), (-2, 0.55), (0, 0.85), (2, 1.0)]},
+        # [FONT] "preferència per les zones de muntanya o subalpines" (ECat)
+        "alt": [(0, 0.45), (300, 0.75), (600, 1.0), (1800, 1.0), (2100, 0.40), (2400, 0.0)],
+        # [FONT] sòls àcids (consens de fonts generals)
+        "soil": {"silici": 1.0, "silici_prov": 1.0, "mixt": 0.90, "calcari": 0.80, None: 0.95},
         "season_manual": ((6, 10), (11, 10)),
     },
     "colmenilles": {
+        # [FONT] primavera (abril-maig a Catalunya; fins a juny a l'alta
+        # muntanya), zones remogudes/cremades fa 2-3 anys, ribes de riu.
+        "timing": [(3, 0.20), (6, 0.60), (8, 1.0), (20, 1.0), (28, 0.60), (38, 0.25)],
+        # [FONT] temperatura mitjana 9-13 °C a l'hivern-primavera (Iberia);
+        # sòl a ~8-12 °C; paren amb la calor. [EST] els números.
+        "heat": {"tmax": [(8, 0.25), (12, 0.75), (15, 1.0)],
+                 "tmax_hot": [(20, 1.0), (24, 0.60), (27, 0.25), (30, 0.05)],
+                 "tmin_hot": [(11, 1.0), (14, 0.50), (17, 0.15)],
+                 "frost": [(-6, 0.20), (-3, 0.50), (-1, 0.85), (1, 1.0)]},
         "alt": [(0, 0.90), (200, 1.0), (1600, 1.0), (1900, 0.40), (2200, 0.0)],
-        "season_manual": ((3, 5), (5, 31)),
+        # [FONT] M. esculenta: preferència per sòls calcaris (també àcids)
+        "soil": {"calcari": 1.0, "mixt": 1.0, "silici": 0.85, "silici_prov": 0.90, None: 0.95},
+        "season_manual": ((3, 1), (6, 5)),
     },
     "llengua": {
-        "alt": [(0, 0.70), (300, 1.0), (1600, 1.0), (1900, 0.40), (2200, 0.0)],
-        "season_manual": ((8, 20), (12, 20)),
+        # [FONT] boscos de coníferes i caducifolis, sòls àcids o mixtos; ~[EST] moment
+        "timing": [(4, 0.15), (7, 0.50), (10, 0.90), (12, 1.0), (28, 1.0), (38, 0.60), (50, 0.25)],
+        "heat": {"tmax_hot": [(24, 1.0), (28, 0.60), (32, 0.25)],
+                 "frost": [(-5, 0.30), (-2, 0.65), (0, 0.90), (2, 1.0)]},
+        "alt": [(0, 0.50), (300, 0.85), (500, 1.0), (1600, 1.0), (1900, 0.40), (2200, 0.0)],
+        "soil": {"silici": 1.0, "silici_prov": 1.0, "mixt": 1.0, "calcari": 0.80, None: 0.95},
+        "season_manual": ((8, 25), (12, 10)),
     },
     "pinetell": {
-        "alt": [(0, 0.80), (200, 1.0), (1700, 1.0), (2000, 0.40), (2250, 0.0)],
-        "season_manual": ((9, 25), (12, 15)),
+        # [FONT] DIEC: pinetell = rovelló de les pinedes de muntanya
+        # (Lactarius deliciosus). Mateix moment que els rovellons.
+        "timing": [(5, 0.10), (9, 0.40), (12, 0.85), (14, 1.0), (32, 1.0), (42, 0.60), (56, 0.25)],
+        "heat": {"tmax_hot": [(22, 1.0), (26, 0.60), (30, 0.30), (33, 0.10)],
+                 "tmin_hot": [(13, 1.0), (16, 0.60), (19, 0.25)],
+                 "cold": [(-2, 0.50), (1, 1.0)],
+                 "frost": [(-6, 0.25), (-3, 0.60), (-1, 0.90), (1, 1.0)]},
+        "alt": [(0, 0.60), (400, 0.90), (700, 1.0), (1700, 1.0), (2000, 0.40), (2250, 0.0)],
+        # [FONT] L. deliciosus: silicícola (MITECO); a la Rioja "tots els sòls"
+        "soil": {"silici": 1.0, "silici_prov": 1.0, "mixt": 0.95, "calcari": 0.85, None: 0.97},
+        "season_manual": ((9, 1), (11, 30)),
     },
     "fredolic": {
-        # bolet tardà de terra baixa (fins poc abans de Nadal)
+        # [FONT] bolet tardà de terra baixa (fins poc abans de Nadal) i que
+        # necessita més fred que els altres (Surt de Casa/ECat); [EST] números.
+        "timing": [(5, 0.15), (9, 0.60), (12, 1.0), (32, 1.0), (42, 0.60), (56, 0.25)],
+        "heat": {"tmax_hot": [(20, 1.0), (24, 0.60), (28, 0.25), (32, 0.05)],
+                 "tmin_hot": [(12, 1.0), (15, 0.50), (18, 0.15)],
+                 "frost": [(-8, 0.30), (-5, 0.65), (-2, 0.95)]},
         "alt": [(0, 1.0), (900, 1.0), (1300, 0.50), (1700, 0.15), (2000, 0.0)],
-        "season_manual": ((10, 1), (12, 31)),
+        "season_manual": ((10, 5), (12, 31)),
     },
 }
 
@@ -1222,14 +1330,14 @@ def derive_weather_view(entry, today=None):
     }
     if not series or not series.get("d0"):
         view = dict(legacy)
-        view.update({"events": None, "tmin_7d": None, "tmax_7d": None, "has_series": False})
+        view.update({"events": None, "tmin_7d": None, "tmax_7d": None, "tmin_abs_7d": None, "has_series": False})
         return view
 
     try:
         d0 = datetime.fromisoformat(series["d0"]).date()
     except (ValueError, TypeError):
         view = dict(legacy)
-        view.update({"events": None, "tmin_7d": None, "tmax_7d": None, "has_series": False})
+        view.update({"events": None, "tmin_7d": None, "tmax_7d": None, "tmin_abs_7d": None, "has_series": False})
         return view
 
     # Només dies COMPLETS (fins ahir): el d'avui és parcial / previsió.
@@ -1247,6 +1355,8 @@ def derive_weather_view(entry, today=None):
         return round(sum(vals) / len(vals), 1) if vals else None
 
     tmin_7d, tmax_7d = avg_last(tmin_l, 7), avg_last(tmax_l, 7)
+    last_mins = [v for v in tmin_l[-7:] if v is not None]
+    tmin_abs_7d = round(min(last_mins), 1) if last_mins else None   # nit més freda (gelades)
     view = dict(legacy)
     if events:
         last = events[-1]
@@ -1258,7 +1368,7 @@ def derive_weather_view(entry, today=None):
     if tmin_7d is not None and tmax_7d is not None:
         view["min_temp"] = round(tmin_7d)
         view["avg_temp"] = round((tmin_7d + tmax_7d) / 2)
-    view.update({"events": events, "tmin_7d": tmin_7d, "tmax_7d": tmax_7d, "has_series": True})
+    view.update({"events": events, "tmin_7d": tmin_7d, "tmax_7d": tmax_7d, "tmin_abs_7d": tmin_abs_7d, "has_series": True})
     return view
 
 
@@ -1974,24 +2084,58 @@ def altitude_multiplier(sp, alt):
     return mult, text
 
 
-def heat_multiplier(sp, tmin, tmax):
-    """Limitant de CALOR per a espècies termòfiles (ou de reig). tmin/tmax:
-    mitjana dels darrers 7 dies. Si no hi ha tmax es dedueix de la mitjana."""
+def heat_multiplier(sp, tmin, tmax, tmin_abs=None):
+    """
+    Limitant de TEMPERATURA (calor, fred i gelada) segons el perfil de
+    l'espècie (veure la clau "heat" de SPECIES_BIO). tmin/tmax: mitjana dels
+    darrers 7 dies; tmin_abs: la nit més freda d'aquests 7 dies. Cada
+    component dóna un multiplicador i es queda el PITJOR (no es multipliquen
+    entre si, perquè parlen de la mateixa cosa). Retorna (mult, text|None).
+    """
     heat = SPECIES_BIO.get(sp["id"], {}).get("heat")
     if not heat or tmin is None:
         return 1.0, None
-    m_min = interp_curve(heat["tmin"], tmin)
-    m_max = interp_curve(heat["tmax"], tmax) if tmax is not None else 1.0
-    mult = min(m_min, m_max)
-    text = None
-    if mult < 0.9:
-        t_full_min, t_full_max = heat["tmin"][-1][0], heat["tmax"][-1][0]
-        mx = f"{tmax:.0f}" if tmax is not None else "?"
-        intro = "Demasiado fresco" if mult < 0.7 else "Algo justo de calor"
-        text = (f"{intro} para esta especie, que necesita calor "
-                f"(últimos 7 días: mínimas {tmin:.0f}°C y máximas {mx}°C; "
-                f"lo ideal es ≥{t_full_min}°C y ≥{t_full_max}°C)")
-    return mult, text
+
+    parts = []   # (multiplicador, text)
+
+    def fmt(v):
+        return "?" if v is None else f"{v:.0f}"
+
+    thermophile = "tmin" in heat           # necessita calor de nit i de dia (ou de reig)
+    if thermophile or ("tmax" in heat and tmax is not None):
+        m_min = interp_curve(heat["tmin"], tmin) if "tmin" in heat else 1.0
+        m_max = interp_curve(heat["tmax"], tmax) if ("tmax" in heat and tmax is not None) else 1.0
+        m = min(m_min, m_max)
+        if thermophile:
+            ideal = f"lo ideal es ≥{heat['tmin'][-1][0]}°C"
+            if "tmax" in heat:
+                ideal += f" y ≥{heat['tmax'][-1][0]}°C"
+            parts.append((m, ("Demasiado fresco" if m < 0.7 else "Algo justo de calor")
+                          + " para esta especie, que necesita calor "
+                          + f"(últimos 7 días: mínimas {fmt(tmin)}°C y máximas {fmt(tmax)}°C; {ideal})"))
+        else:
+            parts.append((m, f"Aún demasiado fresco: necesita días templados (máximas de {fmt(tmax)}°C "
+                             f"en los últimos 7 días; lo ideal es ≥{heat['tmax'][-1][0]}°C)"))
+    if "cold" in heat:     # fred sostingut (mínimes mitjanes baixes)
+        m = interp_curve(heat["cold"], tmin)
+        parts.append((m, f"Frío sostenido para esta especie (mínimas medias de {fmt(tmin)}°C en los últimos 7 días)"))
+    if "frost" in heat and tmin_abs is not None:
+        m = interp_curve(heat["frost"], tmin_abs)
+        parts.append((m, f"Helada o noches muy frías (mínima de {fmt(tmin_abs)}°C en los últimos 7 días): "
+                         "esta especie se resiente"))
+    if "tmax_hot" in heat and tmax is not None:
+        m = interp_curve(heat["tmax_hot"], tmax)
+        parts.append((m, f"Demasiado calor para esta especie (máximas de {fmt(tmax)}°C en los últimos 7 días; "
+                         f"lo ideal es ≤{heat['tmax_hot'][0][0]}°C)"))
+    if "tmin_hot" in heat:
+        m = interp_curve(heat["tmin_hot"], tmin)
+        parts.append((m, f"Noches demasiado cálidas para esta especie (mínimas medias de {fmt(tmin)}°C; "
+                         f"lo ideal es ≤{heat['tmin_hot'][0][0]}°C)"))
+
+    if not parts:
+        return 1.0, None
+    mult, text = min(parts, key=lambda t: t[0])
+    return mult, (text if mult < 0.9 else None)
 
 
 def soil_multiplier(sp, geologia):
@@ -2075,6 +2219,7 @@ def species_score(sp, rain_10d, min_temp, tree, days_since_rain, alt, month, aem
     # --- Temperatura mínima (0-20 punts, amb marges tous) ---
     tmin_now = wx.get("tmin_7d") if wx and wx.get("tmin_7d") is not None else min_temp
     tmax_now = wx.get("tmax_7d") if wx and wx.get("tmax_7d") is not None else None
+    tmin_abs_now = wx.get("tmin_abs_7d") if wx else None
     tlo, thi = sp["temp_range"]
     if tlo <= tmin_now <= thi:
         temp_score = 20
@@ -2142,7 +2287,7 @@ def species_score(sp, rain_10d, min_temp, tree, days_since_rain, alt, month, aem
         factors.append(timing_multiplier(sp, event_age))
     factors.append(season_multiplier(sp, today, gbif_data))
     factors.append(altitude_multiplier(sp, alt))
-    factors.append(heat_multiplier(sp, tmin_now, tmax_now))
+    factors.append(heat_multiplier(sp, tmin_now, tmax_now, tmin_abs_now))
     factors.append(soil_multiplier(sp, geologia))
 
     limit_mult = 1.0
