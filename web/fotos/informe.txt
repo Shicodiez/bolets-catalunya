@@ -1,4 +1,4 @@
-Fotos: 37 de 37 huecos cubiertos (2026-10-15 16:48 UTC)
+Fotos: 58 de 58 huecos cubiertos (2026-10-15 18:25 UTC)
 IGUAL  phalloides #1  Amanita phalloides: File:Amanita phalloides 1.JPG  (CC BY-SA 3.0) [ya estaba]
 IGUAL  amanitas-blancas #1  Amanita verna: File:Amanita verna 3.jpg  (CC BY-SA 4.0) [ya estaba]
 IGUAL  amanitas-blancas #2  Amanita virosa: File:Destroying Angel 02.jpg  (Public domain) [ya estaba]
@@ -17,12 +17,12 @@ IGUAL  pardinum #1  Tricholoma pardinum: File:Tricholoma filamentosum 01.jpg  (C
 IGUAL  omphalotus #1  Omphalotus olearius: File:Omphalotus olearius.JPG  (Public domain) [ya estaba]
 IGUAL  muscaria #1  Amanita muscaria: File:Amanita muscaria Aberystwyth 2023.jpg  (CC BY 4.0) [ya estaba]
 IGUAL  muscaria #2  Amanita pantherina: File:Amanita pantherina 2013 G1.jpg  (Public domain) [ya estaba]
-OK     torminosus #1  Lactarius torminosus: File:Lactarius torminosus 041031w.jpg  (CC BY-SA 3.0, 74 KB)
+IGUAL  torminosus #1  Lactarius torminosus: File:Lactarius torminosus 041031w.jpg  (CC BY-SA 3.0) [ya estaba]
 IGUAL  rovellons #1  Lactarius deliciosus: File:Lactarius deliciosus.jpg  (CC BY-SA 3.0) [ya estaba]
 IGUAL  rovellons #2  Lactarius sanguifluus: File:Weinroter Kiefern-Reizker Lactarius sanguifluus.jpg  (CC BY 3.0) [ya estaba]
 IGUAL  cep #1  Boletus edulis: File:Boletus edulis IT.jpg  (CC BY-SA 4.0) [ya estaba]
-OK     cep #2  Boletus aereus: File:Boletus aereus IT.JPG  (Public domain, 87 KB)
-OK     cep #3  Boletus reticulatus: File:Boletus reticulatus (28576784573).jpg  (CC BY-SA 2.0, 67 KB)
+IGUAL  cep #2  Boletus aereus: File:Boletus aereus IT.JPG  (Public domain) [ya estaba]
+IGUAL  cep #3  Boletus reticulatus: File:Boletus reticulatus (28576784573).jpg  (CC BY-SA 2.0) [ya estaba]
 IGUAL  camagrocs #1  Craterellus lutescens: File:Cantharellus lutescens.jpg  (CC BY-SA 3.0) [ya estaba]
 IGUAL  rossinyols #1  Cantharellus cibarius: File:Chanterelle Cantharellus cibarius.jpg  (CC BY-SA 3.0) [ya estaba]
 IGUAL  trompetes #1  Craterellus cornucopioides: File:Craterellus cornucopioides JPG1.jpg  (CC BY 3.0) [ya estaba]
@@ -36,3 +36,24 @@ IGUAL  llenega #1  Hygrophorus latitabundus: File:Hygrophorus latitabundus1.JPG 
 IGUAL  apagallums #1  Macrolepiota procera: File:Parasol-Macrolepiota-procera.jpg  (CC BY 3.0) [ya estaba]
 IGUAL  camasec #1  Marasmius oreades: File:Michigan Marasmius oreades.jpg  (CC BY 4.0) [ya estaba]
 IGUAL  moixerno #1  Calocybe gambosa: File:Calocybe gambosa 080420wa.jpg  (CC BY-SA 4.0) [ya estaba]
+OK     hypholoma #1  Hypholoma fasciculare: File:Hypholoma fasciculare Queteraro.jpg  (CC BY-SA 4.0, 105 KB)
+OK     chrysorrheus #1  Lactarius chrysorrheus: File:Lact.chry.jpg  (CC BY 3.0, 76 KB) [REVISAR: el nombre del archivo no menciona «chrysorrheus»]
+OK     paxillus #1  Paxillus involutus: File:Navadne podvihanke (Paxillus involutus).jpg  (CC BY-SA 4.0, 50 KB)
+OK     xanthodermus #1  Agaricus xanthodermus: File:Agaricus xanthodermus section.jpg  (CC BY-SA 3.0, 91 KB)
+OK     equestre #1  Tricholoma equestre: File:Tricholoma equestre.jpg  (CC BY-SA 3.0, 67 KB)
+OK     atramentaria #1  Coprinopsis atramentaria: File:Coprinopsis atramentaria 3 - Lindsey.jpg  (CC BY-SA 3.0, 80 KB)
+OK     emetica #1  Russula emetica: File:Russula emetica in Poland.jpg  (CC BY-SA 4.0, 97 KB)
+OK     vinosa #1  Amanita rubescens: File:Amanita rubescens.JPG  (CC BY-SA 3.0, 79 KB)
+OK     camperol #1  Agaricus campestris: File:Agaricus campestris.jpg  (CC BY-SA 3.0, 64 KB)
+OK     pimpinella #1  Lepista nuda: File:Clitocybe nuda (Fr.) H.E. Bigelow & A.H. Sm 267650.jpg  (CC BY-SA 3.0, 84 KB)
+OK     alzinoi #1  Armillaria mellea: File:Armillaria mellea, Honey Fungus, UK 1.jpg  (CC BY-SA 3.0, 69 KB)
+OK     molleric #1  Suillus luteus: File:Suillus luteus 475376.jpg  (CC BY-SA 3.0, 79 KB)
+OK     molleric #2  Suillus granulatus: File:Körnchen-Röhrling Suillus granulatus 1.jpg  (CC BY 3.0, 65 KB)
+OK     coprinus #1  Coprinus comatus: File:Coprinus comatus, the shaggy ink cap, lawyer's wig, or shaggy mane mushroom.jpg  (CC BY-SA 4.0, 105 KB)
+OK     orellana #1  Pleurotus ostreatus: File:Pleurotus ostreatus JPG7.jpg  (CC BY 3.0, 57 KB)
+OK     llora #1  Russula cyanoxantha: File:Russula cyanoxantha (44290996435).jpg  (CC BY-SA 2.0, 48 KB)
+OK     molinera #1  Clitopilus prunulus: File:Clitopilus prunulus - BC, 2024.jpg  (CC BY-SA 4.0, 72 KB)
+OK     fredolic-gros #1  Tricholoma portentosum: File:Tricholoma portentosum 181316.jpg  (CC BY-SA 3.0, 70 KB)
+OK     pampa #1  Infundibulicybe geotropa: File:Clitocybe geotropa JPG1.jpg  (CC BY 3.0, 79 KB)
+OK     pollancro #1  Cyclocybe cylindracea: File:Agrocybe aegerita.jpg  (CC BY-SA 3.0, 56 KB)
+OK     marcot #1  Hygrophorus marzuolus: File:HYGROPHORUS MARZUOLUS (F. Fr.)Bresadola (5731129003).jpg  (CC BY 2.0, 72 KB)

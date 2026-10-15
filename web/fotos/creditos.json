@@ -1,4 +1,16 @@
 {
+ "alzinoi": [
+  {
+   "archivo": "File:Armillaria mellea, Honey Fungus, UK 1.jpg",
+   "autor": "Stu's Images",
+   "f": "fotos/alzinoi-1.jpg",
+   "hueco": 0,
+   "lic": "CC BY-SA 3.0",
+   "licurl": "https://creativecommons.org/licenses/by-sa/3.0",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Armillaria_mellea,_Honey_Fungus,_UK_1.jpg",
+   "sp": "Armillaria mellea"
+  }
+ ],
  "amanitas-blancas": [
   {
    "archivo": "File:Amanita verna 3.jpg",
@@ -33,6 +45,18 @@
    "sp": "Macrolepiota procera"
   }
  ],
+ "atramentaria": [
+  {
+   "archivo": "File:Coprinopsis atramentaria 3 - Lindsey.jpg",
+   "autor": "James Lindsey",
+   "f": "fotos/atramentaria-1.jpg",
+   "hueco": 0,
+   "lic": "CC BY-SA 3.0",
+   "licurl": "https://creativecommons.org/licenses/by-sa/3.0",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Coprinopsis_atramentaria_3_-_Lindsey.jpg",
+   "sp": "Coprinopsis atramentaria"
+  }
+ ],
  "camagrocs": [
   {
    "archivo": "File:Cantharellus lutescens.jpg",
@@ -55,6 +79,18 @@
    "licurl": "https://creativecommons.org/licenses/by/4.0",
    "pagina": "https://commons.wikimedia.org/wiki/File:Michigan_Marasmius_oreades.jpg",
    "sp": "Marasmius oreades"
+  }
+ ],
+ "camperol": [
+  {
+   "archivo": "File:Agaricus campestris.jpg",
+   "autor": "autor desconocido",
+   "f": "fotos/camperol-1.jpg",
+   "hueco": 0,
+   "lic": "CC BY-SA 3.0",
+   "licurl": "https://creativecommons.org/licenses/by-sa/3.0",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Agaricus_campestris.jpg",
+   "sp": "Agaricus campestris"
   }
  ],
  "cep": [
@@ -87,6 +123,18 @@
    "licurl": "https://creativecommons.org/licenses/by-sa/2.0",
    "pagina": "https://commons.wikimedia.org/wiki/File:Boletus_reticulatus_(28576784573).jpg",
    "sp": "Boletus reticulatus"
+  }
+ ],
+ "chrysorrheus": [
+  {
+   "archivo": "File:Lact.chry.jpg",
+   "autor": "Zonda Grattus, aka Luridiformis at en.wikipedia (the sole owner and copyright holder of this image)",
+   "f": "fotos/chrysorrheus-1.jpg",
+   "hueco": 0,
+   "lic": "CC BY 3.0",
+   "licurl": "https://creativecommons.org/licenses/by/3.0",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Lact.chry.jpg",
+   "sp": "Lactarius chrysorrheus"
   }
  ],
  "clitocybe": [
@@ -123,6 +171,18 @@
    "sp": "Morchella elata"
   }
  ],
+ "coprinus": [
+  {
+   "archivo": "File:Coprinus comatus, the shaggy ink cap, lawyer's wig, or shaggy mane mushroom.jpg",
+   "autor": "Bigredwine1",
+   "f": "fotos/coprinus-1.jpg",
+   "hueco": 0,
+   "lic": "CC BY-SA 4.0",
+   "licurl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Coprinus_comatus,_the_shaggy_ink_cap,_lawyer%27s_wig,_or_shaggy_mane_mushroom.jpg",
+   "sp": "Coprinus comatus"
+  }
+ ],
  "cortinarius": [
   {
    "archivo": "File:Corellanus.jpg",
@@ -135,6 +195,18 @@
    "sp": "Cortinarius orellanus"
   }
  ],
+ "emetica": [
+  {
+   "archivo": "File:Russula emetica in Poland.jpg",
+   "autor": "MichalPL",
+   "f": "fotos/emetica-1.jpg",
+   "hueco": 0,
+   "lic": "CC BY-SA 4.0",
+   "licurl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Russula_emetica_in_Poland.jpg",
+   "sp": "Russula emetica"
+  }
+ ],
  "entoloma": [
   {
    "archivo": "File:Entoloma sinuatum group.JPG",
@@ -145,6 +217,18 @@
    "licurl": "http://creativecommons.org/licenses/by-sa/3.0/",
    "pagina": "https://commons.wikimedia.org/wiki/File:Entoloma_sinuatum_group.JPG",
    "sp": "Entoloma sinuatum"
+  }
+ ],
+ "equestre": [
+  {
+   "archivo": "File:Tricholoma equestre.jpg",
+   "autor": "autor desconocido",
+   "f": "fotos/equestre-1.jpg",
+   "hueco": 0,
+   "lic": "CC BY-SA 3.0",
+   "licurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Tricholoma_equestre.jpg",
+   "sp": "Tricholoma equestre"
   }
  ],
  "escarlet": [
@@ -171,6 +255,18 @@
    "sp": "Tricholoma terreum"
   }
  ],
+ "fredolic-gros": [
+  {
+   "archivo": "File:Tricholoma portentosum 181316.jpg",
+   "autor": "Dan Molter (shroomydan)",
+   "f": "fotos/fredolic-gros-1.jpg",
+   "hueco": 0,
+   "lic": "CC BY-SA 3.0",
+   "licurl": "https://creativecommons.org/licenses/by-sa/3.0",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Tricholoma_portentosum_181316.jpg",
+   "sp": "Tricholoma portentosum"
+  }
+ ],
  "galerina": [
   {
    "archivo": "File:Galerina marginata Point Reyes.jpg",
@@ -193,6 +289,18 @@
    "licurl": "http://creativecommons.org/licenses/by-sa/3.0/",
    "pagina": "https://commons.wikimedia.org/wiki/File:Fr%C3%BChjahrslorchel.JPG",
    "sp": "Gyromitra esculenta"
+  }
+ ],
+ "hypholoma": [
+  {
+   "archivo": "File:Hypholoma fasciculare Queteraro.jpg",
+   "autor": "Alan Rockefeller",
+   "f": "fotos/hypholoma-1.jpg",
+   "hueco": 0,
+   "lic": "CC BY-SA 4.0",
+   "licurl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Hypholoma_fasciculare_Queteraro.jpg",
+   "sp": "Hypholoma fasciculare"
   }
  ],
  "inosperma": [
@@ -243,6 +351,18 @@
    "sp": "Hydnum repandum"
   }
  ],
+ "llora": [
+  {
+   "archivo": "File:Russula cyanoxantha (44290996435).jpg",
+   "autor": "Björn S...",
+   "f": "fotos/llora-1.jpg",
+   "hueco": 0,
+   "lic": "CC BY-SA 2.0",
+   "licurl": "https://creativecommons.org/licenses/by-sa/2.0",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Russula_cyanoxantha_(44290996435).jpg",
+   "sp": "Russula cyanoxantha"
+  }
+ ],
  "luridos": [
   {
    "archivo": "File:2010-09-13 Boletus luridus Schaeff 104527 crop.jpg",
@@ -265,6 +385,18 @@
    "sp": "Neoboletus erythropus"
   }
  ],
+ "marcot": [
+  {
+   "archivo": "File:HYGROPHORUS MARZUOLUS (F. Fr.)Bresadola (5731129003).jpg",
+   "autor": "GLJIVARSKO DRUSTVO NIS from Serbia",
+   "f": "fotos/marcot-1.jpg",
+   "hueco": 0,
+   "lic": "CC BY 2.0",
+   "licurl": "https://creativecommons.org/licenses/by/2.0",
+   "pagina": "https://commons.wikimedia.org/wiki/File:HYGROPHORUS_MARZUOLUS_(F._Fr.)Bresadola_(5731129003).jpg",
+   "sp": "Hygrophorus marzuolus"
+  }
+ ],
  "moixerno": [
   {
    "archivo": "File:Calocybe gambosa 080420wa.jpg",
@@ -275,6 +407,40 @@
    "licurl": "https://creativecommons.org/licenses/by-sa/4.0",
    "pagina": "https://commons.wikimedia.org/wiki/File:Calocybe_gambosa_080420wa.jpg",
    "sp": "Calocybe gambosa"
+  }
+ ],
+ "molinera": [
+  {
+   "archivo": "File:Clitopilus prunulus - BC, 2024.jpg",
+   "autor": "Shmarshall",
+   "f": "fotos/molinera-1.jpg",
+   "hueco": 0,
+   "lic": "CC BY-SA 4.0",
+   "licurl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Clitopilus_prunulus_-_BC,_2024.jpg",
+   "sp": "Clitopilus prunulus"
+  }
+ ],
+ "molleric": [
+  {
+   "archivo": "File:Suillus luteus 475376.jpg",
+   "autor": "walt sturgeon (Mycowalt)",
+   "f": "fotos/molleric-1.jpg",
+   "hueco": 0,
+   "lic": "CC BY-SA 3.0",
+   "licurl": "https://creativecommons.org/licenses/by-sa/3.0",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Suillus_luteus_475376.jpg",
+   "sp": "Suillus luteus"
+  },
+  {
+   "archivo": "File:Körnchen-Röhrling Suillus granulatus 1.jpg",
+   "autor": "Holger Krisp",
+   "f": "fotos/molleric-2.jpg",
+   "hueco": 1,
+   "lic": "CC BY 3.0",
+   "licurl": "https://creativecommons.org/licenses/by/3.0",
+   "pagina": "https://commons.wikimedia.org/wiki/File:K%C3%B6rnchen-R%C3%B6hrling_Suillus_granulatus_1.jpg",
+   "sp": "Suillus granulatus"
   }
  ],
  "muscaria": [
@@ -311,6 +477,18 @@
    "sp": "Omphalotus olearius"
   }
  ],
+ "orellana": [
+  {
+   "archivo": "File:Pleurotus ostreatus JPG7.jpg",
+   "autor": "voir ci-dessous / see below",
+   "f": "fotos/orellana-1.jpg",
+   "hueco": 0,
+   "lic": "CC BY 3.0",
+   "licurl": "https://creativecommons.org/licenses/by/3.0",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Pleurotus_ostreatus_JPG7.jpg",
+   "sp": "Pleurotus ostreatus"
+  }
+ ],
  "oureig": [
   {
    "archivo": "File:Oronges.jpg",
@@ -321,6 +499,18 @@
    "licurl": "https://creativecommons.org/licenses/by-sa/3.0",
    "pagina": "https://commons.wikimedia.org/wiki/File:Oronges.jpg",
    "sp": "Amanita caesarea"
+  }
+ ],
+ "pampa": [
+  {
+   "archivo": "File:Clitocybe geotropa JPG1.jpg",
+   "autor": "Jean-Pol GRANDMONT",
+   "f": "fotos/pampa-1.jpg",
+   "hueco": 0,
+   "lic": "CC BY 3.0",
+   "licurl": "https://creativecommons.org/licenses/by/3.0",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Clitocybe_geotropa_JPG1.jpg",
+   "sp": "Infundibulicybe geotropa"
   }
  ],
  "pardinum": [
@@ -335,6 +525,18 @@
    "sp": "Tricholoma pardinum"
   }
  ],
+ "paxillus": [
+  {
+   "archivo": "File:Navadne podvihanke (Paxillus involutus).jpg",
+   "autor": "Petar Milošević",
+   "f": "fotos/paxillus-1.jpg",
+   "hueco": 0,
+   "lic": "CC BY-SA 4.0",
+   "licurl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Navadne_podvihanke_(Paxillus_involutus).jpg",
+   "sp": "Paxillus involutus"
+  }
+ ],
  "phalloides": [
   {
    "archivo": "File:Amanita phalloides 1.JPG",
@@ -345,6 +547,30 @@
    "licurl": "http://creativecommons.org/licenses/by-sa/3.0/",
    "pagina": "https://commons.wikimedia.org/wiki/File:Amanita_phalloides_1.JPG",
    "sp": "Amanita phalloides"
+  }
+ ],
+ "pimpinella": [
+  {
+   "archivo": "File:Clitocybe nuda (Fr.) H.E. Bigelow & A.H. Sm 267650.jpg",
+   "autor": "This image was created by user Jimmie Veitch (jimmiev) at Mushroom Observer, a source for mycological images.You can con",
+   "f": "fotos/pimpinella-1.jpg",
+   "hueco": 0,
+   "lic": "CC BY-SA 3.0",
+   "licurl": "https://creativecommons.org/licenses/by-sa/3.0",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Clitocybe_nuda_(Fr.)_H.E._Bigelow_%26_A.H._Sm_267650.jpg",
+   "sp": "Lepista nuda"
+  }
+ ],
+ "pollancro": [
+  {
+   "archivo": "File:Agrocybe aegerita.jpg",
+   "autor": "Ramiro Barreiro",
+   "f": "fotos/pollancro-1.jpg",
+   "hueco": 0,
+   "lic": "CC BY-SA 3.0",
+   "licurl": "https://creativecommons.org/licenses/by-sa/3.0",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Agrocybe_aegerita.jpg",
+   "sp": "Cyclocybe cylindracea"
   }
  ],
  "rossinyols": [
@@ -427,6 +653,30 @@
    "licurl": "https://creativecommons.org/licenses/by-sa/2.5",
    "pagina": "https://commons.wikimedia.org/wiki/File:2006-09-14_Tylopilus_felleus_crop.jpg",
    "sp": "Tylopilus felleus"
+  }
+ ],
+ "vinosa": [
+  {
+   "archivo": "File:Amanita rubescens.JPG",
+   "autor": "No machine-readable author provided. Archenzo assumed (based on copyright claims).",
+   "f": "fotos/vinosa-1.jpg",
+   "hueco": 0,
+   "lic": "CC BY-SA 3.0",
+   "licurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Amanita_rubescens.JPG",
+   "sp": "Amanita rubescens"
+  }
+ ],
+ "xanthodermus": [
+  {
+   "archivo": "File:Agaricus xanthodermus section.jpg",
+   "autor": "Velella",
+   "f": "fotos/xanthodermus-1.jpg",
+   "hueco": 0,
+   "lic": "CC BY-SA 3.0",
+   "licurl": "https://creativecommons.org/licenses/by-sa/3.0",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Agaricus_xanthodermus_section.jpg",
+   "sp": "Agaricus xanthodermus"
   }
  ]
 }
