@@ -52,13 +52,14 @@ con verificación de email)
 - `data/resultats.json` — el resultado del cálculo. La web lo lee.
 - `data/zones_grid.json` — caché permanente de la rejilla (coordenadas y
   altitud real de cada punto — nunca caduca, se genera una sola vez).
-- `data/bosc_cache.json` — caché del tipo de bosque genérico por zona (ICGC), 30 días.
-- `data/vegetacio_layers_cache.json` — caché de capas de especie de árbol (VEGETACIO), 90 días.
+- `data/bosc_cache.json` — caché del tipo de bosque genérico por zona (ICGC), 1 año.
+- `data/vegetacio_layers_cache.json` — lista de capas de especie de árbol (VEGETACIO, 90 días) **y** la especie exacta ya resuelta de cada punto (`points`, se completa por lotes y se conserva entre ejecuciones).
+- `data/weather_block_cache.json` — caché de tiempo por punto, con su **serie diaria propia** (hasta 45 días de lluvia y temperaturas) para detectar episodios de lluvia sin pedir más datos a Open-Meteo.
 - `data/gbif_cache.json` — caché de distribución mensual y de altitud de cada especie según GBIF/FungaCAT, 60 días.
 - `data/historial_lluvia.json` — historial propio de lluvia diaria vía Meteoclimatic, 30 días.
 - `data/geocode_cache.json` — caché permanente de coordenadas de estaciones de Meteoclimatic (Nominatim).
 - `data/meteocat_stations_cache.json` — caché de metadatos de estaciones XEMA/Meteocat, 90 días.
-- `data/geologia_cache.json` — caché permanente de litología (silici/calcari) por zona, 180 días.
+- `data/geologia_cache.json` — caché permanente de litología (silici/calcari/mixt) por coordenadas, con el texto original del ICGC para poder reclasificar sin volver a consultar.
 - `data/zone_names_cache.json` — caché permanente de nombres reales de las zonas (Nominatim, reverse geocoding).
 - `data/evolucion.json` — snapshot diario de la mejor puntuación por zona, 30 días.
 - `data/hallazgos.json` — salidas reales registradas por los usuarios. Se actualiza vía el Worker.
@@ -108,12 +109,19 @@ intervención manual: **SIAR**, **Ecowitt**, **Weather Underground**,
 
 ### Cómo funciona el cálculo
 
-Para cada uno de los ~1.470 puntos de la rejilla, y cada una de las 10
-especies del catálogo, se calcula una **puntuación de 0 a 100** sumando
-evidencia de seis componentes:
+Para cada punto de la rejilla (~4.250 tras eliminar duplicados a menos de
+0,5 km), y cada una de las 10 especies del catálogo, se calcula una
+**puntuación de 0 a 100** en dos pasos: primero se suma evidencia de seis
+componentes y después se **multiplica por los limitantes biológicos**
+(ver más abajo). Componentes de la suma:
 
-- **Lluvia acumulada** (0-22 pts) desde el inicio de la tanda de lluvias actual
-- **Días desde que empezó a llover** (0-25 pts) — cada especie tiene su rango
+- **Lluvia acumulada** (0-22 pts) del episodio de lluvia elegido
+- **Días desde la lluvia principal** (0-25 pts) — cada especie tiene su rango.
+  Ya NO se mide desde el último chubasco: un episodio es un grupo de días
+  mojados (≥2 mm, huecos de hasta 4 días secos, ≥8 mm en total) y se
+  fecha por el día en que había caído la mitad del agua. Un chubasco
+  posterior de 3 mm no «reinicia» el reloj. Cada especie elige el episodio
+  que mejor le encaja.
 - **Temperatura mínima nocturna** (0-20 pts) — no la media del día
 - **Humedad real del suelo** (0-8 pts) — distingue si el agua caída sigue
   en la tierra o se ha perdido, con bonus si la tendencia es a
@@ -128,8 +136,31 @@ evidencia de seis componentes:
   máxima (cobertura directa del punto exacto); si no hay radar, se usa la
   triangulación de estaciones (AEMET+Meteocat+Meteoclimatic)
 
-El único requisito "duro" (que descarta una especie por completo) es el
-tipo de bosque — el resto es gradual.
+### Limitantes biológicos (`SPECIES_BIO`)
+
+Antes todo era una suma: una especie podía llegar a 90 aunque fallara lo
+más importante. Ahora cada especie tiene limitantes que **multiplican**
+(0-1) el resultado: **momento** respecto a la lluvia principal, **época
+del año**, **altitud**, **calor** (mínimas y máximas de los últimos 7 días)
+y **geología**. Si un limitante vale 0,3 la puntuación no pasa de 30. La
+web muestra los que están actuando (⚠️) y el Worker se los pasa a la IA
+para que explique el porqué.
+
+Ejemplo, Ou de reig (*Amanita caesarea*): sale **15-20 días** después de la
+lluvia principal, necesita **noches ≥ ~12 °C y máximas ≥ ~22 °C**, casi no
+pasa de **1.000 m**, es de **agosto a octubre** y prefiere suelos **ácidos**
+(silici). Casos reales que lo motivaron (15/10/2026): Montnegre marcaba 88-92
+solo 7 días después de ~170 mm; Matadepera (conglomerados con cemento
+calcáreo) salía como «silici»; salían ou de reig a 1.986 m y colmenilles
+(seta de primavera) a 71 en octubre. Con las mismas condiciones hoy puntúan
+~25-38. Las curvas son valores de partida **calibrables** con las salidas
+reales (`hallazgos`): `SPECIES_BIO` es el único sitio donde tocar.
+
+Además de los limitantes, el tipo de bosque sigue siendo un requisito duro:
+si el árbol no está en la lista `trees` de la especie, puntúa 0. Cuando
+VEGETACIO afina el tipo (pino rojo, pino blanco, abeto, haya, alcornoque…),
+las listas incluyen esos «hijos» donde la especie de verdad crece, para no
+perder avisos (comprobado en `tests/test_model.py`).
 
 Junto a cada puntuación se muestra un nivel de **confianza** (🟢🟠🔴),
 independiente del valor numérico: refleja cuánta evidencia real la
@@ -180,14 +211,17 @@ intentos fallidos con URLs de un servicio antiguo ya dado de baja
 Se clasifica por palabras clave del texto de respuesta (`Descripcio` y
 `Descripcio_protolit`): "calcària", "marbre", "guix"... → calcari;
 "granit", "pissarra", "gres", "basalt"... → silici; ambos tipos presentes
-→ mixt. Caché permanente (180 días, la geología no cambia) completándose
-por lotes como VEGETACIO/ICGC.
+→ mixt. Clasificación en tres niveles: palabras de silici claras, palabras de
+calcari claras, y ambiguas («conglomerat», «detrític»… → mixt, porque
+pueden tener cemento calcáreo, como en Matadepera). Caché por **coordenadas**
+(no por id) con el texto original, que se completa por lotes; una caída de
+red nunca se guarda como «sin dato» y 8 fallos seguidos paran la tanda.
+En el scoring la geología ya no es un ajuste de ±1,5: es un limitante
+fuerte para las especies acidófilas (Ou de reig).
 
-Ajuste pequeño y honesto en el scoring (±1.5 puntos dentro del componente
-de temporada) — solo para las 3 especies con evidencia clara encontrada:
-**Ceps** y **Ou de reig** prefieren suelo silíceo, **Camagrocs** prefiere
-calcáreo. El resto de especies no tienen ajuste (no hay evidencia
-suficientemente fiable para inventar una preferencia).
+Preferencias usadas: **Ou de reig** acidófilo (limitante fuerte), **Ceps**
+ligera preferencia por silici, **Camagrocs** por calcari. El resto no tiene
+ajuste (no hay evidencia fiable para inventar una preferencia).
 
 ### Estaciones meteorológicas: consulta directa
 
@@ -327,6 +361,67 @@ del archivo real subido a GitHub — para casos así, la forma fiable de
 confirmar es pedir directamente el contenido del archivo en producción
 (o del propio `resultats.json` generado) antes de asumir que un cambio
 "debería" estar aplicado.
+
+### Perfiles biológicos por especie (auditoría del 15/10/2026)
+
+Los perfiles viven en `SPECIES` y `SPECIES_BIO` de `backend/recollir_dades.py`
+(cada línea lleva la fuente y si es **[FONT]** —confirmado en fuentes— o
+**[EST]** —estimación razonada; las fuentes dan la dirección pero no la cifra—).
+Además del tiempo tras la lluvia, altitud, suelo y temporada, hay ahora
+limitantes de **calor excesivo** (`tmax_hot`, `tmin_hot`), **frío sostenido**
+(`cold`) y **helada** (`frost`, sobre la noche más fría de los últimos 7 días).
+
+| Seta | Tras la lluvia principal | Temperatura | Suelo | Árboles | Altitud |
+|---|---|---|---|---|---|
+| Rovellons | pleno a los 14 d, dura hasta ~5 semanas | frena si máx. > 24 °C o noches > 15 °C; helada < −2 °C | indiferente (*L. deliciosus* silicícola, *L. sanguifluus* calcícola) | pinos (rojo, negro, blanco, piñonero, otros) | 200-1.700 m |
+| Pinetell | 14 d (pinar de montaña) | frena si máx. > 22 °C; tolera algo más de frío | silici (calcari ×0,85) | pinos | 700-1.700 m |
+| Ceps | 9-12 d, hasta ~20 d | óptimo medias ~13 °C (10-15); frena > 25 °C; heladas muy mal | silici (calcari ×0,75) | roble, haya, pino rojo/negro, abeto, alcornoque | 550-1.700 m (tierra baja penalizada) |
+| Camagrocs | 16 d, dura hasta ~6 semanas; necesita mucha humedad | frío: aguanta heladas; frena si máx. > 18 °C o noches > 11 °C | calcari ≥ mixt > silici | pinos, haya, roble, abeto | 400-1.500 m |
+| Trompetes de la mort | 16 d | frena si máx. > 20 °C | calcari (silici ×0,85) | haya y roble | 500-1.500 m |
+| Ou de reig | 15-21 d | necesita noches ≥ 12 °C y días ≥ 22 °C; helada lo mata | silici (calcari ×0,12) | encina, roble, alcornoque | < 800 m |
+| Rossinyols | 7-9 d, hasta ~18 d | frena si máx. > 26 °C; heladas mal | silici (calcari ×0,8) | haya, roble, pinos, abeto | 600-1.800 m |
+| Colmenilles | 8 d (primavera) | necesita días ≥ 15 °C; frena si máx. > 20 °C; marzo-mayo | calcari ≥ silici | roble, pinos | < 1.600 m |
+| Llengua de bou | 12 d, hasta ~28 d | frena si máx. > 24 °C; heladas mal | silici/mixt (calcari ×0,8) | roble, haya, alcornoque, pino rojo/negro, abeto | 500-1.600 m |
+| Fredolic | 12 d, hasta ~32 d | necesita frío: frena si máx. > 20 °C; aguanta heladas | indiferente | pinos, encina | tierra baja (< 900 m) |
+
+Pendiente de calibrar con salidas reales (`hallazgos`): todas las cifras
+**[EST]**. `tests/audit_species.py` imprime una tabla por especie (puntuación
+según días tras la lluvia, calor, frío, helada, altitud, suelo y mes) para
+ver de un vistazo si un cambio de perfil tiene sentido.
+
+### Auditoría del 15/10/2026 (Ou de reig en Montnegre y Matadepera)
+
+El usuario comprobó en el campo que el modelo daba Ou de reig donde no
+había. Causas encontradas y corregidas:
+
+- **Días desde lluvia**: se contaban desde el último día con ≥5 mm, no desde
+  la lluvia principal. Ahora, episodios de lluvia + memoria propia de la
+  serie diaria (`weather_block_cache.json`).
+- **Una suma sin frenos**: los limitantes biológicos multiplican (ver arriba).
+- **Geología**: conglomerados y rocas detríticas con cemento calcáreo se
+  tomaban por silici; un fallo de red se guardaba como «sin dato».
+- **Cachés con caducidad escondida**: bosque (30 d), geología (180 d) y
+  GBIF caducaban de golpe y volvían a pedir miles de consultas.
+- **GBIF**: la caché antigua en formato plano no se leía, por lo que la
+  temporada real nunca se aplicaba y colmenilles puntuaba en otoño.
+- **Puntos duplicados**: 8.285 → 4.248 al descartar puntos a menos de 0,5 km
+  (se conservan los `id` originales para no invalidar cachés).
+- **VEGETACIO** (especie exacta del árbol): el resultado solo vivía en
+  memoria y la tanda de 900 s empezaba cada vez por los mismos puntos
+  (~158 de ~3.000 afinados). Además el emparejamiento por nombre de capa
+  hacía que `QUERCUSILEX/SUBER` (encinar/alcornocal) se tomaran por
+  `QUERCUS` (roble) y que capas que no son de especie (`PTGMFC`,
+  `RPALTRESESP`…) cortaran la búsqueda. Ahora: emparejamiento por clave más
+  larga, solo capas de especie, resultado por punto guardado en
+  `vegetacio_layers_cache.json`, y un fallo de red nunca se confunde con
+  «esa especie no está».
+- **Pruebas**: `tests/test_model.py` (sin red, desde `backend/`:
+  `python3 -I ../tests/test_model.py`) cubre episodios de lluvia con el caso
+  real de Montnegre, curvas, limitantes, GBIF, duplicados y VEGETACIO.
+
+Pendiente / conocido: Open-Meteo infravalora lluvias convectivas muy
+localizadas (el 4/10: 24-32 mm frente a ~170 mm medidos en Montnegre); se
+podría fusionar con el historial de estaciones (`historial_lluvia.json`).
 
 ### Ideas evaluadas y aparcadas deliberadamente
 
