@@ -32,16 +32,22 @@ encontrar cada tipo de bolet ahora mismo.
    puedes elegir cualquiera de las estaciones reales que usa el sistema
    (AEMET, Meteocat, Meteoclimatic) y ver sus datos tal cual llegan.
 8. **Guía de identificación** (enlace arriba y en la pantalla de acceso, y
-   «📖 Cómo reconocerla» en cada especie de una zona): 30 fichas **desplegables
-   con foto** (las setas del predictor y las peligrosas con las que se
-   confunden). Arriba hay un botón **📷 Identificar con una foto**: haces una
-   foto (o eliges una de la galería) y la app te sugiere con qué fichas
-   compararla; para eso hay que haber entrado antes en el predictor y tener
-   cobertura. La guía en sí funciona **sin cobertura** una vez abierta con
-   conexión (guarda también las fotos), y no pide iniciar sesión. Ojo: el texto
-   lo ha redactado una IA y **no lo ha revisado ningún micólogo**, y la
-   identificación por foto es una sugerencia de un modelo de IA general que
-   puede equivocarse.
+   «📖 Cómo reconocerla» en cada especie de una zona): 50 fichas **desplegables
+   con foto**, cada una con su nombre en **latín, catalán y castellano** (las setas del predictor y las peligrosas con las que se
+   confunden). Arriba hay **📷 Identificar con fotos**: haces hasta **3 fotos**
+   de la misma seta (arriba, debajo del sombrero, pie con la base); la app lee
+   de cada una unos rasgos sencillos (color, láminas o poros, anillo, bolsa...),
+   los enseña en un panel que **puedes corregir** (y rellenar a mano: olor,
+   látex, esporada, dónde crece...) y los compara con las 50 fichas, con un
+   **porcentaje de coincidencia** y con lo que encaja, lo que no y lo que falta
+   comprobar. Ese porcentaje **no es la probabilidad** de que sea esa seta ni
+   quiere decir que se pueda comer: mide qué parte de lo que pide la ficha está
+   confirmada con los rasgos indicados. Leer las fotos necesita cobertura y haber
+   entrado antes en el predictor; el panel de rasgos funciona **sin cobertura**.
+   La guía en sí funciona sin cobertura una vez abierta con conexión (guarda
+   también las fotos) y no pide iniciar sesión. Ojo: el texto lo ha redactado una
+   IA y **no lo ha revisado ningún micólogo**, y la lectura de las fotos la hace
+   un modelo de IA general que puede equivocarse.
 
 Los datos se actualizan solos cada 3 horas. No hace falta hacer nada para
 que esté al día.
@@ -77,10 +83,10 @@ con verificación de email)
 - `data/validacio.json` — **predicciones congeladas** de cada salida registrada: la puntuación de cada especie en la zona más cercana el día en que el backend ve la salida (ver «Validación»). Permanente.
 - `data/hallazgos.json` — salidas reales registradas por los usuarios. Se actualiza vía el Worker.
 - `web/index.html` — la web: login, mapa, deslizador de umbral, formulario de salidas, panel de tasa de confirmación, explicaciones de DeepSeek.
-- `web/guia.html` — guía de identificación (una sola página, sin librerías externas; las fotos las carga de `web/fotos/`). **Se genera** con `python3 tools/generar_guia.py` a partir de `tools/guia_datos.py`: se edita el texto en ese archivo y se vuelve a generar, no el HTML a mano.
+- `web/guia.html` — guía de identificación (una sola página, sin librerías externas; las fotos las carga de `web/fotos/`). **Se genera** con `python3 tools/generar_guia.py` a partir de `tools/guia_datos.py` (texto), `tools/rasgos_datos.py` (rasgos de cada ficha) y `tools/puntuar.js` (cálculo de la coincidencia): se editan esos archivos y se vuelve a generar, no el HTML a mano.
 - `web/fotos/` — fotos de las fichas (`<id>-<n>.jpg`), `creditos.json` (autor y licencia de cada una) e `informe.txt`. **No se escriben a mano**: las genera el workflow «Descargar fotos de la guia».
 - `web/sw.js` — service worker: guarda `guia.html`, sus fotos y la pantalla de la app para verlas sin cobertura (red primero, copia guardada como plan B; las fotos desde la copia guardada y se refrescan en segundo plano; los datos del mapa y la identificación por foto no se guardan).
-- `tools/` — `generar_guia.py` y `guia_datos.py` (contenido de la guía), `fotos_datos.py` (qué foto lleva cada ficha) y `descargar_fotos.py` (descarga de Wikimedia Commons).
+- `tools/` — `generar_guia.py` y `guia_datos.py` (contenido de la guía), `rasgos_datos.py` (vocabulario de rasgos y «firma» de cada ficha), `puntuar.js` (cálculo de la coincidencia), `fotos_datos.py` (qué foto lleva cada ficha) y `descargar_fotos.py` (descarga de Wikimedia Commons).
 - `FUENTES-REVISADAS.md` — revisión de 35 webs, foros y artículos (15/10/2026): qué dice cada uno, qué sirve para el modelo y la guía, qué no se pudo leer y el aviso sobre la peste porcina africana.
 - `worker/index.js` — código del Worker de Cloudflare. **Se despliega directamente en el editor de Cloudflare, subirlo a GitHub NO lo actualiza en producción.**
 - `.github/workflows/actualitzar.yml` — automatización que ejecuta el backend cada 3 horas.
@@ -404,11 +410,14 @@ AROME/ECMWF.
 **Reconocimiento por foto:** al principio no se hizo a propósito (una IA de fotos
 que se equivoque con una *Amanita phalloides* mata, y no podemos validar ni medir
 su error). El 15/10/2026 Sergio pidió expresamente poder identificar con la cámara
-y se hizo **como sugerencia, no como veredicto** (ver «Guía de identificación»):
-solo propone hasta 3 fichas de la guía con las que comparar, enseña lo que se ve y
-lo que la foto no enseña, y copia de cada ficha lo que la descarta y con qué se
-confunde. Por debajo es un modelo de visión general de Cloudflare, no un modelo
-entrenado con setas, y **su acierto no está medido**.
+y se hizo **como sugerencia, no como veredicto**. Después pidió 3 fotos (arriba,
+debajo, pie) y un porcentaje por ficha; se rehízo así: la IA **solo lee rasgos**
+(opciones cerradas) y es la propia guía la que los compara con cada ficha y calcula
+una **coincidencia (%)** que se puede explicar (ver «Guía de identificación»). Por
+debajo sigue siendo un modelo de visión general de Cloudflare, no un modelo
+entrenado con setas, y **su acierto no está medido**. El porcentaje **no es una
+probabilidad**: un modelo general no da probabilidades calibradas, y por eso no se
+le pide un «73 %» inventado.
 
 **Ideas apuntadas (sin hacer):** bandas de interpretación y un estado «sin datos»
 cuando faltan fuentes; pH real del suelo (SoilGrids) para afinar las especies
@@ -420,14 +429,19 @@ historial.
 
 ### Guía de identificación y modo sin conexión
 
-- `web/guia.html` se **genera** (`python3 tools/generar_guia.py`) con el texto de `tools/guia_datos.py`. Tiene 30 fichas **desplegables** (se toca la cabecera: miniatura, nombre y nombre científico): 16 peligrosas (oronja verde, amanitas blancas, lepiotas pequeñas, cortinarios, galerina, giromitra, inocibe de Patouillard, clitocibes blancos, entoloma lívido, boleto de Satanás, boletos de poros rojos, boleto amargo, tricoloma tigre, seta del olivo, matamoscas y amanita pantera, lactario torminoso) y 14 de las setas del predictor (las 11 que están en el mapa más apagallums, cama-sec y moixernó, marcadas «no está en el mapa»).
+- `web/guia.html` se **genera** (`python3 tools/generar_guia.py`) con el texto de `tools/guia_datos.py`. Tiene 50 fichas **desplegables** (se toca la cabecera: miniatura, nombre y nombre científico): 23 «peligrosas o con las que se confunden» y 27 de setas buscadas. Las 30 primeras (16 peligrosas y 14 buscadas) son las del 15/10/2026 por la mañana; **el mismo día se añadieron 20 más**, elegidas por ser típicas de Catalunya (listas de la Comunidad de Madrid y de La Rioja, Enciclopèdia Catalana, bolets.com y recuento de observaciones en GBIF): 7 peligrosas o no comestibles (hifoloma de láminas verdes, falso níscalo *L. chrysorrheus*, seta enrollada, champiñón amarilleante, seta de los caballeros, coprino entintado, rúsula emética) y 13 buscadas (vinosa, camperol, pie azul, alzinoi, molleric, barbuda, seta de ostra, carbonera, molinera, capuchina, platera, seta de chopo, marçot). Las que no están en el mapa del predictor lo dicen («no está en el mapa»).
 - Cada ficha empieza por *lo que tiene que cumplir* y *lo que la descarta*, y lista las confusiones con su gravedad. Los **nombres científicos** son la referencia; se evitaron nombres comunes de los que no hay certeza.
 - **Secciones quitadas a petición de Sergio (15/10/2026):** «Léelo antes de nada» y «Si has comido una seta y tienes dudas» (con los teléfonos de urgencias). Se mantienen la franja roja de una línea de arriba, el método de campo en 7 pasos y los mitos (ahora plegados al final) y el aviso de «sin revisión micológica independiente» en el pie.
 - Los `id` de las fichas coinciden con los ids de especie del predictor, así que la ventana de cada zona enlaza con `guia.html#<id>` y el enlace abre la ficha (también con los alias `#cepfosc`, `#cepestiu`, `#pinetell`). Una prueba (`tests/test_model.py`) falla si se añade una especie sin ficha o sin foto asignada.
-- **Fotos:** vienen de **Wikimedia Commons** (vía Wikipedia) y solo se aceptan licencias libres (CC BY, CC BY-SA, CC0, dominio público; nada con NC ni ND). Debajo de cada foto se ve autor y licencia con enlace, como exigen esas licencias. `tools/fotos_datos.py` dice qué nombre científico se busca para cada ficha (y `FORZAR` permite fijar un archivo concreto si la foto automática no es buena); `tools/descargar_fotos.py` la descarga (miniaturas de 500 px) y se ejecuta desde el workflow `descargar_fotos.yml`, porque el entorno de desarrollo no tiene acceso a esas webs. Si no hay fotos, la guía funciona igual sin ellas.
-- **Identificar con una foto:** botón «Hacer foto» (abre la cámara del móvil) o «Elegir de la galería». El navegador reduce la foto a 800 px y la envía al Worker (`POST /identify`, exige sesión). El Worker se la pasa al modelo de visión `@cf/meta/llama-3.2-11b-vision-instruct` de **Cloudflare Workers AI** con la lista de las 30 fichas y pide un JSON (qué se ve, hasta 3 candidatas con su motivo, qué falta ver). Lo que devuelve el modelo se **sanea**: solo ids de la guía, sin duplicados, textos acotados. La app enseña esas candidatas junto con «Descártala si ves…» y «Se confunde con» de cada ficha y un botón para abrirla. **Coste: 0 €** en el plan gratuito de Workers AI (10.000 «neuronas» al día según su tabla de precios; al agotarse, la llamada falla y no se cobra; el Worker añade un tope propio de 120 identificaciones al día). Requiere añadir el *binding* **Workers AI** con el nombre `AI` al Worker (Settings → Bindings); sin él, `/identify` responde que no está activada. El Worker acepta aquí cuerpos de hasta 1,6 MB; el resto de rutas siguen limitadas a 10 KB. **No está probado con el modelo real** (desde el entorno de desarrollo no hay acceso a Cloudflare): las pruebas usan una IA simulada. El acierto del modelo con setas catalanas **no está medido**; hay que probarlo con setas conocidas.
+- **Fotos:** vienen de **Wikimedia Commons** (vía Wikipedia) y solo se aceptan licencias libres (CC BY, CC BY-SA, CC0, dominio público; nada con NC ni ND). Debajo de cada foto se ve autor y licencia con enlace, como exigen esas licencias. `tools/fotos_datos.py` dice qué nombre científico se busca para cada ficha (y `FORZAR` permite fijar un archivo concreto si la foto automática no es buena); `tools/descargar_fotos.py` la descarga (miniaturas de 500 px) y se ejecuta desde el workflow `descargar_fotos.yml`, porque el entorno de desarrollo no tiene acceso a esas webs. Las fotos ya descargadas no se vuelven a buscar (solo los huecos de `FORZAR` o todos con `--todo`), y el informe (`web/fotos/informe.txt`) marca con `[REVISAR]` las que tienen un nombre de archivo que no menciona la especie. Si no hay fotos, la guía funciona igual sin ellas.
+- **Identificar con fotos (3 huecos + panel de rasgos):** hay tres huecos —1 arriba, 2 debajo del sombrero, 3 pie y base— y cada uno tiene botón de cámara y de galería. El navegador reduce cada foto a 800 px y la envía **sola** al Worker (`POST /identify` con `{image, parte}`, exige sesión); el Worker se la pasa al modelo de visión `@cf/meta/llama-3.2-11b-vision-instruct` de **Cloudflare Workers AI** y le pide un JSON con **solo rasgos** de esa parte, eligiendo entre opciones cerradas (`IDENT_VOCAB`, generado con `python3 tools/generar_guia.py --vocab`) o `null` si no se ve. El modelo **no dice qué seta es**. El resultado se **sanea**: solo los rasgos de la parte pedida y solo valores del vocabulario. Se hace una consulta por foto (el modelo gratuito se usa con una imagen por consulta; no se ha probado con varias a la vez). Si una foto parece de otra parte (p. ej. la de debajo parece un pie), la guía avisa y no usa sus rasgos.
+- **Panel de rasgos:** 17 desplegables en 4 grupos (sombrero, debajo, pie, y «lo que no sale en una foto»: tamaño, carne al cortarla, látex, interior, cómo crecen, dónde crece, olor y esporada, que rellena la persona). Lo que lee la IA lleva la marca «IA»; lo que pone la persona **no lo pisa la IA**. Sirve también **sin fotos y sin cobertura**.
+- **Coincidencia (%):** `tools/puntuar.js` compara los rasgos con la «firma» de cada ficha (`tools/rasgos_datos.py`, sacada solo del texto de las fichas: «cumple», «descarta», «confunde»). Cada rasgo pesa 1, o 3 si es **clave** (p. ej. poros o láminas). **Coincidencia = peso de los rasgos que encajan ÷ peso del retrato de la ficha** (con un mínimo de 10, para que una ficha con pocos rasgos no llegue a 100 % con dos). Un rasgo sin indicar no suma ni descarta: se lista como «sin comprobar aún». Un rasgo clave en contra **descarta** la ficha (no sale en la lista). Una **peligrosa** que falla en algún rasgo clave pero por lo demás encaja (≥ 55 %) sale aparte como «peligrosa con la que aún no puedes descartar el parecido» (salvo láminas contra poros, que no se confunden). Entran en la lista las fichas con ≥ 50 % y ≥ 3 rasgos que encajen; hace falta indicar ≥ 3 rasgos; a igualdad, la peligrosa va antes. Cada tarjeta muestra lo que encaja (✔), lo que no (✖), lo que falta, y los «Descártala si ves…»/«Con qué se confunde» de su ficha. Estos umbrales son **decisiones de diseño, no están medidos**. La pantalla dice siempre que la coincidencia **no es la probabilidad** de que sea esa seta ni que se pueda comer, y que la guía solo tiene 50 fichas (una seta que no esté en ellas no sale).
+- **Coste:** **0 €** en el plan gratuito de Workers AI (10.000 «neuronas» al día según su tabla de precios; al agotarse, la llamada falla y no se cobra). El Worker añade un tope propio de **120 fotos al día** (cada foto cuenta 1: unas 40 identificaciones de 3 fotos). Requiere el *binding* **Workers AI** con el nombre `AI` (Settings → Bindings); sin él, `/identify` responde que no está activada. El Worker acepta aquí cuerpos de hasta 1,6 MB; el resto de rutas siguen en 10 KB. **No se ha probado con el modelo real en esta versión** (desde el entorno de desarrollo no hay acceso a Cloudflare): las pruebas usan una IA simulada. El acierto de la lectura con setas catalanas **no está medido**.
+- **Nombres en tres idiomas (15/10/2026):** cada ficha lleva un bloque **Latín / Català / Castellano** y debajo las fuentes de esos nombres. Los datos están en `tools/nombres_datos.py`: el **nombre científico es la referencia**; un nombre popular solo se escribe si aparece en una fuente consultada (Enciclopèdia Catalana, bolets.com / boletaires.cat, Canal Salut, 3Cat, Institut Català d'Història Natural, listas de la Comunidad de Madrid y del Gobierno de La Rioja, Wikipedia en español) y se anota el código de esa fuente; si ninguna lo da, se muestra «—» (no se inventa). El buscador de la guía encuentra por cualquiera de los tres idiomas. Los nombres que usa el predictor (por ejemplo «Escarlet», «Cep fosc», «Cep d'estiu») **no se han cambiado**; las fichas lo explican en una nota. Recuento y fuentes en `NOMBRES-FUENTES.md` y `FUENTES-REVISADAS.md` (§7). Los nombres populares **varían según la zona** y no son oficiales: fíate del nombre científico.
+- **Ampliar la guía:** una seta nueva necesita (1) su ficha en `tools/guia_datos.py`, (2) su firma en `tools/rasgos_datos.py` (`FIRMAS`, usando solo lo que dice la ficha), (3) su hueco de foto en `tools/fotos_datos.py`, (4) sus nombres en `tools/nombres_datos.py` (con el código de la fuente); luego `python3 tools/generar_guia.py`, pegar el nuevo `worker/index.js` solo si cambió el vocabulario de rasgos (`--vocab`), y lanzar el workflow de fotos. `tests/test_model.py` falla si una ficha no tiene firma, foto o nombres, o si un nombre cita una fuente que no existe. **Vocabulario nuevo del 15/10/2026:** «violeta» (sombrero, láminas, pie), «amarillea» (carne al cortarla y látex), «fenol» (olor) y «chocolate»/«negra» (esporada); «violeta» es un valor que lee la IA, así que cambia `IDENT_VOCAB` del Worker y **hay que pegar de nuevo `worker/index.js`**.
 - **Sin conexión:** `sw.js` (caché `bolets-offline-v2`) guarda `guia.html`, los créditos y las fotos, la pantalla de la app, el manifiesto y un icono. Las páginas van red primero (4 s de espera) con la copia como plan B; las fotos salen de la copia y se refrescan en segundo plano. No guarda datos del mapa, así que no puede enseñar una puntuación antigua. Comprobado en Chromium con el servidor apagado de verdad (guía + 37 fotos); **no probado aún en un móvil real**: hay que abrir la guía una vez con cobertura y luego probar en modo avión. La identificación por foto necesita cobertura.
-- **Límites reconocidos:** texto redactado por una IA y **sin revisión de un micólogo** (conviene que la revise una sociedad micológica antes de difundirla); las fotos son la imagen principal del artículo de Wikipedia de cada especie y **no están revisadas una a una** (hay que mirarlas y fijar con `FORZAR` las que no sirvan); no cubre todas las setas, solo las del predictor y las confusiones más conocidas.
+- **Límites reconocidos:** texto redactado por una IA y **sin revisión de un micólogo** (conviene que la revise una sociedad micológica antes de difundirla); las fotos se buscan automáticamente (imagen principal del artículo de Wikipedia de cada especie) y el 15/10/2026 se **revisaron a ojo las 37 primeras**: 34 eran la seta correcta y 3 no (cep fosc con una foto de *B. pinophilus*, cep d'estiu con un archivo de nombre genérico y lactario torminoso con una foto de *Lactarius mairei*), que se corrigieron fijando el archivo con `FORZAR`. La revisión la hizo una IA mirando las fotos, **no un micólogo**; si ves una foto que no es, dímelo y se fija otra; **Las fotos de las 20 fichas nuevas aún no están descargadas ni revisadas** (se descargan con el workflow y luego hay que mirarlas una a una). Los textos de las 20 fichas nuevas están redactados por una IA a partir de las fuentes consultadas (fichas de especies de Wikipedia, listas oficiales, Enciclopèdia Catalana, bolets.com), **sin revisión de un micólogo**; el recuento de observaciones de GBIF solo indica esfuerzo de observación, no abundancia. Algunas fichas con pocos rasgos (marçot, carbonera) dan coincidencias holgadas por diseño. No cubre todas las setas, solo las del predictor, las más típicas añadidas y las confusiones más conocidas.
 
 ### Comparativa con otras apps (iFong)
 
@@ -576,7 +590,13 @@ había. Causas encontradas y corregidas:
   «esa especie no está».
 - **Pruebas**: `tests/test_model.py` (sin red, desde `backend/`:
   `python3 -I ../tests/test_model.py`) cubre episodios de lluvia con el caso
-  real de Montnegre, curvas, limitantes, GBIF, duplicados y VEGETACIO.
+  real de Montnegre, curvas, limitantes, GBIF, duplicados y VEGETACIO, y además la
+  guía, las fotos, los rasgos y el vocabulario del Worker. Otras dos baterías,
+  desde `tests/` con Node: `node test_worker.mjs` (Worker: acceso, límites e
+  `/identify` con una IA simulada) y `node test_rasgos.mjs` (cálculo de la
+  coincidencia: comprueba que el cálculo hace lo diseñado, **no** cuánto acierta con
+  setas reales). La pantalla de identificación se probó además en Chromium con un
+  Worker simulado (prueba fuera del repositorio).
 
 Pendiente / conocido (revisado el 15/10/2026 con datos reales de producción):
 la estación de Vallgorguina midió ~170 mm el 4/10 (≈206 mm entre el 29/9 y el
