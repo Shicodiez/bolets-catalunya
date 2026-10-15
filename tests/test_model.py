@@ -655,5 +655,22 @@ if _wk:
           _wk.index('url.pathname === "/identify" && request.method') > _wk.index("No autenticado"))
     check("worker: el límit de 10 KB es manté per a tota la resta de rutes", "url.pathname === \"/identify\" ? IDENT_MAX_BODY : 10240" in _wk)
 
+# ---- Formulari de hallazgos de index.html: ubicació amb GPS, relleno automàtic i «Cep» a seques (15/10/2026) ----
+if _idx:
+    check("hallazgos: botó «Usar mi ubicación» que fa servir el GPS del navegador amb temps màxim",
+          'id="sighting-gps-btn"' in _idx and "navigator.geolocation.getCurrentPosition" in _idx and "timeout: 20000" in _idx)
+    check("hallazgos: el relleno automàtic cobreix lloc, altitud, arbre i data, però NO marca cap espècie ni toca el resultat",
+          all(x in _idx for x in ("reverseGeocodePlace(", "fetchElevation(", "sightingTreeFromZone(", "'sighting-date').value = new Date()"))
+          and not _re.search(r"autofillSighting[\s\S]{0,2500}(checkbox|sighting-result)[^\n]*(checked|value)\s*=", _idx.split("async function autofillSighting")[1].split("function setSightingPoint")[0]))
+    check("hallazgos: si falla el servei d'altitud o de noms hi ha pla B (altitud i nom de la zona més propera)",
+          "zone ? zone.name : ''" in _idx and "setSightingAltitude(zone.alt)" in _idx and "return null;" in _idx)
+    check("hallazgos: els límits de Catalunya del formulari són els mateixos que els del Worker",
+          bool(_re.search(r"SIGHTING_BOUNDS = \{latMin: 40\.4, latMax: 42\.95, lonMin: 0\.05, lonMax: 3\.4\}", _idx)) and "latMin: 40.4, latMax: 42.95, lonMin: 0.05, lonMax: 3.4" in (_wk or ""))
+    check("hallazgos: els ceps es registren com a «Cep» a seques (id 'ceps'), que el Worker accepta i el backend resol amb el millor dels tres",
+          "{id: 'ceps', name: 'Cep'}" in _idx and '"ceps"' in (_wk or "") and "ceps" in m.LEGACY_SPECIES_ALIASES
+          and m.species_score_for("ceps", {"cep": 40, "cepfosc": 82, "cepestiu": 10}) == 82)
+    check("hallazgos: l'avís diu que el relleno són estimacions i que la seta i el resultat els tria la persona",
+          "son estimaciones" in _idx and "La seta y el resultado los eliges tú" in _idx)
+
 print("\n%d proves fallides" % len(fails) if fails else "\nTotes les proves OK")
 sys.exit(1 if fails else 0)

@@ -314,5 +314,21 @@ async function call(env, pathname, body, ip) {
   check("identify: una petición rechazada por parte inválida no gasta cupo diario", !kv3.m.get(clave), String(kv3.m.get(clave)));
 }
 
+// Hallazgo que envía el formulario de index.html (ubicación y datos rellenados solos; «Cep» a secas = id «ceps»):
+// el Worker debe darlo por válido. Se prueba la función validateHallazgo del propio Worker.
+{
+  const src = fs.readFileSync(workerSrc, "utf-8");
+  const ini = src.indexOf("const CATALUNYA_BOUNDS");
+  const finFn = src.indexOf("// ----", src.indexOf("function validateHallazgo"));
+  const trozo = src.slice(ini, finFn);
+  const validar = new Function(trozo + "\nreturn validateHallazgo;")();
+  const hoy = new Date().toISOString().slice(0, 10);
+  const base = { speciesIds: ["ceps"], speciesNames: ["Cep"], place: "Badalona", alt: "100", tree: "mixt", treeName: "Mixto / no lo sé", date: hoy, amount: "poco", lat: 41.4495, lng: 2.247 };
+  check("hallazgo del formulario (Cep a secas, ubicación del GPS, altitud y árbol rellenados) es válido para el Worker", validar(base) === true);
+  check("«Cep» a secas usa el id «ceps» y los ids sueltos de los ceps siguen siendo válidos", validar({ ...base, speciesIds: ["cepfosc"], speciesNames: ["Cep fosc"] }) === true && validar({ ...base, speciesIds: ["ceps", "rovellons"], speciesNames: ["Cep", "Rovellons"] }) === true);
+  check("el Worker sigue rechazando coordenadas fuera de Catalunya (Madrid) y especies inventadas", validar({ ...base, lat: 40.4168, lng: -3.7038 }) === false && validar({ ...base, speciesIds: ["inventada"] }) === false);
+  check("con 'poco' o 'mucho' hace falta una seta (el formulario no la rellena sola)", validar({ ...base, speciesIds: [], speciesNames: [] }) === false);
+}
+
 console.log(ok + bad === 0 ? "sin pruebas" : `Worker: ${ok} comprobaciones OK, ${bad} fallos`);
 process.exit(bad ? 1 : 0);
