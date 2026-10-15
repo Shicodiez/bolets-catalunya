@@ -1,14 +1,17 @@
 // Service worker de la app de setas.
 //
-// Qué hace (y solo esto): guarda en el móvil la página de la guía de identificación (guia.html) y la propia
-// pantalla de la app, para poder abrirlas SIN cobertura una vez se han abierto alguna vez con conexión.
+// Qué hace (y solo esto): guarda en el móvil la página de la guía de identificación (guia.html), sus fotos
+// (carpeta fotos/) y la propia pantalla de la app, para poder abrirlas SIN cobertura una vez se han abierto
+// alguna vez con conexión.
 //
 // Qué NO hace, a propósito: no guarda los datos del mapa ni las puntuaciones. Esos se piden siempre en vivo,
 // para no volver a ver una versión antigua. Con conexión, las páginas también se piden primero a la red
 // («network-first»): la caché es solo el plan B cuando no hay red o tarda demasiado.
+// Las fotos de la guía (que casi nunca cambian) se sirven al instante desde la copia guardada y se refrescan
+// en segundo plano. La identificación por foto (Worker) NO pasa por aquí: va siempre directa a la red.
 
-const CACHE = 'bolets-offline-v1';
-const PRECACHE = ['./', 'guia.html', 'manifest.json', 'icon-192.png'];
+const CACHE = 'bolets-offline-v2';
+const PRECACHE = ['./', 'guia.html', 'manifest.json', 'icon-192.png', 'fotos/creditos.json'];
 const ESPERA_RED_MS = 4000; // sin cobertura buena la red puede colgarse: pasado este tiempo usamos la copia guardada
 
 self.addEventListener('install', (event) => {
@@ -34,7 +37,22 @@ function esPaginaOfflineable(request, url) {
   if (request.method !== 'GET') return false;
   if (url.origin !== self.location.origin) return false;
   if (request.mode === 'navigate') return true;
-  return /(?:^|\/)(guia\.html|index\.html|manifest\.json|icon-192\.png)$/.test(url.pathname);
+  return /(?:^|\/)(guia\.html|index\.html|manifest\.json|icon-192\.png)$/.test(url.pathname) || esCreditos(url) || esFoto(url);
+}
+
+function esCreditos(url) { return /(?:^|\/)fotos\/creditos\.json$/.test(url.pathname); }
+function esFoto(url) { return /(?:^|\/)fotos\/[^/]+\.jpg$/.test(url.pathname); }
+
+// Fotos: copia guardada primero (rápido y sin cobertura), y se actualiza en segundo plano si hay red.
+async function copiaPrimero(event) {
+  const cache = await caches.open(CACHE);
+  const copia = await cache.match(event.request);
+  const actualizar = fetch(event.request).then((r) => {
+    if (r && r.ok) cache.put(event.request, r.clone()).catch(() => {});
+    return r;
+  }).catch(() => null);
+  if (copia) { event.waitUntil(actualizar); return copia; }
+  return (await actualizar) || Response.error();
 }
 
 async function redPrimero(request) {
@@ -65,5 +83,5 @@ async function redPrimero(request) {
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
   if (!esPaginaOfflineable(event.request, url)) return; // todo lo demás (datos, mapas, Worker) va directo a la red
-  event.respondWith(redPrimero(event.request));
+  event.respondWith(esFoto(url) ? copiaPrimero(event) : redPrimero(event.request));
 });
