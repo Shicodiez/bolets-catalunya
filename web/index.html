@@ -257,10 +257,12 @@
 
   <div class="sighting-box">
     <h3>🍄 Registrar una salida</h3>
-    <p class="hint">Toca "Marcar en el mapa" y luego haz clic en el lugar exacto donde estabas. Con el tiempo esto ayuda a afinar el modelo — incluso cuando no encontráis nada.</p>
+    <p class="hint">Toca "Usar mi ubicación" (o "Marcar en el mapa" y haz clic donde estabas) y se rellenan solos el lugar, la altitud, el árbol y la fecha. Tú eliges la seta y el resultado. Con el tiempo esto ayuda a afinar el modelo — incluso cuando no encontráis nada.</p>
     <div class="sighting-form">
+      <button type="button" id="sighting-gps-btn" class="popup-btn" style="margin-bottom:4px">📡 Usar mi ubicación</button>
       <button type="button" id="sighting-pick-btn" class="popup-btn" style="margin-bottom:4px">📍 Marcar en el mapa</button>
       <p id="sighting-coords-hint" class="hint" style="margin:0"></p>
+      <p id="sighting-auto-hint" class="hint" style="margin:0"></p>
       <div>
         <label>Nombre del lugar (se rellena solo, puedes editarlo)</label>
         <input type="text" id="sighting-place" placeholder="Malniu, Berga, Montseny, Montnegre, Guilleries...">
@@ -788,23 +790,130 @@ async function explainZoneSpecies(event, zoneId, speciesId, elementId) {
 
 function prefillSighting(zoneId) {
   const z = DATA.zones.find(zz => zz.id === zoneId);
-  if (z) {
-    pickedLatLng = {lat: z.lat, lng: z.lon};
-    updatePickedCoordsHint();
-    // Preselecciona la altitud/árbol más cercanos como punto de partida
-    const altSel = document.getElementById('sighting-alt');
-    const roundedAlt = Math.round(z.alt / 50) * 50;
-    if ([...altSel.options].some(o => o.value === String(roundedAlt))) {
-      altSel.value = String(roundedAlt);
-    }
-  }
+  if (z) setSightingPoint(z.lat, z.lon, {zone: z});
   document.querySelector('.sighting-box').scrollIntoView({behavior: 'smooth', block: 'center'});
 }
 
-function updatePickedCoordsHint() {
+// ---- Relleno automático del formulario de hallazgos -------------------------------------------------
+// Al fijar un punto (GPS, clic en el mapa o botón de una zona) se rellenan solos: lugar, altitud, árbol y fecha.
+// La seta y el resultado NO se rellenan: los pone la persona. Lo rellenado es una estimación (la zona más
+// cercana está a unos 3,5 km): se avisa y se puede corregir.
+const SIGHTING_BOUNDS = {latMin: 40.4, latMax: 42.95, lonMin: 0.05, lonMax: 3.4}; // igual que el Worker
+const SIGHTING_ZONE_MAX_KM = 6;
+
+// Tipo de bosque de la zona (backend) -> opciones del formulario. Lo que no encaja (cultivo, matorral...) = «mixto / no lo sé».
+function sightingTreeFromZone(z) {
+  const t = (z && z.is_forest && z.tree) ? z.tree : '';
+  if (/^pi_/.test(t)) return 'pi';
+  if (t === 'alzina') return 'alzina';
+  if (t === 'roure') return 'roure';
+  return 'mixt';
+}
+
+function nearestZoneTo(lat, lng, maxKm) {
+  let best = null, bestKm = Infinity;
+  const kx = 111.32 * Math.cos(lat * Math.PI / 180), ky = 110.57;
+  (DATA && DATA.zones || []).forEach(z => {
+    const km = Math.hypot((z.lon - lng) * kx, (z.lat - lat) * ky);
+    if (km < bestKm) { bestKm = km; best = z; }
+  });
+  return best && bestKm <= maxKm ? {z: best, km: bestKm} : null;
+}
+
+// Altitud del punto (modelo digital del terreno de Open-Meteo, gratuito y sin clave). Si falla, se usa la de la zona.
+async function fetchElevation(lat, lng) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 6000);
+  try {
+    const res = await fetch(`https://api.open-meteo.com/v1/elevation?latitude=${lat.toFixed(5)}&longitude=${lng.toFixed(5)}`, {signal: ctrl.signal});
+    if (!res.ok) return null;
+    const data = await res.json();
+    const v = Array.isArray(data.elevation) ? data.elevation[0] : data.elevation;
+    return (typeof v === 'number' && isFinite(v) && v > -50 && v < 3500) ? v : null;
+  } catch (e) {
+    return null;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+function setSightingAltitude(meters) {
+  const altSel = document.getElementById('sighting-alt');
+  const rounded = Math.min(2500, Math.max(0, Math.round(meters / 50) * 50));
+  if ([...altSel.options].some(o => o.value === String(rounded))) altSel.value = String(rounded);
+}
+
+let sightingAutoToken = 0; // si se fija otro punto mientras se rellena, se ignora el relleno viejo
+
+async function autofillSighting(lat, lng, opts) {
+  opts = opts || {};
+  const token = ++sightingAutoToken;
+  const hint = document.getElementById('sighting-auto-hint');
+  hint.textContent = 'Rellenando lugar, altitud y árbol...';
+  const near = opts.zone ? {z: opts.zone, km: 0} : nearestZoneTo(lat, lng, SIGHTING_ZONE_MAX_KM);
+  const zone = near ? near.z : null;
+
+  document.getElementById('sighting-date').value = new Date().toISOString().slice(0, 10);
+
+  const treeSel = document.getElementById('sighting-tree');
+  treeSel.value = sightingTreeFromZone(zone);
+
+  if (zone && typeof zone.alt === 'number') setSightingAltitude(zone.alt); // de momento la de la zona
+  const placeName = opts.zone ? opts.zone.name : null;
+  const placePromise = placeName
+    ? Promise.resolve(document.getElementById('sighting-place').value = placeName)
+    : reverseGeocodePlace(lat, lng, zone ? zone.name : '');
+  const elevation = opts.zone ? null : await fetchElevation(lat, lng);
+  await placePromise;
+  if (token !== sightingAutoToken) return;
+  if (elevation !== null) setSightingAltitude(elevation);
+
+  const altText = document.getElementById('sighting-alt').value + ' m';
+  const treeText = treeSel.options[treeSel.selectedIndex].textContent;
+  hint.textContent = `✅ Rellenado solo: lugar, altitud (${altText}), árbol (${treeText}) y fecha. Revísalo: son estimaciones. La seta y el resultado los eliges tú.`;
+}
+
+function setSightingPoint(lat, lng, opts) {
+  pickedLatLng = {lat, lng};
+  if (pickMarker) map.removeLayer(pickMarker);
+  pickMarker = L.marker([lat, lng]).addTo(map);
+  updatePickedCoordsHint(opts && opts.accuracy);
+  autofillSighting(lat, lng, opts);
+}
+
+function useMyLocation() {
+  const btn = document.getElementById('sighting-gps-btn');
+  if (!navigator.geolocation) {
+    alert('Tu navegador no permite usar la ubicación. Marca el punto en el mapa.');
+    return;
+  }
+  const original = '📡 Usar mi ubicación';
+  btn.disabled = true;
+  btn.textContent = '📡 Buscando tu ubicación...';
+  navigator.geolocation.getCurrentPosition(pos => {
+    btn.disabled = false;
+    btn.textContent = original;
+    const lat = pos.coords.latitude, lng = pos.coords.longitude;
+    if (lat < SIGHTING_BOUNDS.latMin || lat > SIGHTING_BOUNDS.latMax || lng < SIGHTING_BOUNDS.lonMin || lng > SIGHTING_BOUNDS.lonMax) {
+      alert('Parece que estás fuera de Catalunya. Marca el punto en el mapa.');
+      return;
+    }
+    map.setView([lat, lng], Math.max(map.getZoom(), 11));
+    setSightingPoint(lat, lng, {accuracy: pos.coords.accuracy});
+  }, err => {
+    btn.disabled = false;
+    btn.textContent = original;
+    alert(err && err.code === 1
+      ? 'No has dado permiso para usar la ubicación. Actívalo en el navegador o marca el punto en el mapa.'
+      : 'No se ha podido obtener tu ubicación. Marca el punto en el mapa.');
+  }, {enableHighAccuracy: true, timeout: 20000, maximumAge: 60000});
+}
+
+function updatePickedCoordsHint(accuracyMeters) {
   const hint = document.getElementById('sighting-coords-hint');
   if (pickedLatLng) {
-    hint.textContent = `📍 Ubicación marcada (${pickedLatLng.lat.toFixed(4)}, ${pickedLatLng.lng.toFixed(4)})`;
+    const acc = (typeof accuracyMeters === 'number' && isFinite(accuracyMeters)) ? ` · precisión del GPS ±${Math.round(accuracyMeters)} m` : '';
+    hint.textContent = `📍 Ubicación marcada (${pickedLatLng.lat.toFixed(4)}, ${pickedLatLng.lng.toFixed(4)})${acc}`;
   } else {
     hint.textContent = 'Todavía no has marcado ningún punto en el mapa.';
   }
@@ -819,16 +928,12 @@ function togglePickingMode() {
 
 function handleMapClickForSighting(e) {
   if (!pickingLocation) return;
-  pickedLatLng = {lat: e.latlng.lat, lng: e.latlng.lng};
-  if (pickMarker) map.removeLayer(pickMarker);
-  pickMarker = L.marker([pickedLatLng.lat, pickedLatLng.lng]).addTo(map);
-  updatePickedCoordsHint();
   togglePickingMode();
+  setSightingPoint(e.latlng.lat, e.latlng.lng);
   document.querySelector('.sighting-box').scrollIntoView({behavior: 'smooth', block: 'center'});
-  reverseGeocodePlace(pickedLatLng.lat, pickedLatLng.lng);
 }
 
-async function reverseGeocodePlace(lat, lng) {
+async function reverseGeocodePlace(lat, lng, fallbackName) {
   const placeInput = document.getElementById('sighting-place');
   const previousValue = placeInput.value;
   placeInput.placeholder = 'Buscando nombre del lugar...';
@@ -841,9 +946,9 @@ async function reverseGeocodePlace(lat, lng) {
     const addr = data.address || {};
     const name = addr.village || addr.town || addr.hamlet || addr.municipality
       || addr.city || addr.county || (data.display_name ? data.display_name.split(',')[0] : '');
-    placeInput.value = name || previousValue;
+    placeInput.value = name || previousValue || fallbackName || '';
   } catch (e) {
-    placeInput.value = previousValue;
+    placeInput.value = previousValue || fallbackName || '';
   } finally {
     placeInput.placeholder = 'Malniu, Berga, Montseny, Montnegre, Guilleries...';
   }
@@ -864,7 +969,18 @@ function setupSightingForm() {
     });
   }
 
+  // Los ceps se registran como «Cep» a secas (no importa la variedad): se guarda con el id 'ceps', que el Worker
+  // acepta y el backend contrasta con la MEJOR puntuación de cep, cep fosc y cep d'estiu (LEGACY_SPECIES_ALIASES).
+  const CEP_IDS = ['cep', 'cepfosc', 'cepestiu'];
+  const sightingSpecies = [];
   DATA.species_catalog.forEach(sp => {
+    if (CEP_IDS.includes(sp.id)) {
+      if (!sightingSpecies.some(x => x.id === 'ceps')) sightingSpecies.push({id: 'ceps', name: 'Cep'});
+      return;
+    }
+    sightingSpecies.push(sp);
+  });
+  sightingSpecies.forEach(sp => {
     const item = document.createElement('label');
     item.className = 'species-checkbox-item';
     item.innerHTML = `<input type="checkbox" value="${sp.id}" data-name="${sp.name}"><span>${sp.name}</span>`;
@@ -884,6 +1000,7 @@ function setupSightingForm() {
   updatePickedCoordsHint();
 
   document.getElementById('sighting-pick-btn').addEventListener('click', togglePickingMode);
+  document.getElementById('sighting-gps-btn').addEventListener('click', useMyLocation);
   map.on('click', handleMapClickForSighting);
 
   const resultSel = document.getElementById('sighting-result');
@@ -898,7 +1015,7 @@ function setupSightingForm() {
 
   document.getElementById('sighting-save').addEventListener('click', async () => {
     if (!pickedLatLng) {
-      alert('Marca primero el punto en el mapa.');
+      alert('Toca «Usar mi ubicación» o marca el punto en el mapa.');
       return;
     }
     const place = document.getElementById('sighting-place').value.trim();
@@ -918,6 +1035,7 @@ function setupSightingForm() {
       pickedLatLng = null;
       if (pickMarker) { map.removeLayer(pickMarker); pickMarker = null; }
       updatePickedCoordsHint();
+      sightingAutoToken++; document.getElementById('sighting-auto-hint').textContent = '';
       alert('Vale, no se guarda como dato — gracias por avisar igualmente.');
       return;
     }
@@ -953,6 +1071,7 @@ function setupSightingForm() {
       pickedLatLng = null;
       if (pickMarker) { map.removeLayer(pickMarker); pickMarker = null; }
       updatePickedCoordsHint();
+      sightingAutoToken++; document.getElementById('sighting-auto-hint').textContent = '';
       await renderSightings();
     } catch (e) {
       alert('No se ha podido guardar. Comprueba tu conexión e inténtalo de nuevo.');
