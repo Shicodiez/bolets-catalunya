@@ -145,6 +145,10 @@ function validateExplainRequest(zoneData) {
     breakdown: typeof zoneData.breakdown === "object" && zoneData.breakdown !== null ? zoneData.breakdown : {},
     rain10d: typeof zoneData.rain10d === "number" ? zoneData.rain10d : 0,
     minTemp: typeof zoneData.minTemp === "number" ? zoneData.minTemp : 0,
+    maxTemp: typeof zoneData.maxTemp === "number" ? zoneData.maxTemp : null,
+    // Textos cortos del backend con lo que FRENA la puntuación (todavía pronto,
+    // época, altitud, calor, suelo...). Se limpian y se acotan antes de usarlos en el prompt.
+    limits: Array.isArray(zoneData.limits) ? zoneData.limits.slice(0, 3).map(t => sanitizeForPrompt(t, 240)).filter(t => t) : [],
     daysSinceRain: typeof zoneData.daysSinceRain === "number" ? zoneData.daysSinceRain : 0,
     treeLabel: sanitizeForPrompt(zoneData.treeLabel, 60),
     scoreChange: typeof zoneData.scoreChange === "object" ? zoneData.scoreChange : null,
@@ -152,7 +156,7 @@ function validateExplainRequest(zoneData) {
 }
 
 async function explainWithDeepSeek(env, zoneData) {
-  const { zoneName, speciesName, score, confidence, breakdown, rain10d, minTemp, daysSinceRain, treeLabel, scoreChange } = zoneData;
+  const { zoneName, speciesName, score, confidence, breakdown, rain10d, minTemp, maxTemp, limits, daysSinceRain, treeLabel, scoreChange } = zoneData;
 
   const changeText = scoreChange
     ? `La puntuación ha cambiado ${scoreChange.change >= 0 ? '+' : ''}${scoreChange.change} puntos en los últimos 7 días (de ${scoreChange.previous} a ${scoreChange.current}).`
@@ -164,9 +168,13 @@ Zona: ${zoneName} (${treeLabel})
 Especie: ${speciesName}
 Puntuación: ${score}/100
 Confianza: ${confidence}
-Desglose de la puntuación: lluvia=${breakdown.pluja}, días desde lluvia=${breakdown.dies_pluja}, temperatura=${breakdown.temperatura}, temporada=${breakdown.temporada}, corroboración entre fuentes=${breakdown.corroboracio}
-Datos meteorológicos: ${rain10d}mm de lluvia acumulada, ${minTemp}°C de mínima nocturna, ${daysSinceRain} días desde el inicio de la lluvia
+Desglose de la puntuación (suma de evidencias): lluvia=${breakdown.pluja}, días desde lluvia=${breakdown.dies_pluja}, temperatura=${breakdown.temperatura}, temporada=${breakdown.temporada}, corroboración entre fuentes=${breakdown.corroboracio}
+Factor limitante final: ${breakdown.limitants !== undefined ? breakdown.limitants : 1} (1 = nada frena la puntuación; 0,5 = la puntuación se reduce a la mitad por los motivos de abajo)
+Datos meteorológicos: ${rain10d}mm de lluvia desde el inicio de la lluvia principal, ${minTemp}°C de mínima nocturna${maxTemp !== null ? " y " + maxTemp + "°C de máxima (medias de los últimos 7 días)" : ""}, ${daysSinceRain} días desde la lluvia principal (el grueso del agua, no el último chubasco)
+${limits && limits.length ? "Lo que frena la puntuación: " + limits.join("; ") : "Nada frena especialmente la puntuación."}
 ${changeText}
+
+Si hay factores que frenan la puntuación, explícalos primero y con claridad (por ejemplo, que todavía es pronto o que el suelo no le conviene): es lo más útil para el aficionado.
 
 Escribe la explicación en tono cercano, como si hablaras con un aficionado a los bolets, sin tecnicismos innecesarios.`;
 
@@ -182,7 +190,7 @@ Escribe la explicación en tono cercano, como si hablaras con un aficionado a lo
       // temporalment per compatibilitat, però pot donar respostes inesperades
       messages: [{ role: "user", content: prompt }],
       temperature: 0.5,
-      max_tokens: 200,
+      max_tokens: 300,
       thinking: { type: "disabled" }, // IMPORTANT: els models V4/V4.1 Flash tenen el "thinking
       // mode" activat per defecte i poden gastar-se centenars de tokens "pensant" abans de
       // respondre — amb max_tokens=200 això esgotava tot el pressupost sense arribar mai a
