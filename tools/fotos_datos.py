@@ -46,6 +46,27 @@ FOTOS = {
     "apagallums": [["Macrolepiota procera"]],
     "camasec": [["Marasmius oreades"]],
     "moixerno": [["Calocybe gambosa", "Tricholoma georgii"]],
+    # --- Añadidas el 15/10/2026 (las fotos se descargan con el workflow y se revisan a ojo después) ---
+    "hypholoma": [["Hypholoma fasciculare"]],
+    "chrysorrheus": [["Lactarius chrysorrheus"]],
+    "paxillus": [["Paxillus involutus"]],
+    "xanthodermus": [["Agaricus xanthodermus"]],
+    "equestre": [["Tricholoma equestre", "Tricholoma flavovirens"]],
+    "atramentaria": [["Coprinopsis atramentaria", "Coprinus atramentarius"]],
+    "emetica": [["Russula emetica"]],
+    "vinosa": [["Amanita rubescens"]],
+    "camperol": [["Agaricus campestris"]],
+    "pimpinella": [["Lepista nuda", "Clitocybe nuda"]],
+    "alzinoi": [["Armillaria mellea"]],
+    "molleric": [["Suillus luteus"], ["Suillus granulatus"]],
+    "coprinus": [["Coprinus comatus"]],
+    "orellana": [["Pleurotus ostreatus"]],
+    "llora": [["Russula cyanoxantha"]],
+    "molinera": [["Clitopilus prunulus"]],
+    "fredolic-gros": [["Tricholoma portentosum"]],
+    "pampa": [["Infundibulicybe geotropa", "Clitocybe geotropa"]],
+    "pollancro": [["Cyclocybe cylindracea", "Agrocybe aegerita"]],
+    "marcot": [["Hygrophorus marzuolus"]],
 }
 
 FORZAR = {

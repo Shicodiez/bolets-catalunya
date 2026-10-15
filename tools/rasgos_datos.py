@@ -8,7 +8,7 @@ IMPORTANTE (honestidad):
   * La coincidencia NO es la probabilidad de que sea esa seta ni dice que se pueda comer. Solo cuenta cuántos de los
     rasgos que se han indicado encajan con lo que dice la ficha.
   * Las firmas se han sacado SOLO del texto de las fichas de guia_datos.py («cumple», «descarta», «confunde»), que está
-    redactado por una IA y NO lo ha revisado ningún micólogo. Donde la ficha no dice nada de un rasgo, no se pone.
+    redactado por una IA a partir de las fuentes que se citan en FUENTES-REVISADAS.md y NO lo ha revisado ningún micólogo. Donde la ficha no dice nada de un rasgo, no se pone.
   * Nunca se ha medido cuánto acierta la lectura de las fotos con setas reales de Catalunya.
 
 Formato de FIRMAS:  id de ficha -> {rasgo: "valor1 valor2 ..."}
@@ -41,6 +41,7 @@ DIMS = [
         ("gris", "gris", "Gris"),
         ("verde", "verde u oliva", "Verde u oliva"),
         ("negro", "negro u oscuro", "Negro u oscuro"),
+        ("violeta", "violeta o lila", "Violeta o lila"),
     ]),
     ("s_super", "sombrero", "Superficie del sombrero", [
         ("lisa", "lisa y seca", "Lisa y seca"),
@@ -71,6 +72,7 @@ DIMS = [
         ("pardo", "marrón u óxido", "Marrón u óxido"),
         ("gris", "gris", "Gris"),
         ("verde", "verde oliva", "Verde oliva"),
+        ("violeta", "violeta o lila", "Violeta o lila"),
     ]),
     ("p_anillo", "pie", "Anillo en el pie", [
         ("si", "con anillo", "Sí, tiene anillo (falda o collar)"),
@@ -94,6 +96,7 @@ DIMS = [
         ("pardo", "marrón", "Marrón"),
         ("gris", "gris", "Gris"),
         ("negro", "negro", "Negro"),
+        ("violeta", "violeta o lila", "Violeta o lila"),
     ]),
     # ---- Lo que no sale en una foto: lo rellena la persona ----
     ("s_tam", "otros", "Tamaño del sombrero", [
@@ -105,11 +108,13 @@ DIMS = [
         ("nada", "no cambia de color", "No cambia de color"),
         ("azulea", "se vuelve azul", "Se vuelve azul"),
         ("enrojece", "se vuelve roja o rosa", "Se vuelve roja o rosa"),
+        ("amarillea", "se vuelve amarilla", "Se vuelve amarilla (rápido, al cortar o rascar)"),
     ]),
     ("latex", "otros", "Leche (látex) al cortar o rascar", [
         ("no", "no sale nada", "No sale nada"),
         ("blanco", "leche blanca", "Sale leche blanca"),
         ("naranja", "látex naranja o rojo vino", "Sale látex naranja o rojo vino"),
+        ("amarillea", "leche blanca que amarillea", "Sale leche blanca que se vuelve amarilla en unos segundos"),
     ]),
     ("interior", "otros", "Interior (cortada a lo largo)", [
         ("hueco", "hueca de arriba abajo", "Hueca de arriba abajo, una sola cavidad"),
@@ -131,11 +136,14 @@ DIMS = [
         ("harina", "a harina", "A harina (fresca o rancia)"),
         ("fruta", "afrutado", "Afrutado o a albaricoque"),
         ("almendra", "a almendra o avellana", "A almendra o avellana"),
+        ("fenol", "a tinta, fenol o jabón fenicado", "A tinta, fenol o jabón fenicado"),
     ]),
     ("esporada", "otros", "Color de la esporada", [
         ("blanca", "blanca o crema", "Blanca o crema"),
         ("rosa", "rosa", "Rosa"),
         ("marron", "marrón óxido", "Marrón óxido"),
+        ("chocolate", "pardo oscuro o chocolate", "Pardo oscuro o chocolate"),
+        ("negra", "negra", "Negra"),
     ]),
 ]
 
@@ -222,6 +230,68 @@ FIRMAS = {
     "moixerno": {  # blanco-crema, convexo; láminas apretadas blancas; harina fresca; corros en prados; no fibroso ni enrojece
         "s_color": "blanco", "s_forma": "convexo", "h_tipo!": "laminas", "h_color": "blanco", "olor!": "harina",
         "grupo": "corro", "habitat": "prado", "s_super": "lisa viscosa escamas", "corte": "nada"},
+
+    # ------------------------------ Fichas añadidas el 15/10/2026 ------------------------------
+    # Salen de las frases «cumple»/«descarta»/«confunde» de las fichas nuevas de guia_datos.py. Solo se pone lo que dice la ficha.
+    "hypholoma": {  # amarillo azufre con centro naranja-pardo, liso, 2-8 cm; láminas amarillas→verdes; en mechones sobre madera
+        "s_color": "amarillo naranja pardo", "s_super": "lisa", "s_tam": "pequeno mediano", "h_tipo!": "laminas",
+        "h_color": "amarillo verde", "p_color": "amarillo naranja pardo", "grupo!": "mechon", "habitat!": "madera"},
+    "chrysorrheus": {  # rosado-asalmonado, liso, 3-8 cm; láminas apretadas que bajan; leche blanca que amarillea; con robles
+        "s_color": "rosa", "s_super": "lisa", "s_tam": "pequeno mediano", "h_tipo!": "laminas", "h_color": "blanco rosa",
+        "latex!": "blanco amarillea", "habitat": "planifolio"},
+    "paxillus": {  # pardo (rojizo/amarillento/oliváceo), embudo con margen enrollado, viscoso; láminas amarillo-parduscas que bajan; sin látex
+        "s_color": "pardo rojo amarillo verde", "s_super": "lisa viscosa", "s_forma": "embudo convexo", "h_tipo!": "laminas",
+        "h_color": "amarillo pardo", "p_color": "pardo amarillo", "latex": "no"},
+    "xanthodermus": {  # blanquecino con centro pardo, liso; láminas rosa pálido→chocolate; anillo; base ensanchada; amarillea al cortar; olor a fenol
+        "s_color": "blanco pardo", "s_super": "lisa escamas", "h_tipo!": "laminas", "h_color": "rosa pardo", "p_anillo!": "si",
+        "p_base": "ensanchada", "p_color": "blanco", "corte!": "amarillea", "olor!": "fenol"},
+    "equestre": {  # amarillo con zonas pardas, pegajoso; láminas y pie amarillos; esporada blanca; con pinos
+        "s_color": "amarillo pardo", "s_super": "viscosa", "h_tipo!": "laminas", "h_color!": "amarillo", "p_color": "amarillo",
+        "esporada": "blanca", "habitat": "conifera"},
+    "atramentaria": {  # gris/gris-pardo, acampanado, 3-10 cm; láminas blancas→negras (tinta); pie gris sin anillo; esporada negra; mechones
+        "s_color": "gris pardo", "s_forma": "conico convexo", "s_tam": "pequeno mediano", "h_tipo!": "laminas",
+        "h_color": "blanco gris rosa", "p_anillo!": "no", "p_color": "gris", "grupo": "mechon", "esporada!": "negra",
+        "habitat": "prado madera"},
+    "emetica": {  # rojo escarlata, pegajoso, 2,5-10 cm; láminas blancas; pie blanco y liso; esporada blanca; coníferas
+        "s_color!": "rojo", "s_super": "viscosa", "s_tam": "pequeno mediano", "s_forma": "convexo", "h_tipo!": "laminas",
+        "h_color": "blanco", "p_color": "blanco", "p_super": "lisa", "esporada": "blanca", "habitat": "conifera"},
+    "vinosa": {  # pardo-rojizo con verrugas; láminas blancas; anillo estriado; carne que se vuelve rosa
+        "s_color": "pardo rojo", "s_super": "escamas", "h_tipo!": "laminas", "h_color": "blanco", "p_anillo!": "si",
+        "p_color": "blanco pardo rojo", "corte!": "enrojece", "esporada": "blanca", "habitat": "conifera planifolio"},
+    "camperol": {  # blanco, liso o con finas escamas; láminas rosas→pardo oscuro; un anillo; esporada pardo oscura; prados
+        "s_color!": "blanco", "s_super": "lisa escamas", "s_forma": "convexo", "h_tipo!": "laminas", "h_color!": "rosa pardo",
+        "p_anillo!": "si", "corte": "nada enrojece", "esporada": "chocolate", "habitat!": "prado"},
+    "pimpinella": {  # lila a rosa-violeta; láminas violeta→vinoso; pie violáceo; olor característico; esporada blanca a rosa pálido
+        "s_color!": "violeta rosa", "s_forma": "convexo", "h_tipo!": "laminas", "h_color": "violeta rosa", "p_color": "violeta blanco",
+        "olor": "fruta", "esporada": "blanca rosa", "habitat": "conifera planifolio"},
+    "alzinoi": {  # color miel con escamitas, pegajoso; láminas blancas→amarillentas; anillo ancho; en mechones sobre madera; esporada blanca
+        "s_color": "amarillo pardo", "s_super": "escamas viscosa", "h_tipo!": "laminas", "h_color": "blanco amarillo pardo",
+        "p_anillo!": "si", "p_color": "blanco amarillo pardo", "grupo!": "mechon", "habitat!": "madera", "esporada!": "blanca"},
+    "molleric": {  # castaño/rojizo/oliváceo o naranja-pardo, viscoso; tubos con poros amarillos; puntitos en el pie; no cambia; bajo pinos
+        "s_color": "pardo naranja amarillo verde", "s_super!": "viscosa", "h_tipo!": "poros", "h_color": "amarillo verde",
+        "p_super": "puntos", "corte": "nada", "habitat!": "conifera"},
+    "coprinus": {  # blanco con escamas, casi cilíndrico; láminas blancas→rosas→negras; anillo suelto; esporada negra; céspedes
+        "s_color": "blanco", "s_super!": "escamas", "s_forma": "conico", "s_tam": "pequeno mediano", "h_tipo!": "laminas",
+        "h_color": "blanco rosa gris", "p_anillo!": "si", "p_color": "blanco", "esporada!": "negra", "habitat": "prado"},
+    "orellana": {  # abanico u ostra blanco a gris o pardo; láminas blanquecinas que bajan; sobre madera; olor a almendras amargas
+        "s_color": "blanco gris pardo", "h_tipo!": "laminas", "h_color": "blanco amarillo", "habitat!": "madera", "olor": "almendra"},
+    "llora": {  # color muy variable (verde grisáceo/azulado/pardo), pegajoso; láminas blancas flexibles; pie blanco; esporada blanca
+        "s_color": "verde gris pardo amarillo", "s_super": "viscosa lisa", "s_tam": "mediano grande", "h_tipo!": "laminas",
+        "h_color!": "blanco", "p_color!": "blanco", "esporada!": "blanca", "habitat": "planifolio conifera"},
+    "molinera": {  # blanco a gris claro, mate; láminas que bajan, blancas→rosadas; olor a harina; esporada rosa
+        "s_color": "blanco gris", "s_super": "lisa viscosa", "s_forma": "convexo", "s_tam": "pequeno mediano", "h_tipo!": "laminas",
+        "h_color!": "blanco rosa", "p_color": "blanco gris", "olor!": "harina", "esporada!": "rosa", "habitat": "prado planifolio conifera"},
+    "fredolic-gros": {  # gris oscuro con estrías casi negras, pegajoso, con mamelón; láminas blancas; harina; esporada blanca; coníferas
+        "s_color!": "gris negro", "s_super!": "viscosa", "s_forma": "convexo", "h_tipo!": "laminas", "h_color": "blanco",
+        "p_color": "blanco amarillo", "olor": "harina", "esporada": "blanca", "habitat": "conifera"},
+    "pampa": {  # grande (hasta 20 cm), crema o beige, en embudo con mamelón; láminas que bajan; pie en maza; almendras amargas; esporada blanca; corros
+        "s_color": "blanco pardo", "s_forma": "embudo convexo", "s_tam!": "grande", "h_tipo!": "laminas", "h_color": "blanco pardo",
+        "p_base": "ensanchada", "olor": "almendra", "esporada!": "blanca", "grupo": "corro", "habitat": "prado planifolio conifera"},
+    "pollancro": {  # rojizo-pardo→pardo claro, convexo; láminas blanquecinas→pardo-grisáceas; anillo; mechones sobre madera
+        "s_color": "pardo", "s_forma": "convexo", "s_tam": "pequeno mediano", "h_tipo!": "laminas", "h_color": "blanco pardo gris",
+        "p_anillo!": "si", "p_color": "blanco", "grupo!": "mechon", "habitat!": "madera"},
+    "marcot": {  # blanco→gris→casi negro; láminas gruesas y céreas, un poco decurrentes; pie macizo blanco→gris; montaña junto a la nieve
+        "s_color": "blanco gris negro", "h_tipo!": "laminas", "h_color": "blanco", "p_color": "blanco gris", "habitat": "conifera planifolio"},
 }
 
 PESO_NORMAL = 1

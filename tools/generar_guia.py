@@ -21,7 +21,8 @@ import sys
 REVISION = "15/10/2026"
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from guia_datos import PELIGROSAS, FICHAS, NOMBRES  # noqa: E402
+from guia_datos import PELIGROSAS, FICHAS  # noqa: E402
+from nombres_datos import NOMBRES, FUENTES, fuentes_texto, fuente_larga  # noqa: E402
 import rasgos_datos as RD  # noqa: E402
 
 WORKER_URL = "https://bolets-hallazgos.shicoars.workers.dev/"
@@ -68,11 +69,34 @@ def badge(kind):
     return f'<span class="badge {cls}">{txt}</span>'
 
 
-def nombres_html(clave):
-    n = NOMBRES.get(clave)
-    if not n:
-        return "", ""
-    return (f'<span class="sci">También se le llama: {e(", ".join(n))}</span>', " " + " ".join(n))
+def nombres_html(clave, cien):
+    """Bloque «Nombres» de una ficha: latín, català y castellano (cada uno con «—» si ninguna fuente da nombre) y las fuentes.
+    Devuelve (html, texto para el buscador)."""
+    n = NOMBRES[clave]
+
+    def fila(etq, txt, lista, vacio):
+        if lista:
+            return f'<p><span class="nl">{etq}</span>{txt}</p>'
+        return f'<p><span class="nl">{etq}</span><span class="nada">{vacio}</span></p>'
+
+    ca = "; ".join(e(x) for x in n["ca"])
+    es = "; ".join(e(x) for x in n["es"])
+    filas = [
+        f'<p><span class="nl">Latín</span><i>{e(cien)}</i></p>',
+        fila("Català", ca, n["ca"], "— (ninguna fuente consultada le da nombre en catalán)"),
+        fila("Castellano", es, n["es"], "— (ninguna fuente consultada le da nombre en castellano)"),
+    ]
+    fuentes = []
+    if n["ca"]:
+        fuentes.append("catalán: " + e(fuentes_texto(n["ca_f"])))
+    if n["es"]:
+        fuentes.append("castellano: " + e(fuentes_texto(n["es_f"])))
+    if fuentes:
+        filas.append(f'<p class="nfuente">Nombres según — {"; ".join(fuentes)}.</p>')
+    if n.get("nota"):
+        filas.append(f'<p class="nnota">{e(n["nota"])}</p>')
+    busca = " " + " ".join(n["ca"] + n["es"])
+    return f'<div class="nombres">{"".join(filas)}</div>', busca
 
 
 def resumen(cid, nombre_html, cien):
@@ -86,7 +110,7 @@ def resumen(cid, nombre_html, cien):
 
 def render_peligrosa(p):
     pid, nombre, cien, grav, reco, confunde = p
-    nom_html, nom_busca = nombres_html(pid)
+    nom_html, nom_busca = nombres_html(pid, cien)
     return f"""
 <details class="card danger" id="{pid}" data-kind="peligrosa" data-search="{e((nombre + ' ' + cien + nom_busca).lower())}">
   {resumen(pid, e(nombre) + ' ' + badge(grav), cien)}
@@ -103,10 +127,10 @@ def render_ficha(f):
     cid = f["ids"][0]
     anchors = "".join(f'<a id="{i}"></a>' for i in f["ids"][1:])
     conf = "".join(
-        f"<li><strong>{e(n)}</strong> {badge(k)} — {e(t)}</li>" for n, k, t in f["confunde"]
+        f"<li><strong>{e(n)}</strong> {badge(k) + ' ' if k else ''}— {e(t)}</li>" for n, k, t in f["confunde"]
     )
     mapa = "" if f["mapa"] else ' <span class="badge b-nomap">no está en el mapa</span>'
-    nom_html, nom_busca = nombres_html(cid)
+    nom_html, nom_busca = nombres_html(cid, f["cien"])
     search = (f["nombre"] + " " + f["cien"] + nom_busca).lower()
     return f"""
 {anchors}<details class="card" id="{cid}" data-kind="ficha" data-search="{e(search)}">
@@ -123,6 +147,16 @@ def render_ficha(f):
     <p>{e(f['donde'])}</p>
   </div>
 </details>"""
+
+
+def fuentes_pie():
+    """Lista de las fuentes de nombres que se usan de verdad en alguna ficha, con enlace (en el orden de FUENTES)."""
+    usados = set()
+    for n in NOMBRES.values():
+        usados.update((n["ca_f"] + " " + n["es_f"]).split())
+    return "; ".join(
+        f'<a href="{e(FUENTES[c][1])}" target="_blank" rel="noopener">{e(fuente_larga(c))}</a>' for c in FUENTES if c in usados
+    )
 
 
 def cartas_gravedad():
@@ -301,7 +335,13 @@ CSS = r"""
   .thumb .ph { font-size: 26px; opacity: .55; }
   .ttl { flex: 1 1 auto; min-width: 0; font-size: 17px; font-weight: 700; line-height: 1.25; }
   .ttl .sci { font-weight: 400; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-  .body > .sci { margin-top: 8px; }
+  .nombres { margin: 8px 0 4px; padding: 8px 10px; background: #f3f1ea; border-radius: 8px; font-size: 14px; }
+  .nombres p { margin: 2px 0; }
+  .nombres p:not(.nfuente):not(.nnota) { display: grid; grid-template-columns: 6.4em 1fr; column-gap: 8px; align-items: baseline; }
+  .nombres .nl { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .03em; color: var(--muted); }
+  .nombres .nada { color: var(--muted); }
+  .nombres .nfuente, .nombres .nnota { font-size: 12px; color: var(--muted); margin-top: 4px; }
+  .nombres .nnota { color: var(--amber-text); background: var(--amber-bg); border-radius: 6px; padding: 4px 8px; }
   .chev { flex: 0 0 auto; width: 10px; height: 10px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted);
           transform: rotate(45deg); margin: 0 6px 4px 0; transition: transform .15s; }
   .card[open] > summary .chev { transform: rotate(-135deg); margin-bottom: -4px; }
@@ -790,11 +830,11 @@ PLANTILLA = """<!DOCTYPE html>
   </section>
 
   <h2>Buscar</h2>
-  <input type="search" id="q" placeholder="Nombre en catalán o científico (rossinyol, Amanita...)" autocomplete="off">
+  <input type="search" id="q" placeholder="Nombre en latín, catalán o castellano (rossinyol, níscalo, Amanita...)" autocomplete="off">
   <div class="tabs">
     <button class="tab on" data-f="all">Todo</button>
     <button class="tab" data-f="peligrosa">⚠️ Peligrosas</button>
-    <button class="tab" data-f="ficha">Setas del predictor</button>
+    <button class="tab" data-f="ficha">Setas buscadas</button>
   </div>
 
   <div id="sec-peligrosas">
@@ -805,8 +845,8 @@ PLANTILLA = """<!DOCTYPE html>
   </div>
 
   <div id="sec-fichas">
-    <h2>Las setas del predictor</h2>
-    <p class="sub">Cada ficha empieza por lo que tiene que cumplir y por lo que la descarta. Las del apartado «no está en el mapa» son de prado y todavía no se predicen.</p>
+    <h2>Las setas más buscadas</h2>
+    <p class="sub">Cada ficha empieza por lo que tiene que cumplir y por lo que la descarta. Las marcadas «no está en el mapa» todavía no las predice el predictor (las de prado y las que aún no tienen datos). Que una ficha esté aquí NO quiere decir que la seta se pueda comer.</p>
     <div class="chips">@@INDICE_F@@</div>
     @@FICHAS@@
   </div>
@@ -823,6 +863,7 @@ PLANTILLA = """<!DOCTYPE html>
   </details>
 
   <p class="foot">Fotos: Wikimedia Commons, con licencias libres (el autor y la licencia están debajo de cada foto). Texto de redacción propia, sin revisión micológica independiente. Como referencia de qué confusiones peligrosas importan se consultó (15/10/2026) la página de confusiones de bolets.app. Los nombres comunes cambian de una zona a otra: fíate del nombre científico. La lectura de rasgos de las fotos la hace un modelo de IA general y puede equivocarse; el porcentaje de coincidencia no es una probabilidad.</p>
+  <p class="foot">Nombres populares (consultados el 15/10/2026; solo se escribe el que aparece en una fuente): @@FUENTES@@.</p>
 </div>
 <script id="rasgos-datos" type="application/json">@@DATOS@@</script>
 <script>@@PUNTUAR@@</script>
@@ -855,6 +896,7 @@ def build():
         "@@FICHAS@@": "".join(render_ficha(f) for f in FICHAS),
         "@@PASOS@@": pasos,
         "@@MITOS@@": mitos,
+        "@@FUENTES@@": fuentes_pie(),
     }
     out = PLANTILLA
     for k, v in reemplazos.items():
