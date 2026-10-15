@@ -406,14 +406,23 @@ if _guia:
     check("guia: té una fitxa/ancora per a CADA espècie del predictor (per l'enllaç de la finestra de zona)",
           all(sp["id"] in _ids for sp in m.SPECIES), str([sp["id"] for sp in m.SPECIES if sp["id"] not in _ids]))
     check("guia: sense enllaços interns trencats", all(h in _ids for h in _re.findall(r'href="#([^"]+)"', _guia)))
-    check("guia: autocontinguda (cap recurs extern: ha de funcionar sense cobertura)", not _re.findall(r'(?:src|href)="https?://', _guia))
+    # Recursos externs = res que el navegador hagi de CARREGAR (src=, <link href=, url(...), @import, fetch a hosts de tercers).
+    # Els <a href="https://..."> del peu (fonts dels noms populars) són enllaços que l'usuari pot tocar: no es carreguen sense cobertura.
+    check("guia: autocontinguda (cap recurs extern carregat: ha de funcionar sense cobertura; només hi ha enllaços <a> de fonts al peu)",
+          not _re.findall(r'\bsrc="https?://', _guia) and not _re.findall(r'<link[^>]+href="https?://', _guia)
+          and not _re.findall(r'url\(\s*["\']?https?://', _guia) and "@import" not in _guia)
+    _ext = _re.findall(r'<a [^>]*href="(https?://[^"]+)"', _guia)
+    check("guia: els enllaços externs del peu (fonts) són https i tots s'obren en pestanya nova amb rel=noopener",
+          bool(_ext) and all(u.startswith("https://") for u in _ext)
+          and all('rel="noopener' in t for t in _re.findall(r'<a [^>]*href="https?://[^"]+"[^>]*>', _guia)),
+          str([t for t in _re.findall(r'<a [^>]*href="https?://[^"]+"[^>]*>', _guia) if 'rel="noopener' not in t][:3]))
     check("guia: no hi ha ids duplicats", len(_re.findall(r'\bid="', _guia)) == len(_ids))
     check("guia: sense les seccions «Léelo antes de nada» i «Si has comido una seta» (decisió de l'usuari, 15/10/2026)",
           "Léelo antes de nada" not in _guia and "Si has comido una seta" not in _guia)
     check("guia: el peu continua dient que el text no té revisió micològica independent", "sin revisión micológica independiente" in _guia)
-    check("guia: 30 fitxes desplegables (<details class=\"card\">)", len(_re.findall(r'<details class="card', _guia)) == 30,
+    check("guia: 50 fitxes desplegables (<details class=\"card\">)", len(_re.findall(r'<details class="card', _guia)) == 50,
           str(len(_re.findall(r'<details class="card', _guia))))
-    check("guia: cada fitxa té lloc per a la miniatura i per a les fotos", _guia.count('data-thumb="') == 30 and _guia.count('data-fotos="') == 30)
+    check("guia: cada fitxa té lloc per a la miniatura i per a les fotos", _guia.count('data-thumb="') == 50 and _guia.count('data-fotos="') == 50)
     check("guia: 3 buits de foto (dalt, sota el barret, peu), cadascun amb càmera (capture) i galeria",
           all(f'id="foto-{p_}-cam"' in _guia and f'id="foto-{p_}-gal"' in _guia for p_ in ("sombrero", "debajo", "pie"))
           and _guia.count('capture="environment"') == 3 and _guia.count('class="slot"') == 3)
@@ -581,6 +590,51 @@ if _guia:
           "NO es la probabilidad" in _guia and "ni quiere decir que se pueda comer" in _guia)
     check("guia: el peu diu que el percentatge no és una probabilitat", "el porcentaje de coincidencia no es una probabilidad" in _guia)
     check("guia: ja no hi ha el mode d'una sola foto (ids foto-cam / foto-gal) ni la lectura de «falta_ver»", "foto-cam" not in _guia and "foto-gal" not in _guia and "falta_ver" not in _guia)
+
+# ---- Noms en llatí, català i castellà de les 50 fitxes (tools/nombres_datos.py) ----
+import nombres_datos as _nd, html as _html
+_cien = {p_[0]: p_[2] for p_ in _gd.PELIGROSAS}
+_cien.update({f_["ids"][0]: f_["cien"] for f_ in _gd.FICHAS})
+check("noms: nombres_datos.NOMBRES té exactament una entrada per a cada fitxa de la guia", set(_nd.NOMBRES) == set(_card_ids) and len(_nd.NOMBRES) == len(_card_ids),
+      str(set(_nd.NOMBRES) ^ set(_card_ids)))
+check("noms: cada entrada té llistes ca/es (poden ser buides: es mostra «—») i el codi de font quan hi ha nom",
+      all(isinstance(v_["ca"], list) and isinstance(v_["es"], list) and (not v_["ca"] or v_["ca_f"].strip()) and (not v_["es"] or v_["es_f"].strip())
+          and all(isinstance(x_, str) and x_.strip() for x_ in v_["ca"] + v_["es"]) for v_ in _nd.NOMBRES.values()))
+_cods = {c_ for v_ in _nd.NOMBRES.values() for c_ in (v_["ca_f"] + " " + v_["es_f"]).split()}
+check("noms: tots els codis de font usats existeixen a FUENTES (nom i URL https)",
+      _cods <= set(_nd.FUENTES) and all(_nd.FUENTES[c_][1].startswith("https://") and _nd.fuente_larga(c_) for c_ in _nd.FUENTES),
+      str(_cods - set(_nd.FUENTES)))
+check("noms: cap nom català va amb font només castellana (ca_f no conté fonts MAD-/RIO/ESW) ni a l'inrevés (es_f no conté EC/BOLETS/3CAT/CS/ICHN)",
+      not any(c_.startswith(("MAD-", "RIO", "ESW")) for v_ in _nd.NOMBRES.values() for c_ in v_["ca_f"].split())
+      and not any(c_ in ("EC", "BOLETS", "3CAT", "CS", "ICHN") for v_ in _nd.NOMBRES.values() for c_ in v_["es_f"].split()))
+if _guia:
+    check("noms: 50 blocs «Latín / Català / Castellano» a la guia (un per fitxa)", _guia.count('<div class="nombres">') == 50
+          and _guia.count('<span class="nl">Latín</span>') == 50 and _guia.count('<span class="nl">Català</span>') == 50 and _guia.count('<span class="nl">Castellano</span>') == 50)
+    _mal = []
+    for _k, _v in _nd.NOMBRES.items():
+        _m = _re.search(r'<details class="card[^"]*" id="%s"[^>]*data-search="([^"]*)"' % _re.escape(_k), _guia)
+        if not _m:
+            _mal.append((_k, "sin card/data-search")); continue
+        _bus = _html.unescape(_m.group(1))
+        for _nom in _v["ca"] + _v["es"]:
+            if _nom.lower() not in _bus.lower():
+                _mal.append((_k, _nom))
+        if _cien[_k].lower() not in _bus.lower():
+            _mal.append((_k, "cien"))
+    check("noms: el buscador (data-search) de cada fitxa conté el nom llatí i tots els noms en català i castellà", not _mal, str(_mal[:5]))
+    check("noms: tots els noms de la taula surten dins la fitxa (text visible)",
+          all(_html.escape(_nom, quote=True) in _guia or _html.escape(_nom, quote=False) in _guia for _v in _nd.NOMBRES.values() for _nom in _v["ca"] + _v["es"]))
+    check("noms: el peu llista les fonts de noms consultades i la data (15/10/2026)", "Nombres populares (consultados el 15/10/2026" in _guia
+          and all(_nd.FUENTES[c_][1] in _guia for c_ in _cods))
+    check("noms: els noms antics sense font ja no hi són («corro de bruja», «Trompeta de la muerte», títol «Escarlet» sol)",
+          "corro de bruja" not in _guia.lower() and "trompeta de la muerte" not in _guia.lower() and ">Escarlet<" not in _guia and 'class="nm">Escarlet' not in _guia)
+    check("noms: les fitxes sense nom en una llengua mostren «—» explicant que cap font consultada el dóna (no s'inventen)",
+          all((_v["ca"] or "ninguna fuente consultada le da nombre en catalán" in _guia) and (_v["es"] or "ninguna fuente consultada le da nombre en castellano" in _guia)
+              for _v in _nd.NOMBRES.values()))
+    check("guia: les 20 fitxes noves hi són (7 de perilloses + 13 de normals) i cap fitxa diu «se puede comer»",
+          all(f'id="{_i}"' in _guia for _i in ("hypholoma", "chrysorrheus", "paxillus", "xanthodermus", "equestre", "atramentaria", "emetica", "vinosa", "camperol",
+              "pimpinella", "alzinoi", "molleric", "coprinus", "orellana", "llora", "molinera", "fredolic-gros", "pampa", "pollancro", "marcot"))
+          and "se puede comer" not in _re.sub(r"ni quiere decir que se pueda comer", "", _guia).lower().replace("no se puede comer", ""))
 
 # El vocabulari que el Worker ensenya al model ha de coincidir amb tools/rasgos_datos.py
 _wk = None

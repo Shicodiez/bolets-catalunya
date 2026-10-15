@@ -26,7 +26,7 @@ const tipico = (id) => Object.fromEntries(Object.entries(D.firmas[id]).map(([dim
 const enCand = (g, id) => g.candidatas.some((r) => r.id === id);
 const enDud = (g, id) => g.dudosas.some((r) => r.id === id);
 
-check("hay 30 fichas con firma y todas tienen datos de gravedad", ids.length === 30 && ids.every((i) => D.cartas[i]));
+check("hay 50 fichas con firma y todas tienen datos de gravedad", ids.length === 50 && ids.every((i) => D.cartas[i]));
 
 // 1) Cada ficha, con sus propios rasgos, sale como candidata
 let primeros = 0;
@@ -38,7 +38,7 @@ for (const id of ids) {
   check(`ejemplar tipo de «${id}»: ningún rasgo en contra`, por[id].no.length === 0);
   if (g.candidatas[0] && g.candidatas[0].id === id) primeros++;
 }
-check("la ficha propia es la primera de la lista en al menos 28 de 30 ejemplares tipo (la clitocibe y el cama-sec se confunden por diseño)", primeros >= 28, String(primeros));
+check("la ficha propia es la primera de la lista en al menos 48 de 50 ejemplares tipo (la clitocibe y el cama-sec se confunden por diseño)", primeros >= 48, String(primeros));
 
 // 2) Un rasgo no indicado ni suma ni resta; ningún % pasa de 100
 {
@@ -135,6 +135,42 @@ check("la ficha propia es la primera de la lista en al menos 28 de 30 ejemplares
   check("las partes de la IA son sombrero, debajo y pie; el resto lo rellena la persona",
         D.dims.filter((d) => d.parte !== "otros").every((d) => ["sombrero", "debajo", "pie"].includes(d.parte)) &&
         D.dims.filter((d) => d.parte === "otros").length === 8);
+}
+
+// 9) Las 20 fichas añadidas el 15/10/2026: confusiones que deben salir en las listas (coherencia del cálculo, no validación con setas reales)
+{
+  const NUEVAS = ["hypholoma", "chrysorrheus", "paxillus", "xanthodermus", "equestre", "atramentaria", "emetica", "vinosa", "camperol", "pimpinella",
+    "alzinoi", "molleric", "coprinus", "orellana", "llora", "molinera", "fredolic-gros", "pampa", "pollancro", "marcot"];
+  check("las 20 fichas nuevas tienen firma y datos de gravedad", NUEVAS.every((i) => D.firmas[i] && D.cartas[i]));
+  check("las 7 fichas nuevas de «peligrosas» están marcadas como peligro y la rúsula emética es «no comer» pero no «peligro»",
+        ["hypholoma", "chrysorrheus", "paxillus", "xanthodermus", "equestre", "atramentaria"].every((i) => D.cartas[i].peligro) &&
+        D.cartas.emetica.grav === "nocom" && !D.cartas.emetica.peligro);
+  const vocab = Object.fromEntries(D.dims.map((d) => [d.id, new Set(d.valores.map((v) => v[0]))]));
+  check("vocabulario nuevo: violeta (sombrero, láminas, pie), amarillea (corte y látex), fenol, chocolate y negra",
+        ["s_color", "h_color", "p_color"].every((d) => vocab[d].has("violeta")) && vocab.corte.has("amarillea") && vocab.latex.has("amarillea") &&
+        vocab.olor.has("fenol") && vocab.esporada.has("chocolate") && vocab.esporada.has("negra"));
+  // falso níscalo (Lactarius chrysorrheus) y níscalo: el látex que amarillea los separa en las dos direcciones
+  const A = evalua(tipico("chrysorrheus")), B = evalua(tipico("rovellons"));
+  check("falso níscalo con látex que amarillea: el rovelló queda descartado (no candidata ni dudosa)", !enCand(A.g, "rovellons") && !enDud(A.g, "rovellons") && A.por.rovellons.clave.includes("latex"));
+  check("rovelló típico: el falso níscalo queda descartado por el látex", !enCand(B.g, "chrysorrheus") && B.por.chrysorrheus.clave.includes("latex"));
+  // confusiones peligrosas conocidas
+  const C = evalua(tipico("camperol")), X = evalua(tipico("xanthodermus"));
+  check("camperol típico: las amanitas blancas salen como «dudosas» (no se pueden descartar)", enDud(C.g, "amanitas-blancas"));
+  check("champiñón amarilleante típico: el camperol sale como candidata y las amanitas blancas como dudosas", enCand(X.g, "camperol") && enDud(X.g, "amanitas-blancas"));
+  const V = evalua(tipico("vinosa"));
+  check("Amanita vinosa/rubescens típica: la amanita muscaria sale como candidata (confusión descrita en las fichas)", enCand(V.g, "muscaria"));
+  const M = evalua(tipico("molinera"));
+  check("molinera típica: el entoloma lívido y el moixernó de tardor salen como candidatas, la clitocibe blanca también", enCand(M.g, "entoloma") && enCand(M.g, "moixerno") && enCand(M.g, "clitocybe"));
+  const K = evalua(tipico("coprinus")), T = evalua(tipico("atramentaria"));
+  check("coprino pelucón típico: el coprino entintado sale como «dudosa»", enDud(K.g, "atramentaria"));
+  check("coprino entintado típico: él mismo es candidata con 100 %", enCand(T.g, "atramentaria") && T.por.atramentaria.pct === 100);
+  const H = evalua(tipico("hypholoma"));
+  check("hifoloma de láminas verdes típico: la seta del olivo sale como «dudosa»", enDud(H.g, "omphalotus"));
+  const L = evalua(tipico("pollancro"));
+  check("pollancro típico: la galerina marginada sale como candidata (se parece de joven en troncos)", enCand(L.g, "galerina"));
+  // fichas con poco peso: no deben llegar a 100 % con solo 3 rasgos sueltos
+  const P3 = evalua({ s_color: "pardo", s_forma: "convexo", h_tipo: "laminas" });
+  check("con solo 3 rasgos genéricos ninguna ficha nueva llega a 100 %", NUEVAS.every((i) => P3.por[i].pct < 100));
 }
 
 console.log(`Rasgos: ${ok} comprobaciones OK, ${bad} fallos`);
