@@ -222,12 +222,15 @@
     <p class="hint" style="margin-top:10px"><a href="#" id="login-change-email">Usar otro email</a></p>
   </div>
   <p id="login-error"></p>
+  <p class="hint" style="margin:14px 0 0"><a href="guia.html">📖 Guía de identificación de setas</a><br>
+  <span style="font-size:12px">Funciona sin conexión una vez abierta con cobertura. No necesita iniciar sesión.</span></p>
 </div>
 
 <div id="app-content">
 <div class="wrap">
   <h1>Predictor de setas — Catalunya</h1>
   <p class="subtitle">Puntuación por evidencia acumulada y frenos biológicos: lluvia, temperatura, época, altitud, suelo y contraste entre fuentes</p>
+  <p class="hint" style="margin:0 0 10px;font-size:13px"><a href="guia.html">📖 Guía de identificación de setas</a> <span style="font-size:12px">(también sin conexión)</span></p>
   <div id="credential-warnings"></div>
   <div id="data-coverage-warning"></div>
   <div id="status">Cargando datos...</div>
@@ -311,6 +314,7 @@
 
   <div class="legend">
     <p>La puntuación (0-100) suma evidencia de varios factores: lluvia acumulada, días desde la lluvia principal (el grueso del agua, no el último chubasco), temperatura, humedad real del suelo (no solo lo que ha llovido, sino si esa agua sigue en la tierra), temporada típica de la especie y contraste con AEMET y estaciones amateur (Meteoclimatic).</p>
+    <p style="margin-top:8px"><strong>La puntuación es un índice, no una probabilidad:</strong> un 80 no quiere decir «80 % de probabilidad de encontrar setas», sino que las condiciones de hoy se parecen mucho a las de una buena salida. Con pocos hallazgos confirmados todavía no podemos calibrarla, y por eso se muestra también la confianza (🟢🟠🔴). Y recuerda: <strong>la app dice dónde mirar, no qué se puede comer</strong>; para eso, mira la <a href="guia.html">guía de identificación</a> y consulta a una persona experta.</p>
     <p style="margin-top:8px">Después se aplican <strong>frenos biológicos</strong> propios de cada especie que pueden bajar mucho la nota aunque haya llovido: que todavía sea pronto (el Ou de reig tarda 15-20 días), la época del año, la altitud, la temperatura (el Ou de reig necesita calor; rovellons, camagrocs o trompetes se frenan con el calor; casi todas se resienten con las heladas) y el tipo de suelo (el Ou de reig es de suelo ácido, no calcáreo; las trompetes y las colmenillas prefieren el calcáreo). Cuando algo frena una especie, lo verás con un ⚠️ en la zona.</p>
     <div class="legend-items">
       <span><span class="legend-dot" style="background:#1D9E75"></span>Alta (≥80)</span>
@@ -430,6 +434,7 @@ function renderMap(filterVal) {
         <div style="margin:2px 0 6px">
           ${(s.limits && s.limits.length) ? `<p class="popup-detail" style="margin:2px 0 3px">⚠️ ${s.limits.join(' · ')}</p>` : ''}
           <a href="#" style="font-size:11px" onclick="explainZoneSpecies(event, ${z.id}, '${s.id}', '${rowId}')">¿Por qué esta puntuación?</a>
+          · <a href="guia.html#${s.id}" style="font-size:11px">📖 Cómo reconocerla</a>
           <p id="${rowId}" class="popup-detail" style="display:none;margin-top:4px"></p>
         </div>
       `;
