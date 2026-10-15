@@ -465,15 +465,25 @@ SPECIES = [
     # (coherent amb la corba "timing" de SPECIES_BIO); temp_range = mínima
     # nocturna mitjana (7 dies) ideal; min_rain = mm de l'episodi de pluja.
     {"id": "rovellons",   "name": "Rovellons",           "scientific": ["Lactarius deliciosus", "Lactarius sanguifluus"],      "trees": ["pi_roig", "pi_negre", "pi_pinyer", "pi_blanc", "pi_altres"], "rain_days": [14, 35], "temp_range": [5, 14],  "min_rain": 20},
-    {"id": "ceps",        "name": "Ceps",                 "scientific": ["Boletus edulis", "Boletus aereus", "Boletus pinophilus"], "trees": ["roure", "faig", "pi_roig", "pi_negre", "avet", "suro", "pi_altres"], "rain_days": [10, 20], "temp_range": [6, 16],  "min_rain": 25},
+    # CEPS separats en tres (15/10/2026): abans "ceps" ajuntava edulis, pinophilus i aereus.
+    # L'id antic "ceps" ja no existeix al catàleg; les salides antigues amb "ceps" es
+    # contrasten amb la millor puntuació dels tres (veure LEGACY_SPECIES_ALIASES).
+    {"id": "cep",         "name": "Cep",                  "scientific": ["Boletus edulis", "Boletus pinophilus"],               "trees": ["roure", "faig", "pi_roig", "pi_negre", "avet", "pi_altres"], "rain_days": [10, 20], "temp_range": [6, 16],  "min_rain": 25},
+    {"id": "cepfosc",     "name": "Cep fosc",             "scientific": ["Boletus aereus"],                                     "trees": ["alzina", "suro", "roure", "faig"], "tree_factor": {"faig": 0.85}, "rain_days": [8, 16], "temp_range": [9, 19],  "min_rain": 25},
+    {"id": "cepestiu",    "name": "Cep d'estiu",          "scientific": ["Boletus reticulatus"],                                "trees": ["roure", "faig", "alzina"], "tree_factor": {"alzina": 0.85}, "rain_days": [8, 18], "temp_range": [10, 20], "min_rain": 25},
     {"id": "camagrocs",   "name": "Camagrocs",            "scientific": ["Craterellus lutescens"],                              "trees": ["faig", "roure", "pi_roig", "pi_negre", "pi_blanc", "pi_altres", "avet"], "rain_days": [16, 40], "temp_range": [3, 13],  "min_rain": 25},
-    {"id": "trompetes",   "name": "Trompetes de la mort", "scientific": ["Craterellus cornucopioides"],                         "trees": ["faig", "roure"],                                            "rain_days": [16, 35], "temp_range": [4, 14],  "min_rain": 25},
+    {"id": "trompetes",   "name": "Trompetes de la mort", "scientific": ["Craterellus cornucopioides"],                         "trees": ["faig", "roure", "alzina"], "tree_factor": {"alzina": 0.85}, "rain_days": [16, 35], "temp_range": [4, 14],  "min_rain": 25},
     {"id": "oureig",      "name": "Ou de reig",           "scientific": ["Amanita caesarea"],                                   "trees": ["alzina", "roure", "suro"],                                  "rain_days": [15, 20], "temp_range": [12, 22], "min_rain": 18},
     {"id": "rossinyols",  "name": "Rossinyols",           "scientific": ["Cantharellus cibarius"],                              "trees": ["faig", "roure", "pi_roig", "pi_negre", "avet", "pi_altres"], "rain_days": [9, 18],  "temp_range": [7, 17],  "min_rain": 20},
     {"id": "colmenilles", "name": "Colmenilles",          "scientific": ["Morchella esculenta", "Morchella elata"],             "trees": ["roure", "pi_blanc", "pi_roig", "pi_negre", "pi_altres"],    "rain_days": [8, 20],  "temp_range": [3, 11],  "min_rain": 15},
     {"id": "llengua",     "name": "Llengua de bou",       "scientific": ["Hydnum repandum"],                                    "trees": ["roure", "faig", "suro", "pi_roig", "pi_negre", "avet", "pi_altres"], "rain_days": [12, 28], "temp_range": [5, 16],  "min_rain": 20},
     {"id": "pinetell",    "name": "Pinetell",             "scientific": ["Lactarius deliciosus"],                               "trees": ["pi_roig", "pi_negre", "pi_pinyer", "pi_blanc", "pi_altres"], "rain_days": [14, 32], "temp_range": [3, 13],  "min_rain": 20},
     {"id": "fredolic",    "name": "Fredolic",             "scientific": ["Tricholoma terreum"],                                 "trees": ["pi_blanc", "pi_roig", "pi_negre", "pi_pinyer", "alzina", "pi_altres"], "rain_days": [12, 32], "temp_range": [2, 13],  "min_rain": 18},
+    # Espècies afegides el 15/10/2026 a partir de la fitxa pública de trobarbolets.cat
+    # (hàbitat, sòl i altituds) — PERFIL PROVISIONAL: la pluja i la temperatura són
+    # [EST] i no hi ha cap sortida de camp de l'usuari (veure "provisional" a SPECIES_BIO).
+    {"id": "escarlet",    "name": "Escarlet",             "scientific": ["Hygrophorus russula"],                                "trees": ["alzina", "roure", "faig", "suro"], "tree_factor": {"faig": 0.85, "suro": 0.85}, "rain_days": [16, 40], "temp_range": [3, 12],  "min_rain": 30},
+    {"id": "llenega",     "name": "Llenega negra",        "scientific": ["Hygrophorus latitabundus"],                           "trees": ["pi_roig", "pi_negre", "pi_blanc", "pi_pinyer", "pi_altres"], "rain_days": [14, 35], "temp_range": [3, 12],  "min_rain": 25},
 ]
 
 # ---------------------------------------------------------------------------
@@ -552,24 +562,65 @@ SPECIES_BIO = {
         "alt": [(0, 0.8), (200, 1.0), (1700, 1.0), (2000, 0.35), (2250, 0.0)],
         "season_manual": ((8, 20), (12, 15)),
     },
-    "ceps": {
+    "cep": {
         # [FONT] 20 dies de finestra tèrmica i 26 de pluja acumulada (B. edulis,
         # bioRxiv); a la pràctica 8-14 dies després de la pluja. [EST] la corba.
         "timing": [(3, 0.10), (6, 0.45), (9, 0.90), (11, 1.0), (20, 1.0), (28, 0.60), (38, 0.25)],
-        # [FONT] B. edulis: mitjana diària òptima ~13 °C (10-15 °C); B. aereus
-        # tolera/prefereix la calor; les gelades i el fred els frenen (Surt de
-        # Casa: "el fred d'alguns dies els ha frenat"). [EST] els números.
+        # [FONT] B. edulis: mitjana diària òptima ~13 °C (10-15 °C); les gelades i
+        # el fred els frenen (Surt de Casa: "el fred d'alguns dies els ha
+        # frenat"). [EST] els números.
         "heat": {"tmax_hot": [(25, 1.0), (28, 0.70), (31, 0.40), (34, 0.15)],
                  "cold": [(0, 0.40), (4, 1.0)],
                  "frost": [(-5, 0.20), (-2, 0.50), (0, 0.80), (2, 1.0)]},
-        # [EST] sobretot muntanya mitjana i alta (Pirineu, Prepirineu, Montseny,
-        # Guilleries); només a baixa altitud sota sureda (B. aereus). Penalitza
-        # la terra baixa perquè, mentre "pi_altres" és genèric (pins costaners
-        # inclosos), no surtin ceps a les pinedes de Barcelona.
-        "alt": [(0, 0.30), (200, 0.55), (400, 0.90), (550, 1.0), (1700, 1.0), (2000, 0.40), (2300, 0.0)],
+        # [FONT] trobarbolets.cat (15/10/2026): cep 679-2.451 m; la terra baixa
+        # és del cep fosc (B. aereus), que té perfil propi. Penalitza la terra
+        # baixa perquè, mentre "pi_altres" és genèric (pins costaners inclosos),
+        # no surtin ceps de muntanya a les pinedes de Barcelona.
+        # [CAMPO] hallazgo real: ceps a ~2.000 m sota pi negre (Ger, 25/08/2026)
+        # -> el sostre alt es retalla més amunt (abans a 2.000 m ja quedava a 0,40
+        # i era impossible arribar al llindar). [EST] el tram baix, mogut des de
+        # 400-550 m a 500-700 m en separar el cep fosc.
+        "alt": [(0, 0.10), (300, 0.30), (500, 0.65), (700, 1.0), (1700, 1.0), (2000, 0.95), (2200, 0.80), (2400, 0.30), (2550, 0.0)],
         # [FONT] sòls àcids; a la Serra dels Ports (calcaris) no apareixen
         "soil": {"silici": 1.0, "silici_prov": 1.0, "mixt": 0.90, "calcari": 0.75, None: 0.95},
         "season_manual": ((6, 15), (11, 30)),
+    },
+    "cepfosc": {
+        # PERFIL PROVISIONAL (15/10/2026): B. aereus. Separat del cep perquè és
+        # termòfil i de terra baixa/mitjana sota alzina, sureda i roureda (la
+        # mateixa idea que ja tenia el model en el comentari del cep antic).
+        # Fonts: trobarbolets.cat (cep fosc: 72-1.405 m, sobretot sep-oct) i el
+        # consens de fonts generals; la resta és [EST] sense dades de camp.
+        "provisional": True,
+        "timing": [(3, 0.10), (6, 0.50), (8, 0.90), (10, 1.0), (18, 1.0), (26, 0.60), (36, 0.25)],
+        # [EST] tolera la calor (fins ~28 °C de màxima) però no el fred ni la gelada.
+        "heat": {"tmax_hot": [(28, 1.0), (31, 0.70), (34, 0.35), (37, 0.10)],
+                 "cold": [(2, 0.30), (6, 1.0)],
+                 "frost": [(-3, 0.15), (-1, 0.45), (1, 0.85), (3, 1.0)]},
+        # [FONT] trobarbolets: 72-1.405 m. [EST] la forma de la corba.
+        # [CAMPO] Sant Celoni, ~500 m, alzinar/bosc mixt, 9/10/2025: el model ha de poder-lo veure.
+        "alt": [(0, 0.25), (100, 0.55), (250, 0.95), (350, 1.0), (1000, 1.0), (1300, 0.50), (1500, 0.15), (1650, 0.0)],
+        # [EST] sense preferència forta; una mica menys al calcari.
+        "soil": {"silici": 1.0, "silici_prov": 1.0, "mixt": 0.95, "calcari": 0.85, None: 0.95},
+        "season_manual": ((8, 25), (11, 10)),
+        # [FONT] trobarbolets: sobretot setembre-octubre (només s'usa si GBIF no respon)
+        "peak_months": [9, 10],
+    },
+    "cepestiu": {
+        # PERFIL PROVISIONAL (15/10/2026): B. reticulatus (= B. aestivalis), el
+        # cep d'estiu. Fonts: trobarbolets.cat (433-2.228 m, sobretot jul-set);
+        # la resta és [EST] sense dades de camp.
+        "provisional": True,
+        "timing": [(3, 0.10), (6, 0.50), (8, 0.90), (10, 1.0), (20, 1.0), (28, 0.60), (38, 0.25)],
+        # [EST] espècie d'estiu: li van les nits càlides i no li van el fred ni la gelada.
+        "heat": {"tmax_hot": [(29, 1.0), (32, 0.70), (35, 0.35), (38, 0.10)],
+                 "cold": [(3, 0.30), (8, 1.0)],
+                 "frost": [(-3, 0.15), (-1, 0.45), (1, 0.85), (3, 1.0)]},
+        "alt": [(0, 0.20), (300, 0.55), (450, 1.0), (1700, 1.0), (2000, 0.60), (2250, 0.15), (2400, 0.0)],
+        "soil": {"silici": 1.0, "silici_prov": 1.0, "mixt": 0.95, "calcari": 0.85, None: 0.95},
+        "season_manual": ((6, 10), (10, 5)),
+        # [FONT] trobarbolets: sobretot juliol-setembre (només s'usa si GBIF no respon)
+        "peak_months": [7, 8, 9],
     },
     "camagrocs": {
         # [FONT] bolet tardà de pinedes i molsa; necessita molta humitat i
@@ -593,9 +644,17 @@ SPECIES_BIO = {
         "heat": {"tmax_hot": [(20, 1.0), (24, 0.60), (28, 0.25), (32, 0.05)],
                  "tmin_hot": [(12, 1.0), (15, 0.60), (18, 0.20)],
                  "frost": [(-6, 0.30), (-3, 0.65), (-1, 0.95), (1, 1.0)]},
-        "alt": [(0, 0.20), (300, 0.60), (500, 1.0), (1500, 1.0), (1800, 0.40), (2100, 0.0)],
-        # [FONT] prefereix sòls calcaris (Wikipedia: "heavy calcareous soil")
-        "soil": {"calcari": 1.0, "mixt": 1.0, "silici": 0.85, "silici_prov": 0.90, None: 0.95},
+        # [CAMPO] 3 hallazgos reals "mucho" a 90-170 m (la Batllòria 9/10/2025,
+        # Gualba i la Batllòria 9/11/2025; Montseny/Montnegre, vall de la Tordera):
+        # abans la corba valia només 0,20-0,40 per sota de 200 m i el model no
+        # hauria pogut marcar mai aquests llocs. La terra baixa seca i la costa
+        # segueixen frenades per la resta de limitants (arbre, calor, època, sòl).
+        "alt": [(0, 0.40), (100, 0.85), (170, 1.0), (1500, 1.0), (1800, 0.40), (2100, 0.0)],
+        # [FONT] Wikipedia diu que prefereix sòls calcaris, però [CAMPO] els 3
+        # hallazgos reals "mucho" són a la vall de la Tordera (granit/pissarres,
+        # sòl SILICI) -> la preferència pel calcari és dèbil: el sòl silici ja
+        # no la frena gairebé gens.
+        "soil": {"calcari": 1.0, "mixt": 1.0, "silici": 0.95, "silici_prov": 0.95, None: 0.97},
         "season_manual": ((9, 1), (12, 10)),
     },
     "rossinyols": {
@@ -658,6 +717,43 @@ SPECIES_BIO = {
                  "frost": [(-8, 0.30), (-5, 0.65), (-2, 0.95)]},
         "alt": [(0, 1.0), (900, 1.0), (1300, 0.50), (1700, 0.15), (2000, 0.0)],
         "season_manual": ((10, 5), (12, 31)),
+    },
+    "escarlet": {
+        # PERFIL PROVISIONAL (15/10/2026): hàbitat, sòl i altituds de la fitxa de
+        # trobarbolets.cat (observacions públiques GBIF/iNaturalist); la resta és
+        # [EST] sense dades de camp. Mai pot sortir amb confiança "alta".
+        "provisional": True,
+        # [EST] bolet tardà (hygrophoràcia): triga setmanes i vol una tardor
+        # "generosa" en pluja (trobarbolets: "fàcil als alzinars quan la tardor
+        # ha estat generosa").
+        "timing": [(5, 0.10), (9, 0.35), (13, 0.80), (16, 1.0), (40, 1.0), (52, 0.60), (65, 0.25)],
+        # [EST] tardor-hivern: no li va la calor ni la gelada forta.
+        "heat": {"tmax_hot": [(20, 1.0), (24, 0.60), (28, 0.25), (32, 0.05)],
+                 "tmin_hot": [(12, 1.0), (15, 0.50), (18, 0.15)],
+                 "frost": [(-6, 0.30), (-3, 0.65), (-1, 0.95), (1, 1.0)]},
+        # [FONT] trobarbolets: 36-1.572 m, mediana 528 m. [EST] la forma de la corba.
+        "alt": [(0, 0.70), (100, 1.0), (1000, 1.0), (1400, 0.60), (1650, 0.20), (1800, 0.0)],
+        # [FONT] trobarbolets: sòl calcari; [EST] la intensitat de la preferència.
+        "soil": {"calcari": 1.0, "mixt": 1.0, "silici": 0.70, "silici_prov": 0.75, None: 0.90},
+        # [FONT] trobarbolets: octubre 75 i novembre 80 de 180 registres
+        "season_manual": ((10, 1), (12, 10)),
+    },
+    "llenega": {
+        # PERFIL PROVISIONAL (15/10/2026): mateix criteri que l'escarlet.
+        "provisional": True,
+        # [EST] bolet tardà de pineda, mig enterrat entre les acícules.
+        "timing": [(5, 0.10), (9, 0.40), (12, 0.85), (14, 1.0), (35, 1.0), (45, 0.60), (60, 0.25)],
+        # [EST] tolera el fred (surt a la tardor-hivern); no li va la calor.
+        "heat": {"tmax_hot": [(21, 1.0), (25, 0.60), (29, 0.25), (33, 0.05)],
+                 "tmin_hot": [(12, 1.0), (15, 0.50), (18, 0.15)],
+                 "frost": [(-8, 0.30), (-5, 0.65), (-3, 0.90), (-1, 1.0)]},
+        # [FONT] trobarbolets: 112-1.572 m, mediana 691 m (sobretot Berguedà,
+        # Solsonès i Alt Urgell). [EST] la forma de la corba.
+        "alt": [(0, 0.70), (150, 1.0), (1200, 1.0), (1500, 0.60), (1650, 0.20), (1800, 0.0)],
+        # [FONT] trobarbolets: "pinedes calcàries"; [EST] la intensitat.
+        "soil": {"calcari": 1.0, "mixt": 0.95, "silici": 0.65, "silici_prov": 0.70, None: 0.90},
+        # [FONT] trobarbolets: octubre 51 i novembre 33 de 106 registres
+        "season_manual": ((9, 25), (12, 10)),
     },
 }
 
@@ -1907,6 +2003,10 @@ def parse_tree_from_text(txt):
         (["surededa", "suber"], "suro"),
         (["aciculifoli"], "pi_altres"),
         (["caducifoli", "planifoli"], "roure"),
+        # Castanyers: planifoli caducifoli, hostes habituals de ceps, rossinyols,
+        # trompetes i ou de reig. La capa VEGETACIO no té cap capa de Castanea,
+        # així que el grup genèric "roure" (= caducifolis) és el més fidel.
+        (["castany"], "roure"),
         (["esclerofil", "laurifoli"], "alzina"),
         (["alzina"], "alzina"),
         (["roure"], "roure"),
@@ -2287,6 +2387,9 @@ def species_score(sp, rain_10d, min_temp, tree, days_since_rain, alt, month, aem
         factors.append(timing_multiplier(sp, event_age))
     factors.append(season_multiplier(sp, today, gbif_data))
     factors.append(altitude_multiplier(sp, alt))
+    tree_factor = sp.get("tree_factor", {}).get(tree, 1.0)
+    if tree_factor < 1.0:
+        factors.append((tree_factor, "Árbol menos habitual para esta especie"))
     factors.append(heat_multiplier(sp, tmin_now, tmax_now, tmin_abs_now))
     factors.append(soil_multiplier(sp, geologia))
 
@@ -2305,6 +2408,12 @@ def species_score(sp, rain_10d, min_temp, tree, days_since_rain, alt, month, aem
     # La geologia desconeguda o provisional resta fiabilitat a les espècies que en depenen
     if SPECIES_BIO.get(sp["id"], {}).get("soil") and geologia in (None, "silici_prov") and confidence == "alta":
         confidence = "mitjana"
+    # Perfil provisional (espècie afegida sense dades de camp): la confiança és
+    # sempre baixa per molt que hi hagi estacions i registres GBIF, perquè les
+    # xifres biològiques són estimacions i ningú les ha contrastat al camp.
+    if SPECIES_BIO.get(sp["id"], {}).get("provisional"):
+        confidence = "baja"
+        limits = ["Perfil provisional: sin datos de campo todavía"] + limits[:2]
 
     return final_score, breakdown, confidence, limits
 
@@ -2613,6 +2722,11 @@ def seasonal_climate_score(sp, alt, month, gbif_distributions=None):
 
     if sp["id"] == "colmenilles":  # espècie de primavera, no de tardor
         peak_months = [4, 5]
+    # Mesos de màxim propis d'una espècie (només per a la reserva sense GBIF):
+    # els cep d'estiu i el cep fosc no segueixen la taula genèrica de tardor.
+    own_peaks = SPECIES_BIO.get(sp["id"], {}).get("peak_months")
+    if own_peaks:
+        peak_months = own_peaks
 
     if month in peak_months:
         return 15
@@ -3392,6 +3506,7 @@ def build_results():
         icgc_max_seconds = 2200  # augmentat de 1000 a 2200: amb la graella adaptativa (~6200 punts,
         # 4.2x més gran que quan es va fixar en 1000s), calia més marge
         unresolved_this_run = {}  # 'desconegut' d'aquesta execució — NO es guarden al cache permanent
+        unmatched_labels = {}     # etiquetes que l'ICGC ha donat però que no sabem classificar
         for i, z in enumerate(missing_zones):
             if time.time() - icgc_start > icgc_max_seconds:
                 print(f"  ICGC: límit de temps ({icgc_max_seconds}s) assolit a {i}/{len(missing_zones)} — es continua sense la resta (es reintentaran, no es fixen com a 'desconegut')")
@@ -3399,6 +3514,10 @@ def build_results():
                     unresolved_this_run[remaining["id"]] = UNRESOLVED_TREE
                 break
             tree, _label = fetch_tree_type(z["lat"], z["lon"], layer_name, debug=False)
+            if tree == UNRESOLVED_TREE and _label:
+                # L'ICGC ha respost però l'etiqueta no es reconeix: es compta per
+                # veure al registre quines classes de bosc es perden (castanyers?).
+                unmatched_labels[_label] = unmatched_labels.get(_label, 0) + 1
             if tree == UNRESOLVED_TREE:
                 # Fallada puntual (timeout, error de xarxa...) — no és el
                 # mateix que "confirmat sense bosc". No es guarda al cache
@@ -3413,6 +3532,10 @@ def build_results():
                 print(f"  ICGC: {i + 1}/{len(missing_zones)} punts consultats...")
         if unresolved_this_run:
             print(f"  ICGC: {len(unresolved_this_run)} punts sense resoldre aquesta execució (timeout/error) — es reintentaran, NO es fixen al cache")
+        if unmatched_labels:
+            top = sorted(unmatched_labels.items(), key=lambda kv: -kv[1])[:15]
+            print("  ICGC: etiquetes de bosc NO reconegudes (aquests punts queden sense prediccions): "
+                  + "; ".join(f"{lab!r} x{n}" for lab, n in top))
         save_tree_cache(tree_types)
         tree_types.update(unresolved_this_run)  # per usar-los NOMÉS en aquesta execució, no s'han desat
     else:
@@ -3745,78 +3868,182 @@ def fetch_hallazgos(timeout=15):
         return []
 
 
-def nearest_zone_id(lat, lon, zones, max_km=8):
+# Distància màxima entre un hallazgo i la zona de la graella amb què es compara.
+# La graella és de 2,5-5 km: més enllà d'aquesta distància la zona ja no
+# representa el lloc (i fora de Catalunya no hi ha graella: p. ex. Les Angles).
+MAX_MATCH_KM = 3.5
+# Una salida només es pot contrastar si es registra a prop del dia de la troballa:
+# la predicció es "congela" en la primera execució del backend que la veu, i el
+# temps d'aquell moment ha de ser el de la troballa (no el d'una setmana després).
+MAX_LAG_DAYS = 3
+VALIDACIO_PATH = "../data/validacio.json"
+
+
+def nearest_zone_id(lat, lon, zones, max_km=MAX_MATCH_KM):
     """Troba l'id de la zona de la graella més propera a unes coordenades
-    d'un hallazgo, per poder-lo comparar amb la puntuació d'aquella zona."""
+    d'un hallazgo (dins de max_km), per poder-lo comparar amb la seva puntuació."""
+    zid, _ = nearest_zone(lat, lon, zones, max_km)
+    return zid
+
+
+def nearest_zone(lat, lon, zones, max_km=MAX_MATCH_KM):
+    """Retorna (id, distància_km) de la zona més propera dins de max_km, o (None, None)."""
     best_id, best_dist = None, max_km
     for z in zones:
         d = haversine_km(lat, lon, z["lat"], z["lon"])
         if d < best_dist:
             best_id, best_dist = z["id"], d
-    return best_id
+    return (best_id, round(best_dist, 2)) if best_id is not None else (None, None)
 
 
-def compute_model_accuracy(hallazgos, evolution):
+# Ids d'espècie que ja no existeixen al catàleg però que poden constar a salides
+# antigues (data/hallazgos.json): es contrasten amb la MILLOR puntuació de les
+# espècies en què es va dividir (no se sap quin cep era).
+LEGACY_SPECIES_ALIASES = {"ceps": ("cep", "cepfosc", "cepestiu")}
+
+
+def species_score_for(sid, scores):
+    """Puntuació d'una espècie dins d'un diccionari {id: puntuació}, resolent els
+    ids antics (veure LEGACY_SPECIES_ALIASES). Una espècie que falta val 0."""
+    if sid in scores:
+        return scores[sid]
+    group = LEGACY_SPECIES_ALIASES.get(sid)
+    if group:
+        return max((scores.get(g, 0) for g in group), default=0)
+    return 0
+
+
+def _hallazgo_species_ids(h):
+    """Espècies d'una salida (format nou 'speciesIds' o antic 'speciesId')."""
+    ids = h.get("speciesIds")
+    if isinstance(ids, list):
+        return [i for i in ids if isinstance(i, str)]
+    sid = h.get("speciesId")
+    return [sid] if isinstance(sid, str) else []
+
+
+def load_validacio():
+    try:
+        with open(VALIDACIO_PATH, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        return data if isinstance(data, dict) else {}
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {}
+
+
+def freeze_predictions(hallazgos, results, today=None, path=None):
     """
-    Per a cada hallazgo amb prou informació (data + coordenades), busca la
-    puntuació que el model donava a la zona més propera aquell dia (segons
-    l'historial d'evolució) i comprova si l'encert coincideix:
-    - amount 'mucho'/'poco' + puntuació >= llindar -> encert
-    - amount 'nada' + puntuació < llindar -> encert (l'opció 'nada' ja no es
-      pot triar des del formulari, però es respecta si queda algun hallazgo
-      antic amb aquest valor)
-    - la resta -> desencert
+    "Congela" la predicció del model per a cada salida nova: guarda, per a la
+    zona més propera (<= MAX_MATCH_KM), la puntuació de CADA espècie en el
+    moment en què el backend veu la salida per primera vegada. Així la
+    validació compara amb el que l'app deia de veritat aquell dia (no cal
+    reconstruir el passat) i es fa per espècie.
 
-    Retorna un resum global i desglossat per franja de puntuació, només amb
-    els hallazgos que realment es poden contrastar (no s'inventa res). Com
-    que la majoria d'hallazgos ara només confirmen troballes positives
-    ('mucho'/'poco'), es guarda també quants dels comparables eren positius
-    vs negatius perquè la web pugui explicar què mesura realment la xifra.
+    Només es congelen salides registrades fins a MAX_LAG_DAYS dies després de
+    la troballa. Les anteriors no són contrastables i es compten a part.
+    Es desa a data/validacio.json (permanent, petit: una entrada per salida).
     """
-    results = {"total_comparable": 0, "aciertos": 0, "por_franja": {}, "positivos": 0, "negativos": 0}
-    if not hallazgos or not evolution:
-        return results
-
-    for h in hallazgos:
-        date = h.get("date")
-        lat, lng = h.get("lat"), h.get("lng")
-        amount = h.get("amount")
-        if not date or lat is None or lng is None or amount not in ("mucho", "poco", "nada"):
+    today = today or datetime.now(timezone.utc).date()
+    store = load_validacio()
+    zones_by_id = {z["id"]: z for z in results.get("zones", [])}
+    zone_list = [{"id": z["id"], "lat": z["lat"], "lon": z["lon"]} for z in results.get("zones", [])]
+    added = 0
+    for h in hallazgos or []:
+        hid = h.get("id")
+        if not hid or hid in store:
             continue
-
-        day_snapshot = evolution.get(date)
-        if not day_snapshot:
+        try:
+            d = datetime.fromisoformat(h["date"]).date()
+            lat, lng = float(h["lat"]), float(h["lng"])
+        except (KeyError, TypeError, ValueError):
             continue
-
-        zone_id = nearest_zone_id(lat, lng, ZONES)
-        if zone_id is None:
+        if h.get("amount") not in ("mucho", "poco", "nada"):
             continue
-        score = day_snapshot.get(str(zone_id))
-        if score is None:
+        lag = (today - d).days
+        if lag < 0 or lag > MAX_LAG_DAYS:
+            continue   # no contrastable: es mostra al recompte com a "sense predicció guardada"
+        zid, dist = nearest_zone(lat, lng, zone_list)
+        entry = {"date": h["date"], "amount": h["amount"], "species": _hallazgo_species_ids(h),
+                 "lag_days": lag, "frozen_on": today.isoformat(), "zone_id": zid, "dist_km": dist}
+        if zid is not None:
+            z = zones_by_id[zid]
+            entry["tree"] = z.get("tree")
+            entry["is_forest"] = bool(z.get("is_forest"))
+            # Només hi ha puntuació per a les espècies compatibles amb l'arbre de la zona;
+            # les que falten valen 0 (el model diu "aquí no": requisit dur d'hàbitat).
+            entry["scores"] = {sp["id"]: sp["score"] for sp in z.get("species_scores", [])}
+        store[hid] = entry
+        added += 1
+    if added:
+        with open(path or VALIDACIO_PATH, "w", encoding="utf-8") as f:
+            json.dump(store, f, ensure_ascii=False, indent=1)
+    return store
+
+
+def compute_model_accuracy(hallazgos, validacio, threshold=None):
+    """
+    Contrasta el model amb les salides reals (prediccions congelades a
+    validacio.json). Regles:
+    - Es compara l'ESPÈCIE trobada (no "alguna espècie") amb la puntuació
+      d'aquella espècie a la zona més propera (<= MAX_MATCH_KM).
+    - mucho/poco + puntuació >= llindar -> encert; mucho/poco + < llindar -> fallada.
+    - 'nada' (buscat i no trobat): amb espècie concreta compta aquella; sense
+      espècie (cerca general) compta la millor de la zona. Puntuació < llindar -> encert.
+    - Visites repetides (mateixa zona, dia, espècie i resultat) compten UNA vegada.
+    - Les salides sense predicció guardada o fora de cobertura NO es compten, però
+      es retornen a 'no_contrastables' perquè es vegi quant queda fora.
+
+    IMPORTANT: amb només troballes positives, la xifra mesura quantes troballes
+    el model va saber marcar (sensibilitat), no si s'equivoca marcant zones
+    on no hi ha res. Per això és imprescindible registrar també les cerques
+    sense resultat. Cap número d'aquí és una probabilitat calibrada.
+    """
+    threshold = DEFAULT_SCORE_THRESHOLD if threshold is None else threshold
+    results = {"total_comparable": 0, "aciertos": 0, "por_franja": {}, "por_especie": {},
+               "positivos": 0, "negativos": 0, "hallazgos_total": len(hallazgos or []),
+               "no_contrastables": 0}
+    seen = set()
+    comparable_ids = set()
+    for h in hallazgos or []:
+        entry = (validacio or {}).get(h.get("id"))
+        if not entry or entry.get("zone_id") is None or not isinstance(entry.get("scores"), dict):
             continue
-
-        expected_found = amount in ("mucho", "poco")
-        predicted_found = score >= DEFAULT_SCORE_THRESHOLD
-        hit = expected_found == predicted_found
-
-        results["total_comparable"] += 1
-        if expected_found:
-            results["positivos"] += 1
+        if entry.get("dist_km") is None or entry["dist_km"] > MAX_MATCH_KM:
+            continue
+        amount = entry.get("amount")
+        found = amount in ("mucho", "poco")
+        species = entry.get("species") or []
+        scores = entry["scores"]
+        if species:
+            targets = [(sid, species_score_for(sid, scores)) for sid in species]
+        elif not found:
+            targets = [("(cerca general)", max(scores.values(), default=0))]
         else:
-            results["negativos"] += 1
-        if hit:
-            results["aciertos"] += 1
-
-        franja = f"{(score // 10) * 10}-{(score // 10) * 10 + 9}"
-        franja_stats = results["por_franja"].setdefault(franja, {"total": 0, "aciertos": 0})
-        franja_stats["total"] += 1
-        if hit:
-            franja_stats["aciertos"] += 1
-
+            continue
+        comparable_ids.add(h.get("id"))
+        for sid, score in targets:
+            key = (entry["zone_id"], entry["date"], sid, found)
+            if key in seen:
+                continue
+            seen.add(key)
+            hit = (score >= threshold) == found
+            results["total_comparable"] += 1
+            results["positivos" if found else "negativos"] += 1
+            if hit:
+                results["aciertos"] += 1
+            franja = f"{(score // 10) * 10}-{(score // 10) * 10 + 9}"
+            fr = results["por_franja"].setdefault(franja, {"total": 0, "aciertos": 0})
+            fr["total"] += 1
+            fr["aciertos"] += int(hit)
+            sp_stats = results["por_especie"].setdefault(sid, {"total": 0, "aciertos": 0, "positivos": 0, "negativos": 0})
+            sp_stats["total"] += 1
+            sp_stats["aciertos"] += int(hit)
+            sp_stats["positivos" if found else "negativos"] += 1
+    results["no_contrastables"] = results["hallazgos_total"] - len(comparable_ids)
     if results["total_comparable"] > 0:
         tasa = round(results["aciertos"] / results["total_comparable"] * 100, 1)
         results["tasa_confirmacion"] = tasa
-        results["precision_global"] = tasa  # alias per compatibilitat, mateix valor
+        results["precision_global"] = tasa  # alias per compatibilitat amb la web
     return results
 
 
@@ -4081,12 +4308,19 @@ def main():
 
     print("Contrastant precisió del model amb hallazgos reals...")
     hallazgos = fetch_hallazgos()
-    accuracy = compute_model_accuracy(hallazgos, evolution)
+    try:
+        validacio = freeze_predictions(hallazgos, results)
+        accuracy = compute_model_accuracy(hallazgos, validacio)
+    except Exception as e:   # la validació no ha de trencar mai la publicació de dades
+        print(f"  AVÍS: no s'ha pogut calcular la validació ({e}) — es continua sense ella")
+        accuracy = {"total_comparable": 0, "aciertos": 0, "por_franja": {}, "positivos": 0, "negativos": 0}
     results["model_accuracy"] = accuracy
     if accuracy["total_comparable"] > 0:
-        print(f"  Precisió: {accuracy['precision_global']}% ({accuracy['aciertos']}/{accuracy['total_comparable']} hallazgos contrastables)")
+        print(f"  Tasa de confirmación: {accuracy['precision_global']}% ({accuracy['aciertos']}/{accuracy['total_comparable']} "
+              f"comparaciones; {accuracy['positivos']} positivas, {accuracy['negativos']} negativas — no és una probabilitat calibrada)")
     else:
-        print("  Encara no hi ha prou hallazgos contrastables (calen data + coordenades que coincideixin amb dies de l'historial)")
+        print(f"  Cap salida contrastable encara ({accuracy.get('hallazgos_total', 0)} registrades; "
+              f"cal que es registrin com a màxim {MAX_LAG_DAYS} dies després de la troballa i dins de Catalunya)")
 
     out_path = "../data/resultats.json"
     with open(out_path, "w", encoding="utf-8") as f:
