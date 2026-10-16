@@ -1,0 +1,104 @@
+{
+  "llama32": [
+    {
+      "variante": "img_campo",
+      "status": 200,
+      "ok": true,
+      "rasgos_leidos": 9,
+      "tokens": {
+        "pt": 2339,
+        "ct": 79,
+        "real": true
+      },
+      "neuronas": 15.2,
+      "claves_resultado": [
+        "response",
+        "tool_calls",
+        "usage"
+      ],
+      "texto": "{\"mushroom_visible\":true,\"traits\":{\"s_color\":\"white\",\"s_super\":\"smooth\",\"s_forma\":\"convex\",\"h_tipo\":\"gills\",\"h_color\":\"white\",\"p_anillo\":\"no\",\"p_base\":\"normal\",\"p_super\":\"smooth\",\"p_color\":\"white\"}}"
+    }
+  ],
+  "scout": [
+    {
+      "variante": "img_url",
+      "status": 200,
+      "ok": true,
+      "rasgos_leidos": 9,
+      "tokens": {
+        "pt": 1463,
+        "ct": 79,
+        "real": true
+      },
+      "neuronas": 42,
+      "claves_resultado": [
+        "choices",
+        "created",
+        "ec_transfer_params",
+        "id",
+        "kv_transfer_params",
+        "metrics",
+        "model",
+        "object",
+        "prompt_logprobs",
+        "prompt_text",
+        "prompt_token_ids",
+        "response",
+        "service_tier",
+        "tool_calls",
+        "usage"
+      ],
+      "claves_mensaje": [
+        "annotations",
+        "audio",
+        "content",
+        "function_call",
+        "reasoning",
+        "refusal",
+        "role"
+      ],
+      "fin": "stop",
+      "texto": "{\"mushroom_visible\":true,\"traits\":{\"h_color\":\"white\",\"h_tipo\":\"gills\",\"p_anillo\":\"no\",\"p_base\":\"normal\",\"p_color\":\"white\",\"p_super\":\"smooth\",\"s_color\":\"brown\",\"s_forma\":\"convex\",\"s_super\":\"scaly\"}}"
+    }
+  ],
+  "gemma4": [
+    {
+      "variante": "img_url_sinpensar",
+      "status": 200,
+      "ok": true,
+      "rasgos_leidos": 7,
+      "tokens": {
+        "pt": 999,
+        "ct": 89,
+        "real": true
+      },
+      "neuronas": 11.5,
+      "claves_resultado": [
+        "id",
+        "object",
+        "created",
+        "model",
+        "choices",
+        "service_tier",
+        "usage",
+        "prompt_logprobs",
+        "prompt_token_ids",
+        "prompt_text",
+        "kv_transfer_params",
+        "ec_transfer_params",
+        "metrics"
+      ],
+      "claves_mensaje": [
+        "role",
+        "content",
+        "refusal",
+        "annotations",
+        "audio",
+        "function_call",
+        "reasoning"
+      ],
+      "fin": "stop",
+      "texto": "```json\n{\"mushroom_visible\": true, \"traits\": {\"s_color\": \"white\", \"s_super\": \"scaly\", \"s_forma\": \"convex\", \"h_tipo\": \"gills\", \"h_color\": \"white\", \"p_anillo\": null, \"p_base\": null, \"p_super\": \"dotted\", \"p_color\": \"white\"}}\n```"
+    }
+  ]
+}

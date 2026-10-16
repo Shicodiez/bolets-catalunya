@@ -1,0 +1,235 @@
+{
+  "generado": "2026-10-16T21:30:36.669Z",
+  "simulado": false,
+  "fotos_comunes": 30,
+  "configs": {
+    "llama32_v1": {
+      "fotos": 30,
+      "ok": 30,
+      "fallos": 0,
+      "rasgos_leidos": 142,
+      "comparables": 106,
+      "acierta": 70,
+      "top1": 1,
+      "top5": 2,
+      "top10": 3,
+      "pocos_rasgos": 0,
+      "sin_candidata": 22,
+      "neuronas": 1188.7000000000005,
+      "ms": 154195,
+      "por_dim": {
+        "s_color": {
+          "leido": 30,
+          "comparable": 29,
+          "ok": 22
+        },
+        "s_super": {
+          "leido": 30,
+          "comparable": 18,
+          "ok": 8
+        },
+        "s_forma": {
+          "leido": 30,
+          "comparable": 17,
+          "ok": 13
+        },
+        "h_tipo": {
+          "leido": 26,
+          "comparable": 24,
+          "ok": 14
+        },
+        "h_color": {
+          "leido": 26,
+          "comparable": 18,
+          "ok": 13
+        }
+      }
+    },
+    "llama32_v2": {
+      "fotos": 30,
+      "ok": 30,
+      "fallos": 0,
+      "rasgos_leidos": 258,
+      "comparables": 138,
+      "acierta": 90,
+      "top1": 0,
+      "top5": 3,
+      "top10": 5,
+      "pocos_rasgos": 0,
+      "sin_candidata": 18,
+      "neuronas": 505.39999999999986,
+      "ms": 118327,
+      "por_dim": {
+        "s_color": {
+          "leido": 30,
+          "comparable": 29,
+          "ok": 21
+        },
+        "s_super": {
+          "leido": 30,
+          "comparable": 18,
+          "ok": 9
+        },
+        "s_forma": {
+          "leido": 30,
+          "comparable": 17,
+          "ok": 13
+        },
+        "h_tipo": {
+          "leido": 28,
+          "comparable": 25,
+          "ok": 21
+        },
+        "h_color": {
+          "leido": 28,
+          "comparable": 19,
+          "ok": 13
+        },
+        "p_anillo": {
+          "leido": 28,
+          "comparable": 8,
+          "ok": 2
+        },
+        "p_base": {
+          "leido": 28,
+          "comparable": 5,
+          "ok": 0
+        },
+        "p_super": {
+          "leido": 28,
+          "comparable": 1,
+          "ok": 0
+        },
+        "p_color": {
+          "leido": 28,
+          "comparable": 16,
+          "ok": 11
+        }
+      }
+    },
+    "scout_v2": {
+      "fotos": 30,
+      "ok": 30,
+      "fallos": 0,
+      "rasgos_leidos": 208,
+      "comparables": 117,
+      "acierta": 87,
+      "top1": 1,
+      "top5": 4,
+      "top10": 5,
+      "pocos_rasgos": 2,
+      "sin_candidata": 15,
+      "neuronas": 1216.6000000000004,
+      "ms": 214668,
+      "por_dim": {
+        "s_color": {
+          "leido": 28,
+          "comparable": 27,
+          "ok": 23
+        },
+        "s_super": {
+          "leido": 26,
+          "comparable": 17,
+          "ok": 7
+        },
+        "s_forma": {
+          "leido": 28,
+          "comparable": 16,
+          "ok": 13
+        },
+        "h_tipo": {
+          "leido": 25,
+          "comparable": 22,
+          "ok": 20
+        },
+        "h_color": {
+          "leido": 18,
+          "comparable": 12,
+          "ok": 10
+        },
+        "p_anillo": {
+          "leido": 20,
+          "comparable": 6,
+          "ok": 2
+        },
+        "p_base": {
+          "leido": 21,
+          "comparable": 4,
+          "ok": 1
+        },
+        "p_super": {
+          "leido": 21,
+          "comparable": 1,
+          "ok": 0
+        },
+        "p_color": {
+          "leido": 21,
+          "comparable": 12,
+          "ok": 11
+        }
+      }
+    },
+    "gemma4_v2": {
+      "fotos": 30,
+      "ok": 30,
+      "fallos": 0,
+      "rasgos_leidos": 221,
+      "comparables": 119,
+      "acierta": 88,
+      "top1": 4,
+      "top5": 5,
+      "top10": 6,
+      "pocos_rasgos": 1,
+      "sin_candidata": 18,
+      "neuronas": 345.4000000000001,
+      "ms": 84065,
+      "por_dim": {
+        "s_color": {
+          "leido": 29,
+          "comparable": 28,
+          "ok": 24
+        },
+        "s_super": {
+          "leido": 28,
+          "comparable": 18,
+          "ok": 11
+        },
+        "s_forma": {
+          "leido": 29,
+          "comparable": 17,
+          "ok": 14
+        },
+        "h_tipo": {
+          "leido": 20,
+          "comparable": 18,
+          "ok": 14
+        },
+        "h_color": {
+          "leido": 18,
+          "comparable": 11,
+          "ok": 9
+        },
+        "p_anillo": {
+          "leido": 24,
+          "comparable": 7,
+          "ok": 4
+        },
+        "p_base": {
+          "leido": 23,
+          "comparable": 3,
+          "ok": 0
+        },
+        "p_super": {
+          "leido": 24,
+          "comparable": 1,
+          "ok": 0
+        },
+        "p_color": {
+          "leido": 26,
+          "comparable": 16,
+          "ok": 12
+        }
+      }
+    }
+  }
+}
