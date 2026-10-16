@@ -82,5 +82,19 @@
     "lng": 2.5743198394775395,
     "id": "8651c1f9-f644-424d-abe4-6ed525c618fb",
     "createdAt": "2026-09-09T18:23:55.877Z"
+  },
+  {
+    "speciesIds": [],
+    "speciesNames": [],
+    "place": "Sant Hilari Sacalm",
+    "alt": "800",
+    "tree": "roure",
+    "treeName": "Roble",
+    "date": "2026-10-16",
+    "amount": "nada",
+    "lat": 41.902922243317896,
+    "lng": 2.5086881039383124,
+    "id": "8a5bb895-fe82-45e2-9ce3-9442c2cc8106",
+    "createdAt": "2026-10-16T17:55:19.896Z"
   }
 ]
