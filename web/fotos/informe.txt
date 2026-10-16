@@ -1,4 +1,4 @@
-Fotos: 58 de 58 huecos cubiertos (2026-10-15 18:25 UTC)
+Fotos: 321 de 321 huecos cubiertos (2026-10-16 06:47 UTC)
 IGUAL  phalloides #1  Amanita phalloides: File:Amanita phalloides 1.JPG  (CC BY-SA 3.0) [ya estaba]
 IGUAL  amanitas-blancas #1  Amanita verna: File:Amanita verna 3.jpg  (CC BY-SA 4.0) [ya estaba]
 IGUAL  amanitas-blancas #2  Amanita virosa: File:Destroying Angel 02.jpg  (Public domain) [ya estaba]
@@ -36,24 +36,287 @@ IGUAL  llenega #1  Hygrophorus latitabundus: File:Hygrophorus latitabundus1.JPG 
 IGUAL  apagallums #1  Macrolepiota procera: File:Parasol-Macrolepiota-procera.jpg  (CC BY 3.0) [ya estaba]
 IGUAL  camasec #1  Marasmius oreades: File:Michigan Marasmius oreades.jpg  (CC BY 4.0) [ya estaba]
 IGUAL  moixerno #1  Calocybe gambosa: File:Calocybe gambosa 080420wa.jpg  (CC BY-SA 4.0) [ya estaba]
-OK     hypholoma #1  Hypholoma fasciculare: File:Hypholoma fasciculare Queteraro.jpg  (CC BY-SA 4.0, 105 KB)
-OK     chrysorrheus #1  Lactarius chrysorrheus: File:Lact.chry.jpg  (CC BY 3.0, 76 KB) [REVISAR: el nombre del archivo no menciona «chrysorrheus»]
-OK     paxillus #1  Paxillus involutus: File:Navadne podvihanke (Paxillus involutus).jpg  (CC BY-SA 4.0, 50 KB)
-OK     xanthodermus #1  Agaricus xanthodermus: File:Agaricus xanthodermus section.jpg  (CC BY-SA 3.0, 91 KB)
-OK     equestre #1  Tricholoma equestre: File:Tricholoma equestre.jpg  (CC BY-SA 3.0, 67 KB)
-OK     atramentaria #1  Coprinopsis atramentaria: File:Coprinopsis atramentaria 3 - Lindsey.jpg  (CC BY-SA 3.0, 80 KB)
-OK     emetica #1  Russula emetica: File:Russula emetica in Poland.jpg  (CC BY-SA 4.0, 97 KB)
-OK     vinosa #1  Amanita rubescens: File:Amanita rubescens.JPG  (CC BY-SA 3.0, 79 KB)
-OK     camperol #1  Agaricus campestris: File:Agaricus campestris.jpg  (CC BY-SA 3.0, 64 KB)
-OK     pimpinella #1  Lepista nuda: File:Clitocybe nuda (Fr.) H.E. Bigelow & A.H. Sm 267650.jpg  (CC BY-SA 3.0, 84 KB)
-OK     alzinoi #1  Armillaria mellea: File:Armillaria mellea, Honey Fungus, UK 1.jpg  (CC BY-SA 3.0, 69 KB)
-OK     molleric #1  Suillus luteus: File:Suillus luteus 475376.jpg  (CC BY-SA 3.0, 79 KB)
-OK     molleric #2  Suillus granulatus: File:Körnchen-Röhrling Suillus granulatus 1.jpg  (CC BY 3.0, 65 KB)
-OK     coprinus #1  Coprinus comatus: File:Coprinus comatus, the shaggy ink cap, lawyer's wig, or shaggy mane mushroom.jpg  (CC BY-SA 4.0, 105 KB)
-OK     orellana #1  Pleurotus ostreatus: File:Pleurotus ostreatus JPG7.jpg  (CC BY 3.0, 57 KB)
-OK     llora #1  Russula cyanoxantha: File:Russula cyanoxantha (44290996435).jpg  (CC BY-SA 2.0, 48 KB)
-OK     molinera #1  Clitopilus prunulus: File:Clitopilus prunulus - BC, 2024.jpg  (CC BY-SA 4.0, 72 KB)
-OK     fredolic-gros #1  Tricholoma portentosum: File:Tricholoma portentosum 181316.jpg  (CC BY-SA 3.0, 70 KB)
-OK     pampa #1  Infundibulicybe geotropa: File:Clitocybe geotropa JPG1.jpg  (CC BY 3.0, 79 KB)
-OK     pollancro #1  Cyclocybe cylindracea: File:Agrocybe aegerita.jpg  (CC BY-SA 3.0, 56 KB)
-OK     marcot #1  Hygrophorus marzuolus: File:HYGROPHORUS MARZUOLUS (F. Fr.)Bresadola (5731129003).jpg  (CC BY 2.0, 72 KB)
+IGUAL  hypholoma #1  Hypholoma fasciculare: File:Hypholoma fasciculare Queteraro.jpg  (CC BY-SA 4.0) [ya estaba]
+IGUAL  chrysorrheus #1  Lactarius chrysorrheus: File:Lact.chry.jpg  (CC BY 3.0) [ya estaba]
+IGUAL  paxillus #1  Paxillus involutus: File:Navadne podvihanke (Paxillus involutus).jpg  (CC BY-SA 4.0) [ya estaba]
+IGUAL  xanthodermus #1  Agaricus xanthodermus: File:Agaricus xanthodermus section.jpg  (CC BY-SA 3.0) [ya estaba]
+IGUAL  equestre #1  Tricholoma equestre: File:Tricholoma equestre.jpg  (CC BY-SA 3.0) [ya estaba]
+IGUAL  atramentaria #1  Coprinopsis atramentaria: File:Coprinopsis atramentaria 3 - Lindsey.jpg  (CC BY-SA 3.0) [ya estaba]
+IGUAL  emetica #1  Russula emetica: File:Russula emetica in Poland.jpg  (CC BY-SA 4.0) [ya estaba]
+IGUAL  vinosa #1  Amanita rubescens: File:Amanita rubescens.JPG  (CC BY-SA 3.0) [ya estaba]
+IGUAL  camperol #1  Agaricus campestris: File:Agaricus campestris.jpg  (CC BY-SA 3.0) [ya estaba]
+IGUAL  pimpinella #1  Lepista nuda: File:Clitocybe nuda (Fr.) H.E. Bigelow & A.H. Sm 267650.jpg  (CC BY-SA 3.0) [ya estaba]
+IGUAL  alzinoi #1  Armillaria mellea: File:Armillaria mellea, Honey Fungus, UK 1.jpg  (CC BY-SA 3.0) [ya estaba]
+IGUAL  molleric #1  Suillus luteus: File:Suillus luteus 475376.jpg  (CC BY-SA 3.0) [ya estaba]
+IGUAL  molleric #2  Suillus granulatus: File:Körnchen-Röhrling Suillus granulatus 1.jpg  (CC BY 3.0) [ya estaba]
+IGUAL  coprinus #1  Coprinus comatus: File:Coprinus comatus, the shaggy ink cap, lawyer's wig, or shaggy mane mushroom.jpg  (CC BY-SA 4.0) [ya estaba]
+IGUAL  orellana #1  Pleurotus ostreatus: File:Pleurotus ostreatus JPG7.jpg  (CC BY 3.0) [ya estaba]
+IGUAL  llora #1  Russula cyanoxantha: File:Russula cyanoxantha (44290996435).jpg  (CC BY-SA 2.0) [ya estaba]
+IGUAL  molinera #1  Clitopilus prunulus: File:Clitopilus prunulus - BC, 2024.jpg  (CC BY-SA 4.0) [ya estaba]
+IGUAL  fredolic-gros #1  Tricholoma portentosum: File:Tricholoma portentosum 181316.jpg  (CC BY-SA 3.0) [ya estaba]
+IGUAL  pampa #1  Infundibulicybe geotropa: File:Clitocybe geotropa JPG1.jpg  (CC BY 3.0) [ya estaba]
+IGUAL  pollancro #1  Cyclocybe cylindracea: File:Agrocybe aegerita.jpg  (CC BY-SA 3.0) [ya estaba]
+IGUAL  marcot #1  Hygrophorus marzuolus: File:HYGROPHORUS MARZUOLUS (F. Fr.)Bresadola (5731129003).jpg  (CC BY 2.0) [ya estaba]
+OK     amanita-citrina #1  Amanita citrina: File:Amanita sp. 2010-10-31.jpg  (CC BY-SA 3.0, 82 KB) [REVISAR: el nombre del archivo no menciona «citrina»]
+OK     amanita-gemmata #1  Amanita gemmata: File:Amanita gemmata von hms.jpg  (CC BY 3.0, 87 KB)
+OK     amanita-franchetii #1  Amanita franchetii: File:Amanita franchetii (Boud.) Fayod.jpg  (CC BY-SA 3.0, 74 KB)
+OK     amanita-vaginata #1  Amanita vaginata: File:AmanitaVaginata2.jpg  (CC BY-SA 3.0, 110 KB)
+OK     amanita-crocea #1  Amanita crocea: File:Amanita.crocea2.-.lindsey.jpg  (CC BY-SA 3.0, 82 KB)
+OK     amanita-fulva #1  Amanita fulva: File:Amanita fulva lowpx.jpg  (CC BY 1.0, 84 KB)
+OK     amanita-ovoidea #1  Amanita ovoidea: File:Amanita ovoidea 1.jpg  (CC BY-SA 3.0, 88 KB)
+OK     amanita-spissa #1  Amanita spissa: File:Amanita spissa (29461458303).jpg  (CC BY-SA 2.0, 55 KB)
+OK     lepiota-clypeolaria #1  Lepiota clypeolaria: File:Lepiota clypeolaria 110923w.JPG  (CC BY-SA 3.0, 76 KB)
+OK     echinoderma-asperum #1  Echinoderma asperum: File:Lep.asp.jpg  (CC BY 3.0, 68 KB) [REVISAR: el nombre del archivo no menciona «asperum»]
+OK     cystoderma-amianthinum #1  Cystoderma amianthinum: File:Amiant-Körnchenschirmling Cystoderma amianthinum.jpg  (CC BY 3.0, 59 KB)
+OK     cystoderma-carcharias #1  Cystoderma carcharias: File:Cystoderma carcharias 27630.jpg  (CC BY-SA 3.0, 55 KB)
+OK     agaricus-moelleri #1  Agaricus moelleri: File:Agar.moell.jpg  (CC BY 3.0, 54 KB) [REVISAR: el nombre del archivo no menciona «moelleri»]
+OK     agaricus-arvensis #1  Agaricus arvensis: File:Pieczarka polowa vongrzanka.JPG  (CC BY-SA 3.0, 76 KB) [REVISAR: el nombre del archivo no menciona «arvensis»]
+OK     agaricus-bisporus #1  Agaricus bisporus: File:ChampignonMushroom.jpg  (CC BY-SA 3.0, 43 KB) [REVISAR: el nombre del archivo no menciona «bisporus»]
+OK     agaricus-bitorquis #1  Agaricus bitorquis: File:Agaricus.bitorquis.nathan.jpg  (CC BY-SA 3.0, 93 KB)
+OK     agaricus-sylvaticus #1  Agaricus sylvaticus: File:Agasil0big.jpg  (CC BY 3.0, 76 KB) [REVISAR: el nombre del archivo no menciona «sylvaticus»]
+OK     agaricus-sylvicola #1  Agaricus sylvicola: File:Agaricus silvicola father and son.jpg  (CC BY 3.0, 76 KB) [REVISAR: el nombre del archivo no menciona «sylvicola»]
+OK     macrolepiota-excoriata #1  Macrolepiota excoriata: File:Gomba.jpg  (CC BY-SA 3.0, 138 KB) [REVISAR: el nombre del archivo no menciona «excoriata»]
+OK     chlorophyllum-rhacodes #1  Chlorophyllum rhacodes: File:Chlorophyllum rhacodes LC0093.jpg  (CC BY-SA 2.0 de, 93 KB)
+OK     calvatia-utriformis #1  Calvatia utriformis: File:Hand.utri.jpg  (CC BY 3.0, 63 KB) [REVISAR: el nombre del archivo no menciona «utriformis»]
+OK     calvatia-gigantea #1  Calvatia gigantea: File:Giant Puffball.jpg  (CC BY-SA 3.0, 57 KB) [REVISAR: el nombre del archivo no menciona «gigantea»]
+OK     bovista-plumbea #1  Bovista plumbea: File:Bovista plumbea 128403.jpg  (CC BY-SA 3.0, 87 KB)
+OK     lycoperdon-perlatum #1  Lycoperdon perlatum: File:Single lycoperdon perlatum.jpg  (CC BY-SA 3.0, 86 KB)
+OK     lycoperdon-echinatum #1  Lycoperdon echinatum: File:Lycoperdon echinatum 54507 crop.jpg  (CC BY-SA 3.0, 69 KB)
+OK     apioperdon-pyriforme #1  Apioperdon pyriforme: File:Lycoperdon pyriforme Sasata scale.jpg  (CC BY 3.0, 102 KB)
+OK     phallus-impudicus #1  Phallus impudicus: File:Phallus impudicus LC0235.jpg  (CC BY-SA 3.0 de, 104 KB)
+OK     mutinus-caninus #1  Mutinus caninus: File:Gemeine Hundsrute Mutinus caninus.JPG  (CC BY 3.0, 72 KB)
+OK     astraeus-hygrometricus #1  Astraeus hygrometricus: File:Astraeus hygrometricus 122239.jpg  (CC BY-SA 3.0, 96 KB)
+OK     geastrum-fimbriatum #1  Geastrum fimbriatum: File:Geastrum fimbriatum 20050923 566.jpg  (CC BY-SA 4.0, 92 KB)
+OK     geastrum-triplex #1  Geastrum triplex: File:Geastrum triplex - Bola Creek.jpg  (CC BY-SA 4.0, 63 KB)
+OK     pisolithus-arhizus #1  Pisolithus arhizus: File:Pisolithus arhizus02.jpg  (CC BY-SA 4.0, 82 KB)
+OK     scleroderma-citrinum #1  Scleroderma citrinum: File:Scleroderma citrinum.jpg  (CC BY-SA 3.0, 87 KB)
+OK     scleroderma-verrucosum #1  Scleroderma verrucosum: File:Scleroderma verrucosum 01.JPG  (CC BY-SA 4.0, 86 KB)
+OK     clathrus-ruber #1  Clathrus ruber: File:Clathrus ruber spacepleb.jpg  (CC BY 2.0, 131 KB)
+OK     tricholoma-saponaceum #1  Tricholoma saponaceum: File:Tricholoma saponaceum.jpg  (CC BY-SA 3.0, 55 KB)
+OK     tricholoma-album #1  Tricholoma album: File:Tricholoma album (2).JPG  (CC BY-SA 3.0, 72 KB)
+OK     tricholoma-virgatum #1  Tricholoma virgatum: File:Tricholoma virgatum, McCall 1.jpg  (CC BY-SA 3.0, 76 KB)
+OK     tricholoma-ustale #1  Tricholoma ustale: File:Tricholoma.ustale.-.lindsey.jpg  (CC BY-SA 3.0, 83 KB)
+OK     tricholoma-sejunctum #1  Tricholoma sejunctum: File:TricholomaSejunctum.JPG  (CC BY-SA 3.0, 79 KB)
+OK     tricholoma-atrosquamosum #1  Tricholoma atrosquamosum: File:Tricholoma atrosquamosum 186463.jpg  (CC BY-SA 3.0, 64 KB)
+OK     tricholoma-caligatum #1  Tricholoma caligatum: File:Tricholoma caligatum 1.jpg  (CC BY-SA 4.0, 80 KB)
+OK     tricholoma-aurantium #1  Tricholoma aurantium: File:Tricholoma aurantium 274780.jpg  (CC BY-SA 3.0, 73 KB)
+OK     clitocybe-nebularis #1  Clitocybe nebularis: File:Nevelzwam (nebularis) tussen afgevallen beukenblad (d.j.b.) 01.jpg  (CC BY-SA 4.0, 62 KB)
+OK     clitocybe-odora #1  Clitocybe odora: File:Clitocybe-odora.jpg  (CC BY 3.0, 62 KB)
+OK     hygrophorus-hypothejus #1  Hygrophorus hypothejus: File:Hygrophorus hypothejus 2.jpg  (Public domain, 91 KB)
+OK     hygrocybe-coccinea #1  Hygrocybe coccinea: File:Hygrocybe coccinea (1).jpg  (CC BY 3.0, 57 KB)
+OK     hygrocybe-psittacina #1  Gliophorus psittacinus: File:Hygrocybe psittacina 54530.jpg  (CC BY-SA 3.0, 66 KB)
+OK     hygrocybe-chlorophana #1  Hygrocybe chlorophana: File:Hygrocybe chlorophana.jpg  (Public domain, 78 KB)
+OK     cuphophyllus-pratensis #1  Cuphophyllus pratensis: File:2010-11-20 Cuphophyllus pratensis.jpg  (CC BY-SA 3.0, 86 KB)
+OK     hygrophorus-eburneus #1  Hygrophorus eburneus: File:Hygrophorus eburneus-pastorino.JPG  (CC BY-SA 3.0, 52 KB)
+OK     cuphophyllus-virgineus #1  Cuphophyllus virgineus: File:2007-10-20 Cuphophyllus virgineus.jpg  (CC BY-SA 3.0, 69 KB)
+OK     hygrocybe-punicea #1  Hygrocybe punicea: File:Crimson Waxcap. Hygrocybe punicea (49055268862).jpg  (CC BY 2.0, 75 KB)
+OK     hygrophorus-agathosmus #1  Hygrophorus agathosmus: File:Hygrophorus agathosmus 70328.jpg  (CC BY-SA 3.0, 67 KB)
+OK     hygrophorus-olivaceoalbus #1  Hygrophorus olivaceoalbus: File:2010-08-11 Hygrophorus olivaceoalbus 2.jpg  (CC BY-SA 3.0, 86 KB)
+OK     hygrocybe-conica #1  Hygrocybe conica: File:Hygrocybe conica (2005 11 07) 1.jpg  (CC BY 2.5, 127 KB)
+OK     hygrophorus-chrysodon #1  Hygrophorus chrysodon: File:Hygrophorus chrysodon, Turkey Point 2.jpg  (CC BY-SA 3.0, 48 KB)
+OK     hygrophorus-pudorinus #1  Hygrophorus pudorinus: File:Hygrophorus pudorinus - Hygrophore pudibond.JPG  (CC BY-SA 3.0, 44 KB)
+OK     russula-aurea #1  Russula aurea: File:Russula Aurea.JPG  (CC BY-SA 3.0, 60 KB)
+OK     russula-virescens #1  Russula virescens: File:Russula virescens3.JPG  (CC BY-SA 3.0, 45 KB)
+OK     russula-delica #1  Russula delica: File:Russ.del.jpg  (CC BY 3.0, 82 KB) [REVISAR: el nombre del archivo no menciona «delica»]
+OK     russula-olivacea #1  Russula olivacea: File:Russula.olivacea.-.lindsey.jpg  (CC BY-SA 3.0, 80 KB)
+OK     russula-xerampelina #1  Russula xerampelina: File:2011-11-08 Russula xerampelina (Schaeff.) Fr 180998 mod.jpg  (CC BY-SA 3.0, 80 KB)
+OK     russula-adusta #1  Russula adusta: File:Russula nigricans - Lindsey 3a.jpg  (CC BY-SA 3.0, 77 KB)
+OK     russula-foetens #1  Russula foetens: File:Russula foetens.JPG  (CC BY 3.0, 65 KB)
+OK     russula-fragilis #1  Russula fragilis: File:Russula fragilis.jpg  (CC BY 3.0, 55 KB)
+OK     russula-sanguinea #1  Russula sanguinea: File:Blut-Täubling Russula sanguinaria.JPG  (CC BY 3.0, 69 KB) [REVISAR: el nombre del archivo no menciona «sanguinea»]
+OK     russula-integra #1  Russula integra: File:Russula integra (2).jpg  (CC BY-SA 3.0, 61 KB)
+OK     russula-albonigra #1  Russula albonigra: File:Russula albonigra1.jpg  (CC BY-SA 3.0, 61 KB)
+OK     russula-heterophylla #1  Russula heterophylla: File:Russ.het.jpg  (CC BY 3.0, 55 KB) [REVISAR: el nombre del archivo no menciona «heterophylla»]
+OK     russula-mustelina #1  Russula mustelina: File:2007-08-26 Russula mustelina Fr 72640.jpg  (CC BY-SA 3.0, 51 KB)
+OK     russula-queletii #1  Russula queletii: File:Stachelbeer-Täubling Russula queletii.JPG  (CC BY 3.0, 71 KB)
+OK     russula-amethystina #1  Russula amethystina: File:Russula amethystina.jpg  (CC BY-SA 3.0, 47 KB)
+OK     russula-caerulea #1  Russula caerulea: File:Russula caerulea 342205542.jpg  (CC BY 4.0, 95 KB)
+OK     lactarius-volemus #1  Lactifluus volemus: File:Lactarius volemus 54887.jpg  (CC BY-SA 3.0, 81 KB)
+OK     lactarius-piperatus #1  Lactifluus piperatus: File:Lactarius piperatus 98569.jpg  (CC BY-SA 3.0, 40 KB)
+OK     lactarius-vellereus #1  Lactifluus vellereus: File:Lactarius vellereus.jpg  (CC BY-SA 3.0, 57 KB)
+OK     lactarius-blennius #1  Lactarius blennius: File:Lactarius blennius JPG01.jpg  (CC BY-SA 2.5, 83 KB)
+OK     lactarius-camphoratus #1  Lactarius camphoratus: File:Lactarius camphoratus - Lindsey.jpg  (CC BY-SA 3.0, 82 KB)
+OK     lactarius-glyciosmus #1  Lactarius glyciosmus: File:Lactarius glyciosmus 20121201w.JPG  (CC BY-SA 3.0, 64 KB)
+OK     lactarius-quietus #1  Lactarius quietus: File:Lactarius quietus 2010 G1.jpg  (Public domain, 80 KB)
+OK     lactarius-rufus #1  Lactarius rufus: File:Lact.ruf.jpg  (CC BY 3.0, 86 KB) [REVISAR: el nombre del archivo no menciona «rufus»]
+OK     lactarius-scrobiculatus #1  Lactarius scrobiculatus: File:Lactarius scrobiculatus.JPG  (CC BY-SA 3.0, 102 KB)
+OK     lactarius-subdulcis #1  Lactarius subdulcis: File:Lact.sub.jpg  (CC BY 3.0, 73 KB) [REVISAR: el nombre del archivo no menciona «subdulcis»]
+OK     lactarius-uvidus #1  Lactarius uvidus: File:Lactarius uvidus 20071028w.JPG  (CC BY-SA 3.0, 75 KB)
+OK     lactarius-controversus #1  Lactarius controversus: File:Lactarius controversus.jpg  (CC BY-SA 1.0, 91 KB)
+OK     lactarius-zonarius #1  Lactarius zonarius: File:Lactarius zonarius 20100929w.JPG  (CC BY-SA 3.0, 64 KB)
+OK     lactarius-pyrogalus #1  Lactarius pyrogalus: File:Lactarius pyrogalus.jpg  (CC BY-SA 3.0, 54 KB)
+OK     lactarius-salmonicolor #1  Lactarius salmonicolor: File:Lachs-Reizker (Lactarius salmonicolor).JPG  (CC BY 3.0, 60 KB)
+OK     lactarius-fuliginosus #1  Lactarius fuliginosus: File:Lactarius fuliginosus.jpg  (CC BY 2.5, 76 KB)
+OK     gyroporus-cyanescens #1  Gyroporus cyanescens: File:2007-08-15 Gyroporus cyanescens.jpg  (CC BY-SA 3.0, 81 KB)
+OK     gyroporus-castaneus #1  Gyroporus castaneus: File:Gyro.cast.jpg  (CC BY 3.0, 93 KB) [REVISAR: el nombre del archivo no menciona «castaneus»]
+OK     hemileccinum-impolitum #1  Hemileccinum impolitum: File:Boletus impolitus 2009 G2.jpg  (Public domain, 86 KB)
+OK     butyriboletus-appendiculatus #1  Butyriboletus appendiculatus: File:Anhängsel-Röhrling Boletus appendiculatus.jpg  (CC BY 3.0, 80 KB)
+OK     butyriboletus-regius #1  Butyriboletus regius: File:Boletus regius 37212.jpg  (CC BY-SA 3.0, 70 KB)
+OK     suillellus-queletii #1  Suillellus queletii: File:2010-08-09 Boletus queletii Schulzer 97433.jpg  (CC BY-SA 3.0, 64 KB)
+OK     leccinum-aurantiacum #1  Leccinum aurantiacum: File:Leccinum aurantiacum.jpg  (CC BY-SA 4.0, 73 KB)
+OK     leccinum-versipelle #1  Leccinum versipelle: File:Leccinum versipelle LC0366.jpg  (CC BY-SA 3.0 de, 114 KB)
+OK     leccinum-scabrum #1  Leccinum scabrum: File:Leccinum scabrum JPG7.jpg  (CC BY 3.0, 99 KB)
+OK     caloboletus-calopus #1  Caloboletus calopus: File:Schoenfussroehrling.jpg  (CC BY-SA 3.0, 64 KB) [REVISAR: el nombre del archivo no menciona «calopus»]
+OK     chalciporus-piperatus #1  Chalciporus piperatus: File:Chalciporus piperatus LC0182.jpg  (CC BY-SA 2.0 de, 94 KB)
+OK     imleria-badia #1  Imleria badia: File:Boletus badius JPG1.jpg  (CC BY 3.0, 64 KB)
+OK     xerocomus-subtomentosus #1  Xerocomus subtomentosus: File:Ziegenlippe Xerocomus subtomentosus.jpg  (CC BY 3.0, 80 KB)
+OK     xerocomellus-chrysenteron #1  Xerocomellus chrysenteron: File:Xerocomellus chrysenteron28.jpg  (CC BY-SA 4.0, 104 KB)
+OK     hortiboletus-rubellus #1  Hortiboletus rubellus: File:Hortiboletus rubellus 2016 G1.jpg  (Public domain, 109 KB)
+OK     tapinella-atrotomentosa #1  Tapinella atrotomentosa: File:Samtfuß-Holzkrempling Tapinella atrotomentosa.jpg  (CC BY 3.0, 73 KB)
+OK     suillus-bellinii #1  Suillus bellinii: File:2011-11-21 Suillus bellinii (Inzenga) Kuntze 183888 crop.jpg  (CC BY-SA 3.0, 89 KB)
+OK     suillus-collinitus #1  Suillus collinitus: File:Suillus collinitus.JPG  (CC BY-SA 3.0, 87 KB)
+OK     suillus-bovinus #1  Suillus bovinus: File:Suillus bovinus 2011 10 07.jpg  (CC BY-SA 3.0, 52 KB)
+OK     suillus-variegatus #1  Suillus variegatus: File:Suill.var.jpg  (CC BY 3.0, 85 KB) [REVISAR: el nombre del archivo no menciona «variegatus»]
+OK     gomphidius-glutinosus #1  Gomphidius glutinosus: File:Gomphidius glutinosus 131007.jpg  (CC BY-SA 3.0, 67 KB)
+OK     porphyrellus-porphyrosporus #1  Porphyrellus porphyrosporus: File:Porphyrellus porphyrosporus Mexico.jpg  (CC BY-SA 3.0, 95 KB)
+OK     phylloporus-rhodoxanthus #1  Phylloporus rhodoxanthus: File:2011-07-09 Phylloporus rhodoxanthus subsp. americanus 157204.jpg  (CC BY-SA 3.0, 56 KB)
+OK     strobilomyces-strobilaceus #1  Strobilomyces strobilaceus: File:Strobilomyces floccopus 89374.jpg  (CC BY-SA 3.0, 134 KB)
+OK     gyrodon-lividus #1  Gyrodon lividus: File:Erlengrübling Gyrodon lividus.jpg  (CC BY 3.0, 76 KB)
+OK     hygrophoropsis-aurantiaca #1  Hygrophoropsis aurantiaca: File:Hygrophoropsis aurantiaca 241718.jpg  (CC BY-SA 3.0, 69 KB)
+OK     boletopsis-leucomelaena #1  Boletopsis leucomelaena: File:Boletopsis leucomelaena Mallorca.jpg  (CC BY-SA 3.0, 54 KB)
+OK     cortinarius-caperatus #1  Cortinarius caperatus: File:Rozites caperata 20100919w.JPG  (CC BY-SA 3.0, 56 KB) [REVISAR: el nombre del archivo no menciona «caperatus»]
+OK     cortinarius-praestans #1  Cortinarius praestans: File:Cortinarius praestans.JPG  (CC BY-SA 3.0, 67 KB)
+OK     cortinarius-trivialis #1  Cortinarius trivialis: File:CortinariusTrivialis.jpg  (CC BY-SA 3.0, 112 KB)
+OK     cortinarius-purpurascens #1  Cortinarius purpurascens: File:Cortinarius purpurascens 65102.jpg  (CC BY-SA 3.0, 79 KB)
+OK     cortinarius-infractus #1  Cortinarius infractus: File:Cortinarius infractus 67718.jpg  (CC BY-SA 3.0, 81 KB)
+OK     cortinarius-cinnamomeus #1  Cortinarius cinnamomeus: File:Cortinarius cinnamomeus - Lindsey.jpg  (CC BY-SA 3.0, 64 KB)
+OK     cortinarius-collinitus #1  Cortinarius collinitus: File:Cortinarius collinitus.jpg  (CC BY-SA 3.0, 84 KB)
+OK     cortinarius-anomalus #1  Cortinarius anomalus: File:Cortinarius anomalus - Lindsey.jpg  (CC BY-SA 3.0, 57 KB)
+OK     hebeloma-crustuliniforme #1  Hebeloma crustuliniforme: File:2012-10-16 Hebeloma crustuliniforme (Bull.) Quél 272561 crop.jpg  (CC BY-SA 3.0, 84 KB)
+OK     inocybe-geophylla #1  Inocybe geophylla: File:Ino.geo.jpg  (CC BY 3.0, 76 KB) [REVISAR: el nombre del archivo no menciona «geophylla»]
+OK     inocybe-lacera #1  Inocybe lacera: File:Inocybe spec. - Lindsey 1.jpg  (CC BY-SA 3.0, 87 KB) [REVISAR: el nombre del archivo no menciona «lacera»]
+OK     cortinarius-mucosus #1  Cortinarius mucosus: File:Cortinarius mucosus.jpg  (CC BY-SA 3.0, 82 KB)
+OK     cortinarius-glaucopus #1  Cortinarius glaucopus: File:Cortinarius glaucopus G5.jpg  (CC BY-SA 3.0, 87 KB)
+OK     inosperma-maculatum #1  Inosperma maculatum: File:Inocybe maculata 20080913wb.JPG  (CC BY-SA 3.0, 54 KB)
+OK     hebeloma-sinapizans #1  Hebeloma sinapizans: File:Hebeloma sinapizans.JPG  (CC BY-SA 3.0, 63 KB)
+OK     inocybe-rimosa #1  Inocybe rimosa: File:2011-11-26 Inocybe rimosa (Bull.) P. Kumm 185170.jpg  (CC BY-SA 3.0, 91 KB)
+OK     kuehneromyces-mutabilis #1  Kuehneromyces mutabilis: File:Galerina marginata 051106Bw.jpg  (CC BY-SA 3.0, 41 KB) [REVISAR: el nombre del archivo no menciona «mutabilis»]
+OK     hypholoma-capnoides #1  Hypholoma capnoides: File:Hypholoma-capnoides.jpg  (CC BY-SA 3.0, 36 KB)
+OK     hypholoma-lateritium #1  Hypholoma lateritium: File:HypholomaSublateritium.jpg  (CC BY-SA 3.0, 69 KB)
+OK     pholiota-squarrosa #1  Pholiota squarrosa: File:Sparrige-Schüppling (Pholiota squarrosa).JPG  (CC BY 3.0, 86 KB)
+OK     pholiota-flammans #1  Pholiota flammans: File:Pholiota flammans2.JPG  (CC BY-SA 3.0, 58 KB)
+OK     stropharia-aeruginosa #1  Stropharia aeruginosa: File:Stropharia aeruginosa in nature park Jesenicko in 2014.JPG  (CC BY 3.0, 54 KB)
+OK     protostropharia-semiglobata #1  Protostropharia semiglobata: File:Stropharia semiglobata 38287.jpg  (CC BY-SA 3.0, 56 KB)
+OK     agrocybe-praecox #1  Agrocybe praecox: File:Agrocybe praecox cupertino.jpg  (CC BY 4.0, 68 KB)
+OK     bolbitius-titubans #1  Bolbitius titubans: File:Goldmistpilze2.jpg  (CC BY-SA 3.0, 61 KB) [REVISAR: el nombre del archivo no menciona «titubans»]
+OK     phaeolepiota-aurea #1  Phaeolepiota aurea: File:Phaeolepiota aurea 10866-83fabfaacdf92ca2ba5a395f175754a4.jpg  (CC BY-SA 3.0, 79 KB)
+OK     gymnopus-dryophilus #1  Gymnopus dryophilus: File:Collybia dryophila 20061001w.jpg  (CC BY-SA 3.0, 65 KB)
+OK     gymnopus-fusipes #1  Gymnopus fusipes: File:Collybia fusipes EtgRompu 041024 001.jpg  (CC BY-SA 3.0, 92 KB)
+OK     mycetinis-alliaceus #1  Mycetinis alliaceus: File:Marasmius alliaceus 20070928wb.JPG  (CC BY-SA 3.0, 140 KB)
+OK     mycetinis-scorodonius #1  Mycetinis scorodonius: File:Mycetinis scorodonius 334947.jpg  (CC BY-SA 3.0, 58 KB)
+OK     rhodocollybia-butyracea #1  Rhodocollybia butyracea: File:Rhodocollybia butyracea051207D.jpg  (CC BY 3.0, 36 KB)
+OK     rhodocollybia-maculata #1  Rhodocollybia maculata: File:Rhodocollybia.maculata.-.lindsey.jpg  (CC BY-SA 3.0, 85 KB)
+OK     marasmius-rotula #1  Marasmius rotula: File:Marasmius rotula 148433.jpg  (CC BY-SA 3.0, 152 KB)
+OK     oudemansiella-mucida #1  Oudemansiella mucida: File:Oudemansiella mucida JPG1.jpg  (CC BY 3.0, 46 KB)
+OK     mycena-pura #1  Mycena pura: File:Rettichhelmling002.JPG  (CC BY-SA 3.0, 44 KB) [REVISAR: el nombre del archivo no menciona «pura»]
+OK     mycena-galericulata #1  Mycena galericulata: File:Mycena 60303.jpg  (CC BY-SA 3.0, 68 KB) [REVISAR: el nombre del archivo no menciona «galericulata»]
+OK     mycena-haematopus #1  Mycena haematopus: File:Haematopus-on-oak.jpg  (CC BY-SA 4.0, 78 KB)
+OK     mycena-epipterygia #1  Mycena epipterygia: File:Dehnbare Helmling Mycena epipterygia.jpg  (CC BY 3.0, 64 KB)
+OK     mycena-polygramma #1  Mycena polygramma: File:Mycena spec. - Lindsey 15b.jpg  (CC BY-SA 3.0, 69 KB) [REVISAR: el nombre del archivo no menciona «polygramma»]
+OK     mycena-inclinata #1  Mycena inclinata: File:Mycena inclinata, Clustered Bonnet, UK.jpg  (CC BY-SA 3.0, 76 KB)
+OK     pleurotus-eryngii #1  Pleurotus eryngii: File:Seta de cardo (Pleurotus eryngii), 2012-10-03, DD 01.JPG  (CC BY-SA 3.0, 30 KB)
+OK     pleurotus-cornucopiae #1  Pleurotus cornucopiae: File:2011-06-30 Pleurotus cornucopiae 3 70824.jpg  (CC BY-SA 3.0, 56 KB)
+OK     volvariella-bombycina #1  Volvariella bombycina: File:Volvariella bombycina1.jpg  (CC BY-SA 3.0, 98 KB)
+OK     coprinellus-micaceus #1  Coprinellus micaceus: File:Coprinellus micaceus Glimmer-Tintling.jpg  (CC BY 3.0, 61 KB)
+OK     pluteus-cervinus #1  Pluteus cervinus: File:Rehbrauner Dachpilz Bruderwald-20251017-RM-164830.jpg  (CC BY-SA 4.0, 60 KB) [REVISAR: el nombre del archivo no menciona «cervinus»]
+OK     panellus-stipticus #1  Panellus stipticus: File:Panellus stipticus (37162668243).jpg  (CC BY-SA 2.0, 66 KB)
+OK     phyllotopsis-nidulans #1  Phyllotopsis nidulans: File:Phyllotopsis nidulans 60083.jpg  (CC BY-SA 3.0, 50 KB)
+OK     volvopluteus-gloiocephalus #1  Volvopluteus gloiocephalus: File:Volvopluteus SoCal.jpg  (CC BY-SA 4.0, 91 KB) [REVISAR: el nombre del archivo no menciona «gloiocephalus»]
+OK     coprinopsis-picacea #1  Coprinopsis picacea: File:Coprinopsis picacea 2024 G1.jpg  (CC BY 4.0, 110 KB)
+OK     entoloma-rhodopolium #1  Entoloma rhodopolium: File:Entoloma rhodopolium 947421.jpg  (CC BY-SA 3.0, 113 KB)
+OK     entoloma-clypeatum #1  Entoloma clypeatum: File:Entoloma clypeatum.jpg  (CC BY-SA 3.0, 83 KB)
+OK     mycena-crocata #1  Mycena crocata: File:Mycena crocata.jpg  (CC BY-SA 2.0, 39 KB)
+OK     tubaria-furfuracea #1  Tubaria furfuracea: File:Tubaria furfuracea California.jpg  (CC BY-SA 4.0, 81 KB)
+OK     craterellus-tubaeformis #1  Craterellus tubaeformis: File:Craterellus tubaeformis 1345904803 69350246bb o.jpg  (CC BY-SA 2.0, 92 KB)
+OK     craterellus-cinereus #1  Craterellus cinereus: File:CantharellusCinereus.JPG  (CC BY 3.0, 81 KB)
+OK     gomphus-clavatus #1  Gomphus clavatus: File:Gomphus clavatus II Totes Gebirge.jpg  (CC BY-SA 3.0, 131 KB)
+OK     ramaria-botrytis #1  Ramaria botrytis: File:2010-09-17 Ramaria botrytis crop.jpg  (CC BY 2.0, 60 KB)
+OK     sparassis-crispa #1  Sparassis crispa: File:Grote sponszwam (Sparassis crispa). 09-11-2023. (d.j.b).jpg  (CC0, 86 KB)
+OK     ramaria-formosa #1  Ramaria formosa: File:Hortus Haren 18-10-2021. (actm.) 05.jpg  (CC BY-SA 4.0, 75 KB) [REVISAR: el nombre del archivo no menciona «formosa»]
+OK     sarcodon-imbricatus #1  Sarcodon imbricatus: File:Habichtspilz-Sarcodon-imbricatus.jpg  (CC BY 3.0, 77 KB)
+OK     hydnellum-ferrugineum #1  Hydnellum ferrugineum: File:Hydnellum ferrugineum Glieres.jpg  (CC BY-SA 4.0, 71 KB)
+OK     pseudocraterellus-undulatus #1  Pseudocraterellus undulatus: File:Pseudocraerellus sinuosus1.jpg  (CC BY-SA 3.0, 34 KB)
+OK     clavulina-coralloides #1  Clavulina coralloides: File:Clavulina cristata sasata.JPG  (CC BY-SA 3.0, 69 KB)
+OK     ramaria-stricta #1  Ramaria stricta: File:Ramaria stricta 171867.jpg  (CC BY-SA 3.0, 77 KB)
+OK     scutiger-pes-caprae #1  Scutiger pes-caprae: File:Scutiger pes-caprae 31566.jpg  (CC BY-SA 3.0, 63 KB)
+OK     grifola-frondosa #1  Grifola frondosa: File:Grifola frondosa (29715305790).jpg  (CC BY-SA 2.0, 97 KB)
+OK     albatrellus-ovinus #1  Albatrellus ovinus: File:Albatrellus-ovinus.jpg  (CC BY-SA 3.0, 78 KB)
+OK     auricularia-auricula-judae #1  Auricularia auricula-judae: File:Jelly Ear, Auricularia auricula-judae, UK 2.jpg  (CC BY-SA 4.0, 49 KB)
+OK     fistulina-hepatica #1  Fistulina hepatica: File:Fistulina hepatica.JPG  (CC BY-SA 3.0, 47 KB)
+OK     pseudohydnum-gelatinosum #1  Pseudohydnum gelatinosum: File:Pseudohydnum gelatinosum Abernethy Forest.jpg  (CC BY-SA 4.0, 60 KB)
+OK     phlogiotis-helvelloides #1  Phlogiotis helvelloides: File:Guepinia helvelloides 47030.jpg  (CC BY-SA 3.0, 78 KB)
+OK     fomes-fomentarius #1  Fomes fomentarius: File:Fomes fomentarius 2010 G2.jpg  (Public domain, 85 KB)
+OK     fomitopsis-pinicola #1  Fomitopsis pinicola: File:Fomitopsis pinicola 109142.jpg  (CC BY-SA 3.0, 57 KB)
+OK     trametes-versicolor #1  Trametes versicolor: File:Trametes versicolor G4 (1).JPG  (CC BY-SA 3.0, 64 KB)
+OK     trametes-gibbosa #1  Trametes gibbosa: File:Trametes gibbosa JPG1.jpg  (CC BY-SA 3.0, 99 KB)
+OK     ganoderma-lucidum #1  Ganoderma lucidum: File:Ganoderma lucidum 01.jpg  (CC BY-SA 3.0, 70 KB)
+OK     ganoderma-applanatum #1  Ganoderma applanatum: File:Ganoderma applanatum 2010 G1.jpg  (Public domain, 81 KB)
+OK     laetiporus-sulphureus #1  Laetiporus sulphureus: File:Laetiporus sulphureus big.jpg  (CC BY-SA 3.0, 93 KB)
+OK     piptoporus-betulinus #1  Fomitopsis betulina: File:Piptoporus betulinus 55.jpg  (Public domain, 35 KB)
+OK     meripilus-giganteus #1  Meripilus giganteus: File:Meripilus giganteus (Karst 1882).jpg  (CC BY 3.0, 94 KB)
+OK     phaeolus-schweinitzii #1  Phaeolus schweinitzii: File:Phaeolus schweinitzii 433858897.jpg  (CC BY 4.0, 93 KB)
+OK     daedaleopsis-confragosa #1  Daedaleopsis confragosa: File:Rötende Blätterwirrling Daedaleopsis confragosa.JPG  (CC BY 3.0, 155 KB)
+OK     schizophyllum-commune #1  Schizophyllum commune: File:Schizophyllum commune (Split gill) (33389628036).jpg  (CC0, 53 KB)
+OK     gloeophyllum-sepiarium #1  Gloeophyllum sepiarium: File:Gloeophyllum sepiarium qtl1.jpg  (CC BY-SA 3.0, 83 KB)
+OK     pycnoporus-cinnabarinus #1  Pycnoporus cinnabarinus: File:Pycnoporus cinnabarinus (Jacq.) P. Karst 153.jpg  (CC BY-SA 3.0, 59 KB)
+OK     trichaptum-abietinum #1  Trichaptum abietinum: File:Trichaptum.abietinum.-.lindsey.jpg  (CC BY-SA 3.0, 76 KB)
+OK     cerioporus-squamosus #1  Cerioporus squamosus: File:Polyporus squamosus Molter.jpg  (CC BY-SA 3.0, 81 KB)
+OK     lentinus-arcularius #1  Lentinus arcularius: File:Polyporus arcularius (8841097306).jpg  (CC BY 2.0, 37 KB)
+OK     discina-gigas #1  Discina gigas: File:Gyromitra gigas 85397.jpg  (CC BY-SA 3.0, 104 KB)
+OK     paragyromitra-infula #1  Paragyromitra infula: File:Gyromitra infula Sasata.jpg  (CC BY-SA 3.0, 134 KB)
+OK     helvella-acetabulum #1  Helvella acetabulum: File:Helvella acetabulum 47980.jpg  (CC BY-SA 3.0, 84 KB)
+OK     helvella-crispa #1  Helvella crispa: File:0 Helvella crispa - Havré (1).JPG  (CC BY 3.0, 112 KB)
+OK     helvella-elastica #1  Helvella elastica: File:Helvella elastica.jpg  (CC BY-SA 3.0, 60 KB)
+OK     helvella-lacunosa #1  Helvella lacunosa: File:Helvella lacunosa (south BC).jpg  (CC BY-SA 4.0, 78 KB)
+OK     dissingia-leucomelaena #1  Dissingia leucomelaena: File:Helvella leucomelaena MO.jpg  (CC BY-SA 3.0, 79 KB)
+OK     peziza-vesiculosa #1  Peziza vesiculosa: File:Blasenbecherling Peziza vesiculosa.jpg  (CC BY 3.0, 67 KB)
+OK     sarcosphaera-coronaria #1  Sarcosphaera coronaria: File:Sarcosphaera coronaria 42754.jpg  (CC BY-SA 3.0, 75 KB)
+OK     legaliana-badia #1  Legaliana badia: File:Peziza spec. - Lindsey 1.jpg  (CC BY-SA 3.0, 59 KB) [REVISAR: el nombre del archivo no menciona «badia»]
+OK     aleuria-aurantia #1  Aleuria aurantia: File:Aleuria aurantia (Orange Peel Fungus).JPG  (CC BY-SA 3.0, 113 KB)
+OK     verpa-conica #1  Verpa conica: File:Verpa conica by Ron Pastorino.jpg  (CC BY-SA 3.0, 82 KB)
+OK     verpa-bohemica #1  Verpa bohemica: File:Verpa bohemica1.jpg  (CC BY-SA 3.0, 74 KB)
+OK     morchella-semilibera #1  Morchella semilibera: File:Mitrophora semilibera.jpg  (CC BY-SA 4.0, 163 KB)
+OK     sarcoscypha-coccinea #1  Sarcoscypha coccinea: File:Sarcoscypha coccinea 74716.jpg  (CC BY-SA 3.0, 72 KB)
+OK     scutellinia-scutellata #1  Scutellinia scutellata: File:Scutellinia scutellata Dan Molter crop.jpg  (CC BY-SA 3.0, 89 KB)
+OK     humaria-hemisphaerica #1  Humaria hemisphaerica: File:Halbkugeliger Borstling Humaria hemisphaerica.jpg  (CC BY 3.0, 70 KB)
+OK     disciotis-venosa #1  Disciotis venosa: File:2005-04-23 Disciotis venosa.jpg  (CC BY-SA 3.0, 64 KB)
+OK     daedalea-quercina #1  Daedalea quercina: File:Doolhofzwam (Daedalea quercina) 30-11-2022. (d.j.b).jpg  (CC BY-SA 4.0, 61 KB)
+OK     bondarzewia-mesenterica #1  Bondarzewia mesenterica: File:2011-12-24 Bondarzewia mesenterica (Schaeff.) Kreisel 191086.jpg  (CC BY-SA 3.0, 72 KB)
+OK     auricularia-mesenterica #1  Auricularia mesenterica: File:Auricularia mesenterica 2 BG.JPG  (CC BY-SA 3.0, 224 KB)
+OK     chondrostereum-purpureum #1  Chondrostereum purpureum: File:Chondrostereum purpureum 051120A.jpg  (CC BY-SA 3.0, 84 KB)
+OK     lyophyllum-decastes #1  Lyophyllum decastes: File:Lyophyllum decastes 071012.jpg  (CC BY-SA 3.0, 63 KB)
+OK     laccaria-amethystina #1  Laccaria amethystina: File:Laccaria amethystina - Lakówka ametystowa.jpg  (CC BY-SA 4.0, 65 KB)
+OK     laccaria-laccata #1  Laccaria laccata: File:Lacc.lacc.jpg  (CC BY 3.0, 68 KB) [REVISAR: el nombre del archivo no menciona «laccata»]
+OK     amanita-strobiliformis #1  Amanita strobiliformis: File:Amanita solitaria1.jpg  (CC BY-SA 3.0, 102 KB) [REVISAR: el nombre del archivo no menciona «strobiliformis»]
+OK     lepiota-cristata #1  Lepiota cristata: File:2011-12-01 Lepiota cristata (Bolton) P. Kumm 186612.jpg  (CC BY-SA 3.0, 70 KB)
+OK     tricholoma-sulphureum #1  Tricholoma sulphureum: File:Tricholoma sulphureum 031123w.jpg  (CC BY-SA 3.0, 105 KB)
+OK     tricholoma-ustaloides #1  Tricholoma ustaloides: File:Tricholoma ustaloides 205382.jpg  (CC BY-SA 3.0, 71 KB)
+OK     tricholomopsis-rutilans #1  Tricholomopsis rutilans: File:Trichol rutilans02 Alberto Vázquez.JPG  (CC BY-SA 2.5, 72 KB)
+OK     infundibulicybe-gibba #1  Infundibulicybe gibba: File:Clitocybe gibba 060820w.jpg  (CC BY-SA 3.0, 59 KB)
+OK     aspropaxillus-giganteus #1  Aspropaxillus giganteus: File:Leucopaxillus giganteus 20070817wa.JPG  (CC BY-SA 3.0, 55 KB)
+OK     paralepista-flaccida #1  Paralepista flaccida: File:Roodbruine schijnridderzwammen (Lepista flaccida). 22-01-2021 (d.j.b.) 01.jpg  (CC BY-SA 4.0, 72 KB)
+OK     pseudoclitocybe-cyathiformis #1  Pseudoclitocybe cyathiformis: File:Pseudoclitcybe cyathiformis.jpg  (CC BY-SA 4.0, 75 KB)
+OK     hericium-erinaceus #1  Hericium erinaceus: File:Lion's-mane mushroom imported from iNaturalist photo 29576097 on 21 March 2024.jpg  (CC BY 4.0, 117 KB) [REVISAR: el nombre del archivo no menciona «erinaceus»]
+OK     hericium-coralloides #1  Hericium coralloides: File:2009-09-25 Hericium coralloides (Scop.) Pers 58068 crop.jpg  (CC BY-SA 3.0, 84 KB)
+OK     stropharia-rugosoannulata #1  Stropharia rugosoannulata: File:2011-05-19 Stropharia rugosoannulata Farl. ex Murrill 183478.jpg  (CC BY-SA 3.0, 57 KB)
+OK     gymnopilus-junonius #1  Gymnopilus junonius: File:Gymnopilus junonius-02.jpg  (CC BY 2.5, 68 KB)
+OK     pleurocybella-porrigens #1  Pleurocybella porrigens: File:Pleurocybella 050919low.jpg  (CC BY-SA 3.0, 51 KB) [REVISAR: el nombre del archivo no menciona «porrigens»]
+OK     hypsizygus-ulmarius #1  Hypsizygus ulmarius: File:Hypsizygus ulmarius (Bull.) Redhead 383230.jpg  (CC BY-SA 3.0, 66 KB)
+OK     ampulloclitocybe-clavipes #1  Ampulloclitocybe clavipes: File:2010-10-08 Ampulloclitocybe clavipes cropped.jpg  (CC BY-SA 3.0, 74 KB)
+OK     leucoagaricus-leucothites #1  Leucoagaricus leucothites: File:2009-10-23 Leucoagaricus leucothites (Vittad.) M.M. Moser ex Bon 61894 crop.jpg  (CC BY-SA 3.0, 133 KB)
+OK     leucocoprinus-birnbaumii #1  Leucocoprinus birnbaumii: File:Leucocoprinus birnbaumii growing on potting mix.jpg  (CC0, 79 KB)
+OK     coprinellus-disseminatus #1  Coprinellus disseminatus: File:Coprinellus disseminatus group.jpg  (CC BY 4.0, 63 KB)
+OK     cortinarius-violaceus #1  Cortinarius violaceus: File:2008-08-22 Cortinarius violaceus (L.) Gray 18241.jpg  (CC BY-SA 3.0, 69 KB)
+OK     cortinarius-armillatus #1  Cortinarius armillatus: File:Cortinarius.armillatus2.-.lindsey.jpg  (CC BY-SA 3.0, 63 KB)
+OK     rubroboletus-legaliae #1  Rubroboletus legaliae: File:Luční - Boletus legaliae 02.jpg  (CC BY-SA 3.0, 68 KB)
+OK     amanita-porphyria #1  Amanita porphyria: File:Amanita porphyria Alb. & Schwein 355243 2013-08-06 (cropped).jpg  (CC BY-SA 3.0, 63 KB)
+OK     amanita-echinocephala #1  Amanita echinocephala: File:Am.echin.jpg  (CC BY 3.0, 81 KB) [REVISAR: el nombre del archivo no menciona «echinocephala»]
+OK     lactarius-turpis #1  Lactarius turpis: File:Lactarius turpis 2010 G1.jpg  (Public domain, 101 KB)
+OK     lactarius-deterrimus #1  Lactarius deterrimus: File:Fichten-Reizker Lactarius deterrimus.jpg  (CC BY 3.0, 66 KB)
+OK     lactarius-pallidus #1  Lactarius pallidus: File:Fleischblasse Milchling Lactarius pallidus.jpg  (CC BY 3.0, 58 KB)
+OK     russula-vesca #1  Russula vesca: File:Russ.ves.jpg  (CC BY 3.0, 50 KB) [REVISAR: el nombre del archivo no menciona «vesca»]
+OK     russula-ochroleuca #1  Russula ochroleuca: File:Russula ochroleuca châtaigne.JPG  (CC BY-SA 3.0, 73 KB)
+OK     russula-fellea #1  Russula fellea: File:Russ.fell.jpg  (CC BY 3.0, 53 KB) [REVISAR: el nombre del archivo no menciona «fellea»]
+OK     russula-rosea #1  Russula rosea: File:2011-05-14 Russula lepida 146790 146793 combined.jpg  (CC BY-SA 3.0, 59 KB)
+OK     tricholoma-vaccinum #1  Tricholoma vaccinum: File:Tricholoma vaccinum 99338.jpg  (CC BY-SA 3.0, 84 KB)
+OK     tricholoma-imbricatum #1  Tricholoma imbricatum: File:Tricholoma imbricatum 68626.jpg  (CC BY-SA 3.0, 70 KB)
