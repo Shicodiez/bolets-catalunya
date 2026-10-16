@@ -124,5 +124,23 @@
     "lng": 2.416696619766552,
     "id": "5fcd0260-7826-45d3-a964-cfdbbe46cad8",
     "createdAt": "2026-10-16T17:56:29.155Z"
+  },
+  {
+    "speciesIds": [
+      "ceps"
+    ],
+    "speciesNames": [
+      "Cep"
+    ],
+    "place": "Santa Fe de Montseny",
+    "alt": "1200",
+    "tree": "faig",
+    "treeName": "Haya",
+    "date": "2026-10-16",
+    "amount": "poco",
+    "lat": 41.78439692033024,
+    "lng": 2.457864233589722,
+    "id": "c2029d9d-d54a-4f13-a97a-1f76d6a6874d",
+    "createdAt": "2026-10-16T17:57:10.307Z"
   }
 ]
