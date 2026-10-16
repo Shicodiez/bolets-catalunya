@@ -282,7 +282,6 @@ CSS = r"""
   .slot-msg { font-size: 12px; margin: 5px 0 0; color: var(--muted); line-height: 1.3; }
   .slot-msg:empty { display: none; }
   .slot-msg.err { color: var(--red-text); background: var(--red-bg); padding: 5px 6px; border-radius: 6px; }
-  .slot-msg.warn { color: var(--amber-text); background: var(--amber-bg); padding: 5px 6px; border-radius: 6px; }
   .idtools { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0 0; }
   details.rasgos { margin-top: 12px; }
   details.rasgos fieldset { border: 1px solid var(--line); border-radius: 10px; margin: 10px 0 0; padding: 4px 10px 8px; }
@@ -600,8 +599,10 @@ if ('serviceWorker' in navigator) {
   var P = window.Puntuar;
   var dimPorId = {};
   DATOS.dims.forEach(function (d) { dimPorId[d.id] = d; });
-  var PARTE_TXT = { sombrero: 'sombrero visto desde arriba', debajo: 'debajo del sombrero', pie: 'pie y base' };
+  var PARTES_FOTO = ['sombrero', 'debajo', 'pie'];
   var obs = {};          // rasgo -> { v: valor, src: 'ia' | 'tu' }
+  var lecturas = {};     // hueco de foto -> rasgos que la IA ha leído en esa foto { rasgo: valor }
+  var descartados = {};  // rasgos que la persona ha dejado en blanco a propósito: la IA no los vuelve a rellenar
   var selects = {};      // rasgo -> <select>
   Array.prototype.forEach.call(document.querySelectorAll('select[data-dim]'), function (s) { selects[s.getAttribute('data-dim')] = s; });
 
@@ -774,25 +775,28 @@ if ('serviceWorker' in navigator) {
   function actualizar() { sincronizar(); pintaResultados(); }
   Object.keys(selects).forEach(function (dim) {
     selects[dim].addEventListener('change', function () {
-      if (selects[dim].value) obs[dim] = { v: selects[dim].value, src: 'tu' };
-      else delete obs[dim];
+      if (selects[dim].value) { obs[dim] = { v: selects[dim].value, src: 'tu' }; delete descartados[dim]; }
+      else { delete obs[dim]; descartados[dim] = true; }
       actualizar();
     });
   });
-  function quitarIA(parte) {
-    DATOS.dims.forEach(function (d) { if (d.parte === parte && obs[d.id] && obs[d.id].src === 'ia') delete obs[d.id]; });
-  }
-  function aplicarIA(parte, rasgos) {
-    var n = 0;
+  // Rehace desde cero los rasgos con marca «IA» juntando lo que ha leído la IA en las tres fotos. Lo que ha puesto la persona
+  // no se toca. Cada rasgo se toma de la foto de SU hueco; si esa no lo enseña (p. ej. el color del pie en la foto de la seta
+  // entera), se mira en las otras, y solo vale si todas las que lo leen coinciden.
+  function recalcularIA() {
+    Object.keys(obs).forEach(function (k) { if (obs[k].src === 'ia') delete obs[k]; });
     DATOS.dims.forEach(function (d) {
-      if (d.parte !== parte) return;
-      var v = rasgos[d.id];
-      if (!valorValido(d.id, v)) return;
-      if (obs[d.id] && obs[d.id].src === 'tu') return;   // lo que ha puesto la persona no se pisa
-      obs[d.id] = { v: v, src: 'ia' };
-      n++;
+      if (obs[d.id] || descartados[d.id] || PARTES_FOTO.indexOf(d.parte) < 0) return;
+      var propia = lecturas[d.parte] && lecturas[d.parte][d.id];
+      if (valorValido(d.id, propia)) { obs[d.id] = { v: propia, src: 'ia' }; return; }
+      var vistos = [];
+      PARTES_FOTO.forEach(function (p) {
+        if (p === d.parte) return;
+        var x = lecturas[p] && lecturas[p][d.id];
+        if (valorValido(d.id, x) && vistos.indexOf(x) < 0) vistos.push(x);
+      });
+      if (vistos.length === 1) obs[d.id] = { v: vistos[0], src: 'ia' };
     });
-    return n;
   }
 
   // ----- Huecos de foto -----
@@ -800,7 +804,7 @@ if ('serviceWorker' in navigator) {
   function msgSlot(slot, texto, error) {
     var m = slot.querySelector('.slot-msg');
     m.textContent = texto || '';
-    m.className = 'slot-msg' + (error === 'warn' ? ' warn' : error ? ' err' : '');
+    m.className = 'slot-msg' + (error ? ' err' : '');
     return m;
   }
   function ponerMiniatura(slot, dataUrl) {
@@ -825,23 +829,23 @@ if ('serviceWorker' in navigator) {
     if (!res.rasgos || typeof res.rasgos !== 'object' || Array.isArray(res.rasgos)) {
       return msgSlot(slot, 'El Worker de Cloudflare es de la versión anterior: hay que pegar la última versión de worker/index.js.', true);
     }
-    quitarIA(parte);
+    delete lecturas[parte];
     if (res.se_ve_seta === false) {
+      recalcularIA();
       actualizar();
       return msgSlot(slot, 'No parece que haya una seta en esta foto. Prueba con otra, de cerca y con buena luz.', true);
     }
-    var vista = res.parte_vista;
-    var n = aplicarIA(parte, res.rasgos);
+    // La IA lee TODOS los rasgos que ve en la foto, sea cual sea el hueco donde la hayas puesto (una foto de la seta entera enseña
+    // sombrero, pie y a veces láminas); recalcularIA() los junta con los de las otras fotos. No se le pregunta qué parte enseña
+    // la foto: se equivocaba (probado el 16/10/2026) y el aviso que salía confundía más que ayudaba.
+    var leidos = {}, n = 0;
+    Object.keys(res.rasgos).forEach(function (dim) {
+      if (valorValido(dim, res.rasgos[dim])) { leidos[dim] = res.rasgos[dim]; n++; }
+    });
+    lecturas[parte] = leidos;
+    recalcularIA();
     actualizar();
-    // La IA a veces se equivoca al decir qué parte enseña una foto (probado el 16/10/2026: leyó «sombrero» en una foto de las láminas y en una del pie).
-    // Se fía de en qué hueco la has puesto tú: el Worker solo devuelve los rasgos de ese hueco; si la IA discrepa, se avisa y se dejan a la vista para que los revises.
-    if (PARTE_TXT[vista] && vista !== parte) {
-      var dud = 'La IA cree que esta foto enseña «' + PARTE_TXT[vista] + '», pero está en «' + PARTE_TXT[parte] + '» y me fío de ti. ';
-      return msgSlot(slot, n
-        ? dud + 'He leído ' + n + (n === 1 ? ' rasgo' : ' rasgos') + ': revísalos en el panel (llevan la marca «IA»).'
-        : dud + 'No he podido leer rasgos claros: indícalos tú en el panel.', 'warn');
-    }
-    msgSlot(slot, n ? 'He leído ' + n + (n === 1 ? ' rasgo' : ' rasgos') + '. Revísalos en el panel.' : 'No he podido leer rasgos claros en esta foto. Indícalos tú en el panel.');
+    msgSlot(slot, n ? 'He leído ' + n + (n === 1 ? ' rasgo' : ' rasgos') + ' en esta foto. Revísalos en el panel (llevan la marca «IA»).' : 'No he podido leer rasgos claros en esta foto. Indícalos tú en el panel.');
   }
   function leerFoto(slot, file) {
     var parte = slot.getAttribute('data-parte');
@@ -901,12 +905,15 @@ if ('serviceWorker' in navigator) {
       slot._gen = (slot._gen || 0) + 1;
       ponerMiniatura(slot, null);
       msgSlot(slot, '');
-      quitarIA(parte);
+      delete lecturas[parte];
+      recalcularIA();
       actualizar();
     });
   });
   $('btn-reset').addEventListener('click', function () {
     obs = {};
+    lecturas = {};
+    descartados = {};
     slots.forEach(function (slot) {
       slot._gen = (slot._gen || 0) + 1;
       ponerMiniatura(slot, null);

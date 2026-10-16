@@ -170,8 +170,9 @@ async function call(env, pathname, body, ip) {
     return { status: r.status, json: await r.json().catch(() => ({})) };
   };
   const respuesta = (obj) => ({ response: typeof obj === "string" ? obj : JSON.stringify(obj) });
-  // lo que devolvería el modelo para la foto de DEBAJO, con basura mezclada
-  const bueno = { parte_vista: "debajo", rasgos: { h_tipo: "laminas", h_color: "Blanco o crema", s_color: "verde", p_anillo: "si", h_inventado: "x" } };
+  // lo que devolvería el modelo para una foto (se le habla en inglés y contesta con las palabras de IDENT_EN), con basura mezclada:
+  // el Worker lee TODOS los rasgos que vea la foto, no solo los del hueco
+  const bueno = { mushroom_visible: true, traits: { h_tipo: "gills", h_color: "white or cream", s_color: "Green", p_anillo: "yes", h_inventado: "x", p_base: null } };
   const env0 = { ...baseEnv() };
   const token = await getToken(env0);
 
@@ -183,66 +184,71 @@ async function call(env, pathname, body, ip) {
   r = await callId(env0, token, { image: FOTO, parte: "debajo" });
   check("identify: sin binding AI → 503 con mensaje claro", r.status === 503 && /Workers AI/.test(r.json.error || ""), JSON.stringify(r));
 
-  // caso normal + saneado: solo rasgos de la parte pedida y con valores del vocabulario
+  // caso normal + saneado: se leen TODOS los rasgos conocidos de la foto, con valores del vocabulario cerrado
   const calls = [];
   const ai = { run: async (model, input) => { calls.push({ model, input }); return respuesta(bueno); } };
   const env1 = { ...baseEnv(), AI: ai };
   r = await callId(env1, token, { image: FOTO, parte: "debajo" });
   check("identify: 200 y ok", r.status === 200 && r.json.ok === true, JSON.stringify(r).slice(0, 200));
   const res = r.json.resultado || {};
-  check("identify: devuelve parte, parte_vista y se_ve_seta", res.parte === "debajo" && res.parte_vista === "debajo" && res.se_ve_seta === true, JSON.stringify(res));
-  check("identify: solo rasgos de la parte pedida (h_tipo, h_color); se tira s_color, p_anillo y los inventados",
-        JSON.stringify(Object.keys(res.rasgos || {}).sort()) === '["h_color","h_tipo"]', JSON.stringify(res.rasgos));
-  check("identify: acepta el id («laminas») y el texto completo («Blanco o crema» → blanco)", res.rasgos.h_tipo === "laminas" && res.rasgos.h_color === "blanco", JSON.stringify(res.rasgos));
+  check("identify: devuelve parte y se_ve_seta, y ya NO pregunta ni devuelve qué parte enseña la foto (parte_vista)",
+        res.parte === "debajo" && res.se_ve_seta === true && !("parte_vista" in res), JSON.stringify(res));
+  check("identify: devuelve todos los rasgos que ve (h_tipo, h_color, s_color, p_anillo) aunque no sean del hueco; tira los inventados y los null",
+        JSON.stringify(Object.keys(res.rasgos || {}).sort()) === '["h_color","h_tipo","p_anillo","s_color"]', JSON.stringify(res.rasgos));
+  check("identify: traduce las palabras en inglés a los ids de la guía («gills»→laminas, «white or cream»→blanco, «Green»→verde, «yes»→si)",
+        res.rasgos.h_tipo === "laminas" && res.rasgos.h_color === "blanco" && res.rasgos.s_color === "verde" && res.rasgos.p_anillo === "si", JSON.stringify(res.rasgos));
   check("identify: NO devuelve candidatas ni dice qué seta es", !("candidatas" in res) && !("falta_ver" in res));
   check("identify: usa el modelo de visión de Llama y manda la imagen como data URI (formato del tutorial de Cloudflare)",
         calls.length === 1 && /llama-3\.2-11b-vision-instruct/.test(calls[0].model) && calls[0].input.image === FOTO &&
         typeof calls[0].input.messages[1].content === "string");
   const prompt = calls[0].input.messages[1].content;
-  check("identify: el prompt de «debajo» lista solo sus rasgos y pide no adivinar (null)",
-        /h_tipo \(/.test(prompt) && /h_color \(/.test(prompt) && !/s_color \(/.test(prompt) && !/p_anillo \(/.test(prompt) && /No adivines/.test(prompt) && /null/.test(prompt), prompt.slice(0, 200));
-  check("identify: el mensaje del sistema prohíbe decir la especie o si se puede comer", /No dices qué especie es ni si se puede comer/.test(calls[0].input.messages[0].content));
-  check("identify: tokens de salida acotados (300) y temperatura baja", calls[0].input.max_tokens === 300 && calls[0].input.temperature <= 0.2);
+  check("identify: el prompt está en INGLÉS (Llama 3.2 Vision solo lo soporta así con fotos), pide los 9 rasgos y pide no adivinar (null)",
+        /This is ONE photo of a mushroom/.test(prompt) && !/Esta foto/.test(prompt) && ["s_color", "s_super", "s_forma", "h_tipo", "h_color", "p_anillo", "p_base", "p_super", "p_color"].every((d) => prompt.includes(d + " (")) &&
+        /Do not guess/.test(prompt) && /null/.test(prompt), prompt.slice(0, 200));
+  check("identify: el hueco es solo una pista en el prompt (debajo → «underside of the cap»)", /underside of the cap/.test(prompt));
+  check("identify: el mensaje del sistema prohíbe decir la especie o si se puede comer", /NEVER say which species it is and NEVER say whether it is edible/.test(calls[0].input.messages[0].content));
+  check("identify: tokens de salida acotados (400) y temperatura baja", calls[0].input.max_tokens === 400 && calls[0].input.temperature <= 0.2);
 
-  // cada parte pide sus rasgos
-  for (const [parte, dims, noDims] of [["sombrero", ["s_color", "s_super", "s_forma"], ["h_tipo", "p_anillo"]],
-                                       ["pie", ["p_anillo", "p_base", "p_super", "p_color"], ["s_color", "h_tipo"]]]) {
+  // cada hueco solo cambia la pista; los 9 rasgos se piden siempre
+  for (const [parte, pista] of [["sombrero", "the cap seen from above"], ["pie", "the stem and its base"]]) {
     const c = [];
-    r = await callId({ ...baseEnv(), AI: { run: async (m, i) => { c.push(i); return respuesta({ parte_vista: parte, rasgos: {} }); } } }, token, { image: FOTO, parte });
+    r = await callId({ ...baseEnv(), AI: { run: async (m, i) => { c.push(i); return respuesta({ mushroom_visible: true, traits: {} }); } } }, token, { image: FOTO, parte });
     const pr = c[0].messages[1].content;
-    check(`identify: la parte «${parte}» pide sus ${dims.length} rasgos y ninguno de otra parte`,
-          r.status === 200 && dims.every((d) => pr.includes(d + " (")) && noDims.every((d) => !pr.includes(d + " (")), pr.slice(0, 160));
+    check(`identify: el hueco «${parte}» pone su pista y pide igualmente los 9 rasgos`,
+          r.status === 200 && pr.includes(pista) && pr.includes("h_tipo (") && pr.includes("s_color (") && pr.includes("p_color ("), pr.slice(0, 160));
   }
 
   // el modelo mete texto alrededor del JSON
   r = await callId({ ...baseEnv(), AI: { run: async () => respuesta('Claro, aquí tienes:\n```json\n' + JSON.stringify(bueno) + '\n```\nEspero que ayude') } }, token, { image: FOTO, parte: "debajo" });
   check("identify: lee el JSON aunque el modelo escriba texto alrededor", r.status === 200 && r.json.resultado.rasgos.h_tipo === "laminas", JSON.stringify(r).slice(0, 160));
 
-  // valores que no están en el vocabulario, null, mayúsculas
-  r = await callId({ ...baseEnv(), AI: { run: async () => respuesta({ parte_vista: "SOMBRERO", rasgos: { s_color: "morado", s_super: null, s_forma: "CONVEXO" } }) } }, token, { image: FOTO, parte: "sombrero" });
-  check("identify: valor fuera del vocabulario (morado) y null se descartan; mayúsculas se aceptan",
-        r.status === 200 && JSON.stringify(r.json.resultado.rasgos) === '{"s_forma":"convexo"}' && r.json.resultado.parte_vista === "sombrero", JSON.stringify(r.json));
+  // formatos de respuesta: «chat completions» (otros modelos de Cloudflare) y el formato antiguo con ids en castellano
+  r = await callId({ ...baseEnv(), AI: { run: async () => ({ choices: [{ message: { content: JSON.stringify(bueno) } }], usage: {} }) } }, token, { image: FOTO, parte: "debajo" });
+  check("identify: entiende también la respuesta en formato «chat completions» (choices[0].message.content)", r.status === 200 && r.json.resultado.rasgos.h_tipo === "laminas", JSON.stringify(r).slice(0, 160));
+  r = await callId({ ...baseEnv(), AI: { run: async () => respuesta({ parte_vista: "debajo", rasgos: { h_tipo: "poros", h_color: "Blanco o crema" } }) } }, token, { image: FOTO, parte: "debajo" });
+  check("identify: sigue entendiendo el formato antiguo (rasgos con ids en castellano o texto largo)", r.status === 200 && r.json.resultado.rasgos.h_tipo === "poros" && r.json.resultado.rasgos.h_color === "blanco", JSON.stringify(r).slice(0, 160));
+  r = await callId({ ...baseEnv(), AI: { run: async () => respuesta({ mushroom_visible: true, traits: { p_anillo: true, p_base: "swollen" } }) } }, token, { image: FOTO, parte: "pie" });
+  check("identify: un true/false en el anillo vale como sí/no", r.status === 200 && r.json.resultado.rasgos.p_anillo === "si" && r.json.resultado.rasgos.p_base === "ensanchada", JSON.stringify(r).slice(0, 160));
 
-  // parte_vista distinta de la pedida: se devuelve tal cual para que la guía avise
-  r = await callId({ ...baseEnv(), AI: { run: async () => respuesta({ parte_vista: "pie", rasgos: { h_tipo: "poros" } }) } }, token, { image: FOTO, parte: "debajo" });
-  check("identify: si la foto parece de otra parte, parte_vista lo dice (la guía avisa)", r.status === 200 && r.json.resultado.parte_vista === "pie" && r.json.resultado.parte === "debajo");
-  r = await callId({ ...baseEnv(), AI: { run: async () => respuesta({ parte_vista: "inventada", rasgos: { h_tipo: "poros" } }) } }, token, { image: FOTO, parte: "debajo" });
-  check("identify: parte_vista desconocida → «otra»", r.status === 200 && r.json.resultado.parte_vista === "otra");
+  // valores que no están en el vocabulario, null, mayúsculas
+  r = await callId({ ...baseEnv(), AI: { run: async () => respuesta({ mushroom_visible: true, traits: { s_color: "purple", s_super: null, s_forma: "CONVEX" } }) } }, token, { image: FOTO, parte: "sombrero" });
+  check("identify: valor fuera del vocabulario (purple) y null se descartan; mayúsculas se aceptan",
+        r.status === 200 && JSON.stringify(r.json.resultado.rasgos) === '{"s_forma":"convexo"}', JSON.stringify(r.json));
 
   // basura
   r = await callId({ ...baseEnv(), AI: { run: async () => respuesta("no sé qué es eso") } }, token, { image: FOTO, parte: "debajo" });
   check("identify: respuesta ilegible → 502 con mensaje, sin romper", r.status === 502 && /no ha devuelto una respuesta/.test(r.json.error || ""), JSON.stringify(r));
   r = await callId({ ...baseEnv(), AI: { run: async () => respuesta({ hola: "mundo" }) } }, token, { image: FOTO, parte: "debajo" });
   check("identify: JSON sin ninguno de los campos esperados → 502", r.status === 502, JSON.stringify(r));
-  r = await callId({ ...baseEnv(), AI: { run: async () => respuesta({ parte_vista: "debajo", rasgos: ["láminas"] }) } }, token, { image: FOTO, parte: "debajo" });
-  check("identify: rasgos en formato antiguo (lista) → se ignoran, sin romper", r.status === 200 && JSON.stringify(r.json.resultado.rasgos) === "{}");
+  r = await callId({ ...baseEnv(), AI: { run: async () => respuesta({ mushroom_visible: true, traits: ["gills"] }) } }, token, { image: FOTO, parte: "debajo" });
+  check("identify: rasgos en formato de lista → se ignoran, sin romper", r.status === 200 && JSON.stringify(r.json.resultado.rasgos) === "{}");
 
   // «no hay seta»
-  r = await callId({ ...baseEnv(), AI: { run: async () => respuesta({ parte_vista: "no_es_seta", rasgos: { h_tipo: "laminas" } }) } }, token, { image: FOTO, parte: "debajo" });
-  check("identify: «no es seta» → se_ve_seta=false y ningún rasgo aunque el modelo los ponga",
+  r = await callId({ ...baseEnv(), AI: { run: async () => respuesta({ mushroom_visible: false, traits: { h_tipo: "gills" } }) } }, token, { image: FOTO, parte: "debajo" });
+  check("identify: «no se ve seta» → se_ve_seta=false y ningún rasgo aunque el modelo los ponga",
         r.status === 200 && r.json.resultado.se_ve_seta === false && JSON.stringify(r.json.resultado.rasgos) === "{}");
   r = await callId({ ...baseEnv(), AI: { run: async () => respuesta({ se_ve_seta: false, rasgos: {} }) } }, token, { image: FOTO, parte: "pie" });
-  check("identify: se_ve_seta=false también vale", r.status === 200 && r.json.resultado.se_ve_seta === false && r.json.resultado.parte_vista === "no_es_seta");
+  check("identify: se_ve_seta=false (formato antiguo) también vale", r.status === 200 && r.json.resultado.se_ve_seta === false);
 
   // formato alternativo si el primero falla
   const calls2 = [];

@@ -448,9 +448,11 @@ function validateHallazgo(h) {
 // IMPORTANT: la IA NO identifica l'espècie ni diu mai que una cosa sigui comestible. Només LLEGEIX trets senzills
 // (color del barret, làmines o porus, anell...) triant entre opcions tancades (IDENT_VOCAB). La comparació amb les
 // fitxes i el percentatge de coincidència els calcula la pàgina de la guia (web/guia.html), no el model.
-// Cada petició porta UNA foto i la part de la seta que ensenya (sombrero | debajo | pie): per a 3 fotos, la guia
-// fa 3 peticions i ajunta els trets. El vocabulari es genera amb `python3 tools/generar_guia.py --vocab` i una
-// prova (tests/test_model.py) comprova que coincideix amb tools/rasgos_datos.py.
+// Cada petició porta UNA foto i el forat on l'ha posat la persona (sombrero | debajo | pie), que només és una pista:
+// el model llegeix TOTS els trets que es vegin clarament (una foto de la seta sencera ensenya barret, peu i de vegades
+// làmines) i la guia ajunta els de les 3 fotos. Al model se li parla en anglès (Llama 3.2 Vision només el suporta amb
+// fotos) i el model es tria amb el banc de proves tools/banco_ia.mjs. El vocabulari es genera amb
+// `python3 tools/generar_guia.py --vocab` i una prova (tests/test_model.py) comprova que coincideix amb tools/rasgos_datos.py.
 // ---------------------------------------------------------------------------
 const IDENT_MODEL = "@cf/meta/llama-3.2-11b-vision-instruct";
 const IDENT_MAX_CHARS = 1500000;          // mida màxima de la foto (text base64) — el navegador la redueix a ~800 px
@@ -569,28 +571,78 @@ const IDENT_VOCAB = {
     }
   }
 };
-const IDENT_PARTES_VISTAS = new Set([...Object.keys(IDENT_VOCAB), "otra", "no_es_seta"]);
+// Traducción al inglés de los rasgos, SOLO para hablarle al modelo: la ficha técnica de Llama 3.2 Vision dice que con fotos
+// «English is the only language supported». Cada opción lleva [palabra que debe devolver el modelo, descripción]. Lo que
+// devuelve se traduce de nuevo a los ids de IDENT_VOCAB (identValor), así que el resto de la guía no cambia.
+// Una prueba (tests/test_model.py) comprueba que cubre EXACTAMENTE los mismos rasgos y opciones que IDENT_VOCAB.
+const IDENT_EN = {
+  s_color: { q: "cap colour, seen from above", o: {
+    blanco: ["white", "white or cream"], amarillo: ["yellow", "yellow"], naranja: ["orange", "orange"],
+    rojo: ["red", "red or wine-red"], rosa: ["pink", "pink or salmon"], pardo: ["brown", "brown, tan, ochre or chestnut"],
+    gris: ["grey", "grey"], verde: ["green", "green or olive"], negro: ["black", "black or very dark"],
+    violeta: ["violet", "violet or lilac"] } },
+  s_super: { q: "cap surface", o: {
+    lisa: ["smooth", "smooth and dry"], viscosa: ["sticky", "sticky or slimy (shiny, wet-looking)"],
+    escamas: ["scaly", "with scales, warts or patches"], fibrosa: ["fibrous", "with fine fibres, like tiny hairs"] } },
+  s_forma: { q: "cap shape", o: {
+    convexo: ["convex", "convex or flat (the usual cap shape)"], conico: ["conical", "conical or bell-shaped"],
+    embudo: ["funnel", "funnel- or trumpet-shaped"], alveolado: ["honeycomb", "with pits like a honeycomb"],
+    cerebro: ["brain", "with folds like a brain"] } },
+  h_tipo: { q: "what is under the cap", o: {
+    laminas: ["gills", "gills (thin blades radiating from the stem)"], poros: ["pores", "pores (a sponge of tiny tubes, looks like fine dots)"],
+    pliegues: ["ridges", "thick, vein-like, forked ridges"], puas: ["spines", "spines or teeth (like small needles)"],
+    liso: ["smooth", "smooth or almost smooth, no gills, pores or spines"] } },
+  h_color: { q: "colour of what is under the cap", o: {
+    blanco: ["white", "white or cream"], amarillo: ["yellow", "yellow"], naranja: ["orange", "orange"], rojo: ["red", "red"],
+    rosa: ["pink", "pink or salmon"], pardo: ["brown", "brown or rust"], gris: ["grey", "grey"],
+    verde: ["green", "olive green"], violeta: ["violet", "violet or lilac"] } },
+  p_anillo: { q: "ring on the stem", o: {
+    si: ["yes", "yes, there is a ring (skirt or collar) on the stem"], no: ["no", "no ring"] } },
+  p_base: { q: "base of the stem", o: {
+    bolsa: ["sack", "inside a sack or cup (volva)"], ensanchada: ["swollen", "swollen (bulb or belly), without a sack"],
+    normal: ["normal", "normal: straight or tapering"] } },
+  p_super: { q: "stem surface", o: {
+    lisa: ["smooth", "smooth"], red: ["net", "with a net (fine mesh)"], puntos: ["dotted", "with small dots, scales or bands"] } },
+  p_color: { q: "stem colour", o: {
+    blanco: ["white", "white or cream"], amarillo: ["yellow", "yellow"], naranja: ["orange", "orange"],
+    rojo: ["red", "red or reddish"], pardo: ["brown", "brown"], gris: ["grey", "grey"], negro: ["black", "black"],
+    violeta: ["violet", "violet or lilac"] } },
+};
+const IDENT_HINT = {
+  sombrero: "the cap seen from above",
+  debajo: "the underside of the cap (gills, pores, ridges or spines)",
+  pie: "the stem and its base",
+};
 
 const IDENT_SYSTEM =
-  "Eres un ayudante que describe fotos de setas para un aficionado. No dices qué especie es ni si se puede comer: " +
-  "solo marcas rasgos que se ven, eligiendo entre opciones cerradas. " +
-  "Responde SIEMPRE y SOLO con un objeto JSON válido, sin texto antes ni después.";
+  "You are an assistant that describes photos of mushrooms for a hobbyist. You NEVER say which species it is and NEVER say whether it is edible: " +
+  "you only record traits that are visible, choosing from closed lists of options. " +
+  "Reply ALWAYS and ONLY with one valid JSON object, with no text before or after it.";
 
+// Todas las dimensiones que se pueden leer de una foto, en el orden de IDENT_VOCAB.
+function identDimsTodas() {
+  const out = [];
+  for (const parte of Object.keys(IDENT_VOCAB)) for (const id of Object.keys(IDENT_VOCAB[parte].dims)) out.push([id, parte]);
+  return out;
+}
+
+// Una sola petición por foto: se piden TODOS los rasgos que se vean con claridad, sea cual sea el hueco donde la puso la
+// persona (una foto de la seta entera enseña sombrero, pie y a veces láminas). El hueco solo se usa como pista.
 function identUserPrompt(parte) {
-  const v = IDENT_VOCAB[parte];
-  const dims = Object.entries(v.dims).map(([id, d]) =>
-    `- ${id} (${d.etq}): ` + Object.entries(d.valores).map(([k, t]) => `${k} = ${t}`).join(" | ")).join("\n");
-  const ejemplo = Object.keys(v.dims).map((id) => `"${id}": null`).join(", ");
+  const hint = IDENT_HINT[parte] || "a mushroom";
+  const lineas = identDimsTodas().map(([id]) => {
+    const en = IDENT_EN[id];
+    return `- ${id} (${en.q}): ` + Object.values(en.o).map(([w, t]) => `${w} = ${t}`).join(" | ");
+  });
+  const ejemplo = identDimsTodas().map(([id]) => `"${id}": null`).join(", ");
   return (
-    `Esta foto debería enseñar ${v.descripcion}.\n` +
-    "Devuelve SOLO este JSON:\n" +
-    `{"parte_vista": "sombrero" | "debajo" | "pie" | "otra" | "no_es_seta", "rasgos": {${ejemplo}}}\n` +
-    "En parte_vista pon lo que enseña de verdad la foto: sombrero = la cara de arriba del sombrero; " +
-    "debajo = la cara de abajo del sombrero (láminas, poros, pliegues...); pie = el pie y su base; " +
-    "otra = la seta entera u otra cosa; no_es_seta = no hay ninguna seta.\n" +
-    "En cada rasgo pon UNA de las opciones (la palabra de antes del signo =) o null si no se ve con claridad en esta foto. " +
-    "No adivines: es mejor null que acertar por suerte.\n" +
-    "Rasgos y opciones:\n" + dims
+    `This is ONE photo of a mushroom taken by a hobbyist. They meant it to show: ${hint}.\n` +
+    "First decide whether a mushroom is visible at all. Then record every trait below that you can CLEARLY see in this photo, " +
+    "whichever part of the mushroom it belongs to (cap from above, underside of the cap, stem and base). " +
+    "Use null for any trait you cannot clearly see. Do not guess: null is better than a lucky guess.\n" +
+    "Reply with ONLY this JSON, and for each trait use exactly one of the option words listed (or null):\n" +
+    `{"mushroom_visible": true, "traits": {${ejemplo}}}\n` +
+    "Traits and options:\n" + lineas.join("\n")
   );
 }
 
@@ -603,19 +655,25 @@ function validIdentParte(parte) {
   return typeof parte === "string" && Object.prototype.hasOwnProperty.call(IDENT_VOCAB, parte);
 }
 
-// Acepta el id de la opción ("blanco") o su texto completo ("Blanco o crema"), sin mirar mayúsculas.
-function identValor(def, val) {
+// Acepta lo que devuelva el modelo: la palabra en inglés («brown»), su descripción, el id («pardo») o el texto en castellano
+// («Marrón, ocre o castaño»), sin mirar mayúsculas. Devuelve el id de IDENT_VOCAB o null.
+function identValor(dimId, parte, val) {
+  if (typeof val === "boolean") val = val ? "si" : "no";   // un «yes/no» que el modelo devuelva como true/false (solo vale para el anillo)
   if (typeof val !== "string") return null;
   const v = val.trim().toLowerCase();
   if (!v) return null;
+  const def = IDENT_VOCAB[parte].dims[dimId];
+  const en = IDENT_EN[dimId];
   for (const [id, texto] of Object.entries(def.valores)) {
     if (v === id.toLowerCase() || v === texto.toLowerCase()) return id;
+    const e = en && en.o[id];
+    if (e && (v === e[0].toLowerCase() || v === e[1].toLowerCase())) return id;
   }
   return null;
 }
 
-// Convierte la respuesta del modelo (texto con un JSON dentro) en un resultado SEGURO: solo los rasgos de la parte
-// pedida y solo con valores del vocabulario cerrado. Devuelve null si no hay manera de leerla.
+// Convierte la respuesta del modelo (texto con un JSON dentro) en un resultado SEGURO: solo rasgos conocidos y solo con valores
+// de las listas cerradas. Devuelve null si no hay manera de leerla. `parte` es el hueco donde estaba la foto (solo informativo).
 function parseIdentResponse(raw, parte) {
   let obj = raw;
   if (typeof raw === "string") {
@@ -625,35 +683,55 @@ function parseIdentResponse(raw, parte) {
     try { obj = JSON.parse(raw.slice(a, b + 1)); } catch (e) { return null; }
   }
   if (!obj || typeof obj !== "object" || Array.isArray(obj)) return null;
-  if (!("rasgos" in obj) && !("parte_vista" in obj) && !("se_ve_seta" in obj)) return null;
-  let vista = typeof obj.parte_vista === "string" ? obj.parte_vista.trim().toLowerCase() : "";
-  if (!IDENT_PARTES_VISTAS.has(vista)) vista = "otra";
-  const noEsSeta = vista === "no_es_seta" || obj.se_ve_seta === false;
+  const rasgosIn = obj.traits && typeof obj.traits === "object" && !Array.isArray(obj.traits) ? obj.traits
+    : obj.rasgos && typeof obj.rasgos === "object" && !Array.isArray(obj.rasgos) ? obj.rasgos : null;
+  if (!rasgosIn && !("mushroom_visible" in obj) && !("se_ve_seta" in obj)) return null;
+  const noEsSeta = obj.mushroom_visible === false || obj.se_ve_seta === false;
   const rasgos = {};
-  if (!noEsSeta && obj.rasgos && typeof obj.rasgos === "object" && !Array.isArray(obj.rasgos)) {
-    for (const [dim, def] of Object.entries(IDENT_VOCAB[parte].dims)) {
-      const id = identValor(def, obj.rasgos[dim]);
+  if (!noEsSeta && rasgosIn) {
+    for (const [dim, p] of identDimsTodas()) {
+      const id = identValor(dim, p, rasgosIn[dim]);
       if (id) rasgos[dim] = id;
     }
   }
-  return { parte, parte_vista: noEsSeta ? "no_es_seta" : vista, se_ve_seta: !noEsSeta, rasgos };
+  return { parte, se_ve_seta: !noEsSeta, rasgos };
 }
 
-// Llama al modelo de visión. Cloudflare documenta dos maneras de pasar la imagen según el modelo; se prueba la del
-// tutorial oficial y, si falla, la otra. Si el modelo pide aceptar la licencia de Meta (una sola vez por cuenta),
-// se acepta automáticamente y se repite.
+// Modo de pasar la foto y parámetros extra de cada modelo. Los fija el banco de pruebas (tools/banco_ia.mjs): Cloudflare
+// documenta formas distintas según el modelo, y se prueba la primera y, si falla, la siguiente.
+const IDENT_MODOS = {
+  "@cf/meta/llama-3.2-11b-vision-instruct": ["image", "image_url"],
+};
+const IDENT_EXTRA = {};
+
+function identInputs(model, dataUrl, user) {
+  const base = { max_tokens: 400, temperature: 0.1, ...(IDENT_EXTRA[model] || {}) };
+  const sys = { role: "system", content: IDENT_SYSTEM };
+  const formas = {
+    image: { ...base, messages: [sys, { role: "user", content: user }], image: dataUrl },
+    image_url: { ...base, messages: [sys, { role: "user", content: [{ type: "text", text: user }, { type: "image_url", image_url: { url: dataUrl } }] }] },
+  };
+  return (IDENT_MODOS[model] || ["image_url", "image"]).map((m) => formas[m]);
+}
+
+// Texto de la respuesta: Cloudflare devuelve {response: ...} en unos modelos y el formato «chat completions» en otros.
+function identTexto(out) {
+  if (out && typeof out === "object") {
+    if ("response" in out && out.response != null) return out.response;
+    const m = out.choices && out.choices[0] && out.choices[0].message;
+    if (m && m.content != null) {
+      return Array.isArray(m.content) ? m.content.map((p) => (p && p.text) || "").join("") : m.content;
+    }
+  }
+  return out;
+}
+
+// Llama al modelo de visión. Si el modelo pide aceptar la licencia de Meta (una sola vez por cuenta), se acepta
+// automáticamente y se repite.
 async function runVision(env, dataUrl, parte) {
   const user = identUserPrompt(parte);
-  const base = { max_tokens: 300, temperature: 0.1 };
-  const intentos = [
-    { ...base, messages: [{ role: "system", content: IDENT_SYSTEM }, { role: "user", content: user }], image: dataUrl },
-    { ...base, messages: [
-      { role: "system", content: IDENT_SYSTEM },
-      { role: "user", content: [{ type: "text", text: user }, { type: "image_url", image_url: { url: dataUrl } }] },
-    ] },
-  ];
   let ultimo;
-  for (const input of intentos) {
+  for (const input of identInputs(IDENT_MODEL, dataUrl, user)) {
     try {
       try {
         return await env.AI.run(IDENT_MODEL, input);
@@ -672,8 +750,7 @@ async function runVision(env, dataUrl, parte) {
 
 async function identifyWithAI(env, dataUrl, parte) {
   const out = await runVision(env, dataUrl, parte);
-  const texto = out && typeof out === "object" && "response" in out ? out.response : out;
-  const resultado = parseIdentResponse(texto, parte);
+  const resultado = parseIdentResponse(identTexto(out), parte);
   if (!resultado) throw new Error("La IA no ha devuelto una respuesta que se pueda leer. Prueba con otra foto.");
   return resultado;
 }

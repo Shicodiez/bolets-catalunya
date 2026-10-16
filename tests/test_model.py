@@ -595,8 +595,11 @@ check("rasgos: la nota d'exclusió de «bolsa» diu quins grups la tenen en aque
 if _guia:
     check("guia: el panell avisa de marcar «bolsa» només si s'ha excavat la base, i explica que l'exclusió ve de la guia (no de la micologia en general)",
           "déjalo en «no lo sé»" in _guia and "en esta guía solo tienen bolsa las amanitas, los falos" in _guia and "solo tienen bolsa " + _rd.BOLSA_GRUPOS in _guia)
-    check("guia: si la IA dice que una foto es de otra parte, avisa pero se fía del hueco (ya no descarta la foto: la IA gratuita se equivocó con fotos reales)",
-          "me fío de ti" in _guia and "No la he usado" not in _guia and "La IA cree que esta foto enseña" in _guia and ".slot-msg.warn" in _guia)
+    check("guia: ya no se pregunta ni se avisa de qué parte enseña la foto (la IA gratuita se equivocaba y el aviso confundía con fotos buenas)",
+          "La IA cree que esta foto enseña" not in _guia and "me fío de ti" not in _guia and "PARTE_TXT" not in _guia and ".slot-msg.warn" not in _guia)
+    check("guia: junta lo que la IA lee en las 3 fotos (cada rasgo de la foto de su hueco; si no, de las otras solo si coinciden) y respeta lo que la persona vacía",
+          "function recalcularIA()" in _guia and "var lecturas = {}" in _guia and "var descartados = {}" in _guia and "vistos.length === 1" in _guia
+          and "quitarIA" not in _guia and "aplicarIA" not in _guia)
     _dat = _re.search(r'<script id="rasgos-datos" type="application/json">(.*?)</script>', _guia, _re.S)
     _cart = {p[0]: p[3] for p in _gd.PELIGROSAS}
     _cart.update({f["ids"][0]: "ok" for f in _gd.FICHAS})
@@ -674,6 +677,43 @@ if _wk:
     check("worker: /identify usa el model de visió i demana sessió (queda després de la comprovació de sessió)",
           _wk.index('url.pathname === "/identify" && request.method') > _wk.index("No autenticado"))
     check("worker: el límit de 10 KB es manté per a tota la resta de rutes", "url.pathname === \"/identify\" ? IDENT_MAX_BODY : 10240" in _wk)
+    # Lectura de fotos v2 (16/10/2026): prompt en anglès, tots els trets de cada foto, sense «parte_vista»
+    _en = _re.search(r"const IDENT_EN = (\{.*?\n\});\n", _wk, _re.S)
+    _en_map = {m.group(1): _re.findall(r"(\w+): \[\"", m.group(2))
+               for m in _re.finditer(r"\n  (\w+): \{ q: \"[^\"]*\", o: \{(.*?)\} \},", _en.group(1), _re.S)} if _en else {}
+    _voc = _rd.vocab_worker()
+    _voc_map = {d: list(def_["valores"]) for p_ in _voc.values() for d, def_ in p_["dims"].items()}
+    check("worker: IDENT_EN (anglès per al model) cobreix EXACTAMENT els mateixos trets i opcions que IDENT_VOCAB",
+          len(_voc_map) == 9 and set(_en_map) == set(_voc_map) and all(sorted(_en_map[d]) == sorted(_voc_map[d]) for d in _voc_map), str(_en_map))
+    check("worker: el prompt va en anglès (Llama 3.2 Vision només suporta anglès amb fotos), demana tots els trets i no pregunta quina part és",
+          "This is ONE photo of a mushroom" in _wk and "Do not guess" in _wk and "parte_vista" not in _wk and "IDENT_PARTES_VISTAS" not in _wk
+          and "Reply ALWAYS and ONLY with one valid JSON object" in _wk)
+    check("worker: el sistema prohibeix dir l'espècie i si es pot menjar", "NEVER say which species it is and NEVER say whether it is edible" in _wk)
+    check("worker: el model és una constant única (IDENT_MODEL) i hi ha una taula de maneres de passar la foto per model (IDENT_MODOS)",
+          _re.search(r'const IDENT_MODEL = "@cf/[^"]+";', _wk) is not None and "const IDENT_MODOS" in _wk and "const IDENT_EXTRA" in _wk)
+
+# ---- Banc de proves de la lectura de fotos (16/10/2026) ----
+_rt = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..")
+def _lt(*r):
+    f = _os.path.join(_rt, *r)
+    return open(f, encoding="utf-8").read() if _os.path.exists(f) else None
+_bk, _wf = _lt("tools", "banco_ia.mjs"), _lt(".github", "workflows", "probar_ia_fotos.yml")
+check("banc: existeixen tools/banco_ia.mjs, tools/banco_reducir.py i el workflow «Probar lectura de fotos con IA»",
+      bool(_bk) and bool(_wf) and _lt("tools", "banco_reducir.py") is not None)
+if _bk and _wf:
+    check("banc: fa servir els MATEIXOS prompts i lector que el Worker (els extreu de worker/index.js) i la comparació real (puntuar.js)",
+          "worker/index.js" in _bk and "identUserPrompt" in _bk and "parseIdentResponse" in _bk and "puntuar.js" in _bk and "--rasgos" in _bk)
+    check("banc: té tope de neurones, es reprèn sense repetir, s'atura si Cloudflare diu que s'ha acabat el cupo i no escriu res fora de tools/banco",
+          "PRESUPUESTO" in _bk and "CupoAgotado" in _bk and "hechos.has" in _bk and "resultados.jsonl" in _bk and "--solo-informe" in _bk
+          and "writeFileSync" in _bk and "web/" not in _bk.replace("web/fotos", ""))
+    check("banc: les claus de Cloudflare vénen només de secrets del repositori (mai al codi) i no s'escriuen enlloc",
+          "secrets.CF_ACCOUNT_ID" in _wf and "secrets.CF_API_TOKEN" in _wf and "process.env.CF_API_TOKEN" in _bk
+          and not _re.search(r"console\.(log|error)\([^)]*\bTOKEN\b", _bk) and "Authorization: `Bearer ${TOKEN}`" in _bk and "cfat_" not in _bk and "cfat_" not in _wf)
+    check("banc: el workflow només s'executa a mà, usa la mateixa cua que els altres, i només toca tools/banco",
+          "workflow_dispatch:" in _wf and "group: actualitzar-dades-bolets" in _wf and "git add tools/banco" in _wf and "git add web" not in _wf
+          and "${{ inputs." in _wf and "run: node tools/banco_ia.mjs" in _wf)
+    check("banc: compara la lectura de sempre (llama32_v1) amb la nova (v2) i els models Llama 4 Scout i Gemma 4",
+          all(x in _bk for x in ("llama32_v1", "llama32_v2", "scout_v2", "gemma4_v2", "llama-4-scout-17b-16e-instruct", "gemma-4-26b-a4b-it")))
 
 # ---- Formulari de hallazgos de index.html: ubicació amb GPS, relleno automàtic i «Cep» a seques (15/10/2026) ----
 if _idx:
