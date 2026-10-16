@@ -294,6 +294,14 @@ FIRMAS = {
         "s_color": "blanco gris negro", "h_tipo!": "laminas", "h_color": "blanco", "p_color": "blanco gris", "habitat": "conifera planifolio"},
 }
 
+# ---- Ampliación del 16/10/2026: las firmas de las fichas nuevas salen de especies_extra.py (ver guia_ampliada.py) ----
+import guia_ampliada as _ga  # noqa: E402
+
+FIRMAS_BASE = list(FIRMAS)
+_firmas_extra = _ga.firmas()
+assert not set(_firmas_extra) & set(FIRMAS), "firma repetida en la ampliación"
+FIRMAS.update(_firmas_extra)
+
 PESO_NORMAL = 1
 PESO_CLAVE = 3
 # Peso mínimo del «retrato» de una ficha. Si una ficha solo nombra pocos rasgos (por ejemplo la colmenilla: 2), se divide
@@ -310,6 +318,28 @@ MIN_PCT = 50
 MIN_ENCAJAN = 3
 # Una peligrosa que falla en algún rasgo clave sigue avisándose (como «no la puedes descartar tan rápido») si aun así llega a este %.
 MIN_PCT_DUDOSA = 55
+
+
+# Valores que, dentro de ESTA guía, solo describen unas fichas concretas: si la persona marca ese valor, las demás fichas
+# quedan descartadas aunque su ficha no diga nada de ese rasgo (sin esto, una ficha que no nombra la base del pie
+# se queda «sin comprobar» y puede colarse con un 50 % aunque la seta tenga bolsa).
+#   {rasgo: {valor: [ids de las fichas que sí pueden tenerlo]}}
+# «Bolsa» (volva): en esta guía solo la tienen las amanitas, los falos (Phallus, Mutinus, Clathrus; el «huevo» del que salen) y las
+# volvarias (Volvariella, Volvopluteus). Son las 5 fichas de amanitas de las 50 originales + las fichas de la ampliación que la nombran
+# en su firma. Es una regla de ESTA guía, no de la micología en general: fuera de ella hay otras setas con volva; si la seta de verdad
+# tiene bolsa y no es de esos grupos, no está aquí.
+# El descarte cuenta como rasgo clave en contra: una PELIGROSA que por lo demás encaje (>= MIN_PCT_DUDOSA) pasa a «dudosa»
+# (se sigue avisando); con menos de ese % pasa a la lista plegada de descartadas.
+BOLSA_GRUPOS = "las amanitas, los falos (Phallus, Mutinus, Clathrus) y las volvarias"
+_BOLSA_BASE = ["phalloides", "amanitas-blancas", "oureig", "muscaria", "vinosa"]
+_BOLSA_EXTRA = [c for c in _ga.IDS_EXTRA if "bolsa" in (FIRMAS[c].get("p_base", "") + " " + FIRMAS[c].get("p_base!", "")).split()]
+SOLO_EN = {
+    "p_base": {"bolsa": _BOLSA_BASE + _BOLSA_EXTRA},
+}
+# Cómo se explica el descarte en pantalla (una frase por rasgo; se muestra tras «tú indicas «…»»).
+SOLO_EN_NOTA = {
+    "p_base": "en esta guía solo tienen bolsa " + BOLSA_GRUPOS + ", y esta ficha no es de esos grupos",
+}
 
 
 def firma_normalizada(cid):
@@ -330,6 +360,8 @@ def exportar(cartas):
     return {
         "dims": dims,
         "firmas": firmas,
+        "solo_en": SOLO_EN,
+        "solo_en_nota": SOLO_EN_NOTA,
         "cartas": {cid: {"grav": g, "peligro": g in ("mortal", "muyt", "toxica")} for cid, g in cartas.items()},
         "min_peso": MIN_PESO, "min_rasgos": MIN_RASGOS, "min_comparados": MIN_COMPARADOS, "min_pct": MIN_PCT, "min_encajan": MIN_ENCAJAN, "min_pct_dudosa": MIN_PCT_DUDOSA,
     }

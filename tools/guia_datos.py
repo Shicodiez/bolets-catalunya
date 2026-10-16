@@ -427,3 +427,21 @@ FICHAS = [
          confunde=[("Hygrophorus camarophyllus", None, "muy parecido, pero fructifica en otoño.")],
          donde="Según bolets.com: en el prelitoral desde finales de enero (si el invierno es lluvioso) hasta principios de abril; en montaña, de mediados de abril a principios de junio, sobre todo por encima de 1.600 m y casi siempre en umbría. No está en el mapa."),
 ]
+
+
+# ======================================================================================================================
+# Ampliación del 16/10/2026: unas 260 fichas más (ver guia_ampliada.py y especies_extra.py).
+# Las 50 fichas de arriba no se tocan; las nuevas se AÑADEN al final de PELIGROSAS y de FICHAS. Su texto lo redactó una IA a
+# partir de Wikipedia (inglés) y de la Enciclopèdia Catalana, y NO lo ha revisado ningún micólogo.
+# ======================================================================================================================
+import guia_ampliada as _ga  # noqa: E402
+
+PELIGROSAS_BASE = list(PELIGROSAS)
+FICHAS_BASE = list(FICHAS)
+_titulos_base = [p_[1] for p_ in PELIGROSAS_BASE] + [f_["nombre"] for f_ in FICHAS_BASE]
+PELIGROSAS_EXTRA = _ga.peligrosas(_titulos_base)
+FICHAS_EXTRA = _ga.fichas(_titulos_base)
+IDS_EXTRA = set(_ga.IDS_EXTRA)
+assert not IDS_EXTRA & ({p_[0] for p_ in PELIGROSAS_BASE} | {i_ for f_ in FICHAS_BASE for i_ in f_["ids"]}), "id repetido en la ampliación"
+PELIGROSAS = PELIGROSAS_BASE + PELIGROSAS_EXTRA
+FICHAS = FICHAS_BASE + FICHAS_EXTRA

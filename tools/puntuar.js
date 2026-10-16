@@ -24,11 +24,24 @@
         else { no.push(dim); if (w >= 3) clave.push(dim); }
       });
       falta.sort(function (a, b) { return (b.w - a.w) || (a.dim < b.dim ? -1 : 1); });
+      // Valores que en esta guía solo describen unas fichas (D.solo_en; hoy: «bolsa» solo en las amanitas). Si la persona
+      // lo ha marcado y la ficha no es de las que lo tienen, queda descartada como si fuese un rasgo clave en contra,
+      // aunque la ficha no diga nada de ese rasgo. No toca el denominador (tot): los porcentajes no cambian.
+      var excl = [];
+      var se = D.solo_en || {};
+      Object.keys(se).forEach(function (dim) {
+        var v = obs[dim];
+        if (!v || !se[dim][v] || se[dim][v].indexOf(id) >= 0) return;
+        if (firma[dim] && firma[dim][0].indexOf(v) >= 0) return;   // la propia ficha dice ese valor: se respeta
+        excl.push(dim);
+        if (no.indexOf(dim) < 0) no.push(dim);
+        if (clave.indexOf(dim) < 0) clave.push(dim);
+      });
       var n = si.length + no.length;
       var c = D.cartas[id] || {};
       out.push({
         id: id, n: n, nok: si.length, pct: Math.round(100 * ok / Math.max(tot, D.min_peso || 0)),
-        si: si, no: no, clave: clave, falta: falta, peligro: !!c.peligro, grav: c.grav || '',
+        si: si, no: no, clave: clave, excl: excl, falta: falta, peligro: !!c.peligro, grav: c.grav || '',
         dimsFicha: Object.keys(firma).length
       });
     });
@@ -46,7 +59,7 @@
     var g = { pocosDatos: nObs < D.min_rasgos, candidatas: [], dudosas: [], descartadas: [], sinDatos: 0 };
     if (g.pocosDatos) return g;
     res.forEach(function (r) {
-      if (r.n < D.min_comparados) { g.sinDatos++; return; }
+      if (r.n < D.min_comparados && !r.excl.length) { g.sinDatos++; return; }
       var enough = r.nok >= Math.min(D.min_encajan || 0, r.dimsFicha);
       var buena = r.pct >= D.min_pct && enough;
       if (!r.clave.length && buena) g.candidatas.push(r);

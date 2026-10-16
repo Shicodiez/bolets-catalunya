@@ -116,3 +116,15 @@ def fuentes_texto(codigos):
         if n not in out:
             out.append(n)
     return ", ".join(out)
+
+
+# ---- Ampliación del 16/10/2026: nombres de las fichas nuevas (catalán de la Enciclopèdia Catalana; castellano de es.wikipedia) ----
+import guia_ampliada as _ga  # noqa: E402
+import guia_datos as _gd  # noqa: E402
+
+_nuevos = _ga.nombres()
+assert not set(_nuevos) & set(NOMBRES), "nombre repetido en la ampliación"
+NOMBRES.update(_nuevos)
+_tit = {p_[0]: p_[1].split(" (")[0] for p_ in _gd.PELIGROSAS}
+_tit.update({f_["ids"][0]: f_["nombre"].split(" (")[0] for f_ in _gd.FICHAS})
+_ga.anadir_notas_compartidas(NOMBRES, _tit)

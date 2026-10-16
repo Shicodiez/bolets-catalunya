@@ -1,6 +1,6 @@
 # Nombres en latín, catalán y castellano — fuentes (IMPLEMENTADO el 15/10/2026)
 
-Estado: **implementado**. La guía tiene 50 fichas (30 anteriores + 20 nuevas) y todas llevan su nombre en latín, catalán y castellano.
+Estado: **implementado**. La guía tiene 313 fichas (50 de siempre —30 anteriores + 20 nuevas— y 263 de la ampliación del 16/10/2026, ver el apartado C) y todas llevan su bloque de nombres en latín, catalán y castellano (con «—» donde ninguna fuente da nombre).
 Los datos están en `tools/nombres_datos.py` (la tabla de abajo se ha generado a partir de ese archivo); `web/guia.html` se genera con `python3 tools/generar_guia.py`.
 Fecha de la consulta: 15-oct-2026.
 
@@ -125,3 +125,20 @@ Criterio: (1) aparece en la Enciclopèdia Catalana y/o en las listas oficiales; 
 
 ## C) Cómo se muestra
 Cada ficha: **Latín · Català · Castellano**, cada uno con «—» si no hay nombre en las fuentes, y una línea «Nombres según …» con las fuentes. Los tres nombres entran en el buscador de la guía. El pie de la guía lista las fuentes con enlace y la fecha de consulta.
+
+
+## C) Las 263 fichas de la ampliación (16/10/2026)
+
+Mismas reglas que arriba (el nombre científico es la referencia; un nombre popular solo se escribe si una fuente consultada lo da;
+si no, «—»). Fuentes de esta ampliación:
+- **Catalán:** tabla de la **Enciclopèdia Catalana** (código `EC`): 110 de las 263 tienen nombre en catalán.
+- **Castellano:** solo el **artículo de es.wikipedia** de esa especie (código `ESW`, consultado el 16/10/2026): 74 de las 263 tienen
+  nombre (hasta 4 por especie). `tools/nombres_es_wikipedia.py` guarda `ES_WIKI` (los nombres), `SIN_ARTICULO` (125 especies sin
+  artículo o con otro título) y `SIN_NOMBRE` (64 con artículo pero sin nombre común). No se tradujo ningún nombre del catalán ni
+  del latín.
+- **Título de la ficha:** el nombre en castellano (y el catalán entre paréntesis), o solo uno de los dos, o el nombre científico si
+  no hay ninguno. Si el título coincidiría con el de otra ficha, la ficha nueva se llama por su nombre científico.
+- Un nombre popular que comparten dos fichas lleva en su nota: ««x» se usa también para otras fichas de esta guía (…): fíate del
+  nombre científico.»
+- La tabla completa de nombres está en `tools/nombres_datos.py` (se amplía sola desde `tools/especies_extra.py` +
+  `nombres_es_wikipedia.py`); aquí no se repite fila por fila.

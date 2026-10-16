@@ -22,23 +22,29 @@ const evalua = (obs) => {
   return { res, g: P.agrupar(res, Object.keys(obs).length, D), por: Object.fromEntries(res.map((r) => [r.id, r])) };
 };
 const ids = Object.keys(D.firmas);
+// Las 50 fichas de siempre (rasgos_datos.FIRMAS_BASE); las demás son la ampliación del 16/10/2026 (especies_extra.py).
+const BASE = JSON.parse(execFileSync("python3", ["-c", "import sys; sys.path.insert(0, 'tools'); import rasgos_datos as r, json; print(json.dumps(r.FIRMAS_BASE))"],
+  { encoding: "utf-8", cwd: path.join(aqui, "..") }));
+const EXTRA = ids.filter((i) => !BASE.includes(i));
 const tipico = (id) => Object.fromEntries(Object.entries(D.firmas[id]).map(([dim, [vals]]) => [dim, vals[0]]));
 const enCand = (g, id) => g.candidatas.some((r) => r.id === id);
 const enDud = (g, id) => g.dudosas.some((r) => r.id === id);
 
-check("hay 50 fichas con firma y todas tienen datos de gravedad", ids.length === 50 && ids.every((i) => D.cartas[i]));
+check("hay 313 fichas con firma (50 de siempre + 263 de la ampliación del 16/10/2026) y todas tienen datos de gravedad",
+      BASE.length === 50 && EXTRA.length === 263 && ids.length === 313 && ids.every((i) => D.cartas[i]), `${BASE.length} ${EXTRA.length} ${ids.length}`);
 
 // 1) Cada ficha, con sus propios rasgos, sale como candidata
-let primeros = 0;
+let primeros = 0, primerosBase = 0;
 for (const id of ids) {
   const obs = tipico(id);
   if (Object.keys(obs).length < D.min_rasgos) obs.s_color = obs.s_color || "pardo";   // la colmenilla solo describe 2 rasgos: se añade uno que no la contradice
   const { g, por } = evalua(obs);
   check(`ejemplar tipo de «${id}»: sale como candidata con ≥ ${D.min_pct} %`, enCand(g, id) && por[id].pct >= D.min_pct, JSON.stringify(por[id]));
   check(`ejemplar tipo de «${id}»: ningún rasgo en contra`, por[id].no.length === 0);
-  if (g.candidatas[0] && g.candidatas[0].id === id) primeros++;
+  if (g.candidatas[0] && g.candidatas[0].id === id) { primeros++; if (BASE.includes(id)) primerosBase++; }
 }
-check("la ficha propia es la primera de la lista en al menos 48 de 50 ejemplares tipo (la clitocibe y el cama-sec se confunden por diseño)", primeros >= 48, String(primeros));
+check("la ficha propia es la primera de la lista en al menos 48 de las 50 de siempre (la clitocibe y el cama-sec se confunden por diseño): la ampliación no desplaza a las antiguas", primerosBase >= 48, String(primerosBase));
+check("…y en al menos 290 de las 313 (las demás empatan con una ficha casi igual: es lo esperable con tantas fichas parecidas)", primeros >= 290, String(primeros));
 
 // 2) Un rasgo no indicado ni suma ni resta; ningún % pasa de 100
 {
@@ -171,6 +177,90 @@ check("la ficha propia es la primera de la lista en al menos 48 de 50 ejemplares
   // fichas con poco peso: no deben llegar a 100 % con solo 3 rasgos sueltos
   const P3 = evalua({ s_color: "pardo", s_forma: "convexo", h_tipo: "laminas" });
   check("con solo 3 rasgos genéricos ninguna ficha nueva llega a 100 %", NUEVAS.every((i) => P3.por[i].pct < 100));
+}
+
+
+// 7) «Bolsa» (volva): en esta guía solo la tienen las amanitas (D.solo_en). Caso real de una persona que marcó «bolsa» y solo
+//    le salía la seta enrollada (Paxillus involutus, cuya ficha no dice nada de la base del pie) con un 50 %.
+{
+  const AM = D.solo_en.p_base.bolsa;
+  const AM5 = ["phalloides", "amanitas-blancas", "oureig", "muscaria", "vinosa"];
+  const nombraBolsa = (i) => (D.firmas[i].p_base || [[]])[0].includes("bolsa");
+  check("solo_en: «bolsa» solo en las fichas que la tienen (las 5 amanitas de siempre + 12 de la ampliación: amanitas, falos y volvarias) y todas existen",
+        AM.length === 17 && AM.every((i) => ids.includes(i)) && AM5.every((i) => AM.includes(i)) && new Set(AM).size === AM.length, JSON.stringify(AM));
+  check("solo_en: toda ficha que nombra «bolsa» en su firma está en la lista, y las que están en la lista nombran bolsa o son las 5 de siempre",
+        ids.filter(nombraBolsa).every((i) => AM.includes(i)) && AM.filter((i) => !AM5.includes(i)).every(nombraBolsa));
+  check("solo_en_nota existe para cada rasgo de solo_en", Object.keys(D.solo_en).every((d) => typeof D.solo_en_nota[d] === "string" && D.solo_en_nota[d].length > 10));
+  // la captura exacta
+  const captura = { s_color: "naranja", s_super: "lisa", s_forma: "conico", h_tipo: "laminas", h_color: "amarillo", p_anillo: "no", p_base: "bolsa", p_color: "blanco" };
+  const Cp = evalua(captura);
+  check("captura de la persona: la seta enrollada ya NO sale como candidata", !enCand(Cp.g, "paxillus"));
+  check("captura: ahora salen candidatas de la ampliación (naranja, sin anillo, con bolsa = amanitas como la A. crocea y la A. fulva) y TODAS tienen bolsa en la guía",
+        Cp.g.candidatas.length > 0 && Cp.g.candidatas.every((r) => AM.includes(r.id)) && enCand(Cp.g, "amanita-crocea") && enCand(Cp.g, "amanita-fulva"),
+        JSON.stringify(Cp.g.candidatas.map((r) => r.id)));
+  check("captura: la seta enrollada queda descartada por la base del pie con el motivo de «solo amanitas»",
+        Cp.g.descartadas.some((r) => r.id === "paxillus") && Cp.por.paxillus.excl.join() === "p_base" && Cp.por.paxillus.clave.includes("p_base"));
+  check("captura: el porcentaje de la seta enrollada no ha cambiado (sigue 50 %): el descarte no toca el denominador", Cp.por.paxillus.pct === 50);
+  check("captura: el ou de reig sigue descartado, pero por el color del pie y el anillo (rasgos de su ficha), no por la bolsa",
+        !enCand(Cp.g, "oureig") && Cp.por.oureig.excl.length === 0 && Cp.por.oureig.clave.includes("p_color") && Cp.por.oureig.clave.includes("p_anillo"));
+  // ningún otro caso cambia: con «bolsa» las fichas de amanitas no se tocan y todas las demás quedan con la base como clave en contra
+  const base = Cp.res;
+  check("con «bolsa»: las fichas que la tienen no llevan descarte por la base", AM.every((i) => Cp.por[i].excl.length === 0));
+  check("con «bolsa»: las otras 296 fichas llevan el descarte por la base (clave en contra y en «no encaja»)",
+        ids.filter((i) => !AM.includes(i)).every((i) => Cp.por[i].excl.join() === "p_base" && Cp.por[i].clave.includes("p_base") && Cp.por[i].no.includes("p_base")));
+  check("con «bolsa»: ninguna ficha de las que no tienen bolsa es candidata", ids.filter((i) => !AM.includes(i)).every((i) => !enCand(Cp.g, i)));
+  check("con «bolsa»: son 296 las fichas sin bolsa", ids.filter((i) => !AM.includes(i)).length === 296);
+  // sin «bolsa» (en blanco, «ensanchada» o «normal») el descarte nunca actúa
+  for (const v of [undefined, "ensanchada", "normal"]) {
+    const obs = { ...captura }; if (v) obs.p_base = v; else delete obs.p_base;
+    const E = evalua(obs);
+    check(`sin «bolsa» (${v || "en blanco"}): ninguna ficha tiene descarte por la base`, ids.every((i) => E.por[i].excl.length === 0));
+  }
+  // el porcentaje de cualquier ficha que no habla de la base no depende de marcar «bolsa»
+  const sinBase = { ...captura }; delete sinBase.p_base;
+  const S0 = evalua(sinBase);
+  check("marcar «bolsa» no cambia el porcentaje de las fichas que no describen la base del pie",
+        ids.filter((i) => !D.firmas[i].p_base).every((i) => S0.por[i].pct === Cp.por[i].pct));
+  // el ou de reig de manual sigue siendo el primero con 100 %
+  const OR = evalua(tipico("oureig"));
+  check("ou de reig de manual (con bolsa): primero y con 100 %", OR.g.candidatas[0].id === "oureig" && OR.por.oureig.pct === 100);
+  // una peligrosa que no es amanita y encaja del todo salvo la bolsa: sigue avisando como «dudosa» (no se esconde)
+  const GA = tipico("galerina"); GA.p_base = "bolsa";
+  const Ga = evalua(GA);
+  check("galerina típica pero con «bolsa»: no es candidata, sigue saliendo como «dudosa» (peligrosa que casi encaja)", !enCand(Ga.g, "galerina") && enDud(Ga.g, "galerina"));
+  // un rasgo de la propia ficha manda: ninguna ficha del conjunto pierde su valor si ella misma lo lista
+  check("si la propia ficha lista el valor marcado, no se descarta por solo_en (comprobación de la regla)",
+        ids.every((i) => !(D.firmas[i].p_base && D.firmas[i].p_base[0].includes("bolsa")) || AM.includes(i)));
+}
+
+// 10) Ampliación del 16/10/2026: 263 fichas más (coherencia del cálculo con las fichas nuevas, no validación con setas reales)
+{
+  check("las 263 fichas nuevas describen al menos 2 rasgos y tienen al menos uno clave",
+        EXTRA.every((i) => Object.keys(D.firmas[i]).length >= 2 && Object.values(D.firmas[i]).some(([, w]) => w === 3)));
+  const peligroExtra = EXTRA.filter((i) => D.cartas[i].peligro);
+  check("fichas nuevas: 45 de gravedad «peligro» (43 tóxicas + 2 muy tóxicas); ninguna nueva marcada «mortal» (ninguna fuente consultada lo dice de ellas)",
+        peligroExtra.length === 45 && EXTRA.every((i) => D.cartas[i].grav !== "mortal") && EXTRA.filter((i) => D.cartas[i].grav === "muyt").length === 2,
+        String(peligroExtra.length));
+  check("fichas nuevas: 44 «no comestible» (no cuentan como peligro) y 174 sin gravedad propia (ok)",
+        EXTRA.filter((i) => D.cartas[i].grav === "nocom").length === 44 && EXTRA.filter((i) => D.cartas[i].grav === "ok").length === 174);
+  // Parecidos que las propias fichas nuevas citan como el peligro principal
+  const A = evalua(tipico("amanita-citrina"));
+  check("falsa oronja (A. citrina) típica: la oronja verde mortal sale como candidata (la ficha dice que ese es su mayor peligro)", enCand(A.g, "phalloides") && A.por.phalloides.pct >= 80, JSON.stringify(A.por.phalloides));
+  const Ar = evalua(tipico("agaricus-arvensis"));
+  check("Agaricus arvensis típico: el camperol sale como candidata y las amanitas blancas siguen apareciendo (candidata o dudosa)",
+        enCand(Ar.g, "camperol") && (enCand(Ar.g, "amanitas-blancas") || enDud(Ar.g, "amanitas-blancas")), JSON.stringify(Ar.g.dudosas.map((r) => r.id)));
+  const Lc = evalua(tipico("lepiota-clypeolaria"));
+  check("Lepiota clypeolaria típica: la lepiota mortal y las amanitas blancas siguen apareciendo (candidata o dudosa)",
+        (enCand(Lc.g, "lepiota") || enDud(Lc.g, "lepiota")) && (enCand(Lc.g, "amanitas-blancas") || enDud(Lc.g, "amanitas-blancas")));
+  const Km = evalua(tipico("kuehneromyces-mutabilis"));
+  check("Kuehneromyces mutabilis típica: la galerina mortal sale (candidata o dudosa), que es la confusión clásica de las setas de mechón sobre madera",
+        enCand(Km.g, "galerina") || enDud(Km.g, "galerina"), JSON.stringify(Km.por.galerina));
+  // nada llega a 100 con solo 3 rasgos genéricos
+  const P3x = evalua({ s_color: "pardo", s_forma: "convexo", h_tipo: "laminas" });
+  check("con solo 3 rasgos genéricos ninguna ficha de la ampliación llega a 100 %", EXTRA.every((i) => P3x.por[i].pct < 100));
+  // «láminas» contra «poros»: sigue sin colar peligrosas de láminas cuando se ven poros (también con las nuevas)
+  const Ce = evalua({ ...tipico("cep") });
+  check("cep típico: ninguna peligrosa (nueva o antigua) sale como dudosa por tener poros en contra", Ce.g.dudosas.every((r) => !r.clave.includes("h_tipo")));
 }
 
 console.log(`Rasgos: ${ok} comprobaciones OK, ${bad} fallos`);

@@ -75,3 +75,11 @@ FORZAR = {
     "cep": {1: "Boletus aereus IT.JPG", 2: "Boletus reticulatus (28576784573).jpg"},
     "torminosus": {0: "Lactarius torminosus 041031w.jpg"},
 }
+
+# ---- Ampliación del 16/10/2026: un hueco de foto por ficha nueva, con el nombre científico (y sus sinónimos) de su campo «cien».
+# Las fotos nuevas NO se han revisado a ojo (se bajan con el workflow); descargar_fotos.py marca [REVISAR] las dudosas en informe.txt.
+import guia_ampliada as _ga  # noqa: E402
+
+_fotos_nuevas = _ga.fotos()
+assert not set(_fotos_nuevas) & set(FOTOS), "foto repetida en la ampliación"
+FOTOS.update(_fotos_nuevas)

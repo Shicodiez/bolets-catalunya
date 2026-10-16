@@ -18,10 +18,10 @@ import json
 import os
 import sys
 
-REVISION = "15/10/2026"
+REVISION = "16/10/2026"
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from guia_datos import PELIGROSAS, FICHAS  # noqa: E402
+from guia_datos import PELIGROSAS, FICHAS, PELIGROSAS_BASE, FICHAS_BASE, PELIGROSAS_EXTRA, FICHAS_EXTRA  # noqa: E402
 from nombres_datos import NOMBRES, FUENTES, fuentes_texto, fuente_larga  # noqa: E402
 import rasgos_datos as RD  # noqa: E402
 
@@ -99,11 +99,13 @@ def nombres_html(clave, cien):
     return f'<div class="nombres">{"".join(filas)}</div>', busca
 
 
-def resumen(cid, nombre_html, cien):
-    """Cabecera de una ficha desplegable: miniatura (la pone el navegador), nombre y nombre científico."""
+def resumen(cid, nombre_html, cien, nombre_plano=""):
+    """Cabecera de una ficha desplegable: miniatura (la pone el navegador), nombre y nombre científico (si el título ya es el
+    nombre científico, no se repite debajo)."""
+    sci = "" if nombre_plano.strip().lower() == cien.strip().lower() else f'<span class="sci">{e(cien)}</span>'
     return (
         f'<summary><span class="thumb" data-thumb="{cid}"><span class="ph">🍄</span></span>'
-        f'<span class="ttl"><span class="nm">{nombre_html}</span><span class="sci">{e(cien)}</span></span>'
+        f'<span class="ttl"><span class="nm">{nombre_html}</span>{sci}</span>'
         f'<span class="chev" aria-hidden="true"></span></summary>'
     )
 
@@ -113,7 +115,7 @@ def render_peligrosa(p):
     nom_html, nom_busca = nombres_html(pid, cien)
     return f"""
 <details class="card danger" id="{pid}" data-kind="peligrosa" data-search="{e((nombre + ' ' + cien + nom_busca).lower())}">
-  {resumen(pid, e(nombre) + ' ' + badge(grav), cien)}
+  {resumen(pid, e(nombre) + ' ' + badge(grav), cien, nombre)}
   <div class="body">
     <div class="fotos" data-fotos="{pid}"></div>
     {nom_html}
@@ -129,12 +131,13 @@ def render_ficha(f):
     conf = "".join(
         f"<li><strong>{e(n)}</strong> {badge(k) + ' ' if k else ''}— {e(t)}</li>" for n, k, t in f["confunde"]
     )
-    mapa = "" if f["mapa"] else ' <span class="badge b-nomap">no está en el mapa</span>'
+    # mapa: True = está en el mapa · False = podría estar y todavía no · None = ficha de la ampliación (no se predice; sin etiqueta)
+    mapa = ' <span class="badge b-nomap">no está en el mapa</span>' if f["mapa"] is False else ""
     nom_html, nom_busca = nombres_html(cid, f["cien"])
     search = (f["nombre"] + " " + f["cien"] + nom_busca).lower()
     return f"""
 {anchors}<details class="card" id="{cid}" data-kind="ficha" data-search="{e(search)}">
-  {resumen(cid, e(f['nombre']) + mapa, f['cien'])}
+  {resumen(cid, e(f['nombre']) + mapa, f['cien'], f['nombre'])}
   <div class="body">
     <div class="fotos" data-fotos="{cid}"></div>
     {nom_html}
@@ -209,6 +212,12 @@ def panel_html():
                 f'<label class="rasgo"><span class="rl">{e(etq)}</span>'
                 f'<select data-dim="{did}">{opts}</select><span class="orig" data-orig></span></label>'
             )
+            if did in RD.SOLO_EN_NOTA:
+                filas.append(
+                    '<p class="sub">Márcalo solo si has excavado y has visto la base entera; si no la has desenterrado, déjalo en '
+                    '«no lo sé». Si marcas «bolsa», solo se quedan las fichas que la tienen (en esta guía solo tienen bolsa '
+                    + RD.BOLSA_GRUPOS + ').</p>'
+                )
         extra = ""
         if pid == "otros":
             extra = '<p class="sub">Esto no se ve en una foto. Rellénalo solo si lo has comprobado (cortar la seta, olerla, mirar dónde crece...).</p>'
@@ -241,6 +250,7 @@ CSS = r"""
   .wrap { max-width: 760px; margin: 0 auto; padding: 12px 14px 0; }
   h1 { font-size: 24px; margin: 10px 0 2px; }
   h2 { font-size: 19px; margin: 22px 0 8px; }
+  h3 { font-size: 16px; margin: 22px 0 4px; }
   h4 { font-size: 13px; margin: 14px 0 4px; text-transform: uppercase; letter-spacing: .03em; color: var(--muted); }
   .sub { color: var(--muted); font-size: 14px; margin: 0 0 10px; }
   .sci { display: block; font-size: 13px; font-weight: 400; font-style: italic; color: var(--muted); margin-top: 1px; }
@@ -371,7 +381,12 @@ CSS = r"""
   details.mini > summary { cursor: pointer; font-weight: 600; }
   details.mini ol, details.mini ul { margin: 8px 0 2px 20px; padding: 0; }
   details.mini li { margin: 4px 0; }
+  .chips-index { margin: 6px 0 10px; }
+  .chips-index > summary { font-size: 14px; }
   .foot { font-size: 12px; color: var(--muted); margin-top: 24px; }
+  .offbox { margin-top: 18px; padding: 12px; border: 1px solid var(--line); border-radius: 10px; background: #fff; font-size: 14px; }
+  .offbox p { margin: 0 0 8px; }
+  #off-msg { display: block; margin-top: 8px; font-size: 13px; color: var(--muted); }
   #empty { display: none; padding: 16px; text-align: center; color: var(--muted); }
 """
 
@@ -449,58 +464,119 @@ if ('serviceWorker' in navigator) {
   });
 
   // ---------- Fotos (de fotos/creditos.json; si no hay, la guía queda sin fotos) ----------
-  function pintaFotos(cred) {
+  // Con unas 300 fichas NO se cargan todas las fotos al abrir la página: la miniatura de cada ficha la carga el navegador solo
+  // cuando la ficha se acerca a la pantalla (loading="lazy") y las fotos grandes se piden la primera vez que se abre la ficha.
+  var CRED = null;
+  function pintaMiniaturas() {
     cards.forEach(function (card) {
-      var lista = cred[card.id];
-      if (!lista || !lista.length) return;
+      var lista = CRED[card.id];
       var thumb = card.querySelector('[data-thumb]');
-      var cont = card.querySelector('[data-fotos]');
-      lista.forEach(function (f, i) {
-        if (i === 0 && thumb) {
-          var t = new Image();
-          t.alt = '';
-          t.onload = function () { thumb.textContent = ''; thumb.appendChild(t); };
-          t.src = f.f;
-        }
-        if (!cont) return;
-        var fig = el('figure');
-        var im = new Image();
-        im.alt = f.sp || '';
-        im.onerror = function () { fig.parentNode && fig.parentNode.removeChild(fig); };
-        im.src = f.f;
-        fig.appendChild(im);
-        var cap = el('figcaption');
-        cap.appendChild(document.createTextNode((f.sp ? f.sp + ' · ' : '') + 'Foto: ' + (f.autor || 'desconocido') + ' · '));
-        if (f.pagina && /^https:\/\/commons\.wikimedia\.org\//.test(f.pagina)) {
-          var a = el('a', null, f.lic || 'licencia');
-          a.href = f.pagina; a.target = '_blank'; a.rel = 'noopener';
-          cap.appendChild(a);
-        } else {
-          cap.appendChild(document.createTextNode(f.lic || ''));
-        }
-        fig.appendChild(cap);
-        cont.appendChild(fig);
-      });
+      if (!lista || !lista.length || !thumb) return;
+      var t = new Image();
+      t.alt = '';
+      t.loading = 'lazy';
+      t.decoding = 'async';
+      t.onerror = function () { thumb.textContent = ''; thumb.appendChild(el('span', 'ph', '🍄')); };
+      t.src = lista[0].f;
+      thumb.textContent = '';
+      thumb.appendChild(t);
     });
   }
+  function pintaFotosDe(card) {
+    if (!CRED || card._fotos) return;
+    var lista = CRED[card.id];
+    var cont = card.querySelector('[data-fotos]');
+    if (!lista || !lista.length || !cont) return;
+    card._fotos = true;
+    lista.forEach(function (f) {
+      var fig = el('figure');
+      var im = new Image();
+      im.alt = f.sp || '';
+      im.onerror = function () { fig.parentNode && fig.parentNode.removeChild(fig); };
+      im.src = f.f;
+      fig.appendChild(im);
+      var cap = el('figcaption');
+      cap.appendChild(document.createTextNode((f.sp ? f.sp + ' · ' : '') + 'Foto: ' + (f.autor || 'desconocido') + ' · '));
+      if (f.pagina && /^https:\/\/commons\.wikimedia\.org\//.test(f.pagina)) {
+        var a = el('a', null, f.lic || 'licencia');
+        a.href = f.pagina; a.target = '_blank'; a.rel = 'noopener';
+        cap.appendChild(a);
+      } else {
+        cap.appendChild(document.createTextNode(f.lic || ''));
+      }
+      fig.appendChild(cap);
+      cont.appendChild(fig);
+    });
+  }
+  // «toggle» no sube por el árbol: se escucha en la fase de captura.
+  document.addEventListener('toggle', function (ev) {
+    var d = ev.target;
+    if (d && d.classList && d.classList.contains('card') && d.open) pintaFotosDe(d);
+  }, true);
   fetch('fotos/creditos.json').then(function (r) { return r.ok ? r.json() : null; })
-    .then(function (c) { if (c) pintaFotos(c); }).catch(function () {});
+    .then(function (c) {
+      if (!c) return;
+      CRED = c;
+      pintaMiniaturas();
+      cards.forEach(function (card) { if (card.open) pintaFotosDe(card); });
+      // El botón de guardar las fotos solo se enseña si hay fotos y el navegador sabe guardarlas (service worker + caché).
+      if ('serviceWorker' in navigator && window.caches && Object.keys(CRED).length) $('off-fotos').hidden = false;
+    }).catch(function () {});
+
+  // ---------- Guardar todas las fotos para usar sin cobertura (solo si la persona lo pide) ----------
+  // Cada foto se pide con fetch(): el service worker (sw.js) la guarda en su caché al recibirla. Las que ya estaban guardadas se saltan.
+  $('off-btn').addEventListener('click', function () {
+    var btn = $('off-btn'), msg = $('off-msg');
+    if (!CRED) return;
+    if (!navigator.serviceWorker.controller) {
+      msg.textContent = 'La copia sin conexión aún no está lista en este móvil: recarga la página y vuelve a intentarlo.';
+      return;
+    }
+    var urls = [];
+    Object.keys(CRED).forEach(function (id) { CRED[id].forEach(function (f) { if (f.f && urls.indexOf(f.f) < 0) urls.push(f.f); }); });
+    btn.disabled = true;
+    var i = 0, hechas = 0, falladas = 0;
+    function siguiente() {
+      if (i >= urls.length) return Promise.resolve();
+      var u = urls[i++];
+      return caches.match(u).then(function (ya) {
+        if (ya) return;
+        return fetch(u).then(function (r) { if (!r.ok) falladas++; }, function () { falladas++; });
+      }).then(function () {
+        hechas++;
+        msg.textContent = 'Fotos revisadas: ' + hechas + ' de ' + urls.length + '…';
+        return siguiente();
+      });
+    }
+    Promise.all([siguiente(), siguiente(), siguiente()]).then(function () {
+      msg.textContent = falladas
+        ? 'Hecho, pero ' + falladas + ' de ' + urls.length + ' fotos no se han podido guardar (¿sin conexión?). Vuelve a pulsar el botón cuando tengas red.'
+        : 'Hecho: las ' + urls.length + ' fotos están guardadas en este móvil.';
+      btn.disabled = false;
+    }).catch(function () {
+      msg.textContent = 'No se ha podido guardar todo. Vuelve a pulsar el botón cuando tengas red.';
+      btn.disabled = false;
+    });
+  });
 
   // ---------- Buscar y filtrar ----------
   var q = $('q');
   var tabs = document.querySelectorAll('.tab');
   var mode = 'all';
+  cards.forEach(function (c) { c._busca = norm(c.getAttribute('data-search')); });
+  var subs = Array.prototype.slice.call(document.querySelectorAll('[data-sub]'));
   function apply() {
     var term = norm(q.value.trim());
     var shown = 0, shownP = 0, shownF = 0;
     cards.forEach(function (c) {
       var kind = c.getAttribute('data-kind');
       var okMode = mode === 'all' || mode === kind;
-      var okTerm = !term || norm(c.getAttribute('data-search')).indexOf(term) !== -1;
+      var okTerm = !term || c._busca.indexOf(term) !== -1;
       var show = okMode && okTerm;
       c.classList.toggle('hidden', !show);
       if (show) { shown++; if (kind === 'peligrosa') shownP++; else shownF++; }
     });
+    subs.forEach(function (sb) { sb.classList.toggle('hidden', !sb.querySelector('.card:not(.hidden)')); });
     $('sec-peligrosas').classList.toggle('hidden', shownP === 0);
     $('sec-fichas').classList.toggle('hidden', shownF === 0);
     $('empty').style.display = shown === 0 ? 'block' : 'none';
@@ -591,6 +667,10 @@ if ('serviceWorker' in navigator) {
     var u = el('ul', 'rz');
     r.si.forEach(function (dim) { u.appendChild(el('li', null, '✔ ' + dimPorId[dim].etq + ': ' + nombreValor(dim, o[dim]))); });
     r.no.forEach(function (dim) {
+      if (r.excl.indexOf(dim) >= 0) {
+        u.appendChild(el('li', 'no', '✖ ' + dimPorId[dim].etq + ': tú indicas «' + nombreValor(dim, o[dim]) + '», pero ' + DATOS.solo_en_nota[dim]));
+        return;
+      }
       var esperado = DATOS.firmas[r.id][dim][0].map(function (v) { return nombreValor(dim, v); }).join(' / ');
       u.appendChild(el('li', 'no', '✖ ' + dimPorId[dim].etq + ': tú indicas «' + nombreValor(dim, o[dim]) + '» y la ficha dice «' + esperado + '»'));
     });
@@ -625,9 +705,18 @@ if ('serviceWorker' in navigator) {
     if (g.candidatas.some(function (r) { return r.peligro; }) || g.dudosas.length) {
       box.appendChild(el('p', 'peligro-aviso', '⚠️ Entre los resultados hay setas peligrosas. Mientras no las hayas descartado una por una, no la comas.'));
     }
+    var N_TOP = 5;
+    // Con tantas fichas, una peligrosa que encaja puede quedar por detrás de las 5 primeras: se enseña aparte para que el aviso de
+    // arriba no hable de algo que no se ve.
+    var otrasPel = g.candidatas.slice(N_TOP).filter(function (r) { return r.peligro; }).slice(0, 6);
     if (g.candidatas.length) {
       box.appendChild(el('h4', null, 'Fichas que encajan (de más a menos)'));
-      g.candidatas.slice(0, 5).forEach(function (r, i) { box.appendChild(tarjeta(r, o, i === 0)); });
+      g.candidatas.slice(0, N_TOP).forEach(function (r, i) { box.appendChild(tarjeta(r, o, i === 0)); });
+      if (otrasPel.length) {
+        box.appendChild(el('h4', null, 'Peligrosas que también encajan (con menos coincidencia)'));
+        box.appendChild(el('p', 'sub', 'Salen aquí aunque no estén entre las primeras: mientras no las hayas descartado, no la comas.'));
+        otrasPel.forEach(function (r) { box.appendChild(tarjeta(r, o)); });
+      }
     } else if (n < 5) {
       box.appendChild(el('p', 'msg', 'Con tan pocos rasgos todavía no se puede afinar ninguna ficha. Indica más: haz las tres fotos o rellena el panel de rasgos.'));
     } else {
@@ -647,16 +736,19 @@ if ('serviceWorker' in navigator) {
       ir.addEventListener('click', function () { $('panel-rasgos').open = true; });
       box.appendChild(ir);
     }
-    var resto = g.candidatas.slice(5).concat(g.dudosas.slice(3), g.descartadas);
+    var resto = g.candidatas.slice(N_TOP).filter(function (r) { return otrasPel.indexOf(r) < 0; }).concat(g.dudosas.slice(3), g.descartadas);
     if (resto.length) {
       var det = el('details', 'mini');
       det.appendChild(el('summary', null, 'Descartadas o con poca coincidencia (' + resto.length + ')'));
       var ul = el('ul');
       resto.forEach(function (r) {
         var card = porId[r.id], nm = card.querySelector('.nm');
-        var motivo = r.clave.length
-          ? 'no encaja: ' + dimPorId[r.clave[0]].etq.toLowerCase() + ' (la ficha dice «' + DATOS.firmas[r.id][r.clave[0]][0].map(function (v) { return nombreValor(r.clave[0], v); }).join(' / ') + '»)'
-          : r.pct + ' % de coincidencia';
+        var kf = r.clave.filter(function (d) { return r.excl.indexOf(d) < 0; })[0];
+        var motivo = kf
+          ? 'no encaja: ' + dimPorId[kf].etq.toLowerCase() + ' (la ficha dice «' + DATOS.firmas[r.id][kf][0].map(function (v) { return nombreValor(kf, v); }).join(' / ') + '»)'
+          : r.excl.length
+            ? 'no encaja: ' + dimPorId[r.excl[0]].etq.toLowerCase() + ' (has indicado «' + nombreValor(r.excl[0], o[r.excl[0]]) + '», pero ' + DATOS.solo_en_nota[r.excl[0]] + ')'
+            : r.pct + ' % de coincidencia';
         var li = el('li');
         li.appendChild(document.createTextNode((nm ? nm.firstChild.textContent.trim() : r.id) + ' — ' + motivo));
         ul.appendChild(li);
@@ -857,21 +949,35 @@ PLANTILLA = """<!DOCTYPE html>
   <div class="tabs">
     <button class="tab on" data-f="all">Todo</button>
     <button class="tab" data-f="peligrosa">⚠️ Peligrosas</button>
-    <button class="tab" data-f="ficha">Setas buscadas</button>
+    <button class="tab" data-f="ficha">Otras setas</button>
   </div>
 
   <div id="sec-peligrosas">
     <h2>⚠️ Las peligrosas, primero</h2>
-    <p class="sub">Las setas con las que más se confunden las comestibles. Toca una para ver cómo es y con qué se confunde.</p>
+    <p class="sub">Las @@N_P_BASE@@ setas con las que más se confunden las comestibles. Toca una para ver cómo es y con qué se confunde.</p>
     <div class="chips">@@INDICE_P@@</div>
-    @@PELIGROSAS@@
+    <div data-sub="p-base">@@PELIGROSAS@@</div>
+    <div data-sub="p-extra">
+      <h3>Más especies tóxicas o que no se recomiendan (@@N_P_EXTRA@@)</h3>
+      <p class="sub">Añadidas el 16/10/2026 para poder comparar con más setas. Están ordenadas de más a menos grave según lo que dicen las fuentes consultadas (Wikipedia y la Enciclopèdia Catalana), y su texto no lo ha revisado ningún micólogo. «No comestible» quiere decir que no se recomienda, no que sea inofensiva.</p>
+      <details class="mini chips-index"><summary>Índice de las @@N_P_EXTRA@@ especies añadidas</summary><div class="chips">@@INDICE_P_EXTRA@@</div></details>
+      @@PELIGROSAS_EXTRA@@
+    </div>
   </div>
 
   <div id="sec-fichas">
-    <h2>Las setas más buscadas</h2>
-    <p class="sub">Cada ficha empieza por lo que tiene que cumplir y por lo que la descarta. Las marcadas «no está en el mapa» todavía no las predice el predictor (las de prado y las que aún no tienen datos). Que una ficha esté aquí NO quiere decir que la seta se pueda comer.</p>
-    <div class="chips">@@INDICE_F@@</div>
-    @@FICHAS@@
+    <div data-sub="f-base">
+      <h2>Las setas más buscadas</h2>
+      <p class="sub">Cada ficha empieza por lo que tiene que cumplir y por lo que la descarta. Las marcadas «no está en el mapa» todavía no las predice el predictor (las de prado y las que aún no tienen datos). Que una ficha esté aquí NO quiere decir que la seta se pueda comer.</p>
+      <div class="chips">@@INDICE_F@@</div>
+      @@FICHAS@@
+    </div>
+    <div data-sub="f-extra">
+      <h3>Más especies para comparar (@@N_F_EXTRA@@)</h3>
+      <p class="sub">Añadidas el 16/10/2026, con el mismo formato. Hay setas de todo tipo: unas sin riesgo propio y sin interés, otras que las fuentes consideran buenas comestibles pero que se confunden con tóxicas, y otras que las fuentes dan por no comestibles. El «riesgo de confusión» de cada ficha sale de las parecidas que cita la fuente. Ninguna está en el mapa del predictor. Que una ficha esté aquí NO quiere decir que la seta se pueda comer: cuando una fuente habla de comestibilidad, la ficha cuenta lo que dice esa fuente, con sus cautelas.</p>
+      <details class="mini chips-index"><summary>Índice de las @@N_F_EXTRA@@ especies añadidas</summary><div class="chips">@@INDICE_F_EXTRA@@</div></details>
+      @@FICHAS_EXTRA@@
+    </div>
   </div>
 
   <p id="empty">No hay resultados.</p>
@@ -885,8 +991,15 @@ PLANTILLA = """<!DOCTYPE html>
     <ul>@@MITOS@@</ul>
   </details>
 
+  <div class="offbox" id="off-fotos" hidden>
+    <p><strong>Para el monte, sin cobertura.</strong> Las fotos de las fichas que ya has abierto con conexión se ven sin ella; las demás, no. Si quieres tenerlas todas, guárdalas ahora en el móvil: son muchas fotos, mejor con wifi.</p>
+    <button type="button" class="btn btn-s btn-sec" id="off-btn">Guardar todas las fotos en el móvil</button>
+    <span id="off-msg" role="status" aria-live="polite"></span>
+  </div>
+
   <p class="foot">Fotos: Wikimedia Commons, con licencias libres (el autor y la licencia están debajo de cada foto). Texto de redacción propia, sin revisión micológica independiente. Como referencia de qué confusiones peligrosas importan se consultó (15/10/2026) la página de confusiones de bolets.app. Los nombres comunes cambian de una zona a otra: fíate del nombre científico. La lectura de rasgos de las fotos la hace un modelo de IA general y puede equivocarse; el porcentaje de coincidencia no es una probabilidad.</p>
-  <p class="foot">Nombres populares (consultados el 15/10/2026; solo se escribe el que aparece en una fuente): @@FUENTES@@.</p>
+  <p class="foot">Las @@N_EXTRA@@ fichas añadidas el 16/10/2026 las ha redactado una IA a partir de la página de Wikipedia en inglés de cada especie (consultada ese día) y, para los nombres en catalán y el grado «a refusar» o «tòxic», de la tabla de la Enciclopèdia Catalana. No se ha contrastado cada frase con su fuente ni las ha revisado ningún micólogo: pueden contener errores de la fuente o de la IA. Esta guía no da instrucciones de cocinado ni de conservación: cuando una ficha cita que una seta se come cocinada, es lo que dice la fuente, no un consejo. Si la fuente no dice un rasgo (color de las láminas, esporada...), la ficha no lo dice. Las fotos de esas fichas se descargan automáticamente de Wikimedia Commons y no se han revisado a ojo una por una: si una no es la seta, no te fíes de ella.</p>
+  <p class="foot">Nombres populares (consultados el 15/10/2026 y, los de la ampliación, el 16/10/2026; solo se escribe el que aparece en una fuente): @@FUENTES@@.</p>
 </div>
 <script id="rasgos-datos" type="application/json">@@DATOS@@</script>
 <script>@@PUNTUAR@@</script>
@@ -896,13 +1009,15 @@ PLANTILLA = """<!DOCTYPE html>
 """
 
 
+def chips(lista_nombres, cls="chip"):
+    return "".join(f'<a class="{cls}" href="#{cid}">{e(nom.split(" (")[0])}</a>' for cid, nom in lista_nombres)
+
+
 def build():
-    indice_f = "".join(
-        f'<a class="chip" href="#{f["ids"][0]}">{e(f["nombre"].split(" (")[0])}</a>' for f in FICHAS
-    )
-    indice_p = "".join(
-        f'<a class="chip chip-danger" href="#{p[0]}">{e(p[1].split(" (")[0])}</a>' for p in PELIGROSAS
-    )
+    indice_f = chips([(f["ids"][0], f["nombre"]) for f in FICHAS_BASE])
+    indice_p = chips([(p[0], p[1]) for p in PELIGROSAS_BASE], "chip chip-danger")
+    indice_f_extra = chips([(f["ids"][0], f["nombre"]) for f in FICHAS_EXTRA])
+    indice_p_extra = chips([(p[0], p[1]) for p in PELIGROSAS_EXTRA], "chip chip-danger")
     pasos = "".join(f"<li><strong>{e(t)}.</strong> {e(d)}</li>" for t, d in SIETE_PASOS)
     mitos = "".join(f"<li>{e(m)}</li>" for m in MITOS)
     reemplazos = {
@@ -913,17 +1028,26 @@ def build():
         "@@PUNTUAR@@": puntuar_js(),
         "@@JS@@": JS.replace("@@WORKER@@", WORKER_URL),
         "@@REVISION@@": REVISION,
+        "@@N_P_BASE@@": str(len(PELIGROSAS_BASE)),
+        "@@N_P_EXTRA@@": str(len(PELIGROSAS_EXTRA)),
+        "@@N_F_EXTRA@@": str(len(FICHAS_EXTRA)),
+        "@@N_EXTRA@@": str(len(PELIGROSAS_EXTRA) + len(FICHAS_EXTRA)),
         "@@INDICE_P@@": indice_p,
         "@@INDICE_F@@": indice_f,
-        "@@PELIGROSAS@@": "".join(render_peligrosa(p) for p in PELIGROSAS),
-        "@@FICHAS@@": "".join(render_ficha(f) for f in FICHAS),
+        "@@INDICE_P_EXTRA@@": indice_p_extra,
+        "@@INDICE_F_EXTRA@@": indice_f_extra,
+        "@@PELIGROSAS_EXTRA@@": "".join(render_peligrosa(p) for p in PELIGROSAS_EXTRA),
+        "@@FICHAS_EXTRA@@": "".join(render_ficha(f) for f in FICHAS_EXTRA),
+        "@@PELIGROSAS@@": "".join(render_peligrosa(p) for p in PELIGROSAS_BASE),
+        "@@FICHAS@@": "".join(render_ficha(f) for f in FICHAS_BASE),
         "@@PASOS@@": pasos,
         "@@MITOS@@": mitos,
         "@@FUENTES@@": fuentes_pie(),
     }
     out = PLANTILLA
-    for k, v in reemplazos.items():
-        out = out.replace(k, v)
+    # Los marcadores largos primero, para que @@PELIGROSAS@@ no pise a @@PELIGROSAS_EXTRA@@ (y lo mismo con las demás).
+    for k in sorted(reemplazos, key=len, reverse=True):
+        out = out.replace(k, reemplazos[k])
     assert "@@" not in out, "queda un marcador sin sustituir"
     return out
 

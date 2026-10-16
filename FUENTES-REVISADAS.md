@@ -194,6 +194,64 @@ de trabajo; no se usaron.
 - *Russula emetica*: se grada como «no comer» (no «peligrosa»), porque las fuentes la dan como no comestible y «no tan peligrosa
   como a veces se describe». *Paxillus involutus*, *Tricholoma equestre* y *Coprinopsis atramentaria* se tratan con cautela
   porque las fuentes recogen casos graves, una prohibición de venta y la reacción con alcohol, respectivamente.
-- Fotos de las 20 fichas nuevas: **pendientes de descargar y de revisar a ojo**.
+- Fotos de las 20 fichas nuevas: descargadas el 15/10/2026 (21 fotos, molleric lleva 2; licencias libres de Wikimedia Commons) y revisadas a ojo por una IA, **no por un micólogo**: parecen la especie de su ficha. Una foto sola no basta para separar parejas como falso níscalo/níscalo o molinera/clitocibes blancas.
 - Corrección: en un borrador dije que «mataparent de Satanàs», «cep vermell» y «cep negre» no tenían fuente; sí la tienen
   (bolets.com / boletaires.cat) y se mantuvieron.
+
+## 8. Regla «bolsa solo en amanitas» (16/10/2026)
+
+Se añadió porque una persona marcó «bolsa» en la base del pie y la app le enseñó una seta (*Paxillus involutus*) cuya ficha no
+nombra la base. La regla vale **solo dentro de las 50 fichas de la guía**: la ficha del camperol pone «bolsa (volva) en la base
+del pie» entre lo que lo descarta, la de las amanitas blancas dice que el champiñón no tiene bolsa, y ninguna otra ficha
+no-amanita nombra una. Consultado: Wikipedia, «Volva (mycology)» (presenta la volva como rasgo sobre todo de *Amanita*, sin listar
+géneros) y «Paxillus involutus» (no menciona anillo ni volva). **No** se encontró una fuente que liste los géneros con volva ni
+una que diga expresamente que *Paxillus* no la tiene; hay setas con volva fuera de *Amanita* (p. ej. las volvarias), así que no
+es una afirmación general. Sin revisión de un micólogo.
+
+
+## 9. La ampliación de 50 a 313 fichas (16/10/2026)
+
+Petición de Sergio: «Al menos deberíamos poder comparar con 300 especies», con **fichas completas** (el texto de las de siempre,
+foto y nombres en tres idiomas) y «todas de golpe». Se añaden **263 fichas** (174 «para comparar» y 89 «tóxicas o que no se
+recomiendan») a las 50 de siempre.
+
+**Fuentes que se leyeron (16/10/2026):**
+- **Wikipedia en inglés, página de cada especie:** descripción (sombrero, himenio, pie, carne, esporada), hábitat, distribución,
+  especies parecidas y comestibilidad o toxicidad. Es una fuente **secundaria y editable por cualquiera**; las frases de las fichas
+  son paráfrasis y todo lo que toca a comer o a toxicidad empieza atribuido («Wikipedia dice…»). Cuando la página no da un rasgo,
+  la ficha no lo da; cuando no cita una especie parecida, la ficha lo dice.
+- **Enciclopèdia Catalana** (tabla de comestibilidad y toxicidad de los bolets dels Països Catalans): nombre en catalán y grado
+  (E excel·lent, M molt bo, B bo, A acceptable, R a refusar, T tòxic). El grado se cita atribuido; «a refusar» y «tòxic» mandan la
+  especie a «tóxicas o que no se recomiendan». Usa nomenclatura antigua; se hizo coincidir cada fila con el nombre científico actual
+  de la página de Wikipedia (algunos nombres catalanes sirven para varias especies: la ficha lo avisa).
+- **Wikipedia en español, artículo de cada especie** (solo para el nombre en castellano): se aceptan hasta 4 nombres populares que
+  el artículo da como nombre de **esa** especie; se descartan los que son de otro género o especie, descripciones («seta de
+  color…») y traducciones literales del latín. Resultado: **74 de las 263 tienen nombre en castellano**; 125 no tienen artículo
+  (o el título del artículo es otro) y 64 tienen artículo sin nombre común. El archivo `tools/nombres_es_wikipedia.py` lleva la
+  lista de unas y de otras. **110** tienen nombre en catalán.
+
+**Cómo se eligieron las especies:** lista de 319 candidatas (especies que la Enciclopèdia Catalana grada, especies habituales en
+Catalunya y confusiones de las fichas ya existentes). **79 no tienen ficha:** las **48** que figuraban entre las de página escueta,
+inexistente o redirigida a otra especie en en.wikipedia (se reintentó con títulos antiguos del género y solo se recuperaron 3) y
+**31** que se quedaron fuera al cerrar la lista (no se guardó el motivo de cada una). Se prefirió quitar a rellenar. Sin ficha
+por página escueta o redirigida: Lepista luscina; Desarmillaria tabescens; Clavulina cinerea; Clavariadelphus truncatus; Clitocybe costata; Chroogomphus rutilus; Flammulina velutipes; Hydnum albidum; Hydnum rufescens; Lepista irina; Lacrymaria lacrymabunda; Pholiota carbonaria; Ramaria aurea; Ramaria flava; Strobilurus esculentus; Tricholoma albobrunneum; Clavariadelphus pistillaris; Cortinarius cinnabarinus; Oudemansiella longipes; Megacollybia platyphylla; Hymenopellis radicata; Amanita battarrae; Lactarius aurantiacus; Suillus mediterraneensis; Tapinella panuoides; Cortinarius torvus; Cortinarius bulliardii; Cortinarius venetus; Inocybe asterospora; Pseudosperma rimosum; Pholiota gummosa; Pholiota lenta; Gymnopilus penetrans; Mycena pelianthina; Baeospora myosura; Rickenella fibula; Hohenbuehelia petaloides; Lentinus tigrinus; Psathyrella candolleana; Cantharellus pallens; Clavulina rugosa; Trametes hirsuta; Inonotus hispidus; Stereum hirsutum; Bjerkandera adusta; Lenzites betulinus; Abortiporus biennis; Coltricia perennis. Sin ficha, otras: Hygrophorus penarius; Morchella conica; Amanita mairei; Hygrophorus atramentosus; Hygrophorus gliocyclus; Lactarius rugatus; Tricholoma columbetta; Amanita lepida; Russula chloroides; Hygrophorus cossus; Russula torulosa; Crucibulum laeve; Cyathus striatus; Battarrea phalloides; Tricholoma scalpturatum; Tricholoma acerbum; Clitocybe phyllophila; Lepista sordida; Leucopaxillus gentianeus; Clitopaxillus alexandri; Hygrophorus persoonii; Hygrocybe acutoconica; Russula alutacea; Russula maculata; Russula risigallina; Russula acrifolia; Lactarius semisanguifluus; Lactarius serifluus; Lactarius pubescens; Laccaria bicolor; Morchella deliciosa.
+
+**Reglas de redacción y de clasificación:**
+- La voz de la guía nunca dice «se puede comer» ni «es comestible»; la comestibilidad se cita, con la fuente y con sus avisos.
+- **Sin instrucciones de cocinado, remojo, escaldado ni «prueba una porción»** (se quitaron 24 pasajes así que venían de las
+  fuentes) y sin «buena para quien empieza»: esta guía identifica, no cocina.
+- Una especie va a **tóxicas o que no se recomiendan** si la fuente dice tóxica, venenosa, no recomendada, o no comestible con
+  riesgo, o si la Enciclopèdia Catalana la pone «a refusar» o «tòxic»; gravedad: *mortal* (ninguna de las nuevas), *muy tóxica*
+  (2), *tóxica* (43) o *no comestible* (44). El resto va a **para comparar**, con riesgo bajo, medio o alto según las confusiones
+  peligrosas que la propia fuente nombra.
+- Los rasgos de comparación («firma») salen solo del texto de la ficha; el rasgo clave suele ser láminas/poros/púas/pliegues y el
+  anillo o la bolsa cuando la fuente los destaca.
+
+**Límites:**
+- Texto redactado por una IA desde Wikipedia, **sin revisión de un micólogo** y sin tabla «afirmación → página»; Wikipedia puede
+  estar equivocada o desactualizada (la ficha lo muestra cuando la propia página dice «sin referencia»).
+- **Fotos:** no se descargaron en este entorno (Wikimedia no es accesible desde aquí); las descarga el workflow *Descargar fotos
+  de la guía* y **no se han revisado a ojo**. El informe marca con `[REVISAR]` las que tienen un nombre de archivo que no menciona
+  la especie.
+- Un nombre popular que se usa para dos fichas lleva un aviso automático («fíate del nombre científico»).
+- La comparación sigue siendo una comparación de rasgos con un retrato escrito: **no es una identificación**.

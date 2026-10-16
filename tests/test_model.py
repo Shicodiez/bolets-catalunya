@@ -420,9 +420,9 @@ if _guia:
     check("guia: sense les seccions «Léelo antes de nada» i «Si has comido una seta» (decisió de l'usuari, 15/10/2026)",
           "Léelo antes de nada" not in _guia and "Si has comido una seta" not in _guia)
     check("guia: el peu continua dient que el text no té revisió micològica independent", "sin revisión micológica independiente" in _guia)
-    check("guia: 50 fitxes desplegables (<details class=\"card\">)", len(_re.findall(r'<details class="card', _guia)) == 50,
+    check("guia: 313 fitxes desplegables (<details class=\"card\">): 50 de sempre + 263 de l'ampliació del 16/10/2026", len(_re.findall(r'<details class="card', _guia)) == 313,
           str(len(_re.findall(r'<details class="card', _guia))))
-    check("guia: cada fitxa té lloc per a la miniatura i per a les fotos", _guia.count('data-thumb="') == 50 and _guia.count('data-fotos="') == 50)
+    check("guia: cada fitxa té lloc per a la miniatura i per a les fotos", _guia.count('data-thumb="') == 313 and _guia.count('data-fotos="') == 313)
     check("guia: 3 buits de foto (dalt, sota el barret, peu), cadascun amb càmera (capture) i galeria",
           all(f'id="foto-{p_}-cam"' in _guia and f'id="foto-{p_}-gal"' in _guia for p_ in ("sombrero", "debajo", "pie"))
           and _guia.count('capture="environment"') == 3 and _guia.count('class="slot"') == 3)
@@ -435,7 +435,8 @@ if _guia:
           "abrirPorHash" in _guia and '<a id="pinetell"></a>' in _guia and '<a id="cepfosc"></a>' in _guia)
     check("guia: les fitxes de mortals existeixen (Amanita phalloides, Gyromitra, Cortinarius, Lepiota)",
           all(t in _guia for t in ("Amanita phalloides", "Gyromitra esculenta", "Cortinarius", "Lepiota brunneoincarnata")))
-    check("guia: mai afirma «es pot menjar» com a conclusió", "se puede comer" not in _re.sub(r"Nunca dice «esta se puede comer»", "", _guia))
+    check("guia: mai afirma «es pot menjar» com a conclusió (només es veu «no se puede comer…» o la frase de les regles)",
+          "se puede comer" not in _re.sub(r"Nunca dice «esta se puede comer»|\bno se puede comer", "", _guia))
 check("sw.js: desa la guia per al mode sense connexió", _sw is not None and "guia.html" in _sw)
 check("sw.js: les dades i el mapa NO es desen (només pàgines): no hi ha caché de .json de dades",
       _sw is not None and "resultats" not in _sw and "zones_grid" not in _sw)
@@ -576,7 +577,24 @@ check("rasgos: cap fitxa surt a la guia com a «comestible segura»: les fitxes 
       set(_rd.exportar({c: "ok" for c in _card_ids})["cartas"]) == set(_card_ids))
 check("rasgos: paràmetres de disseny (no mesurats): mínim 3 rasgos, 2 comparats, 3 que encaixin, 50 %, dubtoses 55 %, retrat mínim 10",
       (_rd.MIN_RASGOS, _rd.MIN_COMPARADOS, _rd.MIN_ENCAJAN, _rd.MIN_PCT, _rd.MIN_PCT_DUDOSA, _rd.MIN_PESO) == (3, 2, 3, 50, 55, 10))
+_amanites5 = ["phalloides", "amanitas-blancas", "oureig", "muscaria", "vinosa"]
+_bolsa = _rd.SOLO_EN["p_base"]["bolsa"]
+_nombra_bolsa = lambda c: "bolsa" in (_rd.FIRMAS[c].get("p_base", "") + " " + _rd.FIRMAS[c].get("p_base!", "")).split()
+_cien_de = {p_[0]: p_[2] for p_ in _gd.PELIGROSAS}
+_cien_de.update({f_["ids"][0]: f_["cien"] for f_ in _gd.FICHAS})
+check("rasgos: «bolsa» (volva) només és possible a les 17 fitxes que la tenen (les 5 amanites de sempre + 12 de l'ampliació: amanites, fal·loides i volvàries); cap altra fitxa la nomena a la seva firma i els valors de solo_en existeixen",
+      list(_rd.SOLO_EN) == ["p_base"] and list(_rd.SOLO_EN["p_base"]) == ["bolsa"] and len(_bolsa) == len(set(_bolsa)) == 17
+      and _bolsa[:5] == _amanites5 and set(_bolsa) <= set(_rd.FIRMAS)
+      and {c for c in _rd.FIRMAS if _nombra_bolsa(c)} <= set(_bolsa) and all(_nombra_bolsa(c) for c in _bolsa[5:])
+      and set(_rd.SOLO_EN_NOTA) == set(_rd.SOLO_EN)
+      and "bolsa" in [v[0] for d in _rd.DIMS if d[0] == "p_base" for v in d[3]], str(_bolsa))
+check("rasgos: les fitxes de l'ampliació amb «bolsa» són només amanites, fal·loides (Phallus, Mutinus, Clathrus) o volvàries (Volvariella, Volvopluteus)",
+      all(_cien_de[c].split()[0] in ("Amanita", "Phallus", "Mutinus", "Clathrus", "Volvariella", "Volvopluteus") for c in _bolsa), str([(c, _cien_de[c]) for c in _bolsa]))
+check("rasgos: la nota d'exclusió de «bolsa» diu quins grups la tenen en aquesta guia (no «només les amanites»)",
+      "amanitas" in _rd.SOLO_EN_NOTA["p_base"] and "falos" in _rd.SOLO_EN_NOTA["p_base"] and "volvarias" in _rd.SOLO_EN_NOTA["p_base"] and "solo las amanitas tienen bolsa" not in _rd.SOLO_EN_NOTA["p_base"])
 if _guia:
+    check("guia: el panell avisa de marcar «bolsa» només si s'ha excavat la base, i explica que l'exclusió ve de la guia (no de la micologia en general)",
+          "déjalo en «no lo sé»" in _guia and "en esta guía solo tienen bolsa las amanitas, los falos" in _guia and "solo tienen bolsa " + _rd.BOLSA_GRUPOS in _guia)
     _dat = _re.search(r'<script id="rasgos-datos" type="application/json">(.*?)</script>', _guia, _re.S)
     _cart = {p[0]: p[3] for p in _gd.PELIGROSAS}
     _cart.update({f["ids"][0]: "ok" for f in _gd.FICHAS})
@@ -608,8 +626,8 @@ check("noms: cap nom català va amb font només castellana (ca_f no conté fonts
       not any(c_.startswith(("MAD-", "RIO", "ESW")) for v_ in _nd.NOMBRES.values() for c_ in v_["ca_f"].split())
       and not any(c_ in ("EC", "BOLETS", "3CAT", "CS", "ICHN") for v_ in _nd.NOMBRES.values() for c_ in v_["es_f"].split()))
 if _guia:
-    check("noms: 50 blocs «Latín / Català / Castellano» a la guia (un per fitxa)", _guia.count('<div class="nombres">') == 50
-          and _guia.count('<span class="nl">Latín</span>') == 50 and _guia.count('<span class="nl">Català</span>') == 50 and _guia.count('<span class="nl">Castellano</span>') == 50)
+    check("noms: 313 blocs «Latín / Català / Castellano» a la guia (un per fitxa)", _guia.count('<div class="nombres">') == 313
+          and _guia.count('<span class="nl">Latín</span>') == 313 and _guia.count('<span class="nl">Català</span>') == 313 and _guia.count('<span class="nl">Castellano</span>') == 313)
     _mal = []
     for _k, _v in _nd.NOMBRES.items():
         _m = _re.search(r'<details class="card[^"]*" id="%s"[^>]*data-search="([^"]*)"' % _re.escape(_k), _guia)
@@ -624,7 +642,7 @@ if _guia:
     check("noms: el buscador (data-search) de cada fitxa conté el nom llatí i tots els noms en català i castellà", not _mal, str(_mal[:5]))
     check("noms: tots els noms de la taula surten dins la fitxa (text visible)",
           all(_html.escape(_nom, quote=True) in _guia or _html.escape(_nom, quote=False) in _guia for _v in _nd.NOMBRES.values() for _nom in _v["ca"] + _v["es"]))
-    check("noms: el peu llista les fonts de noms consultades i la data (15/10/2026)", "Nombres populares (consultados el 15/10/2026" in _guia
+    check("noms: el peu llista les fonts de noms consultades i les dates (15/10/2026 i, per a l'ampliació, 16/10/2026)", "Nombres populares (consultados el 15/10/2026 y, los de la ampliación, el 16/10/2026" in _guia
           and all(_nd.FUENTES[c_][1] in _guia for c_ in _cods))
     check("noms: els noms antics sense font ja no hi són («corro de bruja», «Trompeta de la muerte», títol «Escarlet» sol)",
           "corro de bruja" not in _guia.lower() and "trompeta de la muerte" not in _guia.lower() and ">Escarlet<" not in _guia and 'class="nm">Escarlet' not in _guia)
