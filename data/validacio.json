@@ -1,0 +1,96 @@
+{
+ "8a5bb895-fe82-45e2-9ce3-9442c2cc8106": {
+  "date": "2026-10-16",
+  "amount": "nada",
+  "species": [],
+  "lag_days": 0,
+  "frozen_on": "2026-10-16",
+  "zone_id": 3965,
+  "dist_km": 0.9,
+  "tree": "roure",
+  "is_forest": true,
+  "scores": {
+   "cep": 87,
+   "cepfosc": 87,
+   "rossinyols": 87,
+   "llengua": 87,
+   "cepestiu": 57,
+   "trompetes": 55,
+   "camagrocs": 39,
+   "oureig": 39,
+   "escarlet": 37,
+   "colmenilles": 6
+  }
+ },
+ "971a17b8-dd44-4178-b262-8b80726184cd": {
+  "date": "2026-10-16",
+  "amount": "nada",
+  "species": [],
+  "lag_days": 0,
+  "frozen_on": "2026-10-16",
+  "zone_id": 3610,
+  "dist_km": 0.77,
+  "tree": "roure",
+  "is_forest": true,
+  "scores": {
+   "cep": 92,
+   "rossinyols": 92,
+   "llengua": 92,
+   "cepfosc": 80,
+   "cepestiu": 62,
+   "trompetes": 58,
+   "camagrocs": 48,
+   "escarlet": 37,
+   "oureig": 8,
+   "colmenilles": 7
+  }
+ },
+ "5fcd0260-7826-45d3-a964-cfdbbe46cad8": {
+  "date": "2026-10-16",
+  "amount": "nada",
+  "species": [],
+  "lag_days": 0,
+  "frozen_on": "2026-10-16",
+  "zone_id": 3300,
+  "dist_km": 0.66,
+  "tree": "roure",
+  "is_forest": true,
+  "scores": {
+   "cep": 87,
+   "rossinyols": 87,
+   "llengua": 87,
+   "cepfosc": 79,
+   "cepestiu": 59,
+   "trompetes": 54,
+   "camagrocs": 45,
+   "escarlet": 35,
+   "oureig": 9,
+   "colmenilles": 6
+  }
+ },
+ "c2029d9d-d54a-4f13-a97a-1f76d6a6874d": {
+  "date": "2026-10-16",
+  "amount": "poco",
+  "species": [
+   "ceps"
+  ],
+  "lag_days": 0,
+  "frozen_on": "2026-10-16",
+  "zone_id": 3034,
+  "dist_km": 0.27,
+  "tree": "roure",
+  "is_forest": true,
+  "scores": {
+   "cep": 87,
+   "rossinyols": 87,
+   "llengua": 87,
+   "cepestiu": 54,
+   "trompetes": 54,
+   "cepfosc": 48,
+   "camagrocs": 45,
+   "escarlet": 27,
+   "colmenilles": 7,
+   "oureig": 1
+  }
+ }
+}
