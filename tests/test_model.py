@@ -595,6 +595,8 @@ check("rasgos: la nota d'exclusió de «bolsa» diu quins grups la tenen en aque
 if _guia:
     check("guia: el panell avisa de marcar «bolsa» només si s'ha excavat la base, i explica que l'exclusió ve de la guia (no de la micologia en general)",
           "déjalo en «no lo sé»" in _guia and "en esta guía solo tienen bolsa las amanitas, los falos" in _guia and "solo tienen bolsa " + _rd.BOLSA_GRUPOS in _guia)
+    check("guia: si la IA dice que una foto es de otra parte, avisa pero se fía del hueco (ya no descarta la foto: la IA gratuita se equivocó con fotos reales)",
+          "me fío de ti" in _guia and "No la he usado" not in _guia and "La IA cree que esta foto enseña" in _guia and ".slot-msg.warn" in _guia)
     _dat = _re.search(r'<script id="rasgos-datos" type="application/json">(.*?)</script>', _guia, _re.S)
     _cart = {p[0]: p[3] for p in _gd.PELIGROSAS}
     _cart.update({f["ids"][0]: "ok" for f in _gd.FICHAS})
