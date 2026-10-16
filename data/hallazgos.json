@@ -110,5 +110,19 @@
     "lng": 2.4604799189111404,
     "id": "971a17b8-dd44-4178-b262-8b80726184cd",
     "createdAt": "2026-10-16T17:55:40.532Z"
+  },
+  {
+    "speciesIds": [],
+    "speciesNames": [],
+    "place": "Viladrau",
+    "alt": "1100",
+    "tree": "roure",
+    "treeName": "Roble",
+    "date": "2026-10-16",
+    "amount": "nada",
+    "lat": 41.80514143995001,
+    "lng": 2.416696619766552,
+    "id": "5fcd0260-7826-45d3-a964-cfdbbe46cad8",
+    "createdAt": "2026-10-16T17:56:29.155Z"
   }
 ]
