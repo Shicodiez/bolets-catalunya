@@ -1,0 +1,76 @@
+name: Probar lectura de fotos con IA
+
+# Se ejecuta SOLO a mano (Actions -> "Probar lectura de fotos con IA" -> Run workflow).
+# Es un BANCO DE PRUEBAS: coge fotos de la propia guia (de las que se sabe que seta son), se las da a varios modelos de IA de
+# Cloudflare y mide si los rasgos que leen encajan con las fichas y si la ficha correcta sale entre las 5 primeras.
+# No cambia nada de la web ni del Worker: solo escribe tools/banco/ (resultados e INFORME.md).
+# Necesita dos secretos del repositorio: CF_ACCOUNT_ID y CF_API_TOKEN (token de Cloudflare con permiso de Workers AI).
+# Gasta del cupo gratuito de Cloudflare (10.000 neuronas al dia, se reinicia a las 00:00 UTC); se para al llegar al tope
+# indicado y se puede volver a lanzar otro dia: no repite lo ya medido.
+
+on:
+  workflow_dispatch:
+    inputs:
+      fotos:
+        description: "Cuantas fotos de la guia leer"
+        default: "30"
+        required: false
+      presupuesto:
+        description: "Tope de neuronas de Cloudflare a gastar en esta ejecucion (el cupo gratis es 10000 al dia)"
+        default: "6000"
+        required: false
+      configs:
+        description: "Configuraciones separadas por comas (llama32_v1, llama32_v2, scout_v2, gemma4_v2) o todas"
+        default: "todas"
+        required: false
+
+# Misma cola que los otros workflows: asi nunca se pisan al guardar en el repositorio.
+concurrency:
+  group: actualitzar-dades-bolets
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  banco:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Reducir mis fotos a 800 px (solo si has subido alguna a tools/banco/mis_fotos)
+        run: |
+          if [ -d tools/banco/mis_fotos ]; then
+            pip install --quiet pillow
+            python tools/banco_reducir.py
+          fi
+
+      - name: Medir la lectura de fotos
+        env:
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          BANCO_FOTOS: ${{ inputs.fotos }}
+          BANCO_PRESUPUESTO: ${{ inputs.presupuesto }}
+          BANCO_CONFIGS: ${{ inputs.configs }}
+        run: node tools/banco_ia.mjs
+
+      - name: Guardar los resultados en el repositorio
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add tools/banco
+          git diff --staged --quiet || git commit -m "Banco de pruebas de la lectura de fotos con IA"
+          git push || (git pull --rebase && git push)
