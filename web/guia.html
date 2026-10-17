@@ -4404,21 +4404,102 @@ if ('serviceWorker' in navigator) {
     Object.keys(obs).forEach(function (k) { o[k] = obs[k].v; });
     return o;
   }
-  function reducir(file, lado) {
-    return new Promise(function (resolve, reject) {
-      var url = URL.createObjectURL(file);
-      var img = new Image();
-      img.onload = function () {
-        var k = Math.min(1, lado / Math.max(img.naturalWidth, img.naturalHeight));
-        var c = document.createElement('canvas');
-        c.width = Math.max(1, Math.round(img.naturalWidth * k));
-        c.height = Math.max(1, Math.round(img.naturalHeight * k));
-        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
-        URL.revokeObjectURL(url);
-        resolve(c.toDataURL('image/jpeg', 0.82));
-      };
-      img.onerror = function () { URL.revokeObjectURL(url); reject(new Error('No he podido leer la foto.')); };
-      img.src = url;
+  // Reduce la foto a «lado» px (el lado mayor) y la devuelve como JPEG en base64. Primero se pide al navegador que la abra YA
+  // reducida (createImageBitmap con resizeWidth: aguanta fotos enormes, como las de 50 o 108 megapíxeles de algunos móviles, sin
+  // llenar la memoria) y, si no puede, se abre entera como imagen normal. Si tampoco y es HEIC, se convierte a JPG; si nada funciona, el error dice qué formato y tamaño tenía.
+  function dibujaReducida(fuente, ancho, alto, lado) {
+    var k = Math.min(1, lado / Math.max(ancho, alto));
+    var c = document.createElement('canvas');
+    c.width = Math.max(1, Math.round(ancho * k));
+    c.height = Math.max(1, Math.round(alto * k));
+    c.getContext('2d').drawImage(fuente, 0, 0, c.width, c.height);
+    return c.toDataURL('image/jpeg', 0.82);
+  }
+  // Fotos HEIC/HEIF (el formato «alta eficiencia» de muchos móviles): los navegadores no las abren, así que se convierten a JPG
+  // dentro de la propia página con la librería heic2any (archivo web/heic2any.min.js, se descarga solo si hace falta).
+  function esHeic(file) {
+    var tipo = (file && file.type) || '';
+    var nom = (file && file.name) || '';
+    if (/hei[cf]/i.test(tipo) || /\.hei[cf]$/i.test(nom)) return Promise.resolve(true);
+    return new Promise(function (resolve) {
+      try {
+        var fr = new FileReader();
+        fr.onload = function () {
+          var b = new Uint8Array(fr.result), t = '';
+          for (var i = 4; i < 12 && i < b.length; i++) t += String.fromCharCode(b[i]);
+          resolve(/^ftyp(hei[cxms]|hev[cxms]|mif1|msf1)/.test(t));
+        };
+        fr.onerror = function () { resolve(false); };
+        fr.readAsArrayBuffer(file.slice(0, 16));
+      } catch (e) { resolve(false); }
+    });
+  }
+  function cargaHeic() {
+    if (window.heic2any) return Promise.resolve(window.heic2any);
+    if (cargaHeic.p) return cargaHeic.p;
+    var fuentes = ['heic2any.min.js', 'https://shicodiez.github.io/bolets-catalunya/web/heic2any.min.js'];
+    var p = Promise.reject(new Error('inicio'));
+    fuentes.forEach(function (src) {
+      p = p.catch(function () {
+        return new Promise(function (resolve, reject) {
+          var sc = document.createElement('script');
+          sc.src = src;
+          sc.onload = function () { window.heic2any ? resolve(window.heic2any) : reject(new Error('sin heic2any')); };
+          sc.onerror = function () { if (sc.parentNode) sc.parentNode.removeChild(sc); reject(new Error('no carga')); };
+          document.head.appendChild(sc);
+        });
+      });
+    });
+    cargaHeic.p = p;
+    p.catch(function () { cargaHeic.p = null; }); // si falla (sin red), se podrá reintentar
+    return p;
+  }
+  function falloFoto(file, intentoHeic) {
+    var tipo = (file && file.type) || '';
+    var nom = (file && file.name) || '';
+    var mb = file && file.size ? (file.size / 1048576).toFixed(1).replace('.', ',') + ' MB' : 'tamaño desconocido';
+    var raro = /hei[cf]|avif/i.test(tipo) || /\.(hei[cf]|avif)$/i.test(nom);
+    var base = 'No he podido leer la foto (formato: ' + (tipo || 'desconocido') + ', ' + mb + '). ';
+    var salida = 'Prueba con el botón de la cámara 📷 de aquí, o guarda la foto como JPG (en los ajustes de la cámara, desactiva el formato «alta eficiencia»).';
+    return new Error(intentoHeic
+      ? base + 'Es una foto HEIC y no he conseguido convertirla a JPG aquí (¿sin conexión, o la foto es demasiado grande para el móvil?). ' + salida
+      : raro
+        ? base + 'Es un formato que el navegador del móvil no suele abrir. ' + salida
+        : base + 'Prueba con el botón de la cámara 📷 de aquí o con otra foto; si se repite, dime qué formato sale aquí.');
+  }
+  // Abre la foto (blob) y la devuelve reducida; si no se puede abrir, rechaza con un error corriente (el mensaje bonito lo pone reducir()).
+  function abrirYReducir(blob, lado) {
+    var porImagen = function () {
+      return new Promise(function (resolve, reject) {
+        var url = URL.createObjectURL(blob);
+        var img = new Image();
+        img.onload = function () {
+          try { resolve(dibujaReducida(img, img.naturalWidth, img.naturalHeight, lado)); }
+          catch (e) { reject(e); }
+          URL.revokeObjectURL(url);
+        };
+        img.onerror = function () { URL.revokeObjectURL(url); reject(new Error('no se abre')); };
+        img.src = url;
+      });
+    };
+    if (typeof createImageBitmap !== 'function') return porImagen();
+    return createImageBitmap(blob, { resizeWidth: lado, resizeQuality: 'medium' }).then(function (bmp) {
+      var r = dibujaReducida(bmp, bmp.width, bmp.height, lado);
+      if (bmp.close) bmp.close();
+      return r;
+    }).catch(porImagen);
+  }
+  function reducir(file, lado, aviso) {
+    return abrirYReducir(file, lado).catch(function () {
+      return esHeic(file).then(function (heic) {
+        if (!heic) throw falloFoto(file);
+        if (aviso) aviso('La foto es HEIC: la convierto a JPG… (unos segundos)');
+        return cargaHeic().then(function (conv) {
+          return conv({ blob: file, toType: 'image/jpeg', quality: 0.85 });
+        }).then(function (r) {
+          return abrirYReducir(Array.isArray(r) ? r[0] : r, lado);
+        }).catch(function () { throw falloFoto(file, true); });
+      });
     });
   }
 
@@ -4662,7 +4743,7 @@ if ('serviceWorker' in navigator) {
     }
     slot._gen = (slot._gen || 0) + 1;
     var gen = slot._gen;
-    reducir(file, 800).then(function (dataUrl) {
+    reducir(file, 800, function (t) { if (slot._gen === gen) msgSlot(slot, t); }).then(function (dataUrl) {
       if (slot._gen !== gen) return;
       ponerMiniatura(slot, dataUrl);
       msgSlot(slot, 'Leyendo la foto… (unos segundos)');

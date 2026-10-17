@@ -774,6 +774,19 @@ if _guia:
           "a.closest('#idres')" in _guia and "history.pushState({ ficha: true }, '', h)" in _guia and "addEventListener('popstate'" in _guia)
     check("guia: cada tarjeta dice hasta qué % subiría si lo que falta encajase, y el panel explica «con red» y manda dejar en «no lo sé» lo dudoso (17/10/2026)",
           "function techoPct(r)" in _guia and "subiría hasta" in _guia and "dibujo muy fino y claro" in _guia and "uno mal marcado sí puede descartar la buena" in _guia)
+    check("guia: leer una foto de la galería: createImageBitmap con reducción, respaldo con <img>, y el fallo dice formato y tamaño y, con HEIC/HEIF/AVIF, propone la cámara o guardar como JPG (17/10/2026)",
+          "function dibujaReducida(" in _guia and "function falloFoto(" in _guia and "createImageBitmap(blob, { resizeWidth" in _guia and "function abrirYReducir(" in _guia
+          and "No he podido leer la foto (formato: " in _guia and "alta eficiencia" in _guia and "porImagen" in _guia)
+    import hashlib as _hl
+    try:
+        with open(_os.path.join(_WEB, "heic2any.min.js"), "rb") as _fh:
+            _hb = _fh.read()
+    except OSError:
+        _hb = b""
+    check("guia: las fotos HEIC se convierten solas a JPG (esHeic por tipo, extensión o cabecera; cargaHeic con respaldo; aviso «la convierto a JPG») y web/heic2any.min.js (heic2any 0.0.4, sin tocar) está en el repo (17/10/2026)",
+          "function esHeic(" in _guia and "function cargaHeic(" in _guia and "ftyp(hei[cxms]|hev[cxms]|mif1|msf1)" in _guia and "'heic2any.min.js'" in _guia
+          and "la convierto a JPG" in _guia and "no he conseguido convertirla" in _guia
+          and len(_hb) == 1351840 and _hl.md5(_hb).hexdigest() == "e9f06907472fe0a512eb16b9058677ee")
 
 print("\n%d proves fallides" % len(fails) if fails else "\nTotes les proves OK")
 sys.exit(1 if fails else 0)
