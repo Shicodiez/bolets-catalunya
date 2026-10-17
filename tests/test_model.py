@@ -715,6 +715,31 @@ if _bk and _wf:
     check("banc: compara la lectura de sempre (llama32_v1) amb la nova (v2) i els models Llama 4 Scout i Gemma 4",
           all(x in _bk for x in ("llama32_v1", "llama32_v2", "scout_v2", "gemma4_v2", "llama-4-scout-17b-16e-instruct", "gemma-4-26b-a4b-it")))
 
+    # Model triat pel banc (16/10/2026): Gemma 4, amb Llama 3.2 de reserva; la forma de passar la foto és la que va trobar el sondeig del banc
+    _wk2 = _lt("worker", "index.js") or ""
+    _fm = _lt("tools", "banco", "formato.json")
+    check("worker: el model principal és Gemma 4 (el que ha triat el banc) i la reserva és Llama 3.2; el cupo esgotat no prova la reserva",
+          'const IDENT_MODEL = "@cf/google/gemma-4-26b-a4b-it";' in _wk2 and 'const IDENT_MODEL_RESERVA = "@cf/meta/llama-3.2-11b-vision-instruct";' in _wk2
+          and "for (const model of [IDENT_MODEL, IDENT_MODEL_RESERVA])" in _wk2 and "daily/i.test(String(e && e.message))) throw e;" in _wk2)
+    check("worker + guia: el Worker devuelve resultado.modelo y la guia dice «leído con Gemma 4» o «con Llama 3.2, el modelo de reserva» (para ver si contesta el principal)",
+          "resultado.modelo = model" in _wk2 and "leído con Gemma 4" in (_lt("tools", "generar_guia.py") or "") and "el modelo de reserva" in (_lt("tools", "generar_guia.py") or ""))
+    if _fm:
+        import json as _js
+        _f = _js.loads(_fm)
+        _modos = _re.search(r"const IDENT_MODOS = \{(.*?)\n\};", _wk2, _re.S).group(1)
+        _extra = _re.search(r"const IDENT_EXTRA = \{(.*?)\n\};", _wk2, _re.S).group(1)
+        _ok = True
+        if _f.get("gemma4") in ("img_url_sinpensar", "img_url_mct_sinpensar"):
+            _ok = _ok and '"@cf/google/gemma-4-26b-a4b-it": ["image_url"]' in _modos and "enable_thinking: false" in _extra
+        if _f.get("llama32") == "img_campo":
+            _ok = _ok and '"@cf/meta/llama-3.2-11b-vision-instruct": ["image", "image_url"]' in _modos
+        check("worker: la forma de pasar la foto de cada modelo (IDENT_MODOS / IDENT_EXTRA) coincide con la que encontró el sondeo del banco (tools/banco/formato.json)", _ok, str(_f))
+    # el informe del banc ha de dir quin ha guanyat i que n'hi ha poques fotos
+    _inf = _lt("tools", "banco", "INFORME.md")
+    if _inf:
+        check("banc: l'informe publicat inclou les 4 configuracions i diu quantes fotos s'han mesurat",
+              all(x in _inf for x in ("llama32_v1", "llama32_v2", "scout_v2", "gemma4_v2")) and "Fotos medidas" in _inf)
+
 # ---- Formulari de hallazgos de index.html: ubicació amb GPS, relleno automàtic i «Cep» a seques (15/10/2026) ----
 if _idx:
     check("hallazgos: botó «Usar mi ubicación» que fa servir el GPS del navegador amb temps màxim",

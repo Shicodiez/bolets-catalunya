@@ -4546,6 +4546,10 @@ if ('serviceWorker' in navigator) {
   // Rehace desde cero los rasgos con marca «IA» juntando lo que ha leído la IA en las tres fotos. Lo que ha puesto la persona
   // no se toca. Cada rasgo se toma de la foto de SU hueco; si esa no lo enseña (p. ej. el color del pie en la foto de la seta
   // entera), se mira en las otras, y solo vale si todas las que lo leen coinciden.
+  // Excepción: «sin anillo», «base normal» y «pie liso» NO se aceptan de una foto de otro hueco. Con las fotos del banco de
+  // pruebas (16/10/2026) la IA los ponía casi siempre cuando el pie no se veía bien (en la foto de un sombrero, p. ej.), y un
+  // «sin anillo» inventado descarta una amanita que sí lo tiene. Que algo no se vea no quiere decir que no esté.
+  var AUSENCIA = { p_anillo: 'no', p_base: 'normal', p_super: 'lisa' };
   function recalcularIA() {
     Object.keys(obs).forEach(function (k) { if (obs[k].src === 'ia') delete obs[k]; });
     DATOS.dims.forEach(function (d) {
@@ -4556,6 +4560,7 @@ if ('serviceWorker' in navigator) {
       PARTES_FOTO.forEach(function (p) {
         if (p === d.parte) return;
         var x = lecturas[p] && lecturas[p][d.id];
+        if (AUSENCIA[d.id] === x) return;
         if (valorValido(d.id, x) && vistos.indexOf(x) < 0) vistos.push(x);
       });
       if (vistos.length === 1) obs[d.id] = { v: vistos[0], src: 'ia' };
@@ -4608,7 +4613,9 @@ if ('serviceWorker' in navigator) {
     lecturas[parte] = leidos;
     recalcularIA();
     actualizar();
-    msgSlot(slot, n ? 'He leído ' + n + (n === 1 ? ' rasgo' : ' rasgos') + ' en esta foto. Revísalos en el panel (llevan la marca «IA»).' : 'No he podido leer rasgos claros en esta foto. Indícalos tú en el panel.');
+    // «modelo» lo manda el Worker: sirve para ver si ha leído el principal (Gemma 4) o la reserva (Llama 3.2)
+    var mod = typeof res.modelo === 'string' ? (/gemma/i.test(res.modelo) ? ' (leído con Gemma 4)' : /llama/i.test(res.modelo) ? ' (leído con Llama 3.2, el modelo de reserva)' : '') : '';
+    msgSlot(slot, n ? 'He leído ' + n + (n === 1 ? ' rasgo' : ' rasgos') + ' en esta foto' + mod + '. Revísalos en el panel (llevan la marca «IA»).' : 'No he podido leer rasgos claros en esta foto' + mod + '. Indícalos tú en el panel.');
   }
   function leerFoto(slot, file) {
     var parte = slot.getAttribute('data-parte');

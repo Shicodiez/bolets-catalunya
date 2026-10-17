@@ -454,7 +454,12 @@ function validateHallazgo(h) {
 // fotos) i el model es tria amb el banc de proves tools/banco_ia.mjs. El vocabulari es genera amb
 // `python3 tools/generar_guia.py --vocab` i una prova (tests/test_model.py) comprova que coincideix amb tools/rasgos_datos.py.
 // ---------------------------------------------------------------------------
-const IDENT_MODEL = "@cf/meta/llama-3.2-11b-vision-instruct";
+// Modelo elegido con el banco de pruebas (16/10/2026, 30 fotos de la guía, ver tools/banco/INFORME.md): Gemma 4 salió el mejor
+// de los cuatro probados (ficha correcta primera en 4 de 30, entre las 5 primeras en 5 de 30, frente a 0-1 y 3-4 de los demás)
+// y el más barato. Son pocas fotos: la diferencia entre modelos es pequeña, pero no empeora en nada y no se inventa lo que no ve.
+// Si falla (error o respuesta ilegible, no el cupo agotado) se prueba con el modelo de reserva, el que había hasta entonces.
+const IDENT_MODEL = "@cf/google/gemma-4-26b-a4b-it";
+const IDENT_MODEL_RESERVA = "@cf/meta/llama-3.2-11b-vision-instruct";
 const IDENT_MAX_CHARS = 1500000;          // mida màxima de la foto (text base64) — el navegador la redueix a ~800 px
 const IDENT_MAX_BODY = 1600000;           // mida màxima de la petició (només per a /identify)
 const IDENT_VOCAB = {
@@ -700,9 +705,13 @@ function parseIdentResponse(raw, parte) {
 // Modo de pasar la foto y parámetros extra de cada modelo. Los fija el banco de pruebas (tools/banco_ia.mjs): Cloudflare
 // documenta formas distintas según el modelo, y se prueba la primera y, si falla, la siguiente.
 const IDENT_MODOS = {
-  "@cf/meta/llama-3.2-11b-vision-instruct": ["image", "image_url"],
+  "@cf/google/gemma-4-26b-a4b-it": ["image_url"],                 // el banco (formato.json): imagen dentro del mensaje
+  "@cf/meta/llama-3.2-11b-vision-instruct": ["image", "image_url"],   // el banco: imagen en el campo «image»
 };
-const IDENT_EXTRA = {};
+// Gemma 4 puede «pensar» antes de contestar (gasta muchas más palabras de salida y se queda sin espacio): se apaga, como en el banco.
+const IDENT_EXTRA = {
+  "@cf/google/gemma-4-26b-a4b-it": { chat_template_kwargs: { enable_thinking: false } },
+};
 
 function identInputs(model, dataUrl, user) {
   const base = { max_tokens: 400, temperature: 0.1, ...(IDENT_EXTRA[model] || {}) };
@@ -728,17 +737,17 @@ function identTexto(out) {
 
 // Llama al modelo de visión. Si el modelo pide aceptar la licencia de Meta (una sola vez por cuenta), se acepta
 // automáticamente y se repite.
-async function runVision(env, dataUrl, parte) {
+async function runVision(env, dataUrl, parte, model) {
   const user = identUserPrompt(parte);
   let ultimo;
-  for (const input of identInputs(IDENT_MODEL, dataUrl, user)) {
+  for (const input of identInputs(model, dataUrl, user)) {
     try {
       try {
-        return await env.AI.run(IDENT_MODEL, input);
+        return await env.AI.run(model, input);
       } catch (e) {
         if (!/agree|licen[cs]e|5016/i.test(String(e && e.message))) throw e;
-        await env.AI.run(IDENT_MODEL, { prompt: "agree" });
-        return await env.AI.run(IDENT_MODEL, input);
+        await env.AI.run(model, { prompt: "agree" });
+        return await env.AI.run(model, input);
       }
     } catch (e) {
       ultimo = e;
@@ -749,10 +758,20 @@ async function runVision(env, dataUrl, parte) {
 }
 
 async function identifyWithAI(env, dataUrl, parte) {
-  const out = await runVision(env, dataUrl, parte);
-  const resultado = parseIdentResponse(identTexto(out), parte);
-  if (!resultado) throw new Error("La IA no ha devuelto una respuesta que se pueda leer. Prueba con otra foto.");
-  return resultado;
+  let ultimo;
+  for (const model of [IDENT_MODEL, IDENT_MODEL_RESERVA]) {
+    try {
+      const out = await runVision(env, dataUrl, parte, model);
+      const resultado = parseIdentResponse(identTexto(out), parte);
+      if (resultado) { resultado.modelo = model; return resultado; }   // el nombre del modelo solo sirve para saber si ha contestado el principal o la reserva
+      ultimo = new Error("La IA no ha devuelto una respuesta que se pueda leer. Prueba con otra foto.");
+    } catch (e) {
+      // sin cupo no sirve probar con otro modelo: el cupo es de toda la cuenta
+      if (/allocation|quota|neurons|daily/i.test(String(e && e.message))) throw e;
+      ultimo = e;
+    }
+  }
+  throw ultimo;
 }
 
 function identErrorMessage(e) {

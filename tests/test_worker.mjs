@@ -170,6 +170,9 @@ async function call(env, pathname, body, ip) {
     return { status: r.status, json: await r.json().catch(() => ({})) };
   };
   const respuesta = (obj) => ({ response: typeof obj === "string" ? obj : JSON.stringify(obj) });
+  // texto del prompt del usuario, tanto si el mensaje es solo texto como si lleva la imagen dentro (lista de partes)
+  const textoDe = (input) => { const c = input.messages[1].content; return typeof c === "string" ? c : c.map((p) => (p && p.text) || "").join(""); };
+  const GEMMA = /gemma-4-26b-a4b-it/, LLAMA = /llama-3\.2-11b-vision-instruct/;
   // lo que devolvería el modelo para una foto (se le habla en inglés y contesta con las palabras de IDENT_EN), con basura mezclada:
   // el Worker lee TODOS los rasgos que vea la foto, no solo los del hueco
   const bueno = { mushroom_visible: true, traits: { h_tipo: "gills", h_color: "white or cream", s_color: "Green", p_anillo: "yes", h_inventado: "x", p_base: null } };
@@ -198,10 +201,14 @@ async function call(env, pathname, body, ip) {
   check("identify: traduce las palabras en inglés a los ids de la guía («gills»→laminas, «white or cream»→blanco, «Green»→verde, «yes»→si)",
         res.rasgos.h_tipo === "laminas" && res.rasgos.h_color === "blanco" && res.rasgos.s_color === "verde" && res.rasgos.p_anillo === "si", JSON.stringify(res.rasgos));
   check("identify: NO devuelve candidatas ni dice qué seta es", !("candidatas" in res) && !("falta_ver" in res));
-  check("identify: usa el modelo de visión de Llama y manda la imagen como data URI (formato del tutorial de Cloudflare)",
-        calls.length === 1 && /llama-3\.2-11b-vision-instruct/.test(calls[0].model) && calls[0].input.image === FOTO &&
-        typeof calls[0].input.messages[1].content === "string");
-  const prompt = calls[0].input.messages[1].content;
+  check("identify: usa Gemma 4 (el modelo que eligió el banco) y manda la foto dentro del mensaje, como data URI, sin el campo «image»",
+        calls.length === 1 && GEMMA.test(calls[0].model) && !("image" in calls[0].input) && Array.isArray(calls[0].input.messages[1].content) &&
+        calls[0].input.messages[1].content.some((p) => p.type === "image_url" && p.image_url.url === FOTO), JSON.stringify(calls[0] && calls[0].model));
+  check("identify: dice con qué modelo ha leído la foto (resultado.modelo = Gemma 4), solo para poder ver si contesta el principal o la reserva",
+        GEMMA.test(res.modelo || ""), JSON.stringify(res.modelo));
+  check("identify: apaga el «pensar» de Gemma 4 (chat_template_kwargs.enable_thinking=false), como en el banco",
+        calls[0].input.chat_template_kwargs && calls[0].input.chat_template_kwargs.enable_thinking === false);
+  const prompt = textoDe(calls[0].input);
   check("identify: el prompt está en INGLÉS (Llama 3.2 Vision solo lo soporta así con fotos), pide los 9 rasgos y pide no adivinar (null)",
         /This is ONE photo of a mushroom/.test(prompt) && !/Esta foto/.test(prompt) && ["s_color", "s_super", "s_forma", "h_tipo", "h_color", "p_anillo", "p_base", "p_super", "p_color"].every((d) => prompt.includes(d + " (")) &&
         /Do not guess/.test(prompt) && /null/.test(prompt), prompt.slice(0, 200));
@@ -213,7 +220,7 @@ async function call(env, pathname, body, ip) {
   for (const [parte, pista] of [["sombrero", "the cap seen from above"], ["pie", "the stem and its base"]]) {
     const c = [];
     r = await callId({ ...baseEnv(), AI: { run: async (m, i) => { c.push(i); return respuesta({ mushroom_visible: true, traits: {} }); } } }, token, { image: FOTO, parte });
-    const pr = c[0].messages[1].content;
+    const pr = textoDe(c[0]);
     check(`identify: el hueco «${parte}» pone su pista y pide igualmente los 9 rasgos`,
           r.status === 200 && pr.includes(pista) && pr.includes("h_tipo (") && pr.includes("s_color (") && pr.includes("p_color ("), pr.slice(0, 160));
   }
@@ -250,13 +257,37 @@ async function call(env, pathname, body, ip) {
   r = await callId({ ...baseEnv(), AI: { run: async () => respuesta({ se_ve_seta: false, rasgos: {} }) } }, token, { image: FOTO, parte: "pie" });
   check("identify: se_ve_seta=false (formato antiguo) también vale", r.status === 200 && r.json.resultado.se_ve_seta === false);
 
-  // formato alternativo si el primero falla
+  // si Gemma falla por un error normal, se usa el modelo de reserva (Llama), y a este se le prueba su 1.ª forma y, si falla, la 2.ª
   const calls2 = [];
-  const ai2 = { run: async (model, input) => { calls2.push(input); if (input.image) throw new Error("input.image no soportado"); return respuesta(bueno); } };
+  const ai2 = { run: async (model, input) => {
+    calls2.push({ model, input });
+    if (GEMMA.test(model)) throw new Error("3010: Gemma no disponible");
+    if (input.image) throw new Error("input.image no soportado");
+    return respuesta(bueno);
+  } };
   r = await callId({ ...baseEnv(), AI: ai2 }, token, { image: FOTO, parte: "debajo" });
-  check("identify: si falla el formato 1, prueba el 2 (imagen dentro del mensaje) y funciona",
-        r.status === 200 && calls2.length === 2 && Array.isArray(calls2[1].messages[1].content) &&
-        calls2[1].messages[1].content[1].image_url.url === FOTO, JSON.stringify(r).slice(0, 160) + calls2.length);
+  check("identify: si Gemma falla, prueba el modelo de reserva (Llama) con sus formatos (1.º «image», 2.º imagen dentro del mensaje) y funciona",
+        r.status === 200 && r.json.resultado.rasgos.h_tipo === "laminas" && calls2.length === 3 && GEMMA.test(calls2[0].model) &&
+        LLAMA.test(calls2[1].model) && calls2[1].input.image === FOTO && LLAMA.test(calls2[2].model) && Array.isArray(calls2[2].input.messages[1].content) &&
+        calls2[2].input.messages[1].content[1].image_url.url === FOTO, JSON.stringify(r).slice(0, 160) + calls2.length);
+  check("identify: cuando contesta la reserva, resultado.modelo es Llama", LLAMA.test(r.json.resultado.modelo || ""), JSON.stringify(r.json.resultado.modelo));
+  check("identify: la reserva (Llama) NO lleva el parámetro de apagar el pensar, que es de Gemma", !("chat_template_kwargs" in calls2[1].input) && !("chat_template_kwargs" in calls2[2].input));
+
+  // si Gemma contesta algo ilegible, también se prueba la reserva
+  const calls2b = [];
+  r = await callId({ ...baseEnv(), AI: { run: async (model) => { calls2b.push(model); return GEMMA.test(model) ? respuesta("lo siento, no puedo") : respuesta(bueno); } } }, token, { image: FOTO, parte: "debajo" });
+  check("identify: si Gemma contesta algo ilegible, se prueba la reserva (Llama) y se usa su lectura",
+        r.status === 200 && r.json.resultado.rasgos.h_tipo === "laminas" && calls2b.length === 2 && LLAMA.test(calls2b[1]), JSON.stringify(r).slice(0, 160) + calls2b.join());
+
+  // si Gemma contesta bien pero sin ver nada («no se ve seta» o sin rasgos), NO se gasta la reserva: es una respuesta válida
+  const calls2c = [];
+  r = await callId({ ...baseEnv(), AI: { run: async (model) => { calls2c.push(model); return respuesta({ mushroom_visible: true, traits: {} }); } } }, token, { image: FOTO, parte: "debajo" });
+  check("identify: una respuesta válida sin rasgos NO llama a la reserva", r.status === 200 && calls2c.length === 1 && GEMMA.test(calls2c[0]), calls2c.join());
+
+  // fallan los dos
+  const calls2d = [];
+  r = await callId({ ...baseEnv(), AI: { run: async (model) => { calls2d.push(model); throw new Error("3010: caído"); } } }, token, { image: FOTO, parte: "debajo" });
+  check("identify: si fallan los dos modelos → 502 con mensaje claro, sin romper", r.status === 502 && /No se ha podido identificar/.test(r.json.error || "") && calls2d.some((m) => GEMMA.test(m)) && calls2d.some((m) => LLAMA.test(m)), JSON.stringify(r) + calls2d.join());
 
   // licencia de Meta: se acepta sola y se repite
   const calls3 = [];
@@ -274,7 +305,7 @@ async function call(env, pathname, body, ip) {
   // cupo gratuito agotado
   let n4 = 0;
   r = await callId({ ...baseEnv(), AI: { run: async () => { n4++; throw new Error("4006: you have used up your daily free allocation of 10,000 neurons"); } } }, token, { image: FOTO, parte: "debajo" });
-  check("identify: cupo gratuito agotado → 502 «Se ha agotado el cupo» y no reintenta", r.status === 502 && /cupo gratuito/.test(r.json.error || "") && n4 === 1, JSON.stringify(r) + n4);
+  check("identify: cupo gratuito agotado → 502 «Se ha agotado el cupo» y no reintenta (tampoco con el modelo de reserva: el cupo es de la cuenta)", r.status === 502 && /cupo gratuito/.test(r.json.error || "") && n4 === 1, JSON.stringify(r) + n4);
 
   // validación de la foto y de la parte
   const envV = { ...baseEnv(), AI: { run: async () => respuesta(bueno) } };
