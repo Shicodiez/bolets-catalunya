@@ -770,6 +770,10 @@ if _idx:
 if _guia:
     check("guia: els enllaços interns (#cep...) substitueixen l'entrada de l'historial i «← Volver al predictor» fa servir history.back()",
           "history.replaceState(null, '', h)" in _guia and "history.back()" in _guia and "a[href^=\"#\"]" in _guia)
+    check("guia: los enlaces de los resultados de identificar (#idres) AÑADEN una entrada al historial y «atrás» vuelve a ellos (17/10/2026)",
+          "a.closest('#idres')" in _guia and "history.pushState({ ficha: true }, '', h)" in _guia and "addEventListener('popstate'" in _guia)
+    check("guia: cada tarjeta dice hasta qué % subiría si lo que falta encajase, y el panel explica «con red» y manda dejar en «no lo sé» lo dudoso (17/10/2026)",
+          "function techoPct(r)" in _guia and "subiría hasta" in _guia and "dibujo muy fino y claro" in _guia and "uno mal marcado sí puede descartar la buena" in _guia)
 
 print("\n%d proves fallides" % len(fails) if fails else "\nTotes les proves OK")
 sys.exit(1 if fails else 0)

@@ -508,6 +508,19 @@ Ejecución #1 del workflow, con los valores por defecto (30 fotos de la guía, t
 
 **Siguiente prueba pendiente:** medir con las **fotos reales de móvil de Sergio** (subirlas a `tools/banco/mis_fotos/`, p. ej. `cep__sombrero.jpg`, `cep__debajo.jpg`, `cep__pie.jpg`), que son las que de verdad importan.
 
+### Primera prueba con Gemma 4 en vivo y tres arreglos de la guía (17/10/2026)
+
+Sergio probó el Worker con Gemma 4 y sus tres fotos de un *Boletus edulis*: las tres dijeron «leído con Gemma 4» y la IA leyó 3, 4 y 8 rasgos (antes 3, 2 y 0), incluido el pie «con red». Con solo la lectura de la IA el cep salía **cuarto** (67 %, los 6 rasgos comparados encajaban); al completar a mano lo que la foto no enseña, el Leccinum scabrum salía por encima (91 % frente a 87 %). Se reprodujo con los mismos datos: ese 87/91 sale al marcar, además, «lisa» en la superficie del pie. **Causas, comprobadas con `puntuar.js`:** (1) la IA había leído bien la red del pie y la persona la cambió a «lisa» (de lejos el pie del cep parece liso: la red es muy fina y clara y se ve sobre todo arriba); (2) el % es el peso de lo que encaja entre el peso de **todo** el retrato de la ficha, y la del cep tiene rasgos que ninguna foto enseña (carne al cortarla, olor, hábitat) mientras que la del *Leccinum* tiene menos «sin comprobar»; «lisa» y «en blanco» dan **el mismo** porcentaje (un rasgo que no encaja no resta, solo no suma). Con la red leída por la IA y lo demás igual, el cep sale primero (93 % frente a 91 %).
+
+**Otras formas de ordenar** (puntos que encajan menos puntos en contra, restar el doble, solo puntos que encajan) ponen el cep primero en este caso, pero con los mismos datos del banco **no son mejores en general**: con rasgos perfectos las dos primeras suben el «entre las 5 primeras» (242 → 261-263 de 283) pero bajan el «primera» (144 → 133-139), la tercera baja ambos (255 y 116), y con un rasgo mal leído las tres empeoran el «entre las 5 primeras» (135 → 104-130 de 283). **No se cambió la forma de puntuar.**
+
+**Lo que sí se cambió (solo `tools/generar_guia.py` y la guía generada; el Worker no cambia):**
+- **Botón «atrás»:** los enlaces de los resultados de «Identificar con fotos» (los de dentro de `#idres`, p. ej. «Abrir la ficha con fotos») ahora **añaden** una entrada al historial; antes la reemplazaban y «atrás» salía al predictor y se perdía la identificación. Como solo cambia el `#` de la URL, la página no se recarga: las fotos, los rasgos y la lista siguen como estaban, y se recupera la posición de la pantalla. Los demás enlaces internos (el índice, `#cep`…) siguen reemplazando la entrada, como antes. Probado en Chromium (no en un móvil real).
+- **«Hasta qué % subiría»:** debajo de «Sin comprobar aún», cada tarjeta dice hasta qué porcentaje subiría la coincidencia si todo lo que falta por comprobar encajase (`techoPct`). Es un techo para entender la cuenta, no una predicción.
+- **Panel de rasgos:** explica qué es «con red» y «con puntos, escamas o bandas» en el pie (`AYUDAS_PANEL`) y avisa de que, si no se está seguro de un rasgo, se deje en «no lo sé»: sin marcar no descarta ninguna ficha, mal marcado sí puede descartar la buena (los rasgos clave).
+
+**Pendiente de decidir (no se ha tocado):** la ficha de *Leccinum scabrum* dice en «Descártala si ves…» «Pie sin escamas», pero su firma solo marca como clave los poros; hacer clave el pie descartaría esa ficha cuando la persona marca «lisa», pero también cuando la IA lea mal el pie (el banco: nadie lo lee bien). Y la ficha del cep no describe forma, superficie ni tamaño del sombrero, así que no puede sumar por ellos.
+
 ### Comparativa con otras apps (iFong)
 
 iFong (app catalana de setas ya publicada, ~8 especies) usa datos de

@@ -197,6 +197,14 @@ def slots_html():
     return "".join(out)
 
 
+# Explicaciones cortas bajo algunos rasgos del panel (solo texto de la página: no tocan el vocabulario que lee la IA).
+AYUDAS_PANEL = {
+    "p_super": ("«Con red» es un dibujo muy fino y claro, como una malla o un encaje, sobre todo en la parte de arriba del pie, "
+                "justo debajo del sombrero: lo tienen algunos boletos, como los ceps. De lejos el pie parece liso. «Con puntos, escamas "
+                "o bandas» son manchitas, escamas o rayas más oscuras que el fondo del pie. Si no lo ves claro, déjalo en «no lo sé»."),
+}
+
+
 def panel_html():
     """Panel de rasgos: un desplegable por rasgo. Lo que lea la IA de una foto se escribe aquí y la persona lo puede corregir."""
     out = []
@@ -212,6 +220,8 @@ def panel_html():
                 f'<label class="rasgo"><span class="rl">{e(etq)}</span>'
                 f'<select data-dim="{did}">{opts}</select><span class="orig" data-orig></span></label>'
             )
+            if did in AYUDAS_PANEL:
+                filas.append(f'<p class="sub">{e(AYUDAS_PANEL[did])}</p>')
             if did in RD.SOLO_EN_NOTA:
                 filas.append(
                     '<p class="sub">Márcalo solo si has excavado y has visto la base entera; si no la has desenterrado, déjalo en '
@@ -441,12 +451,28 @@ if ('serviceWorker' in navigator) {
     if (!h || h.length < 2) return;
     // Los enlaces internos (#cep, #phalloides...) REEMPLAZAN la entrada del historial en vez de añadir una nueva:
     // así el botón «atrás» del móvil (o «← Volver al predictor») va directo al mapa y no ficha por ficha.
-    try { history.replaceState(null, '', h); } catch (e) { setTimeout(abrirPorHash, 0); return; }
+    // Excepción: los enlaces de los RESULTADOS de «Identificar con fotos» (dentro de #idres) AÑADEN una entrada. Así, tras abrir
+    // la ficha de una candidata, «atrás» vuelve a esos resultados (la página no se recarga: fotos, rasgos y lista siguen como
+    // estaban) en vez de salir al predictor y perder la identificación.
+    var desdeResultados = !!(a.closest && a.closest('#idres'));
+    if (desdeResultados) {
+      try {
+        history.replaceState({ y: window.scrollY || 0 }, '', location.href);
+        history.pushState({ ficha: true }, '', h);
+      } catch (e) { setTimeout(abrirPorHash, 0); return; }
+    } else {
+      try { history.replaceState(null, '', h); } catch (e) { setTimeout(abrirPorHash, 0); return; }
+    }
     ev.preventDefault();
     if (fichaDeHash()) { abrirPorHash(); return; }
     var id = ''; try { id = decodeURIComponent(h.slice(1)); } catch (e2) { return; }
     var destino = document.getElementById(id);
     if (destino) destino.scrollIntoView({ block: 'start' });
+  });
+  // Al volver atrás desde una ficha abierta desde los resultados, se recupera el punto de la página donde se estaba.
+  window.addEventListener('popstate', function (ev) {
+    var y = ev.state && typeof ev.state.y === 'number' ? ev.state.y : null;
+    if (y !== null) setTimeout(function () { window.scrollTo(0, y); }, 30);
   });
   abrirPorHash();
 
@@ -678,7 +704,9 @@ if ('serviceWorker' in navigator) {
     });
     if (u.childNodes.length) d.appendChild(u);
     if (r.falta.length) {
-      d.appendChild(el('p', 'falta', 'Sin comprobar aún: ' + r.falta.slice(0, 5).map(function (f) { return dimPorId[f.dim].etq.toLowerCase(); }).join(', ') + (r.falta.length > 5 ? '…' : '') + '.'));
+      var techo = techoPct(r);
+      d.appendChild(el('p', 'falta', 'Sin comprobar aún: ' + r.falta.slice(0, 5).map(function (f) { return dimPorId[f.dim].etq.toLowerCase(); }).join(', ') + (r.falta.length > 5 ? '…' : '') + '.' +
+        (techo > r.pct ? ' Si todo eso encajase, la coincidencia subiría hasta ' + techo + ' %.' : '')));
     }
     var det = el('details', 'mini');
     det.open = !!abierta;
@@ -689,6 +717,15 @@ if ('serviceWorker' in navigator) {
     ab.href = '#' + card.id;
     d.appendChild(ab);
     return d;
+  }
+  // Hasta qué % subiría la ficha si TODO lo que falta por comprobar encajase (solo para que se entienda la cuenta: el % es el peso
+  // de lo que encaja entre el peso de todo el retrato de la ficha, y lo que no se ha comprobado cuenta como «aún no suma»).
+  function techoPct(r) {
+    var firma = DATOS.firmas[r.id], tot = 0, ok = 0, falta = 0;
+    Object.keys(firma).forEach(function (d) { tot += firma[d][1]; });
+    r.si.forEach(function (d) { ok += firma[d][1]; });
+    r.falta.forEach(function (f) { falta += f.w; });
+    return Math.round(100 * (ok + falta) / Math.max(tot, DATOS.min_peso || 0));
   }
   function pintaResultados() {
     box.textContent = '';
@@ -958,7 +995,7 @@ PLANTILLA = """<!DOCTYPE html>
     <div id="idres" aria-live="polite"></div>
     <details class="mini rasgos" id="panel-rasgos" open>
       <summary>Rasgos de la seta (<span id="n-rasgos">0</span> indicados) · revisa y corrige aquí</summary>
-      <p class="sub">Lo que ha leído la IA de las fotos lleva la marca «IA». Si ves algo distinto, cámbialo: lo que pones tú no lo pisa la IA.</p>
+      <p class="sub">Lo que ha leído la IA de las fotos lleva la marca «IA». Si ves algo distinto, cámbialo: lo que pones tú no lo pisa la IA. Si no estás seguro de un rasgo, déjalo en «no lo sé»: un rasgo sin marcar no descarta ninguna ficha, y uno mal marcado sí puede descartar la buena.</p>
       @@PANEL@@
     </details>
   </section>
