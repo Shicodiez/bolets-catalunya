@@ -142,5 +142,23 @@
     "lng": 2.457864233589722,
     "id": "c2029d9d-d54a-4f13-a97a-1f76d6a6874d",
     "createdAt": "2026-10-16T17:57:10.307Z"
+  },
+  {
+    "speciesIds": [
+      "ceps"
+    ],
+    "speciesNames": [
+      "Cep"
+    ],
+    "place": "Montseny",
+    "alt": "1300",
+    "tree": "roure",
+    "treeName": "Roble",
+    "date": "2026-10-20",
+    "amount": "poco",
+    "lat": 41.80014321371188,
+    "lng": 2.4394226074218888,
+    "id": "d6dd5c07-d76d-4cfd-8844-90327fa94b92",
+    "createdAt": "2026-10-20T11:12:46.392Z"
   }
 ]
