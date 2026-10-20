@@ -92,5 +92,30 @@
    "colmenilles": 7,
    "oureig": 1
   }
+ },
+ "d6dd5c07-d76d-4cfd-8844-90327fa94b92": {
+  "date": "2026-10-20",
+  "amount": "poco",
+  "species": [
+   "ceps"
+  ],
+  "lag_days": 0,
+  "frozen_on": "2026-10-20",
+  "zone_id": 3300,
+  "dist_km": 1.41,
+  "tree": "roure",
+  "is_forest": true,
+  "scores": {
+   "cep": 90,
+   "rossinyols": 90,
+   "llengua": 90,
+   "trompetes": 86,
+   "cepfosc": 82,
+   "camagrocs": 76,
+   "escarlet": 60,
+   "cepestiu": 56,
+   "oureig": 14,
+   "colmenilles": 6
+  }
  }
 }
