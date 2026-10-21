@@ -178,5 +178,19 @@
     "lng": 2.4553934795337717,
     "id": "cd751272-e80c-4106-ab26-1adae6866493",
     "createdAt": "2026-10-20T21:18:20.085Z"
+  },
+  {
+    "speciesIds": [],
+    "speciesNames": [],
+    "place": "Sant Celoni",
+    "alt": "550",
+    "tree": "alzina",
+    "treeName": "Encina",
+    "date": "2026-10-21",
+    "amount": "nada",
+    "lat": 41.66425558153507,
+    "lng": 2.560445050307272,
+    "id": "89c4c5e0-759d-4b0d-81a3-84decc2b737c",
+    "createdAt": "2026-10-21T09:32:41.441Z"
   }
 ]
