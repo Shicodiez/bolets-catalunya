@@ -142,5 +142,62 @@
    "colmenilles": 6,
    "oureig": 1
   }
+ },
+ "89c4c5e0-759d-4b0d-81a3-84decc2b737c": {
+  "date": "2026-10-21",
+  "amount": "nada",
+  "species": [],
+  "lag_days": 0,
+  "frozen_on": "2026-10-21",
+  "zone_id": 2626,
+  "dist_km": 1.46,
+  "tree": "alzina",
+  "is_forest": true,
+  "scores": {
+   "cepfosc": 88,
+   "fredolic": 81,
+   "trompetes": 67,
+   "oureig": 64,
+   "escarlet": 55,
+   "cepestiu": 39
+  }
+ },
+ "ea9634ce-ee6c-4cd6-a522-e9155e540073": {
+  "date": "2026-10-21",
+  "amount": "nada",
+  "species": [],
+  "lag_days": 0,
+  "frozen_on": "2026-10-21",
+  "zone_id": 2626,
+  "dist_km": 0.19,
+  "tree": "alzina",
+  "is_forest": true,
+  "scores": {
+   "cepfosc": 88,
+   "fredolic": 81,
+   "trompetes": 67,
+   "oureig": 64,
+   "escarlet": 55,
+   "cepestiu": 39
+  }
+ },
+ "5347f0b3-6578-4966-8ae0-4fb539e1c1bf": {
+  "date": "2026-10-21",
+  "amount": "nada",
+  "species": [],
+  "lag_days": 0,
+  "frozen_on": "2026-10-21",
+  "zone_id": 2626,
+  "dist_km": 0.19,
+  "tree": "alzina",
+  "is_forest": true,
+  "scores": {
+   "cepfosc": 88,
+   "fredolic": 81,
+   "trompetes": 67,
+   "oureig": 64,
+   "escarlet": 55,
+   "cepestiu": 39
+  }
  }
 }
