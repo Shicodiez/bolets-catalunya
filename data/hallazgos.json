@@ -192,5 +192,19 @@
     "lng": 2.560445050307272,
     "id": "89c4c5e0-759d-4b0d-81a3-84decc2b737c",
     "createdAt": "2026-10-21T09:32:41.441Z"
+  },
+  {
+    "speciesIds": [],
+    "speciesNames": [],
+    "place": "Sant Celoni",
+    "alt": "450",
+    "tree": "roure",
+    "treeName": "Roble",
+    "date": "2026-10-21",
+    "amount": "nada",
+    "lat": 41.6707533,
+    "lng": 2.573155,
+    "id": "ea9634ce-ee6c-4cd6-a522-e9155e540073",
+    "createdAt": "2026-10-21T09:33:05.386Z"
   }
 ]
