@@ -206,5 +206,19 @@
     "lng": 2.573155,
     "id": "ea9634ce-ee6c-4cd6-a522-e9155e540073",
     "createdAt": "2026-10-21T09:33:05.386Z"
+  },
+  {
+    "speciesIds": [],
+    "speciesNames": [],
+    "place": "Sant Celoni",
+    "alt": "450",
+    "tree": "mixt",
+    "treeName": "Mixto / no lo sé",
+    "date": "2026-10-21",
+    "amount": "nada",
+    "lat": 41.6707533,
+    "lng": 2.573155,
+    "id": "5347f0b3-6578-4966-8ae0-4fb539e1c1bf",
+    "createdAt": "2026-10-21T09:34:01.964Z"
   }
 ]
