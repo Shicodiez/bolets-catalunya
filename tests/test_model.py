@@ -438,8 +438,14 @@ if _guia:
     check("guia: mai afirma «es pot menjar» com a conclusió (només es veu «no se puede comer…» o la frase de les regles)",
           "se puede comer" not in _re.sub(r"Nunca dice «esta se puede comer»|\bno se puede comer", "", _guia))
 check("sw.js: desa la guia per al mode sense connexió", _sw is not None and "guia.html" in _sw)
-check("sw.js: les dades i el mapa NO es desen (només pàgines): no hi ha caché de .json de dades",
-      _sw is not None and "resultats" not in _sw and "zones_grid" not in _sw)
+check("sw.js: les dades del predictor només es fan servir de còpia SENSE xarxa (primer la xarxa, després l'última còpia, marcada amb X-Bolets-Copia), sota una sola clau sense «?t=», i Leaflet es desa; els mapes de fons i la resta de dades NO (17-18/10/2026)",
+      _sw is not None and "data\\/resultats\\.json" in _sw and "datosRedPrimero" in _sw and "X-Bolets-Copia" in _sw and "claveDatos" in _sw
+      and "url.origin + url.pathname" in _sw and "leaflet@1.9.4" in _sw and "zones_grid" not in _sw and "tile.openstreetmap" not in _sw and "'index.html'" in _sw)
+check("index.html: sense cobertura NO es queda a la pantalla del codi: verifySession distingeix ok / invalid / offline, amb temps màxim; la sessió desada s'accepta si no es pot preguntar (17-18/10/2026)",
+      _idx is not None and "VERIFY_ESPERA_MS" in _idx and "return 'offline'" in _idx and "estado === 'ok' || estado === 'offline'" in _idx and "navigator.onLine === false" in _idx)
+check("index.html: avisa quan mostra dades guardades (X-Bolets-Copia), les desa des de la pàgina i no es queda mort si el navegador bloqueja l'emmagatzematge",
+      _idx is not None and "X-Bolets-Copia" in _idx and "function guardarCopiaDatos" in _idx and "SIN CONEXIÓN" in _idx
+      and "try { const t = sessionStorage.getItem" in _idx and "try { localStorage.setItem(SESSION_TOKEN_KEY" in _idx)
 check("sw.js: desa també les fotos de la guia (carpeta fotos/) i els seus crèdits",
       _sw is not None and "bolets-offline-v2" in _sw and "fotos/creditos.json" in _sw and "esFoto" in _sw)
 check("sw.js: la identificació per foto (Worker) NO passa pel service worker (només el mateix origen)",
