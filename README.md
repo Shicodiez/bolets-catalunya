@@ -195,7 +195,7 @@ web muestra los que están actuando (⚠️) y el Worker se los pasa a la IA
 para que explique el porqué.
 
 Ejemplo, Ou de reig (*Amanita caesarea*): sale **15-20 días** después de la
-lluvia principal, necesita **noches ≥ ~12 °C y máximas ≥ ~22 °C**, casi no
+lluvia principal, necesita **noches ≥ ~12 °C y máximas ≥ ~18 °C** (era 22 °C hasta el 24/10/2026, ver más abajo), casi no
 pasa de **1.000 m**, es de **agosto a octubre** y prefiere suelos **ácidos**
 (silici). Casos reales que lo motivaron (15/10/2026): Montnegre marcaba 88-92
 solo 7 días después de ~170 mm; Matadepera (conglomerados con cemento
@@ -614,7 +614,7 @@ limitantes de **calor excesivo** (`tmax_hot`, `tmin_hot`), **frío sostenido**
 | Cep d'estiu *(provisional)* (*B. reticulatus*) | 8 d, hasta ~20 d | calor tolerado (frena > 29 °C); necesita noches ≥ 8 °C | silici ≥ mixt > calcari (×0,85) | roble, haya (encina ×0,85) | 450-1.700 m, cae hasta 2.400 m (433-2.228 m según trobarbolets), jul-sep |
 | Camagrocs | 16 d, dura hasta ~6 semanas; necesita mucha humedad | frío: aguanta heladas; frena si máx. > 18 °C o noches > 11 °C | calcari ≥ mixt > silici | pinos, haya, roble, abeto | 400-1.500 m |
 | Trompetes de la mort | 16 d | frena si máx. > 20 °C | casi indiferente (silici ×0,95) | haya y roble; encina (×0,85) | desde ~100 m (tierra baja frenada), hasta 1.500 m |
-| Ou de reig | 15-21 d | necesita noches ≥ 12 °C y días ≥ 22 °C; helada lo mata | silici (calcari ×0,12) | encina, roble, alcornoque | < 800 m |
+| Ou de reig | 15-21 d | necesita noches ≥ 12 °C y días ≥ 18 °C (bajado desde 22 °C el 24/10/2026 con un hallazgo real); helada lo mata | silici (calcari ×0,12) | encina, roble, alcornoque | < 800 m |
 | Rossinyols | 7-9 d, hasta ~18 d | frena si máx. > 26 °C; heladas mal | silici (calcari ×0,8) | haya, roble, pinos, abeto | 600-1.800 m |
 | Colmenilles | 8 d (primavera) | necesita días ≥ 15 °C; frena si máx. > 20 °C; marzo-mayo | calcari ≥ silici | roble, pinos | < 1.600 m |
 | Llengua de bou | 12 d, hasta ~28 d | frena si máx. > 24 °C; heladas mal | silici/mixt (calcari ×0,8) | roble, haya, alcornoque, pino rojo/negro, abeto | 500-1.600 m |
@@ -729,6 +729,19 @@ con >60 mm menos) y las estaciones aficionadas dan ceros (Terrassa y Sabadell
 0 mm frente a ~190) y picos de 333 mm. Fusionar sin filtrar empeoraría el
 modelo, por eso `historial_lluvia.json` solo se usa como contraste (bono de
 corroboración), no para rehacer los episodios de lluvia.
+
+### El ou de reig daba «no» en plena temporada (24/10/2026)
+
+Sergio encontró **mucho ou de reig el 24/10/2026** en Can Salvà (~250 m, entre Gualba y Sant Celoni; dos hallazgos «mucho» guardados en `data/hallazgos.json`) y la app lo daba por terminado. **Qué decía el modelo en esa zona** (datos publicados ese día):
+- Los dos puntos de la rejilla más cercanos (Can Salvà, 192 m, y el Pagès de Dalt, 244 m) están clasificados como matorral y cultivo: **no son bosque, y la app solo puntúa puntos de bosque**, así que para ellos no hacía ninguna cuenta.
+- El punto de bosque más cercano (Gualba, 191 m, encinar, a unos 2 km) daba **35**. Dos frenos: **calor** (medias de los últimos 7 días: mínimas 12 °C y máximas 18 °C; el perfil pedía máximas ≥ 22 °C y a 18 °C solo dejaba pasar el 58 %) y **geología «mixta»** (×0,6). Sin esos dos frenos la suma de evidencias era ~94.
+- En toda Catalunya ese día solo 2 zonas de 691 con ou de reig puntuado llegaban a 70 (mediana 17); el motivo más repetido (663 de 691) era «demasiado fresco». **La época del año no frenaba** (puntúa al máximo con los registros reales de GBIF).
+
+**Causa:** las cifras de calor eran **estimaciones mías ([EST])**; las fuentes solo dicen que necesita calor y lluvia, sin números. El hallazgo real las contradice: con 12 °C / 18 °C (medias de 7 días) hay «mucho».
+
+**Cambio (solo `backend/recollir_dades.py`, perfil `oureig`):** la curva de máximas pasa de `(13→0, 17→0,45, 20→0,85, 22→1)` a `(11→0, 14→0,40, 17→0,85, 18→1)`: 18 °C ya es nota completa (el valor observado) y el resto se baja 2-3 °C. **Las noches (≥ 12 °C), el suelo (silíceo ×1; mixto ×0,6; calcáreo ×0,12), la altitud, el tiempo desde la lluvia y la helada no cambian**; el suelo no se toca para no reabrir los falsos avisos de Matadepera. Con la curva nueva (mismas condiciones del test: 17 días tras la lluvia, encinar a 300 m, noches de 12 °C): máx. 13 °C → 24; 14 → 36; 15 → 50; 16 → 63; 17 → 76; 18 o más → 90; con 12/18 °C y suelo mixto 54, calcáreo 11. **Estimación sobre los datos publicados (no es una ejecución real):** las zonas con ≥ 70 pasarían de 2 a unas 108, todas de suelo silíceo; Gualba (191 m, mixto) pasaría de 35 a ~60 y Gualba (397 m, silíceo) a ~85. Los datos reales se regeneran solos (el workflow corre cada 3 horas).
+
+**Límites:** un solo sitio y un solo día (dos hallazgos del mismo lugar); la curva por debajo de 18 °C sigue siendo estimación; el modelo sigue sin puntuar puntos que no son bosque en la rejilla aunque el hallazgo esté en el borde del bosque (es una limitación de la rejilla de 0,5 km, no se ha tocado); la geología «mixta» de Gualba (191 m) puede ser demasiado prudente (es una zona de granito y pizarras, como indica el hallazgo de otro año en la Tordera), pero no se cambia con un solo caso. Más hallazgos de ou de reig con la temperatura de esos días permitirían afinar.
 
 ### Validación: qué está demostrado y qué no (15/10/2026)
 

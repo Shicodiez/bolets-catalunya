@@ -537,9 +537,16 @@ SPECIES_BIO = {
         # [FONT] "normalment per sota dels 1.000 m" (Surt de Casa/ECat)
         "alt": [(0, 1.0), (800, 1.0), (1000, 0.45), (1150, 0.15), (1300, 0.0)],
         # [FONT] espècie de clima càlid: "només quan coincideixen calor i
-        # pluja" (ECat). [EST] els números.
+        # pluja" (ECat). [EST] els números, EXCEPTE el punt alt de "tmax":
+        # [CAMPO] 24/10/2026, Can Salvà (~250 m, entre Gualba i Sant Celoni),
+        # DOS hallazgos "mucho" amb mitjanes dels 7 dies d'unes mínimes de 12 °C
+        # i unes màximes de 18 °C; abans el perfil demanava màximes >= 22 °C i a
+        # 18 °C només deixava passar el 58 %, així que la zona de bosc més
+        # propera (Gualba, 191 m) sortia amb 35. Ara 18 °C ja és plena puntuació
+        # i la resta de la corba s'ha baixat uns 2-3 °C (aquests valors són [EST]).
+        # Les NITS (tmin) no es toquen: el cas observat (12 °C) ja hi era.
         "heat": {"tmin": [(6, 0.0), (9, 0.45), (11, 0.85), (12, 1.0)],
-                 "tmax": [(13, 0.0), (17, 0.45), (20, 0.85), (22, 1.0)],
+                 "tmax": [(11, 0.0), (14, 0.40), (17, 0.85), (18, 1.0)],
                  "frost": [(-2, 0.05), (1, 0.30), (4, 0.80), (6, 1.0)]},
         # [FONT] sureres i alzinars càlids; a la Serra dels Ports (sòls calcaris)
         # "no apareix". Acidòfil. 

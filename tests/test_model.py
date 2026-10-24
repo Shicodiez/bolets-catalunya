@@ -106,6 +106,14 @@ check("Ou de reig, geologia mixta (Matadepera): no arriba a 70", ou(17, geo="mix
 check("Ou de reig a 1.264 m: < 25", ou(17, alt=1264)[0] < 25, str(ou(17, alt=1264)[0]))
 check("Ou de reig a 1.986 m: 0", ou(17, alt=1986)[0] == 0)
 check("Ou de reig amb nits de 8 °C i màximes de 16 °C: < 40", ou(17, tmin=8, tmax=16)[0] < 40, str(ou(17, tmin=8, tmax=16)[0]))
+# hallazgo real 24/10/2026 (Can Salvà, ~250 m): "mucho" amb mínimes de 12 °C i màximes de 18 °C de mitjana dels 7 dies
+check("Ou de reig amb mínimes de 12 °C i màximes de 18 °C (hallazgo real 24/10/2026), silici, 17 dies: >= 80",
+      ou(17, tmin=12, tmax=18)[0] >= 80, str(ou(17, tmin=12, tmax=18)[0]))
+check("Ou de reig amb 12 °C / 18 °C però geologia mixta (Matadepera): continua sense arribar a 70 (el sòl segueix frenant)",
+      ou(17, tmin=12, tmax=18, geo="mixt")[0] < 70, str(ou(17, tmin=12, tmax=18, geo="mixt")[0]))
+check("Ou de reig amb 12 °C / 18 °C però sòl calcari: continua < 30", ou(17, tmin=12, tmax=18, geo="calcari")[0] < 30, str(ou(17, tmin=12, tmax=18, geo="calcari")[0]))
+check("Ou de reig amb màximes de 13 °C (fred de debò) i mínimes de 12 °C: < 40", ou(17, tmin=12, tmax=13)[0] < 40, str(ou(17, tmin=12, tmax=13)[0]))
+check("Ou de reig a 7 dies de la pluja amb 12 °C / 18 °C: continua < 40 (encara és aviat)", ou(7, tmin=12, tmax=18)[0] < 40, str(ou(7, tmin=12, tmax=18)[0]))
 check("Ou de reig a finals de novembre: baixa", ou(17, day=date(2026, 11, 28))[0] < ou(17)[0] * 0.75, f"{ou(17, day=date(2026, 11, 28))[0]} vs {ou(17)[0]}")
 lim = ou(11, geo="calcari")[3]
 check("els limitants expliquen el perquè (text en castellà)", any("pronto" in t for t in lim) and any("calc" in t.lower() for t in lim), str(lim))
