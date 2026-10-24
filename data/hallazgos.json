@@ -220,5 +220,23 @@
     "lng": 2.573155,
     "id": "5347f0b3-6578-4966-8ae0-4fb539e1c1bf",
     "createdAt": "2026-10-21T09:34:01.964Z"
+  },
+  {
+    "speciesIds": [
+      "oureig"
+    ],
+    "speciesNames": [
+      "Ou de reig"
+    ],
+    "place": "Can Salvà",
+    "alt": "250",
+    "tree": "mixt",
+    "treeName": "Mixto / no lo sé",
+    "date": "2026-10-24",
+    "amount": "mucho",
+    "lat": 41.7522317,
+    "lng": 2.54014,
+    "id": "314d5c05-03f6-49b7-af86-d00856bf9262",
+    "createdAt": "2026-10-24T11:01:38.035Z"
   }
 ]
