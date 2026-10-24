@@ -213,5 +213,19 @@
   "tree": "conreu",
   "is_forest": false,
   "scores": {}
+ },
+ "47f2f335-839b-4bd5-9281-25e6ab316566": {
+  "date": "2026-10-24",
+  "amount": "mucho",
+  "species": [
+   "oureig"
+  ],
+  "lag_days": 0,
+  "frozen_on": "2026-10-24",
+  "zone_id": 2799,
+  "dist_km": 0.8,
+  "tree": "matollar",
+  "is_forest": false,
+  "scores": {}
  }
 }
