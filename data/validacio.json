@@ -199,5 +199,19 @@
    "escarlet": 55,
    "cepestiu": 39
   }
+ },
+ "314d5c05-03f6-49b7-af86-d00856bf9262": {
+  "date": "2026-10-24",
+  "amount": "mucho",
+  "species": [
+   "oureig"
+  ],
+  "lag_days": 0,
+  "frozen_on": "2026-10-24",
+  "zone_id": 3048,
+  "dist_km": 1.09,
+  "tree": "conreu",
+  "is_forest": false,
+  "scores": {}
  }
 }
