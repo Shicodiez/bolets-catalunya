@@ -227,5 +227,26 @@
   "tree": "matollar",
   "is_forest": false,
   "scores": {}
+ },
+ "ac497806-33cd-47ef-9a88-f44148e610d3": {
+  "date": "2026-10-24",
+  "amount": "mucho",
+  "species": [
+   "oureig"
+  ],
+  "lag_days": 1,
+  "frozen_on": "2026-10-25",
+  "zone_id": 3040,
+  "dist_km": 0.99,
+  "tree": "alzina",
+  "is_forest": true,
+  "scores": {
+   "escarlet": 88,
+   "fredolic": 84,
+   "trompetes": 75,
+   "cepfosc": 51,
+   "cepestiu": 29,
+   "oureig": 6
+  }
  }
 }
