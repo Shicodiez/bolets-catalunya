@@ -256,5 +256,23 @@
     "lng": 2.5405206436609977,
     "id": "47f2f335-839b-4bd5-9281-25e6ab316566",
     "createdAt": "2026-10-24T15:58:27.065Z"
+  },
+  {
+    "speciesIds": [
+      "oureig"
+    ],
+    "speciesNames": [
+      "Ou de reig"
+    ],
+    "place": "Gualba",
+    "alt": "250",
+    "tree": "alzina",
+    "treeName": "Encina",
+    "date": "2026-10-24",
+    "amount": "mucho",
+    "lat": 41.7621731224647,
+    "lng": 2.503166198730469,
+    "id": "ac497806-33cd-47ef-9a88-f44148e610d3",
+    "createdAt": "2026-10-25T09:42:15.649Z"
   }
 ]
