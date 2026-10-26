@@ -248,5 +248,20 @@
    "cepestiu": 29,
    "oureig": 6
   }
+ },
+ "2180e21a-201d-4eec-bfee-d5331f02b04a": {
+  "date": "2026-10-26",
+  "amount": "poco",
+  "species": [
+   "ceps",
+   "oureig"
+  ],
+  "lag_days": 0,
+  "frozen_on": "2026-10-26",
+  "zone_id": 2799,
+  "dist_km": 1.14,
+  "tree": "matollar",
+  "is_forest": false,
+  "scores": {}
  }
 }
