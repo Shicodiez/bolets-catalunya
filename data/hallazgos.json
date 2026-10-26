@@ -274,5 +274,25 @@
     "lng": 2.503166198730469,
     "id": "ac497806-33cd-47ef-9a88-f44148e610d3",
     "createdAt": "2026-10-25T09:42:15.649Z"
+  },
+  {
+    "speciesIds": [
+      "ceps",
+      "oureig"
+    ],
+    "speciesNames": [
+      "Cep",
+      "Ou de reig"
+    ],
+    "place": "Riells i Viabrea",
+    "alt": "200",
+    "tree": "mixt",
+    "treeName": "Mixto / no lo sé",
+    "date": "2026-10-26",
+    "amount": "poco",
+    "lat": 41.74215362922314,
+    "lng": 2.5322451893473468,
+    "id": "2180e21a-201d-4eec-bfee-d5331f02b04a",
+    "createdAt": "2026-10-26T16:08:11.098Z"
   }
 ]
