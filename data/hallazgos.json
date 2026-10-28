@@ -312,5 +312,23 @@
     "lng": 2.4307463,
     "id": "8e7e3c48-e77f-4f9b-a7d7-acaee2777c70",
     "createdAt": "2026-10-28T11:04:03.771Z"
+  },
+  {
+    "speciesIds": [
+      "ceps"
+    ],
+    "speciesNames": [
+      "Cep"
+    ],
+    "place": "Viladrau",
+    "alt": "1150",
+    "tree": "faig",
+    "treeName": "Haya",
+    "date": "2026-10-28",
+    "amount": "mucho",
+    "lat": 41.8178573,
+    "lng": 2.402179,
+    "id": "08b63274-bf33-43dc-936c-ec297e70712f",
+    "createdAt": "2026-10-28T15:10:52.829Z"
   }
 ]
