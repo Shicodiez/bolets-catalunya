@@ -330,5 +330,23 @@
     "lng": 2.402179,
     "id": "08b63274-bf33-43dc-936c-ec297e70712f",
     "createdAt": "2026-10-28T15:10:52.829Z"
+  },
+  {
+    "speciesIds": [
+      "ceps"
+    ],
+    "speciesNames": [
+      "Cep"
+    ],
+    "place": "Montseny",
+    "alt": "1050",
+    "tree": "faig",
+    "treeName": "Haya",
+    "date": "2026-10-30",
+    "amount": "mucho",
+    "lat": 41.770276,
+    "lng": 2.3876874,
+    "id": "3a887e84-7dc8-41c6-b7d8-68c6f5ffeab0",
+    "createdAt": "2026-10-30T10:33:43.094Z"
   }
 ]
