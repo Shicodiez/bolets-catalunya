@@ -366,5 +366,29 @@
     "lng": 2.4009268251778204,
     "id": "373ad98f-bf65-458f-a5a1-188b0a36bcbd",
     "createdAt": "2026-10-30T22:04:20.157Z"
+  },
+  {
+    "speciesIds": [
+      "rovellons",
+      "camagrocs",
+      "trompetes",
+      "oureig"
+    ],
+    "speciesNames": [
+      "Rovellons",
+      "Camagrocs",
+      "Trompetes de la mort",
+      "Ou de reig"
+    ],
+    "place": "Can Salvà",
+    "alt": "150",
+    "tree": "mixt",
+    "treeName": "Mixto / no lo sé",
+    "date": "2026-10-30",
+    "amount": "mucho",
+    "lat": 41.74071219921591,
+    "lng": 2.5387799286624535,
+    "id": "b0b9a18c-bcc7-4295-9c80-741a607bef37",
+    "createdAt": "2026-10-30T22:05:13.635Z"
   }
 ]
