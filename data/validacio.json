@@ -313,5 +313,19 @@
    "oureig": 11,
    "colmenilles": 4
   }
+ },
+ "3a887e84-7dc8-41c6-b7d8-68c6f5ffeab0": {
+  "date": "2026-10-30",
+  "amount": "mucho",
+  "species": [
+   "ceps"
+  ],
+  "lag_days": 0,
+  "frozen_on": "2026-10-30",
+  "zone_id": 3022,
+  "dist_km": 1.14,
+  "tree": "conreu",
+  "is_forest": false,
+  "scores": {}
  }
 }
