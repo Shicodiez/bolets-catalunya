@@ -327,5 +327,46 @@
   "tree": "conreu",
   "is_forest": false,
   "scores": {}
+ },
+ "373ad98f-bf65-458f-a5a1-188b0a36bcbd": {
+  "date": "2026-10-30",
+  "amount": "mucho",
+  "species": [
+   "ceps"
+  ],
+  "lag_days": 1,
+  "frozen_on": "2026-10-31",
+  "zone_id": 3292,
+  "dist_km": 1.14,
+  "tree": "roure",
+  "is_forest": true,
+  "scores": {
+   "llengua": 90,
+   "rossinyols": 83,
+   "trompetes": 76,
+   "cep": 69,
+   "camagrocs": 68,
+   "escarlet": 22,
+   "cepestiu": 19,
+   "cepfosc": 6,
+   "colmenilles": 3
+  }
+ },
+ "b0b9a18c-bcc7-4295-9c80-741a607bef37": {
+  "date": "2026-10-30",
+  "amount": "mucho",
+  "species": [
+   "rovellons",
+   "camagrocs",
+   "trompetes",
+   "oureig"
+  ],
+  "lag_days": 1,
+  "frozen_on": "2026-10-31",
+  "zone_id": 2799,
+  "dist_km": 0.58,
+  "tree": "matollar",
+  "is_forest": false,
+  "scores": {}
  }
 }
