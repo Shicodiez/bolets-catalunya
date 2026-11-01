@@ -408,5 +408,23 @@
     "lng": 2.461096329059385,
     "id": "c3b353bc-0c0a-401f-8fc7-b9cf8190ede1",
     "createdAt": "2026-11-01T21:00:47.773Z"
+  },
+  {
+    "speciesIds": [
+      "rovellons"
+    ],
+    "speciesNames": [
+      "Rovellons"
+    ],
+    "place": "Sant Hilari Sacalm",
+    "alt": "950",
+    "tree": "pi",
+    "treeName": "Pino",
+    "date": "2026-11-01",
+    "amount": "mucho",
+    "lat": 41.88849290655002,
+    "lng": 2.459552040407389,
+    "id": "2ce627f4-0f60-486f-b796-e47a47ce689a",
+    "createdAt": "2026-11-01T21:01:09.194Z"
   }
 ]
