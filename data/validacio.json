@@ -368,5 +368,74 @@
   "tree": "matollar",
   "is_forest": false,
   "scores": {}
+ },
+ "c3b353bc-0c0a-401f-8fc7-b9cf8190ede1": {
+  "date": "2026-11-01",
+  "amount": "poco",
+  "species": [
+   "ceps"
+  ],
+  "lag_days": 0,
+  "frozen_on": "2026-11-01",
+  "zone_id": 3956,
+  "dist_km": 0.9,
+  "tree": "roure",
+  "is_forest": true,
+  "scores": {
+   "llengua": 88,
+   "cepfosc": 85,
+   "rossinyols": 84,
+   "trompetes": 83,
+   "camagrocs": 75,
+   "cep": 63,
+   "escarlet": 61,
+   "cepestiu": 33,
+   "oureig": 14,
+   "colmenilles": 3
+  }
+ },
+ "2ce627f4-0f60-486f-b796-e47a47ce689a": {
+  "date": "2026-11-01",
+  "amount": "mucho",
+  "species": [
+   "rovellons"
+  ],
+  "lag_days": 0,
+  "frozen_on": "2026-11-01",
+  "zone_id": 3956,
+  "dist_km": 0.96,
+  "tree": "roure",
+  "is_forest": true,
+  "scores": {
+   "llengua": 88,
+   "cepfosc": 85,
+   "rossinyols": 84,
+   "trompetes": 83,
+   "camagrocs": 75,
+   "cep": 63,
+   "escarlet": 61,
+   "cepestiu": 33,
+   "oureig": 14,
+   "colmenilles": 3
+  }
+ },
+ "655a7720-e30c-4c8d-ae8a-d6b76b1c2c45": {
+  "date": "2026-11-01",
+  "amount": "nada",
+  "species": [],
+  "lag_days": 0,
+  "frozen_on": "2026-11-01",
+  "zone_id": 2625,
+  "dist_km": 1.45,
+  "tree": "alzina",
+  "is_forest": true,
+  "scores": {
+   "cepfosc": 84,
+   "fredolic": 82,
+   "trompetes": 70,
+   "escarlet": 60,
+   "oureig": 52,
+   "cepestiu": 27
+  }
  }
 }
