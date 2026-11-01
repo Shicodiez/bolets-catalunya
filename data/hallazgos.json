@@ -390,5 +390,23 @@
     "lng": 2.5387799286624535,
     "id": "b0b9a18c-bcc7-4295-9c80-741a607bef37",
     "createdAt": "2026-10-30T22:05:13.635Z"
+  },
+  {
+    "speciesIds": [
+      "ceps"
+    ],
+    "speciesNames": [
+      "Cep"
+    ],
+    "place": "Sant Hilari Sacalm",
+    "alt": "1000",
+    "tree": "faig",
+    "treeName": "Haya",
+    "date": "2026-11-01",
+    "amount": "poco",
+    "lat": 41.88982979930637,
+    "lng": 2.461096329059385,
+    "id": "c3b353bc-0c0a-401f-8fc7-b9cf8190ede1",
+    "createdAt": "2026-11-01T21:00:47.773Z"
   }
 ]
