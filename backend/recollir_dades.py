@@ -2112,13 +2112,71 @@ def _day_of_year_pair(month, day):
     return month * 31 + day  # ordre cronològic suficient per comparar (no és un dia de l'any real)
 
 
-def season_multiplier(sp, today, gbif_data=None):
+# Calendari d'una espècie de tardor segons l'ALTITUD de la zona (1/11/2026).
+# Els registres GBIF de Catalunya són d'un rang d'altituds concret (el cep: el 82 % a més de 1.250 m, Pirineu), i la
+# seva distribució mensual és la d'aquella altitud, on la temporada acaba abans pel fred. Una zona més baixa (Montseny,
+# Guilleries: 1.000-1.250 m) té la temporada més TARDANA, i una de més alta, més AVANÇADA. Sense aquest ajust, el
+# 1/11/2026 cap zona de Catalunya arribava a 70 de cep (màxim 66) mentre Sergio en trobava «mucho» al Montseny
+# (28 i 30/10, ~1.000-1.250 m): el calendari frenava un 20 % totes les zones.
+# Es desplaça el dia consultat: dies = (altitud mediana dels registres - altitud de la zona) / 100 m x SEASON_DAYS_PER_100M,
+# limitat a SEASON_SHIFT_MAX_DAYS. Només a espècies amb màxim de registres a l'agost-novembre (la tardor la
+# provoca el refredament, que arriba abans a dalt); les de primavera (colmenilles) i els perfils provisionals no es toquen.
+# NOMÉS en el sentit que mostra el camp (zones MÉS BAIXES que la mediana: temporada més tardana). Les zones més altes
+# es queden com abans: la lògica física és simètrica (a dalt acaba abans), però encara no hi ha cap troballa que ho
+# confirmi i amb la corba actual rossinyols, camagrocs i trompetes perdrien ~200 zones d'alçada sense proves.
+# [EST] 5 dies/100 m: el gradient tèrmic (~0,65 °C/100 m) entre el ritme de refredament de la tardor (~0,13 °C/dia);
+# cap font de camp encara: contrastar amb més hallazgos de tardor a altituds diferents.
+SEASON_DAYS_PER_100M = 5.0
+SEASON_SHIFT_MAX_DAYS = 21
+SEASON_REF_MIN_RECORDS = 30      # registres amb altitud necessaris per fiar-se de l'altitud mediana
+
+
+def gbif_reference_altitude(gbif_data):
+    """Altitud mediana (centre del tram de 250 m) dels registres GBIF d'una espècie, o None si n'hi ha pocs."""
+    if not gbif_data:
+        return None
+    buckets = {}
+    for k, v in (gbif_data.get("alt_bucket_counts") or {}).items():
+        try:
+            buckets[int(k)] = buckets.get(int(k), 0) + (v or 0)
+        except (TypeError, ValueError):
+            continue
+    total = sum(buckets.values())
+    if total <= 0 or (gbif_data.get("total_with_elevation") or 0) < SEASON_REF_MIN_RECORDS:
+        return None
+    acc = 0
+    for b in sorted(buckets):
+        acc += buckets[b]
+        if acc >= total / 2:
+            return b + 125
+    return None
+
+
+def season_altitude_shift_days(gbif_data, counts, alt):
+    """Dies que cal RESTAR a la data per consultar la distribució GBIF d'una zona a l'altitud `alt`
+    (zona més baixa que la mediana dels registres = temporada més tardana). 0 si no s'aplica o si la zona és
+    igual o més alta que la mediana (veure el comentari de SEASON_DAYS_PER_100M)."""
+    if alt is None or not counts:
+        return 0
+    ref = gbif_reference_altitude(gbif_data)
+    if ref is None:
+        return 0
+    peak_month = max(counts, key=counts.get)
+    if peak_month not in (8, 9, 10, 11):
+        return 0
+    shift = (ref - alt) / 100.0 * SEASON_DAYS_PER_100M
+    return max(0.0, min(SEASON_SHIFT_MAX_DAYS, shift))
+
+
+def season_multiplier(sp, today, gbif_data=None, alt=None):
     """
     Limitant d'ÈPOCA (0.03-1). Fa servir la distribució mensual REAL de
     registres GBIF/FungaCAT si n'hi ha prou (>= 15); si no, la finestra
     manual de SPECIES_BIO. Amb GBIF s'interpola entre els centres de mes per
     dia (el 31 d'octubre ja és mig camí cap al novembre), i es compara amb el
     mes de màxim: un mes amb >= 50% del màxim compta com a plena temporada.
+    Si es dóna l'altitud de la zona, el calendari GBIF s'endarrereix per a les
+    zones més baixes que els registres (veure SEASON_DAYS_PER_100M); sense altitud es comporta com abans.
     Retorna (multiplicador, text o None).
     """
     counts = None
@@ -2130,6 +2188,12 @@ def season_multiplier(sp, today, gbif_data=None):
 
     if counts:
         peak = max(counts.values()) or 1
+        # Perfils provisionals (cepfosc, cepestiu, escarlet, llenega: estimacions sense dades de camp): sense desplaçament;
+        # amb ell el cep d'estiu (espècie d'estiu) passava de 37 a 69 a primers de novembre, un efecte que ningú ha demanat.
+        provisional = bool(SPECIES_BIO.get(sp["id"], {}).get("provisional"))
+        shift = 0 if provisional else season_altitude_shift_days(gbif_data, counts, alt)
+        if shift:
+            today = today - timedelta(days=round(shift))
         m, d = today.month, today.day
         # interpolació entre centres de mes (dia 15)
         if d >= 15:
@@ -2161,6 +2225,31 @@ def season_multiplier(sp, today, gbif_data=None):
     if mult < 0.9:
         text = "Fuera de su época habitual" if mult < 0.5 else "Cerca del final (o del inicio) de su época"
     return mult, text
+
+
+# El calendari és un PRIOR, no un mur (1/11/2026, a petició de Sergio). Les espècies termòfiles surten quan arriben la
+# pluja i la calor, no quan toca al calendari: aquest any, amb pluges tardanes i temperatures suaus fins ben entrat
+# l'octubre i el novembre, han sortit més tard del que diu la història (GBIF). Per això el limitant d'ÈPOCA es
+# PERDONA quan el temps d'aquest any és el que l'espècie demana, però només en el tram «cerca del final (o de l'inici)
+# de l'època»; l'època «fora de temporada» (colmenilles a l'octubre) continua sent un bloqueig.
+#   temps favorable  w = multiplicador de MOMENT (dies des de la pluja) x multiplicador de CALOR/FRED/GELADA de l'espècie;
+#   perdó            relax = (w - W0) / (1 - W0) retallat a 0-1       (només amb temps gairebé ideal);
+#   tram             g = (època - S_LO) / (S_HI - S_LO) retallat a 0-1 (0 per sota de S_LO = fora d'època; 1 a partir de S_HI);
+#   època efectiva   = època + (1 - època) x relax x g.
+# [EST] W0 = 0,70, S_LO = 0,35 i S_HI = 0,60: sense dades de camp que els calibrin. Perfils provisionals: no s'apliquen.
+SEASON_RELAX_W0 = 0.70
+SEASON_RELAX_S_LO = 0.35
+SEASON_RELAX_S_HI = 0.60
+
+
+def relax_season(sp, season_mult, timing_mult, heat_mult):
+    """Limitant d'època un cop perdonat quan el temps ho permet (veure el comentari de SEASON_RELAX_W0)."""
+    if SPECIES_BIO.get(sp["id"], {}).get("provisional") or season_mult >= 1.0:
+        return season_mult
+    w = timing_mult * heat_mult
+    relax = max(0.0, min(1.0, (w - SEASON_RELAX_W0) / (1.0 - SEASON_RELAX_W0)))
+    g = max(0.0, min(1.0, (season_mult - SEASON_RELAX_S_LO) / (SEASON_RELAX_S_HI - SEASON_RELAX_S_LO)))
+    return season_mult + (1.0 - season_mult) * relax * g
 
 
 def timing_multiplier(sp, age):
@@ -2389,15 +2478,22 @@ def species_score(sp, rain_10d, min_temp, tree, days_since_rain, alt, month, aem
     gbif_data = gbif_distributions.get(sp["id"]) if gbif_distributions else None
     factors = []   # (multiplicador, text)
     if event_age is None:
-        factors.append((0.30, "Sin una lluvia suficiente en las últimas semanas"))
+        timing_f = (0.30, "Sin una lluvia suficiente en las últimas semanas")
     else:
-        factors.append(timing_multiplier(sp, event_age))
-    factors.append(season_multiplier(sp, today, gbif_data))
+        timing_f = timing_multiplier(sp, event_age)
+    heat_f = heat_multiplier(sp, tmin_now, tmax_now, tmin_abs_now)
+    season_f = season_multiplier(sp, today, gbif_data, alt)
+    # El calendari no pot més que el temps d'aquest any: si la pluja i la calor són les que l'espècie demana, no es descompta.
+    season_eff = relax_season(sp, season_f[0], timing_f[0], heat_f[0])
+    if season_eff != season_f[0]:
+        season_f = (season_eff, season_f[1] if season_eff < 0.9 else None)
+    factors.append(timing_f)
+    factors.append(season_f)
     factors.append(altitude_multiplier(sp, alt))
     tree_factor = sp.get("tree_factor", {}).get(tree, 1.0)
     if tree_factor < 1.0:
         factors.append((tree_factor, "Árbol menos habitual para esta especie"))
-    factors.append(heat_multiplier(sp, tmin_now, tmax_now, tmin_abs_now))
+    factors.append(heat_f)
     factors.append(soil_multiplier(sp, geologia))
 
     limit_mult = 1.0
@@ -3941,7 +4037,7 @@ def load_validacio():
 def freeze_predictions(hallazgos, results, today=None, path=None):
     """
     "Congela" la predicció del model per a cada salida nova: guarda, per a la
-    zona més propera (<= MAX_MATCH_KM), la puntuació de CADA espècie en el
+    zona de BOSC més propera (<= MAX_MATCH_KM; si no n'hi ha, la més propera de qualsevol tipus), la puntuació de CADA espècie en el
     moment en què el backend veu la salida per primera vegada. Així la
     validació compara amb el que l'app deia de veritat aquell dia (no cal
     reconstruir el passat) i es fa per espècie.
@@ -3954,6 +4050,11 @@ def freeze_predictions(hallazgos, results, today=None, path=None):
     store = load_validacio()
     zones_by_id = {z["id"]: z for z in results.get("zones", [])}
     zone_list = [{"id": z["id"], "lat": z["lat"], "lon": z["lon"]} for z in results.get("zones", [])]
+    # Una troballa es fa dins del bosc: es compara amb la zona de BOSC més propera (que té puntuacions), no amb un punt de
+    # la graella classificat com a conreu o matollar a 200 m (hi surt «sense puntuació» encara que Sergio fos al bosc;
+    # 1/11/2026). Només si no hi ha cap zona de bosc dins de MAX_MATCH_KM es recorre a la més propera de qualsevol tipus.
+    forest_list = [{"id": z["id"], "lat": z["lat"], "lon": z["lon"]} for z in results.get("zones", [])
+                   if z.get("is_forest") and z.get("species_scores")]
     added = 0
     for h in hallazgos or []:
         hid = h.get("id")
@@ -3969,7 +4070,9 @@ def freeze_predictions(hallazgos, results, today=None, path=None):
         lag = (today - d).days
         if lag < 0 or lag > MAX_LAG_DAYS:
             continue   # no contrastable: es mostra al recompte com a "sense predicció guardada"
-        zid, dist = nearest_zone(lat, lng, zone_list)
+        zid, dist = nearest_zone(lat, lng, forest_list)
+        if zid is None:
+            zid, dist = nearest_zone(lat, lng, zone_list)
         entry = {"date": h["date"], "amount": h["amount"], "species": _hallazgo_species_ids(h),
                  "lag_days": lag, "frozen_on": today.isoformat(), "zone_id": zid, "dist_km": dist}
         if zid is not None:

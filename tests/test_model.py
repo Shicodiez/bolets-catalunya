@@ -358,6 +358,85 @@ check("validació: positius/negatius comptats", acc["positivos"] == 2 and acc["n
 check("validació: es compara l'espècie trobada, no la millor de la zona", acc["por_especie"]["trompetes"]["aciertos"] == 1 and acc["por_especie"]["ceps"]["aciertos"] == 1 and acc["por_especie"]["trompetes"]["total"] == 2, str(acc["por_especie"]))
 check("validació: les no contrastables es declaren (d, f)", acc["no_contrastables"] == 2, str(acc))
 check("validació: sense dades de referència no inventa res", m.compute_model_accuracy([], {}).get("total_comparable") == 0)
+
+# --- 8b. La troballa es compara amb la zona de BOSC més propera (1/11/2026) ---
+# Sergio buscava ceps al bosc però 3 troballes van caure en punts de la graella classificats com a conreu/matollar (0 puntuacions) i comptaven com a fallada.
+fz = {"zones": [
+    {"id": 10, "lat": 41.7000, "lon": 2.5000, "tree": "conreu", "is_forest": False, "species_scores": []},
+    {"id": 11, "lat": 41.7130, "lon": 2.5000, "tree": "roure", "is_forest": True, "species_scores": [{"id": "cep", "score": 82}]},
+]}
+hs_f = [
+    {"id": "p", "date": "2026-10-14", "amount": "mucho", "speciesIds": ["cep"], "lat": 41.7005, "lng": 2.5000},    # punt de conreu a 55 m; el bosc és a ~1,4 km
+    {"id": "q", "date": "2026-10-14", "amount": "poco", "speciesIds": ["cep"], "lat": 41.7005, "lng": 2.5001},     # l'altra visita, mateix lloc
+]
+tmp_f = os.path.join(tempfile.mkdtemp(), "validacio.json")
+m.VALIDACIO_PATH = tmp_f
+st_f = m.freeze_predictions(hs_f[:1], fz, today=today_, path=tmp_f)
+check("validació: la troballa es compara amb la zona de BOSC més propera, no amb el conreu que té a tocar", st_f["p"]["zone_id"] == 11 and st_f["p"]["is_forest"] is True and st_f["p"]["scores"] == {"cep": 82}, str(st_f["p"]))
+check("validació: la distància desada és la del bosc (>1 km) i entra dins de MAX_MATCH_KM", 1.0 < st_f["p"]["dist_km"] <= m.MAX_MATCH_KM, str(st_f["p"]["dist_km"]))
+tmp_f2 = os.path.join(tempfile.mkdtemp(), "validacio.json")
+m.VALIDACIO_PATH = tmp_f2
+st_f2 = m.freeze_predictions(hs_f[:1], {"zones": [fz["zones"][0]]}, today=today_, path=tmp_f2)
+check("validació: si no hi ha cap zona de bosc dins de 3,5 km, es recorre a la més propera de qualsevol tipus (com abans)", st_f2["p"]["zone_id"] == 10 and st_f2["p"]["is_forest"] is False, str(st_f2["p"]))
+m.VALIDACIO_PATH = tmpf
+
+# --- 8c. Calendari del cep segons l'altitud (1/11/2026) ---
+# Dades GBIF reals del cep (data/gbif_cache.json, 15/10/2026): el 82 % dels registres amb altitud són de més de 1.250 m (Pirineu).
+GB_CEP = {"cep": {"month_counts": {5: 7, 6: 18, 7: 44, 8: 75, 9: 146, 10: 112, 11: 11, 12: 1},
+                  "alt_bucket_counts": {"1500": 77, "1250": 28, "1750": 9, "2000": 7, "1000": 18, "750": 7, "500": 1},
+                  "total_with_elevation": 147}}
+NOV1 = date(2026, 11, 1)
+def sm_cep(alt=None, day=NOV1):
+    return m.season_multiplier(SP["cep"], day, GB_CEP["cep"], alt)[0]
+check("calendari: l'altitud mediana dels registres GBIF del cep és 1.625 m", m.gbif_reference_altitude(GB_CEP["cep"]) == 1625, str(m.gbif_reference_altitude(GB_CEP["cep"])))
+check("calendari: sense altitud es comporta com abans (l'1/11 el cep té 0,8)", abs(sm_cep() - 0.8) < 0.02, str(sm_cep()))
+check("calendari: el cep a 1.200 m l'1/11 és de plena temporada (>= 0,95; abans 0,8)", sm_cep(1200) >= 0.95, str(sm_cep(1200)))
+check("calendari: com més baixa la zona, temporada igual o més tardana", sm_cep(600) >= sm_cep(900) >= sm_cep(1200) >= sm_cep(1500), str([sm_cep(a) for a in (600, 900, 1200, 1500)]))
+check("calendari: una zona MÉS ALTA que la mediana (2.000 m) es queda com abans (no es penalitza sense proves)", sm_cep(2000) == sm_cep(), str((sm_cep(2000), sm_cep())))
+check("calendari: el desplaçament té topall (600 m i 300 m donen el mateix)", sm_cep(600) == sm_cep(300))
+check("calendari: el desplaçament és de 5 dies per cada 100 m per sota de la mediana (1.525 m = 5 d) i amb topall de 21 (1.125 m = 21 d, no 25)",
+      m.season_altitude_shift_days(GB_CEP["cep"], {10: 112, 9: 146}, 1525) == 5.0 and m.season_altitude_shift_days(GB_CEP["cep"], {10: 112, 9: 146}, 1125) == 21,
+      str((m.season_altitude_shift_days(GB_CEP["cep"], {10: 112, 9: 146}, 1525), m.season_altitude_shift_days(GB_CEP["cep"], {10: 112, 9: 146}, 1125))))
+check("calendari: a mig octubre (plena temporada) l'altitud no canvia res", sm_cep(1200, date(2026, 10, 15)) == sm_cep(None, date(2026, 10, 15)) == 1.0)
+check("calendari: les espècies de primavera (colmenilles, màxim a l'abril) no es desplacen per l'altitud",
+      m.season_multiplier(SP["colmenilles"], date(2026, 5, 20), {"month_counts": {3: 35, 4: 95, 5: 82, 6: 2}, "alt_bucket_counts": {"1500": 25, "1000": 5}, "total_with_elevation": 88}, 500)[0]
+      == m.season_multiplier(SP["colmenilles"], date(2026, 5, 20), {"month_counts": {3: 35, 4: 95, 5: 82, 6: 2}, "alt_bucket_counts": {"1500": 25, "1000": 5}, "total_with_elevation": 88})[0])
+GB_CEPESTIU = {"month_counts": {5: 1, 6: 16, 7: 42, 8: 34, 9: 46, 10: 16, 11: 6}, "alt_bucket_counts": {"1250": 12, "1000": 16, "1500": 3, "750": 10, "500": 9, "0": 1}, "total_with_elevation": 51}
+check("calendari: els perfils provisionals (cep d'estiu) no es desplacen: l'1/11 a 700 m val el mateix que sense altitud (abans de la correcció passava de 37 a 69)",
+      m.season_multiplier(SP["cepestiu"], NOV1, GB_CEPESTIU, 700)[0] == m.season_multiplier(SP["cepestiu"], NOV1, GB_CEPESTIU)[0], str((m.season_multiplier(SP["cepestiu"], NOV1, GB_CEPESTIU, 700)[0], m.season_multiplier(SP["cepestiu"], NOV1, GB_CEPESTIU)[0])))
+check("calendari: amb poques dades d'altitud (< 30 registres) no es desplaça res",
+      m.season_multiplier(SP["cep"], NOV1, {**GB_CEP["cep"], "total_with_elevation": 20}, 1000)[0] == sm_cep())
+check("calendari: ids de tram com a enter (resultat en viu) o com a text (còpia en disc) donen el mateix",
+      m.gbif_reference_altitude({**GB_CEP["cep"], "alt_bucket_counts": {int(k): v for k, v in GB_CEP["cep"]["alt_bucket_counts"].items()}}) == 1625)
+
+# --- 8d. El calendari és un prior, no un mur: es perdona si el temps d'aquest any ho permet (1/11/2026, a petició de Sergio) ---
+# «Les termòfiles surten quan arriben la pluja i la calor, no quan toca; aquest any, amb pluges i temperatures suaus tardanes, han sortit més tard.»
+check("calendari/perdó: amb temps ideal (moment i calor al 100 %) i època 0,8 (cerca del final) no es descompta res", m.relax_season(SP["cep"], 0.8, 1.0, 1.0) == 1.0)
+check("calendari/perdó: amb el temps just (producte <= 0,70) el calendari es manté tal qual", m.relax_season(SP["cep"], 0.8, 0.8, 0.85) == 0.8 and m.relax_season(SP["cep"], 0.8, 1.0, 0.70) == 0.8)
+check("calendari/perdó: gradual (temps a mig camí perdona una part)", 0.8 < m.relax_season(SP["cep"], 0.8, 1.0, 0.85) < 1.0, str(m.relax_season(SP["cep"], 0.8, 1.0, 0.85)))
+check("calendari/perdó: FORA d'època (<= 0,35) no es perdona mai, ni amb temps ideal (colmenilles a l'octubre)", m.relax_season(SP["cep"], 0.30, 1.0, 1.0) == 0.30 and m.relax_season(SP["cep"], 0.05, 1.0, 1.0) == 0.05)
+check("calendari/perdó: el tram entre 0,35 i 0,60 és progressiu (sense salts)", m.relax_season(SP["cep"], 0.35, 1, 1) == 0.35 and 0.35 < m.relax_season(SP["cep"], 0.47, 1, 1) < 1.0 and m.relax_season(SP["cep"], 0.60, 1, 1) == 1.0)
+check("calendari/perdó: mai baixa la nota (l'època efectiva és >= l'original) ni passa d'1",
+      all(s0 <= m.relax_season(SP["cep"], s0, w1, w2) <= 1.0 for s0 in (0.1, 0.4, 0.5, 0.8, 0.95) for w1 in (0.3, 0.9, 1.0) for w2 in (0.5, 1.0)))
+check("calendari/perdó: els perfils provisionals (cepfosc, cepestiu...) no es toquen", m.relax_season(SP["cepfosc"], 0.8, 1.0, 1.0) == 0.8 and m.relax_season(SP["cepestiu"], 0.5, 1.0, 1.0) == 0.5)
+GB_OUREIG = {"oureig": {"month_counts": {4: 1, 5: 3, 6: 1, 7: 5, 8: 17, 9: 46, 10: 67, 11: 20}, "alt_bucket_counts": {"750": 9, "500": 7, "0": 1, "1250": 3, "250": 1, "1000": 2}, "total_with_elevation": 23}}
+def oureig_nov(day, age=17, tmin=12, tmax=18, tabs=9):
+    wx_o = {"events": [{"age_mid": age, "mm_since": 100}], "tmin_7d": tmin, "tmax_7d": tmax, "tmin_abs_7d": tabs, "has_series": True}
+    return m.species_score(SP["oureig"], 100, tmin, "alzina", age, 250, day.month, soil_stats=soil, geologia="silici", wx=wx_o, gbif_distributions=GB_OUREIG, today=day)
+check("termòfila amb temps suau tardà: ou de reig el 12/11 amb mínimes de 12 °C, màximes de 18 °C i 17 dies de la pluja: >= 80 (sense el perdó, 65)", oureig_nov(date(2026, 11, 12))[0] >= 80, str(oureig_nov(date(2026, 11, 12))[0]))
+check("termòfila: el mateix dia però amb fred (6 °C / 13 °C) continua sense sortir (< 30)", oureig_nov(date(2026, 11, 12), tmin=6, tmax=13, tabs=3)[0] < 30, str(oureig_nov(date(2026, 11, 12), tmin=6, tmax=13, tabs=3)[0]))
+check("termòfila: amb la pluja recent (6 dies) continua sent aviat (< 40): el perdó no salta el moment", oureig_nov(date(2026, 11, 12), age=6)[0] < 40, str(oureig_nov(date(2026, 11, 12), age=6)[0]))
+check("termòfila: a finals de novembre (fora d'època) el calendari continua manant (< 45), encara que faci bon temps", oureig_nov(date(2026, 11, 28))[0] < 45, str(oureig_nov(date(2026, 11, 28))[0]))
+check("perdó: quan es perdona del tot, ja no surt l'avís «Cerca del final de su época» (el limitant ja no frena)", not any("final" in x for x in oureig_nov(date(2026, 11, 12))[3]), str(oureig_nov(date(2026, 11, 12))[3]))
+check("perdó: amb fred sí continua l'avís d'època i el de fred", any("final" in x for x in oureig_nov(date(2026, 11, 12), tmin=6, tmax=13, tabs=3)[3]), str(oureig_nov(date(2026, 11, 12), tmin=6, tmax=13, tabs=3)[3]))
+# cas real: zona de Santa Fe de Montseny (1.264 m, roure, 13 dies des de la pluja, 58 mm, mínimes de 7 °C), 1/11/2026: abans 65, cap zona del país arribava a 70
+wx_m = {"events": [{"age_mid": 13, "mm_since": 58}], "tmin_7d": 7, "tmax_7d": 14, "tmin_abs_7d": 4, "has_series": True}
+soil_m = {"soil_moisture_avg_7d": 0.264, "soil_moisture_trend": -0.0105, "air_humidity_avg_3d": 87.6}
+def cep_montseny(alt, gbif=GB_CEP, day=NOV1):
+    return m.species_score(SP["cep"], 58, 7, "roure", 13, alt, day.month, soil_stats=soil_m, geologia="silici", wx=wx_m, gbif_distributions=gbif, today=day)[0]
+check("cep a Santa Fe de Montseny (1.264 m) l'1/11/2026 amb les dades reals: >= 75 (abans 65: el calendari el frenava un 20 %)", cep_montseny(1264) >= 75, str(cep_montseny(1264)))
+check("cep a 1.264 m: el calendari ja no el deixa per sota del llindar (70) i continua per sota de 100", 70 <= cep_montseny(1264) < 100)
+check("cep: a 1.264 m puntua més que a 1.800 m el mateix dia (a dalt no s'ha tocat el calendari)", cep_montseny(1264) > cep_montseny(1800), f"{cep_montseny(1264)} vs {cep_montseny(1800)}")
 check("emparellament: fora de 3,5 km no hi ha zona", m.nearest_zone(41.80, 2.50, [{"id": 1, "lat": 41.70, "lon": 2.50}])[0] is None)
 
 # --- classificació de l'etiqueta de bosc de l'ICGC ---
