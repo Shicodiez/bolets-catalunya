@@ -387,6 +387,10 @@ Se marca en el mapa el punto exacto y se elige el resultado: 🍄 mucho/poco
 el mapa** y **no se pueden borrar nunca** una vez registradas (decisión
 deliberada, protege el historial de datos reales).
 
+**Sin cobertura (1/11/2026):** al pulsar «Guardar» la salida se apunta primero en
+el móvil y después se intenta enviar; si no hay cobertura se queda guardada y se
+envía sola al volver la red (ver «Hallazgos sin cobertura» más abajo).
+
 ### App Android (APK)
 
 APK real generado con [Capacitor](https://capacitorjs.com/), que carga la
@@ -542,6 +546,22 @@ Sergio comunicó: «Si no hay cobertura la aplicación no pasa de esta pantalla�
 - El acceso al almacenamiento del navegador (`sessionStorage`/`localStorage`) está protegido: en modo privado o con los datos bloqueados ya no deja la pantalla de acceso sin respuesta.
 
 **Límites, a propósito y por falta de prueba:** (1) hay que abrir la app **una vez con cobertura** después de subir esto para que se guarden los datos y la pantalla; (2) sin conexión **no se ve el mapa de fondo** (OpenStreetMap) salvo trozos que el navegador conserve, solo los puntos de las zonas; (3) lo guardado son los últimos datos descargados, que pueden tener días; (4) sin conexión no se pueden enviar hallazgos ni leer fotos con la IA (la guía y el panel de rasgos sí funcionan). **Probado en Chromium** (servidor local, Leaflet servido desde un falso unpkg y los datos reales de 4.248 zonas): con sesión guardada y los servidores parados la app entra y pinta las zonas con el aviso; con red lenta (el servidor de sesión no contesta) entra a los ~6 s; con 503 entra; con sesión rechazada pide el código; con el almacenamiento bloqueado no se cuelga; la copia se queda en una sola entrada tras varias aperturas y se sustituye por la última descargada con conexión. **No probado** en el APK (WebView de Android) ni en un móvil real.
+
+### Hallazgos sin cobertura (1/11/2026)
+
+Sergio comunicó que sin cobertura «no le deja marcar un hallazgo». **Causa (en el código):** `saveSighting` enviaba el hallazgo directamente al Worker y, si no había red, daba error («No se ha podido guardar. Comprueba tu conexión») y **se perdía lo escrito**. En el bosque, que es donde se encuentra la seta, a menudo no hay cobertura.
+
+**Cambio (`web/index.html`; el Worker no cambia):**
+- Al pulsar «Guardar» el hallazgo se **apunta primero en el móvil** (cola en `localStorage`, clave `bolets_hallazgos_pendientes`, hasta 100) y después se intenta enviar. Si no hay red, o el servidor falla, se queda guardado y se envía **solo** cuando vuelve la cobertura: al abrir la app, al recuperar la conexión (evento `online`), al volver a la app y cada 45 s mientras haya pendientes. Hay un botón **«Enviar ahora»**.
+- Debajo del botón Guardar sale un mensaje claro («📴 Sin cobertura: la salida queda guardada en el móvil y se enviará sola cuando vuelva») y un aviso fijo «Tienes N hallazgos guardados en el móvil, pendientes de enviar». Ya no hay `alert`.
+- **Sin duplicados:** cada hallazgo lleva un identificador propio (`clientId`). Si un envío llegó al servidor pero la respuesta se perdió, antes de reenviar se consulta la lista del servidor y, si el `clientId` ya está, no se vuelve a enviar. El Worker guarda el `clientId` junto al resto del hallazgo (no hizo falta tocarlo) y la validación lo deja pasar.
+- **Qué se reintenta y qué no:** sin red, 5xx y 429 → se conserva y se reintenta; 401/403 (sesión caducada) → se conserva y se explica que hay que pedir otro código (se enviará al volver a entrar); 400 (datos no válidos) → **no** se guarda en la cola (reintentar no serviría), se muestra el motivo y el formulario conserva lo escrito.
+- El relleno automático del formulario (lugar, altitud, árbol) sin red usa la zona más cercana y la altitud de la zona; el nombre del lugar se puede escribir a mano. Se añadió un tiempo máximo de 6 s a la búsqueda del nombre del lugar (con poca cobertura se quedaba «Rellenando…»).
+- Si el navegador bloquea el almacenamiento (modo privado), el hallazgo vive solo en memoria y el mensaje dice «NO cierres la app hasta que vuelva la cobertura».
+
+**Probado en Chromium** (Worker simulado): con conexión, sin conexión, reabrir sin red, volver la red, tres seguidos, respuesta perdida sin duplicar, 400/401/429/500, triple clic, enviar al abrir, almacenamiento bloqueado o dañado, tope de 100; y con el service worker y los servidores apagados de verdad. **No probado aún en un móvil real ni en el APK.**
+
+**Límites:** si el hallazgo se guarda sin red y el móvil borra los datos del navegador antes de tener cobertura, se pierde; el mapa de fondo sin red no se ve (se puede marcar el punto igualmente con «Usar mi ubicación»).
 
 ### Comparativa con otras apps (iFong)
 

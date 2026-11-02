@@ -365,6 +365,8 @@ async function call(env, pathname, body, ip) {
   check("«Cep» a secas usa el id «ceps» y los ids sueltos de los ceps siguen siendo válidos", validar({ ...base, speciesIds: ["cepfosc"], speciesNames: ["Cep fosc"] }) === true && validar({ ...base, speciesIds: ["ceps", "rovellons"], speciesNames: ["Cep", "Rovellons"] }) === true);
   check("el Worker sigue rechazando coordenadas fuera de Catalunya (Madrid) y especies inventadas", validar({ ...base, lat: 40.4168, lng: -3.7038 }) === false && validar({ ...base, speciesIds: ["inventada"] }) === false);
   check("con 'poco' o 'mucho' hace falta una seta (el formulario no la rellena sola)", validar({ ...base, speciesIds: [], speciesNames: [] }) === false);
+  // Cola sin cobertura de index.html: cada hallazgo lleva un «clientId» propio (para no duplicar un reenvío). El Worker lo debe aceptar.
+  check("el hallazgo que reenvía la cola sin cobertura (con «clientId») es válido para el Worker", validar({ ...base, clientId: "0b6f6c0e-4e0c-4f0c-9f0e-3b6f9e2d1a11" }) === true);
 }
 
 console.log(ok + bad === 0 ? "sin pruebas" : `Worker: ${ok} comprobaciones OK, ${bad} fallos`);

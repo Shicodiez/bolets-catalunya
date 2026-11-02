@@ -454,6 +454,11 @@ check("index.html: sense cobertura NO es queda a la pantalla del codi: verifySes
 check("index.html: avisa quan mostra dades guardades (X-Bolets-Copia), les desa des de la pàgina i no es queda mort si el navegador bloqueja l'emmagatzematge",
       _idx is not None and "X-Bolets-Copia" in _idx and "function guardarCopiaDatos" in _idx and "SIN CONEXIÓN" in _idx
       and "try { const t = sessionStorage.getItem" in _idx and "try { localStorage.setItem(SESSION_TOKEN_KEY" in _idx)
+check("index.html: els hallazgos SENSE cobertura s'apunten primer al mòbil (cua) i s'envien sols en tornar la xarxa; id propi (clientId) per no duplicar, 400 no es reintenta, 401/429/5xx es conserven, sense alert (1/11/2026)",
+      _idx is not None and "PENDING_KEY = 'bolets_hallazgos_pendientes'" in _idx and "function flushPendingSightings" in _idx and "clientId" in _idx
+      and "serverClientIds" in _idx and "res.status === 400" in _idx and "window.addEventListener('online'" in _idx and "id=\"sighting-pending\"" in _idx
+      and "id=\"sighting-pending-send\"" in _idx and "setupPendingSightings(); //" in _idx and "No se ha podido guardar. Comprueba tu conexión" not in _idx
+      and "localStorage.removeItem(PENDING_KEY)" in _idx and "try { if (window.crypto && crypto.randomUUID)" in _idx)
 check("sw.js: desa també les fotos de la guia (carpeta fotos/) i els seus crèdits",
       _sw is not None and "bolets-offline-v2" in _sw and "fotos/creditos.json" in _sw and "esFoto" in _sw)
 check("sw.js: la identificació per foto (Worker) NO passa pel service worker (només el mateix origen)",
@@ -681,6 +686,12 @@ for _r in ("../worker/index.js", "../3-worker-cloudflare/index.js"):
         _wk = open(_pw, encoding="utf-8").read()
         break
 check("worker: existeix index.js", _wk is not None)
+if _wk:
+    # La cola de hallazgos sin cobertura (index.html) manda un «clientId» propio: el Worker lo guarda tal cual con el resto del objeto
+    # (así se puede comprobar si un envío ya llegó) y la validación no lo rechaza.
+    _vh = _wk.split("function validateHallazgo", 1)[1].split("// ----", 1)[0]
+    check("worker: guarda el hallazgo entero (incluido el clientId que manda la cola sin cobertura) y validateHallazgo no lo rechaza (1/11/2026)",
+          "newHallazgo.id = crypto.randomUUID()" in _wk and "hallazgos.push(newHallazgo)" in _wk and "clientId" not in _vh and "Object.keys" not in _vh)
 if _wk:
     _blk = _re.search(r"const IDENT_VOCAB = (\{.*?\n\});\n", _wk, _re.S)
     check("worker: el vocabulari de rasgos coincideix EXACTAMENT amb tools/rasgos_datos.py (python3 tools/generar_guia.py --vocab)",

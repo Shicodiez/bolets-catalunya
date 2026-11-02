@@ -152,6 +152,12 @@
     background: var(--surface-1); color: var(--text-secondary); margin-bottom: 6px;
   }
   .sighting-form { display: flex; flex-direction: column; gap: 8px; }
+  #sighting-msg { font-size: 13px; font-weight: 500; margin: 0; padding: 8px 10px; border-radius: var(--radius); display: none; }
+  #sighting-msg.ok { display: block; background: var(--green-bg); color: var(--green-text); }
+  #sighting-msg.espera { display: block; background: var(--amber-bg); color: var(--amber-text); }
+  #sighting-msg.error { display: block; background: #FCEBEB; color: #501313; }
+  #sighting-pending { display: none; font-size: 13px; padding: 8px 10px; border-radius: var(--radius); background: var(--amber-bg); color: var(--amber-text); }
+  #sighting-pending button { display: block; width: 100%; margin: 6px 0 0; }
   .sighting-form label { font-size: 12px; color: var(--text-secondary); }
   .sighting-form select, .sighting-form input, .sighting-form textarea {
     width: 100%; padding: 8px 10px; border-radius: var(--radius);
@@ -302,6 +308,11 @@
         <input type="date" id="sighting-date">
       </div>
       <button id="sighting-save">Guardar</button>
+      <p id="sighting-msg" role="status" aria-live="polite"></p>
+      <div id="sighting-pending" role="status" aria-live="polite">
+        <span id="sighting-pending-text"></span>
+        <button type="button" id="sighting-pending-send" class="popup-btn">Enviar ahora</button>
+      </div>
     </div>
   </div>
 
@@ -583,6 +594,7 @@ function showApp() {
   document.getElementById('login-screen').style.display = 'none';
   document.getElementById('app-content').style.display = 'block';
   loadData();
+  setupPendingSightings(); // reenvía los hallazgos guardados en el móvil sin cobertura (no depende de que carguen los datos)
 }
 
 let pendingLoginEmail = null;
@@ -769,14 +781,220 @@ async function loadSightings() {
   }
 }
 
-async function saveSighting(hallazgo) {
-  const res = await fetch(HALLAZGOS_WORKER_URL, {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json', 'X-Session-Token': getSessionToken() || ''},
-    body: JSON.stringify(hallazgo),
+// ---- Hallazgos sin cobertura -----------------------------------------------------------------------
+// Al pulsar «Guardar», el hallazgo se apunta PRIMERO en el móvil (cola) y después se intenta enviar. Si no hay cobertura,
+// o el servidor falla, se queda en la cola y se envía solo cuando vuelva la red (al abrir la app, al recuperar la
+// conexión o cada poco). Cada hallazgo lleva un identificador propio (clientId): si el envío llegó al servidor pero
+// la respuesta se perdió, antes de reenviar se comprueba si ya está y NO se duplica.
+const PENDING_KEY = 'bolets_hallazgos_pendientes';
+const PENDING_MAX = 100;
+const SEND_TIMEOUT_MS = 20000;
+let pendingMem = null; // copia en memoria (por si el almacenamiento del navegador está bloqueado)
+
+function nuevoClientId() {
+  try { if (window.crypto && crypto.randomUUID) return crypto.randomUUID(); } catch (e) { /* se ignora */ }
+  return 'c' + Date.now().toString(36) + Math.random().toString(36).slice(2, 12);
+}
+
+function readPending() {
+  if (pendingMem) return pendingMem;
+  let list = [];
+  try {
+    const raw = localStorage.getItem(PENDING_KEY);
+    const parsed = raw ? JSON.parse(raw) : [];
+    if (Array.isArray(parsed)) list = parsed.filter(it => it && typeof it === 'object' && it.hallazgo && it.hallazgo.clientId);
+  } catch (e) { /* almacenamiento bloqueado o dañado: se empieza vacío */ }
+  pendingMem = list;
+  return list;
+}
+
+// true si quedó escrito en el almacenamiento del móvil; false si solo se mantiene mientras la app esté abierta.
+function writePending(list) {
+  pendingMem = list;
+  try {
+    if (list.length) localStorage.setItem(PENDING_KEY, JSON.stringify(list));
+    else localStorage.removeItem(PENDING_KEY);
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+async function postHallazgo(hallazgo) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), SEND_TIMEOUT_MS);
+  try {
+    return await fetch(HALLAZGOS_WORKER_URL, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'X-Session-Token': getSessionToken() || ''},
+      body: JSON.stringify(hallazgo),
+      signal: ctrl.signal,
+    });
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+// Ids que el servidor ya tiene (para no duplicar). null = no se ha podido consultar.
+async function serverClientIds() {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), SEND_TIMEOUT_MS);
+  try {
+    const res = await fetch(HALLAZGOS_WORKER_URL, {headers: {'X-Session-Token': getSessionToken() || ''}, signal: ctrl.signal});
+    if (!res.ok) return null;
+    const list = await res.json();
+    if (!Array.isArray(list)) return null;
+    sightingsCache = list;
+    return new Set(list.map(h => h && h.clientId).filter(Boolean));
+  } catch (e) {
+    return null;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+// Envía lo que haya en la cola, uno a uno. Devuelve {enviados, rechazados:[texto], quedan, motivo}.
+// motivo: '' (todo enviado) | 'sin_red' | 'sesion' | 'limite' | 'servidor'
+let flushing = null;
+function flushPendingSightings() {
+  if (flushing) return flushing;
+  flushing = (async () => {
+    const out = {enviados: 0, rechazados: [], quedan: 0, motivo: ''};
+    try {
+      if (!readPending().length) return out;
+      if (!getSessionToken()) { out.motivo = 'sesion'; return out; }
+      let ya = null; // ids ya presentes en el servidor (solo se consulta si algún envío anterior quedó a medias)
+      while (readPending().length) {
+        const item = readPending()[0];
+        if (item.intentos > 0) {
+          if (ya === null) {
+            ya = await serverClientIds();
+            if (ya === null) { out.motivo = 'sin_red'; break; }
+          }
+          if (ya.has(item.hallazgo.clientId)) {
+            writePending(readPending().slice(1));
+            out.enviados++;
+            continue;
+          }
+        }
+        item.intentos = (item.intentos || 0) + 1; // se apunta ANTES de enviar: si se corta, la próxima vez se comprueba que no esté ya
+        writePending(readPending().slice());
+        let res;
+        try {
+          res = await postHallazgo(item.hallazgo);
+        } catch (e) {
+          out.motivo = 'sin_red';
+          break;
+        }
+        if (res.ok) {
+          writePending(readPending().slice(1));
+          out.enviados++;
+          continue;
+        }
+        if (res.status === 400) { // el servidor dice que estos datos no valen: reintentar no serviría
+          let msg = 'datos no válidos';
+          try { const j = await res.json(); if (j && j.error) msg = j.error; } catch (e) { /* se ignora */ }
+          writePending(readPending().slice(1));
+          out.rechazados.push(`${item.hallazgo.place || 'hallazgo'} (${item.hallazgo.date}): ${msg}`);
+          continue;
+        }
+        out.motivo = res.status === 401 || res.status === 403 ? 'sesion' : res.status === 429 ? 'limite' : 'servidor';
+        break;
+      }
+    } finally {
+      out.quedan = readPending().length;
+      flushing = null;
+    }
+    return out;
+  })();
+  return flushing;
+}
+
+// Texto «Tienes N hallazgos guardados en el móvil…» y botón «Enviar ahora».
+function updatePendingNotice(motivo) {
+  const box = document.getElementById('sighting-pending');
+  if (!box) return;
+  const n = readPending().length;
+  if (!n) { box.style.display = 'none'; return; }
+  const razon = {
+    sesion: ' Tu sesión ha caducado: cierra y abre la app, pide otro código y se enviarán solos.',
+    limite: ' El servidor ha puesto un límite por hoy: se enviarán más tarde.',
+    servidor: ' El servidor no ha respondido bien: se reintentará solo.',
+  }[motivo] || ' Se enviarán solos cuando vuelva la cobertura.';
+  document.getElementById('sighting-pending-text').textContent =
+    `📴 ${n === 1 ? 'Tienes 1 hallazgo guardado en el móvil, pendiente de enviar.' : `Tienes ${n} hallazgos guardados en el móvil, pendientes de enviar.`}${razon}`;
+  box.style.display = 'block';
+}
+
+function showSightingMsg(kind, text) {
+  const el = document.getElementById('sighting-msg');
+  if (!el) return;
+  el.className = kind;
+  el.textContent = text;
+  if (!text) { el.style.display = 'none'; return; }
+  el.style.display = '';
+  try { el.scrollIntoView({block: 'nearest'}); } catch (e) { /* se ignora */ }
+}
+
+// Intenta enviar la cola y actualiza el aviso. «manual»: viene del botón «Enviar ahora» (explica el resultado).
+async function trySendPending(manual) {
+  if (!readPending().length) { updatePendingNotice(); return null; }
+  const r = await flushPendingSightings();
+  updatePendingNotice(r.motivo);
+  if (r.enviados) {
+    showSightingMsg('ok', r.enviados === 1 ? '✅ Se ha enviado 1 hallazgo que estaba guardado en el móvil.' : `✅ Se han enviado ${r.enviados} hallazgos que estaban guardados en el móvil.`);
+    loadSightings();
+  } else if (manual && r.quedan) {
+    showSightingMsg('espera', r.motivo === 'sin_red' ? '📴 Todavía no hay cobertura: siguen guardados en el móvil.' : 'Todavía no se ha podido enviar: siguen guardados en el móvil.');
+  }
+  if (r.rechazados.length) {
+    showSightingMsg('error', 'El servidor ha rechazado un hallazgo guardado en el móvil y no se enviará: ' + r.rechazados.join(' · '));
+  }
+  return r;
+}
+
+function setupPendingSightings() {
+  if (setupPendingSightings.hecho) return;
+  setupPendingSightings.hecho = true;
+  const btn = document.getElementById('sighting-pending-send');
+  if (btn) btn.addEventListener('click', async () => {
+    btn.disabled = true;
+    try { await trySendPending(true); } finally { btn.disabled = false; }
   });
-  if (!res.ok) throw new Error('No se ha podido guardar el hallazgo');
-  return res.json();
+  window.addEventListener('online', () => { trySendPending(false); });
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') trySendPending(false); });
+  setInterval(() => { if (readPending().length) trySendPending(false); }, 45000);
+  updatePendingNotice();
+  trySendPending(false);
+}
+
+// Apunta el hallazgo en la cola y lo intenta enviar. Devuelve {estado, texto}:
+//   'enviado'   → ya está en el servidor;
+//   'guardado'  → está en el móvil y se enviará solo (sin red / servidor / sesión / límite);
+//   'rechazado' → el servidor dice que los datos no valen (no se guarda en ningún sitio);
+//   'perdible'  → no se ha podido guardar en el móvil (almacenamiento bloqueado): solo existe mientras la app siga abierta.
+async function saveSighting(hallazgo) {
+  hallazgo.clientId = nuevoClientId();
+  const cola = readPending().slice();
+  if (cola.length >= PENDING_MAX) return {estado: 'rechazado', texto: `Hay ${cola.length} hallazgos sin enviar guardados en el móvil. Conecta el móvil a internet para enviarlos antes de apuntar más.`};
+  cola.push({hallazgo, intentos: 0, creado: new Date().toISOString()});
+  const enDisco = writePending(cola);
+  const r = await flushPendingSightings();
+  const sigue = readPending().some(it => it.hallazgo.clientId === hallazgo.clientId);
+  updatePendingNotice(r.motivo);
+  if (!sigue) {
+    const rech = r.rechazados.find(t => t.startsWith(`${hallazgo.place || 'hallazgo'} (${hallazgo.date})`));
+    if (rech) return {estado: 'rechazado', texto: 'El servidor no ha aceptado este hallazgo: ' + rech.replace(/^.*?\): /, '') + '. No se ha guardado.'};
+    return {estado: 'enviado', texto: '✅ Salida guardada.'};
+  }
+  if (!enDisco) return {estado: 'perdible', texto: '⚠️ No se ha podido guardar en el móvil (el navegador bloquea el almacenamiento) y tampoco enviar. NO cierres la app hasta que vuelva la cobertura: se enviará sola.'};
+  const hasta = {
+    sin_red: '📴 Sin cobertura: la salida queda guardada en el móvil y se enviará sola cuando vuelva. No tienes que hacer nada más.',
+    sesion: '🔑 Tu sesión ha caducado: la salida queda guardada en el móvil. Cierra y abre la app, pide otro código y se enviará sola.',
+    limite: '⏳ El servidor ha puesto un límite por hoy: la salida queda guardada en el móvil y se enviará más tarde.',
+    servidor: '⚠️ El servidor no ha respondido bien: la salida queda guardada en el móvil y se reintentará sola.',
+  }[r.motivo] || '📴 La salida queda guardada en el móvil y se enviará sola.';
+  return {estado: 'guardado', texto: hasta};
 }
 
 const AMOUNT_ICON = {mucho: '🍄🍄🍄', poco: '🍄', nada: '❌'};
@@ -982,9 +1200,11 @@ async function reverseGeocodePlace(lat, lng, fallbackName) {
   const previousValue = placeInput.value;
   placeInput.placeholder = 'Buscando nombre del lugar...';
   placeInput.value = '';
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 6000); // con poca cobertura no se queda esperando para siempre
   try {
     const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&zoom=14&accept-language=es`;
-    const res = await fetch(url, {headers: {'Accept': 'application/json'}});
+    const res = await fetch(url, {headers: {'Accept': 'application/json'}, signal: ctrl.signal});
     if (!res.ok) throw new Error('reverse geocoding failed');
     const data = await res.json();
     const addr = data.address || {};
@@ -994,6 +1214,7 @@ async function reverseGeocodePlace(lat, lng, fallbackName) {
   } catch (e) {
     placeInput.value = previousValue || fallbackName || '';
   } finally {
+    clearTimeout(timer);
     placeInput.placeholder = 'Malniu, Berga, Montseny, Montnegre, Guilleries...';
   }
 }
@@ -1104,21 +1325,27 @@ function setupSightingForm() {
     saveBtn.disabled = true;
     saveBtn.textContent = 'Guardando...';
 
+    showSightingMsg('', '');
     try {
-      await saveSighting({
+      const r = await saveSighting({
         speciesIds, speciesNames, place, alt, tree, treeName, date, amount,
         lat: pickedLatLng.lat, lng: pickedLatLng.lng,
       });
-      document.getElementById('sighting-place').value = '';
-      checkboxContainer.querySelectorAll('input:checked').forEach(i => { i.checked = false; });
-      updateCheckboxStates();
-      pickedLatLng = null;
-      if (pickMarker) { map.removeLayer(pickMarker); pickMarker = null; }
-      updatePickedCoordsHint();
-      sightingAutoToken++; document.getElementById('sighting-auto-hint').textContent = '';
-      await renderSightings();
+      if (r.estado === 'rechazado') {
+        showSightingMsg('error', r.texto); // el formulario se queda como estaba para poder corregirlo
+      } else {
+        document.getElementById('sighting-place').value = '';
+        checkboxContainer.querySelectorAll('input:checked').forEach(i => { i.checked = false; });
+        updateCheckboxStates();
+        pickedLatLng = null;
+        if (pickMarker) { map.removeLayer(pickMarker); pickMarker = null; }
+        updatePickedCoordsHint();
+        sightingAutoToken++; document.getElementById('sighting-auto-hint').textContent = '';
+        showSightingMsg(r.estado === 'enviado' ? 'ok' : (r.estado === 'perdible' ? 'error' : 'espera'), r.texto);
+        if (r.estado === 'enviado') await renderSightings();
+      }
     } catch (e) {
-      alert('No se ha podido guardar. Comprueba tu conexión e inténtalo de nuevo.');
+      showSightingMsg('error', 'No se ha podido guardar el hallazgo (' + (e && e.message ? e.message : 'error') + '). Inténtalo otra vez.');
     } finally {
       saveBtn.disabled = false;
       saveBtn.textContent = originalText;
