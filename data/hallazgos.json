@@ -440,5 +440,20 @@
     "lng": 2.559201413085908,
     "id": "655a7720-e30c-4c8d-ae8a-d6b76b1c2c45",
     "createdAt": "2026-11-01T21:02:16.588Z"
+  },
+  {
+    "speciesIds": [],
+    "speciesNames": [],
+    "place": "Sant Celoni",
+    "alt": "150",
+    "tree": "mixt",
+    "treeName": "Mixto / no lo sé",
+    "date": "2026-11-08",
+    "amount": "nada",
+    "lat": 41.704438,
+    "lng": 2.4987855,
+    "clientId": "1cff6832-d174-45b2-865e-2a7aee6dbc8f",
+    "id": "52cf64af-94b7-433a-a3f1-6e92ae5eb22a",
+    "createdAt": "2026-11-08T10:41:29.755Z"
   }
 ]
