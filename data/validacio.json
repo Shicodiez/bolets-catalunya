@@ -437,5 +437,28 @@
    "oureig": 52,
    "cepestiu": 27
   }
+ },
+ "52cf64af-94b7-433a-a3f1-6e92ae5eb22a": {
+  "date": "2026-11-08",
+  "amount": "nada",
+  "species": [],
+  "lag_days": 0,
+  "frozen_on": "2026-11-08",
+  "zone_id": 2619,
+  "dist_km": 1.66,
+  "tree": "roure",
+  "is_forest": true,
+  "scores": {
+   "escarlet": 93,
+   "trompetes": 90,
+   "camagrocs": 74,
+   "llengua": 64,
+   "rossinyols": 38,
+   "cepfosc": 32,
+   "oureig": 15,
+   "cep": 14,
+   "cepestiu": 9,
+   "colmenilles": 2
+  }
  }
 }
