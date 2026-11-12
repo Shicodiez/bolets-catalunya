@@ -455,5 +455,20 @@
     "clientId": "1cff6832-d174-45b2-865e-2a7aee6dbc8f",
     "id": "52cf64af-94b7-433a-a3f1-6e92ae5eb22a",
     "createdAt": "2026-11-08T10:41:29.755Z"
+  },
+  {
+    "speciesIds": [],
+    "speciesNames": [],
+    "place": "Montseny",
+    "alt": "1050",
+    "tree": "faig",
+    "treeName": "Haya",
+    "date": "2026-11-12",
+    "amount": "nada",
+    "lat": 41.7909233,
+    "lng": 2.4269517,
+    "clientId": "c643f66b-9ebf-45b8-9b21-21b0b6524b5c",
+    "id": "d0fe7139-bb17-4081-bd41-1fcf03a9dbfa",
+    "createdAt": "2026-11-12T11:14:25.407Z"
   }
 ]
