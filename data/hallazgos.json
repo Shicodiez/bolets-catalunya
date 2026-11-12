@@ -470,5 +470,24 @@
     "clientId": "c643f66b-9ebf-45b8-9b21-21b0b6524b5c",
     "id": "d0fe7139-bb17-4081-bd41-1fcf03a9dbfa",
     "createdAt": "2026-11-12T11:14:25.407Z"
+  },
+  {
+    "speciesIds": [
+      "trompetes"
+    ],
+    "speciesNames": [
+      "Trompetes de la mort"
+    ],
+    "place": "Montseny",
+    "alt": "1150",
+    "tree": "roure",
+    "treeName": "Roble",
+    "date": "2026-11-12",
+    "amount": "poco",
+    "lat": 41.80123,
+    "lng": 2.4315467,
+    "clientId": "57268537-964e-4735-a785-d4ce51df9a7d",
+    "id": "a84f073b-aaf0-498b-be04-223d50d426ae",
+    "createdAt": "2026-11-12T12:19:51.919Z"
   }
 ]
