@@ -460,5 +460,52 @@
    "cepestiu": 9,
    "colmenilles": 2
   }
+ },
+ "d0fe7139-bb17-4081-bd41-1fcf03a9dbfa": {
+  "date": "2026-11-12",
+  "amount": "nada",
+  "species": [],
+  "lag_days": 0,
+  "frozen_on": "2026-11-12",
+  "zone_id": 3033,
+  "dist_km": 0.82,
+  "tree": "roure",
+  "is_forest": true,
+  "scores": {
+   "llengua": 95,
+   "trompetes": 90,
+   "rossinyols": 88,
+   "camagrocs": 81,
+   "cep": 66,
+   "escarlet": 53,
+   "cepfosc": 24,
+   "cepestiu": 15,
+   "colmenilles": 2
+  }
+ },
+ "a84f073b-aaf0-498b-be04-223d50d426ae": {
+  "date": "2026-11-12",
+  "amount": "poco",
+  "species": [
+   "trompetes"
+  ],
+  "lag_days": 0,
+  "frozen_on": "2026-11-12",
+  "zone_id": 3300,
+  "dist_km": 0.81,
+  "tree": "roure",
+  "is_forest": true,
+  "scores": {
+   "llengua": 95,
+   "trompetes": 90,
+   "rossinyols": 90,
+   "camagrocs": 81,
+   "cep": 66,
+   "escarlet": 63,
+   "cepfosc": 36,
+   "cepestiu": 18,
+   "oureig": 3,
+   "colmenilles": 2
+  }
  }
 }
